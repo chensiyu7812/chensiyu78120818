@@ -1,73 +1,46 @@
-name: PM-v2 tests
+name: PM-v2 / PM-v1.6 tests
 
 on:
   pull_request:
     paths:
       - "project/src/metacom_pm/**"
-      - "project/scripts/06_run_action_sweep.py"
-      - "project/scripts/18_prepare_pm_v2_seed_dialogues.py"
-      - "project/scripts/18a_prepare_pm_v2_semantic_sanity_audit.py"
-      - "project/scripts/18b_analyze_pm_v2_semantic_sanity_audit.py"
-      - "project/scripts/19_audit_pm_v2_data_labels.py"
-      - "project/scripts/20_generate_pm_v2_development_data.py"
-      - "project/scripts/20a_run_pm_v2_generation_compatibility_pilot.py"
-      - "project/scripts/21_judge_pm_v2_action_sweep.py"
-      - "project/scripts/22_train_pm_v2.py"
-      - "project/scripts/23_select_pm_v2_actions.py"
-      - "project/scripts/24_run_pm_v2_evoemo.py"
-      - "project/scripts/25_eval_pm_v2_external.py"
-      - "project/scripts/26_freeze_pm_v2_study.py"
-      - "project/scripts/27_prepare_pm_v2_human_audit.py"
-      - "project/scripts/28_analyze_pm_v2_human_audit.py"
-      - "project/scripts/29_prepare_pm_v2_fixed_baselines.py"
-      - "project/scripts/30_eval_pm_v2_forced_swap.py"
-      - "project/scripts/31_plan_pm_v2_development_pilot.py"
-      - "project/scripts/32_prepare_pm_v2_pilot_human_spot_check.py"
-      - "project/scripts/33_analyze_pm_v2_pilot_human_spot_check.py"
-      - "project/scripts/34_run_pm_v2_development_judge_schema_smoke.py"
-      - "project/scripts/35_run_pm_v2_external_pointwise_schema_smoke.py"
+      - "project/scripts/**"
       - "project/tests/**"
-      - "project/configs/pm_v2.yaml"
+      - "project/configs/**"
+      - "project/pyproject.toml"
+      - "README_PM_V1_5_REVIEW_ZH.md"
+      - "README_PM_V1_6_REVIEW_ZH.md"
+      - "project/docs/PM_V1_6_*"
       - ".github/workflows/pm-v2-tests.yml"
   push:
     branches:
       - main
       - codex/pm-v2-hardening
+      - agent/pm-v1-5-conference-review
     paths:
       - "project/src/metacom_pm/**"
-      - "project/scripts/06_run_action_sweep.py"
-      - "project/scripts/18_prepare_pm_v2_seed_dialogues.py"
-      - "project/scripts/18a_prepare_pm_v2_semantic_sanity_audit.py"
-      - "project/scripts/18b_analyze_pm_v2_semantic_sanity_audit.py"
-      - "project/scripts/19_audit_pm_v2_data_labels.py"
-      - "project/scripts/20_generate_pm_v2_development_data.py"
-      - "project/scripts/20a_run_pm_v2_generation_compatibility_pilot.py"
-      - "project/scripts/21_judge_pm_v2_action_sweep.py"
-      - "project/scripts/22_train_pm_v2.py"
-      - "project/scripts/23_select_pm_v2_actions.py"
-      - "project/scripts/24_run_pm_v2_evoemo.py"
-      - "project/scripts/25_eval_pm_v2_external.py"
-      - "project/scripts/26_freeze_pm_v2_study.py"
-      - "project/scripts/27_prepare_pm_v2_human_audit.py"
-      - "project/scripts/28_analyze_pm_v2_human_audit.py"
-      - "project/scripts/29_prepare_pm_v2_fixed_baselines.py"
-      - "project/scripts/30_eval_pm_v2_forced_swap.py"
-      - "project/scripts/31_plan_pm_v2_development_pilot.py"
-      - "project/scripts/32_prepare_pm_v2_pilot_human_spot_check.py"
-      - "project/scripts/33_analyze_pm_v2_pilot_human_spot_check.py"
-      - "project/scripts/34_run_pm_v2_development_judge_schema_smoke.py"
-      - "project/scripts/35_run_pm_v2_external_pointwise_schema_smoke.py"
+      - "project/scripts/**"
       - "project/tests/**"
-      - "project/configs/pm_v2.yaml"
+      - "project/configs/**"
+      - "project/pyproject.toml"
+      - "README_PM_V1_5_REVIEW_ZH.md"
+      - "README_PM_V1_6_REVIEW_ZH.md"
+      - "project/docs/PM_V1_6_*"
       - ".github/workflows/pm-v2-tests.yml"
+
+concurrency:
+  group: pm-tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   pytest:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     defaults:
       run:
         working-directory: project
+    env:
+      PYTHONPATH: ${{ github.workspace }}/project:${{ github.workspace }}/project/src
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -77,7 +50,9 @@ jobs:
           cache-dependency-path: project/pyproject.toml
       - name: Install package
         run: python -m pip install -e ".[dev]"
-      - name: Compile PM-v2 modules
+      - name: Compile all modules
         run: python -m compileall -q src scripts tests
+      - name: Validate PM-v1.6 method contract
+        run: python scripts/v1_6/00_validate_method_contract.py
       - name: Run complete test suite
-        run: pytest -q
+        run: python -m pytest -q
