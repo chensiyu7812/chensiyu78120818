@@ -1,0 +1,380 @@
+# PM-v1.6: source-probe resource routing protocol.
+#
+# This protocol supersedes PM-v1.5 before any formal 468x16 development run,
+# checkpoint, freeze, or external result existed. PM-v1.5 artifacts remain
+# immutable historical audit material and are invalid for PM-v1.6 claims.
+version: pm-v1.6
+protocol_status: PREREGISTERED_IMPLEMENTATION_NOT_EXECUTED
+supersedes:
+  version: pm-v1.5
+  reason: >
+    Formalizes the former hidden catalog-content feature as a fixed, low-cost,
+    auditable Step-0 source observation; adds requested/attempted/realized
+    action lineage, alias-aware labels, train-only algorithm competition,
+    one-time internal-test consumption, and hierarchical external claims.
+  old_artifact_status: SUPERSEDED_BEFORE_FORMAL_EXECUTION
+
+supporter_generation_treatment:
+  version: pm-v2.2-supporter-generation-v1
+  generator_endpoint: generator
+  system_prompt_id: selective_esmem_v1
+  system_prompt_sha256: a0313589ed0da2e45ea5dc411d3edd504f77fabb516fe6c262eb38fbb13c3a59
+  temperature: 0.0
+  max_output_tokens: 300
+  output_normalization: normalize_space_v1
+  finish_reason_protocol: pm-v2-finish-reason-v1
+  accepted_normalized_finish_reasons: [complete]
+  reject_length: true
+  reject_missing_or_unknown: true
+
+retrieval:
+  memory_min_score: 0.0
+  strategy_min_score: 0.0
+  strategy_top_k: 3
+  memory_top_k:
+    MP: 2
+    MS: 2
+    ME: 3
+
+evidence_filter:
+  enabled: false
+  interpretation: >
+    PM-v1.6 routes sources before item retrieval. No post-retrieval Evidence
+    Filter is part of the confirmatory treatment.
+
+step0:
+  protocol: pm-v1.6-step0-source-observation-v1
+  algorithm_id: deterministic-hashing-centroid-source-probe-v1
+  encoder_id: sklearn-hashing-word-char-norm-l2-v1
+  dimension: 512
+  word_features: 256
+  char_features: 256
+  refresh_policy: rebuild_only_when_authorized_catalog_content_changes
+  pm_visible_source_fields:
+    - available
+    - bounded_count
+    - min_age_sessions
+    - median_age_sessions
+    - max_age_sessions
+    - estimated_retrievable_tokens
+    - query_to_source_similarity
+    - representation_valid
+  strategy_family_order:
+    - exploration_question
+    - restatement_paraphrase
+    - reflection
+    - self_disclosure
+    - affirmation_reassurance
+    - suggestion_action
+    - information
+    - non_directive_listening
+    - other
+  readiness_fields:
+    - advice_requested
+    - advice_rejected
+    - listening_requested
+    - clarification_needed
+    - action_readiness
+  audit_only_fields:
+    - algorithm_id
+    - encoder_id
+    - representation_dimension
+    - representation_sha256
+    - catalog_build_sha256
+    - refresh_policy
+  forbidden_pm_visible_fields:
+    - raw_text
+    - snippet
+    - memory_id
+    - strategy_id
+    - item_level_score
+    - top_k_score
+    - catalog_embedding
+    - embedding_norm
+    - embedding_mean
+    - embedding_std
+    - regime
+    - oracle
+    - stale_or_conflict_oracle
+  fixed_policies_pay_step0_cost: false
+  learned_pm_and_rule_pay_step0_cost: true
+
+judge_isolation:
+  protocol: pm-v1.6-development-final-judge-isolation-v1
+  development_endpoints:
+    - training_judge_gemini_flash
+    - training_judge_deepseek_flash
+  development_families:
+    - google_gemini
+    - deepseek
+  final_endpoints:
+    - final_judge
+    - final_judge_claude
+  final_families:
+    - openai_gpt4o
+    - anthropic_claude
+  final_model_markers:
+    - gpt-4o
+    - gpt4o
+    - claude
+  resolved_metadata_fields:
+    - endpoint_alias
+    - family
+    - model
+    - base_url
+  legacy_gpt4o_development_semantic_review:
+    status: INVALID_FOR_PM_V1_6_PROTOCOL
+    reusable_rows: 0
+    reusable_gate_status: false
+
+action_lineage:
+  protocol: pm-v1.6-requested-attempted-realized-v1
+  fields:
+    - requested_action_id
+    - retrieval_attempts
+    - realized_action_id
+    - prompt_equivalence_id
+    - prompt_equivalence_class_size
+  retrieval_attempt_fields:
+    - source
+    - call_count
+    - hit_count
+    - retrieved_tokens
+    - latency_ms
+  zero_hit_is_legal: true
+  zero_hit_cost_is_retained: true
+  realized_action_inferred_from_actual_generator_evidence: true
+  fail_if_logged_realized_mismatches_evidence: true
+  shared_quality_label_weight: inverse_prompt_equivalence_class_size
+
+required_hit_preflight:
+  timing: before_response_generation_and_judging
+  outcome_conditioned_exclusion_forbidden: true
+  regimes:
+    profile_needed: [MP]
+    summary_needed: [MS]
+    event_needed: [ME]
+    multi_source_needed: [MP, MS, ME]
+    strategy_helpful: [RS]
+    strategy_harmful: [RS]
+  failure_policy: regenerate_whole_case_or_bundle_under_frozen_attempt_limit
+  retain_all_failed_attempts_in_audit: true
+
+data_shortcut_audit:
+  natural_strata:
+    - context_only
+    - profile_needed
+    - summary_needed
+    - event_needed
+    - multi_source_needed
+    - memory_harmful
+    - strategy_helpful
+    - strategy_harmful
+    - ambiguous
+  challenge_strata:
+    - high_similarity_stale
+    - high_similarity_conflicting
+    - high_similarity_irrelevant
+    - low_lexical_similarity_helpful
+    - swapped_source_counterfactual
+    - multi_source_redundant
+    - strategy_similarity_but_advice_rejected
+  required_diagnostics:
+    - probe_only
+    - text_only
+    - shuffled_probe
+  claim_boundary: >
+    Step-0 must add useful information beyond text, but probe-only performance
+    cannot function as an oracle label key.
+
+transparent_router:
+  protocol: pm-v1.6-transparent-router-v1
+  role:
+    - strong_non_neural_baseline
+    - conservative_default_action_for_learned_pm
+    - external_primary_comparator
+  selection_split: train_users_only
+  selection_rule: one_standard_error_then_simpler_maximum_sources
+  grid:
+    source_selection_threshold: [0.05, 0.15, 0.25]
+    maximum_sources: [1, 2, 3]
+    strategy_selection_threshold: [0.15, 0.25, 0.35]
+  default_coefficients:
+    source_similarity_weight: 1.0
+    source_age_penalty: 0.20
+    source_cost_penalty: 0.10
+    source_availability_bonus: 0.05
+    strategy_family_similarity_weight: 0.75
+    advice_request_bonus: 0.35
+    action_readiness_weight: 0.20
+    advice_reject_penalty: 0.60
+    listening_request_penalty: 0.35
+
+algorithm_competition:
+  protocol: pm-v1.6-train-only-algorithm-selection-v1
+  candidate_algorithms:
+    - absolute_outcome_hgb
+    - state_centered_factorized_hgb
+    - rule_relative_residual_hgb
+  sensitivity_algorithm:
+    - lambdamart_train_only_not_safety_gate
+  user_group_folds: 6
+  primary_selection_metric: mean_user_utility
+  required_metrics:
+    - policy_regret
+    - quality_noninferiority_violation
+    - emotional_support_noninferiority_violation
+    - absolute_risk_violation
+    - total_utility
+    - total_system_cost
+    - paired_utility_vs_rule
+    - action_stability
+    - source_precision_recall
+    - strategy_precision_recall
+  selection_rule: one_standard_error_prefer_simpler_model
+  complexity_order:
+    - absolute_outcome_hgb
+    - state_centered_factorized_hgb
+    - rule_relative_residual_hgb
+  factorial_diagnostic:
+    action_factors: [MP, MS, ME, RS]
+    inspect_orders: [1, 2, 3, 4]
+    do_not_assume_low_order_suffices: true
+  rule_relative_requirements:
+    baseline_action_features_required: true
+    rule_frozen_on_train_users_only: true
+    calibration_must_not_redefine_rule: true
+  internal_test_may_not_select_algorithm: true
+
+override_calibration:
+  protocol: pm-v1.6-calibration-only-override-selection-v1
+  candidate_grid:
+    uncertainty_z: [0.5, 1.0]
+    quality_noninferiority_margin: [0.01, 0.02]
+    emotional_support_noninferiority_margin: [0.01, 0.02]
+    absolute_risk_ceiling: [0.35, 0.45]
+    relative_risk_margin: [0.0, 0.05]
+    risk_weight: [0.25]
+    cost_weight: [0.10]
+    minimum_utility_lcb: [0.0]
+  required_override_checks:
+    - candidate_absolute_risk_ucb_below_ceiling
+    - quality_delta_lcb_noninferior
+    - emotional_support_delta_lcb_noninferior
+    - risk_delta_ucb_not_increased
+    - utility_delta_lcb_strictly_positive
+  interpretation: conservative_residual_override_not_real_world_safety
+
+cost_vector:
+  protocol: pm-v1.6-complete-cost-vector-v1
+  primary_resource_metrics:
+    - total_variable_cost_usd
+    - generator_input_tokens
+  secondary_resource_metrics:
+    - end_to_end_latency_ms
+    - item_retrieval_calls
+    - item_retrieval_tokens
+    - step0_comparisons
+  components:
+    step0:
+      - query_encoding_latency_ms
+      - memory_source_comparisons
+      - strategy_family_comparisons
+      - catalog_build_amortized_ms
+    routing:
+      - router_inference_latency_ms
+    item_retrieval:
+      - call_count
+      - hit_count
+      - retrieved_tokens
+      - latency_ms
+    generation:
+      - observed_input_tokens
+      - observed_output_tokens
+      - api_cost_usd
+      - provider_latency_ms
+  generator_input_tokens_must_not_be_called_total_system_cost: true
+  cost_weights_frozen_before_internal_test: true
+
+internal_test:
+  protocol: pm-v1.6-internal-test-consumption-ledger-v1
+  train_and_calibration_scripts_forbid_internal_paths: true
+  candidate_family_manifest_required: true
+  reserve_before_reading_labels: true
+  append_only_consumption_ledger: true
+  one_consumption_per_internal_dataset_sha256: true
+  overwrite_forbidden: true
+  failure_is_terminal_for_same_candidate_family_and_dataset_hash: true
+  legacy_me_r0_role: legacy_regression_guard_not_primary_algorithm_baseline
+
+internal_gate:
+  learned_vs_rule:
+    quality_noninferiority_margin: 0.02
+    emotional_support_noninferiority_margin: 0.02
+    absolute_risk_ceiling: 0.45
+    maximum_risk_delta_ci_upper: 0.0
+    require_utility_delta_ci_lower_above: 0.0
+  legacy_me_r0:
+    quality_noninferiority_margin: 0.02
+    utility_noninferiority_margin: 0.0
+  failure_status: INTERNAL_NOT_SUPPORTED
+  external_generation_forbidden_on_failure: true
+
+external_evaluation:
+  condition_matrix:
+    - learned_pm_step0
+    - strong_rule_step0
+    - cost_matched_fixed
+    - best_high_resource_fixed
+    - me_r0_legacy_anchor
+    - m0_r0
+    - session_rag_rs
+  full_history_rs_role: descriptive_appendix_only
+  same_supporter_generation_contract: true
+  same_item_retrieval_contract: true
+  same_strategy_bank: data/strategy/strategy_cards_v1_5.jsonl
+  same_fixed_seeker_tracks_required: true
+  primary_cluster: user_id
+  fixed_policies_do_not_pay_step0: true
+  learned_and_rule_conditions_pay_step0: true
+
+external_claims:
+  protocol: pm-v1.6-hierarchical-claim-assessment-v1
+  claim_a_learned_vs_rule:
+    quality_noninferiority_margin: 0.02
+    emotional_support_noninferiority_margin: 0.02
+    maximum_risk_delta_ci_upper: 0.0
+    require_utility_strict_advantage: true
+    require_cost_strict_reduction: false
+  claim_b_efficiency_vs_high_resource:
+    quality_noninferiority_margin: 0.02
+    emotional_support_noninferiority_margin: 0.02
+    maximum_risk_delta_ci_upper: 0.0
+    require_utility_strict_advantage: false
+    require_cost_strict_reduction: true
+  claim_c_cost_matched_secondary:
+    quality_noninferiority_margin: 0.02
+    emotional_support_noninferiority_margin: 0.02
+    maximum_risk_delta_ci_upper: 0.0
+    require_utility_strict_advantage: false
+    require_cost_strict_reduction: false
+  legacy_me_r0_regression_guard:
+    quality_noninferiority_margin: 0.02
+    utility_noninferiority_margin: 0.0
+  failure_status: NOT_SUPPORTED
+
+claim_boundaries:
+  allowed: >
+    Within the frozen synthetic routing matrix and EvoEmo simulated external
+    evaluation, the source-probe PM may be claimed to improve the
+    quality-risk-cost trade-off only for comparisons whose preregistered gates
+    pass.
+  forbidden:
+    - clinical efficacy
+    - real-user emotional improvement
+    - deployment safety
+    - reinforcement learning
+    - POMDP optimization
+    - universal optimality
+    - guaranteed latency reduction
+    - fully independent non-ESConv external generalization
