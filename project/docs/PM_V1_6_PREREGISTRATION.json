@@ -1,0 +1,74 @@
+{
+  "protocol": "pm-v1.6-preregistration-v1",
+  "status": "FROZEN_DESIGN_BEFORE_FORMAL_EXECUTION",
+  "version": "pm-v1.6",
+  "supersedes": "pm-v1.5",
+  "old_artifact_status": "SUPERSEDED_BEFORE_FORMAL_EXECUTION",
+  "algorithm_candidates": [
+    "absolute_outcome_hgb",
+    "state_centered_factorized_hgb",
+    "rule_relative_residual_hgb"
+  ],
+  "algorithm_selection": {
+    "split": "train_users_only",
+    "folds": 6,
+    "primary_metric": "mean_user_utility",
+    "rule": "one_standard_error_prefer_simpler",
+    "complexity_order": [
+      "absolute_outcome_hgb",
+      "state_centered_factorized_hgb",
+      "rule_relative_residual_hgb"
+    ],
+    "internal_test_may_not_select_algorithm": true
+  },
+  "transparent_router": {
+    "selection_split": "train_users_only",
+    "role": [
+      "strong_baseline",
+      "default_action",
+      "external_comparator"
+    ]
+  },
+  "calibration": {
+    "may_select": [
+      "override thresholds",
+      "risk ceiling",
+      "noninferiority margins"
+    ],
+    "may_not_select": [
+      "algorithm family",
+      "transparent rule definition",
+      "external conditions"
+    ]
+  },
+  "internal_test": {
+    "one_time_consumption": true,
+    "append_only_ledger": true,
+    "same_dataset_hash_second_candidate_forbidden": true
+  },
+  "external_conditions": [
+    "learned_pm_step0",
+    "strong_rule_step0",
+    "cost_matched_fixed",
+    "best_high_resource_fixed",
+    "me_r0_legacy_anchor",
+    "m0_r0",
+    "session_rag_rs"
+  ],
+  "failure_outputs": {
+    "mechanism_or_data": "NO_TRAINING",
+    "internal": "INTERNAL_NOT_SUPPORTED",
+    "external": "NOT_SUPPORTED"
+  },
+  "claim_boundaries": {
+    "allowed": "frozen synthetic routing and EvoEmo simulated external quality-risk-cost comparisons only",
+    "forbidden": [
+      "clinical efficacy",
+      "real-user improvement",
+      "deployment safety",
+      "reinforcement learning",
+      "POMDP optimization",
+      "universal optimality"
+    ]
+  }
+}
