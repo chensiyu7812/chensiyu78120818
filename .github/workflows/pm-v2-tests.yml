@@ -15,8 +15,6 @@ on:
   push:
     branches:
       - main
-      - codex/pm-v2-hardening
-      - agent/pm-v1-5-conference-review
     paths:
       - "project/src/metacom_pm/**"
       - "project/scripts/**"
@@ -29,7 +27,7 @@ on:
       - ".github/workflows/pm-v2-tests.yml"
 
 concurrency:
-  group: pm-tests-${{ github.workflow }}-${{ github.ref }}
+  group: pm-tests-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -54,16 +52,23 @@ jobs:
         run: python -m compileall -q src scripts tests
       - name: Validate PM-v1.6 method contract
         run: python scripts/v1_6/00_validate_method_contract.py
-      - name: Run complete test suite
+      - name: Collect private-artifact integration tests
         shell: bash
         run: |
           set -o pipefail
-          python -m pytest -q 2>&1 | tee pytest.log
-      - name: Upload pytest log on failure
+          python -m pytest --collect-only -q -m requires_private_artifacts 2>&1 | tee private_artifact_tests.log
+      - name: Run clean-checkout unit and contract suite
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m pytest -q -m "not requires_private_artifacts" 2>&1 | tee pytest.log
+      - name: Upload pytest diagnostics on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: pytest-log-${{ github.run_id }}
-          path: project/pytest.log
-          if-no-files-found: error
+          name: pytest-diagnostics-${{ github.run_id }}
+          path: |
+            project/pytest.log
+            project/private_artifact_tests.log
+          if-no-files-found: warn
           retention-days: 7
