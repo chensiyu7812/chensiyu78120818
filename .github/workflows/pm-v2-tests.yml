@@ -55,4 +55,15 @@ jobs:
       - name: Validate PM-v1.6 method contract
         run: python scripts/v1_6/00_validate_method_contract.py
       - name: Run complete test suite
-        run: python -m pytest -q
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m pytest -q 2>&1 | tee pytest.log
+      - name: Upload pytest log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-log-${{ github.run_id }}
+          path: project/pytest.log
+          if-no-files-found: error
+          retention-days: 7
