@@ -11,12 +11,13 @@ from .text import normalize_space
 
 SUPPORTER_GENERATION_CONTRACT_VERSION = "pm-v2.2-supporter-generation-v1"
 PM_V2_CONFIG_VERSION = "pm-v2.2"
-# PM-v1.5 (scripts/v1_5/*.py) is a separate, honestly-versioned config
-# ("pm-v1.5" in configs/pm_v1_5.yaml, not a disguised "pm-v2.2"). Accepting
-# both here, rather than forking this shared contract loader, keeps a single
-# source of truth for what a valid supporter-generation-treatment config
-# looks like.
-ACCEPTED_PM_CONFIG_VERSIONS = frozenset({PM_V2_CONFIG_VERSION, "pm-v1.5"})
+# PM-v1.5 and PM-v1.6 are honestly versioned conference-track configs that
+# intentionally reuse the exact same supporter-generation treatment. Keeping
+# one loader prevents development/external prompt, cap, temperature, and finish
+# reason drift across protocol versions.
+ACCEPTED_PM_CONFIG_VERSIONS = frozenset(
+    {PM_V2_CONFIG_VERSION, "pm-v1.5", "pm-v1.6"}
+)
 FINISH_REASON_PROTOCOL_VERSION = "pm-v2-finish-reason-v1"
 OUTPUT_NORMALIZATION_VERSION = "normalize_space_v1"
 NORMALIZED_FINISH_REASONS = frozenset(
@@ -109,11 +110,11 @@ class SupporterGenerationContract:
             )
         if set(reasons) != {"complete"}:
             raise ValueError(
-                "PM-v2.2 supporter generation must accept only complete responses"
+                "supporter generation must accept only complete responses"
             )
         if not self.reject_length or not self.reject_missing_or_unknown:
             raise ValueError(
-                "PM-v2.2 supporter generation must reject length and missing/unknown "
+                "supporter generation must reject length and missing/unknown "
                 "finish reasons"
             )
 
@@ -179,7 +180,7 @@ class SupporterGenerationContract:
             )
         raw = config.get("supporter_generation_treatment")
         if not isinstance(raw, Mapping):
-            raise ValueError("PM-v2 config lacks supporter_generation_treatment")
+            raise ValueError("PM config lacks supporter_generation_treatment")
         return cls.from_mapping(raw)
 
     @property
