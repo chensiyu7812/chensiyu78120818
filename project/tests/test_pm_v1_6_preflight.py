@@ -28,7 +28,7 @@ def _write_inputs(tmp_path, tiny_state, tiny_strategy, *, mp_text: str):
         memory_id="mem_bbbbbbbbbbbbbbbb",
         source=MemorySource.ME,
         created_session=2,
-        text="A completely unrelated detail about gardening.",
+        text="Botany orchids cacti.",
     )
     write_jsonl(runtime, [tiny_state.model_dump(mode="json")])
     write_jsonl(
@@ -120,7 +120,7 @@ def test_preflight_fails_required_source_before_outcomes(
         tmp_path,
         tiny_state,
         tiny_strategy,
-        mp_text="A completely unrelated preference about gardening.",
+        mp_text="Botany orchids cacti.",
     )
     summary, _ = build_preflight(
         runtime_path=runtime,
