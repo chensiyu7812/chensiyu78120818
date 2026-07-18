@@ -16,11 +16,7 @@ from metacom_pm.pm_v1_6_internal import (
     finish_internal_test,
     reserve_internal_test_once,
 )
-from metacom_pm.pm_v1_6_models import (
-    ConservativeResidualPolicy,
-    OverrideConfig,
-    PMV16OutcomeModel,
-)
+from metacom_pm.pm_v1_6_models import OverrideConfig, PMV16OutcomeModel
 from metacom_pm.pm_v1_6_router import (
     StrongTransparentRouter,
     TransparentRouterConfig,
@@ -53,33 +49,34 @@ def _cluster_bootstrap_delta(
     replicates: int,
     confidence_level: float = 0.95,
 ) -> dict[str, Any]:
+    """Bootstrap equal-weight user means, preserving all within-user dependence."""
+
     if not rows:
         raise ValueError("paired bootstrap rows are empty")
     by_user: dict[str, list[float]] = defaultdict(list)
     for row in rows:
         by_user[str(row["user_id"])].append(float(row[field]))
-    users = sorted(by_user)
+    user_means = {
+        user: float(np.mean(values)) for user, values in sorted(by_user.items())
+    }
+    users = list(user_means)
     rng = np.random.default_rng(int(seed))
     draws = np.empty(int(replicates), dtype=float)
     for index in range(int(replicates)):
         sampled = rng.choice(users, size=len(users), replace=True)
         draws[index] = float(
-            np.mean(
-                [
-                    value
-                    for user in sampled
-                    for value in by_user[str(user)]
-                ]
-            )
+            np.mean([user_means[str(user)] for user in sampled])
         )
     alpha = (1.0 - float(confidence_level)) / 2.0
     return {
-        "estimate": float(np.mean([float(row[field]) for row in rows])),
+        "estimate": float(np.mean(list(user_means.values()))),
         "lower": float(np.quantile(draws, alpha)),
         "upper": float(np.quantile(draws, 1.0 - alpha)),
         "n_user_clusters": len(users),
+        "n_state_rows": len(rows),
         "replicates": int(replicates),
         "confidence_level": float(confidence_level),
+        "estimand": "equal_weight_user_mean_of_within_user_state_deltas",
     }
 
 
@@ -92,6 +89,7 @@ def _baseline_rows(
     router: StrongTransparentRouter,
     override: OverrideConfig,
     baseline: str,
+    skip_ineligible: bool = False,
 ) -> list[dict[str, Any]]:
     label_by_key = {(row.state_id, row.action_id): row for row in labels}
     if len(label_by_key) != len(labels):
@@ -106,6 +104,8 @@ def _baseline_rows(
         else:
             raise ValueError(f"unknown internal baseline: {baseline}")
         if action not in state.allowed_actions:
+            if skip_ineligible:
+                continue
             raise RuntimeError(
                 f"internal baseline {baseline} selected illegal action {action} "
                 f"for {state.state_id}"
@@ -143,13 +143,28 @@ def _baseline_rows(
     return rows
 
 
-def _paired_deltas(learned_rows, baseline_rows) -> list[dict[str, Any]]:
+def _paired_deltas(
+    learned_rows,
+    baseline_rows,
+    *,
+    allow_baseline_subset: bool = False,
+) -> list[dict[str, Any]]:
     learned = {row.state_id: row for row in learned_rows}
     baseline = {str(row["state_id"]): row for row in baseline_rows}
-    if set(learned) != set(baseline):
-        raise RuntimeError("learned and baseline internal state universes differ")
+    if allow_baseline_subset:
+        if not set(baseline) or not set(baseline) <= set(learned):
+            raise RuntimeError(
+                "baseline subset is empty or outside learned state universe"
+            )
+        state_ids = sorted(baseline)
+    else:
+        if set(learned) != set(baseline):
+            raise RuntimeError(
+                "learned and baseline internal state universes differ"
+            )
+        state_ids = sorted(learned)
     rows = []
-    for state_id in sorted(learned):
+    for state_id in state_ids:
         left = learned[state_id]
         right = baseline[state_id]
         if left.user_id != str(right["user_id"]):
@@ -222,16 +237,25 @@ def main() -> None:
             "labels_sha256": sha256_file(args.internal_labels),
             "step0_sha256": sha256_file(args.internal_step0),
         }
-        if any(bundle_manifest.get(key) != value for key, value in expected.items()):
-            raise RuntimeError("sealed internal bundle hashes do not match supplied files")
+        if any(
+            bundle_manifest.get(key) != value for key, value in expected.items()
+        ):
+            raise RuntimeError(
+                "sealed internal bundle hashes do not match supplied files"
+            )
 
         bundle = joblib.load(args.checkpoint)
-        if not isinstance(bundle, Mapping) or bundle.get("protocol") != "pm-v1.6-policy-bundle-v1":
+        if (
+            not isinstance(bundle, Mapping)
+            or bundle.get("protocol") != "pm-v1.6-policy-bundle-v1"
+        ):
             raise RuntimeError("checkpoint is not a PM-v1.6 policy bundle")
         model = bundle.get("outcome_model")
         if not isinstance(model, PMV16OutcomeModel):
             raise RuntimeError("policy bundle lacks PM-v1.6 outcome model")
-        router_config = TransparentRouterConfig.model_validate(bundle["router_config"])
+        router_config = TransparentRouterConfig.model_validate(
+            bundle["router_config"]
+        )
         override = OverrideConfig.model_validate(bundle["override_config"])
         router = StrongTransparentRouter(router_config)
 
@@ -260,17 +284,33 @@ def main() -> None:
             override=override,
             baseline="strong_rule",
         )
+        # ME+R0 is a legacy regression anchor only where ME is a legal action.
+        # The eligible subset is defined by the frozen state action mask before
+        # outcomes are read; it is not an outcome-conditioned exclusion.
+        me_eligible_states = [
+            state for state in states if "ME+R0" in state.allowed_actions
+        ]
         me_rows = _baseline_rows(
-            states=states,
+            states=me_eligible_states,
             labels=labels,
             step0_by_state=step0,
             model=model,
             router=router,
             override=override,
             baseline="me_r0",
+            skip_ineligible=False,
         )
+        if not me_rows:
+            raise RuntimeError(
+                "internal test contains no pre-outcome ME+R0-eligible states"
+            )
+
         learned_vs_rule_rows = _paired_deltas(learned_rows, rule_rows)
-        learned_vs_me_rows = _paired_deltas(learned_rows, me_rows)
+        learned_vs_me_rows = _paired_deltas(
+            learned_rows,
+            me_rows,
+            allow_baseline_subset=True,
+        )
         learned_vs_rule = _comparison_summary(
             learned_vs_rule_rows,
             seed=args.bootstrap_seed,
@@ -297,7 +337,9 @@ def main() -> None:
             <= float(rule_gate["absolute_risk_ceiling"]),
             "risk_not_increased_vs_rule": learned_vs_rule["risk"]["upper"]
             <= float(rule_gate["maximum_risk_delta_ci_upper"]),
-            "utility_strictly_better_than_rule": learned_vs_rule["utility"]["lower"]
+            "utility_strictly_better_than_rule": learned_vs_rule["utility"][
+                "lower"
+            ]
             > float(rule_gate["require_utility_delta_ci_lower_above"]),
             "quality_not_regressed_vs_me_r0": learned_vs_me["quality"]["lower"]
             >= -float(legacy_gate["quality_noninferiority_margin"]),
@@ -323,6 +365,13 @@ def main() -> None:
             "checks": checks,
             "learned_vs_strong_rule": learned_vs_rule,
             "learned_vs_me_r0_legacy_guard": learned_vs_me,
+            "me_r0_eligible_subset": {
+                "selection_timing": "frozen_action_mask_before_outcome_access",
+                "n_states": len(me_eligible_states),
+                "n_users": len({state.user_id for state in me_eligible_states}),
+                "state_coverage": len(me_eligible_states) / len(states),
+                "state_ids": sorted(state.state_id for state in me_eligible_states),
+            },
             "external_generation_allowed": status == "PASS",
         }
         args.out.parent.mkdir(parents=True, exist_ok=True)
