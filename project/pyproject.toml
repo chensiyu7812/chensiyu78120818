@@ -28,3 +28,6 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+markers = [
+  "requires_private_artifacts: integration tests that require generated/private artifacts excluded from a clean repository checkout",
+]
