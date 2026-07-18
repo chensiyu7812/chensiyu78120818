@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -29,12 +30,12 @@ class TransparentRouterConfig(BaseModel):
     @model_validator(mode="after")
     def finite(self) -> "TransparentRouterConfig":
         values = [
-            value
+            float(value)
             for key, value in self.model_dump().items()
             if key != "protocol"
         ]
-        if any(not isinstance(value, (int, float)) for value in values):
-            raise ValueError("router parameters must be numeric")
+        if any(not math.isfinite(value) for value in values):
+            raise ValueError("router parameters must be finite")
         return self
 
     def digest(self) -> str:
@@ -50,7 +51,7 @@ class TransparentRouterDecision:
 
 
 class StrongTransparentRouter:
-    """A non-neural, calibration-frozen baseline using exactly the PM Step-0 view."""
+    """A non-neural, train-frozen baseline using exactly the PM Step-0 view."""
 
     def __init__(self, config: TransparentRouterConfig):
         self.config = config
@@ -74,7 +75,9 @@ class StrongTransparentRouter:
         for source in MemorySource:
             row = observation.sources[source]
             if not row.available or not row.representation_valid:
-                scores[source] = float("-inf")
+                # Keep serialized audit records finite. This sentinel can never
+                # cross a valid frozen selection threshold.
+                scores[source] = -1_000_000.0
                 continue
             age = float(row.max_age_sessions or 0) / max(maximum_age, 1.0)
             cost = row.estimated_retrievable_tokens / max(maximum_tokens, 1)
@@ -105,9 +108,8 @@ class StrongTransparentRouter:
             + self.config.advice_request_bonus * float(readiness.advice_requested)
             + self.config.action_readiness_weight * readiness.action_readiness
             - self.config.advice_reject_penalty * float(readiness.advice_rejected)
-            - self.config.listening_request_penalty * float(
-                readiness.listening_requested
-            )
+            - self.config.listening_request_penalty
+            * float(readiness.listening_requested)
         )
         strategy = (
             StrategyMode.RS
@@ -125,7 +127,7 @@ class StrongTransparentRouter:
 
 
 def router_grid() -> list[TransparentRouterConfig]:
-    """Small preregisterable grid; callers must select it using train users only."""
+    """Small preregisterable grid; select using train users only."""
 
     rows: list[TransparentRouterConfig] = []
     for source_threshold in (0.05, 0.15, 0.25):
