@@ -18,6 +18,13 @@ NormalizedFinishReason = Literal[
     "complete", "length", "tool_call", "content_filter", "unknown"
 ]
 ANTHROPIC_STRUCTURED_OUTPUT_TOOL_NAME = "submit_structured_response"
+GEMINI_USAGE_BREAKDOWN_KEYS = (
+    "gemini_prompt_tokens",
+    "gemini_candidate_tokens",
+    "gemini_thought_tokens",
+    "gemini_tool_use_prompt_tokens",
+    "gemini_cached_content_tokens",
+)
 OPENAI_UNSUPPORTED_STRICT_SCHEMA_KEYWORDS = frozenset(
     {
         "allOf",
@@ -44,6 +51,26 @@ class Endpoint:
     # backward compatibility for ordinary OpenAI/Anthropic routes, while
     # providers with multiple API surfaces (notably Gemini) must freeze it.
     transport: str = "auto"
+    # Declared, frozen endpoint capability, decided before any request is
+    # sent -- never a runtime fallback after a rejection (see
+    # test_schema_http_400_is_diagnostic_and_never_downgrades). Some OpenAI-
+    # compatible providers (DeepSeek's own official API, unlike NVIDIA's
+    # gateway hosting the same model) reject the newer strict json_schema
+    # response_format with a 400 and only support the older, loose
+    # json_object mode. Default True preserves every existing endpoint's
+    # behavior unchanged.
+    supports_strict_json_schema: bool = True
+    # "provider_default" omits the ``thinking`` request field entirely,
+    # preserving every existing endpoint's behavior unchanged. deepseek-v4-
+    # flash defaults to thinking enabled (confirmed via api-docs.deepseek.com
+    # /guides/thinking_mode/) and has no separate reasoning-token budget from
+    # max_tokens, so a short judge max_tokens can be entirely consumed by an
+    # unrequested chain-of-thought before any JSON content is emitted --
+    # exactly the finish_reason=length pattern observed on three real
+    # deepseek_official judge calls (completion_tokens landed precisely on
+    # the configured ceiling every time). "disabled"/"enabled" send an
+    # explicit ``{"thinking": {"type": ...}}`` field.
+    thinking_mode: str = "provider_default"
 
     @property
     def api_key(self) -> str:
@@ -92,6 +119,100 @@ class CallResult:
     request_hash: str
     provider_finish_reason: str | None = None
     normalized_finish_reason: NormalizedFinishReason = "unknown"
+    # Structured providers occasionally wrap an otherwise valid JSON object in
+    # a Markdown fence or a short prose prefix.  When that surface is repaired
+    # deterministically, retain an explicit audit record instead of silently
+    # pretending that the provider returned exact JSON.
+    structured_output_audit: dict[str, Any] | None = None
+
+
+def parse_audited_json_surface(text: str) -> tuple[Any, dict[str, Any]]:
+    """Parse one JSON value with narrowly bounded, fully audited normalization.
+
+    Exact JSON remains the preferred surface.  The only accepted normalization
+    removes either one complete Markdown JSON fence or a short prefix/suffix
+    surrounding exactly one JSON object.  JSON values are never edited.  A
+    malformed object, multiple objects, or a long wrapper remains a provider
+    output-format failure and is handled by the outer paid-attempt ledger.
+    """
+
+    raw = str(text)
+    stripped = raw.strip()
+    raw_sha256 = sha256_text(raw)
+    parse_error: json.JSONDecodeError | None = None
+    try:
+        parsed = json.loads(stripped)
+    except json.JSONDecodeError as exc:
+        parse_error = exc
+        parsed = None
+    else:
+        return parsed, {
+            "initially_valid_json": True,
+            "normalization_kind": "exact_json",
+            "raw_text_sha256": raw_sha256,
+            "normalized_json_sha256": sha256_text(canonical_json(parsed)),
+            "discarded_prefix_chars": 0,
+            "discarded_suffix_chars": 0,
+        }
+
+    lines = stripped.splitlines()
+    if (
+        len(lines) >= 3
+        and lines[0].strip().casefold() in {"```", "```json"}
+        and lines[-1].strip() == "```"
+    ):
+        inner = "\n".join(lines[1:-1]).strip()
+        try:
+            fenced = json.loads(inner)
+        except json.JSONDecodeError:
+            pass
+        else:
+            return fenced, {
+                "initially_valid_json": False,
+                "normalization_kind": "single_markdown_json_fence",
+                "raw_text_sha256": raw_sha256,
+                "normalized_json_sha256": sha256_text(canonical_json(fenced)),
+                "discarded_prefix_chars": len(lines[0]) + 1,
+                "discarded_suffix_chars": len(lines[-1]) + 1,
+            }
+
+    # Recover the recurring provider shape `We{...}` without accepting an
+    # arbitrary essay around JSON.  The wrapper is bounded, may not contain a
+    # second JSON delimiter, and exactly one decodable object must exist.
+    decoder = json.JSONDecoder()
+    candidates: list[tuple[Any, str, int, int]] = []
+    for start, character in enumerate(stripped):
+        if character != "{":
+            continue
+        try:
+            embedded, end = decoder.raw_decode(stripped, start)
+        except json.JSONDecodeError:
+            continue
+        prefix = stripped[:start]
+        suffix = stripped[end:]
+        if not isinstance(embedded, dict):
+            continue
+        if len(prefix) > 80 or len(suffix) > 80:
+            continue
+        if any(token in prefix + suffix for token in ("{", "}", "[", "]")):
+            continue
+        candidates.append(
+            (embedded, "single_bounded_json_object", len(prefix), len(suffix))
+        )
+
+    if len(candidates) != 1:
+        if parse_error is None:  # pragma: no cover - exact JSON returned above
+            raise ValueError("provider response is not valid JSON")
+        raise parse_error
+    parsed, kind, prefix_chars, suffix_chars = candidates[0]
+    return parsed, {
+        "initially_valid_json": False,
+        "normalization_kind": kind,
+        "raw_text_sha256": raw_sha256,
+        "normalized_json_sha256": sha256_text(canonical_json(parsed)),
+        "discarded_prefix_chars": int(prefix_chars),
+        "discarded_suffix_chars": int(suffix_chars),
+    }
 
 
 def normalize_provider_finish_reason(
@@ -172,7 +293,7 @@ def _classify_retryable_exception(exc: BaseException) -> tuple[str, int | None]:
 
     Returns (retry_class, status_code). retry_class is one of:
     "rate_limited_429", "request_timeout_408", "http_5xx",
-    "network_timeout", "missing_field", "other".
+    "network_timeout", "missing_field", "provider_output_format", "other".
     Only the caller decides whether/how many times to retry each class; this
     function only describes what happened.
     """
@@ -191,10 +312,25 @@ def _classify_retryable_exception(exc: BaseException) -> tuple[str, int | None]:
         # HTTP status code but are the same kind of transient infrastructure
         # issue as a 5xx response.
         return "network_timeout", None
+    if isinstance(exc, ValueError) and "finish_reason=length" in str(exc):
+        # The provider truncated the response because max_tokens ran out
+        # (commonly an unrequested reasoning/thinking budget consuming the
+        # entire allowance before any content token) -- a contract/config
+        # mismatch, not transient noise. Retrying the identical request is
+        # unlikely to help, so this is deliberately its own class, outside
+        # both RETRYABLE_UP_TO_FULL_BUDGET and BOUNDED_PROVIDER_OUTPUT_RETRY_
+        # CLASSES in bounded_retry.py -- it falls through to terminal on the
+        # first occurrence rather than burning a retry budget chasing the
+        # same ceiling.
+        return "output_token_limit", None
     if isinstance(exc, (KeyError, IndexError, TypeError, AttributeError)) or (
         isinstance(exc, ValueError) and "empty model response" in str(exc)
     ):
         return "missing_field", None
+    if isinstance(exc, json.JSONDecodeError) or (
+        isinstance(exc, ValueError) and "response is not valid JSON" in str(exc)
+    ):
+        return "provider_output_format", None
     return "other", None
 
 
@@ -215,6 +351,7 @@ class RetryableProviderError(RuntimeError):
         usage: Mapping[str, Any] | None = None,
         response_diagnostics: Mapping[str, Any] | None = None,
         retry_after_seconds: float | None = None,
+        provider_text: str | None = None,
     ) -> None:
         super().__init__(message)
         self.last_retry_class = last_retry_class
@@ -226,6 +363,7 @@ class RetryableProviderError(RuntimeError):
             dict(response_diagnostics) if response_diagnostics is not None else None
         )
         self.retry_after_seconds = retry_after_seconds
+        self.provider_text = str(provider_text) if provider_text is not None else None
 
 
 class StructuredOutputValidationError(RuntimeError):
@@ -279,6 +417,47 @@ def require_reported_usage(
         raise RuntimeError(
             f"{stage} provider reported total_tokens is internally inconsistent"
         )
+    present_gemini_keys = {
+        key for key in GEMINI_USAGE_BREAKDOWN_KEYS if key in raw
+    }
+    if present_gemini_keys:
+        if present_gemini_keys != set(GEMINI_USAGE_BREAKDOWN_KEYS):
+            raise RuntimeError(
+                f"{stage} Gemini usage breakdown is incomplete"
+            )
+        try:
+            gemini = {
+                key: int(raw[key]) for key in GEMINI_USAGE_BREAKDOWN_KEYS
+            }
+        except (TypeError, ValueError) as exc:
+            raise RuntimeError(
+                f"{stage} Gemini usage breakdown is invalid"
+            ) from exc
+        if any(value < 0 for value in gemini.values()):
+            raise RuntimeError(
+                f"{stage} Gemini usage breakdown cannot contain negative tokens"
+            )
+        if gemini["gemini_cached_content_tokens"] > gemini[
+            "gemini_prompt_tokens"
+        ]:
+            raise RuntimeError(
+                f"{stage} Gemini cached tokens exceed prompt tokens"
+            )
+        if normalized["prompt_tokens"] != (
+            gemini["gemini_prompt_tokens"]
+            + gemini["gemini_tool_use_prompt_tokens"]
+        ):
+            raise RuntimeError(
+                f"{stage} Gemini normalized prompt accounting is inconsistent"
+            )
+        if normalized["completion_tokens"] != (
+            gemini["gemini_candidate_tokens"]
+            + gemini["gemini_thought_tokens"]
+        ):
+            raise RuntimeError(
+                f"{stage} Gemini normalized completion accounting is inconsistent"
+            )
+        normalized.update(gemini)
     return normalized
 
 
@@ -440,7 +619,12 @@ def _openai_usage_from_body(body: Any) -> dict[str, int] | None:
 
 
 def _gemini_usage_from_body(body: Any) -> dict[str, int] | None:
-    """Normalize native Gemini generateContent usage metadata."""
+    """Normalize native Gemini usage without dropping billable components.
+
+    Gemini defines totalTokenCount as prompt + candidates + tool-use prompt +
+    thoughts. Cached content is already included in promptTokenCount, so it is
+    recorded for audit but is not added a second time.
+    """
 
     if not isinstance(body, Mapping) or not isinstance(
         body.get("usageMetadata"), Mapping
@@ -448,10 +632,20 @@ def _gemini_usage_from_body(body: Any) -> dict[str, int] | None:
         return None
     usage_raw = body["usageMetadata"]
     try:
+        provider_prompt = int(usage_raw.get("promptTokenCount") or 0)
+        candidates = int(usage_raw.get("candidatesTokenCount") or 0)
+        thoughts = int(usage_raw.get("thoughtsTokenCount") or 0)
+        tool_use_prompt = int(usage_raw.get("toolUsePromptTokenCount") or 0)
+        cached_content = int(usage_raw.get("cachedContentTokenCount") or 0)
         return {
-            "prompt_tokens": int(usage_raw.get("promptTokenCount") or 0),
-            "completion_tokens": int(usage_raw.get("candidatesTokenCount") or 0),
+            "prompt_tokens": provider_prompt + tool_use_prompt,
+            "completion_tokens": candidates + thoughts,
             "total_tokens": int(usage_raw.get("totalTokenCount") or 0),
+            "gemini_prompt_tokens": provider_prompt,
+            "gemini_candidate_tokens": candidates,
+            "gemini_thought_tokens": thoughts,
+            "gemini_tool_use_prompt_tokens": tool_use_prompt,
+            "gemini_cached_content_tokens": cached_content,
         }
     except (TypeError, ValueError):
         return None
@@ -494,11 +688,36 @@ def _provider_response_diagnostics(
                 diagnostics["first_choice_keys"] = sorted(
                     str(key) for key in choices[0]
                 )[:100]
+                finish_reason = choices[0].get("finish_reason")
+                if finish_reason is not None:
+                    diagnostics["first_choice_finish_reason"] = str(finish_reason)
                 message = choices[0].get("message")
                 if isinstance(message, Mapping):
                     diagnostics["first_message_keys"] = sorted(
                         str(key) for key in message
                     )[:100]
+                    # Bounded lengths only -- never the content itself, which
+                    # may include the model's chain-of-thought or judged text.
+                    content = message.get("content")
+                    if isinstance(content, str):
+                        diagnostics["first_message_content_length"] = len(content)
+                    reasoning_content = message.get("reasoning_content")
+                    if isinstance(reasoning_content, str):
+                        diagnostics["first_message_reasoning_content_length"] = len(
+                            reasoning_content
+                        )
+        usage = body.get("usage")
+        if isinstance(usage, Mapping):
+            completion_details = usage.get("completion_tokens_details")
+            if isinstance(completion_details, Mapping):
+                reasoning_tokens = completion_details.get("reasoning_tokens")
+                if reasoning_tokens is not None:
+                    try:
+                        diagnostics["completion_reasoning_tokens"] = int(
+                            reasoning_tokens
+                        )
+                    except (TypeError, ValueError):
+                        pass
         candidates = body.get("candidates")
         if isinstance(candidates, list):
             diagnostics["candidates_count"] = len(candidates)
@@ -602,20 +821,39 @@ def chat_request_payload(
     }
     if seed is not None:
         payload["seed"] = int(seed)
+    if endpoint.thinking_mode != "provider_default":
+        payload["thinking"] = {"type": endpoint.thinking_mode}
     if response_schema is not None:
-        payload["response_format"] = {
-            "type": "json_schema",
-            "json_schema": {
-                "name": response_schema.__name__,
-                "strict": True,
-                "schema": openai_strict_json_schema(response_schema),
-            },
-        }
+        if endpoint.supports_strict_json_schema:
+            payload["response_format"] = {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": response_schema.__name__,
+                    "strict": True,
+                    "schema": openai_strict_json_schema(response_schema),
+                },
+            }
+        else:
+            # Loose JSON mode: the provider only guarantees syntactically
+            # valid JSON, not schema conformance. OpenAICompatibleClient.chat
+            # still runs response_schema.model_validate(...) on the parsed
+            # result afterward, so schema conformance is enforced locally
+            # either way -- a mismatch surfaces as StructuredOutputValidation
+            # Error and feeds the existing bounded provider-output retry,
+            # exactly as it would under strict mode.
+            payload["response_format"] = {"type": "json_object"}
     return payload
 
 
 def request_payload_has_schema(payload: Mapping[str, Any]) -> bool:
-    """Recognize OpenAI, Anthropic, or native Gemini schema contracts."""
+    """Recognize OpenAI, Anthropic, or native Gemini schema contracts.
+
+    Includes the loose ``json_object`` mode used by OpenAI-compatible
+    providers that reject the stricter ``json_schema`` response_format
+    (declared via Endpoint.supports_strict_json_schema=False) -- it is a
+    deliberately weaker, but still intentional, structured-output request,
+    not a missing one.
+    """
 
     response_format = payload.get("response_format")
     if isinstance(response_format, Mapping):
@@ -625,6 +863,8 @@ def request_payload_has_schema(payload: Mapping[str, Any]) -> bool:
             and isinstance(json_schema, Mapping)
             and isinstance(json_schema.get("schema"), Mapping)
         ):
+            return True
+        if response_format.get("type") == "json_object":
             return True
     generation_config = payload.get("generationConfig")
     if (
@@ -713,6 +953,7 @@ class OpenAICompatibleClient:
         last_usage: dict[str, int] | None = None
         last_response_diagnostics: dict[str, Any] | None = None
         last_retry_after_seconds: float | None = None
+        last_provider_text: str | None = None
         attempts_tried = 0
         for attempt in range(1, retries + 1):
             attempts_tried = attempt
@@ -779,12 +1020,23 @@ class OpenAICompatibleClient:
                     "completion_tokens": 0,
                     "total_tokens": 0,
                 }
-                text = body["choices"][0]["message"]["content"]
-                if not isinstance(text, str) or not text.strip():
-                    raise ValueError("empty model response")
                 provider_finish_reason, normalized_finish_reason = (
                     normalize_provider_finish_reason(body)
                 )
+                text = body["choices"][0]["message"]["content"]
+                if not isinstance(text, str) or not text.strip():
+                    if normalized_finish_reason == "length":
+                        # Distinguish "the provider truncated the response
+                        # because max_tokens ran out" (e.g. an unrequested
+                        # reasoning/thinking budget consumed everything
+                        # before any content token) from a genuinely
+                        # unexplained empty response -- these need different
+                        # retry treatment (see _classify_retryable_exception).
+                        raise ValueError(
+                            "empty model response (finish_reason=length)"
+                        )
+                    raise ValueError("empty model response")
+                last_provider_text = text
                 call = CallResult(
                     text=text.strip(),
                     raw_response=body,
@@ -797,12 +1049,14 @@ class OpenAICompatibleClient:
                 if response_schema is None:
                     return call, None
                 try:
-                    parsed_obj = json.loads(text)
-                except json.JSONDecodeError:
-                    start, end = text.find("{"), text.rfind("}")
-                    if start < 0 or end <= start:
-                        raise ValueError("response is not valid JSON")
-                    parsed_obj = json.loads(text[start : end + 1])
+                    parsed_obj, surface_audit = parse_audited_json_surface(text)
+                except json.JSONDecodeError as exc:
+                    if normalized_finish_reason == "length":
+                        raise ValueError(
+                            "response is not valid JSON (finish_reason=length)"
+                        ) from exc
+                    raise
+                call.structured_output_audit = surface_audit
                 try:
                     parsed = response_schema.model_validate(parsed_obj)
                 except ValidationError as exc:
@@ -843,6 +1097,7 @@ class OpenAICompatibleClient:
             usage=last_usage,
             response_diagnostics=last_response_diagnostics,
             retry_after_seconds=last_retry_after_seconds,
+            provider_text=last_provider_text,
         )
 
 
@@ -918,6 +1173,7 @@ class GeminiNativeClient:
         last_usage: dict[str, int] | None = None
         last_response_diagnostics: dict[str, Any] | None = None
         last_retry_after_seconds: float | None = None
+        last_provider_text: str | None = None
         attempts_tried = 0
         for attempt in range(1, retries + 1):
             attempts_tried = attempt
@@ -999,6 +1255,7 @@ class GeminiNativeClient:
                 ).strip()
                 if not text:
                     raise ValueError("empty model response")
+                last_provider_text = text
                 provider_finish_reason, normalized_finish_reason = (
                     normalize_provider_finish_reason(body)
                 )
@@ -1013,13 +1270,8 @@ class GeminiNativeClient:
                 )
                 if response_schema is None:
                     return call, None
-                try:
-                    parsed_obj = json.loads(text)
-                except json.JSONDecodeError:
-                    start, end = text.find("{"), text.rfind("}")
-                    if start < 0 or end <= start:
-                        raise ValueError("response is not valid JSON")
-                    parsed_obj = json.loads(text[start : end + 1])
+                parsed_obj, surface_audit = parse_audited_json_surface(text)
+                call.structured_output_audit = surface_audit
                 try:
                     parsed = response_schema.model_validate(parsed_obj)
                 except ValidationError as exc:
@@ -1060,6 +1312,7 @@ class GeminiNativeClient:
             usage=last_usage,
             response_diagnostics=last_response_diagnostics,
             retry_after_seconds=last_retry_after_seconds,
+            provider_text=last_provider_text,
         )
 
 
@@ -1233,6 +1486,9 @@ def request_log(
         ),
         "completion_truncated": (
             result.normalized_finish_reason == "length" if result else None
+        ),
+        "structured_output_audit": (
+            result.structured_output_audit if result else None
         ),
         "validated": parsed.model_dump(mode="json") if parsed else None,
         "usage": result.usage if result else None,

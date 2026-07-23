@@ -311,7 +311,9 @@ semantic family/regime 的四个可见自然语言字段，不向 provider 暴�
 coverage rationale、case ID 或 evidence blueprint。每个用户的 9 个 case 分开请求；初次
 schema/topic/structure lint 失败时，只允许同 case 的一次独立 seed、提前计入预算的 repair。
 成功立即停止，repair 失败则整次正式生成 fail-closed；确定性 fallback 不得作为训练语料。
-因此 52-user 正式生成成功路径为 468 calls，硬上限为 936 calls，而不再是旧整包 52 calls。
+因此 52-user 正式生成成功路径为 468 calls，内容尝试硬上限为 936；每个内容尝试另有
+3 个只处理瞬时 5xx/429/408/timeout 的 ledger-visible transport slots，所以 physical
+调用硬上限为 2,808，而不再是旧整包 52 calls。transport retry 不得消耗唯一 content repair。
 角色顺序不是 provider 的语义任务：provider 只填写 1–2 个
 `{user_text, assistant_text}` 历史 exchange，本地 compiler 再展开为严格的
 `user → assistant` turn 序列。这样 2–4 个历史 turn 的变化仍保留，但交替和“历史最后一条

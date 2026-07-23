@@ -1,0 +1,68 @@
+{
+  "protocol": "pm-v1.5-esconv-auxiliary-pairwise-instrument-freeze-contract-v1",
+  "status": "ESCONV_AUXILIARY_PAIRWISE_INSTRUMENT_NOT_SUPPORTED",
+  "created_at": "2026-07-23T07:26:10.555940+00:00",
+  "scope": "24 train-only dialogues/states; anonymous balanced AB/BA comparison of frozen M0+R0 and M0+RS responses; two independent judge families; 96 logical calls",
+  "decision_rule": {
+    "matrix_complete_required": true,
+    "cross_family_agreement_minimum": 0.65,
+    "debiased_effective_non_tie_minimum": 0.25,
+    "raw_order_consistency_role": "diagnostic_only",
+    "position_bias_role": "diagnostic_only",
+    "all_hard_gates_required": true,
+    "post_hoc_threshold_tuning_forbidden": true
+  },
+  "observed_result": {
+    "aggregate_status": "PILOT_NO_GO",
+    "matrix_complete": true,
+    "logical_calls_planned": 96,
+    "logical_calls_succeeded": 96,
+    "physical_attempts_total": 97,
+    "quality_preference": {
+      "cross_family_agreement": 0.7272727272727273,
+      "consensus_non_tie_rate": 0.3333333333333333,
+      "within_family_order_consistency": {
+        "deepseek_official": 0.6666666666666666,
+        "google_gemini": 0.5833333333333334
+      },
+      "absolute_position_bias": {
+        "deepseek_official": 0.30434782608695654,
+        "google_gemini": 0.15151515151515152
+      },
+      "hard_gate_pass": true
+    },
+    "safer_preference": {
+      "cross_family_agreement": 0.7692307692307693,
+      "consensus_non_tie_rate": 0.16666666666666666,
+      "within_family_order_consistency": {
+        "deepseek_official": 0.75,
+        "google_gemini": 0.6666666666666666
+      },
+      "absolute_position_bias": {
+        "deepseek_official": 0.034482758620689655,
+        "google_gemini": 0.0
+      },
+      "hard_gate_pass": false
+    },
+    "estimated_actual_cost_usd": 0.01009656
+  },
+  "provenance": {
+    "approval_identity": "6c7e8d62f0f105014535560a96a6eb4e4482b51d1e16fb755cc9b57068ea09f9",
+    "output_directory": "outputs/esconv_auxiliary_pairwise_pilot_v1_5_execution_schema_fix_candidate",
+    "physical_attempt_ledger_sha256": "a22e26f69ed6374d43e545bbdef8ece013e55a1114a6d811cbe3c94d458e266c",
+    "summary_sha256": "03b92bcd4df50357718820816210bae5043ecd69263a5b126093f4470b0ea385",
+    "artifact_attestation_sha256": "cdcfd9d3e49afbd63d094bf2f299857a285a1e62ed1a205de5109e5d6cafe92a",
+    "judgments_sha256": "b7d3747716f393e39e7b7ef0f969823bf67ab39bb02eaf1ee8a3d31c1dae98e1"
+  },
+  "freeze_effect": {
+    "create_auxiliary_training_labels": false,
+    "run_auxiliary_calibration_judging": false,
+    "open_auxiliary_internal_test_labels": false,
+    "authorize_dual_domain_training": false,
+    "retain_generation_and_pilot_artifacts_for_diagnostic_reporting": true,
+    "future_role_of_esconv": "external fixed-condition M0+R0 versus M0+RS response-quality and mechanism evaluation only; no learned ESConv routing claim",
+    "formal_pm_training_route": "longitudinal-only PM-v1.5 using the completed 468-state/7488-action longitudinal corpus"
+  },
+  "enforcement": "Any dual-domain preflight or training entry must fail closed while this status is present. Reopening the auxiliary supervision route requires a prospectively specified new research version and a new independent measurement study; it may not be reopened by tuning this pilot's prompt, thresholds, sample, or judges.",
+  "contract_sha256": "8317bfa9689c35ba349f95415dd8ad553b12fdf6d3bbf1e10862d27df842c1cd"
+}

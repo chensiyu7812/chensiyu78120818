@@ -15,6 +15,9 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from metacom_pm.api import (
+    ProviderRequestError,
+    RetryableProviderError,
+    StructuredOutputValidationError,
     chat_request_payload,
     make_client,
     request_payload_has_schema,
@@ -25,6 +28,16 @@ from metacom_pm.attempt_ledger import (
     forbid_overwrite_of_spent_attempts,
     physical_call_key as make_physical_call_key,
     reported_prompt_token_error,
+)
+from metacom_pm.bounded_retry import (
+    BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES,
+    RETRYABLE_UP_TO_FULL_BUDGET,
+    RETRY_CONTRACT_PROTOCOL,
+    TERMINAL_DISPOSITION,
+    call_retry_blocker,
+    execute_with_bounded_retry,
+    failure_metadata,
+    retry_ledger_summary,
 )
 from metacom_pm.artifacts import create_artifact_attestation, require_artifact_attestation
 from metacom_pm.config import endpoint_from_config, load_config
@@ -70,18 +83,264 @@ from metacom_pm.pm_v2_semantic_audit import (
 from metacom_pm.pm_v1_5_shortcut_audit import (
     require_step0_shortcut_audit_pass,
 )
-from metacom_pm.v1_5_automated_semantic_review import (
-    require_automated_semantic_review_pass,
-)
 from metacom_pm.paid_run_release import require_paid_run_release
 from metacom_pm.v1_5_actual_corpus_review import (
     require_actual_corpus_semantic_review_pass,
 )
+from metacom_pm.v1_5_actual_corpus_qualification import (
+    require_actual_corpus_posthoc_qualification,
+)
 from metacom_pm.v1_5_judge_isolation import require_judge_role_isolation
+from metacom_pm.v1_5_deterministic_sharding import (
+    load_validated_sharding_contract,
+)
 from metacom_pm.internal_holdout import seal_internal_label_bundle
 from metacom_pm.text import conservative_token_bound, estimate_tokens
 
 ROOT = Path(__file__).resolve().parents[2]
+
+DEVELOPMENT_JUDGING_TRANSPORT_PROTOCOL = (
+    "pm-v1.5-development-sweep-judging-transport-execution-v1"
+)
+DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS = 4
+DEVELOPMENT_JUDGING_BACKOFF_SECONDS = (10.0, 30.0, 60.0)
+DEVELOPMENT_JUDGING_CONSECUTIVE_FAILURE_BREAKER = 5
+TRAIN_CALIBRATION_SCOPE = "train_calibration"
+SEALED_INTERNAL_TEST_SCOPE = "sealed_internal_test"
+FORMAL_JUDGING_SCOPES = (TRAIN_CALIBRATION_SCOPE, SEALED_INTERNAL_TEST_SCOPE)
+DEVELOPMENT_JUDGING_ISOLATABLE_FAILURE_CLASSES = frozenset(
+    set(RETRYABLE_UP_TO_FULL_BUDGET)
+    | set(BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES)
+    | {"structured_output_validation_error", "output_token_limit"}
+)
+
+
+def development_judging_transport_contract(
+    *, provider_output_attempts_by_family: Mapping[str, int]
+) -> dict[str, Any]:
+    """Bind execution resilience without changing the scientific judge contract."""
+
+    if not provider_output_attempts_by_family or any(
+        int(value) < 1
+        or int(value) > DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS
+        for value in provider_output_attempts_by_family.values()
+    ):
+        raise ValueError(
+            "per-family provider-output attempts must fit the physical-attempt bound"
+        )
+    code_paths = {
+        "runner": Path(__file__).resolve(),
+        "api": ROOT / "src" / "metacom_pm" / "api.py",
+        "attempt_ledger": ROOT / "src" / "metacom_pm" / "attempt_ledger.py",
+        "bounded_retry": ROOT / "src" / "metacom_pm" / "bounded_retry.py",
+        "judging": ROOT / "src" / "metacom_pm" / "pm_v2_judging.py",
+    }
+    code_manifest = {
+        name: {
+            "relative_path": str(path.relative_to(ROOT)),
+            "sha256": sha256_file(path),
+        }
+        for name, path in sorted(code_paths.items())
+    }
+    payload: dict[str, Any] = {
+        "protocol": DEVELOPMENT_JUDGING_TRANSPORT_PROTOCOL,
+        "retry_contract_protocol": RETRY_CONTRACT_PROTOCOL,
+        "maximum_physical_attempts_per_logical_call": (
+            DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS
+        ),
+        "transport_backoff_seconds": list(DEVELOPMENT_JUDGING_BACKOFF_SECONDS),
+        "retryable_transport_classes": sorted(RETRYABLE_UP_TO_FULL_BUDGET),
+        "isolatable_provider_failure_classes": sorted(
+            DEVELOPMENT_JUDGING_ISOLATABLE_FAILURE_CLASSES
+        ),
+        "provider_output_maximum_attempts_by_family": {
+            str(family): int(value)
+            for family, value in sorted(provider_output_attempts_by_family.items())
+        },
+        "terminal_content_or_schema_failure_is_not_blindly_retried": True,
+        "continue_after_isolated_provider_failure": True,
+        "consecutive_same_class_circuit_breaker": (
+            DEVELOPMENT_JUDGING_CONSECUTIVE_FAILURE_BREAKER
+        ),
+        "client_internal_retries": 1,
+        "scientific_judge_contract_unchanged": True,
+        "code_manifest": code_manifest,
+        "code_manifest_sha256": sha256_text(canonical_json(code_manifest)),
+    }
+    payload["contract_sha256"] = sha256_text(canonical_json(payload))
+    return payload
+
+
+def _isolatable_provider_failure_class(exc: Exception) -> str | None:
+    """Return only provider-surface failures safe to isolate to one matrix row."""
+
+    if isinstance(exc, RetryableProviderError):
+        retry_class = str(exc.last_retry_class)
+        return (
+            retry_class
+            if retry_class in DEVELOPMENT_JUDGING_ISOLATABLE_FAILURE_CLASSES
+            else None
+        )
+    if isinstance(exc, StructuredOutputValidationError):
+        return "structured_output_validation_error"
+    # A non-429 4xx generally means the request contract or credential is
+    # wrong for every following row.  It must stop the run, not be diluted as
+    # one isolated observation in a very large matrix.
+    if isinstance(exc, ProviderRequestError):
+        return None
+    return None
+
+
+def _persisted_isolatable_failure_class(
+    ledger: PersistentAttemptLedger, call_key: str
+) -> str | None:
+    terminal = ledger.terminal_row(call_key) or {}
+    metadata = terminal.get("metadata") or {}
+    retry_class = str(metadata.get("retry_class") or "")
+    return (
+        retry_class
+        if retry_class in DEVELOPMENT_JUDGING_ISOLATABLE_FAILURE_CLASSES
+        else None
+    )
+
+
+def development_judging_cost_bounds(
+    cost_rows: list[Mapping[str, Any]],
+) -> dict[str, int | float]:
+    """Return logical and all-attempt bounds using stable float summation."""
+
+    logical_input_tokens = sum(int(row["input_tokens_est"]) for row in cost_rows)
+    logical_output_tokens = sum(int(row["max_output_tokens"]) for row in cost_rows)
+    logical_cost_usd = math.fsum(float(row["maximum_cost_usd"]) for row in cost_rows)
+    attempts = DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS
+    return {
+        "logical_input_tokens": logical_input_tokens,
+        "logical_output_tokens": logical_output_tokens,
+        "logical_cost_usd": logical_cost_usd,
+        "maximum_physical_attempts": len(cost_rows) * attempts,
+        "maximum_input_tokens": logical_input_tokens * attempts,
+        "maximum_output_tokens": logical_output_tokens * attempts,
+        "maximum_cost_usd": logical_cost_usd * attempts,
+    }
+
+
+def select_formal_judging_outcomes(
+    outcomes: list[ActionOutcome],
+    *,
+    state_by_card: Mapping[str, Any],
+    label_scope: str,
+) -> list[ActionOutcome]:
+    """Select exactly one pre-registered split scope without peeking at labels."""
+
+    if label_scope not in FORMAL_JUDGING_SCOPES:
+        raise ValueError(f"unsupported formal judging scope: {label_scope}")
+    allowed_splits = (
+        {"train", "calibration"}
+        if label_scope == TRAIN_CALIBRATION_SCOPE
+        else {"internal_test"}
+    )
+    selected = [
+        outcome
+        for outcome in outcomes
+        if str(state_by_card[outcome.card_id].split.value) in allowed_splits
+    ]
+    observed_splits = {
+        str(state_by_card[outcome.card_id].split.value) for outcome in selected
+    }
+    if observed_splits != allowed_splits:
+        raise RuntimeError(
+            f"formal judging scope {label_scope} is incomplete: "
+            f"{sorted(observed_splits)} != {sorted(allowed_splits)}"
+        )
+    if not selected:
+        raise RuntimeError(f"formal judging scope {label_scope} selected no outcomes")
+    return selected
+
+
+def evaluate_raw_judge_gates(
+    canonical_raw_rows: list[Mapping[str, Any]],
+    *,
+    outcomes: list[ActionOutcome],
+    endpoints: list[Any],
+    labeling: Mapping[str, Any],
+    composite_spec: Any,
+    compatibility_pilot: bool,
+) -> dict[str, Any]:
+    """Evaluate development-label health only on train/calibration rows."""
+
+    expected_families = [str(endpoint.family) for endpoint in endpoints]
+    common = {
+        "expected_families": expected_families,
+        "duplicate_exact_match_rate": labeling["duplicate_exact_match_rate"],
+        "maximum_absolute_dimension_correlation": labeling[
+            "maximum_absolute_dimension_correlation"
+        ],
+        "composite_support_exact_match_rate": labeling[
+            "composite_support_exact_match_rate"
+        ],
+        "maximum_absolute_composite_support_correlation": labeling[
+            "maximum_absolute_composite_support_correlation"
+        ],
+        "reject_constant_response_dimensions": labeling[
+            "reject_constant_response_dimensions"
+        ],
+        "reject_constant_risk_dimensions": labeling[
+            "reject_constant_risk_dimensions"
+        ],
+        "composite_spec": composite_spec,
+        "raise_on_failure": not compatibility_pilot,
+    }
+    global_gate = validate_raw_judge_family_health(canonical_raw_rows, **common)
+    action_gate = validate_raw_judge_family_subgroup_health(
+        canonical_raw_rows,
+        subgroup_key="action_id",
+        expected_subgroups=sorted({row.action_id for row in outcomes}),
+        **common,
+    )
+    risk_gate = validate_action_applicable_risk_signal(
+        canonical_raw_rows,
+        expected_actions=sorted({row.action_id for row in outcomes}),
+        expected_families=expected_families,
+        minimum_signal_rate=labeling[
+            "minimum_action_applicable_risk_signal_rate"
+        ],
+        minimum_distinct_values=labeling[
+            "minimum_action_applicable_risk_distinct_values"
+        ],
+        raise_on_failure=not compatibility_pilot,
+    )
+    return {
+        "status": (
+            "PASS"
+            if global_gate.get("status") == "PASS"
+            and action_gate.get("status") == "PASS"
+            and (compatibility_pilot or risk_gate.get("status") == "PASS")
+            else "FAIL"
+        ),
+        "global": global_gate,
+        "family_by_action": action_gate,
+        "action_applicable_risk_signal": {
+            **risk_gate,
+            "enforced": not compatibility_pilot,
+        },
+    }
+
+
+def advance_development_judging_failure_streak(
+    *,
+    previous_class: str | None,
+    previous_count: int,
+    retry_class: str,
+) -> tuple[str, int]:
+    """Advance the cross-call breaker and stop on a systemic-looking streak."""
+
+    count = previous_count + 1 if retry_class == previous_class else 1
+    if count >= DEVELOPMENT_JUDGING_CONSECUTIVE_FAILURE_BREAKER:
+        raise RuntimeError(
+            f"circuit breaker: {retry_class} recurred {count} times in a row "
+            "across different development-judging calls"
+        )
+    return retry_class, count
 
 
 def raw_key(row):
@@ -146,6 +405,75 @@ def persist_or_validate_judge_dry_run(
     write_json(estimate_path, expected_estimate)
     write_jsonl(call_plan_path, call_plan)
     return "WRITTEN"
+
+
+def load_development_judging_carry_forward(
+    *,
+    carry_forward_dir: Path | None,
+    call_plan: list[dict[str, Any]],
+    stage: str,
+) -> dict[str, Any]:
+    """Load only exact-plan successful calls from one immutable prior ledger."""
+
+    if carry_forward_dir is None:
+        return {
+            "source_directory": None,
+            "source_ledger_sha256": None,
+            "carried_call_keys": set(),
+            "terminal_rows": {},
+        }
+    old_plan_path = carry_forward_dir / "call_plan.jsonl"
+    old_ledger_path = carry_forward_dir / "judge_call_ledger.jsonl"
+    if not old_plan_path.is_file() or not old_ledger_path.is_file():
+        raise RuntimeError(
+            "development-judging carry-forward source lacks call plan or ledger"
+        )
+    if list(iter_jsonl(old_plan_path)) != call_plan:
+        raise RuntimeError(
+            "development-judging carry-forward call plan is not byte-equivalent"
+        )
+    plan_by_key = {str(row["physical_call_key"]): row for row in call_plan}
+    if len(plan_by_key) != len(call_plan):
+        raise RuntimeError("development-judging call plan has duplicate physical keys")
+    old_ledger = PersistentAttemptLedger(
+        old_ledger_path,
+        stage=stage,
+        expected_calls={
+            key: DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS
+            for key in plan_by_key
+        },
+        maximum_total_attempts=10**9,
+    )
+    carried: set[str] = set()
+    terminals: dict[str, dict[str, Any]] = {}
+    for physical_key, plan in plan_by_key.items():
+        if not old_ledger.succeeded(physical_key):
+            continue
+        terminal = old_ledger.terminal_row(physical_key) or {}
+        expected_record_ids = {
+            "state_id": str(plan["state_id"]),
+            "action_id": str(plan["action_id"]),
+            "judge_family": str(plan["judge_family"]),
+            "judge_type": str(plan["judge_type"]),
+        }
+        if (
+            terminal.get("record_ids") != expected_record_ids
+            or terminal.get("prompt_sha256") != plan["prompt_hash"]
+            or not isinstance((terminal.get("result") or {}).get("parsed"), Mapping)
+            or not terminal.get("request_hash")
+        ):
+            raise RuntimeError(
+                "development-judging carry-forward success lacks exact provenance: "
+                f"{physical_key}"
+            )
+        carried.add(physical_key)
+        terminals[physical_key] = terminal
+    return {
+        "source_directory": str(carry_forward_dir),
+        "source_ledger_sha256": sha256_file(old_ledger_path),
+        "carried_call_keys": carried,
+        "terminal_rows": terminals,
+    }
 
 
 def require_exact_saved_judge_dry_run(
@@ -276,26 +604,22 @@ def require_full_sweep_development_binding(
 def require_v1_5_full_sweep_binding(
     sweep_source_chain: Mapping[str, Any],
     *,
-    automated_review_report_sha256: str,
-    automated_review_attestation_sha256: str,
     actual_corpus_review_report_sha256: str,
     actual_corpus_review_attestation_sha256: str,
     step0_shortcut_audit_report_sha256: str,
     step0_shortcut_audit_attestation_sha256: str,
+    actual_corpus_admission_mode: str | None = None,
+    actual_corpus_admission_status: str | None = None,
 ) -> dict[str, Any]:
     """Require an honestly full V1.5 matrix bound to the current review."""
 
     bindings = sweep_source_chain.get("contract_bindings") or {}
     observed = bindings.get("v1_5_full_sweep_gate") or {}
     expected = {
-        "protocol": "pm-v1.5-full-sweep-gate-v2",
+        "protocol": "pm-v1.5-full-sweep-gate-v3",
         "status": "PASS",
         "scope": "full",
         "human_calibration_performed": False,
-        "automated_review_attestation_sha256": (
-            automated_review_attestation_sha256
-        ),
-        "automated_review_report_sha256": automated_review_report_sha256,
         "actual_corpus_review_attestation_sha256": (
             actual_corpus_review_attestation_sha256
         ),
@@ -305,6 +629,16 @@ def require_v1_5_full_sweep_binding(
         ),
         "step0_shortcut_audit_report_sha256": (
             step0_shortcut_audit_report_sha256
+        ),
+        **(
+            {
+                "actual_corpus_admission_mode": actual_corpus_admission_mode,
+                "actual_corpus_admission_status": actual_corpus_admission_status,
+                "original_actual_corpus_gate_status": "FAIL",
+            }
+            if actual_corpus_admission_mode
+            == "POSTHOC_INSTRUMENT_QUALIFICATION"
+            else {}
         ),
     }
     if bindings.get("scope") != "full" or observed != expected:
@@ -320,6 +654,14 @@ def main() -> None:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true")
     mode.add_argument("--run", action="store_true")
+    mode.add_argument(
+        "--aggregate-only",
+        action="store_true",
+        help=(
+            "Zero-API aggregation from one exact, complete merged shard ledger. "
+            "Requires --carry-forward-from and never opens provider clients."
+        ),
+    )
     parser.add_argument("--config", type=Path, default=ROOT / "configs" / "experiment.yaml")
     parser.add_argument(
         "--pm-v2-config", type=Path, default=ROOT / "configs" / "pm_v1_5.yaml"
@@ -347,7 +689,35 @@ def main() -> None:
         default=ROOT / "data" / "pm_v1_5" / "evaluator_contexts.jsonl",
     )
     parser.add_argument("--out-dir", type=Path)
+    parser.add_argument(
+        "--carry-forward-from",
+        type=Path,
+        help=(
+            "Prior incomplete judging directory. Only successful calls from an "
+            "exactly identical call plan are copied into a fresh identity."
+        ),
+    )
+    parser.add_argument(
+        "--execution-sharding-contract",
+        type=Path,
+        help=(
+            "Content-addressed deterministic partition of the full call plan. "
+            "Requires --execution-shard-index; each shard has an independent "
+            "paid identity and only emits call-level ledger evidence."
+        ),
+    )
+    parser.add_argument("--execution-shard-index", type=int)
     parser.add_argument("--compatibility-pilot", action="store_true")
+    parser.add_argument(
+        "--label-scope",
+        choices=FORMAL_JUDGING_SCOPES,
+        required=True,
+        help=(
+            "Formal holdout boundary. Run train_calibration before candidate "
+            "selection; sealed_internal_test only creates the opaque held-out "
+            "label bundle and must not compute outcome-quality summaries."
+        ),
+    )
     parser.add_argument(
         "--pilot-plan",
         type=Path,
@@ -410,29 +780,19 @@ def main() -> None:
     parser.add_argument(
         "--automated-semantic-review-report",
         type=Path,
-        default=ROOT / "outputs" / "pm_v1_5_automated_semantic_review" / "gate_report.json",
         help=(
-            "PM-v1.5 replacement for the human semantic-sanity and pilot "
-            "spot-check gates: output of "
-            "scripts/v1_5_run_automated_semantic_review.py, must show "
-            "status=PASS."
+            "Deprecated V4 calibration artifact; forbidden for formal judging."
         ),
     )
     parser.add_argument(
         "--automated-semantic-review-attestation",
         type=Path,
-        default=ROOT
-        / "outputs"
-        / "pm_v1_5_automated_semantic_review"
-        / "artifact_attestation.json",
+        help="Deprecated companion V4 attestation; forbidden.",
     )
     parser.add_argument(
         "--generation-pilot-attestation",
         type=Path,
-        help=(
-            "Exact paid nine-case pilot bound by the automated semantic review; "
-            "required for PM-v1.5 judging."
-        ),
+        help="Deprecated direct input; generation lineage is inherited from the full sweep.",
     )
     parser.add_argument(
         "--actual-corpus-semantic-review-report",
@@ -450,6 +810,16 @@ def main() -> None:
             / "pm_v1_5_actual_corpus_semantic_review"
             / "artifact_attestation.json"
         ),
+    )
+    parser.add_argument(
+        "--actual-corpus-qualification-report",
+        type=Path,
+        help="Frozen post-hoc actual-468 instrument-qualification report.",
+    )
+    parser.add_argument(
+        "--actual-corpus-qualification-attestation",
+        type=Path,
+        help="Companion attestation for the post-hoc qualification report.",
     )
     parser.add_argument(
         "--step0-shortcut-audit-report",
@@ -527,6 +897,17 @@ def main() -> None:
         raise RuntimeError(
             "paid API runs prohibit --overwrite; use a new output directory"
         )
+    if (args.execution_sharding_contract is None) != (
+        args.execution_shard_index is None
+    ):
+        raise RuntimeError(
+            "--execution-sharding-contract and --execution-shard-index "
+            "must be provided together"
+        )
+    if args.aggregate_only and args.carry_forward_from is None:
+        raise RuntimeError("--aggregate-only requires --carry-forward-from")
+    if args.aggregate_only and args.execution_sharding_contract is not None:
+        raise RuntimeError("--aggregate-only consumes the merged ledger, not one shard")
     if args.compatibility_pilot:
         raise RuntimeError(
             "PM-v1.5 does not run the PM-v2.2 compatibility-pilot judging "
@@ -568,18 +949,32 @@ def main() -> None:
         args.evaluator_contexts, states=states, require_exact=True
     )
     evaluator_by_state = evaluator_index.by_state
-    outcomes = [ActionOutcome.model_validate(row) for row in iter_jsonl(outcomes_path)]
-    unknown_cards = sorted({row.card_id for row in outcomes} - set(state_by_card))
+    all_outcomes = [ActionOutcome.model_validate(row) for row in iter_jsonl(outcomes_path)]
+    unknown_cards = sorted({row.card_id for row in all_outcomes} - set(state_by_card))
     if unknown_cards:
         raise RuntimeError(f"outcomes contain unknown PM-v2 cards: {unknown_cards[:10]}")
-    if len({(row.card_id, row.action_id) for row in outcomes}) != len(outcomes):
+    if len({(row.card_id, row.action_id) for row in all_outcomes}) != len(all_outcomes):
         raise RuntimeError("duplicate state-action outcomes")
+    outcomes = select_formal_judging_outcomes(
+        all_outcomes,
+        state_by_card=state_by_card,
+        label_scope=args.label_scope,
+    )
     config = load_config(args.config)
     pm_v2_config = load_config(args.pm_v2_config)
+    paid_release_stage = (
+        "development_action_judging_train_calibration"
+        if args.label_scope == TRAIN_CALIBRATION_SCOPE
+        else "development_action_judging_internal_test"
+    )
+    if args.execution_shard_index is not None:
+        paid_release_stage = (
+            f"{paid_release_stage}_shard_{int(args.execution_shard_index):02d}"
+        )
     require_paid_run_release(
         pm_v2_config,
         config_path=args.pm_v2_config,
-        stage="development_action_judging",
+        stage=paid_release_stage,
         run=bool(args.run),
         run_identity=args.accept_cost_estimate_sha256,
     )
@@ -652,6 +1047,21 @@ def main() -> None:
         for values in pricing_by_family.values()
     ):
         raise ValueError("development judge family pricing is invalid")
+    provider_output_attempts_by_family = {
+        str(family): int(value)
+        for family, value in dict(
+            judging_config.get("maximum_provider_output_attempts_by_family") or {}
+        ).items()
+    }
+    expected_families = {str(endpoint.family) for endpoint in endpoints}
+    if set(provider_output_attempts_by_family) != expected_families:
+        raise RuntimeError(
+            "development judging provider-output retry limits must exactly cover "
+            "the frozen endpoint families"
+        )
+    transport_execution_contract = development_judging_transport_contract(
+        provider_output_attempts_by_family=provider_output_attempts_by_family
+    )
     pilot_plan_sha256 = None
     pilot_expected_keys_sha256 = None
     compatibility_attestation_sha256 = None
@@ -729,30 +1139,51 @@ def main() -> None:
         # V1.5's fast track does not run V2.2's 180-generation/360-judge
         # compatibility pilot. Full judging itself is fail-closed on the first
         # unsuccessful physical call and subsequently enforces the complete
-        # two-family matrix/quality gates. The independent automated semantic
-        # review remains a required, content-bound input here; external key
-        # claims additionally require the frozen forced-swap sensitivity canary.
-        automated_review_verification = require_automated_semantic_review_pass(
-            args.automated_semantic_review_report,
-            args.automated_semantic_review_attestation,
-            expected_experiment_config_path=args.config,
-            expected_pm_config_path=args.pm_v2_config,
-            expected_strategy_bank_path=args.strategy_bank,
-            expected_generation_pilot_attestation_path=(
-                args.generation_pilot_attestation
-            ),
+        # two-family matrix/quality gates. The actual-468 structured QA and
+        # Step-0 shortcut audit are content-bound inputs inherited from the
+        # full sweep; external key claims additionally require the frozen
+        # forced-swap sensitivity canary.
+        if (
+            args.automated_semantic_review_report is not None
+            or args.automated_semantic_review_attestation is not None
+            or args.generation_pilot_attestation is not None
+        ):
+            raise RuntimeError(
+                "formal judging refuses direct legacy V4/pilot inputs; it must "
+                "inherit current actual-QA lineage from the full sweep"
+            )
+        qualification_args = (
+            args.actual_corpus_qualification_report,
+            args.actual_corpus_qualification_attestation,
         )
-        automated_review_report = automated_review_verification["report"]
-        actual_corpus_verification = require_actual_corpus_semantic_review_pass(
-            args.actual_corpus_semantic_review_report,
-            args.actual_corpus_semantic_review_attestation,
-            expected_experiment_config_path=args.config,
-            expected_states_path=args.states,
-            expected_evaluator_contexts_path=args.evaluator_contexts,
-            expected_backend_path=args.backend,
-            expected_strategy_bank_path=args.strategy_bank,
-            expected_pm_config_path=args.pm_v2_config,
-        )
+        if any(value is not None for value in qualification_args) and not all(
+            value is not None for value in qualification_args
+        ):
+            raise RuntimeError(
+                "actual-corpus qualification report and attestation must be supplied together"
+            )
+        if all(value is not None for value in qualification_args):
+            actual_corpus_verification = require_actual_corpus_posthoc_qualification(
+                args.actual_corpus_qualification_report,
+                args.actual_corpus_qualification_attestation,
+                expected_experiment_config_path=args.config,
+                expected_states_path=args.states,
+                expected_evaluator_contexts_path=args.evaluator_contexts,
+                expected_backend_path=args.backend,
+                expected_strategy_bank_path=args.strategy_bank,
+                expected_pm_config_path=args.pm_v2_config,
+            )
+        else:
+            actual_corpus_verification = require_actual_corpus_semantic_review_pass(
+                args.actual_corpus_semantic_review_report,
+                args.actual_corpus_semantic_review_attestation,
+                expected_experiment_config_path=args.config,
+                expected_states_path=args.states,
+                expected_evaluator_contexts_path=args.evaluator_contexts,
+                expected_backend_path=args.backend,
+                expected_strategy_bank_path=args.strategy_bank,
+                expected_pm_config_path=args.pm_v2_config,
+            )
         shortcut_audit_verification = require_step0_shortcut_audit_pass(
             args.step0_shortcut_audit_report,
             args.step0_shortcut_audit_attestation,
@@ -762,15 +1193,12 @@ def main() -> None:
             expected_generation_attestation_path=args.development_data_attestation,
         )
         semantic_sanity = {
-            "protocol": "pm-v1.5-pilot-plus-actual-corpus-and-shortcut-gate-v2",
-            "status": "PASS",
+            "protocol": "pm-v1.5-actual-corpus-and-shortcut-gate-v3",
+            "status": actual_corpus_verification["status"],
+            "actual_corpus_admission_mode": actual_corpus_verification.get(
+                "mode", "ORIGINAL_GATE_PASS"
+            ),
             "human_calibration_performed": False,
-            "automated_review_report_sha256": sha256_text(
-                canonical_json(automated_review_report)
-            ),
-            "automated_review_attestation_sha256": (
-                automated_review_verification["attestation_sha256"]
-            ),
             "actual_corpus_review_report_sha256": actual_corpus_verification[
                 "report_sha256"
             ],
@@ -786,12 +1214,6 @@ def main() -> None:
         }
         v1_5_full_sweep_gate = require_v1_5_full_sweep_binding(
             sweep_source_chain,
-            automated_review_report_sha256=semantic_sanity[
-                "automated_review_report_sha256"
-            ],
-            automated_review_attestation_sha256=semantic_sanity[
-                "automated_review_attestation_sha256"
-            ],
             actual_corpus_review_report_sha256=semantic_sanity[
                 "actual_corpus_review_report_sha256"
             ],
@@ -804,6 +1226,10 @@ def main() -> None:
             step0_shortcut_audit_attestation_sha256=semantic_sanity[
                 "step0_shortcut_audit_attestation_sha256"
             ],
+            actual_corpus_admission_mode=semantic_sanity.get(
+                "actual_corpus_admission_mode"
+            ),
+            actual_corpus_admission_status=semantic_sanity.get("status"),
         )
         compatibility_attestation_sha256 = None
         runtime_state_lineage = require_pmv2_runtime_state_lineage(
@@ -811,11 +1237,16 @@ def main() -> None:
         )
 
     out_dir.mkdir(parents=True, exist_ok=True)
-    labels_path = out_dir / "action_labels.jsonl"
+    sealed_holdout_scope = args.label_scope == SEALED_INTERNAL_TEST_SCOPE
     train_calibration_labels_path = (
         out_dir / "action_labels_train_calibration.jsonl"
     )
     internal_test_labels_path = out_dir / "action_labels_internal_test.jsonl"
+    labels_path = (
+        internal_test_labels_path
+        if sealed_holdout_scope
+        else out_dir / "action_labels.jsonl"
+    )
     raw_path = out_dir / "judge_results.jsonl"
     ledger_path = out_dir / "judge_call_ledger.jsonl"
     manifest_path = out_dir / "run_manifest.json"
@@ -845,7 +1276,7 @@ def main() -> None:
     stage = (
         "pm_v2_development_judge_compatibility"
         if compatibility_pilot
-        else "pm_v2_action_judging"
+        else f"pm_v2_action_judging_{args.label_scope}"
     )
     manifest = ensure_run_manifest(
         manifest_path,
@@ -869,6 +1300,13 @@ def main() -> None:
             "response_max_output_tokens": response_max_output_tokens,
             "risk_max_output_tokens": risk_max_output_tokens,
             "scope": "compatibility_pilot" if compatibility_pilot else "full",
+            "label_scope": args.label_scope,
+            "source_full_outcomes_sha256": sha256_file(outcomes_path),
+            "selected_outcome_keys_sha256": sha256_text(
+                canonical_json(
+                    sorted([row.card_id, row.action_id] for row in outcomes)
+                )
+            ),
             "max_outcomes": None,
             "pilot_plan_sha256": pilot_plan_sha256,
             "pilot_expected_keys_sha256": pilot_expected_keys_sha256,
@@ -877,9 +1315,22 @@ def main() -> None:
             "development_pilot_gate": development_pilot_gate,
             "v1_5_full_sweep_gate": v1_5_full_sweep_gate,
             "judge_retries": 1,
+            "transport_execution_contract": transport_execution_contract,
             "pricing_usd_per_mtok": pricing_by_family,
             "api_cost_planning": api_cost_planning,
             "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,
+            "execution_sharding_contract_path": (
+                str(args.execution_sharding_contract)
+                if args.execution_sharding_contract is not None
+                else None
+            ),
+            "execution_sharding_contract_file_sha256": (
+                sha256_file(args.execution_sharding_contract)
+                if args.execution_sharding_contract is not None
+                else None
+            ),
+            "execution_shard_index": args.execution_shard_index,
+            "aggregate_only": bool(args.aggregate_only),
         },
     )
     endpoint_by_family = {str(endpoint.family): endpoint for endpoint in endpoints}
@@ -996,7 +1447,9 @@ def main() -> None:
                         "input_tokens_est": input_tokens_est,
                         "base_input_tokens_est": base_input_tokens_est,
                         "max_output_tokens": max_output_tokens,
-                        "max_http_attempts": 1,
+                        "max_http_attempts": (
+                            DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS
+                        ),
                         "prompt_hash": sha256_text(canonical_json(messages)),
                         "request_payload_sha256": sha256_text(
                             canonical_json(request_payload)
@@ -1059,11 +1512,63 @@ def main() -> None:
     }
     if len(plan_by_physical_key) != len(cost_rows):
         raise RuntimeError("duplicate development judge physical-call key")
+    execution_sharding_contract = None
+    execution_shard_record = None
+    execution_cost_rows = cost_rows
+    if args.execution_sharding_contract is not None:
+        execution_sharding_contract, shard_plans = (
+            load_validated_sharding_contract(
+                full_rows=cost_rows,
+                contract_path=args.execution_sharding_contract,
+            )
+        )
+        shard_index = int(args.execution_shard_index)
+        if not 0 <= shard_index < len(shard_plans):
+            raise RuntimeError(
+                f"execution shard index {shard_index} is outside "
+                f"[0,{len(shard_plans)})"
+            )
+        execution_cost_rows = shard_plans[shard_index]
+        execution_shard_record = dict(
+            execution_sharding_contract["shards"][shard_index]
+        )
+        if not execution_cost_rows:
+            raise RuntimeError("development judging execution shard is empty")
+    execution_physical_keys = {
+        str(row["physical_call_key"]) for row in execution_cost_rows
+    }
+    if len(execution_physical_keys) != len(execution_cost_rows):
+        raise RuntimeError("execution shard contains duplicate physical-call keys")
+    if args.carry_forward_from is not None and (
+        args.carry_forward_from.resolve() == out_dir.resolve()
+    ):
+        raise RuntimeError("carry-forward source must differ from the new output directory")
+    carry_forward = load_development_judging_carry_forward(
+        carry_forward_dir=args.carry_forward_from,
+        call_plan=cost_rows,
+        stage=stage,
+    )
+    carried_call_keys = set(carry_forward["carried_call_keys"])
+    if args.execution_sharding_contract is not None and not carried_call_keys.issubset(
+        execution_physical_keys
+    ):
+        raise RuntimeError(
+            "shard continuation contains successful calls outside this shard"
+        )
+    if args.aggregate_only and carried_call_keys != set(plan_by_physical_key):
+        missing = sorted(set(plan_by_physical_key) - carried_call_keys)
+        raise RuntimeError(
+            "aggregate-only requires a complete exact merged successful ledger; "
+            f"missing={missing[:3]}"
+        )
     attempt_ledger = PersistentAttemptLedger(
         ledger_path,
         stage=stage,
-        expected_calls={key: 1 for key in plan_by_physical_key},
-        maximum_total_attempts=int(args.max_api_calls),
+        expected_calls={
+            key: DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS
+            for key in execution_physical_keys
+        },
+        maximum_total_attempts=int(args.max_api_calls) + len(carried_call_keys),
     )
     ledger_rows = attempt_ledger.event_rows
     successful_call_rows: dict[tuple[str, str, str, str], dict] = {}
@@ -1108,11 +1613,23 @@ def main() -> None:
                 "parsed": parsed.model_dump(mode="json"),
                 "request_hash": str(ledger_row["request_hash"]),
             }
+    for physical_key in sorted(carried_call_keys):
+        plan = plan_by_physical_key[physical_key]
+        key = call_key(plan)
+        if key in successful_call_rows:
+            continue
+        terminal = carry_forward["terminal_rows"][physical_key]
+        schema = ResponseJudgeOutput if key[3] == "response" else RiskJudgeOutput
+        parsed = schema.model_validate((terminal.get("result") or {}).get("parsed"))
+        successful_call_rows[key] = {
+            **plan,
+            "parsed": parsed.model_dump(mode="json"),
+            "request_hash": str(terminal["request_hash"]),
+        }
     pending_cost_rows = [
         row
-        for row in cost_rows
-        if not attempt_ledger.succeeded(str(row["physical_call_key"]))
-        and not attempt_ledger.exhausted(str(row["physical_call_key"]))
+        for row in execution_cost_rows
+        if call_key(row) not in successful_call_rows
     ]
     completed_pair_keys = {
         (state_id, action_id, family)
@@ -1126,30 +1643,57 @@ def main() -> None:
     # The accepted estimate is immutable and always describes the complete
     # pre-attempt matrix.  Mutable resume state belongs in summary diagnostics,
     # never in the approval hash or saved call plan.
-    maximum_physical_attempts = len(cost_rows)
-    input_counts = [int(row["input_tokens_est"]) for row in cost_rows]
-    total_input_tokens = sum(input_counts)
-    total_output_tokens = sum(
-        int(row["max_output_tokens"]) for row in cost_rows
-    )
+    newly_costed_rows = [
+        row
+        for row in execution_cost_rows
+        if str(row["physical_call_key"]) not in carried_call_keys
+    ]
+    cost_bounds = development_judging_cost_bounds(newly_costed_rows)
+    maximum_physical_attempts = int(cost_bounds["maximum_physical_attempts"])
+    input_counts = [int(row["input_tokens_est"]) for row in execution_cost_rows]
+    logical_input_tokens = int(cost_bounds["logical_input_tokens"])
+    logical_output_tokens = int(cost_bounds["logical_output_tokens"])
+    logical_cost_usd = float(cost_bounds["logical_cost_usd"])
+    total_input_tokens = int(cost_bounds["maximum_input_tokens"])
+    total_output_tokens = int(cost_bounds["maximum_output_tokens"])
     cost_payload = {
         "stage": stage,
+        "label_scope": args.label_scope,
         "full_logical_api_calls": len(cost_rows),
-        "historical_physical_http_attempts": 0,
-        "planned_new_api_calls": len(cost_rows),
+        "execution_logical_api_calls": len(execution_cost_rows),
+        "historical_carried_forward_calls": len(carried_call_keys),
+        "remaining_new_logical_calls": len(newly_costed_rows),
+        "carry_forward_source_directory": carry_forward["source_directory"],
+        "carry_forward_source_ledger_sha256": carry_forward[
+            "source_ledger_sha256"
+        ],
+        "historical_physical_http_attempts": len(carried_call_keys),
+        "planned_new_api_calls": maximum_physical_attempts,
         "maximum_physical_http_attempts": maximum_physical_attempts,
+        "maximum_physical_attempts_per_logical_call": (
+            DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS
+        ),
         "expected_judge_pairs": len(required_keys),
+        "logical_input_tokens_est": logical_input_tokens,
+        "logical_output_tokens_est": logical_output_tokens,
         "total_input_tokens_est": total_input_tokens,
         "max_input_tokens_per_call_est": max(input_counts, default=0),
         "total_output_tokens_est": total_output_tokens,
-        "estimated_cost_usd": sum(
-            float(row["maximum_cost_usd"]) for row in cost_rows
-        ),
+        "logical_single_attempt_estimated_cost_usd": logical_cost_usd,
+        "estimated_cost_usd": float(cost_bounds["maximum_cost_usd"]),
         "pricing_usd_per_mtok": pricing_by_family,
         "api_cost_planning": api_cost_planning,
         "judge_role_isolation": judge_role_isolation,
         "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,
+        "transport_execution_contract": transport_execution_contract,
         "call_plan_sha256": sha256_text(canonical_json(cost_rows)),
+        "execution_call_plan_sha256": sha256_text(
+            canonical_json(execution_cost_rows)
+        ),
+        "execution_sharding_contract": execution_sharding_contract,
+        "execution_shard_record": execution_shard_record,
+        "execution_shard_index": args.execution_shard_index,
+        "aggregate_only": bool(args.aggregate_only),
         "ledger_sha256": sha256_text(canonical_json([])),
         "run_manifest_sha256": manifest["manifest_sha256"],
         "scope": "compatibility_pilot" if compatibility_pilot else "full",
@@ -1184,15 +1728,22 @@ def main() -> None:
     }
     summary = {
         "status": "DRY_RUN_COMPLETE" if args.dry_run else "STARTING",
+        "label_scope": args.label_scope,
         "outcomes": len(outcomes),
         "judge_endpoints": endpoint_names,
         "judge_families": sorted(str(value) for value in families),
         "full_expected_api_calls": full_calls,
+        "execution_expected_api_calls": len(execution_cost_rows),
         "completed_judge_pairs": len(completed_pair_keys),
         "remaining_judge_pairs": len(missing_keys),
         "remaining_api_calls": remaining_calls,
         "historical_physical_http_attempts": historical_attempts,
-        "planned_new_api_calls": len(pending_cost_rows),
+        "planned_new_logical_calls": len(pending_cost_rows),
+        "planned_new_api_calls": sum(
+            DEVELOPMENT_JUDGING_MAXIMUM_PHYSICAL_ATTEMPTS
+            - attempt_ledger.attempts_for(str(row["physical_call_key"]))
+            for row in pending_cost_rows
+        ),
         "prompt_contract_hash": prompt_contract_hash(),
         "run_manifest_sha256": manifest["manifest_sha256"],
         "pm_v2_config_sha256": sha256_file(args.pm_v2_config),
@@ -1202,11 +1753,22 @@ def main() -> None:
         "development_judging": judging_config,
         "api_cost_planning": api_cost_planning,
         "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,
+        "transport_execution_contract": transport_execution_contract,
+        "execution_sharding_contract": execution_sharding_contract,
+        "execution_shard_record": execution_shard_record,
+        "execution_shard_index": args.execution_shard_index,
+        "aggregate_only": bool(args.aggregate_only),
         "judge_endpoint_descriptors": endpoint_descriptors,
         "judge_role_isolation": judge_role_isolation,
         "scope": "compatibility_pilot" if compatibility_pilot else "full",
         "reportability_status": (
-            "COMPATIBILITY_GATE_PENDING" if compatibility_pilot else "REPORTABLE"
+            "SHARD_EXECUTION_ONLY_NO_AGGREGATE"
+            if args.execution_sharding_contract is not None
+            else (
+                "COMPATIBILITY_GATE_PENDING"
+                if compatibility_pilot
+                else "REPORTABLE"
+            )
         ),
         "pilot_plan_sha256": pilot_plan_sha256,
         "pilot_expected_keys_sha256": pilot_expected_keys_sha256,
@@ -1216,7 +1778,7 @@ def main() -> None:
         "budget_gate": budget_gate,
     }
     print(summary)
-    if args.dry_run or budget_gate["status"] != "PASS":
+    if args.dry_run or args.aggregate_only or budget_gate["status"] != "PASS":
         persist_or_validate_judge_dry_run(
             ledger_path=ledger_path,
             estimate_path=cost_estimate_path,
@@ -1229,30 +1791,73 @@ def main() -> None:
         raise RuntimeError("PM-v2 judge budget gate failed before API calls")
     if args.dry_run:
         return
-    require_exact_saved_judge_dry_run(
-        estimate_path=cost_estimate_path,
-        call_plan_path=call_plan_path,
-        cost_estimate=cost_estimate,
-        budget_gate=budget_gate,
-        call_plan=cost_rows,
-    )
-    if args.accept_cost_estimate_sha256 != cost_estimate["cost_estimate_sha256"]:
-        raise RuntimeError(
-            "judge API run requires exact --accept-cost-estimate-sha256 from dry-run"
+    if not args.aggregate_only:
+        require_exact_saved_judge_dry_run(
+            estimate_path=cost_estimate_path,
+            call_plan_path=call_plan_path,
+            cost_estimate=cost_estimate,
+            budget_gate=budget_gate,
+            call_plan=cost_rows,
         )
+        if args.accept_cost_estimate_sha256 != cost_estimate["cost_estimate_sha256"]:
+            raise RuntimeError(
+                "judge API run requires exact --accept-cost-estimate-sha256 from dry-run"
+            )
+
+    # Seed the fresh ledger only after the exact dry-run identity and approval
+    # have been validated. These rows represent immutable, already-paid calls;
+    # their source ledger hash is part of this run's cost identity above.
+    for physical_key in sorted(carried_call_keys):
+        if attempt_ledger.succeeded(physical_key):
+            continue
+        plan = plan_by_physical_key[physical_key]
+        terminal = carry_forward["terminal_rows"][physical_key]
+        reservation = attempt_ledger.reserve(
+            physical_key,
+            record_ids={
+                "state_id": str(plan["state_id"]),
+                "action_id": str(plan["action_id"]),
+                "judge_family": str(plan["judge_family"]),
+                "judge_type": str(plan["judge_type"]),
+            },
+            prompt_sha256=str(plan["prompt_hash"]),
+        )
+        attempt_ledger.finish(
+            reservation,
+            succeeded=True,
+            request_hash=str(terminal["request_hash"]),
+            usage=terminal.get("usage"),
+            error=None,
+            result=terminal.get("result"),
+            metadata={
+                "carried_forward": True,
+                "source_directory": carry_forward["source_directory"],
+                "source_ledger_sha256": carry_forward["source_ledger_sha256"],
+            },
+        )
+    historical_attempts = attempt_ledger.started_attempts
+    summary["historical_physical_http_attempts"] = historical_attempts
+    summary["carried_forward_calls"] = len(carried_call_keys)
 
     allowed_schema_failures = math.floor(
         (1.0 - float(pilot_config["minimum_schema_success_rate"]))
         * len(required_keys)
         + 1e-12
     )
-    exhausted_unsuccessful_calls = {
+    blocked_unsuccessful_calls = {
         call_key(plan)
         for plan in cost_rows
         if call_key(plan) not in successful_call_rows
-        and attempt_ledger.exhausted(str(plan["physical_call_key"]))
+        and call_retry_blocker(
+            attempt_ledger,
+            str(plan["physical_call_key"]),
+            max_provider_output_attempts=provider_output_attempts_by_family[
+                str(plan["judge_family"])
+            ],
+        )
+        is not None
     }
-    failed_pair_keys = {key[:3] for key in exhausted_unsuccessful_calls}
+    failed_pair_keys = {key[:3] for key in blocked_unsuccessful_calls}
     schema_failures_seen = len(failed_pair_keys)
     pilot_futility_reason = None
     if compatibility_pilot and schema_failures_seen > allowed_schema_failures:
@@ -1260,23 +1865,27 @@ def main() -> None:
             "schema success threshold is mathematically unreachable from existing "
             "failed pilot rows"
         )
-    if not compatibility_pilot and failed_pair_keys:
-        raise RuntimeError(
-            "full development judging contains a spent unsuccessful physical call; "
-            "the one-attempt protocol forbids reissuing it"
-        )
     endpoint_by_family = {str(endpoint.family): endpoint for endpoint in endpoints}
     clients = (
         preflight_development_judge_clients(endpoint_by_family)
         if pending_cost_rows and pilot_futility_reason is None
         else {}
     )
+    isolated_failures: dict[str, str] = {}
+    last_isolated_retry_class: str | None = None
+    consecutive_same_class_count = 0
     try:
-        for plan in pending_cost_rows:
+        # Preserve the frozen full-plan adjacency. Already-successful calls
+        # reset the breaker even during resume; iterating only pending rows
+        # would falsely compress failures that were far apart into a streak.
+        for plan in execution_cost_rows:
             if pilot_futility_reason is not None:
                 break
             key = call_key(plan)
-            if key in successful_call_rows:
+            physical_key = str(plan["physical_call_key"])
+            if key in successful_call_rows or attempt_ledger.succeeded(physical_key):
+                last_isolated_retry_class = None
+                consecutive_same_class_count = 0
                 continue
             execution = execution_by_call_key[key]
             endpoint = endpoint_by_family[key[2]]
@@ -1286,13 +1895,39 @@ def main() -> None:
                 "judge_family": key[2],
                 "judge_type": key[3],
             }
-            reservation = attempt_ledger.reserve(
-                str(plan["physical_call_key"]),
-                record_ids=record_ids,
-                prompt_sha256=str(plan["prompt_hash"]),
+            blocker = call_retry_blocker(
+                attempt_ledger,
+                physical_key,
+                max_provider_output_attempts=provider_output_attempts_by_family[
+                    key[2]
+                ],
             )
-            try:
-                result, parsed = clients[key[2]].chat(
+            if blocker is not None:
+                retry_class = _persisted_isolatable_failure_class(
+                    attempt_ledger, physical_key
+                )
+                if retry_class is None:
+                    raise RuntimeError(
+                        "development judging cannot continue past a persisted "
+                        f"non-isolatable failure: {physical_key}: {blocker}"
+                    )
+                isolated_failures[physical_key] = f"{retry_class}: {blocker}"
+                (
+                    last_isolated_retry_class,
+                    consecutive_same_class_count,
+                ) = advance_development_judging_failure_streak(
+                    previous_class=last_isolated_retry_class,
+                    previous_count=consecutive_same_class_count,
+                    retry_class=retry_class,
+                )
+                continue
+
+            def call_fn(
+                execution=execution,
+                endpoint=endpoint,
+                plan=plan,
+            ):
+                return clients[str(endpoint.family)].chat(
                     execution["messages"],
                     temperature=0.0,
                     max_tokens=int(plan["max_output_tokens"]),
@@ -1300,21 +1935,46 @@ def main() -> None:
                     response_schema=execution["schema"],
                     retries=1,
                 )
-            except Exception as exc:
-                error = f"{type(exc).__name__}: {str(exc)[:2000]}"
-                attempt_ledger.finish(
-                    reservation,
-                    succeeded=False,
-                    request_hash=None,
-                    usage=None,
-                    error=error,
-                    metadata={
-                        "plan_sha256": sha256_text(canonical_json(plan)),
-                        "prompt_contract_hash": prompt_contract_hash(),
-                    },
+
+            reservation = None
+            result = None
+            parsed = None
+            try:
+                reservation, result, parsed = execute_with_bounded_retry(
+                    attempt_ledger,
+                    physical_key,
+                    record_ids=record_ids,
+                    prompt_sha256=str(plan["prompt_hash"]),
+                    call_fn=call_fn,
+                    max_provider_output_attempts=(
+                        provider_output_attempts_by_family[key[2]]
+                    ),
+                    backoff_seconds=DEVELOPMENT_JUDGING_BACKOFF_SECONDS,
                 )
+            except Exception as exc:
+                retry_class = _isolatable_provider_failure_class(exc)
+                if retry_class is None:
+                    raise
+                isolated_failures[physical_key] = (
+                    f"{retry_class}: {type(exc).__name__}: {exc}"
+                )
+                try:
+                    (
+                        last_isolated_retry_class,
+                        consecutive_same_class_count,
+                    ) = advance_development_judging_failure_streak(
+                        previous_class=last_isolated_retry_class,
+                        previous_count=consecutive_same_class_count,
+                        retry_class=retry_class,
+                    )
+                except RuntimeError as breaker_error:
+                    raise breaker_error from exc
+                failed_pair_keys.add(key[:3])
+                schema_failures_seen = len(failed_pair_keys)
+                continue
             else:
                 assert parsed is not None
+                assert reservation is not None and result is not None
                 parsed_payload = parsed.model_dump(mode="json")
                 usage_error = reported_prompt_token_error(
                     result.usage,
@@ -1333,9 +1993,17 @@ def main() -> None:
                         error=usage_error,
                         result={"parsed": parsed_payload},
                         metadata={
+                            **failure_metadata(
+                                retry_class="stage_postcondition_failure",
+                                retry_disposition=TERMINAL_DISPOSITION,
+                            ),
                             "plan_sha256": sha256_text(canonical_json(plan)),
                             "prompt_contract_hash": prompt_contract_hash(),
                         },
+                    )
+                    raise RuntimeError(
+                        "development judge reported invalid token usage: "
+                        + str(key)
                     )
                 else:
                     attempt_ledger.finish(
@@ -1355,25 +2023,92 @@ def main() -> None:
                         "parsed": parsed_payload,
                         "request_hash": result.request_hash,
                     }
-            if attempt_ledger.succeeded(str(plan["physical_call_key"])):
-                pass
-            elif compatibility_pilot:
-                failed_pair_keys.add(key[:3])
-                schema_failures_seen = len(failed_pair_keys)
-                if schema_failures_seen > allowed_schema_failures:
-                    pilot_futility_reason = (
-                        "schema success threshold became mathematically unreachable; "
-                        "remaining compatibility-pilot API calls were not attempted"
-                    )
-            else:
-                raise RuntimeError(
-                    "development judge HTTP call failed after its ledger row was saved: "
-                    + str(key)
-                )
+            last_isolated_retry_class = None
+            consecutive_same_class_count = 0
     finally:
         for client in clients.values():
             client.close()
     ledger_rows = attempt_ledger.event_rows
+
+    if args.execution_sharding_contract is not None:
+        missing_shard_calls = [
+            row
+            for row in execution_cost_rows
+            if call_key(row) not in successful_call_rows
+        ]
+        shard_results_path = out_dir / "shard_call_results.jsonl"
+        write_jsonl(
+            shard_results_path,
+            [
+                successful_call_rows[call_key(row)]
+                for row in execution_cost_rows
+                if call_key(row) in successful_call_rows
+            ],
+        )
+        shard_status = (
+            "SHARD_COMPLETE_NO_AGGREGATE"
+            if not missing_shard_calls
+            else "SHARD_INCOMPLETE_NONREPORTABLE"
+        )
+        shard_report = {
+            **summary,
+            "status": shard_status,
+            "reportability_status": "SHARD_EXECUTION_ONLY_NO_AGGREGATE",
+            "completed_shard_calls": len(execution_cost_rows)
+            - len(missing_shard_calls),
+            "missing_shard_calls": [
+                str(row["physical_call_key"]) for row in missing_shard_calls[:50]
+            ],
+            "physical_http_attempts": attempt_ledger.started_attempts,
+            "transport_retry_summary": retry_ledger_summary(
+                attempt_ledger, sorted(execution_physical_keys)
+            ),
+            "final_ledger_sha256": sha256_text(canonical_json(ledger_rows)),
+            "training_labels_created": False,
+        }
+        summary_path = out_dir / "summary.json"
+        write_json(summary_path, shard_report)
+        create_artifact_attestation(
+            attestation_path,
+            stage=stage,
+            inputs={
+                "experiment_config": args.config,
+                "pm_v2_config": args.pm_v2_config,
+                "states": args.states,
+                "outcomes": outcomes_path,
+                "evaluator_contexts": args.evaluator_contexts,
+                "sweep_manifest": sweep_manifest_path,
+                "sweep_summary": sweep_summary_path,
+                "sweep_attestation": sweep_attestation_path,
+                "cost_estimate": cost_estimate_path,
+                "full_call_plan": call_plan_path,
+                "sharding_contract": args.execution_sharding_contract,
+            },
+            outputs={
+                "summary": (summary_path, False),
+                "shard_call_results": (shard_results_path, True),
+                "call_ledger": (ledger_path, True),
+            },
+            parameters={
+                "status": shard_status,
+                "label_scope": args.label_scope,
+                "execution_sharding_contract": execution_sharding_contract,
+                "execution_shard_record": execution_shard_record,
+                "execution_shard_index": args.execution_shard_index,
+                "accepted_cost_estimate_sha256": cost_estimate[
+                    "cost_estimate_sha256"
+                ],
+                "transport_execution_contract": transport_execution_contract,
+                "training_labels_created": False,
+            },
+        )
+        if missing_shard_calls:
+            raise RuntimeError(
+                "development judging shard incomplete: "
+                f"{len(missing_shard_calls)} missing calls"
+            )
+        print(shard_report)
+        return
 
     raw_by_key = {}
     state_card = {state.state_id: state.card_id for state in states}
@@ -1403,100 +2138,54 @@ def main() -> None:
     write_jsonl(raw_path, [raw_by_key[key] for key in sorted(raw_by_key)])
     missing_after = sorted(required_keys - set(raw_by_key))
     if missing_after and pilot_futility_reason is None:
-        report = {**summary, "status": "INCOMPLETE", "missing_keys": missing_after[:50]}
+        report = {
+            **summary,
+            "status": "INCOMPLETE",
+            "reportability_status": "NONREPORTABLE_INCOMPLETE_MATRIX",
+            "missing_keys": missing_after[:50],
+            "isolated_failures": isolated_failures,
+            "transport_retry_summary": retry_ledger_summary(
+                attempt_ledger, sorted(plan_by_physical_key)
+            ),
+        }
         write_json(out_dir / "summary.json", report)
         raise RuntimeError(f"judge run incomplete: {len(missing_after)} missing pairs")
 
-    canonical_raw_rows = [
-        {
-            "judge_family": row["judge_family"],
-            "action_id": row["action_id"],
-            "response": row["response"],
-            "risk": row["risk"],
+    if sealed_holdout_scope:
+        # Do not calculate any outcome-dependent aggregate before candidate,
+        # thresholds, comparators, and uncertainty rules are frozen. The raw
+        # rows are schema-validated above and immediately sealed below.
+        raw_family_quality_gate = {
+            "status": "NOT_EVALUATED_SEALED_HOLDOUT",
+            "reason": "internal-test outcome aggregates are forbidden before consumption",
         }
-        for row in raw_by_key.values()
-    ]
-    raw_family_global_gate = validate_raw_judge_family_health(
-        canonical_raw_rows,
-        expected_families=[str(endpoint.family) for endpoint in endpoints],
-        duplicate_exact_match_rate=labeling["duplicate_exact_match_rate"],
-        maximum_absolute_dimension_correlation=labeling[
-            "maximum_absolute_dimension_correlation"
-        ],
-        composite_support_exact_match_rate=labeling[
-            "composite_support_exact_match_rate"
-        ],
-        maximum_absolute_composite_support_correlation=labeling[
-            "maximum_absolute_composite_support_correlation"
-        ],
-        reject_constant_response_dimensions=labeling[
-            "reject_constant_response_dimensions"
-        ],
-        reject_constant_risk_dimensions=labeling[
-            "reject_constant_risk_dimensions"
-        ],
-        composite_spec=composite_spec,
-        raise_on_failure=not compatibility_pilot,
-    )
-    raw_family_action_gate = validate_raw_judge_family_subgroup_health(
-        canonical_raw_rows,
-        subgroup_key="action_id",
-        expected_subgroups=sorted({row.action_id for row in outcomes}),
-        expected_families=[str(endpoint.family) for endpoint in endpoints],
-        duplicate_exact_match_rate=labeling["duplicate_exact_match_rate"],
-        maximum_absolute_dimension_correlation=labeling[
-            "maximum_absolute_dimension_correlation"
-        ],
-        composite_support_exact_match_rate=labeling[
-            "composite_support_exact_match_rate"
-        ],
-        maximum_absolute_composite_support_correlation=labeling[
-            "maximum_absolute_composite_support_correlation"
-        ],
-        reject_constant_response_dimensions=labeling[
-            "reject_constant_response_dimensions"
-        ],
-        reject_constant_risk_dimensions=labeling[
-            "reject_constant_risk_dimensions"
-        ],
-        composite_spec=composite_spec,
-        raise_on_failure=not compatibility_pilot,
-    )
-    action_applicable_risk_gate = validate_action_applicable_risk_signal(
-        canonical_raw_rows,
-        expected_actions=sorted({row.action_id for row in outcomes}),
-        expected_families=[str(endpoint.family) for endpoint in endpoints],
-        minimum_signal_rate=labeling[
-            "minimum_action_applicable_risk_signal_rate"
-        ],
-        minimum_distinct_values=labeling[
-            "minimum_action_applicable_risk_distinct_values"
-        ],
-        raise_on_failure=not compatibility_pilot,
-    )
-    raw_family_quality_gate = {
-        "status": (
-            "PASS"
-            if raw_family_global_gate.get("status") == "PASS"
-            and raw_family_action_gate.get("status") == "PASS"
-            and (
-                compatibility_pilot
-                or action_applicable_risk_gate.get("status") == "PASS"
-            )
-            else "FAIL"
-        ),
-        "global": raw_family_global_gate,
-        "family_by_action": raw_family_action_gate,
-        "action_applicable_risk_signal": {
-            **action_applicable_risk_gate,
-            "enforced": not compatibility_pilot,
-        },
-    }
+    else:
+        canonical_raw_rows = [
+            {
+                "judge_family": row["judge_family"],
+                "action_id": row["action_id"],
+                "response": row["response"],
+                "risk": row["risk"],
+            }
+            for row in raw_by_key.values()
+        ]
+        raw_family_quality_gate = evaluate_raw_judge_gates(
+            canonical_raw_rows,
+            outcomes=outcomes,
+            endpoints=endpoints,
+            labeling=labeling,
+            composite_spec=composite_spec,
+            compatibility_pilot=compatibility_pilot,
+        )
 
     labels = []
     labels_path.write_text("", encoding="utf-8")
-    train_calibration_labels_path.write_text("", encoding="utf-8")
-    internal_test_labels_path.write_text("", encoding="utf-8")
+    selected_labels_path = (
+        internal_test_labels_path
+        if sealed_holdout_scope
+        else train_calibration_labels_path
+    )
+    selected_labels_path.write_text("", encoding="utf-8")
     prompt_equivalence_class_sizes: dict[tuple[str, str], int] = {}
     for outcome in outcomes:
         state = state_by_card[outcome.card_id]
@@ -1559,14 +2248,15 @@ def main() -> None:
         )
         labels.append(label)
         append_jsonl(labels_path, label.model_dump(mode="json"))
-        split_path = (
-            internal_test_labels_path
-            if state.split.value == "internal_test"
-            else train_calibration_labels_path
-        )
-        append_jsonl(split_path, label.model_dump(mode="json"))
+        if selected_labels_path != labels_path:
+            append_jsonl(selected_labels_path, label.model_dump(mode="json"))
     pilot_reliable_threshold = float(pilot_config["minimum_reliable_label_rate"])
-    if labels:
+    if sealed_holdout_scope:
+        quality_gate = {
+            "status": "NOT_EVALUATED_SEALED_HOLDOUT",
+            "reason": "internal-test outcome aggregates are forbidden before consumption",
+        }
+    elif labels:
         quality_gate = validate_judge_table(
             labels,
             minimum_families=labeling["minimum_families"],
@@ -1618,7 +2308,9 @@ def main() -> None:
     successful_pairs = sum(raw_row_succeeded(row) for row in raw_by_key.values())
     schema_success_rate = successful_pairs / len(required_keys) if required_keys else 0.0
     reliable_rate = (
-        sum(label.label_reliable for label in labels) / len(labels) if labels else 0.0
+        None
+        if sealed_holdout_scope
+        else (sum(label.label_reliable for label in labels) / len(labels) if labels else 0.0)
     )
     compatibility_thresholds = {
         "minimum_schema_success_rate": float(
@@ -1632,27 +2324,30 @@ def main() -> None:
             pilot_config["minimum_low_mad_coverage_per_action_dimension"]
         ),
     }
-    compatibility_checks = {
-        "exact_raw_matrix": set(raw_by_key) == required_keys,
-        "schema_success_rate": schema_success_rate
-        >= compatibility_thresholds["minimum_schema_success_rate"],
-        "complete_two_family_labels": len(labels) == len(outcomes),
-        "dimension_quality_gate": quality_gate.get("status") == "PASS",
-        "raw_family_dimension_quality_gate": (
-            raw_family_quality_gate.get("status") == "PASS"
-        ),
-    }
-    compatibility_gate = {
-        "status": "PASS" if all(compatibility_checks.values()) else "NONREPORTABLE",
-        "checks": compatibility_checks,
-        "thresholds": compatibility_thresholds,
-        "schema_success_rate": schema_success_rate,
-        "reliable_label_rate": reliable_rate,
-        "joint_reliable_rate_is_diagnostic_only": True,
-        "futility_triggered": pilot_futility_reason is not None,
-        "futility_reason": pilot_futility_reason,
-        "allowed_schema_failures": allowed_schema_failures,
-    }
+    compatibility_checks = None
+    compatibility_gate = None
+    if compatibility_pilot:
+        compatibility_checks = {
+            "exact_raw_matrix": set(raw_by_key) == required_keys,
+            "schema_success_rate": schema_success_rate
+            >= compatibility_thresholds["minimum_schema_success_rate"],
+            "complete_two_family_labels": len(labels) == len(outcomes),
+            "dimension_quality_gate": quality_gate.get("status") == "PASS",
+            "raw_family_dimension_quality_gate": (
+                raw_family_quality_gate.get("status") == "PASS"
+            ),
+        }
+        compatibility_gate = {
+            "status": "PASS" if all(compatibility_checks.values()) else "NONREPORTABLE",
+            "checks": compatibility_checks,
+            "thresholds": compatibility_thresholds,
+            "schema_success_rate": schema_success_rate,
+            "reliable_label_rate": reliable_rate,
+            "joint_reliable_rate_is_diagnostic_only": True,
+            "futility_triggered": pilot_futility_reason is not None,
+            "futility_reason": pilot_futility_reason,
+            "allowed_schema_failures": allowed_schema_failures,
+        }
     label_value_feasibility = None
     if compatibility_pilot:
         selected_state_by_id = {
@@ -1669,6 +2364,7 @@ def main() -> None:
             risk_weight=float(pm_v2_config["selection"]["risk_weight"]),
             cost_weight=float(pm_v2_config["selection"]["cost_weight"]),
         )
+        assert compatibility_gate is not None
         compatibility_gate["checks"]["label_value_feasibility"] = (
             label_value_feasibility["status"] == "PASS"
         )
@@ -1678,27 +2374,40 @@ def main() -> None:
             else "NONREPORTABLE"
         )
     final_status = (
-        compatibility_gate["status"] if compatibility_pilot else "COMPLETE"
+        compatibility_gate["status"]
+        if compatibility_pilot and compatibility_gate is not None
+        else (
+            "SEALED_INTERNAL_TEST_COMPLETE"
+            if sealed_holdout_scope
+            else "COMPLETE"
+        )
     )
     final_missing_api_calls = sum(
         call_key(row) not in successful_call_rows for row in cost_rows
     )
     sealed_internal_bundle_path = out_dir / "sealed_internal_bundle_manifest.json"
-    sealed_internal_bundle = seal_internal_label_bundle(
-        sealed_internal_bundle_path,
-        internal_labels_path=internal_test_labels_path,
-    )
+    sealed_internal_bundle = None
+    if sealed_holdout_scope:
+        sealed_internal_bundle = seal_internal_label_bundle(
+            sealed_internal_bundle_path,
+            internal_labels_path=internal_test_labels_path,
+        )
     report = {
         **summary,
         "status": final_status,
         "reportability_status": (
-            "COMPATIBILITY_GATE_ONLY" if compatibility_pilot else "REPORTABLE"
+            "SEALED_HOLDOUT_NOT_YET_CONSUMED"
+            if sealed_holdout_scope
+            else ("COMPATIBILITY_GATE_ONLY" if compatibility_pilot else "REPORTABLE")
         ),
+        "label_scope": args.label_scope,
         "completed_judge_pairs": len(raw_by_key),
         "remaining_judge_pairs": len(required_keys - set(raw_by_key)),
         "remaining_api_calls": final_missing_api_calls,
         "label_rows": len(labels),
-        "reliable_rows": sum(label.label_reliable for label in labels),
+        "reliable_rows": (
+            None if sealed_holdout_scope else sum(label.label_reliable for label in labels)
+        ),
         "schema_success_pairs": successful_pairs,
         "schema_success_rate": schema_success_rate,
         "quality_gate": quality_gate,
@@ -1706,13 +2415,28 @@ def main() -> None:
         "compatibility_gate": compatibility_gate if compatibility_pilot else None,
         "label_value_feasibility": label_value_feasibility,
         "labels_path": str(labels_path),
-        "train_calibration_labels_path": str(train_calibration_labels_path),
-        "internal_test_labels_path": str(internal_test_labels_path),
-        "sealed_internal_bundle_path": str(sealed_internal_bundle_path),
+        "train_calibration_labels_path": (
+            str(train_calibration_labels_path) if not sealed_holdout_scope else None
+        ),
+        "internal_test_labels_path": (
+            str(internal_test_labels_path) if sealed_holdout_scope else None
+        ),
+        "sealed_internal_bundle_path": (
+            str(sealed_internal_bundle_path) if sealed_holdout_scope else None
+        ),
         "sealed_internal_bundle": sealed_internal_bundle,
         "raw_path": str(raw_path),
         "ledger_path": str(ledger_path),
         "physical_http_attempts": attempt_ledger.started_attempts,
+        "carry_forward_source_directory": carry_forward["source_directory"],
+        "carry_forward_source_ledger_sha256": carry_forward[
+            "source_ledger_sha256"
+        ],
+        "carried_forward_calls": len(carried_call_keys),
+        "transport_execution_contract": transport_execution_contract,
+        "transport_retry_summary": retry_ledger_summary(
+            attempt_ledger, sorted(plan_by_physical_key)
+        ),
         "final_ledger_sha256": sha256_text(canonical_json(ledger_rows)),
     }
     summary_path = out_dir / "summary.json"
@@ -1732,34 +2456,47 @@ def main() -> None:
     if compatibility_pilot:
         attestation_inputs["pilot_plan"] = args.pilot_plan
     else:
-        attestation_inputs["automated_semantic_review"] = (
-            args.automated_semantic_review_report
-        )
-        attestation_inputs["automated_semantic_review_attestation"] = (
-            args.automated_semantic_review_attestation
-        )
         attestation_inputs["actual_corpus_semantic_review"] = (
             args.actual_corpus_semantic_review_report
         )
         attestation_inputs["actual_corpus_semantic_review_attestation"] = (
             args.actual_corpus_semantic_review_attestation
         )
+    if args.carry_forward_from is not None:
+        attestation_inputs["carry_forward_call_plan"] = (
+            args.carry_forward_from / "call_plan.jsonl"
+        )
+        attestation_inputs["carry_forward_ledger"] = (
+            args.carry_forward_from / "judge_call_ledger.jsonl"
+        )
+    attestation_outputs = {
+        "summary": (summary_path, False),
+        "raw_results": (raw_path, True),
+        "call_ledger": (ledger_path, True),
+    }
+    if sealed_holdout_scope:
+        attestation_outputs.update(
+            {
+                "sealed_internal_bundle": (sealed_internal_bundle_path, False),
+                "internal_test_labels": (internal_test_labels_path, True),
+            }
+        )
+    else:
+        attestation_outputs.update(
+            {
+                "labels": (labels_path, True),
+                "train_calibration_labels": (train_calibration_labels_path, True),
+            }
+        )
     create_artifact_attestation(
         attestation_path,
         stage=stage,
         inputs=attestation_inputs,
-        outputs={
-            "summary": (summary_path, False),
-            "labels": (labels_path, True),
-            "sealed_internal_bundle": (sealed_internal_bundle_path, False),
-            "train_calibration_labels": (train_calibration_labels_path, True),
-            "internal_test_labels": (internal_test_labels_path, True),
-            "raw_results": (raw_path, True),
-            "call_ledger": (ledger_path, True),
-        },
+        outputs=attestation_outputs,
         parameters={
             "status": final_status,
             "scope": "compatibility_pilot" if compatibility_pilot else "full",
+            "label_scope": args.label_scope,
             "pm_v2_config_sha256": sha256_file(args.pm_v2_config),
             "prompt_contract_hash": prompt_contract_hash(),
             "composite_spec": composite_spec.model_dump(mode="json"),
@@ -1780,6 +2517,15 @@ def main() -> None:
                 "cost_estimate_sha256"
             ],
             "judge_retries": 1,
+            "transport_execution_contract": transport_execution_contract,
+            "transport_retry_summary": retry_ledger_summary(
+                attempt_ledger, sorted(plan_by_physical_key)
+            ),
+            "carry_forward_source_directory": carry_forward["source_directory"],
+            "carry_forward_source_ledger_sha256": carry_forward[
+                "source_ledger_sha256"
+            ],
+            "carried_forward_calls": len(carried_call_keys),
             "api_cost_planning": api_cost_planning,
             "pricing_usd_per_mtok": pricing_by_family,
             "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,

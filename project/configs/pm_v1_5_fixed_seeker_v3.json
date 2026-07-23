@@ -1,0 +1,19 @@
+{
+  "version": "pm-v2.2-fixed-seeker-generation-v3-bounded-surface",
+  "seeker_endpoint": "seeker",
+  "system_prompt_id": "evoemo-fixed-seeker-bounded-surface-v1",
+  "system_prompt_template_sha256": "c106e3346afb8a8b1c639fa88c81fe7f36c8450114e426344eac89a90572c1b8",
+  "response_instruction_word_limit": 60,
+  "surface_selection_protocol": "normalized-longest-complete-sentence-prefix-v1",
+  "temperature": 0.2,
+  "max_output_tokens": 300,
+  "output_normalization": "normalize_space_v1",
+  "finish_reason_protocol": "pm-v2-finish-reason-v1",
+  "accepted_normalized_finish_reasons": [
+    "complete",
+    "length"
+  ],
+  "maximum_physical_attempts_per_logical_call": 10,
+  "seed_protocol": "base-seed-plus-turn-index-v1",
+  "elicitation_scaffold_protocol": "deterministic-generic-open-loop-v1"
+}

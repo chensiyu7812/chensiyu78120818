@@ -1,0 +1,397 @@
+{
+  "protocol": "pm-v1.5-hybrid-retrieval-diagnostic-v1",
+  "generated_utc": "2026-07-20T14:38:03Z",
+  "status": "REPORT_ONLY_NOT_A_FORMAL_ARTIFACT_NO_ADOPTION_DECISION_MADE",
+  "inputs": {
+    "evoemo_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/external/evo_emo.json",
+    "evoemo_sha256": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420",
+    "evo_memory_builder_contract_sha256": "ec4768cb3b52932a11838196c45e41868b85d321716e18e26e6c6d8961c6c6cb",
+    "evo_memory_global_catalog_sha256": "3264b863f655a6a11e4ef0a3a8ccdfbd72a5024955d2abca5e5be60bb03e1071",
+    "development_data_candidate": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_17_casewise_repair_candidate/_generated_bundles_work.jsonl",
+      "sha256": "19516c6528fa65f07bf0d96b7815ed33f1542497a200c0473fc5c8027ee268f0",
+      "user_count": 52,
+      "split_counts": {
+        "calibration": 12,
+        "internal_test": 16,
+        "train": 24
+      },
+      "disclosure": "Real, generated content produced by scripts/v1_5/20_generate_pm_v2_development_data_v1_5.py's v8.17 casewise-repair attempt -- NOT the frozen formal development-data artifact (as of this report, that stage has not been formally closed out / paid-approved for every user). Floors calibrated from it should be re-derived once the formal artifact exists; the calibration method itself (TRAIN-positive minimum, CALIBRATION-only reporting) does not change."
+    },
+    "esconv_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/external/ESConv.json",
+    "esconv_sha256": "aa0556c5b330562ba009c1cd5137486bfa2a7255f33225a6524cd58f7efdd9af",
+    "esconv_split_manifest_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/strategy/esconv_split_manifest_v1_5.jsonl",
+    "esconv_split_manifest_sha256": "0199fbe1cad5f42aacfd2ba52a92bc6530dfcb33a82bb7bb7e81e5abb6e63e63",
+    "strategy_bank_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/strategy/strategy_cards_v1_5.jsonl",
+    "strategy_bank_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e"
+  },
+  "semantic_encoder": {
+    "spec_sha256": "febe9bbf8f7207607335284b98d7bc97a0b41231a4c2358cba0a027097911f65",
+    "binding": {
+      "protocol": "pm-v1.5-semantic-encoder-binding-v1",
+      "spec_sha256": "febe9bbf8f7207607335284b98d7bc97a0b41231a4c2358cba0a027097911f65",
+      "snapshot_tree_sha256": "c94b5329116dedfb43349b42d8138ef0b7c3348373eb7339b35bbeef530de15b",
+      "snapshot_file_count": 11,
+      "implementation": "transformers-auto-model-cls-float32"
+    }
+  },
+  "floor_calibration_query_construction": "Each calibration example's query is built via retrieval.context_query(current_user_text, recent_dialogue, session_summary) -- the same construction real retrieval uses at deployment time -- not bare current_user_text alone. Floors calibrated against a shorter, differently-shaped query would not be calibrated against the query distribution they are meant to gate.",
+  "floor_calibration_by_memory_source": {
+    "ME": {
+      "lexical_min_score": 0.0827640881769065,
+      "semantic_min_score": 0.6020669904499151,
+      "train_positive_count": 48,
+      "train_negative_count": 384,
+      "calibration_positive_count": 24,
+      "calibration_negative_count": 192,
+      "calibration_recall": 1.0,
+      "calibration_negative_exclusion_rate": 0.10416666666666667
+    },
+    "MP": {
+      "lexical_min_score": 0.06728631102524889,
+      "semantic_min_score": 0.552360977474838,
+      "train_positive_count": 48,
+      "train_negative_count": 384,
+      "calibration_positive_count": 24,
+      "calibration_negative_count": 192,
+      "calibration_recall": 1.0,
+      "calibration_negative_exclusion_rate": 0.015625
+    },
+    "MS": {
+      "lexical_min_score": 0.05876339005942004,
+      "semantic_min_score": 0.5271099646806728,
+      "train_positive_count": 48,
+      "train_negative_count": 384,
+      "calibration_positive_count": 24,
+      "calibration_negative_count": 192,
+      "calibration_recall": 1.0,
+      "calibration_negative_exclusion_rate": 0.026041666666666668
+    }
+  },
+  "strategy_floor_calibration_status": "no_labeled_synthetic_strategy_candidates_available_in_this_corpus; strategy floors frozen at (0.0, 0.0) -- no exclusion -- rather than fabricated from nonexistent ground truth",
+  "frozen_contract": {
+    "rrf_k": 60,
+    "memory_floors_by_source": {
+      "ME": {
+        "lexical_min_score": 0.0827640881769065,
+        "semantic_min_score": 0.6020669904499151
+      },
+      "MP": {
+        "lexical_min_score": 0.06728631102524889,
+        "semantic_min_score": 0.552360977474838
+      },
+      "MS": {
+        "lexical_min_score": 0.05876339005942004,
+        "semantic_min_score": 0.5271099646806728
+      }
+    },
+    "strategy_floors": {
+      "lexical_min_score": 0.0,
+      "semantic_min_score": 0.0
+    },
+    "contract_sha256": "c8674d11a6d39f762b7c2d01094a3e56201b1bf1f629b61d78030b9233bc8e5f"
+  },
+  "legitimate_adoption_evidence": {
+    "note": "The only numbers in this report that may inform a Part 4 adoption decision, per the approved plan's data-boundary rule: real per-case candidate pools scored via the actual retrieve() pipeline (fusion, ranking, top-k), never a raw- score-only floor check. Memory uses the CALIBRATION split only (never TRAIN, already spent fitting floors above); Strategy uses the ESConv VALIDATION split only (never test, which is confirmatory). Both use the same context_query construction real retrieval uses.",
+    "memory_retrieval_quality": {
+      "split": "calibration",
+      "top_k_by_source": {
+        "MP": 2,
+        "MS": 2,
+        "ME": 3
+      },
+      "by_method": {
+        "lexical_only": {
+          "MP": {
+            "units_evaluated": 24,
+            "hit_rate": 1.0,
+            "mean_precision": 0.5,
+            "query_hashes": []
+          },
+          "MS": {
+            "units_evaluated": 24,
+            "hit_rate": 1.0,
+            "mean_precision": 0.5,
+            "query_hashes": []
+          },
+          "ME": {
+            "units_evaluated": 24,
+            "hit_rate": 1.0,
+            "mean_precision": 0.5,
+            "query_hashes": []
+          }
+        },
+        "hybrid": {
+          "MP": {
+            "units_evaluated": 24,
+            "hit_rate": 1.0,
+            "mean_precision": 0.5,
+            "query_hashes": []
+          },
+          "MS": {
+            "units_evaluated": 24,
+            "hit_rate": 1.0,
+            "mean_precision": 0.5,
+            "query_hashes": []
+          },
+          "ME": {
+            "units_evaluated": 24,
+            "hit_rate": 1.0,
+            "mean_precision": 0.625,
+            "query_hashes": []
+          }
+        }
+      },
+      "negative_source_and_harmful_retrieval": {
+        "lexical_only": {
+          "MP": {
+            "harmful_retrieval_rate": 1.0,
+            "harmful_eligible_cases": 12,
+            "negative_source_false_retrieval_rate": 1.0,
+            "negative_source_eligible_cases": 84
+          },
+          "MS": {
+            "harmful_retrieval_rate": 1.0,
+            "harmful_eligible_cases": 12,
+            "negative_source_false_retrieval_rate": 1.0,
+            "negative_source_eligible_cases": 84
+          },
+          "ME": {
+            "harmful_retrieval_rate": 1.0,
+            "harmful_eligible_cases": 12,
+            "negative_source_false_retrieval_rate": 1.0,
+            "negative_source_eligible_cases": 84
+          }
+        },
+        "hybrid": {
+          "MP": {
+            "harmful_retrieval_rate": 1.0,
+            "harmful_eligible_cases": 12,
+            "negative_source_false_retrieval_rate": 1.0,
+            "negative_source_eligible_cases": 84
+          },
+          "MS": {
+            "harmful_retrieval_rate": 1.0,
+            "harmful_eligible_cases": 12,
+            "negative_source_false_retrieval_rate": 0.9880952380952381,
+            "negative_source_eligible_cases": 84
+          },
+          "ME": {
+            "harmful_retrieval_rate": 0.9166666666666666,
+            "harmful_eligible_cases": 12,
+            "negative_source_false_retrieval_rate": 1.0,
+            "negative_source_eligible_cases": 84
+          }
+        }
+      }
+    },
+    "esconv_strategy_retrieval_quality": {
+      "split": "validation",
+      "strategy_top_k": 3,
+      "by_method": {
+        "lexical_only": {
+          "units_evaluated": 2393,
+          "hit_rate": 0.4057668198913498,
+          "mean_precision": 0.17230812090820447,
+          "query_hashes": []
+        },
+        "hybrid": {
+          "units_evaluated": 2393,
+          "hit_rate": 0.39406602590890094,
+          "mean_precision": 0.1649254770859451,
+          "query_hashes": []
+        }
+      },
+      "paired_dialogue_cluster_bootstrap": {
+        "cluster_key": "dialogue_id",
+        "hit_rate_diff": {
+          "mean": -0.011700793982448809,
+          "ci_low": -0.038336172440045675,
+          "ci_high": 0.015047615224440319,
+          "n_clusters": 172
+        },
+        "precision_diff": {
+          "mean": -0.007382643822259368,
+          "ci_low": -0.01911616193851919,
+          "ci_high": 0.0037594119442357684,
+          "n_clusters": 172
+        }
+      }
+    }
+  },
+  "report_only_evoemo_diagnostic_not_confirmatory": {
+    "note": "Every number below uses EvoEmo's evaluator-only subsequent_topics/related_sessions ground truth and topic text as a query stand-in -- report-only, computed after the frozen_contract above was already fixed, and never fed back into floor calibration or the legitimate evidence above. Scope is ME only: related_sessions ground truth has no MP/MS analogue.",
+    "top_k_by_source": {
+      "ME": 3
+    },
+    "fixed_top_k_comparison": {
+      "lexical_only": {
+        "units_evaluated": 34,
+        "hit_rate": 0.5882352941176471,
+        "mean_precision": 0.2647058823529412,
+        "query_hashes": [
+          "b483b8a2953db23c3c8249ce45ccb47ed552e00534d7d7fa3fa3c6e5cf32f624",
+          "efa38c87d37bd2cae6c9ffcdbf6291c27109eb68e614f359220cbd8276e52227",
+          "e06223b2ef5c190d9a3b7c947c85f6922759559ee111575d84ae1b12b6e67e4b",
+          "31828cbf2b53ddf395ccb002926368008476d6fc78a162185ecc93e6fabeb844",
+          "303a32dd2f59a14afd0b681841384bd7ff2c7c9b64014593af4a18509c9db8bb",
+          "099e4314940b08e4f2a80e17fdffc8b5b6d7574fec38dc075c0c3db3ea4ad6c0",
+          "f9ef7bea6758b7db240bbb08f41ea03074cbbbe3f4a793bca7db220fd2fde103",
+          "3e9a02d92a5cac279741af512e12325251d55731694b8796c87e7b775fc5e143",
+          "8deefe32d563633774fb64d0f617fffc5bfadb34569d70d61cefb4d7da7e4407",
+          "0884155eadd788ae6bdddf90f09ae6427e06b64645f911c9d434675b34f3c75f",
+          "a0ab08a6e6db669a1736cd8727fd7abe234c97659ede6cf58c229f337ddb02c3",
+          "e11012d1ec92d36acb2bf979fc00aca27706021abf9f13448cd4f98ee698734a",
+          "3b9a1c62795cee2d16f52916ddcc7e1467b13ed9ab8e712992bdbeb6a0a4eb0b",
+          "bd03cefacf8968333d497834ebf5aded1dfe32e5bdacedfba461d48bb2a24b47",
+          "1bbc9b2498d0ac348002a58c4affa94438540b5d730df0a33ba66209fa282b18",
+          "76c5b3e361cd822f2ba6e3e08c587e9fcc475ce96bbd34045b17b63fb7969bde",
+          "9d646f5c042d710ea82be4510a9e67dfa8c02ef63d986be82d19a6a3e7c8e371",
+          "fa4bcca5373e2d6c55d2ea87577f96d9c7aeebdf546f92969fc0c823121b460d",
+          "4894fdf65d96928d026b465634ce8b5a5071d84db4a4e337433984a2654ef365",
+          "467bd298c2c86e10d7251a413f69fb4c4a6c0ead9114aed9e0d0f4061ab64ad5",
+          "f0aaff66b2f88f22950819925efa15af32d64995d32d972e9070f69c09662299",
+          "ebce9b28ce1ec94d9ef28cdba306f7f54655e775581d2f53db8bf21ab4eedcd0",
+          "9d3fe26fcf10c9e6974a378fe22f1742efd2a51da61dca868553d3b17f17a92c",
+          "e1303db5cd90c7a5f6533efa201ca10133cd38a95052827bcaf92259e816f6bc",
+          "5297dbc8c04ec3aaa092aee9f0ad6109ced5fb2308c2bed97fd9fad748a531b8",
+          "fb122efb6c3d21d7533e5546768487002dcad62f7f1c02d99f75651a1088f84e",
+          "359e1f4a895aea21caf2d27d8999c9bccb6367a6c3ce68557bcb86c1f2272ce8",
+          "a0025c879361012c0f06420688f3da873f85c7399f8eff75d7779d78ac23d88f",
+          "338009ba53017807059c3e86a9eaf8183b6d1827e9c55f13ee2ac61ed12c6dd8",
+          "b454380cfdd806d23fd7a8a9b8f822756aebfce6addbfe12e0d98a27846f0e5b",
+          "720fd8ac4b6a92779d575f9258a34dc2a351e6c1b9a84fddf8feef441e6e5f6e",
+          "2a12b4b870547e43284b2813ddf3130b51b859cf74c587e3456b9b91531df607",
+          "b4abcd7ec585f3322669a0404782b5f98783e4e589abe161388b5e114dd6f489",
+          "08e79fe9f671e19f78580bcf3e381c5e1ae236272b4b84f183ffb81d4f61746c"
+        ]
+      },
+      "hybrid": {
+        "units_evaluated": 34,
+        "hit_rate": 0.9117647058823529,
+        "mean_precision": 0.5392156862745098,
+        "query_hashes": [
+          "b483b8a2953db23c3c8249ce45ccb47ed552e00534d7d7fa3fa3c6e5cf32f624",
+          "efa38c87d37bd2cae6c9ffcdbf6291c27109eb68e614f359220cbd8276e52227",
+          "e06223b2ef5c190d9a3b7c947c85f6922759559ee111575d84ae1b12b6e67e4b",
+          "31828cbf2b53ddf395ccb002926368008476d6fc78a162185ecc93e6fabeb844",
+          "303a32dd2f59a14afd0b681841384bd7ff2c7c9b64014593af4a18509c9db8bb",
+          "099e4314940b08e4f2a80e17fdffc8b5b6d7574fec38dc075c0c3db3ea4ad6c0",
+          "f9ef7bea6758b7db240bbb08f41ea03074cbbbe3f4a793bca7db220fd2fde103",
+          "3e9a02d92a5cac279741af512e12325251d55731694b8796c87e7b775fc5e143",
+          "8deefe32d563633774fb64d0f617fffc5bfadb34569d70d61cefb4d7da7e4407",
+          "0884155eadd788ae6bdddf90f09ae6427e06b64645f911c9d434675b34f3c75f",
+          "a0ab08a6e6db669a1736cd8727fd7abe234c97659ede6cf58c229f337ddb02c3",
+          "e11012d1ec92d36acb2bf979fc00aca27706021abf9f13448cd4f98ee698734a",
+          "3b9a1c62795cee2d16f52916ddcc7e1467b13ed9ab8e712992bdbeb6a0a4eb0b",
+          "bd03cefacf8968333d497834ebf5aded1dfe32e5bdacedfba461d48bb2a24b47",
+          "1bbc9b2498d0ac348002a58c4affa94438540b5d730df0a33ba66209fa282b18",
+          "76c5b3e361cd822f2ba6e3e08c587e9fcc475ce96bbd34045b17b63fb7969bde",
+          "9d646f5c042d710ea82be4510a9e67dfa8c02ef63d986be82d19a6a3e7c8e371",
+          "fa4bcca5373e2d6c55d2ea87577f96d9c7aeebdf546f92969fc0c823121b460d",
+          "4894fdf65d96928d026b465634ce8b5a5071d84db4a4e337433984a2654ef365",
+          "467bd298c2c86e10d7251a413f69fb4c4a6c0ead9114aed9e0d0f4061ab64ad5",
+          "f0aaff66b2f88f22950819925efa15af32d64995d32d972e9070f69c09662299",
+          "ebce9b28ce1ec94d9ef28cdba306f7f54655e775581d2f53db8bf21ab4eedcd0",
+          "9d3fe26fcf10c9e6974a378fe22f1742efd2a51da61dca868553d3b17f17a92c",
+          "e1303db5cd90c7a5f6533efa201ca10133cd38a95052827bcaf92259e816f6bc",
+          "5297dbc8c04ec3aaa092aee9f0ad6109ced5fb2308c2bed97fd9fad748a531b8",
+          "fb122efb6c3d21d7533e5546768487002dcad62f7f1c02d99f75651a1088f84e",
+          "359e1f4a895aea21caf2d27d8999c9bccb6367a6c3ce68557bcb86c1f2272ce8",
+          "a0025c879361012c0f06420688f3da873f85c7399f8eff75d7779d78ac23d88f",
+          "338009ba53017807059c3e86a9eaf8183b6d1827e9c55f13ee2ac61ed12c6dd8",
+          "b454380cfdd806d23fd7a8a9b8f822756aebfce6addbfe12e0d98a27846f0e5b",
+          "720fd8ac4b6a92779d575f9258a34dc2a351e6c1b9a84fddf8feef441e6e5f6e",
+          "2a12b4b870547e43284b2813ddf3130b51b859cf74c587e3456b9b91531df607",
+          "b4abcd7ec585f3322669a0404782b5f98783e4e589abe161388b5e114dd6f489",
+          "08e79fe9f671e19f78580bcf3e381c5e1ae236272b4b84f183ffb81d4f61746c"
+        ]
+      }
+    },
+    "fixed_token_budget_comparison": {
+      "token_budget": 360,
+      "lexical_only": {
+        "units_evaluated": 34,
+        "hit_rate": 0.6470588235294118,
+        "mean_precision": 0.22941176470588234,
+        "query_hashes": [
+          "b483b8a2953db23c3c8249ce45ccb47ed552e00534d7d7fa3fa3c6e5cf32f624",
+          "efa38c87d37bd2cae6c9ffcdbf6291c27109eb68e614f359220cbd8276e52227",
+          "e06223b2ef5c190d9a3b7c947c85f6922759559ee111575d84ae1b12b6e67e4b",
+          "31828cbf2b53ddf395ccb002926368008476d6fc78a162185ecc93e6fabeb844",
+          "303a32dd2f59a14afd0b681841384bd7ff2c7c9b64014593af4a18509c9db8bb",
+          "099e4314940b08e4f2a80e17fdffc8b5b6d7574fec38dc075c0c3db3ea4ad6c0",
+          "f9ef7bea6758b7db240bbb08f41ea03074cbbbe3f4a793bca7db220fd2fde103",
+          "3e9a02d92a5cac279741af512e12325251d55731694b8796c87e7b775fc5e143",
+          "8deefe32d563633774fb64d0f617fffc5bfadb34569d70d61cefb4d7da7e4407",
+          "0884155eadd788ae6bdddf90f09ae6427e06b64645f911c9d434675b34f3c75f",
+          "a0ab08a6e6db669a1736cd8727fd7abe234c97659ede6cf58c229f337ddb02c3",
+          "e11012d1ec92d36acb2bf979fc00aca27706021abf9f13448cd4f98ee698734a",
+          "3b9a1c62795cee2d16f52916ddcc7e1467b13ed9ab8e712992bdbeb6a0a4eb0b",
+          "bd03cefacf8968333d497834ebf5aded1dfe32e5bdacedfba461d48bb2a24b47",
+          "1bbc9b2498d0ac348002a58c4affa94438540b5d730df0a33ba66209fa282b18",
+          "76c5b3e361cd822f2ba6e3e08c587e9fcc475ce96bbd34045b17b63fb7969bde",
+          "9d646f5c042d710ea82be4510a9e67dfa8c02ef63d986be82d19a6a3e7c8e371",
+          "fa4bcca5373e2d6c55d2ea87577f96d9c7aeebdf546f92969fc0c823121b460d",
+          "4894fdf65d96928d026b465634ce8b5a5071d84db4a4e337433984a2654ef365",
+          "467bd298c2c86e10d7251a413f69fb4c4a6c0ead9114aed9e0d0f4061ab64ad5",
+          "f0aaff66b2f88f22950819925efa15af32d64995d32d972e9070f69c09662299",
+          "ebce9b28ce1ec94d9ef28cdba306f7f54655e775581d2f53db8bf21ab4eedcd0",
+          "9d3fe26fcf10c9e6974a378fe22f1742efd2a51da61dca868553d3b17f17a92c",
+          "e1303db5cd90c7a5f6533efa201ca10133cd38a95052827bcaf92259e816f6bc",
+          "5297dbc8c04ec3aaa092aee9f0ad6109ced5fb2308c2bed97fd9fad748a531b8",
+          "fb122efb6c3d21d7533e5546768487002dcad62f7f1c02d99f75651a1088f84e",
+          "359e1f4a895aea21caf2d27d8999c9bccb6367a6c3ce68557bcb86c1f2272ce8",
+          "a0025c879361012c0f06420688f3da873f85c7399f8eff75d7779d78ac23d88f",
+          "338009ba53017807059c3e86a9eaf8183b6d1827e9c55f13ee2ac61ed12c6dd8",
+          "b454380cfdd806d23fd7a8a9b8f822756aebfce6addbfe12e0d98a27846f0e5b",
+          "720fd8ac4b6a92779d575f9258a34dc2a351e6c1b9a84fddf8feef441e6e5f6e",
+          "2a12b4b870547e43284b2813ddf3130b51b859cf74c587e3456b9b91531df607",
+          "b4abcd7ec585f3322669a0404782b5f98783e4e589abe161388b5e114dd6f489",
+          "08e79fe9f671e19f78580bcf3e381c5e1ae236272b4b84f183ffb81d4f61746c"
+        ]
+      },
+      "hybrid": {
+        "units_evaluated": 34,
+        "hit_rate": 0.9117647058823529,
+        "mean_precision": 0.46715686274509804,
+        "query_hashes": [
+          "b483b8a2953db23c3c8249ce45ccb47ed552e00534d7d7fa3fa3c6e5cf32f624",
+          "efa38c87d37bd2cae6c9ffcdbf6291c27109eb68e614f359220cbd8276e52227",
+          "e06223b2ef5c190d9a3b7c947c85f6922759559ee111575d84ae1b12b6e67e4b",
+          "31828cbf2b53ddf395ccb002926368008476d6fc78a162185ecc93e6fabeb844",
+          "303a32dd2f59a14afd0b681841384bd7ff2c7c9b64014593af4a18509c9db8bb",
+          "099e4314940b08e4f2a80e17fdffc8b5b6d7574fec38dc075c0c3db3ea4ad6c0",
+          "f9ef7bea6758b7db240bbb08f41ea03074cbbbe3f4a793bca7db220fd2fde103",
+          "3e9a02d92a5cac279741af512e12325251d55731694b8796c87e7b775fc5e143",
+          "8deefe32d563633774fb64d0f617fffc5bfadb34569d70d61cefb4d7da7e4407",
+          "0884155eadd788ae6bdddf90f09ae6427e06b64645f911c9d434675b34f3c75f",
+          "a0ab08a6e6db669a1736cd8727fd7abe234c97659ede6cf58c229f337ddb02c3",
+          "e11012d1ec92d36acb2bf979fc00aca27706021abf9f13448cd4f98ee698734a",
+          "3b9a1c62795cee2d16f52916ddcc7e1467b13ed9ab8e712992bdbeb6a0a4eb0b",
+          "bd03cefacf8968333d497834ebf5aded1dfe32e5bdacedfba461d48bb2a24b47",
+          "1bbc9b2498d0ac348002a58c4affa94438540b5d730df0a33ba66209fa282b18",
+          "76c5b3e361cd822f2ba6e3e08c587e9fcc475ce96bbd34045b17b63fb7969bde",
+          "9d646f5c042d710ea82be4510a9e67dfa8c02ef63d986be82d19a6a3e7c8e371",
+          "fa4bcca5373e2d6c55d2ea87577f96d9c7aeebdf546f92969fc0c823121b460d",
+          "4894fdf65d96928d026b465634ce8b5a5071d84db4a4e337433984a2654ef365",
+          "467bd298c2c86e10d7251a413f69fb4c4a6c0ead9114aed9e0d0f4061ab64ad5",
+          "f0aaff66b2f88f22950819925efa15af32d64995d32d972e9070f69c09662299",
+          "ebce9b28ce1ec94d9ef28cdba306f7f54655e775581d2f53db8bf21ab4eedcd0",
+          "9d3fe26fcf10c9e6974a378fe22f1742efd2a51da61dca868553d3b17f17a92c",
+          "e1303db5cd90c7a5f6533efa201ca10133cd38a95052827bcaf92259e816f6bc",
+          "5297dbc8c04ec3aaa092aee9f0ad6109ced5fb2308c2bed97fd9fad748a531b8",
+          "fb122efb6c3d21d7533e5546768487002dcad62f7f1c02d99f75651a1088f84e",
+          "359e1f4a895aea21caf2d27d8999c9bccb6367a6c3ce68557bcb86c1f2272ce8",
+          "a0025c879361012c0f06420688f3da873f85c7399f8eff75d7779d78ac23d88f",
+          "338009ba53017807059c3e86a9eaf8183b6d1827e9c55f13ee2ac61ed12c6dd8",
+          "b454380cfdd806d23fd7a8a9b8f822756aebfce6addbfe12e0d98a27846f0e5b",
+          "720fd8ac4b6a92779d575f9258a34dc2a351e6c1b9a84fddf8feef441e6e5f6e",
+          "2a12b4b870547e43284b2813ddf3130b51b859cf74c587e3456b9b91531df607",
+          "b4abcd7ec585f3322669a0404782b5f98783e4e589abe161388b5e114dd6f489",
+          "08e79fe9f671e19f78580bcf3e381c5e1ae236272b4b84f183ffb81d4f61746c"
+        ]
+      }
+    }
+  }
+}

@@ -96,3 +96,58 @@ def test_internal_labels_cannot_change_after_pretraining_seal(
             candidate_manifest_path=manifest,
             internal_labels_path=labels,
         )
+
+
+def test_two_internal_domains_use_distinct_seals_ledgers_and_reports(
+    tmp_path: Path,
+) -> None:
+    checkpoint = tmp_path / "checkpoint.bin"
+    checkpoint.write_bytes(b"frozen")
+    artifacts = {"checkpoint": checkpoint}
+    labels_by_domain = {}
+    for domain in ("longitudinal_synthetic", "esconv_auxiliary"):
+        labels = tmp_path / f"{domain}.jsonl"
+        labels.write_text(
+            f'{{"state_id":"{domain}_state","private":"outcome"}}\n',
+            encoding="utf-8",
+        )
+        seal = tmp_path / f"{domain}_seal.json"
+        seal_internal_label_bundle(seal, internal_labels_path=labels)
+        artifacts[f"sealed_internal_bundle_{domain}"] = seal
+        labels_by_domain[domain] = labels
+    manifest = tmp_path / "candidate.json"
+    freeze_candidate_manifest(
+        manifest,
+        run_identity="dual-domain-run",
+        artifacts=artifacts,
+        parameters={"domains": sorted(labels_by_domain)},
+    )
+    for domain, labels in labels_by_domain.items():
+        ledger = tmp_path / f"{domain}_ledger.jsonl"
+        begin_internal_test_consumption(
+            ledger,
+            candidate_manifest_path=manifest,
+            internal_labels_path=labels,
+            sealed_artifact_name=f"sealed_internal_bundle_{domain}",
+            consumption_domain=domain,
+        )
+        report = tmp_path / f"{domain}_report.json"
+        write_json(report, {"status": "NOT_SUPPORTED", "domain": domain})
+        finish_internal_test_consumption(
+            ledger, report_path=report, expected_domain=domain
+        )
+        verified = require_completed_internal_consumption(
+            ledger,
+            candidate_manifest_path=manifest,
+            report_path=report,
+            expected_domain=domain,
+        )
+        assert verified["status"] == "PASS"
+
+    with pytest.raises(RuntimeError, match="consumption domain mismatch"):
+        require_completed_internal_consumption(
+            tmp_path / "longitudinal_synthetic_ledger.jsonl",
+            candidate_manifest_path=manifest,
+            report_path=tmp_path / "longitudinal_synthetic_report.json",
+            expected_domain="esconv_auxiliary",
+        )

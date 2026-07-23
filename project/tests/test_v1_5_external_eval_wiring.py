@@ -25,11 +25,13 @@ import pytest
 from metacom_pm.artifacts import create_artifact_attestation
 from metacom_pm.config import endpoint_from_config, load_config
 from metacom_pm.evoemo import (
-    FIXED_SEEKER_V22_STAGE,
+    FIXED_SEEKER_V23_STAGE,
     fixed_seeker_cost_planning_contract,
     load_evoemo,
 )
-from metacom_pm.fixed_seeker_contract import FixedSeekerGenerationContract
+from metacom_pm.fixed_seeker_contract import require_fixed_seeker_v3_sidecar_contract
+from metacom_pm.generation_contract import SupporterGenerationContract
+from metacom_pm.response_mechanism_contract import build_response_mechanism_contract
 from metacom_pm.io import (
     canonical_json,
     read_json,
@@ -132,12 +134,15 @@ def _seed_lineage_fixture(workdir: Path) -> tuple[Path, Path]:
 
 
 def _fixed_track_fixture(workdir: Path) -> tuple[Path, Path]:
-    bundle = workdir / "evoemo_fixed_tracks_v1_5"
+    bundle = workdir / "evoemo_fixed_tracks_v1_5_v3_formal_candidate"
     bundle.mkdir(parents=True)
     experiment = load_config(ROOT / "configs" / "experiment.yaml")
     pm_config = load_config(ROOT / "configs" / "pm_v1_5.yaml")
-    contract = FixedSeekerGenerationContract.from_mapping(
-        pm_config["fixed_seeker_generation_treatment"]
+    # V3 is read only from the separately-tracked sidecar, never from
+    # configs/pm_v1_5.yaml (which stays on the historical V2 treatment) --
+    # matching exactly what the real, migrated V1.5 consumers now do.
+    contract = require_fixed_seeker_v3_sidecar_contract(
+        ROOT / "configs" / "pm_v1_5_fixed_seeker_v3.json"
     )
     endpoint = endpoint_from_config(experiment, contract.seeker_endpoint)
     bound = contract.bind_endpoint(contract.seeker_endpoint, endpoint)
@@ -196,7 +201,7 @@ def _fixed_track_fixture(workdir: Path) -> tuple[Path, Path]:
     attestation = bundle / "artifact_attestation.json"
     create_artifact_attestation(
         attestation,
-        stage=FIXED_SEEKER_V22_STAGE,
+        stage=FIXED_SEEKER_V23_STAGE,
         inputs={
             "evoemo": ROOT / "data" / "external" / "evo_emo.json",
             "run_manifest": bundle / "run_manifest.json",
@@ -230,6 +235,128 @@ def _fixed_track_fixture(workdir: Path) -> tuple[Path, Path]:
         },
     )
     return tracks, attestation
+
+
+def _esconv_v1_5_freeze_fixture(
+    workdir: Path,
+    *,
+    pm_checkpoint: Path,
+    transparent_rule_checkpoint: Path,
+    training_report: Path,
+    development_observable_support: dict,
+) -> dict[str, Path]:
+    config = load_config(ROOT / "configs" / "pm_v1_5.yaml")[
+        "esconv_external_evaluation"
+    ]
+    bundle = workdir / "esconv_test_v1_5"
+    bundle.mkdir()
+    paths = {
+        "runtime_states": bundle / "runtime_states.jsonl",
+        "pm_v2_states": bundle / "pm_v2_states.jsonl",
+        "memory_backend": bundle / "memory_backend.jsonl",
+        "audit_only": bundle / "audit_only.jsonl",
+        "split_audit": bundle / "split_audit.json",
+    }
+    state_count = int(config["expected_primary_states"])
+    write_jsonl(
+        paths["runtime_states"],
+        (
+            {
+                "state_id": f"esconv-state-{index}",
+                "card_id": f"esconv-card-{index}",
+            }
+            for index in range(state_count)
+        ),
+    )
+    write_jsonl(
+        paths["pm_v2_states"],
+        ({"state_id": f"esconv-state-{index}"} for index in range(state_count)),
+    )
+    write_jsonl(
+        paths["memory_backend"],
+        ({"state_id": f"esconv-state-{index}"} for index in range(state_count)),
+    )
+    write_jsonl(
+        paths["audit_only"],
+        ({"state_id": f"esconv-state-{index}"} for index in range(state_count)),
+    )
+    write_json(
+        paths["split_audit"],
+        {
+            "status": "PASS",
+            "protocol": config["split_protocol"],
+            "outcomes_used_for_split": False,
+            "eligible_test_dialogues": config["nonoverlap_dialogue_counts"][
+                "test"
+            ],
+            "checks": {"fixture_isolation": True},
+        },
+    )
+    build_report = bundle / "build_report.json"
+    write_json(
+        build_report,
+        {
+            "status": "COMPLETE",
+            "protocol": config["protocol"],
+            "turn_selection_protocol": config["turn_selection_protocol"],
+            "same_pm_checkpoint_required": True,
+            "retraining_or_esconv_outcome_tuning_authorized": False,
+            "turn_selection_uses_response_or_judge_outcomes": False,
+            "all_support_eligible_test_turns_included": True,
+            "legal_actions": config["legal_actions"],
+            "test_dialogues": config["nonoverlap_dialogue_counts"]["test"],
+            "test_turns": state_count,
+            "observable_state_support": {"status": "PASS"},
+            "development_observable_state_support_sha256": sha256_text(
+                canonical_json(development_observable_support)
+            ),
+            "outputs": {
+                name: {"path": str(path), "sha256": sha256_file(path)}
+                for name, path in paths.items()
+            },
+        },
+    )
+    policy_dir = workdir / "esconv_v1_5_preflight"
+    policy_dir.mkdir()
+    choices = policy_dir / "policy_choices.jsonl"
+    write_jsonl(
+        choices,
+        (
+            {
+                "state_id": f"esconv-state-{index}",
+                "learned_action": "M0+R0",
+                "transparent_rule_action": "M0+RS",
+                "always_r0_action": "M0+R0",
+                "always_rs_action": "M0+RS",
+                "esconv_outcome_used_for_choice": False,
+            }
+            for index in range(state_count)
+        ),
+    )
+    summary = policy_dir / "summary.json"
+    write_json(
+        summary,
+        {
+            "status": "COMPLETE",
+            "protocol": config["protocol"],
+            "same_frozen_checkpoint": True,
+            "esconv_train_validation_or_test_outcomes_used_for_choice": False,
+            "learned_checkpoint_sha256": sha256_file(pm_checkpoint),
+            "transparent_rule_checkpoint_sha256": sha256_file(
+                transparent_rule_checkpoint
+            ),
+            "training_report_sha256": sha256_file(training_report),
+            "pm_v2_states_sha256": sha256_file(paths["pm_v2_states"]),
+            "policy_choices_sha256": sha256_file(choices),
+            "state_count": state_count,
+        },
+    )
+    return {
+        "build_report": build_report,
+        **paths,
+        "policy_summary": summary,
+        "policy_choices": choices,
+    }
 
 
 def _build_freeze(workdir: Path, monkeypatch, *, pm_checkpoint_content: str = "pm-checkpoint"):
@@ -362,6 +489,14 @@ def _build_freeze(workdir: Path, monkeypatch, *, pm_checkpoint_content: str = "p
         candidate_manifest_path=candidate_manifest,
         internal_labels_path=internal_test_labels,
     )
+    development_observable_support = {
+        "protocol": "pm-v1.5-development-external-observable-state-support-v1",
+        "status": "PASS",
+        "outcome_labels_used": False,
+        "evoemo_content_used": False,
+        "history_turn_targets": [2, 4, 6, 8],
+        "summary_treatments": ["present", "absent"],
+    }
     training_report = workdir / "training_report.json"
     write_json(
         training_report,
@@ -425,6 +560,9 @@ def _build_freeze(workdir: Path, monkeypatch, *, pm_checkpoint_content: str = "p
             "gate_m": {"status": "PASS"},
             "gate_f": {"status": "PASS"},
             "reportability_checks": {"fixture_gate": True},
+            "development_observable_state_support": (
+                development_observable_support
+            ),
         },
     )
     finish_internal_test_consumption(
@@ -475,6 +613,7 @@ def _build_freeze(workdir: Path, monkeypatch, *, pm_checkpoint_content: str = "p
                 "expected_split_state_counts": expected_split_states,
                 "expected_total_states": 468,
             },
+            "observable_state_support": development_observable_support,
         },
     )
     data_attestation = workdir / "data_attestation.json"
@@ -501,25 +640,51 @@ def _build_freeze(workdir: Path, monkeypatch, *, pm_checkpoint_content: str = "p
     )
     semantic_review = {
         "status": "PASS",
-        "automated_review_report_sha256": "a" * 64,
-        "automated_review_attestation_sha256": "b" * 64,
         "actual_corpus_review_report_sha256": "c" * 64,
         "actual_corpus_review_attestation_sha256": "d" * 64,
         "step0_shortcut_audit_report_sha256": "e" * 64,
         "step0_shortcut_audit_attestation_sha256": "f" * 64,
     }
     full_sweep_gate = {
-        "protocol": "pm-v1.5-full-sweep-gate-v2",
+        "protocol": "pm-v1.5-full-sweep-gate-v3",
         "status": "PASS",
         "scope": "full",
         "human_calibration_performed": False,
-        "automated_review_report_sha256": "a" * 64,
-        "automated_review_attestation_sha256": "b" * 64,
         "actual_corpus_review_report_sha256": "c" * 64,
         "actual_corpus_review_attestation_sha256": "d" * 64,
         "step0_shortcut_audit_report_sha256": "e" * 64,
         "step0_shortcut_audit_attestation_sha256": "f" * 64,
     }
+    pm_v1_5_config_for_fixture = load_config(ROOT / "configs" / "pm_v1_5.yaml")
+    fixture_supporter_contract = SupporterGenerationContract.from_config(
+        pm_v1_5_config_for_fixture
+    )
+    fixture_generator_endpoint = endpoint_from_config(
+        load_config(ROOT / "configs" / "experiment.yaml"),
+        fixture_supporter_contract.generator_endpoint,
+    )
+    fixture_generator_endpoint_sha256 = sha256_text(
+        canonical_json(
+            {
+                "model": fixture_generator_endpoint.model,
+                "family": fixture_generator_endpoint.family,
+                "base_url": fixture_generator_endpoint.base_url,
+            }
+        )
+    )
+    fixture_retrieval = pm_v1_5_config_for_fixture["retrieval"]
+    fixture_response_mechanism_contract = build_response_mechanism_contract(
+        project_root=ROOT,
+        supporter_generation_contract=fixture_supporter_contract,
+        generator_endpoint_sha256=fixture_generator_endpoint_sha256,
+        strategy_bank_sha256=sha256_file(
+            ROOT / "data" / "strategy" / "strategy_cards_v1_5.jsonl"
+        ),
+        memory_min_score=fixture_retrieval["memory_min_score"],
+        strategy_min_score=fixture_retrieval["strategy_min_score"],
+        strategy_top_k=fixture_retrieval["strategy_top_k"],
+        evidence_filter_enabled=False,
+    )
     sweep_bindings = {
         "scope": "full",
         "pm_v2_config_sha256": sha256_file(
@@ -533,6 +698,7 @@ def _build_freeze(workdir: Path, monkeypatch, *, pm_checkpoint_content: str = "p
         "evidence_filter_model": {"mode": "disabled_for_pm_v1_5"},
         "semantic_sanity": semantic_review,
         "v1_5_full_sweep_gate": full_sweep_gate,
+        "response_mechanism_contract": fixture_response_mechanism_contract,
     }
     sweep_summary = workdir / "sweep_summary.json"
     write_json(
@@ -638,6 +804,13 @@ def _build_freeze(workdir: Path, monkeypatch, *, pm_checkpoint_content: str = "p
         parameters={"track": "pm-v1.5"},
     )
     fixed_tracks, fixed_tracks_attestation = _fixed_track_fixture(workdir)
+    esconv_fixture = _esconv_v1_5_freeze_fixture(
+        workdir,
+        pm_checkpoint=pm_checkpoint,
+        transparent_rule_checkpoint=transparent_rule_checkpoint,
+        training_report=training_report,
+        development_observable_support=development_observable_support,
+    )
     out = workdir / "pm_v1_5_study_freeze.json"
 
     argv = [
@@ -673,6 +846,14 @@ def _build_freeze(workdir: Path, monkeypatch, *, pm_checkpoint_content: str = "p
         "--judging-attestation", str(judging_attestation),
         "--decision-quality-report", str(decision_quality_report),
         "--decision-quality-attestation", str(decision_quality_attestation),
+        "--esconv-build-report", str(esconv_fixture["build_report"]),
+        "--esconv-runtime-states", str(esconv_fixture["runtime_states"]),
+        "--esconv-pm-states", str(esconv_fixture["pm_v2_states"]),
+        "--esconv-memory-backend", str(esconv_fixture["memory_backend"]),
+        "--esconv-audit-only", str(esconv_fixture["audit_only"]),
+        "--esconv-split-audit", str(esconv_fixture["split_audit"]),
+        "--esconv-policy-summary", str(esconv_fixture["policy_summary"]),
+        "--esconv-policy-choices", str(esconv_fixture["policy_choices"]),
         "--out", str(out),
     ]
     monkeypatch.setattr(sys, "argv", argv)
@@ -728,6 +909,12 @@ def _reference_parameters(freeze: dict, *, checkpoint_sha256: str | None = None)
         "supporter_generation_treatment_sha256": generation[
             "supporter_generation_treatment_sha256"
         ],
+        "evo_memory_builder_contract_sha256": generation[
+            "evo_memory_builder_contract_sha256"
+        ],
+        "evo_memory_global_catalog_sha256": generation[
+            "evo_memory_global_catalog_sha256"
+        ],
         "fixed_seeker_generation_treatment": generation[
             "fixed_seeker_generation_treatment"
         ],
@@ -775,6 +962,35 @@ def test_v1_5_freeze_creation_produces_well_formed_external_contract(workdir, mo
     notes = freeze["notes"]
     generation_contract = notes["generation_contract"]
     external_contract = notes["external_evaluation_contract"]
+    esconv_binding = notes["esconv_external_binding"]
+
+    assert esconv_binding["status"] == "PASS"
+    assert esconv_binding["test_dialogues"] == 169
+    assert esconv_binding["test_turns"] == 2112
+    assert esconv_binding["same_checkpoint_sha256"] == sha256_file(
+        checkpoints["pm_checkpoint"]
+    )
+    assert esconv_binding["external_outcomes_used_for_tuning"] is False
+
+    esconv_generation_contract = notes["esconv_generation_contract"]
+    assert esconv_generation_contract["protocol"] == (
+        "pm-v1.5-esconv-action-first-generation-contract-v1"
+    )
+    assert esconv_generation_contract["legal_actions"] == ["M0+R0", "M0+RS"]
+    assert esconv_generation_contract["expected_state_count"] == 2112
+    # Action-first: exactly 2 legal actions per state, never one generation
+    # per policy condition (which would wrongly be 2112 * 4 = 8448).
+    assert esconv_generation_contract["expected_logical_action_outcomes"] == (
+        2112 * 2
+    )
+    assert esconv_generation_contract["audit_only_referenced"] is False
+    # The ESConv contract reuses the exact same response_mechanism_contract
+    # object already bound to the internal sweep and EvoEmo external
+    # generation -- not a separately-built one that merely happens to match.
+    assert (
+        esconv_generation_contract["response_mechanism_contract"]
+        == generation_contract["response_mechanism_contract"]
+    )
 
     assert notes["retrieval_consistency"] == {
         "status": "PASS",
@@ -853,8 +1069,6 @@ def test_v1_5_freeze_creation_produces_well_formed_external_contract(workdir, mo
     assert smoke["unit"] == sorted(external_contract["excluded_units"])[0]
     assert external_contract["forced_swap"]["sample_units"] == 12
 
-    from metacom_pm.io import sha256_file
-
     assert generation_contract["policy_checkpoint_sha256"] == sha256_file(checkpoints["pm_checkpoint"])
     assert generation_contract["policy_training_report_sha256"] == sha256_file(checkpoints["training_report"])
     assert generation_contract["post_generation_policy_tuning_prohibited"] is True
@@ -891,6 +1105,141 @@ def test_v1_5_freeze_rejects_development_external_retrieval_drift():
         module.require_v1_5_retrieval_consistency(config)
 
 
+def _response_mechanism_base_kwargs() -> dict:
+    pm_v1_5_config = load_config(ROOT / "configs" / "pm_v1_5.yaml")
+    supporter_contract = SupporterGenerationContract.from_config(pm_v1_5_config)
+    retrieval = pm_v1_5_config["retrieval"]
+    return {
+        "project_root": ROOT,
+        "supporter_generation_contract": supporter_contract,
+        "generator_endpoint_sha256": "a" * 64,
+        "strategy_bank_sha256": "b" * 64,
+        "memory_min_score": retrieval["memory_min_score"],
+        "strategy_min_score": retrieval["strategy_min_score"],
+        "strategy_top_k": retrieval["strategy_top_k"],
+        "evidence_filter_enabled": False,
+    }
+
+
+@pytest.mark.parametrize(
+    "override,expected_match",
+    [
+        (
+            {"generator_endpoint_sha256": "c" * 64},
+            "generator endpoint differs",
+        ),  # model
+        (
+            {"strategy_bank_sha256": "d" * 64},
+            "response mechanism contract",
+        ),  # Bank
+        ({"strategy_top_k": 99}, "response mechanism contract"),  # top-k
+        (
+            {"evidence_filter_enabled": True},
+            "response mechanism contract",
+        ),  # filter
+    ],
+)
+def test_require_v1_5_response_mechanism_consistency_fails_closed_on_drift(
+    override, expected_match
+):
+    module = _load_module(
+        "scripts/v1_5_create_freeze.py", "v1_5_response_mechanism_drift_test"
+    )
+    base_kwargs = _response_mechanism_base_kwargs()
+    freeze_contract = build_response_mechanism_contract(**base_kwargs)
+    sweep_contract = build_response_mechanism_contract(**{**base_kwargs, **override})
+    with pytest.raises(RuntimeError, match=expected_match):
+        module.require_v1_5_response_mechanism_consistency(
+            freeze_contract=freeze_contract, sweep_contract=sweep_contract
+        )
+
+
+@pytest.mark.parametrize(
+    "relative_path",
+    [
+        "src/metacom_pm/prompts.py",  # prompt
+        "src/metacom_pm/retrieval.py",  # query builder
+    ],
+)
+def test_require_v1_5_response_mechanism_consistency_fails_closed_on_code_drift(
+    tmp_path, relative_path
+):
+    import shutil
+
+    from metacom_pm.response_mechanism_contract import MECHANISM_CODE_RELATIVE_PATHS
+
+    module = _load_module(
+        "scripts/v1_5_create_freeze.py", "v1_5_response_mechanism_code_drift_test"
+    )
+    fake_root = tmp_path / "project"
+    (fake_root / "src" / "metacom_pm").mkdir(parents=True)
+    for relative in MECHANISM_CODE_RELATIVE_PATHS:
+        dest = fake_root / relative
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, dest)
+
+    base_kwargs = {**_response_mechanism_base_kwargs(), "project_root": fake_root}
+    freeze_contract = build_response_mechanism_contract(**base_kwargs)
+
+    perturbed_path = fake_root / relative_path
+    perturbed_path.write_text(
+        perturbed_path.read_text(encoding="utf-8") + "\n# perturbed\n",
+        encoding="utf-8",
+    )
+    sweep_contract = build_response_mechanism_contract(**base_kwargs)
+    with pytest.raises(RuntimeError, match="response mechanism contract"):
+        module.require_v1_5_response_mechanism_consistency(
+            freeze_contract=freeze_contract, sweep_contract=sweep_contract
+        )
+
+
+def test_esconv_generation_contract_expected_keys_change_with_legal_actions_or_states(
+    tmp_path,
+):
+    module = _load_module(
+        "scripts/v1_5_create_freeze.py", "v1_5_esconv_generation_contract_test"
+    )
+    states_path = tmp_path / "runtime_states.jsonl"
+    write_jsonl(
+        states_path,
+        ({"card_id": f"card_{i}"} for i in range(5)),
+    )
+    choices_path = tmp_path / "policy_choices.jsonl"
+    write_jsonl(choices_path, [{"dummy": 1}])
+    base_kwargs = dict(
+        response_mechanism_contract={"contract_sha256": "a" * 64},
+        runtime_states_path=states_path,
+        policy_choices_path=choices_path,
+        legal_actions=("M0+R0", "M0+RS"),
+    )
+    baseline = module.build_v1_5_esconv_generation_contract(**base_kwargs)
+    assert baseline["expected_state_count"] == 5
+    assert baseline["expected_logical_action_outcomes"] == 10
+
+    fewer_actions = module.build_v1_5_esconv_generation_contract(
+        **{**base_kwargs, "legal_actions": ("M0+R0",)}
+    )
+    assert fewer_actions["expected_logical_action_outcomes"] == 5
+    assert (
+        fewer_actions["expected_action_keys_sha256"]
+        != baseline["expected_action_keys_sha256"]
+    )
+
+    more_states_path = tmp_path / "runtime_states_more.jsonl"
+    write_jsonl(
+        more_states_path,
+        ({"card_id": f"card_{i}"} for i in range(6)),
+    )
+    more_states = module.build_v1_5_esconv_generation_contract(
+        **{**base_kwargs, "runtime_states_path": more_states_path}
+    )
+    assert more_states["expected_state_count"] == 6
+    assert (
+        more_states["expected_action_keys_sha256"]
+        != baseline["expected_action_keys_sha256"]
+    )
+
+
 def test_v1_5_external_generation_defaults_are_condition_isolated():
     module = _load_module(
         "scripts/v1_5/24_run_pm_v2_evoemo_v1_5.py",
@@ -924,19 +1273,15 @@ def test_v1_5_judging_requires_honest_full_sweep_binding():
         "scripts/v1_5/21_judge_pm_v2_action_sweep_v1_5.py",
         "v1_5_full_sweep_binding",
     )
-    report_sha = "a" * 64
-    attestation_sha = "b" * 64
     actual_report_sha = "c" * 64
     actual_attestation_sha = "d" * 64
     shortcut_report_sha = "e" * 64
     shortcut_attestation_sha = "f" * 64
     gate = {
-        "protocol": "pm-v1.5-full-sweep-gate-v2",
+        "protocol": "pm-v1.5-full-sweep-gate-v3",
         "status": "PASS",
         "scope": "full",
         "human_calibration_performed": False,
-        "automated_review_attestation_sha256": attestation_sha,
-        "automated_review_report_sha256": report_sha,
         "actual_corpus_review_attestation_sha256": actual_attestation_sha,
         "actual_corpus_review_report_sha256": actual_report_sha,
         "step0_shortcut_audit_report_sha256": shortcut_report_sha,
@@ -945,8 +1290,6 @@ def test_v1_5_judging_requires_honest_full_sweep_binding():
     chain = {"contract_bindings": {"scope": "full", "v1_5_full_sweep_gate": gate}}
     assert module.require_v1_5_full_sweep_binding(
         chain,
-        automated_review_report_sha256=report_sha,
-        automated_review_attestation_sha256=attestation_sha,
         actual_corpus_review_report_sha256=actual_report_sha,
         actual_corpus_review_attestation_sha256=actual_attestation_sha,
         step0_shortcut_audit_report_sha256=shortcut_report_sha,
@@ -962,8 +1305,6 @@ def test_v1_5_judging_requires_honest_full_sweep_binding():
     with pytest.raises(RuntimeError, match="exact PM-v1.5 full matrix"):
         module.require_v1_5_full_sweep_binding(
             stale,
-            automated_review_report_sha256=report_sha,
-            automated_review_attestation_sha256=attestation_sha,
             actual_corpus_review_report_sha256=actual_report_sha,
             actual_corpus_review_attestation_sha256=actual_attestation_sha,
             step0_shortcut_audit_report_sha256=shortcut_report_sha,
@@ -1040,6 +1381,61 @@ def test_v1_5_external_eval_rejects_stale_supporter_treatment(workdir, monkeypat
     ]
     monkeypatch.setattr(sys, "argv", argv)
     with pytest.raises(RuntimeError, match="violates frozen supporter_generation_treatment_sha256"):
+        module.main()
+
+
+def test_v1_5_external_eval_rejects_stale_evo_memory_catalog(workdir, monkeypatch):
+    # Guards the checkpoint added to close the gap where a memory-builder
+    # change after the freeze (chunking, splitting, id scheme) could
+    # otherwise slip past external evaluation undetected: evoemo_sha256
+    # alone only pins the raw input file, not what build_evo_memory
+    # actually constructs from it.
+    out, checkpoints = _build_freeze(workdir, monkeypatch)
+    freeze = json.loads(out.read_text(encoding="utf-8"))
+    freeze_sha = freeze["freeze_sha256"]
+    generation_contract = freeze["notes"]["generation_contract"]
+
+    parameters = {
+        "condition": "pm_v2",
+        "supporter_generation_treatment": generation_contract["supporter_generation_treatment"],
+        "supporter_generation_treatment_sha256": generation_contract[
+            "supporter_generation_treatment_sha256"
+        ],
+        "evo_memory_builder_contract_sha256": "0" * 64,  # tampered
+        "evo_memory_global_catalog_sha256": generation_contract[
+            "evo_memory_global_catalog_sha256"
+        ],
+        "fixed_seeker_generation_treatment": generation_contract["fixed_seeker_generation_treatment"],
+        "fixed_seeker_generation_treatment_sha256": generation_contract[
+            "fixed_seeker_generation_treatment_sha256"
+        ],
+        "simulator_id": generation_contract["simulator_id"],
+        "max_turns": generation_contract["max_turns"],
+        "seeds": generation_contract["seeds"],
+        "evaluation_unit_contract": generation_contract["evaluation_unit_contract"],
+    }
+    turns_path, attestation_path = _fake_generation_artifact(
+        workdir,
+        "pm_v2",
+        stage="evoemo_pm_v2_generation",
+        parameters=parameters,
+        study_freeze_sha256=freeze_sha,
+    )
+
+    module = _load_module(
+        "scripts/v1_5/25_eval_pm_v2_external_v1_5.py", "v1_5_external_eval_test_evo_memory"
+    )
+    argv = [
+        "25_eval_pm_v2_external_v1_5.py",
+        "--dry-run",
+        "--freeze", str(out),
+        "--turn-paths", str(turns_path),
+        "--generation-attestations", str(attestation_path),
+        "--policy-checkpoint", str(checkpoints["pm_checkpoint"]),
+        "--policy-training-report", str(checkpoints["training_report"]),
+    ]
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(RuntimeError, match="violates frozen evo_memory_builder_contract_sha256"):
         module.main()
 
 
@@ -1408,6 +1804,12 @@ def test_v1_5_external_eval_happy_path_reaches_shared_dry_runner(workdir, monkey
                 "supporter_generation_treatment_sha256": generation[
                     "supporter_generation_treatment_sha256"
                 ],
+                "evo_memory_builder_contract_sha256": generation[
+                    "evo_memory_builder_contract_sha256"
+                ],
+                "evo_memory_global_catalog_sha256": generation[
+                    "evo_memory_global_catalog_sha256"
+                ],
                 "fixed_seeker_generation_treatment": generation[
                     "fixed_seeker_generation_treatment"
                 ],
@@ -1524,3 +1926,138 @@ def test_v1_5_external_eval_happy_path_reaches_shared_dry_runner(workdir, monkey
     assert len(calls) == 1
     assert calls[0]["conditions"] == external["conditions"]
     assert set(calls[0]["expected_units"]).isdisjoint(excluded)
+
+
+def _pre_v3_fixed_seeker_bundle(workdir: Path) -> tuple[Path, Path]:
+    """A bare, pre-V3-migration-named bundle: content is irrelevant, since
+
+    every migrated consumer's directory-name check fires before either file
+    is actually read.
+    """
+
+    old_style_dir = workdir / "evoemo_fixed_tracks_v1_5"
+    old_style_dir.mkdir(parents=True)
+    fixed_tracks = old_style_dir / "fixed_seeker_tracks.jsonl"
+    fixed_tracks.touch()
+    fixed_tracks_attestation = old_style_dir / "artifact_attestation.json"
+    fixed_tracks_attestation.touch()
+    return fixed_tracks, fixed_tracks_attestation
+
+
+def test_v1_5_freeze_rejects_pre_v3_fixed_seeker_bundle_directory_name(
+    workdir, monkeypatch
+):
+    """Reverse-direction check for the fixed-seeker V3 atomic migration:
+
+    scripts/v1_5_create_freeze.py must now refuse the historical bare
+    outputs/evoemo_fixed_tracks_v1_5 bundle name it used to require, not
+    silently keep accepting it alongside the new V3 name.
+    """
+
+    module = _load_module(
+        "scripts/v1_5_create_freeze.py", "v1_5_create_freeze_reverse_test"
+    )
+    fixed_tracks, fixed_tracks_attestation = _pre_v3_fixed_seeker_bundle(workdir)
+    placeholder = lambda name: str(workdir / name)  # noqa: E731
+    argv = [
+        "v1_5_create_freeze.py",
+        "--fixed-tracks", str(fixed_tracks),
+        "--fixed-tracks-attestation", str(fixed_tracks_attestation),
+        "--pm-checkpoint", placeholder("pm.joblib"),
+        "--pm-training-report", placeholder("training_report.json"),
+        "--candidate-manifest", placeholder("candidate_manifest.json"),
+        "--internal-consumption-ledger", placeholder("consumption_ledger.jsonl"),
+        "--transparent-rule-checkpoint", placeholder("transparent_rule.joblib"),
+        "--no-step0-checkpoint", placeholder("no_step0.joblib"),
+        "--no-state-bge-checkpoint", placeholder("no_state_bge.joblib"),
+        "--lexical-only-checkpoint", placeholder("lexical_only.joblib"),
+        "--cost-matched-fixed-checkpoint", placeholder("cost_matched_fixed.joblib"),
+        "--me-r0-fixed-checkpoint", placeholder("me_r0_fixed.joblib"),
+        "--out", placeholder("study_freeze.json"),
+    ]
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(
+        RuntimeError, match="evoemo_fixed_tracks_v1_5_v3_formal_candidate"
+    ):
+        module.main()
+
+
+def test_v1_5_evoemo_generation_rejects_pre_v3_fixed_seeker_bundle_directory_name(
+    workdir, monkeypatch
+):
+    """Same reverse-direction check for scripts/v1_5/24_run_pm_v2_evoemo_v1_5.py."""
+
+    module = _load_module(
+        "scripts/v1_5/24_run_pm_v2_evoemo_v1_5.py",
+        "v1_5_24_run_pm_v2_evoemo_reverse_test",
+    )
+    fixed_tracks, fixed_tracks_attestation = _pre_v3_fixed_seeker_bundle(workdir)
+    argv = [
+        "24_run_pm_v2_evoemo_v1_5.py",
+        "--dry-run",
+        "--fixed-tracks", str(fixed_tracks),
+        "--fixed-tracks-attestation", str(fixed_tracks_attestation),
+    ]
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(
+        RuntimeError, match="evoemo_fixed_tracks_v1_5_v3_formal_candidate"
+    ):
+        module.main()
+
+
+def test_v1_5_reference_baselines_rejects_pre_v3_fixed_seeker_bundle_directory_name(
+    workdir, monkeypatch
+):
+    """Same reverse-direction check for
+
+    scripts/v1_5/24a_run_pmv22_reference_baselines_v1_5.py.
+    """
+
+    module = _load_module(
+        "scripts/v1_5/24a_run_pmv22_reference_baselines_v1_5.py",
+        "v1_5_24a_run_pmv22_reference_baselines_reverse_test",
+    )
+    fixed_tracks, fixed_tracks_attestation = _pre_v3_fixed_seeker_bundle(workdir)
+    argv = [
+        "24a_run_pmv22_reference_baselines_v1_5.py",
+        "--dry-run",
+        "--fixed-tracks", str(fixed_tracks),
+        "--fixed-tracks-attestation", str(fixed_tracks_attestation),
+    ]
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(
+        RuntimeError, match="evoemo_fixed_tracks_v1_5_v3_formal_candidate"
+    ):
+        module.main()
+
+
+def test_run_pmv2_fixed_evoemo_rejects_an_unsupported_fixed_seeker_stage_value():
+    """Reverse-direction check for the shared runner's new
+
+    fixed_seeker_required_stage parameter (pm_v2_evoemo.run_pmv2_fixed_evoemo):
+    only the two known stages may ever be requested, never an arbitrary or
+    mistyped string that could silently accept anything.
+    """
+
+    from metacom_pm.pm_v2_evoemo import run_pmv2_fixed_evoemo
+
+    with pytest.raises(ValueError, match="unsupported fixed-seeker required stage"):
+        run_pmv2_fixed_evoemo(
+            "evoemo.json",
+            "strategy.jsonl",
+            "checkpoint.joblib",
+            "fixed_tracks.jsonl",
+            "out_dir",
+            project_root=ROOT,
+            generator_endpoint=None,
+            supporter_generation_contract=None,
+            fixed_seeker_generation_contract={},
+            fixed_seeker_generation_contract_sha256="",
+            simulator_id="sim",
+            fixed_seeker_required_stage="not_a_real_stage",
+            evaluation_unit_contract={},
+            action_preflight_gates={},
+            maximum_cost_matched_relative_deviation=0.1,
+            input_usd_per_mtok=0.15,
+            output_usd_per_mtok=0.60,
+        )

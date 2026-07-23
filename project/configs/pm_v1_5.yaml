@@ -55,8 +55,12 @@ execution_release:
   protocol: pm-v1.5-central-paid-run-release-v1
   # The code/config revision is released for final dry-run identity creation,
   # but no paid call is authorized unless the separate approval manifest is
-  # APPROVED and binds the exact stage identity.  Its approval map remains empty
-  # while the final post-release dry run is being reviewed.
+  # APPROVED and binds the exact stage identity. V8.11.1 has now been consumed
+  # and passed 9/9 with zero fallback; its identity is permanently closed. The
+  # first formal identity then exposed a deterministic 162>160 character MS
+  # decoy bug after nine successful calls and is also closed. The next possible
+  # paid stage is a fresh V8.12 compatibility pilot for the repaired compiler;
+  # the approval map remains empty until that exact dry-run is reviewed.
   status: PAID_RUN_RELEASED
   release_revision: pm-v1.5_1
   approval_manifest: outputs/pm_v1_5_paid_run_release.json
@@ -88,8 +92,11 @@ api_cost_planning:
 # Operators must not need hidden CLI flags to reproduce the reviewed identity;
 # conflicting CLI overrides are rejected.
 generation_compatibility_pilot_budget:
-  max_api_calls: 18
-  max_estimated_usd: 0.018
+  # Nine cases × (initial + one content repair) × at most three separately
+  # ledgered transport attempts. A 5xx/429/timeout never consumes the one
+  # semantic repair; 4xx and deterministic local failures remain terminal.
+  max_api_calls: 54
+  max_estimated_usd: 0.054
   max_input_tokens_per_call: 4000
 
 action_space:
@@ -117,7 +124,7 @@ supporter_generation_treatment:
 # cap.  The 300-token cap prevents the old track's instruction from becoming a
 # near-universal forced truncation mechanism.
 fixed_seeker_generation_treatment:
-  version: pm-v2.2-fixed-seeker-generation-v1
+  version: pm-v2.2-fixed-seeker-generation-v2
   seeker_endpoint: seeker
   system_prompt_id: evoemo-fixed-seeker-v1
   system_prompt_template_sha256: a9138eaf46b46e8f10c89774a9ef51189b5807391a0882dff58c287a4c54eeac
@@ -127,7 +134,16 @@ fixed_seeker_generation_treatment:
   output_normalization: normalize_space_v1
   finish_reason_protocol: pm-v2-finish-reason-v1
   accepted_normalized_finish_reasons: [complete]
-  maximum_physical_attempts_per_logical_call: 1
+  # v1 permitted exactly one physical attempt per logical call; a real run
+  # crashed after 5/1020 calls on a single plain ReadTimeout, because a
+  # 1,020-call matrix against a third-party-hosted (NVIDIA NIM) endpoint is
+  # at least as likely to hit a transient failure as automated_semantic_review
+  # (10) or actual_corpus_semantic_audit (6), and got none. v2 retries only
+  # transport failures (408/429/5xx/network timeout) up to this budget via
+  # bounded_retry.py's execute_with_bounded_retry; a content-gate rejection
+  # (finish_reason != complete, empty text, usage anomaly) still fails closed
+  # on its first attempt, never retried.
+  maximum_physical_attempts_per_logical_call: 10
   seed_protocol: base-seed-plus-turn-index-v1
   elicitation_scaffold_protocol: deterministic-generic-open-loop-v1
 
@@ -159,16 +175,35 @@ data_generation:
   calibration_users: 12
   internal_test_users: 16
   cases_per_user: 9
-  # Every case has one initial surface call and at most one separately seeded,
-  # pre-budgeted repair after schema/topic/structure lint failure. A success
-  # stops the case immediately; no third call or hidden client retry is allowed.
+  observable_state_support:
+    protocol: pm-v1.5-development-external-observable-state-support-v1
+    history_turn_targets: [2, 4, 6, 8]
+    history_assignment: formal_user_case_counterbalanced_without_outcomes
+    summary_treatments: [present, absent]
+    summary_assignment: history_stratified_four_user_block_counterbalance
+    current_user_style_source: nonoverlap_esconv_train_seed_inspiration_only
+    evoemo_instance_text_or_outcomes_used: false
+  current_user_text_diversity:
+    protocol: pm-v1.5-controlled-counterfactual-current-text-v1
+    allowed_duplicate_scope: same_user_same_semantic_family_same_split_only
+    maximum_duplicate_group_size: 2
+    maximum_duplicate_pairs_per_nine_case_bundle: 2
+    minimum_unique_texts_per_nine_case_bundle: 7
+    cross_user_duplicate_forbidden: true
+    cross_family_duplicate_forbidden: true
+    cross_split_duplicate_forbidden: true
+    synthetic_nonce_or_case_marker_forbidden: true
+  # Every case has one initial content attempt and at most one separately
+  # seeded, pre-budgeted content repair after schema/topic/structure failure.
+  # Each content attempt has three independent, ledger-visible physical slots
+  # for transient transport failures; transport retries never consume the one
+  # content repair and the provider client itself still receives retries=1.
   max_generation_attempts: 2
-  compatibility_pilot_semantic_review:
-    protocol: pm-v2-generation-pilot-semantic-review-v1-two-independent-all-affirmative
-    required_before_full_generation: true
-    minimum_annotators: 2
-    required_all_affirmative: true
-    cases: 9
+  semantic_validation_sequence:
+    protocol: pm-v1.5-generate-then-actual-structured-qa-v1
+    compatibility_pilot_checks_transport_schema_structure: true
+    pre_generation_v4_review_authorizes_formal_generation: false
+    actual_468_structured_qa_required_before_action_sweep: true
   required_regimes:
     - context_only
     - profile_needed
@@ -179,6 +214,23 @@ data_generation:
     - strategy_helpful
     - strategy_harmful
     - ambiguous
+
+# Formal execution resilience is intentionally outside ``data_generation``.
+# The successful V8.11.1 pilot attests provider-visible generation semantics;
+# these fields govern only how the same frozen content attempt is retried and
+# budgeted over a much larger 468-call run. Keeping the execution envelope
+# separate prevents an execution-only hardening from falsely rewriting the
+# already-passed pilot's prompt/schema/config projection.
+formal_generation_execution:
+  transport_retry:
+    protocol: pm-v1.5-bounded-retry-v4-independent-transport-format
+    maximum_physical_attempts_per_content_attempt: 3
+    transport_backoff_seconds: [10, 30]
+    retryable_classes: [http_5xx, network_timeout, rate_limited_429, request_timeout_408]
+  budget_limits:
+    max_api_calls: 2808
+    max_estimated_usd: 3.0
+    max_input_tokens_per_call: 12000
 
 quality_composite:
   version: pmv2-quality-v2
@@ -359,6 +411,86 @@ semantic_diagnostics:
   current_user_text_truncation_must_be_zero: true
   implicit_visible_state_truncation_must_be_zero: true
   development_external_centroid_scale_comparison_required: true
+  development_external_observable_state_support_required: true
+
+# Co-primary single-session external test.  This is the expanded 1,300-dialogue
+# ESConv release under our already-frozen custom dialogue-level split; it is not
+# relabeled as the official split of the original 1,053-dialogue corpus.
+esconv_external_evaluation:
+  protocol: pm-v1.5-esconv-single-session-same-checkpoint-adapter-v1
+  split_protocol: pm-v1.5-esconv-expanded1300-custom-hash-70-15-15-dialogue-level-v1
+  corpus_release: expanded_1300_dialogues
+  split_is_official_original_1053_release: false
+  split_seed: 13
+  nominal_split: {train: 0.70, validation: 0.15, test: 0.15}
+  raw_dialogue_counts: {train: 934, validation: 186, test: 180}
+  nonoverlap_dialogue_counts: {train: 875, validation: 172, test: 169}
+  unit_of_split: dialogue
+  turn_selection_protocol: pm-v1.5-esconv-all-support-eligible-turns-recent-even-window-v1
+  raw_test_supporter_turns: 2275
+  excluded_history_below_two_turns: 163
+  expected_primary_states: 2112
+  primary_turn_selection: all_test_supporter_turns_with_at_least_two_prior_history_turns
+  history_window_rule: largest_recent_window_in_[2,4,6,8]_not_exceeding_observed_history
+  turn_selection_uses_response_strategy_or_judge_outcomes: false
+  primary_bootstrap_cluster: dialogue_id
+  checkpoint_policy: same_frozen_pm_v1_5_no_retraining_or_retuning
+  legal_actions: [M0+R0, M0+RS]
+  primary_conditions:
+    - learned_pm
+    - transparent_rule_same_step0
+    - always_r0
+    - always_rs
+  primary_estimand: immediate_response_quality_strategy_cost_tradeoff
+  quality_role: co_primary_external_outcome
+  memory_role: structural_unavailability_and_false-memory_guardrail_only
+  primary_success_rule:
+    quality_noninferior_to_both_always_r0_and_always_rs: true
+    quality_noninferiority_margin_normalized: 0.02
+    strategy_cost_or_input_tokens_strictly_lower_than_always_rs: true
+    learned_vs_transparent_rule_utility_reported: true
+  guardrails:
+    unsupported_personal_memory_claim_rate_nonincrease: true
+    severe_ood_fallback_reported_separately: true
+    automatic_overlap_metrics_appendix_only: true
+  forbidden:
+    - esconv_test_outcomes_for_model_or_threshold_selection
+    - claim_of_long_term_memory_capability_from_esconv
+    - pooling_esconv_and_evoemo_into_one_score
+    - calling_the_custom_expanded_split_the_official_original_split
+
+# Auxiliary training/calibration/internal-test support: gives the SAME PM
+# real exposure to "no cross-session memory, choose only between M0+R0 and
+# M0+RS" states, using the 52 ESConv dialogues already used to seed the 52
+# synthetic development users (scripts/v1_5/20_generate_pm_v2_development_data_v1_5.py's
+# seeds[global_index % len(seeds)]) -- and only those 52.  These 52 are, by
+# construction, instance-disjoint from the Strategy Bank's 823 source
+# dialogues (require_instance_disjoint_seed_strategy_sources), so retrieval
+# against these auxiliary states can never surface a card derived from the
+# state's own dialogue.  Selection is deterministic and outcome-free (first
+# eligible train sources in manifest order, NOT a random sample -- disclose
+# accordingly, never as "randomly sampled representative ESConv training
+# set").  The held-out 169-dialogue ESConv test split is untouched by this
+# block and never read by the auxiliary builder.
+esconv_auxiliary_training:
+  protocol: pm-v1.5-esconv-auxiliary-bank-disjoint-seed-training-support-v1
+  semantic_family: esconv_auxiliary_strategy_routing
+  legal_actions: [M0+R0, M0+RS]
+  seed_dialogue_count: 52
+  sample_selection_rule: first_eligible_train_sources_in_manifest_order
+  sample_selection_is_outcome_free_deterministic_not_random: true
+  bank_disjoint: true
+  strategy_bank_source_dialogue_overlap_count: 0
+  split_dialogue_counts: {train: 24, calibration: 12, internal_test: 16}
+  expected_state_counts: {train: 318, calibration: 170, internal_test: 231}
+  expected_total_states: 719
+  excluded_history_below_two_count: 60
+  turn_selection_protocol: pm-v1.5-esconv-all-support-eligible-turns-recent-even-window-v1
+  turn_selection_uses_response_strategy_or_judge_outcomes: false
+  forbidden:
+    - using_esconv_test_dialogues_for_auxiliary_training
+    - randomly_resampling_the_52_seed_dialogues
+    - equal_per_state_weighting_against_the_216_longitudinal_train_states
 
 pre_training_rule_grid_diagnostic:
   protocol: pm-v1.5-transparent-rule-grid-diagnostic-v1
@@ -536,11 +668,14 @@ semantic_sanity_audit:
   minimum_affirmative_rate_per_split: 0.80
   minimum_affirmative_rate_per_family: 0.80
 
-# Frozen pre-generation 27-case calibration matrix and exact judge aliases.
-# Every one of the 12 rubric dimensions has two deterministic, natural-language
-# corruptions. The runner rejects any CLI seed, panel, or matrix that differs.
+# Historical V4 calibration contract. Its paid result failed the control gate
+# and is permanently calibration-only; it cannot authorize formal generation,
+# training, or a paper result. The exact fields remain frozen so the historical
+# artifact stays interpretable and cannot be rewritten after observation.
 automated_semantic_review:
   protocol: pm-v1.5-automated-semantic-review-v4-native-gemini-deterministic27-plus-paid9
+  status: CONSUMED_FAILED_CLOSED_CALIBRATION_ONLY
+  formal_authorization: false
   control_protocol: pm-v1.5-pilot-controls-v2
   judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_flash]
   control_seed: 20260716
@@ -559,32 +694,131 @@ automated_semantic_review:
     - advice_readiness_match
     - surface_naturalness_match
 
-# Paid response generation is forbidden until every one of the actual 468
-# generated states passes the same dual-family 12-field semantic rubric. The
-# internal split permits no deterministic surface fallback; train/calibration
-# tolerate at most one case only as an explicit fail-closed ceiling.
-actual_corpus_semantic_audit:
-  protocol: pm-v1.5-actual-468-semantic-review-v2
-  control_protocol: pm-v1.5-actual-corpus-controls-v2
-  control_seed: 20260716
-  controls_per_field: 2
-  required_control_fields:
-    - semantic_family_match
-    - regime_match
-    - memory_sources_marginal_value_match
-    - memory_item_utility_match
+# Calibration-only balanced proxy-measurement diagnostic for the consumed V4
+# material. Source metadata, arithmetic, dialogue structure, and explicit
+# generation-leakage markers are code truths. Only context grounding and
+# advice readiness go to the two judge families, each as a matched
+# positive/negative pair with exhaustive evidence. It does not authorize V5,
+# PM training, formal generation, or any real-user-understanding claim.
+v4_root_cause_single_field_diagnostic:
+  protocol: pm-v1.5-balanced-proxy-measurement-runner-v4.2-first-paper-scoped
+  stage: development_v4_root_cause_single_field_diagnostic
+  status: CALIBRATION_DIAGNOSTIC_ONLY_NOT_FORMAL_GATE
+  judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_flash]
+  diagnostic_fields:
     - source_type_match
     - dialogue_temporal_order_match
     - context_grounding_match
     - memory_age_design_match
-    - strategy_resource_need_match
-    - strategy_item_utility_match
     - advice_readiness_match
     - surface_naturalness_match
+  semantic_fields:
+    - context_grounding_match
+    - advice_readiness_match
+  deterministic_fields:
+    - source_type_match
+    - dialogue_temporal_order_match
+    - memory_age_design_match
+    - surface_naturalness_match
+  diagnostic_polarities: [positive, negative]
+  semantic_protocol: ATOMIC_DEFINITION_AND_EXHAUSTIVE_EVIDENCE
+  temperature: 0.0
+  seed: 29
+  max_output_tokens: 300
+  # Transport availability and model-surface conformance are separate. A 503
+  # never consumes the two malformed-output observations, and one unavailable
+  # endpoint cannot abort the remaining frozen matrix.
+  maximum_physical_attempts_per_logical_call: 10
+  maximum_provider_output_failures_per_logical_call: 2
+  transport_backoff_seconds: [10, 30, 60, 120, 300, 300, 600, 600, 900]
+  pricing_usd_per_mtok:
+    input: 0.10
+    output: 0.40
+  budget_limits:
+    max_api_calls: 80
+    max_estimated_usd: 0.04
+    max_input_tokens_per_call: 4000
+
+# Paid response generation is forbidden until all 468 generated states pass
+# deterministic provenance/structure checks and the two atomic semantic claims
+# receive no unanimous rejection. Judge disagreement is retained and reported,
+# not silently converted into gold or used to tune/delete states. Citation
+# integrity is report-only. The remaining synthetic construction labels are not
+# claimed as independent semantic gold; their utility is tested in the blinded
+# action sweep. The internal split permits no deterministic surface fallback.
+actual_corpus_semantic_audit:
+  protocol: pm-v1.5-actual-468-structured-qa-v3
+  control_protocol: pm-v1.5-actual-corpus-semantic-controls-v3
+  control_seed: 20260716
+  controls_per_field: 2
+  deterministic_fields:
+    - source_type_match
+    - dialogue_temporal_order_match
+    - memory_age_design_match
+    - surface_naturalness_match
+  semantic_fields:
+    - context_grounding_match
+    - advice_readiness_match
+  derived_or_construction_fields:
+    - semantic_family_match
+    - regime_match
+    - memory_sources_marginal_value_match
+    - memory_item_utility_match
+    - strategy_resource_need_match
+    - strategy_item_utility_match
+  required_control_fields:
+    - context_grounding_match
+    - advice_readiness_match
   required_before_action_response_generation: true
   expected_states: 468
-  judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_flash]
-  required_all_fields_affirmative: true
+  # Switched from training_judge_deepseek_flash (NVIDIA-hosted) to
+  # training_judge_deepseek_official_flash (DeepSeek's own API) after this
+  # exact stage's third consecutive real crash from the NVIDIA endpoint's
+  # confirmed 40 RPM account cap (development_actual_corpus_semantic_review,
+  # 553/1880 succeeded before exhausting its retry budget on sustained 429s).
+  # v1_5_run_automated_semantic_review.py prices uniformly from CLI args, not
+  # per-family, so no pricing_usd_per_mtok change is needed here -- but a
+  # fresh dry-run/identity is required regardless of prior progress, since
+  # endpoint identity is part of every frozen contract hash.
+  judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_official_flash]
+  panel_policy: unanimous-reject-disagreement-retained-v1
+  citation_policy: report-only-not-outcome-v1
+  real_state_acceptance: no_unanimous_semantic_rejection
+  negative_control_acceptance: no_unanimous_semantic_miss
+  # A 1,880-call formal matrix is much more likely than an 8-call diagnostic
+  # to encounter a transient 5xx. The exact upper bound is costed in dry-run;
+  # malformed provider surfaces remain separately capped at two observations.
+  # Raised 6->10 after two real runs measured the NVIDIA-hosted deepseek
+  # endpoint's real physical-attempt failure rate at ~37% (vs ~3% for
+  # google_gemini) over several sustained hours, not a brief blip -- at that
+  # rate 6 attempts left a ~30% chance of at least one full-budget exhaustion
+  # across the ~1,500-call remaining batch; 10 cuts that to ~1%. Matches the
+  # budget already used by v4_root_cause_single_field_diagnostic.
+  maximum_physical_attempts_per_logical_call: 10
+  maximum_provider_output_failures_per_logical_call: 2
+  # Per-family override (mirrors development_judging's): deepseek_official's
+  # loose json_object mode has more format/empty-output noise than the
+  # strict-schema NVIDIA endpoint this stage used before, partly caused by
+  # an unrequested reasoning budget (now fixed via thinking_mode: disabled
+  # on the endpoint itself -- see experiment.yaml); 3 keeps one extra margin
+  # for genuine, provider-acknowledged occasional empty content beyond that
+  # fix. google_gemini falls back to maximum_provider_output_failures_per_
+  # logical_call above, unchanged.
+  maximum_provider_output_attempts_by_family:
+    deepseek_official: 3
+  # Real per-family rates (matches development_judging's), used instead of
+  # v1_5_run_automated_semantic_review.py's uniform CLI --input/output-usd-
+  # per-million-tokens price for this scope: google_gemini and deepseek_
+  # official have different real per-token prices, so one uniform number
+  # either over- or under-counts one family's real cost.
+  pricing_usd_per_mtok:
+    google_gemini:
+      input: 0.10
+      output: 0.40
+    deepseek_official:
+      input: 0.14
+      output: 0.28
+  transport_backoff_seconds: [10, 30, 60, 120, 300, 300, 600, 600, 900]
   maximum_provider_surface_fallback_rate_by_split:
     train: 0.005
     calibration: 0.01
@@ -596,17 +830,34 @@ development_judging:
   # gated by the automated semantic review and fails on the first unsuccessful
   # physical call. The compatibility_pilot block below is retained only so
   # shared parsers can read the config; V1.5 CLI branches reject its use.
-  judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_flash]
-  # Frozen per-family accounting. Gemini rates are the paid-tier list prices;
-  # the NVIDIA-hosted DeepSeek endpoint is credit-backed, so the hard API-call
-  # cap (rather than a fictitious token price) is its primary budget bound.
+  # Switched from training_judge_deepseek_flash (NVIDIA-hosted) to
+  # training_judge_deepseek_official_flash (DeepSeek's own API) after the
+  # NVIDIA-hosted endpoint's confirmed 40 RPM account cap crashed
+  # esconv_auxiliary_judging_pilot_train (retry-budget exhaustion on
+  # sustained 429s). Endpoint identity is part of every frozen contract hash,
+  # so any not-yet-consumed identity computed under the old endpoint is
+  # stale; a fresh dry-run is required regardless of prior progress.
+  judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_official_flash]
+  # Gemini rates are the paid-tier list prices. deepseek_official is
+  # DeepSeek's own real per-token pricing (api-docs.deepseek.com), using the
+  # conservative cache-miss input rate since cache-hit cannot be guaranteed.
   pricing_usd_per_mtok:
     google_gemini:
       input: 0.10
       output: 0.40
-    deepseek:
-      input: 0.0
-      output: 0.0
+    deepseek_official:
+      input: 0.14
+      output: 0.28
+  # Per-family, so switching one family's provider does not silently change
+  # another's retry behavior. deepseek_official's loose json_object mode has
+  # more format/empty-output noise than the strict-schema NVIDIA endpoint it
+  # replaced (partly caused by an unrequested reasoning budget, now fixed via
+  # thinking_mode: disabled on the endpoint itself -- see experiment.yaml);
+  # 3 keeps one extra margin of safety for genuine, provider-acknowledged
+  # occasional empty content beyond that fix. google_gemini is unchanged.
+  maximum_provider_output_attempts_by_family:
+    google_gemini: 2
+    deepseek_official: 3
   seed: 2701
   response_max_output_tokens: 600
   risk_max_output_tokens: 700

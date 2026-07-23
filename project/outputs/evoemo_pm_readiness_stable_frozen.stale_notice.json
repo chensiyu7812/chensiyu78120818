@@ -1,0 +1,28 @@
+{
+  "protocol": "pm-v1.5-stale-artifact-notice-v1",
+  "notice_created_utc": "2026-07-20T16:05:00Z",
+  "stale_files": [
+    {
+      "path": "outputs/evoemo_pm_readiness_stable_frozen.json",
+      "sha256": "89ebe9fbab556540e88a1e0670b933c24cb42a0d9ceac9c0972a98d93f402f1e"
+    }
+  ],
+  "old_memory_protocol": {
+    "descriptor": {
+      "protocol": "pm-v1.5-evo-memory-whole-session-me-implicit-v0",
+      "me_construction": "one_item_per_session_all_seeker_turns_concatenated_no_length_cap"
+    },
+    "description": "Retroactively assigned label and hash; no formal protocol or contract hash existed at the time these files were produced. ME construction was: one MemoryItem per session, built by concatenating every seeker dialogue turn in that session into a single unbounded-length string. builder_contract_sha256_retroactive is sha256(canonical_json(descriptor)) above, independently reproducible from the descriptor field.",
+    "builder_contract_sha256_retroactive": "9ec603028cceb522d1f3da7062962e6cdd3ed9d2d23dfca65d0d5a7dafecd964"
+  },
+  "new_memory_protocol": {
+    "protocol": "pm-v1.5-evo-memory-episode-chunked-v3",
+    "description": "build_evo_memory's ME construction now chunks each session's seeker turns into non-overlapping, in-order, length-bounded episode items with stable turn-span ids (60-token reporting target, 120-token true hard cap -- any turn alone over the cap is losslessly split on sentence/word/bounded-character-span boundaries into further uniquely-id'd sub-spans), instead of one whole-session item.",
+    "builder_contract_sha256": "ec4768cb3b52932a11838196c45e41868b85d321716e18e26e6c6d8961c6c6cb"
+  },
+  "reason": "This is a checked-in snapshot of scripts/15b_evoemo_pm_readiness.py's output (pm_action_distribution, safe_action_count_distribution, etc.), derived from make_evo_runtime_state()/_catalog() statistics over build_evo_memory()'s items. The chunked ME catalog changes count/age/token features that gate the PM's OOD/safe-action logic, so a fresh run under the current builder would very plausibly produce different distributions. No script or test regenerates or diffs it against a live run, so it would otherwise go silently stale.",
+  "historical_only": true,
+  "formal_pipeline_use_forbidden": true,
+  "current_pipeline_index_status": "No current-pipeline index or pointer in this repository resolves to this/these file path(s); they are referenced only from within the already-completed, self-contained 'policy_manager_35' study freeze chain (outputs/evoemo_selective/artifact_attestation.json, outputs/evoemo_response_v4_eval_freeze.json), which is left untouched as an immutable historical record. Nothing in that chain was edited or removed to satisfy this notice beyond adding this notice file.",
+  "action_if_regenerated": "Any regeneration under the current or a future builder must be written to a NEW path, never overwritten in place here. A formal V1.5 consumer that encounters builder_contract_sha256 == \"9ec603028cceb522d1f3da7062962e6cdd3ed9d2d23dfca65d0d5a7dafecd964\" (the old, retroactively-labeled contract) must fail closed rather than treat the file as current."
+}

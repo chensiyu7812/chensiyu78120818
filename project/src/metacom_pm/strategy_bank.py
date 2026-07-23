@@ -13,7 +13,10 @@ from .text import dialogue_text, jaccard, normalize_for_hash, normalize_space, s
 
 
 def stable_dialogue_split(dialogue_index: int, seed: int = 13) -> str:
-    # Reproduces the 70/15/15 dialogue-level intent without turn leakage.
+    # Frozen custom split for the expanded 1,300-dialogue release.  It is not
+    # presented as the official split of the original 1,053-dialogue corpus.
+    # Hashing the dialogue index keeps complete dialogues together and makes
+    # the assignment reproducible before any turn-level outcome is inspected.
     value = int(stable_hex("esconv_split", seed, dialogue_index, n=12), 16) / float(16**12)
     if value < 0.70:
         return "train"
@@ -255,21 +258,31 @@ def esconv_turn_states(
                 continue
             # Require at least one visible seeker message.
             previous = dialogue[:turn_index]
-            if not any(x.get("speaker") == "seeker" for x in previous):
+            current_user_index = next(
+                (
+                    index
+                    for index in range(len(previous) - 1, -1, -1)
+                    if previous[index].get("speaker") == "seeker"
+                ),
+                None,
+            )
+            if current_user_index is None:
                 continue
-            current_user = next(
-                (normalize_space(x.get("content") or "") for x in reversed(previous)
-                 if x.get("speaker") == "seeker"),
-                "",
+            current_user = normalize_space(
+                previous[current_user_index].get("content") or ""
             )
             if not current_user:
                 continue
+            # The final seeker utterance is represented once as current_user_text,
+            # never duplicated inside history.  This matches the EvoEmo runtime
+            # and the formal visible-state semantic query contract.
+            prior_history = previous[:current_user_index]
             history = [
                 {
                     "role": "user" if x.get("speaker") == "seeker" else "assistant",
                     "content": normalize_space(x.get("content") or ""),
                 }
-                for x in previous[-8:]
+                for x in prior_history[-8:]
                 if normalize_space(x.get("content") or "")
             ]
             states.append({

@@ -28,6 +28,7 @@ from .evoemo import (
     _session_rag,
     _track_key,
     build_evo_memory,
+    evo_memory_global_catalog_digest,
     load_evoemo,
     make_evo_runtime_state,
 )
@@ -809,6 +810,22 @@ def plan_reference_baselines(
     )
 
     scenarios = _scenarios(evoemo_path)
+    # evoemo_sha256 below only pins the raw input file, not what
+    # build_evo_memory actually constructs from it (MP/MS/ME item content,
+    # chunking, ids) -- record that separately so this cost estimate (and
+    # everything derived from it) is auditable against the memory builder
+    # that actually produced the retrieval catalog used in planning. Derive
+    # the user list from `scenarios` (not a fresh load_evoemo(evoemo_path)
+    # call) so this goes through the same _scenarios seam every caller and
+    # test fixture already uses, instead of a second, independent read.
+    seen_user_ids: set[str] = set()
+    unique_scenario_users: list[dict[str, Any]] = []
+    for scenario_user, _scenario_topic in scenarios:
+        scenario_user_id = str(scenario_user["id"])
+        if scenario_user_id not in seen_user_ids:
+            seen_user_ids.add(scenario_user_id)
+            unique_scenario_users.append(scenario_user)
+    evo_memory_digest = evo_memory_global_catalog_digest(unique_scenario_users)
     evaluation_unit_contract, units = build_reference_evaluation_unit_contract(
         scenarios,
         seeds=seeds,
@@ -894,6 +911,12 @@ def plan_reference_baselines(
         "stage": PMV22_REFERENCE_BASELINE_STAGE,
         "conditions": sorted(REFERENCE_BASELINE_CONDITIONS),
         "evoemo_sha256": sha256_file(evoemo_path),
+        "evo_memory_builder_contract_sha256": evo_memory_digest[
+            "builder_contract_sha256"
+        ],
+        "evo_memory_global_catalog_sha256": evo_memory_digest[
+            "global_catalog_sha256"
+        ],
         "strategy_bank_sha256": sha256_file(strategy_bank_path),
         "fixed_tracks_sha256": sha256_file(fixed_tracks_path),
         "generator_endpoint": generator_endpoint_payload(generator_endpoint),
@@ -1189,6 +1212,12 @@ def run_reference_baselines(
 
     common_contract = {
         "conditions": sorted(REFERENCE_BASELINE_CONDITIONS),
+        "evo_memory_builder_contract_sha256": cost_estimate[
+            "evo_memory_builder_contract_sha256"
+        ],
+        "evo_memory_global_catalog_sha256": cost_estimate[
+            "evo_memory_global_catalog_sha256"
+        ],
         "supporter_generation_treatment": cost_estimate[
             "supporter_generation_treatment"
         ],

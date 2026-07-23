@@ -9,15 +9,24 @@ from metacom_pm.config import endpoint_from_config, load_config
 from metacom_pm.paid_run_release import require_paid_run_release
 from metacom_pm.evidence_filter import EvidenceFilterConfig
 from metacom_pm.freeze import require_study_freeze
-from metacom_pm.fixed_seeker_contract import FixedSeekerGenerationContract
-from metacom_pm.evoemo import fixed_seeker_cost_planning_contract
+from metacom_pm.fixed_seeker_contract import require_fixed_seeker_v3_sidecar_contract
+from metacom_pm.evoemo import (
+    FIXED_SEEKER_V23_STAGE,
+    evo_memory_global_catalog_digest,
+    fixed_seeker_cost_planning_contract,
+    load_evoemo,
+)
 from metacom_pm.generation_contract import SupporterGenerationContract
-from metacom_pm.io import canonical_json, sha256_file, sha256_text
+from metacom_pm.io import canonical_json, read_json, sha256_file, sha256_text
 from metacom_pm.pm_v2_evoemo import (
     EVALUATION_UNIT_CONTRACT_PROTOCOL,
     run_pmv2_fixed_evoemo,
 )
 from metacom_pm.pm_v2_external_eval import expected_external_units
+from metacom_pm.response_mechanism_contract import (
+    build_response_mechanism_contract,
+    require_matching_response_mechanism_contract,
+)
 from metacom_pm.pm_v1_5_semantic import (
     FrozenTransformerSemanticEncoder,
     require_semantic_runtime_contract,
@@ -121,7 +130,7 @@ def main() -> None:
         type=Path,
         default=ROOT
         / "outputs"
-        / "evoemo_fixed_tracks_v1_5"
+        / "evoemo_fixed_tracks_v1_5_v3_formal_candidate"
         / "fixed_seeker_tracks.jsonl",
     )
     parser.add_argument(
@@ -129,8 +138,19 @@ def main() -> None:
         type=Path,
         default=ROOT
         / "outputs"
-        / "evoemo_fixed_tracks_v1_5"
+        / "evoemo_fixed_tracks_v1_5_v3_formal_candidate"
         / "artifact_attestation.json",
+    )
+    parser.add_argument(
+        "--fixed-seeker-contract",
+        type=Path,
+        default=ROOT / "configs" / "pm_v1_5_fixed_seeker_v3.json",
+        help=(
+            "V3 sidecar contract (configs/pm_v1_5.yaml itself deliberately "
+            "stays on the historical V2 treatment; editing it directly was "
+            "shown to invalidate the already-qualified V8.19.2 lineage via a "
+            "pm_v1_5_config hash mismatch)."
+        ),
     )
     parser.add_argument("--out-dir", type=Path)
     parser.add_argument("--max-api-calls", type=int, default=2000)
@@ -147,12 +167,19 @@ def main() -> None:
         args.condition, checkpoint=args.checkpoint, out_dir=args.out_dir
     )
     if (
-        args.fixed_tracks.parent.name != "evoemo_fixed_tracks_v1_5"
+        args.fixed_tracks.parent.name != "evoemo_fixed_tracks_v1_5_v3_formal_candidate"
         or args.fixed_tracks_attestation.parent != args.fixed_tracks.parent
     ):
         raise RuntimeError(
-            "PM-v1.5 requires its isolated outputs/evoemo_fixed_tracks_v1_5 bundle"
+            "PM-v1.5 requires its isolated "
+            "outputs/evoemo_fixed_tracks_v1_5_v3_formal_candidate bundle"
         )
+    if args.fixed_tracks_attestation.is_file():
+        if read_json(args.fixed_tracks_attestation).get("stage") != FIXED_SEEKER_V23_STAGE:
+            raise RuntimeError(
+                "PM-v1.5 fixed-seeker generation requires a "
+                f"{FIXED_SEEKER_V23_STAGE} bundle"
+            )
 
     if args.run and args.overwrite:
         raise RuntimeError(
@@ -183,8 +210,8 @@ def main() -> None:
     supporter_generation_contract = SupporterGenerationContract.from_config(
         pm_v2_config
     )
-    fixed_seeker_contract = FixedSeekerGenerationContract.from_mapping(
-        pm_v2_config["fixed_seeker_generation_treatment"]
+    fixed_seeker_contract = require_fixed_seeker_v3_sidecar_contract(
+        args.fixed_seeker_contract
     )
     fixed_seeker_endpoint = endpoint_from_config(
         config, fixed_seeker_contract.seeker_endpoint
@@ -294,6 +321,22 @@ def main() -> None:
         or contract.get("evidence_filter_model") != evidence_filter_model_binding
     ):
         raise RuntimeError("study freeze Evidence Filter contract is absent or stale")
+    # PM-v1.5: the freeze's evoemo_sha256 only pins the raw input file, not
+    # what build_evo_memory actually constructs from it (MP/MS/ME item
+    # content, chunking, ids). Independently recompute the same digest this
+    # run's own memory catalog would have and fail closed on any mismatch,
+    # so a memory-builder change that slipped in after the freeze cannot
+    # silently generate over a different catalog than was frozen.
+    live_evo_memory_digest = evo_memory_global_catalog_digest(load_evoemo(evoemo_path))
+    if (
+        contract.get("evo_memory_builder_contract_sha256")
+        != live_evo_memory_digest["builder_contract_sha256"]
+        or contract.get("evo_memory_global_catalog_sha256")
+        != live_evo_memory_digest["global_catalog_sha256"]
+    ):
+        raise RuntimeError(
+            "study freeze EvoEmo memory catalog is absent or stale"
+        )
     generator_pricing = resolve_frozen_generator_pricing(
         contract,
         input_override=args.input_usd_per_mtok,
@@ -308,6 +351,21 @@ def main() -> None:
     )
     if endpoint_sha != contract.get("generator_endpoint_sha256"):
         raise RuntimeError("generator endpoint changed after study freeze")
+    live_response_mechanism_contract = build_response_mechanism_contract(
+        project_root=ROOT,
+        supporter_generation_contract=supporter_generation_contract,
+        generator_endpoint_sha256=endpoint_sha,
+        strategy_bank_sha256=sha256_file(strategy_path),
+        memory_min_score=contract.get("memory_min_score"),
+        strategy_min_score=contract.get("strategy_min_score"),
+        strategy_top_k=int(contract["strategy_top_k"]),
+        evidence_filter_enabled=bool(evidence_filter_config.enabled),
+    )
+    require_matching_response_mechanism_contract(
+        expected=contract.get("response_mechanism_contract") or {},
+        actual=live_response_mechanism_contract,
+        context="study freeze vs live EvoEmo external generation",
+    )
     simulator_id = str(contract["simulator_id"])
     max_turns = int(contract["max_turns"])
     seeds = [int(value) for value in contract["seeds"]]
@@ -393,6 +451,7 @@ def main() -> None:
         args.checkpoint,
         args.fixed_tracks,
         args.out_dir,
+        project_root=ROOT,
         generator_endpoint=endpoint,
         supporter_generation_contract=supporter_generation_contract,
         fixed_seeker_generation_contract=(
@@ -403,6 +462,7 @@ def main() -> None:
         ),
         simulator_id=simulator_id,
         fixed_tracks_attestation_path=args.fixed_tracks_attestation,
+        fixed_seeker_required_stage=FIXED_SEEKER_V23_STAGE,
         condition=args.condition,
         max_turns=max_turns,
         seeds=seeds,

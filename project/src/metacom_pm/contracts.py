@@ -127,7 +127,16 @@ class RuntimeState(StrictModel):
     state_id: str
     card_id: str
     user_id: str
-    split: Literal["train", "validation", "development", "esconv_test", "evoemo_test"]
+    split: Literal[
+        "train",
+        "validation",
+        "development",
+        "esconv_test",
+        "evoemo_test",
+        "esconv_auxiliary_train",
+        "esconv_auxiliary_calibration",
+        "esconv_auxiliary_internal_test",
+    ]
     semantic_family: str
     current_user_text: str = Field(min_length=1)
     current_session_history: list[DialogueTurn]

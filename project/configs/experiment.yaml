@@ -62,6 +62,35 @@ endpoints:
     family: "deepseek"
     timeout_seconds: 240
 
+  # DeepSeek's own official API (not NVIDIA-hosted): added after three
+  # consecutive real crashes on training_judge_deepseek_flash, all HTTP 429/
+  # 503 from the NVIDIA free/prototyping tier (confirmed hard-capped at 40
+  # RPM via the account dashboard). DeepSeek's own docs state they do not
+  # enforce an RPM quota and slow down under load rather than reject.
+  # Deliberately a distinct endpoint/family, not a silent replacement of
+  # training_judge_deepseek_flash -- nothing references this yet; no existing
+  # stage's judge_endpoints, pricing, or contract hash changes until a stage
+  # is explicitly repointed at it.
+  training_judge_deepseek_official_flash:
+    base_url: "https://api.deepseek.com"
+    model: "deepseek-v4-flash"
+    api_key_env: "DEEPSEEK_API_KEY"
+    family: "deepseek_official"
+    timeout_seconds: 240
+    # Confirmed via a real HTTP 400 ("This response_format type is
+    # unavailable now") and DeepSeek's own docs (api-docs.deepseek.com/
+    # guides/json_mode): the official API only supports the older, loose
+    # json_object response_format, not OpenAI's newer strict json_schema
+    # mode that NVIDIA's gateway happily forwards for the same model.
+    supports_strict_json_schema: false
+    # deepseek-v4-flash defaults to thinking enabled (api-docs.deepseek.com/
+    # guides/thinking_mode/); three real judge calls exhausted their entire
+    # max_tokens budget on unrequested reasoning before any JSON content,
+    # landing on completion_tokens == the configured ceiling every time and
+    # leaving empty/truncated content. Judging is fixed-rubric scoring, not a
+    # task that needs long chain-of-thought, so thinking is disabled here.
+    thinking_mode: disabled
+
   training_judge_qwen122:
     base_url: "https://integrate.api.nvidia.com"
     model: "qwen/qwen3.5-122b-a10b"

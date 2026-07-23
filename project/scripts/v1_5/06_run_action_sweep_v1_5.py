@@ -12,12 +12,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
+from typing import Any
 
 from metacom_pm.artifacts import require_artifact_attestation
-from metacom_pm.attempt_ledger import forbid_overwrite_of_spent_attempts
+from metacom_pm.attempt_ledger import (
+    PersistentAttemptLedger,
+    forbid_overwrite_of_spent_attempts,
+)
+from metacom_pm.bounded_retry import RETRYABLE_UP_TO_FULL_BUDGET
 from metacom_pm.config import endpoint_from_config, load_config
-from metacom_pm.contracts import parse_action_id
+from metacom_pm.contracts import ActionOutcome, parse_action_id
 from metacom_pm.evidence_filter import EvidenceFilterConfig
 from metacom_pm.evidence_filter_model import require_evidence_filter_artifacts
 from metacom_pm.generation_contract import SupporterGenerationContract
@@ -45,16 +51,66 @@ from metacom_pm.pm_v2_semantic_audit import (
     require_pmv2_runtime_state_lineage,
     require_semantic_sanity_pass,
 )
-from metacom_pm.v1_5_automated_semantic_review import (
-    require_automated_semantic_review_pass,
-)
 from metacom_pm.paid_run_release import require_paid_run_release
+from metacom_pm.response_mechanism_contract import build_response_mechanism_contract
 from metacom_pm.v1_5_actual_corpus_review import (
     require_actual_corpus_semantic_review_pass,
+)
+from metacom_pm.v1_5_actual_corpus_qualification import (
+    require_actual_corpus_posthoc_qualification,
 )
 
 
 ROOT = Path(__file__).resolve().parents[2]
+
+LONGITUDINAL_TRANSPORT_EXECUTION_PROTOCOL = (
+    "pm-v1.5-longitudinal-sweep-transport-execution-v1"
+)
+LONGITUDINAL_TRANSPORT_MAX_ATTEMPTS_PER_CALL = 4
+LONGITUDINAL_TRANSPORT_BACKOFF_SECONDS = (10.0, 30.0, 60.0)
+LONGITUDINAL_TRANSPORT_CIRCUIT_BREAKER = 5
+
+
+def _longitudinal_transport_execution_contract() -> dict:
+    """Bind execution resilience without changing the scientific treatment."""
+
+    code_paths = {
+        "runner": Path(__file__).resolve(),
+        "sweep": ROOT / "src" / "metacom_pm" / "sweep.py",
+        "api": ROOT / "src" / "metacom_pm" / "api.py",
+        "attempt_ledger": ROOT / "src" / "metacom_pm" / "attempt_ledger.py",
+        "bounded_retry": ROOT / "src" / "metacom_pm" / "bounded_retry.py",
+    }
+    code_manifest = {
+        name: {
+            "relative_path": str(path.relative_to(ROOT)),
+            "sha256": sha256_file(path),
+        }
+        for name, path in sorted(code_paths.items())
+    }
+    payload = {
+        "protocol": LONGITUDINAL_TRANSPORT_EXECUTION_PROTOCOL,
+        "transport_retry_policy": "bounded_transport",
+        "transport_max_attempts_per_call": (
+            LONGITUDINAL_TRANSPORT_MAX_ATTEMPTS_PER_CALL
+        ),
+        "transport_backoff_seconds": list(
+            LONGITUDINAL_TRANSPORT_BACKOFF_SECONDS
+        ),
+        "consecutive_same_class_circuit_breaker": (
+            LONGITUDINAL_TRANSPORT_CIRCUIT_BREAKER
+        ),
+        "continue_after_isolated_terminal_failure": True,
+        "retryable_classes": sorted(RETRYABLE_UP_TO_FULL_BUDGET),
+        "terminal_content_failures_are_not_blindly_retried": True,
+        "legacy_config_request_retries": 1,
+        "legacy_config_fail_fast": True,
+        "scientific_treatment_unchanged": True,
+        "code_manifest": code_manifest,
+        "code_manifest_sha256": sha256_text(canonical_json(code_manifest)),
+    }
+    payload["contract_sha256"] = sha256_text(canonical_json(payload))
+    return payload
 
 
 def _budget_gate(
@@ -132,6 +188,232 @@ def _require_saved_dry_run(
         raise RuntimeError("saved action-sweep dry-run did not pass its budget gate")
 
 
+ACTION_SWEEP_CARRY_FORWARD_PROTOCOL = (
+    "pm-v1.5-action-sweep-exact-plan-carry-forward-v1"
+)
+
+
+def _load_action_sweep_carry_forward(
+    *, carry_forward_dir: Path | None, call_plan: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Authenticate successful calls from an exact-plan prior sweep.
+
+    The source directory is read-only.  A failed/exhausted call is never
+    inherited; only a ledger SUCCEEDED event containing the complete raw call
+    and ActionOutcome recovery payload is eligible.  Exact full-plan equality
+    prevents a continuation from silently mixing scientific treatments.
+    """
+
+    if carry_forward_dir is None:
+        return {
+            "binding": None,
+            "carried_call_keys": set(),
+            "carried_terminal_rows": {},
+        }
+    required = {
+        "call_plan": carry_forward_dir / "call_plan.jsonl",
+        "cost_estimate": carry_forward_dir / "cost_estimate.json",
+        "ledger": carry_forward_dir / "physical_attempt_ledger.jsonl",
+        "outcomes": carry_forward_dir / "action_outcomes.jsonl",
+        "raw_calls": carry_forward_dir / "raw_api_calls.jsonl",
+        "summary": carry_forward_dir / "summary.json",
+    }
+    missing = sorted(name for name, path in required.items() if not path.is_file())
+    if missing:
+        raise RuntimeError(
+            f"action-sweep carry-forward source lacks required files: {missing}"
+        )
+    source_plan = list(iter_jsonl(required["call_plan"]))
+    if source_plan != call_plan:
+        raise RuntimeError(
+            "action-sweep carry-forward source plan differs from the current "
+            "freshly computed full plan"
+        )
+    source_estimate = read_json(required["cost_estimate"])
+    source_estimate_body = {
+        key: value
+        for key, value in source_estimate.items()
+        if key not in {"cost_estimate_sha256", "budget_gate"}
+    }
+    if source_estimate.get("cost_estimate_sha256") != sha256_text(
+        canonical_json(source_estimate_body)
+    ):
+        raise RuntimeError("action-sweep carry-forward source estimate self-hash failed")
+    current_plan_sha256 = sha256_text(canonical_json(call_plan))
+    if source_estimate.get("call_plan_sha256") != current_plan_sha256:
+        raise RuntimeError("action-sweep carry-forward source plan hash mismatch")
+    expected_calls = {
+        str(row["call_key"]): int(row["max_http_attempts"])
+        for row in call_plan
+    }
+    source_ledger = PersistentAttemptLedger(
+        required["ledger"],
+        stage="action_sweep_generation",
+        expected_calls=expected_calls,
+        maximum_total_attempts=10**9,
+    )
+    plan_by_call_key: dict[str, dict[str, Any]] = {}
+    for row in call_plan:
+        plan_by_call_key.setdefault(str(row["call_key"]), row)
+    carried_terminal_rows: dict[str, dict[str, Any]] = {}
+    for call_key, plan_row in plan_by_call_key.items():
+        if not source_ledger.succeeded(call_key):
+            continue
+        terminal = source_ledger.terminal_row(call_key)
+        result = (terminal or {}).get("result")
+        if (
+            not isinstance(terminal, dict)
+            or not isinstance(result, dict)
+            or not isinstance(result.get("action_outcome"), dict)
+            or not isinstance(result.get("raw_call"), dict)
+            or not isinstance(terminal.get("usage"), dict)
+        ):
+            raise RuntimeError(
+                f"action-sweep carry-forward source lacks recovery data: {call_key}"
+            )
+        outcome = ActionOutcome.model_validate(result["action_outcome"])
+        raw_call = dict(result["raw_call"])
+        if (
+            outcome.card_id != str(plan_row["card_id"])
+            or outcome.prompt_hash != str(plan_row["prompt_sha256"])
+            or (outcome.provenance or {}).get("physical_call_key") != call_key
+            or raw_call.get("error") is not None
+            or str(raw_call.get("physical_call_key") or "") != call_key
+        ):
+            raise RuntimeError(
+                f"action-sweep carry-forward payload mismatches plan: {call_key}"
+            )
+        carried_terminal_rows[call_key] = dict(terminal)
+    carried_call_keys = set(carried_terminal_rows)
+    remaining_call_keys = set(plan_by_call_key) - carried_call_keys
+    summary = read_json(required["summary"])
+    carried_logical_outcomes = sum(
+        1 for row in call_plan if str(row["call_key"]) in carried_call_keys
+    )
+    if int(summary.get("completed_outcomes", -1)) != carried_logical_outcomes:
+        raise RuntimeError(
+            "action-sweep carry-forward summary/ledger completion mismatch"
+        )
+    binding = {
+        "protocol": ACTION_SWEEP_CARRY_FORWARD_PROTOCOL,
+        "source_directory": str(carry_forward_dir),
+        "source_call_plan_file_sha256": sha256_file(required["call_plan"]),
+        "source_cost_estimate_file_sha256": sha256_file(required["cost_estimate"]),
+        "source_cost_estimate_sha256": source_estimate["cost_estimate_sha256"],
+        "source_ledger_sha256": sha256_file(required["ledger"]),
+        "source_outcomes_sha256": sha256_file(required["outcomes"]),
+        "source_raw_calls_sha256": sha256_file(required["raw_calls"]),
+        "source_summary_sha256": sha256_file(required["summary"]),
+        "source_physical_http_attempts": int(
+            summary.get("total_physical_http_attempts", -1)
+        ),
+        "full_call_plan_sha256": current_plan_sha256,
+        "carried_forward_call_count": len(carried_call_keys),
+        "carried_forward_logical_outcome_count": carried_logical_outcomes,
+        "carried_forward_call_keys_sha256": sha256_text(
+            canonical_json(sorted(carried_call_keys))
+        ),
+        "remaining_new_call_count": len(remaining_call_keys),
+        "remaining_new_call_keys_sha256": sha256_text(
+            canonical_json(sorted(remaining_call_keys))
+        ),
+    }
+    binding["binding_sha256"] = sha256_text(canonical_json(binding))
+    return {
+        "binding": binding,
+        "carried_call_keys": carried_call_keys,
+        "carried_terminal_rows": carried_terminal_rows,
+    }
+
+
+def _continuation_cost_estimate(
+    estimate: dict[str, Any],
+    rows: list[dict[str, Any]],
+    carry_forward: dict[str, Any],
+) -> dict[str, Any]:
+    """Reprice an exact full plan for only the calls not carried forward."""
+
+    binding = carry_forward.get("binding")
+    if binding is None:
+        return estimate
+    carried = set(carry_forward["carried_call_keys"])
+    physical_by_key: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        physical_by_key.setdefault(str(row["call_key"]), row)
+    remaining_keys = set(physical_by_key) - carried
+    remaining_physical_rows = [physical_by_key[key] for key in sorted(remaining_keys)]
+    remaining_logical_rows = [
+        row for row in rows if str(row["call_key"]) in remaining_keys
+    ]
+    attempts_per_call = int(estimate["transport_max_attempts_per_call"])
+    input_tokens = [
+        int(row["estimated_input_tokens"]) for row in remaining_physical_rows
+    ]
+    logical_input = sum(input_tokens)
+    logical_output = sum(
+        int(row["maximum_output_tokens"]) for row in remaining_physical_rows
+    )
+    pricing = dict(estimate["pricing"])
+    logical_cost = (
+        logical_input / 1_000_000 * float(pricing["input_usd_per_mtok"])
+        + logical_output / 1_000_000 * float(pricing["output_usd_per_mtok"])
+    )
+    ordered = sorted(input_tokens)
+    p95_index = max(0, math.ceil(0.95 * len(ordered)) - 1) if ordered else 0
+    payload = {
+        key: value
+        for key, value in estimate.items()
+        if key != "cost_estimate_sha256"
+    }
+    contract_bindings = {
+        **dict(payload.get("contract_bindings") or {}),
+        "carry_forward": dict(binding),
+    }
+    payload.update(
+        {
+            "full_expected_api_calls": int(estimate["expected_api_calls"]),
+            "expected_api_calls": len(remaining_physical_rows),
+            "full_logical_api_calls": int(estimate["logical_api_calls"]),
+            "logical_api_calls": len(rows),
+            "historical_carried_forward_calls": len(carried),
+            "remaining_new_logical_calls": len(remaining_physical_rows),
+            "remaining_new_logical_outcomes": len(remaining_logical_rows),
+            "full_maximum_physical_api_attempts": int(
+                estimate["maximum_physical_api_attempts"]
+            ),
+            "maximum_physical_api_attempts": (
+                len(remaining_physical_rows) * attempts_per_call
+            ),
+            "estimated_total_input_tokens": logical_input,
+            "maximum_total_output_tokens": logical_output,
+            "unduplicated_logical_total_input_tokens": sum(
+                int(row["estimated_input_tokens"])
+                for row in remaining_logical_rows
+            ),
+            "unduplicated_logical_maximum_output_tokens": sum(
+                int(row["maximum_output_tokens"])
+                for row in remaining_logical_rows
+            ),
+            "maximum_physical_total_input_tokens": (
+                logical_input * attempts_per_call
+            ),
+            "maximum_physical_total_output_tokens": (
+                logical_output * attempts_per_call
+            ),
+            "mean_input_tokens": (
+                logical_input / len(input_tokens) if input_tokens else 0.0
+            ),
+            "p95_input_tokens": ordered[p95_index] if ordered else 0.0,
+            "max_input_tokens": max(input_tokens, default=0),
+            "logical_estimated_cost_usd": logical_cost,
+            "estimated_cost_usd": logical_cost * attempts_per_call,
+            "contract_bindings": contract_bindings,
+        }
+    )
+    payload["cost_estimate_sha256"] = sha256_text(canonical_json(payload))
+    return payload
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Fail-closed action sweep: exact dry-run and accepted cost hash before API use."
@@ -189,6 +471,15 @@ def main() -> None:
     )
     parser.add_argument(
         "--out-dir", type=Path, default=ROOT / "outputs" / "pm_v1_5_sweep"
+    )
+    parser.add_argument(
+        "--carry-forward-from",
+        type=Path,
+        help=(
+            "Read-only exact-plan source directory. Only ledger-authenticated "
+            "SUCCEEDED calls are inherited; failed calls receive a fresh, "
+            "separately approved continuation identity in --out-dir."
+        ),
     )
     parser.add_argument("--max-cards", type=int)
     parser.add_argument(
@@ -322,29 +613,20 @@ def main() -> None:
     parser.add_argument(
         "--automated-semantic-review-report",
         type=Path,
-        default=ROOT / "outputs" / "pm_v1_5_automated_semantic_review" / "gate_report.json",
         help=(
-            "PM-v1.5 replacement for the human semantic-sanity and pilot "
-            "spot-check gates: output of "
-            "scripts/v1_5_run_automated_semantic_review.py, must show "
-            "status=PASS."
+            "Deprecated V4 calibration artifact; forbidden for the formal "
+            "V1.5 sweep, which binds actual-468 structured QA v3 instead."
         ),
     )
     parser.add_argument(
         "--automated-semantic-review-attestation",
         type=Path,
-        default=ROOT
-        / "outputs"
-        / "pm_v1_5_automated_semantic_review"
-        / "artifact_attestation.json",
+        help="Deprecated companion V4 attestation; forbidden.",
     )
     parser.add_argument(
         "--generation-pilot-attestation",
         type=Path,
-        help=(
-            "Exact paid nine-case pilot bound by the automated semantic review; "
-            "required for the PM-v1.5 full sweep."
-        ),
+        help="Deprecated direct input; generation lineage comes through the development-data attestation.",
     )
     parser.add_argument(
         "--actual-corpus-semantic-review-report",
@@ -365,6 +647,20 @@ def main() -> None:
             / "pm_v1_5_actual_corpus_semantic_review"
             / "artifact_attestation.json"
         ),
+    )
+    parser.add_argument(
+        "--actual-corpus-qualification-report",
+        type=Path,
+        help=(
+            "Frozen post-hoc instrument-qualification addendum. When supplied "
+            "with its attestation, the original review remains FAIL and this "
+            "narrow qualification is used instead of claiming gate PASS."
+        ),
+    )
+    parser.add_argument(
+        "--actual-corpus-qualification-attestation",
+        type=Path,
+        help="Companion attestation for --actual-corpus-qualification-report.",
     )
     parser.add_argument(
         "--step0-shortcut-audit-report",
@@ -463,6 +759,11 @@ def main() -> None:
 
     if args.run and args.overwrite:
         raise RuntimeError("paid PM-v1.5 action-sweep runs prohibit --overwrite")
+    if (
+        args.carry_forward_from is not None
+        and args.carry_forward_from.resolve() == args.out_dir.resolve()
+    ):
+        raise RuntimeError("action-sweep carry-forward requires a new output directory")
     if args.pilot_plan is not None:
         raise RuntimeError(
             "PM-v1.5 does not run the PM-v2.2 compatibility-pilot branch; "
@@ -532,6 +833,13 @@ def main() -> None:
     if args.pilot_plan is not None and (args.max_cards is not None or args.actions):
         raise RuntimeError("--pilot-plan cannot be combined with ad-hoc pilot filters")
     pilot_plan = read_json(args.pilot_plan) if args.pilot_plan is not None else None
+    formal_v1_5_full_sweep = bool(
+        runtime_is_pm_v2
+        and args.v1_5_full_sweep_scope
+        and pilot_plan is None
+        and args.max_cards is None
+        and not args.actions
+    )
 
     contract_bindings: dict = {}
     pm_v2_states_path = None
@@ -542,6 +850,11 @@ def main() -> None:
     memory_helpfulness_model = None
     evidence_filter_model_binding = None
     supporter_generation_contract = None
+    transport_max_attempts_per_call: int | None = None
+    transport_retry_policy = "single_attempt"
+    transport_backoff_seconds: tuple[float, ...] = ()
+    consecutive_same_class_circuit_breaker: int | None = None
+    longitudinal_transport_execution_contract: dict | None = None
     if args.pm_v2_config is not None:
         pm_config = load_config(args.pm_v2_config)
         require_paid_run_release(
@@ -606,27 +919,47 @@ def main() -> None:
             runtime_state_lineage = require_pmv2_runtime_state_lineage(
                 args.runtime, audited_states
             )
-            automated_review_verification = require_automated_semantic_review_pass(
-                args.automated_semantic_review_report,
-                args.automated_semantic_review_attestation,
-                expected_experiment_config_path=args.config,
-                expected_pm_config_path=args.pm_v2_config,
-                expected_strategy_bank_path=args.strategy_bank,
-                expected_generation_pilot_attestation_path=(
-                    args.generation_pilot_attestation
-                ),
+            if (
+                args.automated_semantic_review_report is not None
+                or args.automated_semantic_review_attestation is not None
+                or args.generation_pilot_attestation is not None
+            ):
+                raise RuntimeError(
+                    "formal sweep refuses direct legacy V4/pilot inputs; use the "
+                    "attested development corpus plus actual structured QA v3"
+                )
+            qualification_args = (
+                args.actual_corpus_qualification_report,
+                args.actual_corpus_qualification_attestation,
             )
-            automated_review_report = automated_review_verification["report"]
-            actual_corpus_verification = require_actual_corpus_semantic_review_pass(
-                args.actual_corpus_semantic_review_report,
-                args.actual_corpus_semantic_review_attestation,
-                expected_experiment_config_path=args.config,
-                expected_states_path=pm_v2_states_path,
-                expected_evaluator_contexts_path=evaluator_contexts_path,
-                expected_backend_path=args.backend,
-                expected_strategy_bank_path=args.strategy_bank,
-                expected_pm_config_path=args.pm_v2_config,
-            )
+            if any(value is not None for value in qualification_args) and not all(
+                value is not None for value in qualification_args
+            ):
+                raise RuntimeError(
+                    "actual-corpus qualification report and attestation must be supplied together"
+                )
+            if all(value is not None for value in qualification_args):
+                actual_corpus_verification = require_actual_corpus_posthoc_qualification(
+                    args.actual_corpus_qualification_report,
+                    args.actual_corpus_qualification_attestation,
+                    expected_experiment_config_path=args.config,
+                    expected_states_path=pm_v2_states_path,
+                    expected_evaluator_contexts_path=evaluator_contexts_path,
+                    expected_backend_path=args.backend,
+                    expected_strategy_bank_path=args.strategy_bank,
+                    expected_pm_config_path=args.pm_v2_config,
+                )
+            else:
+                actual_corpus_verification = require_actual_corpus_semantic_review_pass(
+                    args.actual_corpus_semantic_review_report,
+                    args.actual_corpus_semantic_review_attestation,
+                    expected_experiment_config_path=args.config,
+                    expected_states_path=pm_v2_states_path,
+                    expected_evaluator_contexts_path=evaluator_contexts_path,
+                    expected_backend_path=args.backend,
+                    expected_strategy_bank_path=args.strategy_bank,
+                    expected_pm_config_path=args.pm_v2_config,
+                )
             shortcut_audit_verification = require_step0_shortcut_audit_pass(
                 args.step0_shortcut_audit_report,
                 args.step0_shortcut_audit_attestation,
@@ -663,16 +996,13 @@ def main() -> None:
                 )
             semantic_sanity = {
                 "protocol": (
-                    "pm-v1.5-pilot-plus-actual-corpus-and-shortcut-gate-v2"
+                    "pm-v1.5-actual-corpus-and-shortcut-gate-v3"
                 ),
-                "status": "PASS",
+                "status": actual_corpus_verification["status"],
+                "actual_corpus_admission_mode": actual_corpus_verification.get(
+                    "mode", "ORIGINAL_GATE_PASS"
+                ),
                 "human_calibration_performed": False,
-                "automated_review_report_sha256": sha256_text(
-                    canonical_json(automated_review_report)
-                ),
-                "automated_review_attestation_sha256": (
-                    automated_review_verification["attestation_sha256"]
-                ),
                 "actual_corpus_review_report_sha256": (
                     actual_corpus_verification["report_sha256"]
                 ),
@@ -797,6 +1127,27 @@ def main() -> None:
                 "PM-v2 development_sweep.fail_fast must be true so an exact "
                 "action-matrix failure cannot spend the remaining budget"
             )
+        if formal_v1_5_full_sweep:
+            # The old config values remain frozen so the scientific corpus and
+            # response-mechanism identities do not drift.  Formal V1.5 uses a
+            # separately hashed execution-only resilience contract: each
+            # physical HTTP call still asks for exactly the same model,
+            # prompt, seed and output cap, while transient transport failures
+            # receive a bounded fresh attempt recorded in the durable ledger.
+            longitudinal_transport_execution_contract = (
+                _longitudinal_transport_execution_contract()
+            )
+            transport_max_attempts_per_call = (
+                LONGITUDINAL_TRANSPORT_MAX_ATTEMPTS_PER_CALL
+            )
+            transport_retry_policy = "bounded_transport"
+            transport_backoff_seconds = (
+                LONGITUDINAL_TRANSPORT_BACKOFF_SECONDS
+            )
+            consecutive_same_class_circuit_breaker = (
+                LONGITUDINAL_TRANSPORT_CIRCUIT_BREAKER
+            )
+            fail_fast = False
         strategy_top_k = frozen_values["strategy_top_k"]
         memory_min_score = frozen_values["memory_min_score"]
         strategy_min_score = frozen_values["strategy_min_score"]
@@ -812,9 +1163,32 @@ def main() -> None:
             raise RuntimeError("output pricing override differs from PM-v2 YAML")
         args.input_usd_per_mtok = frozen_input_price
         args.output_usd_per_mtok = frozen_output_price
+        generator_endpoint = endpoint_from_config(
+            experiment_config, supporter_generation_contract.generator_endpoint
+        )
+        generator_endpoint_sha256 = sha256_text(
+            canonical_json(
+                {
+                    "model": generator_endpoint.model,
+                    "family": generator_endpoint.family,
+                    "base_url": generator_endpoint.base_url,
+                }
+            )
+        )
+        response_mechanism_contract = build_response_mechanism_contract(
+            project_root=ROOT,
+            supporter_generation_contract=supporter_generation_contract,
+            generator_endpoint_sha256=generator_endpoint_sha256,
+            strategy_bank_sha256=sha256_file(args.strategy_bank),
+            memory_min_score=float(retrieval_config["memory_min_score"]),
+            strategy_min_score=float(retrieval_config["strategy_min_score"]),
+            strategy_top_k=int(retrieval_config["strategy_top_k"]),
+            evidence_filter_enabled=bool(evidence_filter_config.enabled),
+        )
         contract_bindings = {
             "pm_v2_config_sha256": sha256_file(args.pm_v2_config),
             "pm_v2_version": str(pm_config["version"]),
+            "response_mechanism_contract": response_mechanism_contract,
             "supporter_generation_treatment": (
                 supporter_generation_contract.payload()
             ),
@@ -853,6 +1227,10 @@ def main() -> None:
                 else "full"
             ),
         }
+        if longitudinal_transport_execution_contract is not None:
+            contract_bindings["transport_execution_contract"] = (
+                longitudinal_transport_execution_contract
+            )
     else:
         if args.input_usd_per_mtok is None or args.output_usd_per_mtok is None:
             raise RuntimeError(
@@ -950,16 +1328,10 @@ def main() -> None:
         ):
             raise RuntimeError("PM-v1.5 full sweep lacks its frozen review gate")
         contract_bindings["v1_5_full_sweep_gate"] = {
-            "protocol": "pm-v1.5-full-sweep-gate-v2",
+            "protocol": "pm-v1.5-full-sweep-gate-v3",
             "status": "PASS",
             "scope": "full",
             "human_calibration_performed": False,
-            "automated_review_attestation_sha256": semantic_sanity[
-                "automated_review_attestation_sha256"
-            ],
-            "automated_review_report_sha256": semantic_sanity[
-                "automated_review_report_sha256"
-            ],
             "actual_corpus_review_attestation_sha256": semantic_sanity[
                 "actual_corpus_review_attestation_sha256"
             ],
@@ -972,6 +1344,18 @@ def main() -> None:
             "step0_shortcut_audit_report_sha256": semantic_sanity[
                 "step0_shortcut_audit_report_sha256"
             ],
+            **(
+                {
+                    "actual_corpus_admission_mode": semantic_sanity[
+                        "actual_corpus_admission_mode"
+                    ],
+                    "actual_corpus_admission_status": semantic_sanity["status"],
+                    "original_actual_corpus_gate_status": "FAIL",
+                }
+                if semantic_sanity.get("actual_corpus_admission_mode")
+                == "POSTHOC_INSTRUMENT_QUALIFICATION"
+                else {}
+            ),
         }
     estimate, rows = plan_action_sweep(
         args.runtime,
@@ -985,6 +1369,7 @@ def main() -> None:
         max_tokens=max_output_tokens,
         seed=seed,
         request_retries=request_retries,
+        transport_max_attempts_per_call=transport_max_attempts_per_call,
         fail_fast=fail_fast,
         input_token_safety_factor=input_token_safety_factor,
         fail_on_reported_input_overrun=fail_on_reported_input_overrun,
@@ -998,6 +1383,12 @@ def main() -> None:
         output_usd_per_mtok=args.output_usd_per_mtok,
         contract_bindings=contract_bindings,
     )
+    carry_forward = _load_action_sweep_carry_forward(
+        carry_forward_dir=args.carry_forward_from,
+        call_plan=rows,
+    )
+    estimate = _continuation_cost_estimate(estimate, rows, carry_forward)
+    contract_bindings = dict(estimate["contract_bindings"])
     gate = _budget_gate(
         estimate,
         max_api_calls=args.max_api_calls,
@@ -1043,6 +1434,7 @@ def main() -> None:
         max_tokens=max_output_tokens,
         seed=seed,
         request_retries=request_retries,
+        transport_max_attempts_per_call=transport_max_attempts_per_call,
         fail_fast=fail_fast,
         input_token_safety_factor=input_token_safety_factor,
         fail_on_reported_input_overrun=fail_on_reported_input_overrun,
@@ -1054,11 +1446,18 @@ def main() -> None:
         supporter_generation_contract=supporter_generation_contract,
         overwrite=args.overwrite,
         max_physical_api_attempts=args.max_api_calls,
+        transport_retry_policy=transport_retry_policy,
+        transport_backoff_seconds=transport_backoff_seconds,
+        consecutive_same_class_circuit_breaker=(
+            consecutive_same_class_circuit_breaker
+        ),
         contract_bindings={
             **contract_bindings,
             "accepted_cost_estimate_sha256": expected_hash,
             "pricing": result["pricing"],
         },
+        carry_forward_terminal_rows=carry_forward["carried_terminal_rows"],
+        carry_forward_binding=carry_forward["binding"],
     )
     print(summary)
 

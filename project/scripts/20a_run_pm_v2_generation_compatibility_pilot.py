@@ -3,10 +3,12 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+import time
 
 from metacom_pm.api import (
     CallResult,
     ProviderRequestError,
+    RetryableProviderError,
     StructuredOutputValidationError,
     make_client,
     require_reported_usage,
@@ -15,6 +17,14 @@ from metacom_pm.artifacts import create_artifact_attestation
 from metacom_pm.attempt_ledger import (
     PersistentAttemptLedger,
     forbid_overwrite_of_spent_attempts,
+)
+from metacom_pm.bounded_retry import (
+    BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES,
+    RETRY_CONTRACT_PROTOCOL,
+    TERMINAL_DISPOSITION,
+    execute_with_bounded_retry,
+    failure_metadata,
+    retry_ledger_summary,
 )
 from metacom_pm.config import endpoint_from_config, load_config
 from metacom_pm.io import (
@@ -33,13 +43,17 @@ from metacom_pm.pm_v2_data import (
     SURFACE_GENERATION_MAX_OUTPUT_TOKENS,
     GeneratedSurfaceOnlyCaseDraft,
     compile_surface_only_user_bundle,
+    deterministic_memory_blueprint_preflight,
     generation_case_family_assignments,
     lint_generation_surface_case,
 )
 from metacom_pm.pm_v2_generation_pilot import (
+    GENERATION_PILOT_MAX_CONTENT_ATTEMPTS,
     GENERATION_PILOT_MAX_ATTEMPTS,
+    GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT,
     GENERATION_PILOT_MINIMUM_CALLS,
     GENERATION_PILOT_STAGE,
+    GENERATION_PILOT_TRANSPORT_BACKOFF_SECONDS,
     build_generation_compatibility_contract,
     build_generation_compatibility_plan,
     read_generation_seed_dialogues_from_contract,
@@ -55,11 +69,42 @@ class PilotInputTokenOverrun(RuntimeError):
     pass
 
 
+_CONTENT_ATTEMPT_FAILURE_CLASSES = frozenset(
+    {
+        *BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES,
+        "structured_output_validation_error",
+        "content_lint_failure",
+    }
+)
+
+
+def _persisted_content_attempt_failed(
+    ledger: PersistentAttemptLedger, call_key: str
+) -> bool:
+    terminal = ledger.terminal_row(call_key)
+    if terminal is None or terminal.get("event") != "FAILED":
+        return False
+    metadata = terminal.get("metadata") or {}
+    return str(metadata.get("retry_class") or "") in _CONTENT_ATTEMPT_FAILURE_CLASSES
+
+
+def _write_persisted_content_failure(
+    *, out_dir: Path, row: dict, ledger: PersistentAttemptLedger
+) -> None:
+    terminal = ledger.terminal_row(str(row["physical_call_key"]))
+    result = (terminal or {}).get("result") or {}
+    write_json(
+        out_dir / f"failed_{row['case_field']}_{row['attempt_kind']}.json",
+        result,
+    )
+
+
 def _ledger_usage(ledger: PersistentAttemptLedger) -> dict[str, int]:
     totals = {key: 0 for key in ("prompt_tokens", "completion_tokens", "total_tokens")}
-    for call_key in ledger.started_call_keys:
-        terminal = ledger.terminal_row(call_key)
-        if terminal is None or terminal.get("usage") is None:
+    for terminal in ledger.event_rows:
+        if terminal.get("event") not in {"SUCCEEDED", "FAILED"}:
+            continue
+        if terminal.get("usage") is None:
             continue
         usage = require_reported_usage(
             terminal.get("usage"), stage="completed generation-pilot surface call"
@@ -130,6 +175,10 @@ def _materialize_success(
         "repair_case_count": len(repair_cases),
         "physical_attempts": ledger.started_attempts,
         "actual_usage": _ledger_usage(ledger),
+        "transport_retry_summary": retry_ledger_summary(
+            ledger,
+            list(ledger.expected_calls),
+        ),
         "bundle_validation": report,
     }
     write_json(bundle_path, bundle.model_dump(mode="json"))
@@ -155,6 +204,10 @@ def _materialize_success(
                 "cost_estimate_sha256"
             ],
             "provider_trace_mode": "surface_only_casewise",
+            "retry_contract_protocol": RETRY_CONTRACT_PROTOCOL,
+            "maximum_transport_attempts_per_content_attempt": (
+                GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT
+            ),
         },
         expected={
             "minimum_physical_attempts": GENERATION_PILOT_MINIMUM_CALLS,
@@ -277,6 +330,7 @@ def main() -> None:
         int(generation[key])
         for key in ("train_users", "calibration_users", "internal_test_users")
     )
+    memory_blueprint_preflight = deterministic_memory_blueprint_preflight()
     contract = build_generation_compatibility_contract(
         project_root=ROOT,
         experiment_config_path=args.config,
@@ -293,6 +347,8 @@ def main() -> None:
     _, call_plan, messages_by_call = build_generation_compatibility_plan(
         contract, endpoint=endpoint
     )
+    if len(call_plan) != GENERATION_PILOT_MAX_CONTENT_ATTEMPTS:
+        raise RuntimeError("generation pilot content-attempt plan is incomplete")
     initial_rows = [row for row in call_plan if row["attempt_kind"] == "initial"]
     expected_cost = sum(
         row["input_token_upper_bound"] / 1_000_000 * frozen_input
@@ -300,17 +356,27 @@ def main() -> None:
         for row in initial_rows
     )
     maximum_cost = sum(
-        row["input_token_upper_bound"] / 1_000_000 * frozen_input
-        + row["maximum_output_tokens"] / 1_000_000 * frozen_output
+        int(row["maximum_physical_attempts"])
+        * (
+            row["input_token_upper_bound"] / 1_000_000 * frozen_input
+            + row["maximum_output_tokens"] / 1_000_000 * frozen_output
+        )
         for row in call_plan
     )
     max_input_bound = max(row["input_token_upper_bound"] for row in call_plan)
     cost_payload = {
         "stage": GENERATION_PILOT_STAGE,
         "compatibility_contract_sha256": contract["contract_sha256"],
+        "deterministic_memory_blueprint_preflight": memory_blueprint_preflight,
         "call_plan_sha256": sha256_text(canonical_json(call_plan)),
         "minimum_api_calls_if_successful": len(initial_rows),
-        "maximum_physical_api_attempts": len(call_plan),
+        "maximum_content_attempts": len(call_plan),
+        "maximum_transport_attempts_per_content_attempt": (
+            GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT
+        ),
+        "maximum_physical_api_attempts": sum(
+            int(row["maximum_physical_attempts"]) for row in call_plan
+        ),
         "maximum_repairs_per_case": 1,
         "stop_after_each_case_success": True,
         "input_token_safety_factor": safety_factor,
@@ -333,7 +399,8 @@ def main() -> None:
         "cost_estimate_sha256": sha256_text(canonical_json(cost_payload)),
     }
     checks = {
-        "physical_api_attempts": len(call_plan) <= args.max_api_calls,
+        "physical_api_attempts": cost_payload["maximum_physical_api_attempts"]
+        <= args.max_api_calls,
         "estimated_cost_usd": maximum_cost <= args.max_estimated_usd,
         "input_tokens_per_call": max_input_bound <= args.max_input_tokens_per_call,
     }
@@ -372,7 +439,13 @@ def main() -> None:
             "compatibility_contract_sha256": contract["contract_sha256"],
             "physical_call_keys": [row["physical_call_key"] for row in call_plan],
             "minimum_physical_api_attempts": len(initial_rows),
-            "maximum_physical_api_attempts": len(call_plan),
+            "maximum_content_attempts": len(call_plan),
+            "maximum_transport_attempts_per_content_attempt": (
+                GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT
+            ),
+            "maximum_physical_api_attempts": cost_payload[
+                "maximum_physical_api_attempts"
+            ],
             "maximum_repairs_per_case": 1,
             "stop_after_each_case_success": True,
             "input_token_safety_factor": safety_factor,
@@ -382,8 +455,11 @@ def main() -> None:
     ledger = PersistentAttemptLedger(
         ledger_path,
         stage=GENERATION_PILOT_STAGE,
-        expected_calls={row["physical_call_key"]: 1 for row in call_plan},
-        maximum_total_attempts=len(call_plan),
+        expected_calls={
+            row["physical_call_key"]: int(row["maximum_physical_attempts"])
+            for row in call_plan
+        },
+        maximum_total_attempts=cost_payload["maximum_physical_api_attempts"],
     )
 
     exact_estimate = {**cost_estimate, "budget_gate": budget_gate}
@@ -445,6 +521,7 @@ def main() -> None:
     accepted_kinds: dict[str, str] = {}
     accepted_rows: list[dict] = []
     prior_currents: list[str] = []
+    prior_current_families: list[str] = []
     client = make_client(endpoint)
     try:
         for case_field, regime in GENERATION_CASE_FIELDS:
@@ -458,27 +535,50 @@ def main() -> None:
             if accepted is None:
                 for row in case_rows:
                     call_key = str(row["physical_call_key"])
-                    if call_key in ledger.started_call_keys:
+                    if _persisted_content_attempt_failed(ledger, call_key):
                         continue
-                    reservation = ledger.reserve(
-                        call_key,
-                        record_ids={
-                            "user_id": contract["pilot_user_id"],
-                            "case_field": case_field,
-                            "attempt_kind": row["attempt_kind"],
-                            "generation_seed": row["generation_seed"],
-                        },
-                        prompt_sha256=row["prompt_sha256"],
-                    )
+                    record_ids = {
+                        "user_id": contract["pilot_user_id"],
+                        "case_field": case_field,
+                        "attempt_kind": row["attempt_kind"],
+                        "generation_seed": row["generation_seed"],
+                    }
                     try:
-                        call, surface = client.chat(
-                            messages_by_call[call_key],
-                            temperature=GENERATION_TEMPERATURE,
-                            max_tokens=SURFACE_GENERATION_MAX_OUTPUT_TOKENS,
-                            seed=int(row["generation_seed"]),
-                            response_schema=GeneratedSurfaceOnlyCaseDraft,
-                            retries=1,
+                        reservation, call, surface = execute_with_bounded_retry(
+                            ledger,
+                            call_key,
+                            record_ids=record_ids,
+                            prompt_sha256=str(row["prompt_sha256"]),
+                            call_fn=lambda row=row, call_key=call_key: client.chat(
+                                messages_by_call[call_key],
+                                temperature=GENERATION_TEMPERATURE,
+                                max_tokens=SURFACE_GENERATION_MAX_OUTPUT_TOKENS,
+                                seed=int(row["generation_seed"]),
+                                response_schema=GeneratedSurfaceOnlyCaseDraft,
+                                retries=1,
+                            ),
+                            max_provider_output_attempts=1,
+                            backoff_seconds=(
+                                GENERATION_PILOT_TRANSPORT_BACKOFF_SECONDS
+                            ),
+                            sleep=time.sleep,
+                            capture_provider_output_text=True,
                         )
+                    except StructuredOutputValidationError:
+                        _write_persisted_content_failure(
+                            out_dir=args.out_dir, row=row, ledger=ledger
+                        )
+                        continue
+                    except RetryableProviderError as exc:
+                        if exc.last_retry_class in BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES:
+                            _write_persisted_content_failure(
+                                out_dir=args.out_dir, row=row, ledger=ledger
+                            )
+                            continue
+                        raise
+                    except ProviderRequestError:
+                        raise
+                    try:
                         assert surface is not None
                         usage = require_reported_usage(
                             call.usage, stage="generation pilot surface"
@@ -499,9 +599,14 @@ def main() -> None:
                                 usage=usage,
                                 error=error,
                                 result=result,
+                                metadata=failure_metadata(
+                                    retry_class="input_token_bound_overrun",
+                                    retry_disposition=TERMINAL_DISPOSITION,
+                                ),
                             )
                             raise PilotInputTokenOverrun(error)
                         lint = lint_generation_surface_case(
+                            user_id=str(contract["pilot_user_id"]),
                             case_field=case_field,
                             regime=regime,
                             family=assignments[case_field],
@@ -512,6 +617,7 @@ def main() -> None:
                             ],
                             surface=surface,
                             prior_current_user_texts=prior_currents,
+                            prior_current_user_families=prior_current_families,
                         )
                         result = {
                             "surface": surface.model_dump(mode="json"),
@@ -527,6 +633,10 @@ def main() -> None:
                                 usage=usage,
                                 error="surface lint failed: " + canonical_json(lint["errors"]),
                                 result=result,
+                                metadata=failure_metadata(
+                                    retry_class="content_lint_failure",
+                                    retry_disposition=TERMINAL_DISPOSITION,
+                                ),
                             )
                             write_json(
                                 args.out_dir
@@ -544,51 +654,26 @@ def main() -> None:
                         )
                         accepted = (row, surface, call)
                         break
-                    except StructuredOutputValidationError as exc:
-                        usage = require_reported_usage(
-                            exc.call.usage, stage="invalid generation pilot surface"
-                        )
-                        result = {
-                            "provider_response": exc.call.raw_response,
-                            "parsed_payload": exc.parsed_payload,
-                            "validation_errors": exc.validation_errors,
-                        }
-                        ledger.finish(
-                            reservation,
-                            succeeded=False,
-                            request_hash=exc.call.request_hash,
-                            usage=usage,
-                            error=f"{type(exc).__name__}: {exc}",
-                            result=result,
-                        )
-                        write_json(
-                            args.out_dir
-                            / f"failed_{case_field}_{row['attempt_kind']}.json",
-                            result,
-                        )
-                        continue
                     except PilotInputTokenOverrun:
                         raise
-                    except ProviderRequestError as exc:
-                        ledger.finish(
-                            reservation,
-                            succeeded=False,
-                            request_hash=exc.request_hash,
-                            usage=exc.usage,
-                            error=f"{type(exc).__name__}: {exc}",
-                            result={
-                                "response_diagnostics": exc.response_diagnostics
-                            },
-                        )
-                        raise
                     except Exception as exc:
-                        ledger.finish(
-                            reservation,
-                            succeeded=False,
-                            request_hash=None,
-                            usage=None,
-                            error=f"{type(exc).__name__}: {exc}",
-                        )
+                        if (
+                            ledger.terminal_event(
+                                call_key, reservation.attempt_index
+                            )
+                            is None
+                        ):
+                            ledger.finish(
+                                reservation,
+                                succeeded=False,
+                                request_hash=getattr(call, "request_hash", None),
+                                usage=getattr(call, "usage", None),
+                                error=f"{type(exc).__name__}: {exc}",
+                                metadata=failure_metadata(
+                                    retry_class="local_postcondition_error",
+                                    retry_disposition=TERMINAL_DISPOSITION,
+                                ),
+                            )
                         raise
             if accepted is None:
                 write_json(
@@ -613,6 +698,7 @@ def main() -> None:
             accepted_kinds[case_field] = row["attempt_kind"]
             accepted_rows.append(row)
             prior_currents.append(surface.current_user_text)
+            prior_current_families.append(assignments[case_field])
     finally:
         client.close()
 

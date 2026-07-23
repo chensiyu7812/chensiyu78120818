@@ -1882,7 +1882,7 @@ def _dimension_gate(
     matrix = np.asarray(
         [[float(row[name]) for name in dimensions] for row in rows], dtype=float
     )
-    duplicates, correlations, constants, prevalence = dimension_health(
+    duplicates, correlations, constants, prevalence, _mutual_exclusivity = dimension_health(
         matrix,
         dimensions,
         prefix=prefix,

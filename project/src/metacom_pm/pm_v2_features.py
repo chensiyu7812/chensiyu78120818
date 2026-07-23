@@ -435,6 +435,67 @@ class PMV2FeatureBuilder:
         return semantic_distance, metadata_ood
 
     @staticmethod
+    def metadata_dimension_names() -> list[str]:
+        """Ordered names matching every value _metadata_raw emits.
+
+        Diagnostic-only: lets a report attribute the averaged
+        metadata_ood_score back to individual dimensions without changing
+        anything about how the score itself is computed. Must stay in exact
+        lockstep with _metadata_raw's construction order.
+        """
+
+        names = ["session_index"]
+        per_source_fields = (
+            "available",
+            "count_ratio",
+            "min_age_ratio",
+            "median_age_ratio",
+            "max_age_ratio",
+            "expected_tokens_frac",
+            "representation_valid",
+            "query_to_source_similarity",
+            "age_span_ratio",
+        )
+        for source in SOURCE_ORDER:
+            for field_name in per_source_fields:
+                names.append(f"{source.value}.{field_name}")
+        names.append("strategy.expected_tokens_frac")
+        names.append("strategy.representation_valid")
+        names.extend(f"strategy.family.{family}" for family in STRATEGY_FAMILY_IDS)
+        names.extend(
+            f"strategy.advice_readiness.{readiness}"
+            for readiness in ADVICE_READINESS_IDS
+        )
+        names.append("strategy.question_present")
+        return names
+
+    def metadata_ood_breakdown(self, state: PMV2State) -> dict[str, float]:
+        """Per-dimension deviation before averaging into metadata_ood_score.
+
+        Same computation as _ood_scores' metadata_ood, just not yet reduced
+        to a single mean -- so a report can show which dimensions actually
+        drive a severe classification instead of only the aggregate.
+        """
+
+        if not self.fitted:
+            raise RuntimeError("PMV2FeatureBuilder must be fitted before OOD reporting")
+        metadata = self._metadata_raw(state)
+        assert self.metadata_reference_low is not None
+        assert self.metadata_reference_high is not None
+        lower_span = np.maximum(np.abs(self.metadata_reference_low), 1.0)
+        upper_span = np.maximum(np.abs(self.metadata_reference_high), 1.0)
+        below = np.maximum(0.0, self.metadata_reference_low - metadata) / lower_span
+        above = np.maximum(0.0, metadata - self.metadata_reference_high) / upper_span
+        deviation = np.maximum(below, above)
+        names = self.metadata_dimension_names()
+        if len(names) != len(deviation):
+            raise RuntimeError(
+                "metadata_dimension_names drifted out of sync with _metadata_raw "
+                f"({len(names)} names vs {len(deviation)} values)"
+            )
+        return {name: float(value) for name, value in zip(names, deviation)}
+
+    @staticmethod
     def _semantic_challenge(state: PMV2State) -> PMV2State:
         history = [
             state.current_session_history[0].model_copy(

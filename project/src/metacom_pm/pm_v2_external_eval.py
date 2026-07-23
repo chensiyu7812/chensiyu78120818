@@ -386,6 +386,7 @@ def validate_external_score_table(
         response_correlations,
         response_constants,
         response_prevalence,
+        _response_mutual_exclusivity,
     ) = dimension_health(
         matrix,
         DIMENSIONS,
@@ -398,6 +399,7 @@ def validate_external_score_table(
         risk_correlations,
         risk_constants,
         risk_prevalence,
+        _risk_mutual_exclusivity,
     ) = dimension_health(
         risk_matrix,
         RISK_DIMENSIONS,

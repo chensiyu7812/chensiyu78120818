@@ -388,17 +388,17 @@ def enforce_full_state_design(
             f"expected={expected_split_state_counts}, observed={report['split_counts']}"
         )
     expected_total_states = sum(expected_split_state_counts.values())
+    minimum_unique_current_texts = (expected_total_states * 7 + 8) // 9
     split_manifest_report = report["split_manifest"]
     if (
         report["n_states"] != expected_total_states
         or split_manifest_report["total_states"] != expected_total_states
         or split_manifest_report["unique_normalized_current_user_texts"]
-        != expected_total_states
-        or split_manifest_report["normalized_current_user_text_unique_rate"] != 1.0
+        < minimum_unique_current_texts
     ):
         raise RuntimeError(
-            "generated PM-v2 current-user texts are not globally unique over the "
-            "frozen full state design"
+            "generated PM-v2 current-user texts violate the frozen controlled "
+            "counterfactual-diversity floor"
         )
     expected_family_union_counts = {
         PMV2Split.TRAIN.value: 14,
@@ -419,8 +419,19 @@ def enforce_full_state_design(
         "cases_per_user": cases_per_user,
         "expected_split_state_counts": expected_split_state_counts,
         "expected_total_states": expected_total_states,
-        "unique_normalized_current_user_texts": expected_total_states,
-        "normalized_current_user_text_unique_rate": 1.0,
+        "minimum_unique_normalized_current_user_texts": (
+            minimum_unique_current_texts
+        ),
+        "unique_normalized_current_user_texts": split_manifest_report[
+            "unique_normalized_current_user_texts"
+        ],
+        "normalized_current_user_text_unique_rate": split_manifest_report[
+            "normalized_current_user_text_unique_rate"
+        ],
+        "current_user_text_diversity_policy": (
+            "same-user/same-family/same-split pairs only; max group 2; "
+            "minimum 7 unique per 9-case bundle"
+        ),
         "semantic_family_union_counts": observed_family_union_counts,
     }
     report["full_state_design"] = result
@@ -1128,6 +1139,7 @@ def main() -> None:
                 continue
             user_plan = all_user_attempts[user_id]
             prior_current_user_texts: list[str] = []
+            prior_current_user_families: list[str] = []
             for case_plan in user_plan["cases"]:
                 loaded = _load_successful_surface_attempt(
                     ledger=ledger, case_plan=case_plan
@@ -1189,6 +1201,7 @@ def main() -> None:
                                 )
                                 raise ReportedInputTokenOverrun(last_error)
                             lint = lint_generation_surface_case(
+                                user_id=str(user_plan["user_id"]),
                                 case_field=str(case_plan["case_field"]),
                                 regime=ResourceNeedRegime(
                                     str(case_plan["regime"])
@@ -1202,6 +1215,9 @@ def main() -> None:
                                 surface=surface,
                                 prior_current_user_texts=(
                                     prior_current_user_texts
+                                ),
+                                prior_current_user_families=(
+                                    prior_current_user_families
                                 ),
                             )
                             result = {
@@ -1300,6 +1316,9 @@ def main() -> None:
                         )
                 _, surface, _ = loaded
                 prior_current_user_texts.append(surface.current_user_text)
+                prior_current_user_families.append(
+                    str(case_plan["semantic_family"])
+                )
             bundle = _compile_casewise_user_from_ledger(
                 ledger=ledger,
                 user_plan=user_plan,

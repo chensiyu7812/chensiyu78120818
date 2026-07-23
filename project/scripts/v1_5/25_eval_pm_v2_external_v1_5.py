@@ -32,7 +32,7 @@ from metacom_pm.config import endpoint_from_config, load_config
 from metacom_pm.paid_run_release import require_paid_run_release
 from metacom_pm.evidence_filter import EvidenceFilterConfig
 from metacom_pm.freeze import require_study_freeze
-from metacom_pm.fixed_seeker_contract import FixedSeekerGenerationContract
+from metacom_pm.fixed_seeker_contract import require_fixed_seeker_v3_sidecar_contract
 from metacom_pm.generation_contract import SupporterGenerationContract
 from metacom_pm.io import (
     canonical_json,
@@ -127,6 +127,19 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=ROOT / "configs" / "experiment.yaml")
     parser.add_argument("--pm-v1-5-config", type=Path, default=ROOT / "configs" / "pm_v1_5.yaml")
     parser.add_argument("--freeze", type=Path, default=ROOT / "outputs" / "pm_v1_5_study_freeze.json")
+    parser.add_argument(
+        "--fixed-seeker-contract",
+        type=Path,
+        default=ROOT / "configs" / "pm_v1_5_fixed_seeker_v3.json",
+        help=(
+            "V3 sidecar contract (configs/pm_v1_5.yaml itself deliberately "
+            "stays on the historical V2 treatment; editing it directly was "
+            "shown to invalidate the already-qualified V8.19.2 lineage via a "
+            "pm_v1_5_config hash mismatch). Must match what scripts/"
+            "v1_5_create_freeze.py used when the freeze being read here was "
+            "built."
+        ),
+    )
     parser.add_argument("--evoemo", type=Path, default=ROOT / "data" / "external" / "evo_emo.json")
     parser.add_argument(
         "--turn-paths",
@@ -221,8 +234,8 @@ def main() -> None:
         raise RuntimeError("this external evaluation driver requires a pm-v1.5 config")
 
     supporter_generation_contract = SupporterGenerationContract.from_config(pm_v1_5_config)
-    fixed_seeker_contract = FixedSeekerGenerationContract.from_mapping(
-        pm_v1_5_config["fixed_seeker_generation_treatment"]
+    fixed_seeker_contract = require_fixed_seeker_v3_sidecar_contract(
+        args.fixed_seeker_contract
     )
     fixed_seeker_endpoint = endpoint_from_config(config, fixed_seeker_contract.seeker_endpoint)
     bound_fixed_seeker_contract = fixed_seeker_contract.bind_endpoint(
@@ -367,6 +380,14 @@ def main() -> None:
                     "supporter_generation_treatment_sha256",
                     generation_contract.get("supporter_generation_treatment_sha256"),
                 ),
+                (
+                    "evo_memory_builder_contract_sha256",
+                    generation_contract.get("evo_memory_builder_contract_sha256"),
+                ),
+                (
+                    "evo_memory_global_catalog_sha256",
+                    generation_contract.get("evo_memory_global_catalog_sha256"),
+                ),
                 ("fixed_seeker_generation_treatment", generation_contract.get("fixed_seeker_generation_treatment")),
                 (
                     "fixed_seeker_generation_treatment_sha256",
@@ -451,6 +472,12 @@ def main() -> None:
                 ),
                 "supporter_generation_treatment_sha256": generation_contract.get(
                     "supporter_generation_treatment_sha256"
+                ),
+                "evo_memory_builder_contract_sha256": generation_contract.get(
+                    "evo_memory_builder_contract_sha256"
+                ),
+                "evo_memory_global_catalog_sha256": generation_contract.get(
+                    "evo_memory_global_catalog_sha256"
                 ),
                 "fixed_seeker_generation_treatment": generation_contract.get(
                     "fixed_seeker_generation_treatment"

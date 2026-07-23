@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from typing import Any
 
 import httpx
@@ -13,11 +14,14 @@ from metacom_pm.api import (
     OpenAICompatibleClient,
     ProviderRequestError,
     StructuredOutputValidationError,
+    _classify_retryable_exception,
     chat_request_payload,
     make_client,
     normalize_provider_finish_reason,
     openai_strict_json_schema,
+    parse_audited_json_surface,
     request_payload_has_schema,
+    require_reported_usage,
     request_log,
 )
 from metacom_pm.pm_v2_data import GeneratedBundleDraft, GeneratedUserBundle
@@ -34,6 +38,26 @@ PROVIDER_SCHEMAS = (
     RiskJudgeOutput,
     ForcedSwapJudgeOutput,
 )
+
+
+def test_invalid_provider_json_has_a_distinct_bounded_repair_class() -> None:
+    assert _classify_retryable_exception(
+        ValueError("response is not valid JSON")
+    ) == ("provider_output_format", None)
+
+
+def test_audited_json_surface_only_normalizes_one_bounded_document() -> None:
+    parsed, audit = parse_audited_json_surface('```json\n{"score": 1}\n```')
+    assert parsed == {"score": 1}
+    assert audit["initially_valid_json"] is False
+    assert audit["normalization_kind"] == "single_markdown_json_fence"
+    assert audit["discarded_prefix_chars"] > 0
+    assert audit["discarded_suffix_chars"] > 0
+
+    with pytest.raises(json.JSONDecodeError):
+        parse_audited_json_surface('{"score": 1} and {"score": 1}')
+    with pytest.raises(json.JSONDecodeError):
+        parse_audited_json_surface("x" * 81 + '{"score": 1}')
 
 
 def _object_nodes(node: Any):
@@ -215,6 +239,173 @@ def test_paid_structured_response_survives_local_semantic_rejection(
     assert failure.validation_errors[0]["loc"] == []
 
 
+def test_chat_payload_sends_thinking_field_only_when_declared() -> None:
+    """thinking_mode="provider_default" (every existing endpoint) must omit
+    the field entirely -- only an endpoint that explicitly declares
+    "disabled" or "enabled" gets it sent. deepseek-v4-flash defaults to
+    thinking enabled and has no separate reasoning-token budget from
+    max_tokens, so an unrequested reasoning pass can consume the entire
+    judge max_tokens before any content token (the real cause of three
+    finish_reason=length judge failures on training_judge_deepseek_official_
+    flash)."""
+
+    default_endpoint = Endpoint(
+        base_url="https://api.openai.com", model="gpt-4o-mini", api_key_env="IGNORED"
+    )
+    payload = chat_request_payload(
+        default_endpoint,
+        [{"role": "user", "content": "hi"}],
+        temperature=0.0,
+        max_tokens=100,
+        seed=1,
+        response_schema=None,
+    )
+    assert "thinking" not in payload
+
+    disabled_endpoint = Endpoint(
+        base_url="https://api.deepseek.com",
+        model="deepseek-v4-flash",
+        api_key_env="IGNORED",
+        family="deepseek_official",
+        supports_strict_json_schema=False,
+        thinking_mode="disabled",
+    )
+    payload = chat_request_payload(
+        disabled_endpoint,
+        [{"role": "user", "content": "hi"}],
+        temperature=0.0,
+        max_tokens=100,
+        seed=1,
+        response_schema=None,
+    )
+    assert payload["thinking"] == {"type": "disabled"}
+
+
+def test_chat_payload_uses_loose_json_object_mode_when_declared() -> None:
+    """Endpoint.supports_strict_json_schema=False (DeepSeek's own official
+    API, which rejects the newer strict json_schema response_format with a
+    real HTTP 400 -- see the deepseek_official endpoint in
+    configs/experiment.yaml) is a declared, frozen capability decided before
+    any request is sent, not a runtime fallback after a rejection (that
+    remains forbidden -- see test_schema_http_400_is_diagnostic_and_never_
+    downgrades below). request_payload_has_schema must still recognize the
+    looser contract as an intentional structured-output request."""
+
+    endpoint = Endpoint(
+        base_url="https://api.deepseek.com",
+        model="deepseek-v4-flash",
+        api_key_env="IGNORED",
+        family="deepseek_official",
+        supports_strict_json_schema=False,
+    )
+    payload = chat_request_payload(
+        endpoint,
+        [{"role": "user", "content": "Generate."}],
+        temperature=0.0,
+        max_tokens=100,
+        seed=7,
+        response_schema=GeneratedBundleDraft,
+    )
+    assert payload["response_format"] == {"type": "json_object"}
+    assert request_payload_has_schema(payload) is True
+
+
+def test_default_endpoint_still_uses_strict_json_schema_mode() -> None:
+    endpoint = Endpoint(
+        base_url="https://integrate.api.nvidia.com",
+        model="deepseek-ai/deepseek-v4-flash",
+        api_key_env="IGNORED",
+        family="deepseek",
+    )
+    assert endpoint.supports_strict_json_schema is True
+    payload = chat_request_payload(
+        endpoint,
+        [{"role": "user", "content": "Generate."}],
+        temperature=0.0,
+        max_tokens=100,
+        seed=7,
+        response_schema=GeneratedBundleDraft,
+    )
+    assert payload["response_format"]["type"] == "json_schema"
+    assert payload["response_format"]["json_schema"]["schema"] == (
+        openai_strict_json_schema(GeneratedBundleDraft)
+    )
+
+
+def test_loose_json_object_mode_still_enforces_the_schema_locally(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A provider that only guarantees valid JSON syntax (not schema
+    conformance) must still have its response locally validated against
+    response_schema -- a mismatch is a StructuredOutputValidationError, not
+    a silent pass, exactly as under strict mode."""
+
+    class SemanticOutput(StrictModel):
+        value: int
+
+    monkeypatch.setenv("TEST_DEEPSEEK_KEY", "test-only")
+    endpoint = Endpoint(
+        base_url="https://api.deepseek.com",
+        model="deepseek-v4-flash",
+        api_key_env="TEST_DEEPSEEK_KEY",
+        family="deepseek_official",
+        supports_strict_json_schema=False,
+    )
+    client = OpenAICompatibleClient(endpoint)
+    client._client.close()
+
+    class LooseJsonTransport:
+        def __init__(self, content: str) -> None:
+            self.content = content
+            self.payloads: list[dict[str, Any]] = []
+
+        def post(self, path: str, *, json: dict[str, Any]) -> httpx.Response:
+            self.payloads.append(json)
+            return httpx.Response(
+                200,
+                request=httpx.Request("POST", f"https://api.deepseek.com{path}"),
+                json={
+                    "choices": [
+                        {
+                            "finish_reason": "stop",
+                            "message": {"content": self.content},
+                        }
+                    ],
+                    "usage": {
+                        "prompt_tokens": 10,
+                        "completion_tokens": 3,
+                        "total_tokens": 13,
+                    },
+                },
+            )
+
+        def close(self) -> None:
+            pass
+
+    valid_transport = LooseJsonTransport('{"value": 7}')
+    client._client = valid_transport  # type: ignore[assignment]
+    call, parsed = client.chat(
+        [{"role": "user", "content": "Return one value as json."}],
+        response_schema=SemanticOutput,
+        retries=1,
+    )
+    assert valid_transport.payloads[0]["response_format"] == {"type": "json_object"}
+    assert parsed is not None and parsed.value == 7
+    assert call.usage == {
+        "prompt_tokens": 10,
+        "completion_tokens": 3,
+        "total_tokens": 13,
+    }
+
+    client._client = LooseJsonTransport('{"value": "not-an-int"}')  # type: ignore[assignment]
+    with pytest.raises(StructuredOutputValidationError):
+        client.chat(
+            [{"role": "user", "content": "Return one value as json."}],
+            response_schema=SemanticOutput,
+            retries=1,
+        )
+
+
 def test_chat_payload_binds_the_locally_validated_schema() -> None:
     endpoint = Endpoint(
         base_url="https://api.openai.com",
@@ -339,10 +530,103 @@ def test_gemini_native_client_parses_usage_finish_reason_and_schema(
         "prompt_tokens": 19,
         "completion_tokens": 5,
         "total_tokens": 24,
+        "gemini_prompt_tokens": 19,
+        "gemini_candidate_tokens": 5,
+        "gemini_thought_tokens": 0,
+        "gemini_tool_use_prompt_tokens": 0,
+        "gemini_cached_content_tokens": 0,
     }
     assert call.provider_finish_reason == "STOP"
     assert call.normalized_finish_reason == "complete"
     assert len(call.request_hash) == 64
+
+
+def test_gemini_native_usage_reconciles_thought_tokens_without_tolerance(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class NativeOutput(StrictModel):
+        value: int
+
+    monkeypatch.setenv("TEST_GEMINI_KEY", "test-only")
+    endpoint = Endpoint(
+        base_url="https://generativelanguage.googleapis.com/v1beta",
+        model="gemini-2.5-flash-lite",
+        api_key_env="TEST_GEMINI_KEY",
+        family="google_gemini",
+        transport="gemini_generate_content",
+    )
+    client = GeminiNativeClient(endpoint)
+    client._client.close()
+
+    class ThinkingTransport:
+        def post(self, path: str, *, json: dict[str, Any]) -> httpx.Response:
+            return httpx.Response(
+                200,
+                request=httpx.Request(
+                    "POST",
+                    "https://generativelanguage.googleapis.com/v1beta" + path,
+                ),
+                json={
+                    "candidates": [
+                        {
+                            "content": {
+                                "role": "model",
+                                "parts": [{"text": '{"value":7}'}],
+                            },
+                            "finishReason": "STOP",
+                        }
+                    ],
+                    "usageMetadata": {
+                        "promptTokenCount": 265,
+                        "candidatesTokenCount": 109,
+                        "thoughtsTokenCount": 2,
+                        "toolUsePromptTokenCount": 0,
+                        "cachedContentTokenCount": 20,
+                        "totalTokenCount": 376,
+                    },
+                },
+            )
+
+        def close(self) -> None:
+            pass
+
+    client._client = ThinkingTransport()  # type: ignore[assignment]
+    try:
+        call, parsed = client.chat(
+            [{"role": "user", "content": "Return one value."}],
+            response_schema=NativeOutput,
+            retries=1,
+        )
+    finally:
+        client.close()
+    assert parsed is not None and parsed.value == 7
+    assert call.usage == {
+        "prompt_tokens": 265,
+        "completion_tokens": 111,
+        "total_tokens": 376,
+        "gemini_prompt_tokens": 265,
+        "gemini_candidate_tokens": 109,
+        "gemini_thought_tokens": 2,
+        "gemini_tool_use_prompt_tokens": 0,
+        "gemini_cached_content_tokens": 20,
+    }
+    assert require_reported_usage(call.usage, stage="test") == call.usage
+    with pytest.raises(RuntimeError, match="internally inconsistent"):
+        require_reported_usage(
+            {**call.usage, "total_tokens": 377},
+            stage="test",
+        )
+    tool_usage = {
+        **call.usage,
+        "prompt_tokens": 268,
+        "total_tokens": 379,
+        "gemini_tool_use_prompt_tokens": 3,
+    }
+    assert require_reported_usage(tool_usage, stage="test") == tool_usage
+    incomplete = dict(call.usage)
+    incomplete.pop("gemini_thought_tokens")
+    with pytest.raises(RuntimeError, match="breakdown is incomplete"):
+        require_reported_usage(incomplete, stage="test")
 
 
 def test_gemini_list_shaped_http_error_is_bounded_and_readable(

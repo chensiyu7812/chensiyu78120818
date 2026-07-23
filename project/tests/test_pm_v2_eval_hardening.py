@@ -5,6 +5,7 @@ import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
 
+import numpy as np
 import pytest
 
 from metacom_pm.api import (
@@ -67,6 +68,11 @@ from metacom_pm.pm_v2_judging import (
     RiskJudgeOutput,
     composite_spec_from_config,
     composite_weights_hash,
+    dimension_applicability_by_action,
+    dimension_applicability_contract_sha256,
+    dimension_health,
+    dimensions_inapplicable_to_every_action,
+    judge_family_directional_preference_report,
     judge_one,
     labeling_settings_from_config,
     prompt_contract_hash,
@@ -325,6 +331,387 @@ def test_raw_family_subgroup_gate_allows_structurally_inapplicable_zero_risks():
     assert family_report["risk_dimension_prevalence"]
     assert family_report["duplicate_dimension_pairs"] == []
     assert family_report["constant_dimensions"] == []
+
+
+def test_dimension_applicability_by_action_matches_applicable_risk_fields():
+    by_action = dimension_applicability_by_action(["M0+R0", "M0+RS"])
+    assert by_action["M0+R0"] == frozenset(
+        {"risk.selected_context_misuse", "risk.unnecessary_exposure",
+         "risk.stale_or_conflicting_use", "risk.strategy_overuse"}
+    )
+    assert by_action["M0+RS"] == frozenset(
+        {"risk.selected_context_misuse", "risk.unnecessary_exposure",
+         "risk.stale_or_conflicting_use"}
+    )
+
+
+def test_dimensions_inapplicable_to_every_action_is_the_intersection():
+    # M0+R0/M0+RS never select memory; MP+R0 does -- so the memory-misuse
+    # dimensions are inapplicable to the first two but applicable to the
+    # third, and must NOT appear in the "inapplicable to every action" set.
+    only_memoryless = dimensions_inapplicable_to_every_action(["M0+R0", "M0+RS"])
+    assert "risk.selected_context_misuse" in only_memoryless
+    mixed = dimensions_inapplicable_to_every_action(["M0+R0", "MP+R0"])
+    assert "risk.selected_context_misuse" not in mixed
+    assert dimensions_inapplicable_to_every_action([]) == frozenset()
+
+
+def test_dimension_applicability_contract_sha256_is_order_independent_and_sensitive():
+    a = dimension_applicability_contract_sha256(["M0+R0", "M0+RS"])
+    b = dimension_applicability_contract_sha256(["M0+RS", "M0+R0"])
+    c = dimension_applicability_contract_sha256(["M0+R0", "MP+R0"])
+    assert a == b
+    assert a != c
+
+
+def test_raw_family_gate_ignores_declared_inapplicable_constant_risk_dimension():
+    rows = []
+    for index in range(20):
+        for family in ("family_a", "family_b"):
+            risk = {
+                name: float((index + hash(name)) % 4)
+                for name in RiskDimensions.model_fields
+            }
+            # selected_context_misuse is declared inapplicable and held at a
+            # real structural zero; every other risk dimension still varies.
+            risk["selected_context_misuse"] = 0.0
+            rows.append(
+                {
+                    "judge_family": family,
+                    "response": {
+                        **{
+                            name: 1.0 + float((index + i) % 5)
+                            for i, name in enumerate(ResponseDimensions.model_fields)
+                        },
+                        "rationale": "response",
+                    },
+                    "risk": {**risk, "rationale": "risk"},
+                }
+            )
+    kwargs = dict(
+        expected_families=["family_a", "family_b"],
+        duplicate_exact_match_rate=1.1,
+        maximum_absolute_dimension_correlation=1.1,
+        composite_support_exact_match_rate=1.1,
+        maximum_absolute_composite_support_correlation=1.1,
+        reject_constant_response_dimensions=False,
+        reject_constant_risk_dimensions=True,
+        composite_spec=CompositeSpec(),
+        raise_on_failure=False,
+    )
+    without_contract = validate_raw_judge_family_health(rows, **kwargs)
+    assert without_contract["status"] == "FAIL"
+    assert "risk.selected_context_misuse" in (
+        without_contract["families"]["family_a"]["constant_dimensions"]
+    )
+    with_contract = validate_raw_judge_family_health(
+        rows,
+        inapplicable_risk_dimensions=frozenset({"risk.selected_context_misuse"}),
+        **kwargs,
+    )
+    assert with_contract["status"] == "PASS"
+    assert with_contract["families"]["family_a"]["constant_dimensions"] == []
+
+    # A genuinely constant *applicable* dimension must still fail.
+    for row in rows:
+        row["risk"]["memory_omission"] = 0.0
+    still_fails = validate_raw_judge_family_health(
+        rows,
+        inapplicable_risk_dimensions=frozenset({"risk.selected_context_misuse"}),
+        **kwargs,
+    )
+    assert still_fails["status"] == "FAIL"
+    assert "risk.memory_omission" in (
+        still_fails["families"]["family_a"]["constant_dimensions"]
+    )
+
+
+def test_judge_table_ignores_declared_inapplicable_dimension_for_low_mad_coverage():
+    spec = CompositeSpec()
+    dimensions = [
+        *[f"response.{name}" for name in ResponseDimensions.model_fields],
+        *[f"risk.{name}" for name in RiskDimensions.model_fields],
+    ]
+    labels = []
+    for index in range(20):
+        # risk.selected_context_misuse disagrees on every single label (MAD
+        # always above threshold) -- a real, structural artifact of a
+        # dimension that is never applicable to M0+R0, not a judge defect.
+        dimension_mad = {name: 0.0 for name in dimensions}
+        dimension_mad["risk.selected_context_misuse"] = 1.0
+        labels.append(
+            ActionLabel(
+                state_id=f"s{index}",
+                card_id=f"c{index}",
+                user_id=f"u{index}",
+                semantic_family=f"f{index}",
+                action_id="M0+R0",
+                response=ResponseDimensions(
+                    **{
+                        name: 1.0 + float((index * (offset + 1)) % 5)
+                        for offset, name in enumerate(ResponseDimensions.model_fields)
+                    }
+                ),
+                risk=RiskDimensions(
+                    **{name: 0.0 for name in RiskDimensions.model_fields}
+                ),
+                observed_input_tokens=100,
+                retrieval_calls=0,
+                judge_families=["a", "b"],
+                judge_count=2,
+                max_dimension_mad=1.0,
+                dimension_mad=dimension_mad,
+                label_reliable=True,
+                composite_weights_sha256=composite_weights_hash(spec),
+            )
+        )
+    kwargs = dict(
+        minimum_reliable_rate=0.0,
+        reliable_mad_threshold=0.75,
+        minimum_low_mad_coverage_per_dimension=0.90,
+        minimum_low_mad_coverage_per_action_dimension=0.90,
+        duplicate_exact_match_rate=1.1,
+        maximum_absolute_dimension_correlation=1.1,
+        reject_constant_response_dimensions=False,
+        reject_constant_risk_dimensions=False,
+        composite_spec=spec,
+        raise_on_failure=False,
+    )
+    without_contract = validate_judge_table(labels, **kwargs)
+    assert without_contract["status"] == "FAIL"
+    assert "risk.selected_context_misuse" in without_contract["low_coverage_dimensions"]
+    assert (
+        "M0+R0/risk.selected_context_misuse"
+        in without_contract["low_coverage_action_dimensions"]
+    )
+    with_contract = validate_judge_table(
+        labels,
+        inapplicable_risk_dimensions=frozenset({"risk.selected_context_misuse"}),
+        inapplicable_risk_dimensions_by_action=dimension_applicability_by_action(
+            ["M0+R0"]
+        ),
+        **kwargs,
+    )
+    assert with_contract["status"] == "PASS"
+    assert with_contract["low_coverage_dimensions"] == []
+    assert with_contract["low_coverage_action_dimensions"] == []
+    # The raw coverage dicts must show an explicit N/A (None), not a computed
+    # (here, artificially low) number that merely happens to be excluded from
+    # the failure lists above -- the report itself must not misrepresent an
+    # inapplicable cell as if it were a real (bad or good) measurement.
+    assert (
+        with_contract["dimension_low_mad_coverage"]["risk.selected_context_misuse"]
+        is None
+    )
+    assert (
+        with_contract["action_dimension_low_mad_coverage"]["M0+R0"][
+            "risk.selected_context_misuse"
+        ]
+        is None
+    )
+    # An applicable dimension on the same table must still report a real
+    # computed coverage value, not be swept into N/A by accident.
+    assert isinstance(
+        with_contract["dimension_low_mad_coverage"]["response.emotional_support"],
+        float,
+    )
+
+
+def test_dimension_health_pairwise_applicability_restricts_before_informative_filter():
+    # action A makes "overuse" inapplicable; its own (positively-correlated)
+    # noise would otherwise dilute the real, cleanly anti-correlated signal
+    # that action B alone provides between "overuse" and "omission".
+    field_names = ("overuse", "omission")
+    action_ids = ["A"] * 10 + ["B"] * 10
+    a_overuse = [1.0, 0.0] * 5
+    a_omission = [1.0, 0.0] * 5
+    b_overuse = [1.0, 0.0] * 5
+    b_omission = [0.0, 1.0] * 5
+    matrix = np.asarray(
+        list(zip(a_overuse + b_overuse, a_omission + b_omission)), dtype=float
+    )
+    inapplicable_by_action = {"A": frozenset({"risk.overuse"}), "B": frozenset()}
+
+    (
+        _dup_without,
+        corr_without,
+        _const_without,
+        _prev_without,
+        mutual_without,
+    ) = dimension_health(
+        matrix,
+        field_names,
+        prefix="risk",
+        duplicate_exact_match_rate=1.1,
+        maximum_absolute_dimension_correlation=0.95,
+        minimum_nonzero_observations=5,
+        split_correlation_by_sign=True,
+    )
+    assert corr_without == []
+    assert mutual_without == []
+
+    (
+        _dup_with,
+        corr_with,
+        _const_with,
+        _prev_with,
+        mutual_with,
+    ) = dimension_health(
+        matrix,
+        field_names,
+        prefix="risk",
+        duplicate_exact_match_rate=1.1,
+        maximum_absolute_dimension_correlation=0.95,
+        minimum_nonzero_observations=5,
+        action_ids=action_ids,
+        inapplicable_risk_dimensions_by_action=inapplicable_by_action,
+        split_correlation_by_sign=True,
+    )
+    assert corr_with == []
+    assert len(mutual_with) == 1
+    pair = mutual_with[0]
+    assert pair["pairwise_applicable_rows"] == 10
+    assert pair["informative_correlation"] == pytest.approx(-1.0)
+
+
+def test_dimension_health_splits_correlation_by_sign():
+    field_names = ("a", "b")
+    positive_matrix = np.asarray([[1.0, 1.0], [0.0, 0.0]] * 6, dtype=float)
+    negative_matrix = np.asarray([[1.0, 0.0], [0.0, 1.0]] * 6, dtype=float)
+
+    (_dup, positive_high, _const, _prev, positive_mutual) = dimension_health(
+        positive_matrix,
+        field_names,
+        prefix="risk",
+        duplicate_exact_match_rate=1.1,
+        maximum_absolute_dimension_correlation=0.95,
+        split_correlation_by_sign=True,
+    )
+    assert len(positive_high) == 1
+    assert positive_mutual == []
+
+    (_dup2, negative_high, _const2, _prev2, negative_mutual) = dimension_health(
+        negative_matrix,
+        field_names,
+        prefix="risk",
+        duplicate_exact_match_rate=1.1,
+        maximum_absolute_dimension_correlation=0.95,
+        split_correlation_by_sign=True,
+    )
+    assert negative_high == []
+    assert len(negative_mutual) == 1
+
+    # split_correlation_by_sign=False (the default) preserves the exact
+    # unsplit prior behavior: both directions gate as high_correlation_pairs.
+    (_dup3, negative_unsplit, _const3, _prev3, negative_mutual_unsplit) = (
+        dimension_health(
+            negative_matrix,
+            field_names,
+            prefix="risk",
+            duplicate_exact_match_rate=1.1,
+            maximum_absolute_dimension_correlation=0.95,
+        )
+    )
+    assert len(negative_unsplit) == 1
+    assert negative_mutual_unsplit == []
+
+
+def test_judge_family_directional_preference_report_concordance_and_contingency():
+    dims = list(ResponseDimensions.model_fields)
+    risk_dims = list(RiskDimensions.model_fields)
+
+    def row(state_id, action_id, family, support_value):
+        return {
+            "state_id": state_id,
+            "action_id": action_id,
+            "judge_family": family,
+            "response": {
+                **{name: support_value for name in dims},
+                "rationale": "r",
+            },
+            "risk": {**{name: 0.0 for name in risk_dims}, "rationale": "r"},
+        }
+
+    rows = []
+    # s1: both families score M0+RS higher -> concordant.
+    for family in ("fam_a", "fam_b"):
+        rows.append(row("s1", "M0+R0", family, 3.0))
+        rows.append(row("s1", "M0+RS", family, 4.0))
+    # s2/s3: fam_a prefers M0+R0, fam_b prefers M0+RS -> discordant.
+    for state_id in ("s2", "s3"):
+        rows.append(row(state_id, "M0+R0", "fam_a", 5.0))
+        rows.append(row(state_id, "M0+RS", "fam_a", 1.0))
+        rows.append(row(state_id, "M0+R0", "fam_b", 1.0))
+        rows.append(row(state_id, "M0+RS", "fam_b", 5.0))
+
+    report = judge_family_directional_preference_report(
+        rows,
+        action_a="M0+R0",
+        action_b="M0+RS",
+        expected_families=["fam_a", "fam_b"],
+        dialogue_by_state={"s1": "d1", "s2": "d2", "s3": "d3"},
+        risk_weight=0.25,
+        bootstrap_replicates=200,
+        bootstrap_seed=3,
+    )
+    assert report["diagnostic_only"] is True
+    assert report["never_gates"] is True
+    assert report["n_comparable_states"] == 3
+    assert report["concordant_states"] == 1
+    assert report["discordant_states"] == 2
+    assert report["tie_involved_states"] == 0
+    assert report["concordance_rate"] == pytest.approx(1.0 / 3.0)
+    assert report["directional_contingency_table"]["M0+R0"]["M0+RS"] == 2
+    assert report["directional_contingency_table"]["M0+RS"]["M0+RS"] == 1
+    bootstrap = report["dialogue_cluster_bootstrap"]
+    assert bootstrap["n_groups"] == 3
+    assert bootstrap["concordance_rate_ci_lower"] is not None
+    assert bootstrap["concordance_rate_ci_upper"] is not None
+    assert 0.0 <= bootstrap["concordance_rate_ci_lower"] <= bootstrap[
+        "concordance_rate_ci_upper"
+    ] <= 1.0
+
+
+def test_judge_family_directional_preference_report_ties_excluded_from_decisive_rates():
+    dims = list(ResponseDimensions.model_fields)
+    risk_dims = list(RiskDimensions.model_fields)
+
+    def row(state_id, action_id, family, support_value):
+        return {
+            "state_id": state_id,
+            "action_id": action_id,
+            "judge_family": family,
+            "response": {
+                **{name: support_value for name in dims},
+                "rationale": "r",
+            },
+            "risk": {**{name: 0.0 for name in risk_dims}, "rationale": "r"},
+        }
+
+    rows = []
+    # fam_a ties on every state (identical scores for both actions).
+    for state_id in ("s1", "s2", "s3"):
+        rows.append(row(state_id, "M0+R0", "fam_a", 3.0))
+        rows.append(row(state_id, "M0+RS", "fam_a", 3.0))
+        rows.append(row(state_id, "M0+R0", "fam_b", 5.0))
+        rows.append(row(state_id, "M0+RS", "fam_b", 1.0))
+
+    report = judge_family_directional_preference_report(
+        rows,
+        action_a="M0+R0",
+        action_b="M0+RS",
+        expected_families=["fam_a", "fam_b"],
+        dialogue_by_state={"s1": "d1", "s2": "d2", "s3": "d3"},
+        risk_weight=0.25,
+        bootstrap_replicates=200,
+        bootstrap_seed=1,
+    )
+    assert report["tie_involved_states"] == 3
+    assert report["concordant_states"] == 0
+    assert report["discordant_states"] == 0
+    assert report["concordance_rate"] is None
+    assert report["discordance_rate"] is None
+    assert report["tie_rate"] == 1.0
 
 
 def test_success_ledger_reconciles_generation_turn_after_append_crash(tmp_path):
@@ -862,6 +1249,7 @@ def test_evoemo_turn_resume_never_repeats_successful_or_failed_http_attempts(
     }
     out_dir = tmp_path / "out"
     kwargs = {
+        "project_root": Path(__file__).resolve().parents[1],
         "generator_endpoint": endpoint,
         "supporter_generation_contract": SupporterGenerationContract.from_config(
             load_config("configs/pm_v2.yaml")

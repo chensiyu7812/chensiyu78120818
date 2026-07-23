@@ -13,6 +13,33 @@ def canonical_json(obj: Any) -> str:
     return json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
+def dict_field_diff(saved: Any, current: Any) -> list[str]:
+    """Dotted field paths where two (possibly deeply nested) dicts disagree.
+
+    Several fail-closed identity/binding checks in this project compare two
+    dicts only via a hash of their canonical JSON and, on mismatch, report
+    nothing beyond "they differ" -- which turns every real mismatch into a
+    manual forensic reconstruction. This gives any such check a cheap way to
+    say exactly which field(s) changed.
+    """
+    differing_paths: list[str] = []
+
+    def _walk(saved_value: Any, current_value: Any, path: str) -> None:
+        if isinstance(saved_value, dict) and isinstance(current_value, dict):
+            for key in sorted(set(saved_value) | set(current_value)):
+                _walk(
+                    saved_value.get(key),
+                    current_value.get(key),
+                    f"{path}.{key}" if path else key,
+                )
+            return
+        if canonical_json(saved_value) != canonical_json(current_value):
+            differing_paths.append(path)
+
+    _walk(saved, current, "")
+    return differing_paths
+
+
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 

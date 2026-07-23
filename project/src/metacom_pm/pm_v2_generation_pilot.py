@@ -13,8 +13,21 @@ from .api import (
 )
 from .artifacts import require_artifact_attestation
 from .attempt_ledger import PersistentAttemptLedger, physical_call_key
+from .bounded_retry import (
+    DEFAULT_BACKOFF_SECONDS,
+    RETRYABLE_UP_TO_FULL_BUDGET,
+    RETRY_CONTRACT_PROTOCOL,
+    retry_ledger_summary,
+)
 from .config import load_config
-from .io import canonical_json, iter_jsonl, read_json, sha256_file, sha256_text
+from .io import (
+    canonical_json,
+    dict_field_diff,
+    iter_jsonl,
+    read_json,
+    sha256_file,
+    sha256_text,
+)
 from .pm_v2_contracts import ResourceNeedRegime
 from .pm_v2_data import (
     GENERATION_CASE_FIELDS,
@@ -36,17 +49,25 @@ GENERATION_PILOT_STAGE = (
     "pm_v2_synthetic_generation_deterministic_evidence_pilot"
 )
 GENERATION_PILOT_CONTRACT_VERSION = (
-    "pm-v2-generation-compatibility-pilot-v8.7-scoped-generation-lineage-"
+    "pm-v2-generation-compatibility-pilot-v8.12-memory-blueprint-boundary-"
+    "controlled-counterfactual-text-"
+    "observable-state-support-"
     "role-safe-exchanges-"
     "observable-readiness-exact-paid-surface-review-casewise-one-bounded-"
-    "repair-zero-fallback"
+    "repair-three-ledgered-transport-attempts-zero-fallback"
 )
 GENERATION_PILOT_USER_ID = "pmv2_generation_compatibility_pilot"
 GENERATION_PILOT_SEED_OFFSET = 9_000_000
 GENERATION_PILOT_MINIMUM_CALLS = len(ResourceNeedRegime)
-GENERATION_PILOT_MAX_ATTEMPTS = len(ResourceNeedRegime) * (
+GENERATION_PILOT_MAX_CONTENT_ATTEMPTS = len(ResourceNeedRegime) * (
     1 + SURFACE_GENERATION_MAX_REPAIRS
 )
+GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT = 3
+GENERATION_PILOT_MAX_ATTEMPTS = (
+    GENERATION_PILOT_MAX_CONTENT_ATTEMPTS
+    * GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT
+)
+GENERATION_PILOT_TRANSPORT_BACKOFF_SECONDS = DEFAULT_BACKOFF_SECONDS
 GENERATION_PILOT_REPLAY_PROTOCOL = (
     "pm-v2-paid-schema-response-offline-deterministic-compiler-replay-v1"
 )
@@ -218,10 +239,14 @@ def read_generation_seed_dialogues(path: str | Path) -> list[str]:
 def shared_generation_code_manifest(project_root: str | Path) -> dict[str, str]:
     root = Path(project_root).resolve()
     relative_paths = (
+        "scripts/20a_run_pm_v2_generation_compatibility_pilot.py",
+        "scripts/v1_5/20a_run_generation_compatibility_pilot_v1_5.py",
         "src/metacom_pm/api.py",
         "src/metacom_pm/attempt_ledger.py",
+        "src/metacom_pm/bounded_retry.py",
         "src/metacom_pm/config.py",
         "src/metacom_pm/io.py",
+        "src/metacom_pm/paid_run_release.py",
         "src/metacom_pm/pm_v2_contracts.py",
         "src/metacom_pm/pm_v2_data.py",
         "src/metacom_pm/pm_v2_generation_pilot.py",
@@ -379,6 +404,15 @@ def build_generation_compatibility_contract(
             "temperature": GENERATION_TEMPERATURE,
             "max_output_tokens": SURFACE_GENERATION_MAX_OUTPUT_TOKENS,
             "request_retries": 1,
+            "retry_contract_protocol": RETRY_CONTRACT_PROTOCOL,
+            "transport_retry_classes": sorted(RETRYABLE_UP_TO_FULL_BUDGET),
+            "transport_backoff_seconds": list(
+                GENERATION_PILOT_TRANSPORT_BACKOFF_SECONDS
+            ),
+            "maximum_transport_attempts_per_content_attempt": (
+                GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT
+            ),
+            "maximum_content_attempts": GENERATION_PILOT_MAX_CONTENT_ATTEMPTS,
             "maximum_physical_attempts": GENERATION_PILOT_MAX_ATTEMPTS,
             "minimum_physical_attempts": GENERATION_PILOT_MINIMUM_CALLS,
             "maximum_repairs_per_case": SURFACE_GENERATION_MAX_REPAIRS,
@@ -497,7 +531,9 @@ def build_generation_compatibility_plan(
                     ),
                 ),
                 "maximum_output_tokens": int(controls["max_output_tokens"]),
-                "maximum_physical_attempts": 1,
+                "maximum_physical_attempts": (
+                    GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT
+                ),
             }
         )
         messages_by_call[call_key] = messages
@@ -694,7 +730,9 @@ def require_generation_compatibility_attestation(
         ):
             raise RuntimeError(
                 "generation replay lineage differs from the current "
-                "endpoint/config/prompt/schema/shared-code contract"
+                "endpoint/config/prompt/schema/shared-code contract. "
+                "Differing field(s): "
+                f"{dict_field_diff(recorded_contract or {}, expected_contract)}"
             )
         replay = read_json(replay_path)
         summary = read_json(summary_path)
@@ -779,7 +817,9 @@ def require_generation_compatibility_attestation(
     ):
         raise RuntimeError(
             "generation compatibility pilot lineage differs from the current "
-            "endpoint/config/prompt/schema/shared-code contract"
+            "endpoint/config/prompt/schema/shared-code contract. "
+            "Differing field(s): "
+            f"{dict_field_diff(recorded_contract or {}, expected_contract)}"
         )
     estimate = read_json(estimate_path)
     estimate_payload = {
@@ -789,14 +829,32 @@ def require_generation_compatibility_attestation(
     }
     accepted_cost_hash = sha256_text(canonical_json(estimate_payload))
     plan_rows = list(iter_jsonl(plan_path))
+    controls = expected_contract["generation_controls"]
+    maximum_physical_attempts = sum(
+        int(row.get("maximum_physical_attempts") or 0) for row in plan_rows
+    )
     if (
         estimate.get("cost_estimate_sha256") != accepted_cost_hash
         or parameters.get("accepted_cost_estimate_sha256") != accepted_cost_hash
         or (estimate.get("budget_gate") or {}).get("status") != "PASS"
         or estimate.get("call_plan_sha256")
         != sha256_text(canonical_json(plan_rows))
-        or len(plan_rows)
-        != int(expected_contract["generation_controls"]["maximum_physical_attempts"])
+        or len(plan_rows) != int(controls["maximum_content_attempts"])
+        or any(
+            int(row.get("maximum_physical_attempts") or 0)
+            != int(controls["maximum_transport_attempts_per_content_attempt"])
+            for row in plan_rows
+        )
+        or maximum_physical_attempts != int(controls["maximum_physical_attempts"])
+        or int(estimate.get("maximum_content_attempts") or 0) != len(plan_rows)
+        or int(estimate.get("maximum_physical_api_attempts") or 0)
+        != maximum_physical_attempts
+        or parameters.get("retry_contract_protocol") != RETRY_CONTRACT_PROTOCOL
+        or int(
+            parameters.get("maximum_transport_attempts_per_content_attempt")
+            or 0
+        )
+        != GENERATION_PILOT_MAX_TRANSPORT_ATTEMPTS_PER_CONTENT_ATTEMPT
     ):
         raise RuntimeError(
             "generation compatibility pilot cost plan/accepted hash is stale"
@@ -827,9 +885,10 @@ def require_generation_compatibility_attestation(
         ledger_path,
         stage=GENERATION_PILOT_STAGE,
         expected_calls={
-            str(row["physical_call_key"]): 1 for row in plan_rows
+            str(row["physical_call_key"]): int(row["maximum_physical_attempts"])
+            for row in plan_rows
         },
-        maximum_total_attempts=len(plan_rows),
+        maximum_total_attempts=maximum_physical_attempts,
     )
     successful_keys = {
         str(row["physical_call_key"])
@@ -852,17 +911,40 @@ def require_generation_compatibility_attestation(
             raise RuntimeError("generation pilot lacks an accepted case surface")
         if accepted["attempt_kind"] == "repair":
             expected_started_keys.add(str(repair["physical_call_key"]))
-            if ledger.terminal_event(str(initial["physical_call_key"]), 1) != "FAILED":
+            initial_terminal = ledger.terminal_row(str(initial["physical_call_key"]))
+            if (initial_terminal or {}).get("event") != "FAILED":
                 raise RuntimeError(
                     "generation pilot repair lacks a failed initial attempt"
                 )
         elif accepted["attempt_kind"] != "initial":
             raise RuntimeError("generation pilot accepted unknown attempt kind")
+    retry_summary = retry_ledger_summary(ledger, list(ledger.expected_calls))
+    usage_totals = {
+        key: 0 for key in ("prompt_tokens", "completion_tokens", "total_tokens")
+    }
+    for terminal_row in ledger.event_rows:
+        if terminal_row.get("event") not in {"SUCCEEDED", "FAILED"}:
+            continue
+        if terminal_row.get("usage") is None:
+            continue
+        usage = require_reported_usage(
+            terminal_row.get("usage"),
+            stage="persisted generation-pilot physical attempt",
+        )
+        for key in usage_totals:
+            usage_totals[key] += usage[key]
     if (
         set(accepted_by_case) != expected_cases
         or successful_keys != accepted_keys
         or ledger.started_call_keys != expected_started_keys
         or int(summary.get("physical_attempts") or 0) != ledger.started_attempts
+        or summary.get("transport_retry_summary") != retry_summary
+        or summary.get("actual_usage") != usage_totals
+        or any(
+            (failure.get("metadata") or {}).get("retry_contract_protocol")
+            != RETRY_CONTRACT_PROTOCOL
+            for failure in ledger.failures()
+        )
         or summary.get("bundle_validation") != bundle_report
     ):
         raise RuntimeError(

@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 
-from metacom_pm.api import CallResult, Endpoint
+from metacom_pm.api import CallResult, Endpoint, ProviderRequestError
 from metacom_pm.artifacts import create_artifact_attestation
 from metacom_pm.config import endpoint_from_config, load_config
 from metacom_pm.contracts import MemoryBackendRecord
@@ -852,6 +852,44 @@ def test_action_sweep_plan_is_exact_and_does_not_need_api_key(
     assert len(estimate["cost_estimate_sha256"]) == 64
 
 
+def test_action_sweep_caches_identical_strategy_query_without_changing_rows(
+    tmp_path, monkeypatch, tiny_state, tiny_memories, tiny_strategy
+):
+    import metacom_pm.sweep as sweep_module
+
+    runtime = tmp_path / "runtime.jsonl"
+    backend = tmp_path / "backend.jsonl"
+    strategies = tmp_path / "strategies.jsonl"
+    write_jsonl(runtime, [tiny_state.model_dump(mode="json")])
+    write_jsonl(
+        backend,
+        [MemoryBackendRecord(card_id=tiny_state.card_id, items=tiny_memories).model_dump(mode="json")],
+    )
+    write_jsonl(strategies, [tiny_strategy.model_dump(mode="json")])
+    original_retrieve = sweep_module.StrategyRetriever.retrieve
+    calls = 0
+
+    def counted_retrieve(self, query):
+        nonlocal calls
+        calls += 1
+        return original_retrieve(self, query)
+
+    monkeypatch.setattr(sweep_module.StrategyRetriever, "retrieve", counted_retrieve)
+    endpoint = Endpoint("https://invalid.example", "fixture", "UNSET", family="test")
+    estimate, rows = plan_action_sweep(
+        runtime,
+        backend,
+        strategies,
+        endpoint=endpoint,
+        request_retries=1,
+        input_usd_per_mtok=1.0,
+        output_usd_per_mtok=2.0,
+    )
+    assert any(row["action_id"].endswith("+RS") for row in rows)
+    assert calls == 1
+    assert estimate["logical_api_calls"] == len(rows)
+
+
 def test_action_sweep_deduplicates_filter_collapsed_prompts(
     tmp_path, monkeypatch, tiny_state, tiny_memories, tiny_strategy
 ):
@@ -1065,6 +1103,140 @@ def test_action_sweep_cost_hash_binds_physical_attempt_cap(
         row["estimated_input_tokens"] > row["raw_estimated_input_tokens"]
         for row in safety_rows
     )
+
+
+def test_action_sweep_transport_attempt_cap_is_separate_from_request_retries(
+    tmp_path, tiny_state, tiny_memories, tiny_strategy
+):
+    runtime = tmp_path / "runtime.jsonl"
+    backend = tmp_path / "backend.jsonl"
+    strategies = tmp_path / "strategies.jsonl"
+    write_jsonl(runtime, [tiny_state.model_dump(mode="json")])
+    write_jsonl(
+        backend,
+        [
+            MemoryBackendRecord(
+                card_id=tiny_state.card_id, items=tiny_memories
+            ).model_dump(mode="json")
+        ],
+    )
+    write_jsonl(strategies, [tiny_strategy.model_dump(mode="json")])
+    endpoint = Endpoint(
+        "https://invalid.example", "never-called", "UNSET", family="test"
+    )
+
+    estimate, rows = plan_action_sweep(
+        runtime,
+        backend,
+        strategies,
+        endpoint=endpoint,
+        request_retries=1,
+        transport_max_attempts_per_call=4,
+        input_usd_per_mtok=1.0,
+        output_usd_per_mtok=2.0,
+    )
+
+    assert estimate["request_retries"] == 1
+    assert estimate["transport_max_attempts_per_call"] == 4
+    assert estimate["maximum_physical_api_attempts"] == 4 * estimate[
+        "expected_api_calls"
+    ]
+    assert estimate["estimated_cost_usd"] == pytest.approx(
+        4 * estimate["logical_estimated_cost_usd"]
+    )
+    assert {row["max_http_attempts"] for row in rows} == {4}
+
+
+def test_v1_5_longitudinal_transport_contract_is_separate_and_self_hashed() -> None:
+    module = _load_script_module(
+        "pm_v1_5_longitudinal_transport_contract",
+        "v1_5/06_run_action_sweep_v1_5.py",
+    )
+    contract = module._longitudinal_transport_execution_contract()
+    body = {key: value for key, value in contract.items() if key != "contract_sha256"}
+
+    assert contract["transport_max_attempts_per_call"] == 4
+    assert contract["transport_retry_policy"] == "bounded_transport"
+    assert contract["continue_after_isolated_terminal_failure"] is True
+    assert contract["terminal_content_failures_are_not_blindly_retried"] is True
+    assert contract["legacy_config_request_retries"] == 1
+    assert contract["legacy_config_fail_fast"] is True
+    assert contract["scientific_treatment_unchanged"] is True
+    assert contract["retryable_classes"] == [
+        "http_5xx",
+        "network_timeout",
+        "rate_limited_429",
+        "request_timeout_408",
+    ]
+    assert contract["contract_sha256"] == sha256_text(canonical_json(body))
+
+
+def test_bounded_sweep_circuit_breaker_stops_repeated_same_class_failures(
+    tmp_path, monkeypatch, tiny_state, tiny_memories, tiny_strategy
+):
+    runtime = tmp_path / "runtime.jsonl"
+    backend = tmp_path / "backend.jsonl"
+    strategies = tmp_path / "strategies.jsonl"
+    write_jsonl(runtime, [tiny_state.model_dump(mode="json")])
+    write_jsonl(
+        backend,
+        [
+            MemoryBackendRecord(
+                card_id=tiny_state.card_id, items=tiny_memories
+            ).model_dump(mode="json")
+        ],
+    )
+    write_jsonl(strategies, [tiny_strategy.model_dump(mode="json")])
+
+    class RepeatedTerminalClient:
+        calls = 0
+
+        def __init__(self, endpoint):
+            self.endpoint = endpoint
+
+        def close(self):
+            pass
+
+        def chat(self, *args, **kwargs):
+            type(self).calls += 1
+            raise ProviderRequestError(
+                status_code=401,
+                detail="fixture terminal failure",
+                schema_mode=False,
+            )
+
+    import metacom_pm.sweep as sweep_module
+
+    monkeypatch.setattr(
+        sweep_module, "OpenAICompatibleClient", RepeatedTerminalClient
+    )
+    out_dir = tmp_path / "out"
+    with pytest.raises(RuntimeError, match="circuit breaker"):
+        run_action_sweep(
+            runtime,
+            backend,
+            strategies,
+            out_dir / "outcomes.jsonl",
+            out_dir / "raw.jsonl",
+            out_dir / "summary.json",
+            endpoint=Endpoint(
+                "https://invalid.example", "never-called", "UNSET", family="test"
+            ),
+            action_filter={"M0+R0", "M0+RS", "MP+R0"},
+            request_retries=1,
+            transport_max_attempts_per_call=4,
+            fail_fast=False,
+            transport_retry_policy="bounded_transport",
+            transport_backoff_seconds=(0.0, 0.0, 0.0),
+            consecutive_same_class_circuit_breaker=2,
+        )
+
+    assert RepeatedTerminalClient.calls == 2
+    events = [
+        row["event"]
+        for row in iter_jsonl(out_dir / "physical_attempt_ledger.jsonl")
+    ]
+    assert events == ["STARTED", "FAILED", "STARTED", "FAILED"]
 
 
 def test_action_sweep_missing_api_key_does_not_reserve_attempt(

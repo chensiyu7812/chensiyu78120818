@@ -645,13 +645,7 @@ class SplitManifest(StrictModel):
     def no_overlap(self):
         if self.normalized_text_overlap or self.user_overlap or self.semantic_family_overlap:
             raise ValueError("PM-v2 split manifest contains leakage")
-        if self.unique_normalized_current_user_texts != self.total_states:
-            raise ValueError(
-                "PM-v2 current_user_text must be globally unique across all states"
-            )
         expected_rate = self.unique_normalized_current_user_texts / self.total_states
         if abs(self.normalized_current_user_text_unique_rate - expected_rate) > 1e-12:
             raise ValueError("PM-v2 normalized text unique-rate accounting mismatch")
-        if self.normalized_current_user_text_unique_rate != 1.0:
-            raise ValueError("PM-v2 normalized current-user-text unique rate must be 1.0")
         return self

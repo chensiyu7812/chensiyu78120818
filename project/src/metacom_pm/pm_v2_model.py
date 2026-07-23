@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from math import fsum
 from pathlib import Path
 from statistics import NormalDist
-from typing import Any, Iterable, Sequence
+from typing import Any, Callable, Iterable, Sequence
 
 import joblib
 import numpy as np
@@ -38,6 +39,112 @@ RISK_FIELDS = (
 
 def composite_weights_digest(spec: CompositeSpec) -> str:
     return sha256_text(canonical_json(spec.weights))
+
+
+# Fixed, disclosed, never tuned from calibration/internal-test results. This
+# is a MAD-adjusted conservative utility -- a pessimistic point adjustment
+# for judge disagreement recorded on ActionLabel.dimension_mad -- and is
+# explicitly NOT a confidence interval, NOT a gold-standard value, and NOT a
+# measurement of true user utility.
+MAD_ADJUSTED_CONSERVATIVE_UTILITY_PROTOCOL = (
+    "pm-v1.5-mad-adjusted-conservative-utility-v1"
+)
+MAD_ADJUSTED_CONSERVATIVE_UTILITY_LAMBDA = 1.0
+# The dimensions' own frozen 1-5/0-3 scales (ResponseDimensions/RiskDimensions,
+# pm_v2_contracts.py) named here so attestations can bind the exact clamp
+# range in force without hand-copying a magic number that could silently
+# drift from the schema.
+RESPONSE_DIMENSION_CLAMP_RANGE = (1.0, 5.0)
+RISK_DIMENSION_CLAMP_RANGE = (0.0, 3.0)
+
+
+def mad_adjusted_conservative_quality_and_risk(
+    *,
+    label: ActionLabel,
+    action_id: str,
+    composite_spec: CompositeSpec,
+) -> tuple[float, float]:
+    """Per-dimension MAD-adjusted conservative quality/risk for one label.
+
+    quality: every response dimension is first replaced by
+    clip(median - lambda*MAD, 1, 5) (the dimension's own frozen 1-5 scale),
+    then aggregated with the same frozen composite weights already used for
+    the nominal quality score -- never a linear approximation applied only
+    at the composite level.
+
+    risk: only the dimensions applicable to this action (applicable_risk_
+    fields, pm_v2_model.py's own authoritative source) are replaced by
+    clip(median + lambda*MAD, 0, 3), scaled to [0, 1], and the maximum is
+    taken -- matching the existing nominal risk aggregation exactly, just
+    with a pessimistic per-dimension adjustment instead of the raw median.
+
+    lambda is MAD_ADJUSTED_CONSERVATIVE_UTILITY_LAMBDA, fixed at 1.0. It must
+    never be tuned from calibration/internal-test results -- doing so would
+    turn a disclosed, fixed conservatism rule into a result-chasing free
+    parameter.
+    """
+
+    lam = MAD_ADJUSTED_CONSERVATIVE_UTILITY_LAMBDA
+    response_min, response_max = RESPONSE_DIMENSION_CLAMP_RANGE
+    risk_min, risk_max = RISK_DIMENSION_CLAMP_RANGE
+    conservative_response = {
+        name: float(
+            np.clip(
+                float(getattr(label.response, name))
+                - lam * float(label.dimension_mad[f"response.{name}"]),
+                response_min,
+                response_max,
+            )
+        )
+        for name in RESPONSE_FIELDS
+    }
+    conservative_quality = float(
+        composite_spec.score(ResponseDimensions(**conservative_response))
+    )
+    applicable = applicable_risk_fields(action_id)
+    conservative_risk = max(
+        float(
+            np.clip(
+                float(getattr(label.risk, name))
+                + lam * float(label.dimension_mad[f"risk.{name}"]),
+                risk_min,
+                risk_max,
+            )
+        )
+        / risk_max
+        for name in applicable
+    )
+    return conservative_quality, conservative_risk
+
+
+def mad_adjusted_conservative_utility(
+    *,
+    label: ActionLabel,
+    action_id: str,
+    composite_spec: CompositeSpec,
+    risk_weight: float,
+    cost_weight: float,
+    normalized_cost: float,
+) -> dict[str, float]:
+    """The one shared conservative-utility computation for every comparator:
+    learned PM, transparent rule, fixed comparators, the calibration fixed
+    frontier's own selection, and the internal paired bootstrap all call this
+    same helper with the same fixed lambda -- never a per-caller reimplementation.
+    """
+
+    conservative_quality, conservative_risk = mad_adjusted_conservative_quality_and_risk(
+        label=label, action_id=action_id, composite_spec=composite_spec
+    )
+    conservative_utility = float(
+        conservative_quality
+        - float(risk_weight) * conservative_risk
+        - float(cost_weight) * float(normalized_cost)
+    )
+    return {
+        "conservative_quality": conservative_quality,
+        "conservative_risk": conservative_risk,
+        "conservative_utility": conservative_utility,
+    }
 
 
 SEVERE_OOD_FALLBACK_REASON = (
@@ -269,6 +376,7 @@ class PMV2Model:
         word_features: int = 256,
         char_features: int = 256,
         step0_signal_mode: str = "full",
+        domain_key: Callable[[PMV2State], str] | None = None,
     ) -> "PMV2Model":
         effective_selection = selection_config or SelectionConfig()
         state_map = {state.state_id: state for state in states}
@@ -371,13 +479,58 @@ class PMV2Model:
             state_raw_totals[label.state_id] = (
                 state_raw_totals.get(label.state_id, 0.0) + raw_weight
             )
-        state_weights = np.asarray(
-            [
+        # Domain -> user/dialogue group -> state -> action/alias, each level
+        # equalized within its parent. ``domain_key`` defaults to a single
+        # shared domain, which is a uniform rescaling of (so mathematically
+        # equivalent to, for any scale-invariant weighted fit) the prior
+        # state-only equalization whenever every group has the same state
+        # count -- true of the 52 synthetic development users today (9
+        # regime states each). Passing a real domain_key (e.g. distinguishing
+        # longitudinal synthetic states from ESConv auxiliary states) is what
+        # stops a domain with many more user/dialogue groups, or deeper
+        # per-dialogue turn counts, from silently outweighing another.
+        effective_domain_key = domain_key or (lambda _state: "default")
+        domain_by_state = {
+            state_id: str(effective_domain_key(state))
+            for state_id, state in state_map.items()
+        }
+        group_by_state = {
+            state_id: str(state.user_id) for state_id, state in state_map.items()
+        }
+        groups_by_domain: dict[str, set[str]] = {}
+        states_by_group: dict[tuple[str, str], set[str]] = {}
+        for state_id in state_map:
+            domain = domain_by_state[state_id]
+            group = group_by_state[state_id]
+            groups_by_domain.setdefault(domain, set()).add(group)
+            states_by_group.setdefault((domain, group), set()).add(state_id)
+        domains_present = sorted(groups_by_domain)
+        domain_weight = {domain: 1.0 / len(domains_present) for domain in domains_present}
+        state_weights = np.empty(len(usable), dtype=float)
+        for i, (label, raw_weight) in enumerate(
+            zip(usable, alias_raw_weights, strict=True)
+        ):
+            domain = domain_by_state[label.state_id]
+            group = group_by_state[label.state_id]
+            group_weight = domain_weight[domain] / len(groups_by_domain[domain])
+            state_weight = group_weight / len(states_by_group[(domain, group)])
+            state_weights[i] = state_weight * (
                 raw_weight / state_raw_totals[label.state_id]
-                for label, raw_weight in zip(usable, alias_raw_weights, strict=True)
-            ],
-            dtype=float,
-        )
+            )
+        domain_weighting_report = {
+            "domains_present": domains_present,
+            "domain_weight": domain_weight,
+            "groups_per_domain": {
+                domain: len(groups) for domain, groups in groups_by_domain.items()
+            },
+            "states_per_domain": {
+                domain: sum(
+                    len(states_by_group[(domain, group)])
+                    for group in groups_by_domain[domain]
+                )
+                for domain in domains_present
+            },
+        }
 
         def mad_weight(label: ActionLabel, *, prefix: str, field_name: str) -> float:
             mad = float(label.dimension_mad[f"{prefix}.{field_name}"])
@@ -395,6 +548,36 @@ class PMV2Model:
                     total**2 / max(float(np.sum(values**2)), 1e-12)
                 ),
             }
+
+        def grouped_effective_weight_report(
+            values: np.ndarray, group_keys: Sequence[str]
+        ) -> dict[str, dict[str, float]]:
+            # Reports effective weight and ESS per group directly from
+            # ``values`` (which may already carry an exact-zero applicability
+            # mask); zero-weighted rows contribute nothing to either
+            # statistic, so inapplicable rows are naturally excluded without
+            # needing a separate filter here.
+            report: dict[str, dict[str, float]] = {}
+            for group in sorted(set(group_keys)):
+                group_values = np.asarray(
+                    [
+                        value
+                        for value, key in zip(values, group_keys, strict=True)
+                        if key == group
+                    ],
+                    dtype=float,
+                )
+                total = float(np.sum(group_values))
+                sum_sq = float(np.sum(group_values**2))
+                report[group] = {
+                    "effective_weight": total,
+                    "effective_sample_size": float(total**2 / sum_sq)
+                    if sum_sq > 0.0
+                    else 0.0,
+                    "applicable_row_count": int(np.count_nonzero(group_values)),
+                    "total_row_count": int(len(group_values)),
+                }
+            return report
 
         response_heads: dict[str, BootstrapRegressor] = {}
         response_weight_reports: dict[str, dict[str, float]] = {}
@@ -418,6 +601,16 @@ class PMV2Model:
                 n_models=n_models, seed=seed
             ).fit(x, y, groups, head_weights)
 
+        # Action-applicability mask: a risk dimension that cannot make a given
+        # action infeasible (see ``applicable_risk_fields``) must contribute
+        # exactly zero training weight to that risk head, never a nonzero
+        # weight earned merely from the label's own MAD looking "reliable".
+        applicable_fields_by_label = [
+            frozenset(applicable_risk_fields(label.action_id)) for label in usable
+        ]
+        domain_keys_for_usable = [domain_by_state[label.state_id] for label in usable]
+        action_keys_for_usable = [label.action_id for label in usable]
+
         risk_heads: dict[str, BootstrapRegressor] = {}
         risk_weight_reports: dict[str, dict[str, float]] = {}
         for field_name in RISK_FIELDS:
@@ -425,14 +618,45 @@ class PMV2Model:
                 [float(getattr(label.risk, field_name)) / 3.0 for label in usable],
                 dtype=float,
             )
-            head_weights = state_weights * np.asarray(
+            applicability_mask = np.asarray(
                 [
-                    mad_weight(label, prefix="risk", field_name=field_name)
-                    for label in usable
+                    1.0 if field_name in fields else 0.0
+                    for fields in applicable_fields_by_label
                 ],
                 dtype=float,
             )
-            risk_weight_reports[field_name] = weight_report(head_weights)
+            head_weights = (
+                state_weights
+                * np.asarray(
+                    [
+                        mad_weight(label, prefix="risk", field_name=field_name)
+                        for label in usable
+                    ],
+                    dtype=float,
+                )
+                * applicability_mask
+            )
+            total_effective_weight = float(np.sum(head_weights))
+            if total_effective_weight <= 0.0:
+                raise RuntimeError(
+                    f"risk head {field_name!r} has zero total effective training "
+                    "weight after applying the action-applicability mask; no "
+                    "action in this training set makes this risk dimension "
+                    "applicable, so it cannot be fit"
+                )
+            risk_weight_reports[field_name] = {
+                **weight_report(head_weights),
+                "applicability_mask_applied": True,
+                "applicable_row_count": int(np.count_nonzero(applicability_mask)),
+                "total_row_count": int(len(applicability_mask)),
+                "total_effective_weight": total_effective_weight,
+                "by_domain": grouped_effective_weight_report(
+                    head_weights, domain_keys_for_usable
+                ),
+                "by_action": grouped_effective_weight_report(
+                    head_weights, action_keys_for_usable
+                ),
+            }
             risk_heads[field_name] = BootstrapRegressor(
                 n_models=n_models, seed=seed + 101
             ).fit(x, y, groups, head_weights)
@@ -475,6 +699,10 @@ class PMV2Model:
                 "response_heads": response_weight_reports,
                 "risk_heads": risk_weight_reports,
             },
+            "domain_dialogue_state_action_weighting": {
+                "protocol": "domain-then-group-then-state-then-alias-equalize-v1",
+                **domain_weighting_report,
+            },
             "composite_weights_sha256": expected_weights_hash,
             "bootstrap_group_key": bootstrap_group_key,
             "bootstrap_unique_groups": len(set(groups)),
@@ -503,6 +731,7 @@ class PMV2Model:
         n_models: int,
         seed: int,
         bootstrap_group_key: str = "user_id",
+        domain_key: Callable[[PMV2State], str] | None = None,
         rule_router: Any | None = None,
         safe_thresholds: dict[str, float] | None = None,
     ) -> "PMV2Model":
@@ -614,14 +843,50 @@ class PMV2Model:
             state_totals[state.state_id] = state_totals.get(state.state_id, 0.0) + (
                 alias_weights[(state.state_id, action_id)]
             )
+        effective_domain_key = domain_key or (lambda _state: "default")
+        domain_by_state = {
+            state.state_id: str(effective_domain_key(state)) for state in states
+        }
+        if any(not value for value in domain_by_state.values()):
+            raise ValueError("routing-objective domain keys must be non-empty")
+        groups_by_domain: dict[str, set[str]] = {}
+        states_by_group: dict[tuple[str, str], set[str]] = {}
+        for state in states:
+            domain = domain_by_state[state.state_id]
+            group = str(state.user_id)
+            groups_by_domain.setdefault(domain, set()).add(group)
+            states_by_group.setdefault((domain, group), set()).add(state.state_id)
+        domains_present = sorted(groups_by_domain)
+        domain_weights = {
+            domain: 1.0 / len(domains_present) for domain in domains_present
+        }
         weights = np.asarray(
             [
-                alias_weights[(state.state_id, action_id)]
-                / state_totals[state.state_id]
+                (
+                    domain_weights[domain_by_state[state.state_id]]
+                    / len(groups_by_domain[domain_by_state[state.state_id]])
+                    / len(
+                        states_by_group[
+                            (domain_by_state[state.state_id], str(state.user_id))
+                        ]
+                    )
+                    * alias_weights[(state.state_id, action_id)]
+                    / state_totals[state.state_id]
+                )
                 for state, action_id in rows
             ],
             dtype=float,
         )
+        effective_weight_by_domain = {
+            domain: float(
+                fsum(
+                    float(weight)
+                    for weight, (state, _action_id) in zip(weights, rows, strict=True)
+                    if domain_by_state[state.state_id] == domain
+                )
+            )
+            for domain in domains_present
+        }
         self.routing_objective_head = BootstrapRegressor(
             n_models=int(n_models), seed=int(seed) + 211
         ).fit(x, np.asarray(targets, dtype=float), groups, weights)
@@ -636,6 +901,23 @@ class PMV2Model:
             "n_rows": len(rows),
             "bootstrap_group_key": bootstrap_group_key,
             "bootstrap_unique_groups": len(set(groups)),
+            "domain_dialogue_state_action_weighting": {
+                "protocol": "domain-then-group-then-state-then-alias-equalize-v1",
+                "domains_present": domains_present,
+                "domain_weight": domain_weights,
+                "effective_weight_by_domain": effective_weight_by_domain,
+                "groups_per_domain": {
+                    domain: len(groups_by_domain[domain])
+                    for domain in domains_present
+                },
+                "states_per_domain": {
+                    domain: sum(
+                        len(states_by_group[(domain, group)])
+                        for group in groups_by_domain[domain]
+                    )
+                    for domain in domains_present
+                },
+            },
             "rule_action_distribution": dict(
                 sorted(
                     {
@@ -1744,6 +2026,14 @@ def evaluate_policy(
             - model.selection_config.risk_weight * risk
             - model.selection_config.cost_weight * normalized_estimated_cost
         )
+        conservative = mad_adjusted_conservative_utility(
+            label=label,
+            action_id=decision.chosen_action,
+            composite_spec=model.selection_config.composite_spec,
+            risk_weight=model.selection_config.risk_weight,
+            cost_weight=model.selection_config.cost_weight,
+            normalized_cost=normalized_estimated_cost,
+        )
         rows.append(
             {
                 "state_id": state_id,
@@ -1752,6 +2042,17 @@ def evaluate_policy(
                 "quality": quality,
                 "risk": risk,
                 "realized_utility": realized_utility,
+                # MAD-adjusted conservative utility (pm-v1.5-mad-adjusted-
+                # conservative-utility-v1, lambda=1.0 fixed): a disclosed,
+                # pessimistic adjustment for judge disagreement -- NOT a
+                # confidence interval, NOT a gold-standard value, NOT true
+                # user utility. nominal_* fields above are never overwritten.
+                "nominal_quality": quality,
+                "nominal_risk": risk,
+                "nominal_utility": realized_utility,
+                "conservative_quality": conservative["conservative_quality"],
+                "conservative_risk": conservative["conservative_risk"],
+                "conservative_utility": conservative["conservative_utility"],
                 "estimated_resource_cost": float(chosen_prediction.estimated_cost),
                 "normalized_estimated_resource_cost": normalized_estimated_cost,
                 "observed_input_tokens": float(label.observed_input_tokens),
@@ -1869,6 +2170,141 @@ def evaluate_policy(
     }
 
 
+def evaluate_policy_domain_balanced(
+    model: PMV2Model,
+    states: Sequence[PMV2State],
+    labels: Sequence[ActionLabel],
+    *,
+    domain_key: Callable[[PMV2State], str] | None = None,
+) -> dict[str, Any]:
+    """Evaluate a policy with equal top-level weight for each data domain.
+
+    Raw state counts are intentionally retained for completeness diagnostics,
+    while every scalar policy mean/rate used for model or rule selection is the
+    arithmetic mean of the corresponding within-domain statistic.  With no
+    ``domain_key`` this is exactly the legacy single-domain evaluation.
+    """
+
+    if domain_key is None:
+        result = evaluate_policy(model, states, labels)
+        result["domain_balanced_action_distribution"] = {
+            action_id: float(count) / float(result["n"])
+            for action_id, count in result["action_distribution"].items()
+        }
+        result["domain_balancing"] = {
+            "protocol": "equal-domain-policy-metrics-v1",
+            "domains_present": ["default"],
+            "domain_weight": {"default": 1.0},
+        }
+        return result
+    state_map = {state.state_id: state for state in states}
+    if len(state_map) != len(states) or not state_map:
+        raise ValueError("domain-balanced evaluation requires unique non-empty states")
+    domain_states: dict[str, list[PMV2State]] = {}
+    for state in states:
+        domain = str(domain_key(state))
+        if not domain:
+            raise ValueError("domain-balanced evaluation keys must be non-empty")
+        domain_states.setdefault(domain, []).append(state)
+    labels_by_domain: dict[str, list[ActionLabel]] = {
+        domain: [] for domain in domain_states
+    }
+    state_domain = {
+        state.state_id: domain
+        for domain, domain_rows in domain_states.items()
+        for state in domain_rows
+    }
+    for label in labels:
+        domain = state_domain.get(label.state_id)
+        if domain is None:
+            raise ValueError(
+                f"domain-balanced labels reference unknown state {label.state_id}"
+            )
+        labels_by_domain[domain].append(label)
+    per_domain = {
+        domain: evaluate_policy(
+            model, domain_states[domain], labels_by_domain[domain]
+        )
+        for domain in sorted(domain_states)
+    }
+    pooled = evaluate_policy(model, states, labels)
+    scalar_keys = (
+        "mean_quality",
+        "mean_risk",
+        "mean_realized_utility",
+        "mean_estimated_resource_cost",
+        "mean_normalized_estimated_resource_cost",
+        "mean_observed_input_tokens",
+        "mean_cost",
+        "m0_rate",
+        "r0_rate",
+        "learned_m0_rate",
+        "learned_r0_rate",
+        "nonfallback_m0_r0_rate",
+        "learned_m0_share",
+        "learned_r0_share",
+        "learned_decision_rate",
+        "fallback_rate",
+        "severe_ood_fallback_rate",
+        "no_feasible_fallback_rate",
+        "ood_fallback_rate",
+        "action_entropy_bits",
+        "learned_action_entropy_bits",
+        "learned_maximum_action_share",
+    )
+    for key in scalar_keys:
+        pooled[key] = float(
+            np.mean([float(row[key]) for row in per_domain.values()])
+        )
+    pooled["mean_response_dimensions"] = {
+        name: float(
+            np.mean(
+                [
+                    float(row["mean_response_dimensions"][name])
+                    for row in per_domain.values()
+                ]
+            )
+        )
+        for name in RESPONSE_FIELDS
+    }
+    domains = sorted(per_domain)
+    action_ids = sorted(
+        {
+            action_id
+            for row in per_domain.values()
+            for action_id in row["action_distribution"]
+        }
+    )
+    domain_balanced_action_distribution = {
+        action_id: float(
+            np.mean(
+                [
+                    float(row["action_distribution"].get(action_id, 0))
+                    / float(row["n"])
+                    for row in per_domain.values()
+                ]
+            )
+        )
+        for action_id in action_ids
+    }
+    pooled["domain_balanced_action_distribution"] = (
+        domain_balanced_action_distribution
+    )
+    pooled["domain_balancing"] = {
+        "protocol": "equal-domain-policy-metrics-v1",
+        "domains_present": domains,
+        "domain_weight": {domain: 1.0 / len(domains) for domain in domains},
+        "state_count": {
+            domain: len(domain_states[domain]) for domain in domains
+        },
+        "per_domain": {
+            domain: {key: value for key, value in row.items() if key != "rows"}
+            for domain, row in per_domain.items()
+        },
+    }
+    return pooled
+
+
 def tune_selection_config(
     model: PMV2Model,
     states: Sequence[PMV2State],
@@ -1883,6 +2319,7 @@ def tune_selection_config(
     objective_risk_weight: float = 0.25,
     objective_cost_weight: float = 0.10,
     objective_version: str = "pmv2-calibration-utility-v1",
+    domain_key: Callable[[PMV2State], str] | None = None,
 ) -> dict[str, Any]:
     """Tune only on a frozen calibration split.
 
@@ -1915,7 +2352,9 @@ def tune_selection_config(
                             }
                         )
                         model.selection_config = config
-                        metrics = evaluate_policy(model, states, labels)
+                        metrics = evaluate_policy_domain_balanced(
+                            model, states, labels, domain_key=domain_key
+                        )
                         objective = (
                             metrics["mean_quality"]
                             - float(objective_risk_weight) * metrics["mean_risk"]
@@ -1958,6 +2397,7 @@ def tune_selection_config(
             "cost_basis": "within_state_normalized_estimated_resource_cost",
             "observed_input_tokens_used": False,
         },
+        "domain_balancing_protocol": "equal-domain-policy-metrics-v1",
         "selected": best,
         "candidate_count": len(candidates),
         "pareto_candidates": sorted(valid, key=lambda row: row["objective"], reverse=True)[:25],

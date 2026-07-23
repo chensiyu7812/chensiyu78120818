@@ -1,0 +1,41 @@
+{
+  "protocol": "pm-v1.5-hybrid-retrieval-adoption-decision-v1",
+  "decision": "NOT_ADOPTED",
+  "decided_at_utc": "2026-07-20T14:41:00Z",
+  "decision_basis": "USER_EXPLICIT_REVIEW_OF_LEGITIMATE_EVIDENCE",
+  "diagnostic_report_path": "outputs/pm_v1_5_hybrid_retrieval_diagnostic.json",
+  "diagnostic_report_contract_sha256": "c8674d11a6d39f762b7c2d01094a3e56201b1bf1f629b61d78030b9233bc8e5f",
+  "diagnostic_report_generated_utc": "2026-07-20T14:38:03Z",
+  "evidence_considered": {
+    "note": "Only the report's legitimate_adoption_evidence section (Memory: real per-case retrieve() over the CALIBRATION split; Strategy: real per-turn retrieve() over the ESConv VALIDATION split, 172 dialogue-cluster paired bootstrap) informed this decision. The report_only_evoemo_diagnostic_not_confirmatory section (hit-rate 0.588/0.647 lexical vs 0.912 hybrid) was explicitly excluded from the decision -- it uses EvoEmo's evaluator-only topic text as a query stand-in, which is not the same query distribution real retrieval sees, and the divergence between it and the legitimate evidence below is itself evidence that the EvoEmo number was an artifact of that query-shape mismatch rather than a real retrieval-quality signal.",
+    "strategy_esconv_validation": {
+      "units_evaluated": 2393,
+      "dialogue_clusters": 172,
+      "lexical_only": {"hit_rate": 0.4057668198913498, "mean_precision": 0.17230812090820447},
+      "hybrid": {"hit_rate": 0.39406602590890094, "mean_precision": 0.1649254770859451},
+      "paired_dialogue_cluster_bootstrap": {
+        "hit_rate_diff_mean": -0.011700793982448809,
+        "hit_rate_diff_95ci": [-0.038336172440045675, 0.015047615224440319],
+        "precision_diff_mean": -0.007382643822259368,
+        "precision_diff_95ci": [-0.01911616193851919, 0.0037594119442357684]
+      },
+      "verdict": "Hybrid is numerically slightly worse on both metrics; both 95% CIs straddle zero (not statistically distinguishable from no change). This is the best-powered evidence in the report (172 independent dialogue clusters) and shows no benefit."
+    },
+    "memory_calibration": {
+      "units_evaluated_per_source": 24,
+      "by_source": {
+        "MP": {"lexical_hit_rate": 1.0, "lexical_precision": 0.5, "hybrid_hit_rate": 1.0, "hybrid_precision": 0.5},
+        "MS": {"lexical_hit_rate": 1.0, "lexical_precision": 0.5, "hybrid_hit_rate": 1.0, "hybrid_precision": 0.5},
+        "ME": {"lexical_hit_rate": 1.0, "lexical_precision": 0.5, "hybrid_hit_rate": 1.0, "hybrid_precision": 0.625}
+      },
+      "verdict": "MP/MS show no difference at all. ME shows a precision improvement (0.5 -> 0.625) but hit_rate is already at ceiling (1.0) for both methods, the sample is small (n=24 cases), and the effect does not replicate in the other two sources -- too thin on its own to justify even a Memory-only adoption."
+    }
+  },
+  "rationale": "Per the approved plan's decision framework: Strategy shows no improvement (numerically down, statistically indistinguishable from zero on the best-powered evidence in this report); Memory shows only a single-source, small-sample precision effect with no hit-rate support. Neither clears the bar for adoption, and the plan is explicit that a more-sophisticated method must not be adopted 'because it is more sophisticated' absent a real, stable improvement. Decision: keep the existing lexical-only MemoryRetriever/StrategyRetriever in every real consumer; do not proceed to Part 4 (atomic migration).",
+  "disposition": {
+    "hybrid_retrieval_module_status": "ARCHIVED_ISOLATED_NOT_ADOPTED",
+    "real_consumer_impact": "NONE -- HybridMemoryRetriever/HybridStrategyRetriever were never imported by any real consumer (enforced by tests/test_hybrid_retrieval_isolation.py) and remain unused",
+    "code_disposition": "Left in place on pm-v1.5-hybrid-retrieval (src/metacom_pm/hybrid_retrieval.py, hybrid_retrieval_diagnostics.py, scripts/v1_5/40_diagnose_hybrid_retrieval.py, and their tests) as a documented, reviewable, isolated diagnostic -- not deleted, since the negative result and the methodology (rank fusion contract, calibration/validation data-boundary discipline, cluster-bootstrap paired CI, harmful/negative-source retrieval metrics) are themselves a valid, reusable research artifact.",
+    "reopening_condition": "This decision should only be revisited with new evidence from the legitimate calibration/validation (or a future frozen ESConv/EvoEmo test split, report-only) data boundary -- never by re-relitigating the same numbers, and never by substituting report-only EvoEmo numbers for the legitimate evidence again."
+  }
+}

@@ -137,6 +137,8 @@ def begin_internal_test_consumption(
     *,
     candidate_manifest_path: str | Path,
     internal_labels_path: str | Path,
+    sealed_artifact_name: str = "sealed_internal_bundle",
+    consumption_domain: str = "default",
 ) -> dict[str, Any]:
     """Atomically spend the one permitted internal-test outcome read.
 
@@ -153,7 +155,9 @@ def begin_internal_test_consumption(
         raise RuntimeError("internal-test consumption requires a frozen candidate manifest")
     manifest_sha256 = sha256_file(candidate_manifest_path)
     labels_sha256 = sha256_file(internal_labels_path)
-    sealed_record = (manifest.get("artifacts") or {}).get("sealed_internal_bundle") or {}
+    if not sealed_artifact_name or not consumption_domain:
+        raise ValueError("internal-test seal name and consumption domain are required")
+    sealed_record = (manifest.get("artifacts") or {}).get(sealed_artifact_name) or {}
     sealed_path = Path(str(sealed_record.get("path") or ""))
     sealed = require_sealed_internal_label_bundle(
         sealed_path, internal_labels_path=internal_labels_path
@@ -179,6 +183,8 @@ def begin_internal_test_consumption(
                 "run_identity": manifest["run_identity"],
                 "candidate_manifest_sha256": manifest_sha256,
                 "internal_labels_sha256": labels_sha256,
+                "sealed_artifact_name": sealed_artifact_name,
+                "consumption_domain": consumption_domain,
                 "started_at": utc_now(),
             }
             handle.seek(0, os.SEEK_END)
@@ -196,6 +202,7 @@ def finish_internal_test_consumption(
     ledger_path: str | Path,
     *,
     report_path: str | Path,
+    expected_domain: str = "default",
 ) -> dict[str, Any]:
     ledger_path = Path(ledger_path)
     fd = os.open(ledger_path, os.O_RDWR)
@@ -204,12 +211,18 @@ def finish_internal_test_consumption(
         rows = _read_ledger(handle)
         if len(rows) != 1 or rows[0].get("event") != "STARTED":
             raise RuntimeError("internal-test ledger is not awaiting completion")
+        if str(rows[0].get("consumption_domain") or "default") != expected_domain:
+            raise RuntimeError("internal-test ledger consumption domain mismatch")
         event = {
             "protocol": INTERNAL_LEDGER_PROTOCOL,
             "event": "COMPLETED",
             "run_identity": rows[0]["run_identity"],
             "candidate_manifest_sha256": rows[0]["candidate_manifest_sha256"],
             "internal_labels_sha256": rows[0]["internal_labels_sha256"],
+            "sealed_artifact_name": str(
+                rows[0].get("sealed_artifact_name") or "sealed_internal_bundle"
+            ),
+            "consumption_domain": expected_domain,
             "report_sha256": sha256_file(report_path),
             "completed_at": utc_now(),
         }
@@ -226,6 +239,7 @@ def require_completed_internal_consumption(
     *,
     candidate_manifest_path: str | Path,
     report_path: str | Path,
+    expected_domain: str = "default",
 ) -> dict[str, Any]:
     with Path(ledger_path).open("r", encoding="utf-8") as handle:
         rows = _read_ledger(handle)
@@ -238,4 +252,9 @@ def require_completed_internal_consumption(
         raise RuntimeError("internal-test ledger candidate manifest hash mismatch")
     if rows[1]["report_sha256"] != sha256_file(report_path):
         raise RuntimeError("internal-test ledger report hash mismatch")
+    if any(
+        str(row.get("consumption_domain") or "default") != expected_domain
+        for row in rows
+    ):
+        raise RuntimeError("internal-test ledger consumption domain mismatch")
     return {"status": "PASS", "events": rows}

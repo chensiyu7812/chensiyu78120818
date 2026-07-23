@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 import math
 import time
 
 from .api import (
     Endpoint,
     OpenAICompatibleClient,
+    ProviderRequestError,
+    RetryableProviderError,
     request_log,
     require_reported_usage,
 )
@@ -16,6 +18,12 @@ from .attempt_ledger import (
     PersistentAttemptLedger,
     forbid_overwrite_of_spent_attempts,
     physical_call_key,
+)
+from .bounded_retry import (
+    DEFAULT_BACKOFF_SECONDS,
+    DEFAULT_MAX_PROVIDER_OUTPUT_ATTEMPTS,
+    call_retry_blocker,
+    execute_with_bounded_retry,
 )
 from .artifacts import create_artifact_attestation
 from .action_execution import (
@@ -50,6 +58,28 @@ from .prompts import generation_messages, BASE_SUPPORTER_SYSTEM
 from .retrieval import MemoryRetriever, StrategyRetriever, context_query
 from .text import conservative_token_bound, estimate_tokens
 from .sampling import select_stratified_card_ids
+
+
+class _QueryCachedStrategyRetriever:
+    """Memoize deterministic Strategy retrieval within one offline sweep.
+
+    A full 16-action counterfactual matrix asks the same pre-retrieval query
+    for every RS action of a state. Re-scanning all 11,590 cards eight times
+    cannot change evidence or prompts; it only repeats lexical tokenization.
+    The cache is local to one plan/run invocation and returns fresh lists so a
+    caller cannot mutate the stored result.
+    """
+
+    def __init__(self, delegate: StrategyRetriever):
+        self.delegate = delegate
+        self._cache: dict[str, tuple[StrategyCard, ...]] = {}
+
+    def retrieve(self, query: str) -> list[StrategyCard]:
+        cached = self._cache.get(query)
+        if cached is None:
+            cached = tuple(self.delegate.retrieve(query))
+            self._cache[query] = cached
+        return list(cached)
 
 
 def _resolve_supporter_generation_treatment(
@@ -210,6 +240,7 @@ def plan_action_sweep(
     max_tokens: int = 300,
     seed: int | None = 4311,
     request_retries: int = 3,
+    transport_max_attempts_per_call: int | None = None,
     fail_fast: bool = False,
     input_token_safety_factor: float = 1.0,
     fail_on_reported_input_overrun: bool = False,
@@ -228,6 +259,13 @@ def plan_action_sweep(
 
     if request_retries < 1:
         raise ValueError("request_retries must be positive")
+    transport_attempt_cap = int(
+        request_retries
+        if transport_max_attempts_per_call is None
+        else transport_max_attempts_per_call
+    )
+    if transport_attempt_cap < 1:
+        raise ValueError("transport_max_attempts_per_call must be positive")
     (
         system_prompt,
         generation_treatment,
@@ -260,8 +298,10 @@ def plan_action_sweep(
     strategies = load_strategy_cards(strategy_bank_path)
     if not strategies:
         raise ValueError("strategy bank is empty")
-    strategy_retriever = StrategyRetriever(
-        strategies, top_k=strategy_top_k, minimum_score=strategy_min_score
+    strategy_retriever = _QueryCachedStrategyRetriever(
+        StrategyRetriever(
+            strategies, top_k=strategy_top_k, minimum_score=strategy_min_score
+        )
     )
     memory_retriever = MemoryRetriever(
         minimum_score_by_source=(
@@ -355,7 +395,18 @@ def plan_action_sweep(
                 "action_id": action_id,
                 "requested_action_id": action_id,
                 "retrieval_attempts": [
-                    row.model_dump(mode="json") for row in retrieval_attempts
+                    # latency_ms is a real wall-clock measurement
+                    # (action_execution.execute_requested_retrievals), so it
+                    # varies across separate process invocations even for the
+                    # identical plan. Planning only needs to know which
+                    # evidence would be selected (for prompt/token counting),
+                    # not how long that trial retrieval took -- zeroing it
+                    # here is what makes call_plan_sha256/cost_estimate_sha256
+                    # reproducible across a separate --dry-run and --run
+                    # invocation. Real per-call latency is still recorded
+                    # for real during run_action_sweep's own execution.
+                    {**row.model_dump(mode="json"), "latency_ms": 0.0}
+                    for row in retrieval_attempts
                 ],
                 "realized_action_id": realized_action_id,
                 "effective_action_id": realized_action_id,
@@ -370,7 +421,7 @@ def plan_action_sweep(
                 ),
                 "prompt_sha256": prompt_sha256,
                 "call_key": call_key,
-                "max_http_attempts": int(request_retries),
+                "max_http_attempts": transport_attempt_cap,
                 "raw_estimated_input_tokens": raw_input_tokens,
                 "estimated_input_tokens": input_tokens,
                 "maximum_output_tokens": int(max_tokens),
@@ -409,7 +460,7 @@ def plan_action_sweep(
         total_input / 1_000_000 * float(input_usd_per_mtok)
         + total_output / 1_000_000 * float(output_usd_per_mtok)
     )
-    maximum_physical_attempts = len(physical_rows) * int(request_retries)
+    maximum_physical_attempts = len(physical_rows) * transport_attempt_cap
     payload = {
         "protocol": "pm_v2_action_sweep_cost_v3_persistent_attempt_ledger",
         "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,
@@ -425,6 +476,7 @@ def plan_action_sweep(
         "max_tokens": int(max_tokens),
         "seed": seed,
         "request_retries": int(request_retries),
+        "transport_max_attempts_per_call": transport_attempt_cap,
         "fail_fast": bool(fail_fast),
         "input_token_safety_factor": float(input_token_safety_factor),
         "fail_on_reported_input_overrun": bool(fail_on_reported_input_overrun),
@@ -470,9 +522,9 @@ def plan_action_sweep(
         "unduplicated_logical_maximum_output_tokens": len(rows)
         * int(max_tokens),
         "maximum_physical_total_input_tokens": total_input
-        * int(request_retries),
+        * transport_attempt_cap,
         "maximum_physical_total_output_tokens": total_output
-        * int(request_retries),
+        * transport_attempt_cap,
         "mean_input_tokens": (
             float(total_input / len(input_tokens)) if input_tokens else 0.0
         ),
@@ -483,7 +535,7 @@ def plan_action_sweep(
             "output_usd_per_mtok": float(output_usd_per_mtok),
         },
         "logical_estimated_cost_usd": logical_cost_usd,
-        "estimated_cost_usd": logical_cost_usd * int(request_retries),
+        "estimated_cost_usd": logical_cost_usd * transport_attempt_cap,
         "cost_basis": "maximum_physical_api_attempts",
         "call_plan_sha256": sha256_text(canonical_json(rows)),
         "contract_bindings": dict(contract_bindings or {}),
@@ -517,6 +569,7 @@ def run_action_sweep(
     max_tokens: int = 300,
     seed: int | None = 4311,
     request_retries: int = 3,
+    transport_max_attempts_per_call: int | None = None,
     fail_fast: bool = False,
     input_token_safety_factor: float = 1.0,
     fail_on_reported_input_overrun: bool = False,
@@ -532,9 +585,34 @@ def run_action_sweep(
     contract_bindings: dict[str, Any] | None = None,
     max_physical_api_attempts: int | None = None,
     out_attempt_ledger_path: str | Path | None = None,
+    transport_retry_policy: str = "single_attempt",
+    transport_backoff_seconds: tuple[float, ...] = DEFAULT_BACKOFF_SECONDS,
+    consecutive_same_class_circuit_breaker: int | None = 5,
+    carry_forward_terminal_rows: Mapping[str, Mapping[str, Any]] | None = None,
+    carry_forward_binding: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     if request_retries < 1:
         raise ValueError("request_retries must be positive")
+    transport_attempt_cap = int(
+        request_retries
+        if transport_max_attempts_per_call is None
+        else transport_max_attempts_per_call
+    )
+    if transport_attempt_cap < 1:
+        raise ValueError("transport_max_attempts_per_call must be positive")
+    if transport_retry_policy not in {"single_attempt", "bounded_transport"}:
+        raise ValueError(
+            "transport_retry_policy must be 'single_attempt' or "
+            "'bounded_transport'"
+        )
+    if (
+        transport_retry_policy == "single_attempt"
+        and transport_attempt_cap != int(request_retries)
+    ):
+        raise ValueError(
+            "a distinct transport_max_attempts_per_call requires "
+            "transport_retry_policy='bounded_transport'"
+        )
     (
         system_prompt,
         generation_treatment,
@@ -591,8 +669,10 @@ def run_action_sweep(
     strategies = load_strategy_cards(strategy_bank_path)
     if not strategies:
         raise ValueError("strategy bank is empty")
-    strategy_retriever = StrategyRetriever(
-        strategies, top_k=strategy_top_k, minimum_score=strategy_min_score
+    strategy_retriever = _QueryCachedStrategyRetriever(
+        StrategyRetriever(
+            strategies, top_k=strategy_top_k, minimum_score=strategy_min_score
+        )
     )
     memory_retriever = MemoryRetriever(
         minimum_score_by_source=(
@@ -707,7 +787,29 @@ def run_action_sweep(
     physical_call_keys = {
         str(row["call_key"]) for row in prepared_calls.values()
     }
-    planned_maximum_attempts = len(physical_call_keys) * int(request_retries)
+    carried_terminal_rows = {
+        str(call_key): dict(terminal)
+        for call_key, terminal in (carry_forward_terminal_rows or {}).items()
+    }
+    if carried_terminal_rows and carry_forward_binding is None:
+        raise ValueError(
+            "action-sweep carry-forward rows require a content-addressed binding"
+        )
+    unknown_carried_call_keys = sorted(
+        set(carried_terminal_rows) - physical_call_keys
+    )
+    if unknown_carried_call_keys:
+        raise RuntimeError(
+            "action-sweep carry-forward contains calls outside the current plan: "
+            f"{unknown_carried_call_keys[:5]}"
+        )
+    full_planned_maximum_attempts = (
+        len(physical_call_keys) * transport_attempt_cap
+    )
+    planned_maximum_attempts = (
+        len(physical_call_keys - set(carried_terminal_rows))
+        * transport_attempt_cap
+    )
     runtime_attempt_cap = int(
         planned_maximum_attempts
         if max_physical_api_attempts is None
@@ -728,7 +830,13 @@ def run_action_sweep(
         "max_tokens": max_tokens,
         "seed": seed,
         "request_retries": int(request_retries),
+        "transport_max_attempts_per_call": transport_attempt_cap,
         "fail_fast": bool(fail_fast),
+        "transport_retry_policy": str(transport_retry_policy),
+        "transport_backoff_seconds": list(transport_backoff_seconds),
+        "consecutive_same_class_circuit_breaker": (
+            consecutive_same_class_circuit_breaker
+        ),
         "input_token_safety_factor": float(input_token_safety_factor),
         "fail_on_reported_input_overrun": bool(fail_on_reported_input_overrun),
         "strategy_top_k": strategy_top_k,
@@ -756,6 +864,9 @@ def run_action_sweep(
         "card_filter": sorted(card_filter) if card_filter else None,
         "system_prompt_sha256": sha256_text(system_prompt),
         "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,
+        "full_plan_maximum_physical_api_attempts": (
+            full_planned_maximum_attempts
+        ),
         "planned_maximum_physical_api_attempts": planned_maximum_attempts,
         "runtime_maximum_physical_api_attempts": runtime_attempt_cap,
         "call_key_matrix_sha256": sha256_text(
@@ -765,6 +876,11 @@ def run_action_sweep(
         "prompt_equivalence_classes": len(physical_call_keys),
         "prompt_alias_outcomes": len(prepared_calls) - len(physical_call_keys),
         "contract_bindings": dict(contract_bindings or {}),
+        "carry_forward_binding": (
+            dict(carry_forward_binding)
+            if carry_forward_binding is not None
+            else None
+        ),
     }
     if generation_treatment is not None:
         run_metadata.update(
@@ -806,11 +922,74 @@ def run_action_sweep(
         attempt_ledger_path,
         stage="action_sweep_generation",
         expected_calls={
-            row["call_key"]: int(request_retries)
+            row["call_key"]: transport_attempt_cap
             for row in prepared_calls.values()
         },
-        maximum_total_attempts=runtime_attempt_cap,
+        # Carried successes are written as explicitly tagged synthetic ledger
+        # entries so the existing recovery path can authenticate their exact
+        # result payloads.  They were paid for in the content-addressed source
+        # run and therefore do not consume this continuation's NEW budget.
+        maximum_total_attempts=(
+            runtime_attempt_cap + len(carried_terminal_rows)
+        ),
     )
+    for call_key, source_terminal in carried_terminal_rows.items():
+        if ledger.succeeded(call_key):
+            continue
+        if ledger.attempts_for(call_key):
+            raise RuntimeError(
+                "action-sweep continuation ledger already contains a non-success "
+                f"for carried call {call_key}"
+            )
+        source_result = source_terminal.get("result")
+        source_usage = source_terminal.get("usage")
+        if (
+            source_terminal.get("event") != "SUCCEEDED"
+            or not isinstance(source_result, dict)
+            or not isinstance(source_result.get("action_outcome"), dict)
+            or not isinstance(source_result.get("raw_call"), dict)
+            or not isinstance(source_usage, dict)
+        ):
+            raise RuntimeError(
+                f"action-sweep carry-forward source is incomplete for {call_key}"
+            )
+        matching_prepared = next(
+            row
+            for row in prepared_calls.values()
+            if row["call_key"] == call_key
+        )
+        source_outcome = ActionOutcome.model_validate(
+            source_result["action_outcome"]
+        )
+        source_raw = dict(source_result["raw_call"])
+        if (
+            source_outcome.card_id != matching_prepared["state"].card_id
+            or source_outcome.prompt_hash != matching_prepared["prompt_hash"]
+            or (source_outcome.provenance or {}).get("physical_call_key")
+            != call_key
+            or source_raw.get("error") is not None
+            or str(source_raw.get("physical_call_key") or "") != call_key
+        ):
+            raise RuntimeError(
+                f"action-sweep carry-forward payload mismatches plan for {call_key}"
+            )
+        reservation = ledger.reserve(
+            call_key,
+            record_ids=dict(matching_prepared["record_ids"]),
+            prompt_sha256=str(matching_prepared["prompt_hash"]),
+        )
+        ledger.finish(
+            reservation,
+            succeeded=True,
+            request_hash=source_terminal.get("request_hash"),
+            usage=dict(source_usage),
+            error=None,
+            result=dict(source_result),
+            metadata={
+                "carried_forward": True,
+                **dict(carry_forward_binding or {}),
+            },
+        )
     successful_raw_call_keys: set[str] = set()
     if out_raw_calls_path.exists():
         duplicate_success_raw: list[str] = []
@@ -903,7 +1082,7 @@ def run_action_sweep(
         done.add(key)
     historical_attempts = ledger.started_attempts
     client: OpenAICompatibleClient | None = None
-    n_calls = 0
+    newly_attempted_call_keys: set[str] = set()
     failures: list[dict[str, Any]] = [
         {
             **dict(row.get("record_ids") or {}),
@@ -918,6 +1097,8 @@ def run_action_sweep(
     aborted_on_input_token_overrun = False
     aborted_on_missing_reported_usage = False
     aborted_on_completion_gate = False
+    last_isolated_retry_class: str | None = None
+    consecutive_same_class_count = 0
     total_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
     try:
         for (card_id, action_id), prepared in prepared_calls.items():
@@ -954,7 +1135,28 @@ def run_action_sweep(
                 )
                 done.add((card_id, action_id))
                 continue
-            if ledger.exhausted(call_key):
+            if transport_retry_policy == "bounded_transport":
+                blocker = call_retry_blocker(
+                    ledger,
+                    call_key,
+                    max_provider_output_attempts=(
+                        DEFAULT_MAX_PROVIDER_OUTPUT_ATTEMPTS
+                    ),
+                )
+                if blocker is not None:
+                    failures.append(
+                        {
+                            "card_id": card_id,
+                            "action_id": action_id,
+                            "call_key": call_key,
+                            "error": f"call cannot be retried: {blocker}",
+                        }
+                    )
+                    if fail_fast:
+                        aborted_on_first_failure = True
+                        break
+                    continue
+            elif ledger.exhausted(call_key):
                 failures.append(
                     {
                         "card_id": card_id,
@@ -975,22 +1177,92 @@ def run_action_sweep(
             # a physical API attempt and must not consume the frozen budget.
             if client is None:
                 client = OpenAICompatibleClient(endpoint)
-            reservation = ledger.reserve(
-                call_key,
-                record_ids=prepared["record_ids"],
-                prompt_sha256=prepared["prompt_hash"],
-            )
-            n_calls += 1
+            newly_attempted_call_keys.add(call_key)
             result = None
-            try:
-                result, _ = client.chat(
-                    prepared["messages"],
-                    temperature=temperature,
-                    max_tokens=max_tokens,
-                    seed=seed,
-                    response_schema=None,
-                    retries=1,
+            if transport_retry_policy == "bounded_transport":
+                # Every physical HTTP attempt (including transient 5xx/
+                # timeout retries) is ledgered by execute_with_bounded_retry
+                # itself; only a terminal or exhausted disposition escapes as
+                # an exception here. Content-level terminal errors (schema,
+                # completion-gate rejection, reported-token-overrun) are
+                # still handled below, after a physical response exists --
+                # this call only governs the transport layer.
+                def call_fn(prepared=prepared):
+                    return client.chat(
+                        prepared["messages"],
+                        temperature=temperature,
+                        max_tokens=max_tokens,
+                        seed=seed,
+                        response_schema=None,
+                        retries=1,
+                    )
+
+                try:
+                    reservation, result, _ = execute_with_bounded_retry(
+                        ledger,
+                        call_key,
+                        record_ids=prepared["record_ids"],
+                        prompt_sha256=prepared["prompt_hash"],
+                        call_fn=call_fn,
+                        max_provider_output_attempts=(
+                            DEFAULT_MAX_PROVIDER_OUTPUT_ATTEMPTS
+                        ),
+                        backoff_seconds=transport_backoff_seconds,
+                    )
+                except Exception as exc:
+                    if isinstance(exc, RetryableProviderError):
+                        retry_class = exc.last_retry_class
+                    elif isinstance(exc, ProviderRequestError):
+                        retry_class = "provider_request_error_4xx"
+                    else:
+                        retry_class = "unclassified_local_error"
+                    failures.append(
+                        {
+                            "card_id": card_id,
+                            "action_id": action_id,
+                            "call_key": call_key,
+                            "error": f"{type(exc).__name__}: {exc}",
+                            "retry_class": retry_class,
+                        }
+                    )
+                    if retry_class == last_isolated_retry_class:
+                        consecutive_same_class_count += 1
+                    else:
+                        last_isolated_retry_class = retry_class
+                        consecutive_same_class_count = 1
+                    if (
+                        consecutive_same_class_circuit_breaker is not None
+                        and consecutive_same_class_count
+                        >= consecutive_same_class_circuit_breaker
+                    ):
+                        raise RuntimeError(
+                            f"circuit breaker: {retry_class} recurred "
+                            f"{consecutive_same_class_count} times in a row "
+                            "across different calls -- treating as systemic, "
+                            "not isolated"
+                        ) from exc
+                    if fail_fast:
+                        aborted_on_first_failure = True
+                        break
+                    continue
+                last_isolated_retry_class = None
+                consecutive_same_class_count = 0
+            else:
+                reservation = ledger.reserve(
+                    call_key,
+                    record_ids=prepared["record_ids"],
+                    prompt_sha256=prepared["prompt_hash"],
                 )
+            try:
+                if transport_retry_policy != "bounded_transport":
+                    result, _ = client.chat(
+                        prepared["messages"],
+                        temperature=temperature,
+                        max_tokens=max_tokens,
+                        seed=seed,
+                        response_schema=None,
+                        retries=1,
+                    )
                 try:
                     reported_usage = require_reported_usage(
                         result.usage, stage="action sweep generation"
@@ -1229,6 +1501,9 @@ def run_action_sweep(
                             "temperature": temperature,
                             "seed": seed,
                             "request_retries": int(request_retries),
+                            "transport_max_attempts_per_call": (
+                                transport_attempt_cap
+                            ),
                             "physical_call_key": call_key,
                             "physical_attempt_index": reservation.attempt_index,
                             "physical_attempt_key": reservation.attempt_key,
@@ -1359,20 +1634,38 @@ def run_action_sweep(
         "n_cards": len(cards),
         "expected_outcomes": expected,
         "completed_outcomes": completed,
-        "new_api_calls": n_calls,
-        "new_physical_http_attempts": n_calls,
+        "new_api_calls": len(newly_attempted_call_keys),
+        "new_logical_calls_attempted": len(newly_attempted_call_keys),
+        "new_physical_http_attempts": (
+            ledger.started_attempts - historical_attempts
+        ),
         "historical_physical_http_attempts": historical_attempts,
         "total_physical_http_attempts": ledger.started_attempts,
         "remaining_runtime_physical_http_attempts": ledger.remaining_attempts,
         "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,
         "request_retries": int(request_retries),
+        "transport_max_attempts_per_call": transport_attempt_cap,
         "fail_fast": bool(fail_fast),
+        "transport_retry_policy": str(transport_retry_policy),
+        "transport_backoff_seconds": list(transport_backoff_seconds),
+        "consecutive_same_class_circuit_breaker": (
+            consecutive_same_class_circuit_breaker
+        ),
         "aborted_on_first_failure": aborted_on_first_failure,
         "aborted_on_input_token_overrun": aborted_on_input_token_overrun,
         "aborted_on_missing_reported_usage": aborted_on_missing_reported_usage,
         "aborted_on_completion_gate": aborted_on_completion_gate,
+        "full_plan_maximum_physical_api_attempts": (
+            full_planned_maximum_attempts
+        ),
         "maximum_physical_api_attempts_planned": planned_maximum_attempts,
         "maximum_physical_api_attempts_authorized": runtime_attempt_cap,
+        "carried_forward_logical_calls": len(carried_terminal_rows),
+        "carry_forward_binding": (
+            dict(carry_forward_binding)
+            if carry_forward_binding is not None
+            else None
+        ),
         "failures": failures,
         "usage": total_usage,
         "endpoint_model": endpoint.model,
@@ -1416,14 +1709,29 @@ def run_action_sweep(
             "max_tokens": max_tokens,
             "seed": seed,
             "request_retries": int(request_retries),
+            "transport_max_attempts_per_call": transport_attempt_cap,
             "fail_fast": bool(fail_fast),
+            "transport_retry_policy": str(transport_retry_policy),
+            "transport_backoff_seconds": list(transport_backoff_seconds),
+            "consecutive_same_class_circuit_breaker": (
+                consecutive_same_class_circuit_breaker
+            ),
             "input_token_safety_factor": float(input_token_safety_factor),
             "fail_on_reported_input_overrun": bool(
                 fail_on_reported_input_overrun
             ),
             "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,
+            "full_plan_maximum_physical_api_attempts": (
+                full_planned_maximum_attempts
+            ),
             "maximum_physical_api_attempts_planned": planned_maximum_attempts,
             "maximum_physical_api_attempts_authorized": runtime_attempt_cap,
+            "carried_forward_logical_calls": len(carried_terminal_rows),
+            "carry_forward_binding": (
+                dict(carry_forward_binding)
+                if carry_forward_binding is not None
+                else None
+            ),
             "strategy_top_k": strategy_top_k,
             "memory_min_score": memory_min_score,
             "strategy_min_score": strategy_min_score,

@@ -229,7 +229,7 @@ def test_missing_field_is_retried_once_and_never_resets_after_reload(tmp_path: P
         calls += 1
         return "wrong", "wrong"
 
-    with pytest.raises(RetryBlockedError, match="missing_field"):
+    with pytest.raises(RetryBlockedError, match="terminal_nonretryable.*missing_field"):
         _execute(reloaded, must_not_call)
     assert calls == 0
     assert reloaded.attempts_for("call_1") == 2
@@ -258,11 +258,73 @@ def test_crash_during_the_one_missing_field_retry_cannot_open_a_third_attempt(
     # extra attempt authorized by the missing-field policy.
     reloaded = _ledger(tmp_path, expected_attempts=3)
     assert call_retry_blocker(reloaded, "call_1") == (
-        "missing-field retry allowance is already spent"
+        "provider-output repair allowance has an unknown spent attempt"
     )
-    with pytest.raises(RetryBlockedError, match="allowance is already spent"):
+    with pytest.raises(RetryBlockedError, match="unknown spent attempt"):
         _execute(reloaded, lambda: ("wrong", "wrong"))
     assert reloaded.attempts_for("call_1") == 2
+
+
+def test_invalid_provider_json_gets_exactly_one_ledger_visible_repair(
+    tmp_path: Path,
+):
+    ledger = _ledger(tmp_path, expected_attempts=3)
+    calls = [
+        lambda: (_ for _ in ()).throw(_retryable("provider_output_format", None)),
+        lambda: ("ok", "parsed"),
+    ]
+    reservation, result, parsed = _execute(ledger, lambda: calls.pop(0)())
+    assert reservation.attempt_index == 2
+    assert (result, parsed) == ("ok", "parsed")
+    first = ledger.terminal_row("call_1", 1)
+    assert first is not None
+    assert first["metadata"]["retry_class"] == "provider_output_format"
+    assert first["metadata"]["retry_disposition"] == RETRYABLE_DISPOSITION
+
+
+def test_invalid_provider_json_cannot_open_a_third_attempt_after_failed_repair(
+    tmp_path: Path,
+):
+    ledger = _ledger(tmp_path, expected_attempts=3)
+    with pytest.raises(RetryableProviderError):
+        _execute(
+            ledger,
+            lambda: (_ for _ in ()).throw(
+                _retryable("provider_output_format", None)
+            ),
+        )
+    assert ledger.attempts_for("call_1") == 2
+    assert ledger.terminal_row("call_1", 2)["metadata"][
+        "retry_disposition"
+    ] == TERMINAL_DISPOSITION
+    reloaded = _ledger(tmp_path, expected_attempts=3)
+    assert call_retry_blocker(reloaded, "call_1") == (
+        "persisted terminal_nonretryable failure (provider_output_format)"
+    )
+
+
+def test_transport_failures_do_not_consume_provider_output_repair_allowance(
+    tmp_path: Path,
+):
+    ledger = _ledger(tmp_path, expected_attempts=6)
+    calls = [
+        lambda: (_ for _ in ()).throw(_retryable("http_5xx", 503)),
+        lambda: (_ for _ in ()).throw(_retryable("provider_output_format", None)),
+        lambda: (_ for _ in ()).throw(_retryable("http_5xx", 503)),
+        lambda: ("ok", "parsed"),
+    ]
+    reservation, result, parsed = _execute(ledger, lambda: calls.pop(0)())
+    assert reservation.attempt_index == 4
+    assert (result, parsed) == ("ok", "parsed")
+    assert [
+        ledger.terminal_row("call_1", index)["metadata"]["retry_class"]
+        for index in (1, 2, 3)
+    ] == ["http_5xx", "provider_output_format", "http_5xx"]
+    assert all(
+        ledger.terminal_row("call_1", index)["metadata"]["retry_disposition"]
+        == RETRYABLE_DISPOSITION
+        for index in (1, 2, 3)
+    )
 
 
 def test_exhausting_repeated_5xx_marks_the_final_failure_exhausted(tmp_path: Path):

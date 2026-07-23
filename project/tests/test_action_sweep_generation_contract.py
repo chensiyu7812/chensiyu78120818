@@ -98,6 +98,53 @@ def test_pmv22_action_sweep_plan_binds_full_generation_treatment(
         )
 
 
+def test_plan_action_sweep_is_reproducible_across_separate_invocations(
+    tmp_path, tiny_state, tiny_memories, tiny_strategy
+):
+    """call_plan_sha256/cost_estimate_sha256 must be byte-identical across
+    two separate calls with identical inputs -- a real dry-run and a later
+    separate --run process recompute this same plan and require an exact
+    match (scripts/v1_5/06, 14; the new ESConv-auxiliary 13b). Real wall-clock
+    retrieval latency must never leak into these hashes."""
+
+    runtime, backend, strategies = _inputs(
+        tmp_path, tiny_state, tiny_memories, tiny_strategy
+    )
+    contract = _contract()
+    endpoint = Endpoint(
+        "https://invalid.example", "fixture", "UNSET", family="test"
+    )
+    kwargs = dict(
+        endpoint=endpoint,
+        action_filter={"MP+RS"},
+        temperature=contract.temperature,
+        max_tokens=contract.max_output_tokens,
+        supporter_generation_contract=contract,
+        input_usd_per_mtok=1.0,
+        output_usd_per_mtok=2.0,
+    )
+    first_estimate, first_rows = plan_action_sweep(
+        runtime, backend, strategies, **kwargs
+    )
+    second_estimate, second_rows = plan_action_sweep(
+        runtime, backend, strategies, **kwargs
+    )
+    assert first_rows == second_rows
+    assert first_estimate == second_estimate
+    assert (
+        first_estimate["cost_estimate_sha256"]
+        == second_estimate["cost_estimate_sha256"]
+    )
+    called_attempts = [
+        attempt
+        for row in first_rows
+        for attempt in row["retrieval_attempts"]
+        if attempt["called"]
+    ]
+    assert called_attempts
+    assert all(attempt["latency_ms"] == 0.0 for attempt in called_attempts)
+
+
 def test_pmv22_action_sweep_rejects_truncation_before_outcome_write(
     tmp_path, monkeypatch, tiny_state, tiny_memories, tiny_strategy
 ):

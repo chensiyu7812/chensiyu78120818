@@ -282,6 +282,7 @@ def main() -> None:
         args.checkpoint,
         args.fixed_tracks,
         args.out_dir,
+        project_root=ROOT,
         generator_endpoint=endpoint,
         supporter_generation_contract=supporter_generation_contract,
         fixed_seeker_generation_contract=(

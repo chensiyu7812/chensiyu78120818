@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import Counter
 from copy import deepcopy
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 import numpy as np
 from sklearn.model_selection import GroupKFold
@@ -16,7 +16,7 @@ from .pm_v2_model import (
     PMV2Model,
     ROUTING_ALGORITHMS,
     SelectionConfig,
-    evaluate_policy,
+    evaluate_policy_domain_balanced,
 )
 
 
@@ -113,6 +113,7 @@ def select_routing_algorithm_group_cv(
     maximum_validation_risk: float,
     safe_residual_thresholds: Mapping[str, float],
     simplicity_order: Sequence[str],
+    domain_key: Callable[[PMV2State], str] | None = None,
 ) -> tuple[str, dict[str, Any]]:
     """Choose the routing target using only train-user group-aware CV."""
 
@@ -151,9 +152,58 @@ def select_routing_algorithm_group_cv(
     }
     split_rows: list[dict[str, Any]] = []
     state_array = np.asarray(list(states), dtype=object)
-    for fold_index, (fit_indices, validation_indices) in enumerate(
-        splitter.split(state_array, groups=users)
-    ):
+    if domain_key is None:
+        fold_splits = list(splitter.split(state_array, groups=users))
+    else:
+        domain_by_index = np.asarray(
+            [str(domain_key(state)) for state in states], dtype=object
+        )
+        if any(not str(value) for value in domain_by_index):
+            raise ValueError("algorithm CV domain keys must be non-empty")
+        user_domains: dict[str, set[str]] = {}
+        for user, domain in zip(users, domain_by_index, strict=True):
+            user_domains.setdefault(str(user), set()).add(str(domain))
+        crossed = sorted(
+            user for user, domains in user_domains.items() if len(domains) != 1
+        )
+        if crossed:
+            raise ValueError(
+                "algorithm CV user groups cannot cross domains: "
+                f"{crossed[:10]}"
+            )
+        domains = sorted(set(str(value) for value in domain_by_index))
+        per_domain_splits: dict[str, list[tuple[np.ndarray, np.ndarray]]] = {}
+        for domain in domains:
+            global_indices = np.flatnonzero(domain_by_index == domain)
+            domain_groups = users[global_indices]
+            unique_domain_groups = sorted(set(str(value) for value in domain_groups))
+            if len(unique_domain_groups) < fold_count:
+                raise ValueError(
+                    f"algorithm CV domain {domain!r} has fewer groups than folds"
+                )
+            local_splits = list(
+                GroupKFold(n_splits=fold_count).split(
+                    state_array[global_indices], groups=domain_groups
+                )
+            )
+            per_domain_splits[domain] = [
+                (global_indices[fit], global_indices[validation])
+                for fit, validation in local_splits
+            ]
+        fold_splits = []
+        for fold_index in range(fold_count):
+            fit = np.sort(
+                np.concatenate(
+                    [per_domain_splits[domain][fold_index][0] for domain in domains]
+                )
+            )
+            validation = np.sort(
+                np.concatenate(
+                    [per_domain_splits[domain][fold_index][1] for domain in domains]
+                )
+            )
+            fold_splits.append((fit, validation))
+    for fold_index, (fit_indices, validation_indices) in enumerate(fold_splits):
         fit_states = [states[int(index)] for index in fit_indices]
         validation_states = [states[int(index)] for index in validation_indices]
         fit_ids = {state.state_id for state in fit_states}
@@ -177,6 +227,7 @@ def select_routing_algorithm_group_cv(
             semantic_projection_dimensions=int(semantic_projection_dimensions),
             word_features=int(word_features),
             char_features=int(char_features),
+            domain_key=domain_key,
         )
         fold_rule = None
         fold_rule_report = None
@@ -189,6 +240,7 @@ def select_routing_algorithm_group_cv(
                 minimum_quality=float(rule_minimum_quality),
                 maximum_risk=float(rule_maximum_risk),
                 selection_data_role="train_fold",
+                domain_key=domain_key,
             )
         split_rows.append(
             {
@@ -199,6 +251,22 @@ def select_routing_algorithm_group_cv(
                 "validation_states": len(validation_states),
                 "fit_user_count": len(fit_users),
                 "validation_user_count": len(validation_users),
+                "fit_domain_counts": dict(
+                    sorted(
+                        Counter(
+                            str(domain_key(state)) if domain_key else "default"
+                            for state in fit_states
+                        ).items()
+                    )
+                ),
+                "validation_domain_counts": dict(
+                    sorted(
+                        Counter(
+                            str(domain_key(state)) if domain_key else "default"
+                            for state in validation_states
+                        ).items()
+                    )
+                ),
                 "rule_config_sha256": (
                     fold_rule_report["selected_config_sha256"]
                     if fold_rule_report is not None
@@ -215,6 +283,7 @@ def select_routing_algorithm_group_cv(
                 n_models=int(n_models),
                 seed=int(seed) + fold_index * 1000 + candidate_index * 100,
                 bootstrap_group_key=bootstrap_group_key,
+                domain_key=domain_key,
                 rule_router=(
                     fold_rule
                     if algorithm == "rule_relative_safe_residual_hgb"
@@ -226,7 +295,12 @@ def select_routing_algorithm_group_cv(
                     else None
                 ),
             )
-            metrics = evaluate_policy(model, validation_states, validation_labels)
+            metrics = evaluate_policy_domain_balanced(
+                model,
+                validation_states,
+                validation_labels,
+                domain_key=domain_key,
+            )
             candidate_rows[algorithm].append(
                 {
                     "fold": fold_index,
@@ -243,7 +317,10 @@ def select_routing_algorithm_group_cv(
                     "mean_observed_input_tokens": float(
                         metrics["mean_observed_input_tokens"]
                     ),
-                    "action_distribution": dict(metrics["action_distribution"]),
+                    "action_distribution": dict(
+                        metrics["domain_balanced_action_distribution"]
+                    ),
+                    "domain_balancing": metrics["domain_balancing"],
                 }
             )
 
@@ -255,6 +332,8 @@ def select_routing_algorithm_group_cv(
         total_states = sum(int(row["validation_states"]) for row in rows)
 
         def weighted(field: str) -> float:
+            if domain_key is not None:
+                return float(np.mean([float(row[field]) for row in rows]))
             return float(
                 sum(
                     float(row[field]) * int(row["validation_states"])
@@ -310,6 +389,7 @@ def select_routing_algorithm_group_cv(
         "group_key": "user_id",
         "fold_count": fold_count,
         "unique_train_users": len(unique_users),
+        "domain_balancing_protocol": "equal-domain-policy-metrics-v1",
         "cv_bootstrap_models": int(n_models),
         "minimum_validation_quality": float(minimum_validation_quality),
         "maximum_validation_risk": float(maximum_validation_risk),

@@ -64,6 +64,10 @@ def endpoint_from_config(config: Mapping[str, Any], name: str) -> Endpoint:
         timeout_seconds=float(raw.get("timeout_seconds", 180.0)),
         family=(str(raw["family"]) if raw.get("family") else None),
         transport=str(raw.get("transport") or "auto"),
+        supports_strict_json_schema=bool(
+            raw.get("supports_strict_json_schema", True)
+        ),
+        thinking_mode=str(raw.get("thinking_mode") or "provider_default"),
     )
 
 

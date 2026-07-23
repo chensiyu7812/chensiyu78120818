@@ -6,6 +6,11 @@ from pathlib import Path
 
 import pytest
 
+from metacom_pm.api import (
+    CallResult,
+    ProviderRequestError,
+    RetryableProviderError,
+)
 from metacom_pm.artifacts import create_artifact_attestation
 from metacom_pm.attempt_ledger import PersistentAttemptLedger
 from metacom_pm.bounded_retry import TERMINAL_DISPOSITION, failure_metadata
@@ -21,8 +26,12 @@ from metacom_pm.v1_5_automated_semantic_review import (
     AUTOMATED_CONTROL_PROTOCOL,
     AUTOMATED_REVIEW_PROTOCOL,
     RATING_FIELDS,
+    AutomatedSemanticReviewOutput,
     aggregate_gate,
     require_automated_semantic_review_pass,
+)
+from metacom_pm.v1_5_semantic_review_diagnostic import (
+    maximum_legal_single_field_diagnostic_output_tokens,
 )
 
 
@@ -367,6 +376,259 @@ def _argv(out_dir: Path, mode: str, pilot_attestation: Path) -> list[str]:
     ]
 
 
+def _valid_review_call_result() -> tuple[CallResult, AutomatedSemanticReviewOutput]:
+    payload = {field: 1 for field in RATING_FIELDS}
+    payload["notes"] = "ok"
+    parsed = AutomatedSemanticReviewOutput.model_validate(payload)
+    call = CallResult(
+        text=canonical_json(payload),
+        raw_response={
+            "choices": [
+                {
+                    "finish_reason": "stop",
+                    "message": {"content": canonical_json(payload)},
+                }
+            ]
+        },
+        usage={"prompt_tokens": 10, "completion_tokens": 10, "total_tokens": 20},
+        latency_ms=1.0,
+        request_hash="f" * 64,
+        provider_finish_reason="stop",
+        normalized_finish_reason="complete",
+    )
+    return call, parsed
+
+
+class _FakeClientWithInjectedFailures:
+    """Every call succeeds with a valid parsed result, except the physical
+    call indices in ``fail_at`` (0-based, in the order chat() is invoked),
+    which raise whatever ``exception_factory`` returns for that call. Lets a
+    test deterministically target exactly one (or a repeating pattern of)
+    logical call(s) without any real network/sleep involved."""
+
+    def __init__(self, *, fail_at: dict[int, callable]) -> None:
+        self._fail_at = fail_at
+        self._count = 0
+
+    def chat(self, messages, *, temperature, max_tokens, seed, response_schema, retries):
+        index = self._count
+        self._count += 1
+        if index in self._fail_at:
+            raise self._fail_at[index]()
+        return _valid_review_call_result()
+
+    def close(self) -> None:
+        pass
+
+
+def _run_with_fake_client(
+    module,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    *,
+    fail_at: dict[int, callable],
+    preseed_succeeded_plan_indices: set[int] | None = None,
+) -> Path:
+    out_dir = tmp_path / "review"
+    pilot = _patch_paid_pilot(module, monkeypatch, tmp_path)
+    monkeypatch.setattr(sys, "argv", _argv(out_dir, "--dry-run", pilot))
+    module.main()
+    if preseed_succeeded_plan_indices:
+        plan = list(iter_jsonl(out_dir / "call_plan.jsonl"))
+        ledger = PersistentAttemptLedger(
+            out_dir / "physical_attempt_ledger.jsonl",
+            stage="pm_v1_5_automated_semantic_review",
+            expected_calls={
+                str(row["physical_call_key"]): int(row["maximum_physical_attempts"])
+                for row in plan
+            },
+            maximum_total_attempts=10**6,
+        )
+        for index in preseed_succeeded_plan_indices:
+            row = plan[index]
+            call_key = str(row["physical_call_key"])
+            reservation = ledger.reserve(
+                call_key, record_ids={}, prompt_sha256=str(row["prompt_sha256"])
+            )
+            ledger.finish(
+                reservation,
+                succeeded=True,
+                request_hash="f" * 64,
+                usage={"prompt_tokens": 10, "completion_tokens": 10, "total_tokens": 20},
+                error=None,
+                result={"parsed": {}, "raw_text": "{}"},
+                metadata={"carried_forward": True},
+            )
+    monkeypatch.setattr(
+        module,
+        "require_paid_run_release",
+        lambda *args, **kwargs: {"status": "PAID_RUN_RELEASED"},
+    )
+    monkeypatch.setenv("GEMINI_API_KEY", "test-only")
+    monkeypatch.setenv("NVIDIA_API_KEY", "test-only")
+    estimate = read_json(out_dir / "cost_estimate.json")
+    client = _FakeClientWithInjectedFailures(fail_at=fail_at)
+    monkeypatch.setattr(module, "make_client", lambda _endpoint: client)
+    argv = _argv(out_dir, "--run", pilot) + [
+        "--accept-cost-estimate-sha256",
+        estimate["cost_estimate_sha256"],
+    ]
+    monkeypatch.setattr(sys, "argv", argv)
+    module.main()
+    return out_dir
+
+
+def test_isolated_output_token_limit_failure_does_not_crash_the_whole_run(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    """The real bug this fixes: a single real output_token_limit failure
+    (state_0a97c3fc.../advice_readiness_match, real actual-468 run) killed
+    the entire 1880-call matrix. One isolated failure must not stop the
+    remaining, unrelated calls."""
+
+    module = _load_runner()
+
+    def _output_token_limit_error():
+        return RetryableProviderError(
+            "response is not valid JSON (finish_reason=length)",
+            last_retry_class="output_token_limit",
+            last_status_code=None,
+            attempts_tried=1,
+        )
+
+    out_dir = _run_with_fake_client(
+        module, monkeypatch, tmp_path, fail_at={0: _output_token_limit_error}
+    )
+    gate = read_json(out_dir / "gate_report.json")
+    assert gate["status"] == "INCOMPLETE_NO_GATE_DECISION"
+    assert gate["logical_calls_incomplete"] == 1
+    assert gate["logical_calls_succeeded"] == gate["logical_calls_planned"] - 1
+    assert "output_token_limit" in gate["incomplete_calls"][0]["reason"]
+
+
+def test_provider_request_error_still_stops_the_whole_run_immediately(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    """A 4xx (credentials, balance, request-contract rejection -- the same
+    class DeepSeek's json_schema-mode 400 raised) is not isolated case noise:
+    it means the run itself cannot be trusted, and must still stop
+    everything immediately, not just record and continue."""
+
+    module = _load_runner()
+
+    def _provider_request_error():
+        return ProviderRequestError(
+            status_code=400,
+            detail="Invalid schema for response_format",
+            schema_mode=True,
+            request_hash="a" * 64,
+        )
+
+    with pytest.raises(ProviderRequestError):
+        _run_with_fake_client(
+            module, monkeypatch, tmp_path, fail_at={0: _provider_request_error}
+        )
+
+
+def test_circuit_breaker_stops_on_repeated_same_class_isolated_failures(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    """The same isolatable retry_class recurring across many different
+    calls is a systemic problem in disguise, not bad luck -- must not
+    silently grind through a run that cannot actually succeed."""
+
+    module = _load_runner()
+
+    def _missing_field_error():
+        return RetryableProviderError(
+            "empty model response",
+            last_retry_class="missing_field",
+            last_status_code=None,
+            attempts_tried=1,
+        )
+
+    fail_at = {i: _missing_field_error for i in range(10)}
+    with pytest.raises(RuntimeError, match="circuit breaker"):
+        _run_with_fake_client(module, monkeypatch, tmp_path, fail_at=fail_at)
+
+
+def test_circuit_breaker_does_not_trip_on_failures_spread_across_carried_forward_successes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    """Real bug: the runner used to iterate only the `pending` (not-yet-
+    succeeded) rows, so the consecutive-failure counter advanced only
+    across pending rows -- any already-succeeded (e.g. carried-forward)
+    row in between was invisible to it. Five failures that are hundreds of
+    rows apart in the real 1880-row actual-468 plan (positions 52, 420,
+    477, 644, 790, confirmed against a real run) got compressed into an
+    apparent "5 in a row" this way, tripping the breaker on isolated
+    failures. Fixed by iterating the full call plan and resetting the
+    streak on every already-succeeded row, whether real or carried
+    forward. This test seeds most of the 120-row pilot plan as already
+    successful (simulating carry-forward) except 5 positions spread far
+    apart, which fail with the same isolatable retry_class -- the run
+    must complete (INCOMPLETE_NO_GATE_DECISION), not crash."""
+
+    module = _load_runner()
+
+    def _missing_field_error():
+        return RetryableProviderError(
+            "empty model response",
+            last_retry_class="missing_field",
+            last_status_code=None,
+            attempts_tried=1,
+        )
+
+    spread_out_failure_positions = {5, 35, 65, 95, 115}
+    preseed = set(range(120)) - spread_out_failure_positions
+    # Only the 5 non-preseeded rows ever reach the fake client, in plan
+    # order. Each needs 2 physical attempts to become terminal (matching
+    # test_circuit_breaker_stops_on_repeated_same_class_isolated_failures'
+    # own range(10) for exactly 5 terminal logical failures), so all 10
+    # physical-attempt indices across those 5 logical calls must fail.
+    fail_at = {i: _missing_field_error for i in range(10)}
+    out_dir = _run_with_fake_client(
+        module,
+        monkeypatch,
+        tmp_path,
+        fail_at=fail_at,
+        preseed_succeeded_plan_indices=preseed,
+    )
+    gate = read_json(out_dir / "gate_report.json")
+    assert gate["status"] == "INCOMPLETE_NO_GATE_DECISION"
+    assert gate["logical_calls_incomplete"] == 5
+
+
+def test_output_directory_guard_is_wired_in_before_any_expensive_work(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
+    """Unlike 13b/13c, this script takes --out-dir as an explicit operator-
+    chosen path rather than auto-deriving one from scope/split, so there is
+    no auto-fallback sibling directory to resolve to here -- just proves
+    require_output_directory_not_previously_consumed is actually called with
+    the real --out-dir, before any real_case_rows/retrieval work, not just
+    that the underlying guard function itself is correct (see
+    test_output_directory_previously_consumed_is_permanently_protected in
+    tests/test_v1_5_latest_protocol_repairs.py for that)."""
+
+    module = _load_runner()
+    out_dir = tmp_path / "review"
+    pilot = _patch_paid_pilot(module, monkeypatch, tmp_path)
+    calls: list[Path] = []
+
+    def fake_guard(target_out_dir, *, config, config_path):
+        calls.append(Path(target_out_dir))
+        raise RuntimeError("guard invoked -- stopping before any real work")
+
+    monkeypatch.setattr(
+        module, "require_output_directory_not_previously_consumed", fake_guard
+    )
+    monkeypatch.setattr(sys, "argv", _argv(out_dir, "--dry-run", pilot))
+    with pytest.raises(RuntimeError, match="guard invoked"):
+        module.main()
+    assert calls == [out_dir]
+
+
 def test_automated_review_dry_run_freezes_the_durable_retry_contract(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ):
@@ -397,14 +659,21 @@ def test_automated_review_dry_run_freezes_the_durable_retry_contract(
         "gemini_generate_content"
     )
     retry_contract = first["retry_contract"]
-    assert retry_contract["protocol"] == "pm-v1.5-bounded-retry-v2"
+    assert retry_contract["protocol"] == (
+        "pm-v1.5-bounded-retry-v4-independent-transport-format"
+    )
     assert retry_contract["cross_process_eligibility_source"] == (
         "physical_attempt_ledger"
     )
     assert "request_timeout_408" in retry_contract["retryable_up_to_full_budget"]
+    assert retry_contract["bounded_provider_output_retry_classes"] == [
+        "missing_field",
+        "provider_output_format",
+    ]
+    assert retry_contract["provider_output_maximum_failures"] == 2
     assert retry_contract[
-        "missing_field_maximum_additional_physical_attempts"
-    ] == 1
+        "provider_output_failures_are_independent_of_transport_attempts"
+    ] is True
     assert "consecutive_failure_circuit_breaker_limit" not in retry_contract
 
     monkeypatch.setattr(sys, "argv", _argv(out_dir, "--dry-run", pilot))
@@ -493,3 +762,25 @@ def test_run_refuses_persisted_terminal_failure_before_loading_credentials(
     with pytest.raises(RuntimeError, match="persisted ledger"):
         module.main()
     assert ledger.attempts_for(call_key) == 1
+
+
+def test_actual_468_response_max_tokens_clears_the_computed_legal_bound():
+    # Real evidence across two rounds of actual-468 crashes: 300 was too low
+    # (real completions up to 604/365 tokens with only 300 requested), and
+    # even 900 was not always enough (a real advice_readiness_match call
+    # generated 4515 characters and was still mid-answer at
+    # completion_tokens=900, finish_reason=length). Root cause was an
+    # unbounded output schema, now bounded (see
+    # v1_5_semantic_review_diagnostic.py); this must stay well above the
+    # schema's own computed worst-case-legal-response size rather than being
+    # raised again by guesswork after the next real truncation.
+    source = (
+        ROOT / "scripts" / "v1_5_run_automated_semantic_review.py"
+    ).read_text(encoding="utf-8")
+    assert "response_max_tokens = 300" not in source
+    assert "response_max_tokens = 900" not in source
+    assert "response_max_tokens = 1800" in source
+    maximum_legal = maximum_legal_single_field_diagnostic_output_tokens()
+    assert 1800 > maximum_legal
+    # Real margin, not just barely clearing the bound.
+    assert 1800 >= maximum_legal * 2

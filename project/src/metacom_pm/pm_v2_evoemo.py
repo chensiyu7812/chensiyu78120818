@@ -34,11 +34,13 @@ from .evidence_filter import EvidenceFilterConfig, filter_evidence
 from .evidence_filter_model import PMV2EvidenceFilterModel
 from .evoemo import (
     FIXED_SEEKER_V22_STAGE,
+    FIXED_SEEKER_V23_STAGE,
     NEUTRAL_INITIAL_GREETING,
     _fixed_context_before_turn,
     _load_fixed_tracks,
     _track_key,
     build_evo_memory,
+    evo_memory_global_catalog_digest,
     fixed_seeker_cost_planning_contract,
     load_evoemo,
     make_evo_runtime_state,
@@ -57,7 +59,10 @@ from .io import (
     write_jsonl,
 )
 from .generation_contract import SupporterGenerationContract
-from .pm_v2_data import runtime_to_pmv2_state
+from .pm_v2_data import (
+    compare_external_observable_state_support,
+    runtime_to_pmv2_state,
+)
 from .pm_v2_contracts import PMV2State
 from .pm_v1_5_step0 import build_strategy_family_catalog
 from .pm_v1_5_semantic import (
@@ -76,6 +81,7 @@ from .pm_v1_5_rule_router import (
 from .pm_v2_fixed_model import FixedActionPMV2Model
 from .pm_v2_model import PMV2Model, decision_fallback_kind
 from .prompts import generation_messages
+from .response_mechanism_contract import build_response_mechanism_contract
 from .retrieval import MemoryRetriever, StrategyRetriever, context_query
 from .text import conservative_token_bound, estimate_tokens, normalize_space
 
@@ -620,12 +626,19 @@ def run_pmv2_fixed_evoemo(
     fixed_tracks_path: str | Path,
     out_dir: str | Path,
     *,
+    project_root: str | Path,
     generator_endpoint: Endpoint,
     supporter_generation_contract: SupporterGenerationContract,
     fixed_seeker_generation_contract: Mapping[str, Any],
     fixed_seeker_generation_contract_sha256: str,
     simulator_id: str,
     fixed_tracks_attestation_path: str | Path | None = None,
+    # Shared by both the original PM-v2.2 track (scripts/24_run_pm_v2_evoemo.py,
+    # still V2, unchanged) and the V1.5 track (scripts/v1_5/
+    # 24_run_pm_v2_evoemo_v1_5.py, migrated to V3): the caller states which
+    # fixed-seeker attestation stage its own frozen bundle must carry, rather
+    # than this shared runner silently assuming one track's version for both.
+    fixed_seeker_required_stage: str = FIXED_SEEKER_V22_STAGE,
     condition: str = "pm_v2",
     max_turns: int = 10,
     seeds: Sequence[int] = (101,),
@@ -664,6 +677,13 @@ def run_pmv2_fixed_evoemo(
         raise RuntimeError(
             "paid API runs prohibit overwrite; use a new output directory"
         )
+    if fixed_seeker_required_stage not in {
+        FIXED_SEEKER_V22_STAGE,
+        FIXED_SEEKER_V23_STAGE,
+    }:
+        raise ValueError(
+            f"unsupported fixed-seeker required stage: {fixed_seeker_required_stage!r}"
+        )
     generator_pricing_usd_per_mtok = {
         "input": float(input_usd_per_mtok),
         "output": float(output_usd_per_mtok),
@@ -693,6 +713,9 @@ def run_pmv2_fixed_evoemo(
         development_score_diagnostics = development_training_report.get(
             "step0_score_diagnostics_by_split"
         ) or {}
+        development_observable_support = development_training_report.get(
+            "development_observable_state_support"
+        ) or {}
         development_training_report_sha256 = sha256_file(
             development_training_report_path
         )
@@ -713,6 +736,7 @@ def run_pmv2_fixed_evoemo(
                 "fixed-action condition cannot claim an unused training-score reference"
             )
         development_score_diagnostics = None
+        development_observable_support = None
         development_training_report_sha256 = None
     derived_evidence_filter_model_binding = (
         {
@@ -769,7 +793,7 @@ def run_pmv2_fixed_evoemo(
     fixed_bundle_dir = Path(fixed_tracks_path).resolve().parent
     fixed_verification = require_content_addressed_attestation(
         fixed_tracks_attestation_path,
-        required_stage=FIXED_SEEKER_V22_STAGE,
+        required_stage=fixed_seeker_required_stage,
         relocated_inputs={
             "evoemo": evoemo_path,
             "run_manifest": fixed_bundle_dir / "run_manifest.json",
@@ -986,11 +1010,24 @@ def run_pmv2_fixed_evoemo(
         "evaluation_turn_indices"
     ]
 
+    # evoemo_sha256 above only pins the raw input file, not what
+    # build_evo_memory actually constructs from it (MP/MS/ME item content,
+    # chunking, ids) -- record that separately so this run's manifest is
+    # auditable against the memory builder that actually produced its
+    # retrieval catalog, not just the source data.
+    evo_memory_digest = evo_memory_global_catalog_digest(users)
+
     ensure_run_manifest(
         manifest_path,
         {
             "stage": "evoemo_pm_v2_generation",
             "evoemo_sha256": sha256_file(evoemo_path),
+            "evo_memory_builder_contract_sha256": evo_memory_digest[
+                "builder_contract_sha256"
+            ],
+            "evo_memory_global_catalog_sha256": evo_memory_digest[
+                "global_catalog_sha256"
+            ],
             "strategy_bank_sha256": sha256_file(strategy_bank_path),
             "checkpoint_sha256": sha256_file(checkpoint_path),
             "fixed_tracks_sha256": sha256_file(fixed_tracks_path),
@@ -1067,6 +1104,7 @@ def run_pmv2_fixed_evoemo(
 
     preflight_rows: list[dict[str, Any]] = []
     preflight_states: list[PMV2State] = []
+    evaluation_preflight_states: list[PMV2State] = []
     call_plan: list[dict[str, Any]] = []
     semantic_centroids_by_user: dict[
         str, dict[MemorySource, tuple[float, ...]]
@@ -1134,6 +1172,8 @@ def run_pmv2_fixed_evoemo(
                 decision = model.choose(pm_state)
                 if semantic_encoder is not None and isinstance(pm_state, PMV2State):
                     preflight_states.append(pm_state)
+                    if turn_index in evaluation_turn_indices:
+                        evaluation_preflight_states.append(pm_state)
                 fallback_type = (
                     decision_fallback_kind(decision) if condition == "pm_v2" else None
                 )
@@ -1327,6 +1367,21 @@ def run_pmv2_fixed_evoemo(
             "external_threshold_selection_or_retuning_authorized": False,
         }
     )
+    observable_state_support = (
+        compare_external_observable_state_support(
+            development=development_observable_support or {},
+            external_states=evaluation_preflight_states,
+        )
+        if semantic_encoder is not None
+        else {
+            "protocol": (
+                "pm-v1.5-development-external-observable-state-support-v1"
+            ),
+            "status": "NOT_APPLICABLE_FIXED_ACTION_CONDITION",
+            "outcome_labels_used": False,
+            "external_threshold_selection_or_retuning_authorized": False,
+        }
+    )
     write_json(comparison_path, development_external_score_comparison)
 
     preflight = {
@@ -1362,6 +1417,7 @@ def run_pmv2_fixed_evoemo(
         "development_external_score_comparison": (
             development_external_score_comparison
         ),
+        "observable_state_support": observable_state_support,
     }
     preflight["semantic_truncation"]["current_user_text_gate"] = (
         "PASS"
@@ -1410,6 +1466,10 @@ def run_pmv2_fixed_evoemo(
             "complete_section_allocation_gate"
         ]
         != "PASS"
+        or observable_state_support.get("status") not in {
+            "PASS",
+            "NOT_APPLICABLE_FIXED_ACTION_CONDITION",
+        }
     ):
         preflight["status"] = "FAIL"
     write_json(preflight_path, preflight)
@@ -1442,6 +1502,12 @@ def run_pmv2_fixed_evoemo(
         "stage": "evoemo_pm_v2_generation",
         "physical_attempt_ledger_protocol": PHYSICAL_ATTEMPT_LEDGER_PROTOCOL,
         "condition": condition,
+        "evo_memory_builder_contract_sha256": evo_memory_digest[
+            "builder_contract_sha256"
+        ],
+        "evo_memory_global_catalog_sha256": evo_memory_digest[
+            "global_catalog_sha256"
+        ],
         "supporter_generation_treatment": supporter_treatment,
         "supporter_generation_treatment_sha256": supporter_treatment_sha256,
         "fixed_seeker_generation_treatment": fixed_seeker_treatment,
@@ -2486,6 +2552,27 @@ def run_pmv2_fixed_evoemo(
             cost_match_preflight_path,
             False,
         )
+    generator_endpoint_sha256 = sha256_text(
+        canonical_json(
+            {
+                "model": generator_endpoint.model,
+                "family": generator_endpoint.family,
+                "base_url": generator_endpoint.base_url,
+            }
+        )
+    )
+    response_mechanism_contract = build_response_mechanism_contract(
+        project_root=project_root,
+        supporter_generation_contract=supporter_generation_contract,
+        generator_endpoint_sha256=generator_endpoint_sha256,
+        strategy_bank_sha256=sha256_file(strategy_bank_path),
+        memory_min_score=memory_min_score,
+        strategy_min_score=strategy_min_score,
+        strategy_top_k=int(strategy_top_k),
+        evidence_filter_enabled=bool(
+            evidence_filter_config.enabled if evidence_filter_config is not None else False
+        ),
+    )
     create_artifact_attestation(
         attestation_path,
         stage="evoemo_pm_v2_generation",
@@ -2494,6 +2581,13 @@ def run_pmv2_fixed_evoemo(
         parameters={
             "condition": condition,
             "protocol": supporter_generation_contract.version,
+            "evo_memory_builder_contract_sha256": evo_memory_digest[
+                "builder_contract_sha256"
+            ],
+            "evo_memory_global_catalog_sha256": evo_memory_digest[
+                "global_catalog_sha256"
+            ],
+            "response_mechanism_contract": response_mechanism_contract,
             "supporter_generation_treatment": supporter_treatment,
             "supporter_generation_treatment_sha256": supporter_treatment_sha256,
             "fixed_seeker_generation_treatment": fixed_seeker_treatment,
@@ -2508,15 +2602,7 @@ def run_pmv2_fixed_evoemo(
             "action_preflight_gate_scope": "frozen_evaluation_turns_only",
             "all_turn_action_preflight_is_diagnostic_only": True,
             "selection_config_hash": model.selection_config.digest(),
-            "generator_endpoint_sha256": sha256_text(
-                canonical_json(
-                    {
-                        "model": generator_endpoint.model,
-                        "family": generator_endpoint.family,
-                        "base_url": generator_endpoint.base_url,
-                    }
-                )
-            ),
+            "generator_endpoint_sha256": generator_endpoint_sha256,
             "strategy_action_tokens": int(strategy_action_tokens),
             "strategy_top_k": int(strategy_top_k),
             "memory_min_score": memory_min_score,

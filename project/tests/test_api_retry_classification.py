@@ -11,6 +11,11 @@ from metacom_pm.api import (
     ProviderRequestError,
     RetryableProviderError,
 )
+from metacom_pm.pm_v2_contracts import StrictModel
+
+
+class _TinyStructuredOutput(StrictModel):
+    verdict: str
 
 
 def _client(
@@ -135,6 +140,188 @@ def test_2xx_missing_content_preserves_usage_and_safe_body_shape(
     assert failure.response_diagnostics["status_code"] == 200
     assert failure.response_diagnostics["first_message_keys"] == ["role"]
     assert "paid-but-malformed" not in str(failure.response_diagnostics)
+
+
+def test_empty_content_with_finish_reason_length_is_output_token_limit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A response cut off by max_tokens (e.g. an unrequested reasoning budget
+    consuming the whole allowance before any content token, the real pattern
+    observed on deepseek-v4-flash) is a contract/config mismatch, not random
+    provider noise -- it must be classified distinctly from missing_field so
+    the caller does not burn a bounded retry budget re-sending the identical
+    request into the identical wall."""
+
+    client = _client(
+        monkeypatch,
+        lambda _request: httpx.Response(
+            200,
+            json={
+                "id": "truncated-by-length",
+                "choices": [
+                    {
+                        "finish_reason": "length",
+                        "message": {
+                            "role": "assistant",
+                            "content": "",
+                            "reasoning_content": "x" * 500,
+                        },
+                    }
+                ],
+                "usage": {
+                    "prompt_tokens": 859,
+                    "completion_tokens": 600,
+                    "total_tokens": 1459,
+                    "completion_tokens_details": {"reasoning_tokens": 600},
+                },
+            },
+        ),
+    )
+    try:
+        with pytest.raises(RetryableProviderError) as exc_info:
+            client.chat([{"role": "user", "content": "test"}], retries=1)
+    finally:
+        client.close()
+    failure = exc_info.value
+    assert failure.last_retry_class == "output_token_limit"
+    assert "finish_reason=length" in str(failure)
+    diagnostics = failure.response_diagnostics
+    assert diagnostics["first_choice_finish_reason"] == "length"
+    assert diagnostics["first_message_content_length"] == 0
+    assert diagnostics["first_message_reasoning_content_length"] == 500
+    assert diagnostics["completion_reasoning_tokens"] == 600
+
+
+def test_truncated_json_with_finish_reason_length_is_output_token_limit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Non-empty but truncated-mid-string content under finish_reason=length
+    must not be misclassified as ordinary provider_output_format noise
+    either -- same underlying cause (ran out of max_tokens) as the empty-
+    content case above, so the same distinct, non-blindly-retried class."""
+
+    client = _client(
+        monkeypatch,
+        lambda _request: httpx.Response(
+            200,
+            json={
+                "id": "truncated-json-by-length",
+                "choices": [
+                    {
+                        "finish_reason": "length",
+                        "message": {
+                            "role": "assistant",
+                            "content": '{"emotional_support": 4, "rationale": "cut off mid',
+                        },
+                    }
+                ],
+                "usage": {
+                    "prompt_tokens": 938,
+                    "completion_tokens": 700,
+                    "total_tokens": 1638,
+                },
+            },
+        ),
+    )
+    try:
+        with pytest.raises(RetryableProviderError) as exc_info:
+            client.chat(
+                [{"role": "user", "content": "test"}],
+                response_schema=_TinyStructuredOutput,
+                retries=1,
+            )
+    finally:
+        client.close()
+    failure = exc_info.value
+    assert failure.last_retry_class == "output_token_limit"
+    assert "finish_reason=length" in str(failure)
+
+
+def test_empty_content_without_length_finish_reason_stays_missing_field(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Genuinely unexplained empty content (no length signal at all) keeps
+    the existing missing_field classification and its existing bounded
+    retry treatment -- this fix must not reclassify every empty response."""
+
+    client = _client(
+        monkeypatch,
+        lambda _request: httpx.Response(
+            200,
+            json={
+                "id": "empty-no-length-signal",
+                "choices": [
+                    {
+                        "finish_reason": "stop",
+                        "message": {"role": "assistant", "content": ""},
+                    }
+                ],
+                "usage": {
+                    "prompt_tokens": 21,
+                    "completion_tokens": 0,
+                    "total_tokens": 21,
+                },
+            },
+        ),
+    )
+    try:
+        with pytest.raises(RetryableProviderError) as exc_info:
+            client.chat([{"role": "user", "content": "test"}], retries=1)
+    finally:
+        client.close()
+    assert exc_info.value.last_retry_class == "missing_field"
+
+
+def test_schema_mode_audits_bounded_prefix_without_changing_json_values(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    client = _client(
+        monkeypatch,
+        lambda _request: httpx.Response(
+            200,
+            json={
+                "id": "paid-prefixed-json",
+                "choices": [
+                    {
+                        "message": {
+                            "role": "assistant",
+                            "content": 'We{"verdict":"supported"}',
+                        },
+                        "finish_reason": "stop",
+                    }
+                ],
+                "usage": {
+                    "prompt_tokens": 21,
+                    "completion_tokens": 5,
+                    "total_tokens": 26,
+                },
+            },
+        ),
+    )
+    try:
+        call, parsed = client.chat(
+            [{"role": "user", "content": "test"}],
+            response_schema=_TinyStructuredOutput,
+            retries=1,
+        )
+    finally:
+        client.close()
+    assert parsed is not None and parsed.verdict == "supported"
+    assert call.usage == {
+        "prompt_tokens": 21,
+        "completion_tokens": 5,
+        "total_tokens": 26,
+    }
+    assert call.structured_output_audit == {
+        "initially_valid_json": False,
+        "normalization_kind": "single_bounded_json_object",
+        "raw_text_sha256": call.structured_output_audit["raw_text_sha256"],
+        "normalized_json_sha256": call.structured_output_audit[
+            "normalized_json_sha256"
+        ],
+        "discarded_prefix_chars": 2,
+        "discarded_suffix_chars": 0,
+    }
 
 
 def test_real_http_403_is_deterministic_and_carries_request_hash(

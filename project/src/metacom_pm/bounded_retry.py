@@ -8,6 +8,7 @@ Deterministic failures remain terminal across process restarts.
 
 from __future__ import annotations
 
+import hashlib
 import time
 from typing import Any, Callable, Mapping
 
@@ -18,7 +19,7 @@ from .api import (
 )
 from .attempt_ledger import AttemptReservation, PersistentAttemptLedger
 
-RETRY_CONTRACT_PROTOCOL = "pm-v1.5-bounded-retry-v2"
+RETRY_CONTRACT_PROTOCOL = "pm-v1.5-bounded-retry-v4-independent-transport-format"
 RETRYABLE_UP_TO_FULL_BUDGET = frozenset(
     {
         "rate_limited_429",
@@ -28,7 +29,13 @@ RETRYABLE_UP_TO_FULL_BUDGET = frozenset(
     }
 )
 DEFAULT_BACKOFF_SECONDS: tuple[float, ...] = (10.0, 30.0)
-DEFAULT_MAX_MISSING_FIELD_ATTEMPTS = 2  # initial response plus one retry
+BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES = frozenset(
+    {"missing_field", "provider_output_format"}
+)
+DEFAULT_MAX_PROVIDER_OUTPUT_ATTEMPTS = 2  # initial response plus one repair
+# Compatibility alias for old imports; the v3 policy applies one shared cap to
+# every provider-output-format class rather than only to missing fields.
+DEFAULT_MAX_MISSING_FIELD_ATTEMPTS = DEFAULT_MAX_PROVIDER_OUTPUT_ATTEMPTS
 
 RETRYABLE_DISPOSITION = "retryable_transient"
 TERMINAL_DISPOSITION = "terminal_nonretryable"
@@ -79,11 +86,23 @@ def _call_failures(
     ]
 
 
+def _provider_output_failures(
+    ledger: PersistentAttemptLedger, call_key: str
+) -> list[dict[str, Any]]:
+    return [
+        row
+        for row in _call_failures(ledger, call_key)
+        if isinstance(row.get("metadata"), Mapping)
+        and str(row["metadata"].get("retry_class") or "")
+        in BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES
+    ]
+
+
 def call_retry_blocker(
     ledger: PersistentAttemptLedger,
     call_key: str,
     *,
-    max_missing_field_attempts: int = DEFAULT_MAX_MISSING_FIELD_ATTEMPTS,
+    max_provider_output_attempts: int = DEFAULT_MAX_PROVIDER_OUTPUT_ATTEMPTS,
 ) -> str | None:
     """Explain why a non-successful call may not reserve another attempt.
 
@@ -97,7 +116,6 @@ def call_retry_blocker(
     if ledger.succeeded(call_key):
         return None
     failures = _call_failures(ledger, call_key)
-    first_missing_field_attempt: int | None = None
     for row in failures:
         metadata = row.get("metadata")
         if not isinstance(metadata, Mapping):
@@ -106,18 +124,23 @@ def call_retry_blocker(
             return "historical failure uses an unknown retry contract"
         retry_class = str(metadata.get("retry_class") or "")
         disposition = str(metadata.get("retry_disposition") or "")
-        if retry_class == "missing_field" and first_missing_field_attempt is None:
-            first_missing_field_attempt = int(row.get("attempt_index") or 0)
         if disposition in {TERMINAL_DISPOSITION, EXHAUSTED_DISPOSITION}:
             return f"persisted {disposition} failure ({retry_class or 'unknown'})"
         if disposition != RETRYABLE_DISPOSITION:
             return "historical failure has an unknown retry disposition"
-    if (
-        first_missing_field_attempt is not None
-        and ledger.attempts_for(call_key)
-        >= first_missing_field_attempt + int(max_missing_field_attempts) - 1
-    ):
-        return "missing-field retry allowance is already spent"
+    provider_output_failures = _provider_output_failures(ledger, call_key)
+    if len(provider_output_failures) >= int(max_provider_output_attempts):
+        return "provider-output repair allowance is already spent"
+    # If the process died after reserving an attempt that followed a malformed
+    # provider surface, that unknown paid attempt may have been the one allowed
+    # repair.  Fail closed rather than silently opening another repair draw.
+    if provider_output_failures:
+        last_output_failure_index = max(
+            int(row.get("attempt_index") or 0) for row in provider_output_failures
+        )
+        for attempt_index in range(last_output_failure_index + 1, ledger.attempts_for(call_key) + 1):
+            if ledger.terminal_event(call_key, attempt_index) is None:
+                return "provider-output repair allowance has an unknown spent attempt"
     if ledger.exhausted(call_key):
         return "physical-attempt bound is exhausted"
     return None
@@ -127,12 +150,12 @@ def require_call_retryable(
     ledger: PersistentAttemptLedger,
     call_key: str,
     *,
-    max_missing_field_attempts: int = DEFAULT_MAX_MISSING_FIELD_ATTEMPTS,
+    max_provider_output_attempts: int = DEFAULT_MAX_PROVIDER_OUTPUT_ATTEMPTS,
 ) -> None:
     blocker = call_retry_blocker(
         ledger,
         call_key,
-        max_missing_field_attempts=max_missing_field_attempts,
+        max_provider_output_attempts=max_provider_output_attempts,
     )
     if blocker is not None:
         raise RetryBlockedError(f"call {call_key} cannot be retried: {blocker}")
@@ -140,10 +163,28 @@ def require_call_retryable(
 
 def _response_result(
     response_diagnostics: Mapping[str, Any] | None,
+    *,
+    provider_text: str | None = None,
 ) -> dict[str, Any] | None:
-    if response_diagnostics is None:
+    if response_diagnostics is None and provider_text is None:
         return None
-    return {"provider_response_diagnostics": dict(response_diagnostics)}
+    result: dict[str, Any] = {
+        "provider_response_diagnostics": (
+            dict(response_diagnostics) if response_diagnostics is not None else None
+        )
+    }
+    if provider_text is not None:
+        bounded = str(provider_text)[:8192]
+        result.update(
+            {
+                "provider_output_text": bounded,
+                "provider_output_text_sha256": hashlib.sha256(
+                    str(provider_text).encode("utf-8")
+                ).hexdigest(),
+                "provider_output_text_truncated": len(str(provider_text)) > len(bounded),
+            }
+        )
+    return result
 
 
 def execute_with_bounded_retry(
@@ -153,9 +194,10 @@ def execute_with_bounded_retry(
     record_ids: Mapping[str, Any],
     prompt_sha256: str,
     call_fn: Callable[[], tuple[Any, Any]],
-    max_missing_field_attempts: int = DEFAULT_MAX_MISSING_FIELD_ATTEMPTS,
+    max_provider_output_attempts: int = DEFAULT_MAX_PROVIDER_OUTPUT_ATTEMPTS,
     backoff_seconds: tuple[float, ...] = DEFAULT_BACKOFF_SECONDS,
     sleep: Callable[[float], None] = time.sleep,
+    capture_provider_output_text: bool = False,
 ) -> tuple[AttemptReservation, Any, Any]:
     """Retry only persisted transient failures, ledgering every attempt.
 
@@ -164,13 +206,13 @@ def execute_with_bounded_retry(
     here with enough metadata to make a restart obey the same decision.
     """
 
-    if max_missing_field_attempts < 1:
-        raise ValueError("max_missing_field_attempts must be positive")
+    if max_provider_output_attempts < 1:
+        raise ValueError("max_provider_output_attempts must be positive")
     while True:
         require_call_retryable(
             ledger,
             call_key,
-            max_missing_field_attempts=max_missing_field_attempts,
+            max_provider_output_attempts=max_provider_output_attempts,
         )
         reservation = ledger.reserve(
             call_key, record_ids=record_ids, prompt_sha256=prompt_sha256
@@ -216,39 +258,17 @@ def execute_with_bounded_retry(
             )
             raise
         except RetryableProviderError as exc:
-            prior_missing_field_attempts = [
-                int(row.get("attempt_index") or 0)
-                for row in _call_failures(ledger, call_key)
-                if isinstance(row.get("metadata"), Mapping)
-                and row["metadata"].get("retry_class") == "missing_field"
-            ]
-            first_missing_field_attempt = (
-                min(prior_missing_field_attempts)
-                if prior_missing_field_attempts
-                else (
-                    reservation.attempt_index
-                    if exc.last_retry_class == "missing_field"
-                    else None
-                )
-            )
-            missing_field_attempt_cap = (
-                first_missing_field_attempt + max_missing_field_attempts - 1
-                if first_missing_field_attempt is not None
-                else None
-            )
             effective_attempt_cap = ledger.expected_calls[call_key]
-            if missing_field_attempt_cap is not None:
-                effective_attempt_cap = min(
-                    effective_attempt_cap, missing_field_attempt_cap
-                )
             if reservation.attempt_index >= effective_attempt_cap:
-                disposition = (
-                    EXHAUSTED_DISPOSITION
-                    if effective_attempt_cap == ledger.expected_calls[call_key]
-                    else TERMINAL_DISPOSITION
-                )
+                disposition = EXHAUSTED_DISPOSITION
             elif (
-                exc.last_retry_class == "missing_field"
+                exc.last_retry_class in BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES
+                and len(_provider_output_failures(ledger, call_key)) + 1
+                >= int(max_provider_output_attempts)
+            ):
+                disposition = TERMINAL_DISPOSITION
+            elif (
+                exc.last_retry_class in BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES
                 or exc.last_retry_class in RETRYABLE_UP_TO_FULL_BUDGET
             ):
                 disposition = RETRYABLE_DISPOSITION
@@ -268,7 +288,16 @@ def execute_with_bounded_retry(
                 request_hash=exc.request_hash,
                 usage=exc.usage,
                 error=f"{type(exc).__name__}: {exc}",
-                result=_response_result(exc.response_diagnostics),
+                result=_response_result(
+                    exc.response_diagnostics,
+                    provider_text=(
+                        exc.provider_text
+                        if capture_provider_output_text
+                        and exc.last_retry_class
+                        in BOUNDED_PROVIDER_OUTPUT_RETRY_CLASSES
+                        else None
+                    ),
+                ),
                 metadata=metadata,
             )
             if disposition != RETRYABLE_DISPOSITION:

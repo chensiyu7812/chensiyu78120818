@@ -3,6 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 import json
 from math import isfinite
+from pathlib import Path
+import re
 from typing import Any, Mapping
 
 from .api import Endpoint
@@ -11,16 +13,48 @@ from .generation_contract import (
     NORMALIZED_FINISH_REASONS,
     OUTPUT_NORMALIZATION_VERSION,
 )
-from .io import canonical_json, sha256_text
+from .io import canonical_json, read_json, sha256_file, sha256_text
 from .text import normalize_space
 
 
-FIXED_SEEKER_GENERATION_CONTRACT_VERSION = (
+FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V1 = (
     "pm-v2.2-fixed-seeker-generation-v1"
 )
+# v2 lifts the exactly-one-physical-attempt restriction: configs/pm_v2.yaml
+# still uses v1 and must keep its historical exactly-one-attempt behavior
+# unchanged, so the two versions are validated differently below rather than
+# repointing the shared constant (which would silently loosen pm_v2.yaml too).
+FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V2 = (
+    "pm-v2.2-fixed-seeker-generation-v2"
+)
+FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3 = (
+    "pm-v2.2-fixed-seeker-generation-v3-bounded-surface"
+)
+SUPPORTED_FIXED_SEEKER_GENERATION_CONTRACT_VERSIONS = frozenset(
+    {
+        FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V1,
+        FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V2,
+        FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3,
+    }
+)
+# configs/pm_v1_5.yaml stays on the historical V2 treatment: a real
+# longitudinal dry-run showed that editing it directly invalidates the
+# already-qualified V8.19.2 lineage via a pm_v1_5_config hash mismatch. V3 is
+# therefore read only from this separately-tracked sidecar file by every V1.5
+# consumer that needs it (never from configs/pm_v1_5.yaml). Each consumer
+# verifies this exact frozen file hash before trusting its contents -- update
+# deliberately if the sidecar is ever revised (a genuine V3 protocol change),
+# never to silence a real mismatch.
+FIXED_SEEKER_V3_SIDECAR_CONTRACT_SHA256 = (
+    "8386e31e996a6621f293fb813812bf3882dd4eaf4bb337bd7fde7b536d4b8b21"
+)
 FIXED_SEEKER_SYSTEM_PROMPT_ID = "evoemo-fixed-seeker-v1"
+FIXED_SEEKER_SYSTEM_PROMPT_ID_V3 = "evoemo-fixed-seeker-bounded-surface-v1"
 FIXED_SEEKER_SEED_PROTOCOL = "base-seed-plus-turn-index-v1"
 FIXED_SEEKER_SCAFFOLD_PROTOCOL = "deterministic-generic-open-loop-v1"
+FIXED_SEEKER_SURFACE_SELECTION_PROTOCOL = (
+    "normalized-longest-complete-sentence-prefix-v1"
+)
 
 # The 60-token limit is an instruction to the simulator, not the provider's
 # output-token cap.  Keeping the template here lets the configuration bind its
@@ -39,7 +73,22 @@ FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_SHA256 = sha256_text(
     FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE
 )
 
-_CONTRACT_KEYS = frozenset(
+FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_V3 = """Role-play the emotional-support seeker. Stay faithful to the
+private profile and topic. Do not mention that this is a benchmark, do not
+reveal the entire hidden card at once, and do not discuss retrieval, policies,
+or experimental conditions. Respond naturally to the supporter's latest
+message in one or two short sentences using at most
+{response_instruction_word_limit} whitespace-delimited words. Do not become
+artificially agreeable merely because the supporter suggests something.
+
+Private scenario:
+{private_scenario_json}
+"""
+FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_SHA256_V3 = sha256_text(
+    FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_V3
+)
+
+_LEGACY_CONTRACT_KEYS = frozenset(
     {
         "version",
         "seeker_endpoint",
@@ -56,6 +105,49 @@ _CONTRACT_KEYS = frozenset(
         "elicitation_scaffold_protocol",
     }
 )
+_V3_CONTRACT_KEYS = frozenset(
+    {
+        "version",
+        "seeker_endpoint",
+        "system_prompt_id",
+        "system_prompt_template_sha256",
+        "response_instruction_word_limit",
+        "surface_selection_protocol",
+        "temperature",
+        "max_output_tokens",
+        "output_normalization",
+        "finish_reason_protocol",
+        "accepted_normalized_finish_reasons",
+        "maximum_physical_attempts_per_logical_call",
+        "seed_protocol",
+        "elicitation_scaffold_protocol",
+    }
+)
+
+
+@dataclass(frozen=True)
+class FixedSeekerSurface:
+    """The exact normalized surface admitted to a fixed seeker track."""
+
+    text: str
+    original_word_count: int
+    selected_word_count: int
+    sentence_count: int
+    prefix_selected: bool
+    provider_finish_reason: str | None
+    normalized_finish_reason: str
+    protocol: str
+
+    def metadata(self) -> dict[str, Any]:
+        return {
+            "protocol": self.protocol,
+            "original_word_count": self.original_word_count,
+            "selected_word_count": self.selected_word_count,
+            "sentence_count": self.sentence_count,
+            "prefix_selected": self.prefix_selected,
+            "provider_finish_reason": self.provider_finish_reason,
+            "normalized_finish_reason": self.normalized_finish_reason,
+        }
 
 
 @dataclass(frozen=True)
@@ -99,7 +191,9 @@ class FixedSeekerGenerationContract:
     seeker_endpoint: str
     system_prompt_id: str
     system_prompt_template_sha256: str
-    response_instruction_token_limit: int
+    response_instruction_token_limit: int | None
+    response_instruction_word_limit: int | None
+    surface_selection_protocol: str | None
     temperature: float
     max_output_tokens: int
     output_normalization: str
@@ -110,30 +204,59 @@ class FixedSeekerGenerationContract:
     elicitation_scaffold_protocol: str
 
     def __post_init__(self) -> None:
-        if self.version != FIXED_SEEKER_GENERATION_CONTRACT_VERSION:
+        if self.version not in SUPPORTED_FIXED_SEEKER_GENERATION_CONTRACT_VERSIONS:
             raise ValueError(
                 f"unsupported fixed-seeker contract version: {self.version!r}"
             )
         if not self.seeker_endpoint:
             raise ValueError("fixed-seeker endpoint alias must be non-empty")
-        if self.system_prompt_id != FIXED_SEEKER_SYSTEM_PROMPT_ID:
-            raise ValueError(
-                f"unsupported fixed-seeker system prompt: {self.system_prompt_id!r}"
-            )
-        if (
-            self.system_prompt_template_sha256
-            != FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_SHA256
-        ):
-            raise ValueError(
-                "fixed-seeker system-prompt template hash mismatch: "
-                f"configured={self.system_prompt_template_sha256}, "
-                f"actual={FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_SHA256}"
-            )
-        if self.response_instruction_token_limit != 60:
-            raise ValueError(
-                "fixed-seeker natural-language response instruction must equal "
-                "60 tokens"
-            )
+        if self.version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3:
+            if self.system_prompt_id != FIXED_SEEKER_SYSTEM_PROMPT_ID_V3:
+                raise ValueError(
+                    "unsupported V3 fixed-seeker system prompt: "
+                    f"{self.system_prompt_id!r}"
+                )
+            if (
+                self.system_prompt_template_sha256
+                != FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_SHA256_V3
+            ):
+                raise ValueError(
+                    "V3 fixed-seeker system-prompt template hash mismatch"
+                )
+            if self.response_instruction_token_limit is not None:
+                raise ValueError("V3 fixed seeker cannot claim a provider token limit")
+            if self.response_instruction_word_limit != 60:
+                raise ValueError(
+                    "V3 fixed-seeker normalized response limit must equal 60 words"
+                )
+            if (
+                self.surface_selection_protocol
+                != FIXED_SEEKER_SURFACE_SELECTION_PROTOCOL
+            ):
+                raise ValueError("unsupported V3 fixed-seeker surface selector")
+        else:
+            if self.system_prompt_id != FIXED_SEEKER_SYSTEM_PROMPT_ID:
+                raise ValueError(
+                    f"unsupported fixed-seeker system prompt: {self.system_prompt_id!r}"
+                )
+            if (
+                self.system_prompt_template_sha256
+                != FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_SHA256
+            ):
+                raise ValueError(
+                    "fixed-seeker system-prompt template hash mismatch: "
+                    f"configured={self.system_prompt_template_sha256}, "
+                    f"actual={FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_SHA256}"
+                )
+            if self.response_instruction_token_limit != 60:
+                raise ValueError(
+                    "fixed-seeker natural-language response instruction must equal "
+                    "60 tokens"
+                )
+            if self.response_instruction_word_limit is not None:
+                raise ValueError("legacy fixed seeker cannot claim a word limit")
+            if self.surface_selection_protocol is not None:
+                raise ValueError("legacy fixed seeker cannot select a bounded prefix")
         if not isfinite(self.temperature) or self.temperature != 0.2:
             raise ValueError("fixed-seeker temperature must equal 0.2")
         if self.max_output_tokens != 300:
@@ -161,14 +284,31 @@ class FixedSeekerGenerationContract:
             raise ValueError(
                 f"unknown normalized finish reasons in contract: {unknown_reasons}"
             )
-        if set(reasons) != {"complete"}:
+        expected_reasons = (
+            {"complete", "length"}
+            if self.version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3
+            else {"complete"}
+        )
+        if set(reasons) != expected_reasons:
+            if self.version != FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3:
+                raise ValueError(
+                    "PM-v2.2 fixed-seeker generation must accept only complete "
+                    "responses"
+                )
             raise ValueError(
-                "PM-v2.2 fixed-seeker generation must accept only complete responses"
+                "V3 fixed-seeker accepted finish reasons must equal complete "
+                "plus length"
             )
-        if self.maximum_physical_attempts_per_logical_call != 1:
+        if self.version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V1:
+            if self.maximum_physical_attempts_per_logical_call != 1:
+                raise ValueError(
+                    "PM-v2.2 fixed-seeker generation v1 permits exactly one "
+                    "physical attempt per logical call"
+                )
+        elif self.maximum_physical_attempts_per_logical_call < 1:
             raise ValueError(
-                "PM-v2.2 fixed-seeker generation permits exactly one physical "
-                "attempt per logical call"
+                "PM-v2.2 fixed-seeker generation v2 requires a positive "
+                "physical attempt budget per logical call"
             )
         if self.seed_protocol != FIXED_SEEKER_SEED_PROTOCOL:
             raise ValueError(
@@ -185,9 +325,15 @@ class FixedSeekerGenerationContract:
         cls, raw: Mapping[str, Any]
     ) -> "FixedSeekerGenerationContract":
         data = dict(raw)
-        if set(data) != _CONTRACT_KEYS:
-            missing = sorted(_CONTRACT_KEYS - set(data))
-            extra = sorted(set(data) - _CONTRACT_KEYS)
+        version = data.get("version")
+        expected_keys = (
+            _V3_CONTRACT_KEYS
+            if version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3
+            else _LEGACY_CONTRACT_KEYS
+        )
+        if set(data) != expected_keys:
+            missing = sorted(expected_keys - set(data))
+            extra = sorted(set(data) - expected_keys)
             raise ValueError(
                 "fixed_seeker_generation_treatment keys do not match the frozen "
                 f"contract: missing={missing}, extra={extra}"
@@ -205,10 +351,14 @@ class FixedSeekerGenerationContract:
         for key in string_keys:
             if not isinstance(data[key], str):
                 raise ValueError(f"{key} must be a string")
-        integer_keys = (
-            "response_instruction_token_limit",
+        integer_keys = [
             "max_output_tokens",
             "maximum_physical_attempts_per_logical_call",
+        ]
+        integer_keys.append(
+            "response_instruction_word_limit"
+            if version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3
+            else "response_instruction_token_limit"
         )
         for key in integer_keys:
             if isinstance(data[key], bool) or not isinstance(data[key], int):
@@ -229,8 +379,20 @@ class FixedSeekerGenerationContract:
             seeker_endpoint=data["seeker_endpoint"],
             system_prompt_id=data["system_prompt_id"],
             system_prompt_template_sha256=data["system_prompt_template_sha256"],
-            response_instruction_token_limit=int(
-                data["response_instruction_token_limit"]
+            response_instruction_token_limit=(
+                None
+                if version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3
+                else int(data["response_instruction_token_limit"])
+            ),
+            response_instruction_word_limit=(
+                int(data["response_instruction_word_limit"])
+                if version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3
+                else None
+            ),
+            surface_selection_protocol=(
+                str(data["surface_selection_protocol"])
+                if version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3
+                else None
             ),
             temperature=float(data["temperature"]),
             max_output_tokens=int(data["max_output_tokens"]),
@@ -250,14 +412,11 @@ class FixedSeekerGenerationContract:
         return BoundFixedSeekerGenerationContract(self, endpoint_id, endpoint)
 
     def payload(self) -> dict[str, Any]:
-        return {
+        payload = {
             "version": self.version,
             "seeker_endpoint": self.seeker_endpoint,
             "system_prompt_id": self.system_prompt_id,
             "system_prompt_template_sha256": self.system_prompt_template_sha256,
-            "response_instruction_token_limit": (
-                self.response_instruction_token_limit
-            ),
             "temperature": self.temperature,
             "max_output_tokens": self.max_output_tokens,
             "output_normalization": self.output_normalization,
@@ -271,13 +430,33 @@ class FixedSeekerGenerationContract:
             "seed_protocol": self.seed_protocol,
             "elicitation_scaffold_protocol": self.elicitation_scaffold_protocol,
         }
+        if self.version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3:
+            payload.update(
+                {
+                    "response_instruction_word_limit": (
+                        self.response_instruction_word_limit
+                    ),
+                    "surface_selection_protocol": self.surface_selection_protocol,
+                }
+            )
+        else:
+            payload["response_instruction_token_limit"] = (
+                self.response_instruction_token_limit
+            )
+        return payload
 
     def digest(self) -> str:
         return sha256_text(canonical_json(self.payload()))
 
     def render_system_prompt(self, private_scenario: Mapping[str, Any]) -> str:
-        return FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE.format(
+        template = (
+            FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE_V3
+            if self.version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3
+            else FIXED_SEEKER_SYSTEM_PROMPT_TEMPLATE
+        )
+        return template.format(
             response_instruction_token_limit=self.response_instruction_token_limit,
+            response_instruction_word_limit=self.response_instruction_word_limit,
             private_scenario_json=json.dumps(
                 dict(private_scenario), ensure_ascii=False, indent=2
             ),
@@ -285,6 +464,93 @@ class FixedSeekerGenerationContract:
 
     def normalize_output(self, text: str) -> str:
         return normalize_space(text)
+
+    def select_surface(
+        self,
+        text: str,
+        *,
+        normalized_finish_reason: str | None,
+        provider_finish_reason: str | None,
+    ) -> tuple[FixedSeekerSurface | None, str | None]:
+        """Select the exact final seeker surface without mid-sentence truncation."""
+
+        normalized_reason = normalized_finish_reason or "unknown"
+        finish_error = self.completion_gate_error(
+            normalized_finish_reason=normalized_reason,
+            provider_finish_reason=provider_finish_reason,
+        )
+        if finish_error is not None:
+            return None, finish_error
+        normalized = self.normalize_output(text)
+        if not normalized:
+            return None, "fixed-seeker completion is empty after frozen normalization"
+        if self.version != FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3:
+            return (
+                FixedSeekerSurface(
+                    text=normalized,
+                    original_word_count=len(normalized.split()),
+                    selected_word_count=len(normalized.split()),
+                    sentence_count=0,
+                    prefix_selected=False,
+                    provider_finish_reason=provider_finish_reason,
+                    normalized_finish_reason=normalized_reason,
+                    protocol=self.output_normalization,
+                ),
+                None,
+            )
+
+        assert self.response_instruction_word_limit is not None
+        limit = int(self.response_instruction_word_limit)
+        original_words = len(normalized.split())
+        if normalized_reason == "complete" and original_words <= limit:
+            return (
+                FixedSeekerSurface(
+                    text=normalized,
+                    original_word_count=original_words,
+                    selected_word_count=original_words,
+                    sentence_count=1,
+                    prefix_selected=False,
+                    provider_finish_reason=provider_finish_reason,
+                    normalized_finish_reason=normalized_reason,
+                    protocol=str(self.surface_selection_protocol),
+                ),
+                None,
+            )
+
+        complete_sentences = [
+            match.group(0).strip()
+            for match in re.finditer(r".+?[.!?](?=\s|$)", normalized)
+        ]
+        selected: list[str] = []
+        selected_words = 0
+        for sentence in complete_sentences:
+            sentence_words = len(sentence.split())
+            if selected_words + sentence_words > limit:
+                break
+            selected.append(sentence)
+            selected_words += sentence_words
+        if not selected:
+            return (
+                None,
+                "fixed-seeker V3 has no complete sentence prefix within its "
+                f"{limit}-word bound",
+            )
+        final_text = " ".join(selected)
+        if not final_text.endswith((".", "!", "?")):
+            raise RuntimeError("fixed-seeker V3 selector produced an incomplete surface")
+        return (
+            FixedSeekerSurface(
+                text=final_text,
+                original_word_count=original_words,
+                selected_word_count=selected_words,
+                sentence_count=len(selected),
+                prefix_selected=final_text != normalized,
+                provider_finish_reason=provider_finish_reason,
+                normalized_finish_reason=normalized_reason,
+                protocol=str(self.surface_selection_protocol),
+            ),
+            None,
+        )
 
     def completion_gate_error(
         self,
@@ -300,3 +566,34 @@ class FixedSeekerGenerationContract:
                 f"provider={provider_finish_reason!r}"
             )
         return None
+
+
+def require_fixed_seeker_v3_sidecar_contract(
+    sidecar_path: str | Path,
+) -> "FixedSeekerGenerationContract":
+    """Fail closed unless the V3 sidecar file is exactly the frozen contract.
+
+    Every V1.5 consumer that needs the V3 bounded-surface treatment loads it
+    through this one function, never by reading configs/pm_v1_5.yaml (which
+    stays on the historical V2 treatment -- see FIXED_SEEKER_V3_SIDECAR_
+    CONTRACT_SHA256's docstring for why). Verifies both the exact frozen file
+    hash and that the file actually declares itself V3, so a hand-edited or
+    swapped-in sidecar is rejected before any downstream generation/freeze
+    binding check even runs.
+    """
+
+    path = Path(sidecar_path)
+    observed_sha256 = sha256_file(path)
+    if observed_sha256 != FIXED_SEEKER_V3_SIDECAR_CONTRACT_SHA256:
+        raise RuntimeError(
+            "fixed-seeker V3 sidecar contract hash mismatch: "
+            f"path={path}, expected={FIXED_SEEKER_V3_SIDECAR_CONTRACT_SHA256}, "
+            f"observed={observed_sha256}"
+        )
+    contract = FixedSeekerGenerationContract.from_mapping(read_json(path))
+    if contract.version != FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3:
+        raise RuntimeError(
+            f"fixed-seeker V3 sidecar contract is not V3: path={path}, "
+            f"version={contract.version!r}"
+        )
+    return contract

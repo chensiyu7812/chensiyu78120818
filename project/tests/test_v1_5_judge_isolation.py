@@ -29,7 +29,7 @@ def test_current_v1_5_judge_roles_are_hard_isolated() -> None:
     assert report["status"] == "PASS"
     assert {row["name"] for row in report["development_endpoints"]} == {
         "training_judge_gemini_flash_lite",
-        "training_judge_deepseek_flash",
+        "training_judge_deepseek_official_flash",
     }
     gemini = next(
         row

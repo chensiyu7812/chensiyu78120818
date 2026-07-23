@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import dataclass
 from itertools import product
-from typing import Any, Literal, Mapping, Sequence
+from typing import Any, Callable, Literal, Mapping, Sequence
 
 import numpy as np
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -16,6 +16,7 @@ from .pm_v2_model import (
     SelectionConfig,
     TRANSPARENT_RULE_SELECTION_REASON,
     evaluate_policy,
+    evaluate_policy_domain_balanced,
     estimated_action_cost_profile,
 )
 
@@ -500,13 +501,33 @@ def tune_transparent_rule_router(
     minimum_quality: float,
     maximum_risk: float,
     selection_data_role: Literal["train", "train_fold"],
+    domain_key: Callable[[PMV2State], str] | None = None,
 ) -> tuple[TransparentRuleRouter, dict[str, Any]]:
     """Select rule numbers on train data with one frozen utility ruler."""
 
     rows: list[dict[str, Any]] = []
     for config in candidates:
         router = TransparentRuleRouter.create(config, selection_config)
-        metrics = evaluate_policy(router, states, labels)
+        if domain_key is None:
+            metrics = evaluate_policy(router, states, labels)
+            domain_balancing = {
+                "protocol": "equal-domain-policy-metrics-v1",
+                "domains_present": ["default"],
+                "domain_weight": {"default": 1.0},
+            }
+            action_distribution = metrics["action_distribution"]
+        else:
+            metrics = evaluate_policy_domain_balanced(
+                router, states, labels, domain_key=domain_key
+            )
+            domain_balancing = {
+                key: value
+                for key, value in metrics["domain_balancing"].items()
+                if key != "per_domain"
+            }
+            action_distribution = metrics[
+                "domain_balanced_action_distribution"
+            ]
         eligible = (
             metrics["mean_quality"] >= minimum_quality
             and metrics["mean_risk"] <= maximum_risk
@@ -520,7 +541,8 @@ def tune_transparent_rule_router(
                 "mean_risk": metrics["mean_risk"],
                 "mean_realized_utility": metrics["mean_realized_utility"],
                 "mean_observed_input_tokens": metrics["mean_observed_input_tokens"],
-                "action_distribution": metrics["action_distribution"],
+                "action_distribution": action_distribution,
+                "domain_balancing": domain_balancing,
             }
         )
     eligible_rows = [row for row in rows if row["eligible"]]
@@ -554,6 +576,7 @@ def tune_transparent_rule_router(
         "selection_data_role": (
             "train_only" if selection_data_role == "train" else "train_fold_only"
         ),
+        "domain_balancing": selected.get("domain_balancing"),
         "candidate_count": len(rows),
         "minimum_quality": float(minimum_quality),
         "maximum_risk": float(maximum_risk),

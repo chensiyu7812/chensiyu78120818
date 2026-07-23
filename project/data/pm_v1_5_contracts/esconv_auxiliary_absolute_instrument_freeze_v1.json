@@ -1,0 +1,108 @@
+{
+  "protocol": "pm-v1.5-esconv-auxiliary-absolute-label-instrument-freeze-contract-v1",
+  "status": "ESCONV_AUXILIARY_ABSOLUTE_LABEL_INSTRUMENT_NOT_SUPPORTED",
+  "created_at": "2026-07-23T06:57:15.460346+00:00",
+  "scope": "esconv_auxiliary_judging_v1_5_full_train (636/636 pairs, mechanically-recovered)",
+  "decision_rule": "Per explicit user instruction: freeze as ESCONV_AUXILIARY_ABSOLUTE_LABEL_INSTRUMENT_NOT_SUPPORTED if, after (a) the judge-uncertainty-robust MAD-adjusted conservative utility (lambda=1.0 fixed), (b) risk-head action-applicability zero-weighting, (c) sparse-zero-aware informative-only duplicate/correlation detection, (d) pairwise action-applicable-row restriction for risk-dimension correlation, and (e) directional (positive/negative) splitting of the correlation gate are all applied, the applicable response dimensions and the cross-judge-family routing preference remain unreliable. Both conditions hold here; do not continue adjusting thresholds, lambda, or applicability definitions.",
+  "supporting_findings": {
+    "response_dimension_low_mad_coverage_unresolved": {
+      "low_coverage_dimensions": [
+        "response.factual_grounding",
+        "response.memory_appropriateness"
+      ],
+      "low_coverage_action_dimensions": [
+        "M0+R0/response.factual_grounding",
+        "M0+R0/response.memory_appropriateness",
+        "M0+RS/response.factual_grounding",
+        "M0+RS/response.memory_appropriateness",
+        "M0+RS/response.personalization"
+      ],
+      "note": "response.factual_grounding and response.memory_appropriateness are always-applicable response dimensions (no structural-zero exemption is possible for them); low judge agreement here is a genuine, unresolved measurement-reliability limitation, not an artifact of sparsity or applicability."
+    },
+    "google_gemini_near_constant_and_duplicate_behavior": {
+      "raw_family_global_constant_dimensions": [
+        "response.temporal_consistency",
+        "risk.memory_omission",
+        "risk.strategy_overuse"
+      ],
+      "raw_family_global_duplicate_dimension_pairs": [
+        {
+          "left": "response.factual_grounding",
+          "right": "response.temporal_consistency",
+          "overall_exact_match_rate": 0.9905660377358491,
+          "informative_exact_match_rate": 0.9905660377358491,
+          "overall_correlation": null,
+          "informative_correlation": null,
+          "informative_rows": 636,
+          "pairwise_applicable_rows": 636,
+          "insufficient_evidence": false,
+          "exact_match_rate": 0.9905660377358491,
+          "correlation": null
+        }
+      ],
+      "action_applicable_risk_signal_failed_panels": [
+        "M0+RS::google_gemini"
+      ],
+      "note": "gemini shows near-zero variance on response.temporal_consistency, risk.memory_omission and risk.strategy_overuse, a near-duplicate between response.factual_grounding/response.temporal_consistency (99.06% exact match), and near-zero risk signal on the M0+RS panel. All three risk dimensions here are genuinely applicable to M0+RS, so none of this is explained by the applicability contract."
+    },
+    "cross_judge_routing_preference_unreliable": {
+      "judge_family_directional_preference": {
+        "protocol": "pm-v1.5-judge-family-directional-preference-diagnostic-v1",
+        "action_a": "M0+R0",
+        "action_b": "M0+RS",
+        "families": [
+          "deepseek_official",
+          "google_gemini"
+        ],
+        "risk_weight": 0.25,
+        "n_states": 318,
+        "n_comparable_states": 318,
+        "concordant_states": 97,
+        "discordant_states": 54,
+        "tie_involved_states": 167,
+        "concordance_rate": 0.6423841059602649,
+        "discordance_rate": 0.3576158940397351,
+        "tie_rate": 0.5251572327044025,
+        "directional_contingency_table": {
+          "M0+R0": {
+            "M0+R0": 69,
+            "M0+RS": 39,
+            "tie": 56
+          },
+          "M0+RS": {
+            "M0+R0": 15,
+            "M0+RS": 28,
+            "tie": 33
+          },
+          "tie": {
+            "M0+R0": 22,
+            "M0+RS": 17,
+            "tie": 39
+          }
+        },
+        "dialogue_cluster_bootstrap": {
+          "n_groups": 24,
+          "replicates": 2000,
+          "confidence_level": 0.9,
+          "seed": 0,
+          "concordance_rate_ci_lower": 0.5771683014971606,
+          "concordance_rate_ci_upper": 0.7089552238805971
+        },
+        "diagnostic_only": true,
+        "never_gates": true
+      },
+      "note": "Among the 318 M0+R0-vs-M0+RS comparable states, 52.5% involve at least one family reporting a tie, and among the 151 decisive (non-tie) comparisons the two independent judge families agree on direction only 64.2% of the time (90% dialogue-clustered bootstrap CI [0.577, 0.709]) -- a materially unreliable cross-family signal on exactly the R0-vs-RS distinction this instrument exists to measure."
+    },
+    "sparse_zero_and_applicability_fixes_confirmed_working_not_sufficient": {
+      "note": "The sparse-zero informative-only fix removed the previously-reported deepseek_official unsupported_personal_claim/strategy_omission false-positive duplicate. The new pairwise action-applicability restriction plus positive/negative correlation split correctly reclassified the deepseek_official strategy_overuse/strategy_omission near-perfect anti-correlation (informative_correlation=-1.0 on the 318 M0+RS-applicable rows) as a mutual_exclusivity_diagnostic_pair (reported, not gating), and deepseek_official now PASSES its own raw-family-global gate entirely. These confirmed-working fixes remove every false-positive/structural finding identified so far, but the remaining findings above are genuine and unresolved by any measurement-contract adjustment."
+    }
+  },
+  "provenance": {
+    "run_local_verdict_path": "outputs/esconv_auxiliary_judging_v1_5_full_train/instrument_freeze_verdict.json",
+    "basis_recovered_summary_path": "outputs/esconv_auxiliary_judging_v1_5_full_train/recovered_summary.json",
+    "basis_recovered_summary_sha256": "bf6ed316365d98b83b6245b7de85a112d147f7e51ad855b06f5d6dec728a5b6a"
+  },
+  "enforcement": "21a_preflight_dual_domain_training_v1_5.py requires this contract to not carry the ESCONV_AUXILIARY_ABSOLUTE_LABEL_INSTRUMENT_NOT_SUPPORTED status before it may proceed to validate/consume the existing ESConv-auxiliary absolute (per-dimension) train/calibration labels for dual-domain training; it fails closed (raises) when this status is present.",
+  "freeze_effect": "No further threshold, lambda, or applicability-definition tuning will be attempted against this train-split result. Calibration and internal-test ESConv-auxiliary judging remain paused; no new paid-run approval was requested or used to reach this verdict (this is a zero-API, offline re-aggregation of the already-recovered 636/636 real labels).",
+  "contract_sha256": "0513eaf98ba47d0eff1da9dec2447c4ab083fb386b2a676badca0905edea7a4e"
+}
