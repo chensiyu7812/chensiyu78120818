@@ -17,3 +17,45 @@ raw_judge_calls.jsonl
 
 outputs/tmp/
 tmp/
+
+# PM-v2 generated data and research provenance stay local or in the
+# content-addressed artifact vault.  Public, sanitized summaries should be
+# promoted into docs/ explicitly instead of committing an entire run folder.
+/project/data/pm_v2/
+/project/data/pm_v1_5/
+/project/outputs/pm_v2*/
+/project/outputs/pm_v1_5*/
+/project/outputs/strategy_rag_v1_*/
+/project/outputs/evoemo_fixed_tracks_v22/
+/project/outputs/evoemo_fixed_tracks_v1_5/
+/project/outputs/evoemo_pm_v2*/
+/project/outputs/evoemo_pm_v1_5*/
+/project/outputs/evoemo_pmv22*/
+/project/outputs/posthoc_v1_bank_mechanism_diagnostic*/
+/project/outputs/posthoc_v1_bank*/
+/project/outputs/v1_bank_causal_probe*/
+/project/outputs/v1_5_*/
+
+# Provider payloads, generated call plans, local checkpoints, and completed
+# reviews belong in the private vault regardless of their parent directory.
+**/raw_api_calls.jsonl
+**/raw_seeker_calls.jsonl
+**/raw_*_calls.jsonl
+**/*call_plan*.jsonl
+**/paired_generations.jsonl
+**/pilot_bundle.json
+**/*.joblib
+**/reviewer_*_completed.csv
+**/annotations_completed*.csv
+
+# Local migration/integrity reports contain machine paths and immediately
+# become stale when the workspace changes.
+/MIGRATION_REPORT_ZH.md
+/MIGRATION_SHA256SUMS.txt
+/project/migration_preflight.json
+
+# Never stage private blinding maps or append-only paid-attempt provenance by
+# accident, even when they are created outside the standard PM-v2 directories.
+**/private_condition_mapping.jsonl
+**/physical_attempt_ledger.jsonl
+**/failed_attempt_*.json

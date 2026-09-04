@@ -1,0 +1,79 @@
+{
+  "protocol": "pm-v1.5-conference-review-artifact-index-v1",
+  "created_date": "2026-07-17",
+  "scope": "code-and-method-review-before-confirmatory-execution",
+  "current_pm_v1_5_config": {
+    "path": "project/configs/pm_v1_5.yaml",
+    "sha256": "81c1d120da8468758933a91b6819530104886bc59e77c1994514009290a07762"
+  },
+  "strategy_bank": {
+    "path": "project/data/strategy/strategy_cards_v1_5.jsonl",
+    "rows": 12403,
+    "sha256": "87107266b12a0eb03727a5eec6f5f9ce4bedee1b4cfe636ffe7bee6ae6f03e98",
+    "split_manifest_path": "project/data/strategy/esconv_split_manifest_v1_5.jsonl",
+    "split_manifest_rows": 1300,
+    "split_manifest_sha256": "0199fbe1cad5f42aacfd2ba52a92bc6530dfcb33a82bb7bb7e81e5abb6e63e63",
+    "audit_path": "project/data/strategy/strategy_bank_audit_v1_5.json",
+    "audit_sha256": "55710a4a05eaff4551f3923c5fa150b8383d07d2626815c397e868e3964f4c1b",
+    "excluded_esconv_sources": 84,
+    "deterministic_source_id_rule_enabled": true,
+    "turn_overlap_audit_path": "project/outputs/v1_5_strategy_card_evoemo_turn_overlap_audit_v1_5_bank.json",
+    "turn_overlap_audit_sha256": "669120c5a3a6bb36f4a3ec37654ec1d25e555afa00180a92f3009cda9431f1b4",
+    "turn_overlap_audit_status": "GENERIC_FINDINGS_ONLY",
+    "turn_overlap_findings": 13,
+    "deterministic_source_findings_after_rebuild": 0
+  },
+  "development_seed": {
+    "local_path_not_published": "project/data/pm_v2/train_seed_dialogues_v1_5.jsonl",
+    "rows": 875,
+    "sha256": "9ad08439843a27133f12ada3a177808c81fba54bf6b93ad5376c5e25288228b2",
+    "publication_note": "Raw seed dialogues remain in the ignored private artifact vault; the review package publishes their lineage hash and construction code, not the raw dialogue file."
+  },
+  "generation_compatibility_pilot": {
+    "execution_status": "STRUCTURAL_PASS_BOUND_TO_PRIOR_CONFIG",
+    "paper_result": false,
+    "physical_attempts": 1,
+    "accepted_cost_estimate_sha256": "c9b48fe7ca9db0a6963c011c728ba70cd343ac6afa035f671cb7969e9e08efed",
+    "summary_file_sha256": "e1520a2738121a349c094d2653375d7da3360cb8e518b7000f47b24f55f79da5",
+    "attestation_file_sha256": "2c9309617409bcb98f7fa46d711dca67f98f88a8b28c2847ef7b81ca21f668d3",
+    "bound_pm_v1_5_config_sha256": "372c95dd9dbe8f0e36573c0cd1dc027dfed16f2639e004a5c2ac676e4c579156",
+    "matches_current_config": false,
+    "required_action": "rerun the one-call pilot under the current config before full development generation"
+  },
+  "automated_semantic_review": {
+    "execution_status": "CURRENT_DRY_RUN_ONLY_NO_PASS_GATE_REPORT",
+    "paper_result": false,
+    "logical_calls": 66,
+    "maximum_physical_attempts": 198,
+    "judge_families": [
+      "deepseek",
+      "openai_gpt4o"
+    ],
+    "retry_contract": "pm-v1.5-bounded-retry-v2",
+    "accepted_cost_estimate_sha256": "54369b9c51d4d4930abb591c0a5be416691911512307811667f172a29adb3b0c",
+    "call_plan_contract_sha256": "dfb32f887338d0ef21d7f3853fbdad4dd7ee66c5f14599c8bae5c002e79a075a",
+    "local_cost_estimate_file_sha256": "50b6476710ab09d03f109dde63a605ed685b17b5877d38bb0f972d5be9e3d03a",
+    "local_call_plan_file_sha256": "a650a685d25ac228be4f7ed94005e2fed739dcfe484fdaf67e986c48e6beafb6",
+    "prior_partial_attempt_policy": "not reused or spliced into the current run"
+  },
+  "formal_pipeline": {
+    "development_generation_complete": false,
+    "full_action_sweep_complete": false,
+    "development_judging_complete": false,
+    "trained_checkpoint_present": false,
+    "internal_test_opened": false,
+    "fixed_seeker_tracks_complete": false,
+    "study_freeze_present": false,
+    "external_generation_complete": false,
+    "external_judging_complete": false,
+    "claim_status": "NO_CURRENT_RESULT"
+  },
+  "excluded_artifact_classes": [
+    "raw API call logs",
+    "provider payloads and full generated pilot bundles",
+    "local checkpoints and joblib files",
+    "unfrozen development or external outputs",
+    "raw seed dialogues"
+  ],
+  "exclusion_reason": "The GitHub branch is a code/science review package. Content-addressed hashes and sanitized audits are published; raw provider artifacts and mutable run directories remain in the ignored private artifact vault."
+}

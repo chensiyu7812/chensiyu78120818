@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from enum import Enum
+import math
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -59,10 +60,6 @@ class ObservableSourceSummary(StrictModel):
     max_age_sessions: int | None = Field(default=None, ge=0)
     estimated_tokens: int = Field(default=0, ge=0)
     query_similarity_mean: float = Field(default=0.0, ge=-1.0, le=1.0)
-    query_similarity_max: float = Field(default=0.0, ge=-1.0, le=1.0)
-    query_similarity_p90: float = Field(default=0.0, ge=-1.0, le=1.0)
-    stale_fraction: float = Field(default=0.0, ge=0.0, le=1.0)
-    conflict_fraction: float = Field(default=0.0, ge=0.0, le=1.0)
     catalog_embedding: list[float] = Field(default_factory=list)
 
     @model_validator(mode="after")
@@ -146,6 +143,42 @@ class PMV2State(StrictModel):
                 f"missing={sorted(expected - set(self.allowed_actions))}, "
                 f"extra={sorted(set(self.allowed_actions) - expected)}"
             )
+        allowed_provenance = {
+            "backend_record_id",
+            "evaluator_context_id",
+            "data_generation_sha256",
+            "adapted_from_runtime_state",
+            "runtime_provenance_sha256",
+        }
+        unexpected_provenance = sorted(set(self.provenance) - allowed_provenance)
+        if unexpected_provenance:
+            raise ValueError(
+                "PMV2State provenance may contain operational references only; "
+                f"unexpected keys={unexpected_provenance}"
+            )
+        for key in ("backend_record_id", "evaluator_context_id"):
+            if key in self.provenance and (
+                not isinstance(self.provenance[key], str)
+                or not self.provenance[key]
+            ):
+                raise ValueError(f"PMV2State provenance {key} must be a non-empty string")
+        if (
+            "backend_record_id" in self.provenance
+            and self.provenance["backend_record_id"] != self.card_id
+        ):
+            raise ValueError("backend_record_id must equal card_id")
+        for key in ("data_generation_sha256", "runtime_provenance_sha256"):
+            if key in self.provenance and (
+                not isinstance(self.provenance[key], str)
+                or len(self.provenance[key]) != 64
+            ):
+                raise ValueError(f"PMV2State provenance {key} must be a SHA-256 digest")
+        if "adapted_from_runtime_state" in self.provenance and not isinstance(
+            self.provenance["adapted_from_runtime_state"], bool
+        ):
+            raise ValueError(
+                "PMV2State provenance adapted_from_runtime_state must be boolean"
+            )
         return self
 
 
@@ -175,7 +208,7 @@ class RiskDimensions(StrictModel):
 
 
 class CompositeSpec(StrictModel):
-    version: str = "pmv2-quality-v1"
+    version: str = "pmv2-quality-v2"
     weights: dict[str, float] = Field(
         default_factory=lambda: {
             "emotional_support": 0.30,
@@ -219,8 +252,10 @@ class ActionLabel(StrictModel):
     judge_families: list[str] = Field(min_length=1)
     judge_count: int = Field(ge=1)
     max_dimension_mad: float = Field(ge=0.0)
+    dimension_mad: dict[str, float]
     label_reliable: bool
-    composite_spec_version: str = "pmv2-quality-v1"
+    composite_spec_version: str = "pmv2-quality-v2"
+    composite_weights_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     provenance: dict[str, Any] = Field(default_factory=dict)
 
     @field_validator("action_id")
@@ -228,6 +263,23 @@ class ActionLabel(StrictModel):
     def valid_action(cls, value: str) -> str:
         parse_action_id(value)
         return value
+
+    @field_validator("dimension_mad")
+    @classmethod
+    def valid_dimension_mad(cls, value: dict[str, float]) -> dict[str, float]:
+        expected = {
+            *(f"response.{name}" for name in ResponseDimensions.model_fields),
+            *(f"risk.{name}" for name in RiskDimensions.model_fields),
+        }
+        if set(value) != expected:
+            raise ValueError(
+                "dimension_mad must exactly cover response and risk dimensions: "
+                f"{sorted(expected)}"
+            )
+        parsed = {str(name): float(score) for name, score in value.items()}
+        if any(not math.isfinite(score) or score < 0.0 for score in parsed.values()):
+            raise ValueError("dimension_mad values must be finite and non-negative")
+        return parsed
 
 
 class PredictionInterval(StrictModel):
@@ -274,9 +326,21 @@ class SplitManifest(StrictModel):
     normalized_text_overlap: int = 0
     user_overlap: int = 0
     semantic_family_overlap: int = 0
+    total_states: int = Field(ge=1)
+    unique_normalized_current_user_texts: int = Field(ge=1)
+    normalized_current_user_text_unique_rate: float = Field(ge=0.0, le=1.0)
 
     @model_validator(mode="after")
     def no_overlap(self):
         if self.normalized_text_overlap or self.user_overlap or self.semantic_family_overlap:
             raise ValueError("PM-v2 split manifest contains leakage")
+        if self.unique_normalized_current_user_texts != self.total_states:
+            raise ValueError(
+                "PM-v2 current_user_text must be globally unique across all states"
+            )
+        expected_rate = self.unique_normalized_current_user_texts / self.total_states
+        if abs(self.normalized_current_user_text_unique_rate - expected_rate) > 1e-12:
+            raise ValueError("PM-v2 normalized text unique-rate accounting mismatch")
+        if self.normalized_current_user_text_unique_rate != 1.0:
+            raise ValueError("PM-v2 normalized current-user-text unique rate must be 1.0")
         return self

@@ -1,0 +1,352 @@
+{
+  "esconv_sha256": "aa0556c5b330562ba009c1cd5137486bfa2a7255f33225a6524cd58f7efdd9af",
+  "evoemo_sha256": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420",
+  "strategy_bank_sha256": "87107266b12a0eb03727a5eec6f5f9ce4bedee1b4cfe636ffe7bee6ae6f03e98",
+  "split_manifest_sha256": "0199fbe1cad5f42aacfd2ba52a92bc6530dfcb33a82bb7bb7e81e5abb6e63e63",
+  "threshold": 0.88,
+  "deterministic_source_id_rule_enabled": true,
+  "n_esconv_dialogues": 1300,
+  "n_excluded_overlap": 84,
+  "overlaps": {
+    "esconv_0013": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0027": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0051": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0062": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9037267080745341
+    },
+    "esconv_0067": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0075": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0081": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0082": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.976545842217484
+    },
+    "esconv_0085": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0086": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0088": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9861495844875346
+    },
+    "esconv_0119": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0140": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0150": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9819967266775778
+    },
+    "esconv_0207": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0215": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0228": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0242": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0245": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0326": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9090909090909091
+    },
+    "esconv_0371": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0410": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0427": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0471": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0508": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9791271347248577
+    },
+    "esconv_0513": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0538": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0539": {
+      "reason": "deterministic_session_id",
+      "evoemo_session_id": "esc539",
+      "similarity": 1.0
+    },
+    "esconv_0548": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0552": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0559": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0585": {
+      "reason": "deterministic_session_id",
+      "evoemo_session_id": "esc585",
+      "similarity": 1.0
+    },
+    "esconv_0611": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9906542056074766
+    },
+    "esconv_0617": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0629": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0652": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0660": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0682": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0717": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0768": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9932318104906938
+    },
+    "esconv_0769": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0785": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9831546707503829
+    },
+    "esconv_0786": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0837": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0844": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0858": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9861660079051383
+    },
+    "esconv_0860": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0873": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0894": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0904": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0912": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.8923884514435696
+    },
+    "esconv_0915": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0942": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0955": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0968": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0982": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0989": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.930841121495327
+    },
+    "esconv_0994": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_0995": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9833333333333333
+    },
+    "esconv_1000": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1002": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1006": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1013": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1015": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1024": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1029": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9136363636363637
+    },
+    "esconv_1054": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1082": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1091": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9751381215469613
+    },
+    "esconv_1098": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1109": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1121": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1138": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1149": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1172": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9831288343558282
+    },
+    "esconv_1198": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.984081041968162
+    },
+    "esconv_1212": {
+      "reason": "deterministic_session_id",
+      "evoemo_session_id": "esc1212",
+      "similarity": 1.0
+    },
+    "esconv_1216": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9824868651488616
+    },
+    "esconv_1231": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1252": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9743589743589743
+    },
+    "esconv_1263": {
+      "reason": "shingle_jaccard",
+      "similarity": 0.9759825327510917
+    },
+    "esconv_1282": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1283": {
+      "reason": "exact",
+      "similarity": 1.0
+    },
+    "esconv_1290": {
+      "reason": "exact",
+      "similarity": 1.0
+    }
+  },
+  "n_strategy_cards": 12403
+}

@@ -1,6 +1,11 @@
-# PM-v1.5 Artifact 完整性状态
+# Legacy PM-v1.5 supplemental Artifact 完整性状态
 
 更新时间：2026-07-15
+
+> **历史文档：** 本文只记录 `pm-v1.5-supplemental` 分支（冻结 PM-v1 后、不重训的
+> post-hoc 诊断）的 artifact 缺口，不描述当前重新训练的 PM-v1.5 快速会议版。当前版本
+> 的代码、主张边界与真实执行状态见仓库根目录 `README_PM_V1_5_REVIEW_ZH.md` 和
+> `project/docs/PM_V1_5_REVIEW_ARTIFACT_INDEX.json`。
 
 ## 已提交到 `pm-v1.5-supplemental`
 

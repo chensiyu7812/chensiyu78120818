@@ -50,6 +50,7 @@ def find_esconv_evoemo_overlaps(
     evoemo_path: str | Path,
     *,
     jaccard_threshold: float = 0.88,
+    include_deterministic_source_ids: bool = False,
 ) -> dict[int, dict[str, Any]]:
     evo_texts = evoemo_dialogue_texts(evoemo_path)
     exact = {normalize_for_hash(text) for text in evo_texts if text}
@@ -67,6 +68,44 @@ def find_esconv_evoemo_overlaps(
         best = max((jaccard(shingles, other) for other in evo_shingles), default=0.0)
         if best >= jaccard_threshold:
             overlaps[idx] = {"reason": "shingle_jaccard", "similarity": best}
+    if include_deterministic_source_ids:
+        # The whole-dialogue Jaccard check can miss a real source match when
+        # unrelated portions of the dialogue were edited enough to drag the
+        # overall similarity below threshold, even though large verbatim
+        # spans remain. Some EvoEmo sessions are named `escN`, directly
+        # encoding their ESConv source index; that mapping is a deterministic
+        # ground truth for those sessions and should be unioned in regardless
+        # of what the fuzzy check found (or missed).
+        for idx, reason in find_deterministic_esconv_evoemo_overlaps(evoemo_path).items():
+            overlaps.setdefault(idx, reason)
+    return overlaps
+
+
+def find_deterministic_esconv_evoemo_overlaps(
+    evoemo_path: str | Path,
+) -> dict[int, dict[str, Any]]:
+    """ESConv indices directly named by an EvoEmo session id (`escN`).
+
+    This is a small, known subset of EvoEmo sessions whose id literally
+    encodes their ESConv source dialogue index. It is a deterministic ground
+    truth for those specific sessions, independent of and more reliable than
+    the fuzzy whole-dialogue Jaccard check for exactly this subset -- it does
+    not replace that check for the remaining sessions, which use unrelated
+    naming and have no equivalent deterministic signal.
+    """
+
+    data = json.loads(Path(evoemo_path).read_text(encoding="utf-8"))
+    overlaps: dict[int, dict[str, Any]] = {}
+    for user in data:
+        for session in user.get("dialog_history") or []:
+            session_id = str(session.get("id") or "")
+            match = re.match(r"^esc(\d+)$", session_id)
+            if match:
+                overlaps[int(match.group(1))] = {
+                    "reason": "deterministic_session_id",
+                    "evoemo_session_id": session_id,
+                    "similarity": 1.0,
+                }
     return overlaps
 
 
@@ -88,10 +127,14 @@ def build_strategy_bank(
     *,
     seed: int = 13,
     jaccard_threshold: float = 0.88,
+    include_deterministic_source_ids: bool = False,
 ) -> dict[str, Any]:
     esconv = load_esconv(esconv_path)
     overlaps = find_esconv_evoemo_overlaps(
-        esconv, evoemo_path, jaccard_threshold=jaccard_threshold
+        esconv,
+        evoemo_path,
+        jaccard_threshold=jaccard_threshold,
+        include_deterministic_source_ids=include_deterministic_source_ids,
     )
     cards: list[dict[str, Any]] = []
     split_rows: list[dict[str, Any]] = []
@@ -152,7 +195,12 @@ def build_strategy_bank(
     write_json(out_overlap_path, {
         "esconv_sha256": sha256_file(esconv_path),
         "evoemo_sha256": sha256_file(evoemo_path),
+        "strategy_bank_sha256": sha256_file(out_bank_path),
+        "split_manifest_sha256": sha256_file(out_split_path),
         "threshold": jaccard_threshold,
+        "deterministic_source_id_rule_enabled": bool(
+            include_deterministic_source_ids
+        ),
         "n_esconv_dialogues": len(esconv),
         "n_excluded_overlap": len(overlaps),
         "overlaps": {f"esconv_{k:04d}": v for k, v in sorted(overlaps.items())},

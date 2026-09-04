@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from types import MappingProxyType
 from typing import Any, Mapping, Sequence
 
 from .contracts import MemoryItem, RuntimeState, StrategyCard
@@ -27,6 +28,27 @@ Use supplied past information only when it clearly helps the current user.
 Do not force a memory reference merely to demonstrate recall. Ignore irrelevant,
 outdated, or awkwardly intrusive information, and never invent personal facts.
 Keep the reply concise, natural, and emotionally supportive."""
+
+
+SUPPORTER_SYSTEM_PROMPTS: Mapping[str, str] = MappingProxyType(
+    {
+        "base_supporter_v1": BASE_SUPPORTER_SYSTEM,
+        "official_esmem_v1": OFFICIAL_ESMEM_SYSTEM,
+        "selective_esmem_v1": SELECTIVE_ESMEM_SYSTEM,
+    }
+)
+
+
+def resolve_supporter_system_prompt(prompt_id: str) -> str:
+    """Resolve an allowlisted supporter prompt by its frozen semantic ID."""
+
+    try:
+        return SUPPORTER_SYSTEM_PROMPTS[prompt_id]
+    except KeyError as exc:
+        allowed = ", ".join(sorted(SUPPORTER_SYSTEM_PROMPTS))
+        raise ValueError(
+            f"unknown supporter system prompt {prompt_id!r}; allowed: {allowed}"
+        ) from exc
 
 
 def common_context(state: RuntimeState) -> str:

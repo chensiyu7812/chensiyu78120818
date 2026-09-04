@@ -33,8 +33,16 @@ def token_set(text: str) -> set[str]:
 
 
 def estimate_tokens(text: str) -> int:
-    # Provider-neutral conservative approximation.
+    # Provider-neutral base approximation; API budget gates add a frozen margin.
     return max(1, math.ceil(len(str(text or "")) / 4))
+
+
+def conservative_token_bound(text: str, *, safety_factor: float) -> int:
+    """Return the frozen provider-neutral planning bound for input tokens."""
+
+    if not math.isfinite(safety_factor) or safety_factor < 1.0:
+        raise ValueError("input-token safety factor must be finite and at least 1")
+    return max(1, math.ceil(estimate_tokens(text) * safety_factor))
 
 
 def clean_memory_text(text: str) -> str:

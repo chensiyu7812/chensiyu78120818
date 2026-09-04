@@ -198,6 +198,82 @@ class SelectedEvidence(StrictModel):
     strategy_cards: list[StrategyCard]
 
 
+class EvidenceItemDecision(StrictModel):
+    evidence_type: Literal["memory", "strategy"]
+    item_id: str
+    source: str
+    current_turn_score: float = Field(ge=0.0, le=1.0)
+    context_score: float = Field(ge=0.0, le=1.0)
+    selector_score: float = Field(ge=0.0, le=1.0)
+    helpfulness_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    estimated_tokens: int = Field(ge=0)
+    keep: bool
+    reason: str = Field(min_length=1)
+
+
+class EvidenceFilterDecision(StrictModel):
+    protocol: str = Field(min_length=1)
+    enabled: bool
+    config_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    memory_filter_mode: Literal["lexical_bootstrap", "supervised_helpfulness"]
+    strategy_filter_mode: Literal["lexical_contextual_fail_safe"]
+    memory_filter_checkpoint_sha256: str | None = Field(
+        default=None, pattern=r"^[0-9a-f]{64}$"
+    )
+    requested_action_id: str
+    effective_action_id: str
+    candidate_memory_ids: list[str]
+    kept_memory_ids: list[str]
+    dropped_memory_ids: list[str]
+    candidate_strategy_ids: list[str]
+    kept_strategy_ids: list[str]
+    dropped_strategy_ids: list[str]
+    candidate_memory_tokens: int = Field(ge=0)
+    kept_memory_tokens: int = Field(ge=0)
+    candidate_strategy_tokens: int = Field(ge=0)
+    kept_strategy_tokens: int = Field(ge=0)
+    item_decisions: list[EvidenceItemDecision]
+
+    @model_validator(mode="after")
+    def coherent(self):
+        parse_action_id(self.requested_action_id)
+        parse_action_id(self.effective_action_id)
+        if (
+            self.memory_filter_mode == "supervised_helpfulness"
+            and self.memory_filter_checkpoint_sha256 is None
+        ):
+            raise ValueError("supervised memory filter requires checkpoint SHA-256")
+        for candidate, kept, dropped, label in (
+            (
+                self.candidate_memory_ids,
+                self.kept_memory_ids,
+                self.dropped_memory_ids,
+                "memory",
+            ),
+            (
+                self.candidate_strategy_ids,
+                self.kept_strategy_ids,
+                self.dropped_strategy_ids,
+                "strategy",
+            ),
+        ):
+            if len(candidate) != len(set(candidate)):
+                raise ValueError(f"duplicate candidate {label} IDs")
+            if len(kept) != len(set(kept)) or len(dropped) != len(set(dropped)):
+                raise ValueError(f"duplicate kept/dropped {label} IDs")
+            if set(kept) & set(dropped) or set(kept) | set(dropped) != set(candidate):
+                raise ValueError(f"kept/dropped {label} IDs must partition candidates")
+        if self.kept_memory_tokens > self.candidate_memory_tokens:
+            raise ValueError("kept memory tokens exceed candidate tokens")
+        if self.kept_strategy_tokens > self.candidate_strategy_tokens:
+            raise ValueError("kept strategy tokens exceed candidate tokens")
+        expected_item_ids = self.candidate_memory_ids + self.candidate_strategy_ids
+        actual_item_ids = [row.item_id for row in self.item_decisions]
+        if actual_item_ids != expected_item_ids:
+            raise ValueError("item decisions must follow the candidate evidence order")
+        return self
+
+
 class CostRecord(StrictModel):
     pm_input_tokens_est: int = Field(ge=0)
     retrieval_calls: int = Field(ge=0)
@@ -215,6 +291,16 @@ class CostRecord(StrictModel):
     pm_inference_ms: float = Field(default=0.0, ge=0)
     retrieval_latency_ms: float = Field(default=0.0, ge=0)
     generation_latency_ms: float = Field(default=0.0, ge=0)
+    evidence_filter_calls: int = Field(default=0, ge=0)
+    evidence_filter_latency_ms: float = Field(default=0.0, ge=0)
+    candidate_memory_count: int = Field(default=0, ge=0)
+    kept_memory_count: int = Field(default=0, ge=0)
+    candidate_strategy_count: int = Field(default=0, ge=0)
+    kept_strategy_count: int = Field(default=0, ge=0)
+    candidate_memory_tokens: int = Field(default=0, ge=0)
+    candidate_strategy_tokens: int = Field(default=0, ge=0)
+    dropped_memory_tokens: int = Field(default=0, ge=0)
+    dropped_strategy_tokens: int = Field(default=0, ge=0)
 
 
 class ActionOutcome(StrictModel):
@@ -227,6 +313,10 @@ class ActionOutcome(StrictModel):
     selected_strategy_ids: list[str]
     memory_view: list[MemoryItem]
     strategy_view: list[StrategyCard]
+    effective_action_id: str | None = None
+    candidate_memory_view: list[MemoryItem] | None = None
+    candidate_strategy_view: list[StrategyCard] | None = None
+    evidence_filter_decision: EvidenceFilterDecision | None = None
     cost: CostRecord
     model_name: str
     prompt_hash: str
@@ -241,12 +331,49 @@ class ActionOutcome(StrictModel):
             raise ValueError("memory_view includes a source outside the action")
         if strategy is StrategyMode.R0 and self.strategy_view:
             raise ValueError("R0 outcome cannot include strategy cards")
-        if strategy is StrategyMode.RS and not self.strategy_view:
+        if (
+            strategy is StrategyMode.RS
+            and not self.strategy_view
+            and self.evidence_filter_decision is None
+        ):
             raise ValueError("RS outcome must include strategy cards")
         if self.selected_memory_ids != [x.memory_id for x in self.memory_view]:
             raise ValueError("selected_memory_ids mismatch")
         if self.selected_strategy_ids != [x.strategy_id for x in self.strategy_view]:
             raise ValueError("selected_strategy_ids mismatch")
+        if self.evidence_filter_decision is not None:
+            if self.candidate_memory_view is None or self.candidate_strategy_view is None:
+                raise ValueError("filtered outcomes require candidate evidence views")
+            decision = self.evidence_filter_decision
+            if decision.requested_action_id != self.action_id:
+                raise ValueError("filter requested action does not match action_id")
+            if decision.candidate_memory_ids != [
+                x.memory_id for x in self.candidate_memory_view
+            ]:
+                raise ValueError("candidate memory IDs mismatch")
+            if decision.candidate_strategy_ids != [
+                x.strategy_id for x in self.candidate_strategy_view
+            ]:
+                raise ValueError("candidate strategy IDs mismatch")
+            if decision.kept_memory_ids != self.selected_memory_ids:
+                raise ValueError("filter kept memory IDs mismatch")
+            if decision.kept_strategy_ids != self.selected_strategy_ids:
+                raise ValueError("filter kept strategy IDs mismatch")
+            candidate_sources = {item.source for item in self.candidate_memory_view}
+            if not candidate_sources <= sources:
+                raise ValueError("candidate memory includes a source outside the action")
+            if strategy is StrategyMode.R0 and self.candidate_strategy_view:
+                raise ValueError("R0 outcome cannot retrieve strategy candidates")
+            computed_effective = canonical_action_id(
+                actual_sources,
+                StrategyMode.RS if self.strategy_view else StrategyMode.R0,
+            )
+            if decision.effective_action_id != computed_effective:
+                raise ValueError("filter effective action does not match kept evidence")
+            if self.effective_action_id != computed_effective:
+                raise ValueError("effective_action_id does not match kept evidence")
+        elif self.effective_action_id is not None and self.effective_action_id != self.action_id:
+            raise ValueError("unfiltered effective_action_id must equal action_id")
         return self
 
 

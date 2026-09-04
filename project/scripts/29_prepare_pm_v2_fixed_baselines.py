@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 import json
 from pathlib import Path
 
@@ -18,8 +19,12 @@ def make_fixed(base: PMV2Model, *, action_id: str, name: str, source_sha: str):
         response_heads=base.response_heads,
         risk_heads=base.risk_heads,
         selection_config=base.selection_config,
+        response_conformal_radii=dict(base.response_conformal_radii),
+        risk_conformal_radii=dict(base.risk_conformal_radii),
+        quality_conformal_radius=float(base.quality_conformal_radius),
+        conformal_calibration_report=deepcopy(base.conformal_calibration_report),
         format_version=base.format_version,
-        training_report=base.training_report,
+        training_report=deepcopy(base.training_report),
         fixed_action=action_id,
         baseline_name=name,
         source_checkpoint_sha256=source_sha,

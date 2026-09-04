@@ -1,0 +1,14 @@
+{
+  "protocol": "pm-v1.6-supersession-record-v1",
+  "status": "SUPERSEDED_BEFORE_FORMAL_EXECUTION",
+  "superseded_version": "pm-v1.5",
+  "replacement_version": "pm-v1.6",
+  "formal_pm_v1_5_development_matrix_exists": false,
+  "formal_pm_v1_5_checkpoint_exists": false,
+  "formal_pm_v1_5_study_freeze_exists": false,
+  "formal_pm_v1_5_external_result_exists": false,
+  "legacy_gpt4o_development_semantic_review_status": "INVALID_FOR_PM_V1_6_PROTOCOL",
+  "reusable_old_semantic_review_rows": 0,
+  "reusable_old_gate_status": false,
+  "reason": "Step-0 source observation, action lineage, alias-aware labels, algorithm competition, internal-test sealing, and hierarchical external claims change the method contract."
+}

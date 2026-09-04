@@ -14,7 +14,7 @@ from .contracts import (
     canonical_action_id,
     parse_action_id,
 )
-from .retrieval import StrategyRetriever, context_query
+from .retrieval import DEFAULT_MEMORY_TOP_K, StrategyRetriever, context_query
 from .training import PMModel
 
 
@@ -26,11 +26,7 @@ def estimated_action_cost(
     strategy_tokens: int = 260,
     retrieval_call_penalty: int = 24,
 ) -> float:
-    memory_top_k = memory_top_k or {
-        MemorySource.MP: 2,
-        MemorySource.MS: 2,
-        MemorySource.ME: 3,
-    }
+    memory_top_k = memory_top_k or dict(DEFAULT_MEMORY_TOP_K)
     sources, strategy = parse_action_id(action_id)
     tokens = 0.0
     calls = 0

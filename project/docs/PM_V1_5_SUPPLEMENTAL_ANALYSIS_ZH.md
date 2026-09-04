@@ -1,6 +1,13 @@
-# PM-v1.5 补充诊断与论文边界说明
+# Legacy PM-v1.5 supplemental：补充诊断与论文边界说明
 
 更新时间：2026-07-15
+
+> **历史命名警告：** 本文中的 “PM-v1.5” 只指 GitHub 分支
+> `pm-v1.5-supplemental`，即冻结 PM-v1 后、不重训的 post-hoc 诊断。它不是当前
+> `agent/pm-v1-5-conference-review` 分支中的“PM-v1.5 快速会议版”。当前版本会重新生成
+> development 数据、重新训练并重新做外部评测，且截至 2026-07-17 尚无正式结果。审查
+> 当前版本请从仓库根目录 `README_PM_V1_5_REVIEW_ZH.md` 开始；本文数字不得作为当前
+> 版本的结果。
 
 文档性质：PM-v1 冻结之后的补充诊断。本文不修改原 checkpoint，不重新训练 PM，也不将外部结果用于反向调参。
 

@@ -210,7 +210,11 @@ def run_release_preflight(
         }}
 
     # Build the manifest last and exclude the output itself to make it stable.
-    manifest = build_manifest(root, exclude={Path(out_path).name, "release_manifest.json"})
+    manifest = build_manifest(
+        root,
+        exclude={Path(out_path).name, "release_manifest.json"},
+        tracked_only=True,
+    )
     write_json(root / "release_manifest.json", manifest)
     passed = all(value["passed"] for value in checks.values())
     esconv_path = root / "data/external/ESConv.json"
