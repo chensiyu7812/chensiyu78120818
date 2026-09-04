@@ -1,4 +1,4 @@
-This private repository contains the current MetaCom V3.3 code and audit package for external review.
+
 
 Start with:
 
