@@ -1,0 +1,1955 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_gpt_u002",
+  "content_author": "chatgpt_pro",
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "finance_housing",
+    "sleep_daily_energy",
+    "family_caregiving"
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01_teaching_certificate",
+      "label": "part-time adult-education teaching certificate, portfolio, and classroom practice"
+    },
+    {
+      "thread_id": "thread_02_freelance_gigs",
+      "label": "freelance live-sound bookings, notice periods, and income stability"
+    },
+    {
+      "thread_id": "thread_03_dutch_confidence",
+      "label": "professional Dutch practice and speaking confidence for teaching and interviews"
+    },
+    {
+      "thread_id": "thread_04_household_budget",
+      "label": "household budgeting around irregular freelance income and career transition"
+    },
+    {
+      "thread_id": "thread_05_family_support",
+      "label": "supporting family abroad while keeping financial and decision boundaries"
+    },
+    {
+      "thread_id": "thread_06_sleep_recovery",
+      "label": "sleep and recovery after late events without treating fatigue as a diagnosis"
+    }
+  ],
+  "profile_history": [
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_profile_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "name",
+      "field_value": "Darius Okafor",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "Darius Okafor",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "addressing_or_disambiguating_user_identity"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_profile_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "age",
+      "field_value": "36",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "36",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "age_relevant_feasibility_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_profile_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "job",
+      "field_value": "freelance live-sound technician",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I work freelance as a live-sound technician",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "income_variability",
+        "workplace_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_profile_nationality_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "nationality",
+      "field_value": "Nigerian",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I'm Nigerian",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "country_specific_process_or_language_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_profile_location_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "location",
+      "field_value": "Rotterdam, Netherlands",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I live in Rotterdam, Netherlands",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "local_logistics",
+        "commute",
+        "housing",
+        "location_specific_feasibility"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_profile_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "gender",
+      "field_value": "man",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I'm a man",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "gender_relevant_context_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_profile_education_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "education",
+      "field_value": "Higher National Diploma in electrical and electronic engineering",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "my education is a Higher National Diploma in electrical and electronic engineering",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "education_or_training_context"
+      ]
+    }
+  ],
+  "response_preference_history": [
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_preference_listen_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "listen_only_no_advice",
+      "preference_text": "When I'm venting after a late job, please don't turn it into fixes unless I ask; sometimes I just need to complain for a minute.",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "When I'm venting after a late job, please don't turn it into fixes unless I ask; sometimes I just need to complain for a minute.",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_preference_reflect_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "reflection_before_question",
+      "preference_text": "It helps if you reflect what you think I'm worried about before asking me a question; otherwise I sometimes answer the question before I know whether you understood the problem.",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s006_t01"
+      ],
+      "literal_source_span": "It helps if you reflect what you think I'm worried about before asking me a question; otherwise I sometimes answer the question before I know whether you understood the problem.",
+      "valid_from_session": 6,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u002_mp_preference_direct_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "direct_answer_before_explanation",
+      "preference_text": "When I ask a practical yes-or-no question, give me the direct answer before the explanation.",
+      "owner_id": "p2r_formal_gpt_u002",
+      "source_turn_ids": [
+        "s010_t01"
+      ],
+      "literal_source_span": "When I ask a practical yes-or-no question, give me the direct answer before the explanation.",
+      "valid_from_session": 10,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_sofia",
+      "name": "Sofia Martins",
+      "relationship": "partner who shares Darius’s apartment and household budget",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "status_after_session_15": "ongoing partner"
+    },
+    {
+      "entity_id": "entity_bram",
+      "name": "Bram de Wit",
+      "relationship": "booking coordinator who sends many of Darius’s freelance sound jobs",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "status_after_session_15": "ongoing booking contact"
+    },
+    {
+      "entity_id": "entity_henk",
+      "name": "Henk Visser",
+      "relationship": "instructor in the adult-education teaching certificate",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "status_after_session_15": "ongoing instructor"
+    },
+    {
+      "entity_id": "entity_elise",
+      "name": "Elise van Dijk",
+      "relationship": "course peer who practices micro-teaching with Darius",
+      "valid_from_session": 4,
+      "valid_until_session": null,
+      "status_after_session_15": "ongoing course peer"
+    },
+    {
+      "entity_id": "entity_chidi",
+      "name": "Chidi Okafor",
+      "relationship": "father living in Enugu who sometimes asks Darius for financial help",
+      "valid_from_session": 5,
+      "valid_until_session": null,
+      "status_after_session_15": "ongoing family relationship"
+    },
+    {
+      "entity_id": "entity_kofi",
+      "name": "Kofi Mensah",
+      "relationship": "friend and fellow freelance audio technician",
+      "valid_from_session": 7,
+      "valid_until_session": null,
+      "status_after_session_15": "ongoing friend"
+    },
+    {
+      "entity_id": "entity_lotte",
+      "name": "Lotte Smit",
+      "relationship": "venue operations manager at a conference center Darius works for regularly",
+      "valid_from_session": 9,
+      "valid_until_session": null,
+      "status_after_session_15": "professional contact"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "event_01",
+      "session_index": 1,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_02_freelance_gigs"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_bram"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Darius begins an adult-education teaching certificate while continuing irregular freelance live-sound work."
+    },
+    {
+      "event_id": "event_02",
+      "session_index": 2,
+      "topic_thread_ids": [
+        "thread_06_sleep_recovery",
+        "thread_01_teaching_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_henk"
+      ],
+      "resolution_status": "mixed",
+      "description": "Darius tests a low-effort recovery routine after a late event so he can still attend Saturday coursework."
+    },
+    {
+      "event_id": "event_03",
+      "session_index": 3,
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_04_household_budget"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia",
+        "entity_bram"
+      ],
+      "resolution_status": "mixed",
+      "description": "Two short-notice gigs create a budget-versus-study conflict that Darius distinguishes from simple workload."
+    },
+    {
+      "event_id": "event_04",
+      "session_index": 4,
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_06_sleep_recovery"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_bram"
+      ],
+      "resolution_status": "resolved",
+      "description": "Darius asks Bram for a minimum notice window for non-emergency bookings and receives fewer last-minute requests."
+    },
+    {
+      "event_id": "event_05",
+      "session_index": 5,
+      "topic_thread_ids": [
+        "thread_04_household_budget",
+        "thread_05_family_support"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia",
+        "entity_chidi"
+      ],
+      "resolution_status": "unresolved",
+      "description": "A family request and a slow freelance month expose uncertainty about how much money Darius can safely send abroad."
+    },
+    {
+      "event_id": "event_06",
+      "session_index": 6,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_henk"
+      ],
+      "resolution_status": "resolved",
+      "description": "Darius prepares one short Dutch explanation of an audio concept and finds it easier to participate in class."
+    },
+    {
+      "event_id": "event_07",
+      "session_index": 7,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elise"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Darius opens his teaching portfolio but delays recording the required micro-lesson."
+    },
+    {
+      "event_id": "event_08",
+      "session_index": 8,
+      "topic_thread_ids": [
+        "thread_03_dutch_confidence",
+        "thread_06_sleep_recovery"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "description": "Short voice notes during daytime walks give Darius repeatable Dutch speaking practice without late-night study."
+    },
+    {
+      "event_id": "event_09",
+      "session_index": 9,
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_06_sleep_recovery"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lotte"
+      ],
+      "resolution_status": "resolved",
+      "description": "A conference-center job ends early enough for Darius to test a post-gig shutdown routine with less next-day disruption."
+    },
+    {
+      "event_id": "event_10",
+      "session_index": 10,
+      "topic_thread_ids": [
+        "thread_04_household_budget",
+        "thread_02_freelance_gigs"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia"
+      ],
+      "resolution_status": "resolved",
+      "description": "Darius and Sofia separate fixed household costs from volatile freelance income and identify a smaller transition buffer target."
+    },
+    {
+      "event_id": "event_11",
+      "session_index": 11,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elise"
+      ],
+      "resolution_status": "resolved",
+      "description": "An unscripted micro-teaching rehearsal helps Darius recover after losing a technical word instead of restarting."
+    },
+    {
+      "event_id": "event_12",
+      "session_index": 12,
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_04_household_budget"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_bram",
+        "entity_lotte"
+      ],
+      "resolution_status": "conflicting",
+      "description": "Different payment timings from Bram and Lotte reveal that Darius had been treating invoice date and payment date as the same thing."
+    },
+    {
+      "event_id": "event_13",
+      "session_index": 13,
+      "topic_thread_ids": [
+        "thread_05_family_support",
+        "thread_04_household_budget"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_chidi"
+      ],
+      "resolution_status": "resolved",
+      "description": "Darius gives his father a fixed amount and a clear limit instead of negotiating from urgency during every call."
+    },
+    {
+      "event_id": "event_14",
+      "session_index": 14,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_henk"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Darius learns about an assistant-instructor opening but has not yet decided whether his Dutch is strong enough to apply."
+    },
+    {
+      "event_id": "event_15",
+      "session_index": 15,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elise"
+      ],
+      "resolution_status": "resolved",
+      "description": "Darius runs a timed ten-minute lesson for Elise and discovers where the explanation becomes too technical."
+    },
+    {
+      "event_id": "event_16",
+      "session_index": 15,
+      "topic_thread_ids": [
+        "thread_04_household_budget"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia"
+      ],
+      "resolution_status": "mixed",
+      "description": "The same week, Darius and Sofia revisit how many low-paid gigs he should keep during the certificate."
+    },
+    {
+      "event_id": "event_17",
+      "session_index": 16,
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_06_sleep_recovery",
+        "thread_05_family_support"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_kofi",
+        "entity_chidi"
+      ],
+      "resolution_status": "mixed",
+      "description": "Darius compares his recovery needs with Kofi’s different gig tolerance while a new family-support commitment remains unsettled."
+    },
+    {
+      "event_id": "event_18",
+      "session_index": 17,
+      "topic_thread_ids": [
+        "thread_03_dutch_confidence",
+        "thread_01_teaching_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_kofi"
+      ],
+      "resolution_status": "mixed",
+      "description": "Kofi’s fluent public speaking briefly becomes an unhelpful comparison while Darius prepares a teaching demonstration."
+    },
+    {
+      "event_id": "event_19",
+      "session_index": 18,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_02_freelance_gigs"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lotte"
+      ],
+      "resolution_status": "resolved",
+      "description": "Darius blocks a predictable weekday for classroom observation and Lotte agrees not to schedule him there."
+    },
+    {
+      "event_id": "event_20",
+      "session_index": 19,
+      "topic_thread_ids": [
+        "thread_06_sleep_recovery",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "description": "A deliberately imperfect morning speaking drill helps Darius keep practicing after a tiring event week."
+    },
+    {
+      "event_id": "event_21",
+      "session_index": 20,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_henk"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Darius finishes the portfolio draft but delays booking the formal Dutch B2 exam needed by one teaching employer."
+    },
+    {
+      "event_id": "event_22",
+      "session_index": 21,
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_04_household_budget",
+        "thread_02_freelance_gigs"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia",
+        "entity_bram"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Near course completion, Darius separates the actual portfolio deadline from broader anxiety about giving up freelance income."
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 16 months ago",
+      "event_ids": [
+        "event_01"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_02_freelance_gigs"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_bram"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Darius Okafor, 36, and I work freelance as a live-sound technician. I enrolled in a part-time adult-education teaching certificate because I'd like to teach audio production eventually. Bram can offer me three jobs in one week and then almost nothing the next, so I don't know how to protect the course without panicking about income."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "You are trying to create a more stable direction using work that is currently unstable by design. What would count as progress in the first part of the course?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "My goal is to finish the teaching portfolio without dropping every decent gig that appears. I've registered and paid the first term, but I haven't decided which types of booking I can refuse while I'm studying."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "That leaves a real boundary question open: not whether to work, but which work remains compatible with the training you chose."
+        }
+      ],
+      "summary": "Darius begins a teaching certificate while keeping irregular sound work and defines his main goal as completing the portfolio without reflexively accepting every available gig.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_ms_001",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "My goal is to finish the teaching portfolio without dropping every decent gig that appears.",
+          "candidate_text": "My goal is to finish the teaching portfolio without dropping every decent gig that appears.",
+          "topic_thread": "thread_01_teaching_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "prior_goal"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_unresolved_001",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "I've registered and paid the first term, but I haven't decided which types of booking I can refuse while I'm studying.",
+          "candidate_text": "I've registered and paid the first term, but I haven't decided which types of booking I can refuse while I'm studying.",
+          "topic_thread": "thread_02_freelance_gigs",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I've registered and paid the first term",
+          "result_span": null
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_context_001",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "Bram can offer me three jobs in one week and then almost nothing the next",
+          "candidate_text": "Bram can offer me three jobs in one week and then almost nothing the next",
+          "topic_thread": "thread_02_freelance_gigs",
+          "entity_ids": [
+            "self",
+            "entity_bram"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 15 months ago",
+      "event_ids": [
+        "event_02"
+      ],
+      "topic_thread_ids": [
+        "thread_06_sleep_recovery",
+        "thread_01_teaching_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_henk"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I'm Nigerian and I live in Rotterdam, Netherlands. I had a corporate event finish after midnight before Henk's Saturday class. When I'm venting after a late job, please don't turn it into fixes unless I ask; sometimes I just need to complain for a minute."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "That makes sense. You can be tired and annoyed here without immediately making a recovery plan."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "Later, when I did want to make the morning less awful, I put my course bag, water, and breakfast on the kitchen counter before I went to the venue. I got home too tired to organize anything, but I still made the class on time because the morning had almost no decisions left."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "The useful part was reducing the number of choices waiting for a tired version of you, not pretending the late finish had no cost."
+        }
+      ],
+      "summary": "After a late event, Darius prepares his Saturday course essentials in advance and reaches class on time because the exhausted morning requires almost no decisions.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_core_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I put my course bag, water, and breakfast on the kitchen counter before I went to the venue. I got home too tired to organize anything, but I still made the class on time because the morning had almost no decisions left.",
+          "candidate_text": "I put my course bag, water, and breakfast on the kitchen counter before I went to the venue. I got home too tired to organize anything, but I still made the class on time because the morning had almost no decisions left.",
+          "topic_thread": "thread_06_sleep_recovery",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I put my course bag, water, and breakfast on the kitchen counter before I went to the venue.",
+          "result_span": "I got home too tired to organize anything, but I still made the class on time because the morning had almost no decisions left."
+        }
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 14 months ago",
+      "event_ids": [
+        "event_03"
+      ],
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_04_household_budget"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia",
+        "entity_bram"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I'm a man, and my education is a Higher National Diploma in electrical and electronic engineering. Bram offered me two short-notice weekday jobs. The hard part isn't that both jobs are tiring; one pays enough to cover most of our rent, while the other mostly pays for the inconvenience and costs me a teaching workshop."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "So 'too much work' hides two different pressures: income security and losing a course opportunity."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "Yes. Sofia thought I was rejecting work because I was overwhelmed, but the smaller gig is the one I'm angry about because it buys very little and displaces something I can't repeat this month."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "That distinction gives you a better basis for both the booking decision and the budget conversation with Sofia."
+        }
+      ],
+      "summary": "Darius distinguishes a high-value gig that supports household stability from a low-value booking that mainly disrupts a nonrepeatable teaching workshop.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_ms_002",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "The hard part isn't that both jobs are tiring; one pays enough to cover most of our rent, while the other mostly pays for the inconvenience and costs me a teaching workshop.",
+          "candidate_text": "The hard part isn't that both jobs are tiring; one pays enough to cover most of our rent, while the other mostly pays for the inconvenience and costs me a teaching workshop.",
+          "topic_thread": "thread_02_freelance_gigs",
+          "entity_ids": [
+            "self",
+            "entity_bram"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "pressure_distinction"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_context_002",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s003_t03"
+          ],
+          "literal_source_span": "Sofia thought I was rejecting work because I was overwhelmed",
+          "candidate_text": "Sofia thought I was rejecting work because I was overwhelmed",
+          "topic_thread": "thread_04_household_budget",
+          "entity_ids": [
+            "self",
+            "entity_sofia"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 13 months ago",
+      "event_ids": [
+        "event_04"
+      ],
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_06_sleep_recovery"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_bram"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "I messaged Bram that I could usually take weekday bookings with at least three days' notice, but anything later than that should be a genuine emergency rate rather than a normal ask. He pushed back once, then started sending the ordinary jobs earlier, and I had only one last-minute request over the next month."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "You changed the booking rule instead of arguing case by case, and the pattern shifted enough to be measurable."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "I still say yes to some late jobs, but now it feels more like a decision and less like the phone deciding for me."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "That is a useful distinction to keep if the freelance volume changes again."
+        }
+      ],
+      "summary": "Darius sets a three-day notice expectation with Bram and sees ordinary bookings arrive earlier, making last-minute acceptance feel more like a choice than a default.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_core_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "I messaged Bram that I could usually take weekday bookings with at least three days' notice, but anything later than that should be a genuine emergency rate rather than a normal ask. He pushed back once, then started sending the ordinary jobs earlier, and I had only one last-minute request over the next month.",
+          "candidate_text": "I messaged Bram that I could usually take weekday bookings with at least three days' notice, but anything later than that should be a genuine emergency rate rather than a normal ask. He pushed back once, then started sending the ordinary jobs earlier, and I had only one last-minute request over the next month.",
+          "topic_thread": "thread_02_freelance_gigs",
+          "entity_ids": [
+            "self",
+            "entity_bram"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I messaged Bram that I could usually take weekday bookings with at least three days' notice, but anything later than that should be a genuine emergency rate rather than a normal ask.",
+          "result_span": "He pushed back once, then started sending the ordinary jobs earlier, and I had only one last-minute request over the next month."
+        }
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 12 months ago",
+      "event_ids": [
+        "event_05"
+      ],
+      "topic_thread_ids": [
+        "thread_04_household_budget",
+        "thread_05_family_support"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia",
+        "entity_chidi"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "Dad asked if I could help replace part of the roof before the rainy season. My freelance income was low last month, and I realized I don't actually know what amount is safe after our fixed expenses and course fees."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "The urgency in the request is real, but the amount you can contribute is still an information problem on your side."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "I transferred a small amount for the immediate repair, but I haven't told Dad what I can or can't send after that. Sofia and I also haven't updated the household buffer since I started the certificate."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "So there is one completed emergency action and two unresolved boundaries: the ongoing family amount and the household buffer."
+        }
+      ],
+      "summary": "A roof repair request exposes that Darius has not recalculated his safe family contribution or household buffer since beginning the teaching certificate.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_ms_003",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s005_t01"
+          ],
+          "literal_source_span": "I realized I don't actually know what amount is safe after our fixed expenses and course fees.",
+          "candidate_text": "I realized I don't actually know what amount is safe after our fixed expenses and course fees.",
+          "topic_thread": "thread_04_household_budget",
+          "entity_ids": [
+            "self",
+            "entity_sofia"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "specific_old_observation"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_unresolved_002",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "I transferred a small amount for the immediate repair, but I haven't told Dad what I can or can't send after that.",
+          "candidate_text": "I transferred a small amount for the immediate repair, but I haven't told Dad what I can or can't send after that.",
+          "topic_thread": "thread_05_family_support",
+          "entity_ids": [
+            "self",
+            "entity_chidi"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I transferred a small amount for the immediate repair",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 11 months ago",
+      "event_ids": [
+        "event_06"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_henk"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "Henk said I understand the technical material but disappear when the discussion switches into Dutch. It helps if you reflect what you think I'm worried about before asking me a question; otherwise I sometimes answer the question before I know whether you understood the problem."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "You are not worried that you lack the audio knowledge; you are worried that speaking Dutch fast enough will make your knowledge look thinner than it is. What would be a small way to test that?"
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "I picked one familiar topic—gain staging—and wrote three Dutch sentences I would actually use with a beginner. I said them once in class when Henk asked for an example, and having the technical sequence already clear stopped me from translating every thought from English first."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "That gave the language task a known technical skeleton, so you were practicing expression rather than inventing content at the same time."
+        }
+      ],
+      "summary": "Darius prepares three Dutch sentences about a familiar audio concept and participates in class more easily because he is not inventing technical content while translating.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_core_003",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s006_t03"
+          ],
+          "literal_source_span": "I picked one familiar topic—gain staging—and wrote three Dutch sentences I would actually use with a beginner. I said them once in class when Henk asked for an example, and having the technical sequence already clear stopped me from translating every thought from English first.",
+          "candidate_text": "I picked one familiar topic—gain staging—and wrote three Dutch sentences I would actually use with a beginner. I said them once in class when Henk asked for an example, and having the technical sequence already clear stopped me from translating every thought from English first.",
+          "topic_thread": "thread_03_dutch_confidence",
+          "entity_ids": [
+            "self",
+            "entity_henk"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I picked one familiar topic—gain staging—and wrote three Dutch sentences I would actually use with a beginner.",
+          "result_span": "I said them once in class when Henk asked for an example, and having the technical sequence already clear stopped me from translating every thought from English first."
+        }
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 10 months ago",
+      "event_ids": [
+        "event_07"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elise"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "The portfolio requires a recorded ten-minute lesson. Elise said she'd practice with me, but I keep collecting examples instead of choosing one lesson."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "The open thread is no longer finding material. It is committing to one teachable slice and recording it."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "Exactly. I have three lesson outlines and no video. I keep telling myself more preparation will make me less awkward on camera."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "That gives you a very specific unfinished item to revisit later: one recorded lesson, not another outline."
+        }
+      ],
+      "summary": "Darius recognizes that his teaching portfolio is stalled by avoiding the recorded micro-lesson, even though he already has more than enough lesson outlines.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_ms_004",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "I have three lesson outlines and no video.",
+          "candidate_text": "I have three lesson outlines and no video.",
+          "topic_thread": "thread_01_teaching_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "unfinished_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 9 months ago",
+      "event_ids": [
+        "event_08"
+      ],
+      "topic_thread_ids": [
+        "thread_03_dutch_confidence",
+        "thread_06_sleep_recovery"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "I started leaving myself a sixty-second Dutch voice note while I walk to the supermarket, usually about something I can see. I listened back only to check whether the main idea was understandable, and after two weeks I stopped restarting every sentence just because the grammar wasn't neat."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "The practice is short, tied to a routine you already do, and judged by comprehensibility rather than polish."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "It also happens in daylight, which matters because late-night language practice after gigs was going nowhere."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "That timing difference sounds as important as the speaking exercise itself."
+        }
+      ],
+      "summary": "Darius attaches one-minute Dutch voice notes to a daytime walk and becomes less likely to restart imperfect sentences, avoiding ineffective late-night language practice.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_core_004",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "I started leaving myself a sixty-second Dutch voice note while I walk to the supermarket, usually about something I can see. I listened back only to check whether the main idea was understandable, and after two weeks I stopped restarting every sentence just because the grammar wasn't neat.",
+          "candidate_text": "I started leaving myself a sixty-second Dutch voice note while I walk to the supermarket, usually about something I can see. I listened back only to check whether the main idea was understandable, and after two weeks I stopped restarting every sentence just because the grammar wasn't neat.",
+          "topic_thread": "thread_03_dutch_confidence",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I started leaving myself a sixty-second Dutch voice note while I walk to the supermarket, usually about something I can see.",
+          "result_span": "I listened back only to check whether the main idea was understandable, and after two weeks I stopped restarting every sentence just because the grammar wasn't neat."
+        }
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 8 months ago",
+      "event_ids": [
+        "event_09"
+      ],
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_06_sleep_recovery"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lotte"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "Lotte's conference job ended at ten instead of one in the morning, so I tried something simple when I got home: I wrote the next day's first commitment on paper, put my phone on charge outside the bedroom, and stopped checking client messages. I fell asleep sooner than after most event nights, and I didn't spend breakfast reconstructing what I was supposed to do."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "Because the job ended earlier, you had room to test what happens when the workday has an actual closing signal."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "I wouldn't claim it fixes a one-in-the-morning finish, but it did help on a normal late evening."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "That boundary on applicability is useful; it keeps the result tied to the conditions where you observed it."
+        }
+      ],
+      "summary": "After a moderately late conference job, Darius closes client messages and records the next commitment on paper, making sleep onset and the following morning smoother.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_ms_005",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "I wouldn't claim it fixes a one-in-the-morning finish, but it did help on a normal late evening.",
+          "candidate_text": "I wouldn't claim it fixes a one-in-the-morning finish, but it did help on a normal late evening.",
+          "topic_thread": "thread_06_sleep_recovery",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "resolved_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 7 months ago",
+      "event_ids": [
+        "event_10"
+      ],
+      "topic_thread_ids": [
+        "thread_04_household_budget",
+        "thread_02_freelance_gigs"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "When I ask a practical yes-or-no question, give me the direct answer before the explanation. Sofia and I finally put our rent, utilities, course payment, and minimum groceries in one column, then kept freelance extras in a separate column. The smaller fixed number showed that I didn't need to replace every declined gig pound-for-pound, and my idea of the emergency buffer came down to something we can actually build."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "Direct answer: yes, that separation gave you a more realistic floor. The explanation is that you stopped treating variable spending and fixed survival costs as one number."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "It doesn't make the income predictable, but it stopped every quiet week from looking like a crisis."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "That is a meaningful budgeting outcome even without changing the freelance market itself."
+        }
+      ],
+      "summary": "Darius and Sofia separate fixed household costs from variable freelance spending, producing a smaller realistic income floor and reducing panic during quiet work weeks.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_core_005",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "Sofia and I finally put our rent, utilities, course payment, and minimum groceries in one column, then kept freelance extras in a separate column. The smaller fixed number showed that I didn't need to replace every declined gig pound-for-pound, and my idea of the emergency buffer came down to something we can actually build.",
+          "candidate_text": "Sofia and I finally put our rent, utilities, course payment, and minimum groceries in one column, then kept freelance extras in a separate column. The smaller fixed number showed that I didn't need to replace every declined gig pound-for-pound, and my idea of the emergency buffer came down to something we can actually build.",
+          "topic_thread": "thread_04_household_budget",
+          "entity_ids": [
+            "self",
+            "entity_sofia"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "Sofia and I finally put our rent, utilities, course payment, and minimum groceries in one column, then kept freelance extras in a separate column.",
+          "result_span": "The smaller fixed number showed that I didn't need to replace every declined gig pound-for-pound, and my idea of the emergency buffer came down to something we can actually build."
+        }
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 6 months ago",
+      "event_ids": [
+        "event_11"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elise"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "Elise sat at our dining table pretending to be a beginner while I explained signal flow. Halfway through I lost the Dutch word I wanted, pointed at the sketch instead, and kept the lesson moving. What surprised me was that the explanation still made sense; the missing word didn't swallow the whole lesson the way it does in my head beforehand."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "You found a way through the gap instead of treating the gap as the end of the lesson."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "That was probably the first rehearsal where I sounded like someone teaching and not someone sitting a language exam."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "That distinction may matter when you prepare the recorded version."
+        }
+      ],
+      "summary": "During an informal micro-lesson, Darius works around a missing Dutch word using a sketch and discovers that one language gap does not have to derail teaching.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_challenge_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s011_t01"
+          ],
+          "literal_source_span": "Elise sat at our dining table pretending to be a beginner while I explained signal flow. Halfway through I lost the Dutch word I wanted, pointed at the sketch instead, and kept the lesson moving. What surprised me was that the explanation still made sense; the missing word didn't swallow the whole lesson the way it does in my head beforehand.",
+          "candidate_text": "Elise sat at our dining table pretending to be a beginner while I explained signal flow. Halfway through I lost the Dutch word I wanted, pointed at the sketch instead, and kept the lesson moving. What surprised me was that the explanation still made sense; the missing word didn't swallow the whole lesson the way it does in my head beforehand.",
+          "topic_thread": "thread_03_dutch_confidence",
+          "entity_ids": [
+            "self",
+            "entity_elise"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "Halfway through I lost the Dutch word I wanted, pointed at the sketch instead, and kept the lesson moving.",
+          "result_span": "What surprised me was that the explanation still made sense; the missing word didn't swallow the whole lesson the way it does in my head beforehand."
+        }
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 5 months ago",
+      "event_ids": [
+        "event_12"
+      ],
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_04_household_budget"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_bram",
+        "entity_lotte"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "I thought the conference center and Bram were both paying within two weeks because that is when I sent the invoices. Lotte clarified that her venue pays thirty days after approval, while Bram usually pays about ten days after the job. I had been comparing two different clocks and calling the gap 'missing income.'"
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "That is a concrete correction: invoice timing and cash arrival were not equivalent across the two clients."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "The total is still irregular, but at least I can stop using the wrong date when I look ahead at the month."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "Keeping the correction attached to each client should make future forecasts less confusing."
+        }
+      ],
+      "summary": "Darius corrects a mistaken assumption about two clients’ payment clocks, separating invoice submission from actual payment timing in future budget forecasts.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_ms_006",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "Lotte clarified that her venue pays thirty days after approval, while Bram usually pays about ten days after the job. I had been comparing two different clocks and calling the gap 'missing income.'",
+          "candidate_text": "Lotte clarified that her venue pays thirty days after approval, while Bram usually pays about ten days after the job. I had been comparing two different clocks and calling the gap 'missing income.'",
+          "topic_thread": "thread_02_freelance_gigs",
+          "entity_ids": [
+            "self",
+            "entity_bram",
+            "entity_lotte"
+          ],
+          "resolution_status": "conflicting",
+          "memory_function": "conflict_record"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_context_003",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "Lotte clarified that her venue pays thirty days after approval",
+          "candidate_text": "Lotte clarified that her venue pays thirty days after approval",
+          "topic_thread": "thread_02_freelance_gigs",
+          "entity_ids": [
+            "entity_lotte"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 4 months ago",
+      "event_ids": [
+        "event_13"
+      ],
+      "topic_thread_ids": [
+        "thread_05_family_support",
+        "thread_04_household_budget"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_chidi"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "Dad called again about the roof and another family expense. This time I told him the exact amount I could send this month and that anything beyond it would have to wait until the next invoice cycle. He was disappointed for a minute, but the call ended without us renegotiating the number three times."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "You gave a limit connected to your real cash timing rather than negotiating against his urgency in real time."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "I felt guilty after, but also much less resentful. Those two feelings can apparently coexist."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "That is useful evidence for future family requests: discomfort did not mean the boundary failed."
+        }
+      ],
+      "summary": "Darius gives his father a fixed monthly contribution limit tied to real cash flow, reducing repeated negotiation even though he still feels some guilt afterward.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_core_006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "This time I told him the exact amount I could send this month and that anything beyond it would have to wait until the next invoice cycle. He was disappointed for a minute, but the call ended without us renegotiating the number three times.",
+          "candidate_text": "This time I told him the exact amount I could send this month and that anything beyond it would have to wait until the next invoice cycle. He was disappointed for a minute, but the call ended without us renegotiating the number three times.",
+          "topic_thread": "thread_05_family_support",
+          "entity_ids": [
+            "self",
+            "entity_chidi"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "This time I told him the exact amount I could send this month and that anything beyond it would have to wait until the next invoice cycle.",
+          "result_span": "He was disappointed for a minute, but the call ended without us renegotiating the number three times."
+        }
+      ]
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 3 months ago",
+      "event_ids": [
+        "event_14"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_henk"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "Henk forwarded an assistant-instructor opening at a vocational center. The subject matter fits, but the posting says Dutch B2 is expected and I haven't taken the exam."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "There is a difference between not having the credential yet and not being capable of the work. What decision is still open?"
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "I saved the posting and checked the application deadline, but I haven't decided whether to apply before the language exam or wait for the next opening."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "That is the unresolved action choice. It does not need to be disguised as a general question about whether you are 'ready enough.'"
+        }
+      ],
+      "summary": "An assistant-instructor vacancy fits Darius’s technical goals, but he has not decided whether to apply before obtaining the requested Dutch B2 credential.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_unresolved_003",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s014_t03"
+          ],
+          "literal_source_span": "I saved the posting and checked the application deadline, but I haven't decided whether to apply before the language exam or wait for the next opening.",
+          "candidate_text": "I saved the posting and checked the application deadline, but I haven't decided whether to apply before the language exam or wait for the next opening.",
+          "topic_thread": "thread_01_teaching_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I saved the posting and checked the application deadline",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 10 weeks ago",
+      "event_ids": [
+        "event_15",
+        "event_16"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence",
+        "thread_04_household_budget"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elise",
+        "entity_sofia"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "I ran the full ten-minute lesson for Elise with a timer and asked her to mark the moment she stopped following the signal-chain example. She pointed to the same section twice, so I replaced the technical detour with one diagram. The second run finished within time and she could repeat the three main steps back to me."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "That gave you learner-side evidence about exactly where the lesson lost clarity, and the revision changed both timing and comprehension."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "Sofia also asked whether the course means I should stop taking cheap weekday jobs completely. I don't think the answer is that simple; some of those gigs fill quiet months even if I don't want them forever."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "Then keep that financial question separate from the teaching result you just measured."
+        }
+      ],
+      "summary": "A timed lesson with Elise identifies one confusing section and a diagram fixes it, while Darius keeps a separate unresolved question about low-paid weekday gigs.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_core_007",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s015_t01"
+          ],
+          "literal_source_span": "I ran the full ten-minute lesson for Elise with a timer and asked her to mark the moment she stopped following the signal-chain example. She pointed to the same section twice, so I replaced the technical detour with one diagram. The second run finished within time and she could repeat the three main steps back to me.",
+          "candidate_text": "I ran the full ten-minute lesson for Elise with a timer and asked her to mark the moment she stopped following the signal-chain example. She pointed to the same section twice, so I replaced the technical detour with one diagram. The second run finished within time and she could repeat the three main steps back to me.",
+          "topic_thread": "thread_01_teaching_certificate",
+          "entity_ids": [
+            "self",
+            "entity_elise"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I ran the full ten-minute lesson for Elise with a timer and asked her to mark the moment she stopped following the signal-chain example.",
+          "result_span": "The second run finished within time and she could repeat the three main steps back to me."
+        }
+      ]
+    },
+    {
+      "session_index": 16,
+      "relative_time": "about 8 weeks ago",
+      "event_ids": [
+        "event_17"
+      ],
+      "topic_thread_ids": [
+        "thread_02_freelance_gigs",
+        "thread_06_sleep_recovery",
+        "thread_05_family_support"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_kofi",
+        "entity_chidi"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s016_t01",
+          "role": "user",
+          "text": "Kofi worked three late concerts in a row and still went running each morning. I tried to use that as proof that I should accept the same pattern, but after two late jobs I was rereading the same paragraph in class."
+        },
+        {
+          "turn_id": "s016_t02",
+          "role": "assistant",
+          "text": "His recovery pattern is information about him, not a standard your body has to copy."
+        },
+        {
+          "turn_id": "s016_t03",
+          "role": "user",
+          "text": "My useful observation is simpler: two late finishes back to back make Saturday learning noticeably worse for me, even when each individual job feels manageable. Dad also asked whether I can promise the same monthly amount through autumn, and I haven't answered that yet."
+        },
+        {
+          "turn_id": "s016_t04",
+          "role": "assistant",
+          "text": "That is a personal scheduling observation you can use without turning it into a judgment about toughness."
+        }
+      ],
+      "summary": "Darius stops using Kofi’s tolerance for consecutive late gigs as a benchmark while a separate question about committing to a fixed family-support amount remains unanswered.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_unresolved_004",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s016_t03"
+          ],
+          "literal_source_span": "Dad also asked whether I can promise the same monthly amount through autumn, and I haven't answered that yet.",
+          "candidate_text": "Dad also asked whether I can promise the same monthly amount through autumn, and I haven't answered that yet.",
+          "topic_thread": "thread_05_family_support",
+          "entity_ids": [
+            "self",
+            "entity_chidi"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 17,
+      "relative_time": "about 6 weeks ago",
+      "event_ids": [
+        "event_18"
+      ],
+      "topic_thread_ids": [
+        "thread_03_dutch_confidence",
+        "thread_01_teaching_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_kofi"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s017_t01",
+          "role": "user",
+          "text": "Kofi can walk into a room and improvise a whole training talk, and I caught myself saving clips of him to copy before my demonstration. But he grew up speaking Dutch and does sales presentations every week; that's his context, not mine."
+        },
+        {
+          "turn_id": "s017_t02",
+          "role": "assistant",
+          "text": "That makes him a poor template for the specific skill you are building, even if you admire how relaxed he looks."
+        },
+        {
+          "turn_id": "s017_t03",
+          "role": "user",
+          "text": "I deleted the clips from my practice folder. I still want to get more fluid, just not by pretending his baseline is the assignment."
+        },
+        {
+          "turn_id": "s017_t04",
+          "role": "assistant",
+          "text": "Good distinction: aspiration can stay, but the retrieval target should remain your own evidence and task."
+        }
+      ],
+      "summary": "Darius identifies Kofi’s fluent Dutch presentation style as an invalid personal benchmark for his own teaching demonstration and removes it from his practice materials.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_ms_007",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s017_t01"
+          ],
+          "literal_source_span": "But he grew up speaking Dutch and does sales presentations every week; that's his context, not mine.",
+          "candidate_text": "But he grew up speaking Dutch and does sales presentations every week; that's his context, not mine.",
+          "topic_thread": "thread_03_dutch_confidence",
+          "entity_ids": [
+            "self",
+            "entity_kofi"
+          ],
+          "resolution_status": "stale_or_wrong_entity",
+          "memory_function": "wrong_person_distractor"
+        }
+      ]
+    },
+    {
+      "session_index": 18,
+      "relative_time": "about 1 month ago",
+      "event_ids": [
+        "event_19"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_02_freelance_gigs"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lotte"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s018_t01",
+          "role": "user",
+          "text": "The vocational center lets applicants observe one class before applying. I asked Lotte not to book me on Wednesday afternoons for the next four weeks and explained that it was for a fixed training commitment. She blocked the slot in her scheduling sheet, so I attended the observation without turning down a confirmed job at the last minute."
+        },
+        {
+          "turn_id": "s018_t02",
+          "role": "assistant",
+          "text": "You protected a predictable window early enough that the career step did not have to compete with a job already promised."
+        },
+        {
+          "turn_id": "s018_t03",
+          "role": "user",
+          "text": "That felt different from saying no after the work existed. I can see why timing matters."
+        },
+        {
+          "turn_id": "s018_t04",
+          "role": "assistant",
+          "text": "You now have one example where advance availability control reduced both money anxiety and course conflict."
+        }
+      ],
+      "summary": "Darius protects Wednesday afternoons with a regular venue before bookings are assigned, allowing him to observe a teaching class without cancelling paid work later.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_core_008",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s018_t01"
+          ],
+          "literal_source_span": "I asked Lotte not to book me on Wednesday afternoons for the next four weeks and explained that it was for a fixed training commitment. She blocked the slot in her scheduling sheet, so I attended the observation without turning down a confirmed job at the last minute.",
+          "candidate_text": "I asked Lotte not to book me on Wednesday afternoons for the next four weeks and explained that it was for a fixed training commitment. She blocked the slot in her scheduling sheet, so I attended the observation without turning down a confirmed job at the last minute.",
+          "topic_thread": "thread_02_freelance_gigs",
+          "entity_ids": [
+            "self",
+            "entity_lotte"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I asked Lotte not to book me on Wednesday afternoons for the next four weeks and explained that it was for a fixed training commitment.",
+          "result_span": "She blocked the slot in her scheduling sheet, so I attended the observation without turning down a confirmed job at the last minute."
+        }
+      ]
+    },
+    {
+      "session_index": 19,
+      "relative_time": "about 3 weeks ago",
+      "event_ids": [
+        "event_20"
+      ],
+      "topic_thread_ids": [
+        "thread_06_sleep_recovery",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s019_t01",
+          "role": "user",
+          "text": "After a tiring event week, I made coffee and recorded a Dutch explanation while the washing machine was running and my hair was still wet. I let the sentence come out crooked, listened once, and answered myself with a cleaner version instead of deleting it. By the third morning the recordings sounded less like auditions and more like me trying to communicate."
+        },
+        {
+          "turn_id": "s019_t02",
+          "role": "assistant",
+          "text": "You made imperfection part of the practice rather than a reason to restart the practice."
+        },
+        {
+          "turn_id": "s019_t03",
+          "role": "user",
+          "text": "I think that matters because tired weeks are exactly when I used to wait for a perfect study session that never arrived."
+        },
+        {
+          "turn_id": "s019_t04",
+          "role": "assistant",
+          "text": "Then the value may be resilience to ordinary conditions, not just language accuracy."
+        }
+      ],
+      "summary": "Darius keeps short Dutch speaking practice alive during a tiring week by responding to imperfect recordings instead of deleting them and waiting for ideal conditions.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_reusable_challenge_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s019_t01"
+          ],
+          "literal_source_span": "After a tiring event week, I made coffee and recorded a Dutch explanation while the washing machine was running and my hair was still wet. I let the sentence come out crooked, listened once, and answered myself with a cleaner version instead of deleting it. By the third morning the recordings sounded less like auditions and more like me trying to communicate.",
+          "candidate_text": "After a tiring event week, I made coffee and recorded a Dutch explanation while the washing machine was running and my hair was still wet. I let the sentence come out crooked, listened once, and answered myself with a cleaner version instead of deleting it. By the third morning the recordings sounded less like auditions and more like me trying to communicate.",
+          "topic_thread": "thread_03_dutch_confidence",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "I let the sentence come out crooked, listened once, and answered myself with a cleaner version instead of deleting it.",
+          "result_span": "By the third morning the recordings sounded less like auditions and more like me trying to communicate."
+        }
+      ]
+    },
+    {
+      "session_index": 20,
+      "relative_time": "about 10 days ago",
+      "event_ids": [
+        "event_21"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_03_dutch_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_henk"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s020_t01",
+          "role": "user",
+          "text": "Henk says the portfolio draft is ready to submit after one formatting pass. The language piece is less tidy: I looked up two B2 exam dates and both are available, but I haven't booked either one."
+        },
+        {
+          "turn_id": "s020_t02",
+          "role": "assistant",
+          "text": "So the teaching portfolio has moved to a finishing task, while the credential step is still genuinely uncommitted."
+        },
+        {
+          "turn_id": "s020_t03",
+          "role": "user",
+          "text": "I keep reading about the exam structure as if one more page will tell me whether I'm ready. It won't choose a date for me."
+        },
+        {
+          "turn_id": "s020_t04",
+          "role": "assistant",
+          "text": "That sounds like a clear unresolved event to keep separate from the portfolio's near-completion."
+        }
+      ],
+      "summary": "Darius reaches the final formatting stage of his teaching portfolio but remains uncommitted to either of two available Dutch B2 examination dates.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_unresolved_005",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s020_t01"
+          ],
+          "literal_source_span": "I looked up two B2 exam dates and both are available, but I haven't booked either one.",
+          "candidate_text": "I looked up two B2 exam dates and both are available, but I haven't booked either one.",
+          "topic_thread": "thread_03_dutch_confidence",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I looked up two B2 exam dates",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 21,
+      "relative_time": "this week",
+      "event_ids": [
+        "event_22"
+      ],
+      "topic_thread_ids": [
+        "thread_01_teaching_certificate",
+        "thread_04_household_budget",
+        "thread_02_freelance_gigs"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sofia",
+        "entity_bram"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s021_t01",
+          "role": "user",
+          "text": "The certificate finishes next month, and people keep telling me career changes are stressful. That's true in a general way, but it isn't specific enough to help. The actual deadline is the portfolio submission on the 18th; Bram's bookings after that are not part of the portfolio problem."
+        },
+        {
+          "turn_id": "s021_t02",
+          "role": "assistant",
+          "text": "You are separating the concrete training deadline from the much larger story about what happens to freelance work afterward."
+        },
+        {
+          "turn_id": "s021_t03",
+          "role": "user",
+          "text": "Sofia and I still need to decide how much income volatility we can tolerate if I take a part-time teaching job. I don't want that future budget question to turn the last portfolio week into a referendum on my whole career."
+        },
+        {
+          "turn_id": "s021_t04",
+          "role": "assistant",
+          "text": "Then the immediate and future threads can stay distinct: submit the portfolio, and later decide the acceptable income mix."
+        }
+      ],
+      "summary": "Darius separates a concrete portfolio deadline from broad career-change anxiety and keeps the future household decision about part-time teaching income as a distinct thread.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u002_ms_008",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s021_t01"
+          ],
+          "literal_source_span": "people keep telling me career changes are stressful. That's true in a general way, but it isn't specific enough to help.",
+          "candidate_text": "people keep telling me career changes are stressful. That's true in a general way, but it isn't specific enough to help.",
+          "topic_thread": "thread_01_teaching_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "not_specific",
+          "memory_function": "same_topic_no_specific_content"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u002_me_context_004",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u002",
+          "source_turn_ids": [
+            "s021_t01"
+          ],
+          "literal_source_span": "The actual deadline is the portfolio submission on the 18th",
+          "candidate_text": "The actual deadline is the portfolio submission on the 18th",
+          "topic_thread": "thread_01_teaching_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    }
+  ]
+}

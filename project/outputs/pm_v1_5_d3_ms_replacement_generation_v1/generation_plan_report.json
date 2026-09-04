@@ -1,0 +1,33 @@
+{
+  "protocol": "pm-v1.5-d3-ms-replacement-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_80_D3_MS_REPLACEMENT_CALLS",
+  "api_calls_made": 0,
+  "pairs": 40,
+  "planned_calls": 80,
+  "estimated_input_tokens": 31885,
+  "maximum_output_tokens": 24000,
+  "pricing_usd_per_mtok": {
+    "input": 0.15,
+    "output": 0.6
+  },
+  "cost_upper_bound_usd": 0.019183,
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "checks": {
+    "40_pairs": true,
+    "80_calls": true,
+    "two_arms_per_pair": true,
+    "ms_only": true,
+    "same_seed_within_pair": true,
+    "only_ms_bit_changes": true,
+    "distinct_prompts_within_pair": true,
+    "no_response_or_outcome": true
+  },
+  "call_plan_sha256": "c8aba7f25cd514cbdfadde56b7abc36b8892cf388376c4d02e81dada7e9883bc",
+  "registry_sha256": "0272ef6c80fce8bfc74e08f6b571e89d9057f8be3a3f8ef75bdecfd299bb9957",
+  "blueprint_manifest_sha256": "553c69f030465a5128fda5d8d222a478db6e60b41bd8694a20ed58994f659c0c"
+}

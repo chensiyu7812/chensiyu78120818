@@ -1,0 +1,97 @@
+{
+  "protocol": "pm-v1.5-strategy-bank-v3-expansion-contract-v1",
+  "status": "ACTIVE_OUTCOME_BLIND_CARD_AUTHORING",
+  "research_role": "Replace the five-card mechanism baseline with a compact but genuinely retrievable strategy catalog without returning to the noisy 11,590 raw-response cards.",
+  "scale": {
+    "candidate_target": {
+      "minimum": 80,
+      "maximum": 100
+    },
+    "hard_quota": false,
+    "core_safe_families": 5,
+    "distinct_submoves_per_family_target": {
+      "minimum": 8,
+      "maximum": 10
+    },
+    "expected_core_submove_cards": {
+      "minimum": 40,
+      "maximum": 50
+    },
+    "additional_execution_or_context_variants": {
+      "minimum": 30,
+      "maximum": 50,
+      "allowed_only_when": "The variant changes a decision boundary, dialogue phase, goal, burden, risk constraint, or generator instruction in a way that can change the response."
+    }
+  },
+  "card_unit": {
+    "is": "A reusable support move with a distinct when-to-use rule, when-not-to-use rule, execution instruction, burden level, and risk constraints.",
+    "is_not": [
+      "one raw ESConv supporter response",
+      "one topic-specific copy of an existing move",
+      "one emotion label",
+      "one problem-type template",
+      "one post-outcome quality label"
+    ],
+    "required_fields": [
+      "strategy_family",
+      "support_submove",
+      "when_to_use",
+      "when_not_to_use",
+      "compatible_support_modes",
+      "compatible_dialogue_phases",
+      "goal_types",
+      "directive_burden",
+      "risk_flags",
+      "retrieval_text",
+      "prompt_guidance",
+      "source_support"
+    ]
+  },
+  "source_support_gate": {
+    "eligible_source_pool": "The 6,391 outcome-blind, packet-disjoint, filtered ESConv train lineage rows already retained by Strategy Bank V2.",
+    "minimum_independent_source_dialogues_per_card": 20,
+    "raw_examples_exposed_to_generator": false,
+    "post_treatment_survey_used_as_card_utility": false,
+    "judge_or_generated_response_outcomes_used": false,
+    "test_or_external_data_used": false
+  },
+  "distinctness_gate": {
+    "normalized_duplicate_cards_allowed": false,
+    "topic_only_variants_allowed": false,
+    "high_semantic_similarity_action": "Human merge-or-justify review; similarity alone cannot delete a safety-relevant boundary variant.",
+    "same_move_different_metadata_action": "Use metadata tags on one card unless the prompt instruction or permitted behavior actually changes."
+  },
+  "coverage_axes": [
+    "explicit advice versus listen boundary",
+    "support mode",
+    "dialogue phase",
+    "current goal",
+    "interaction burden tolerance",
+    "question/task burden limit",
+    "risk and urgency gate",
+    "current versus previous experience"
+  ],
+  "descriptive_only_axes": [
+    "problem topic",
+    "emotion label"
+  ],
+  "human_review": {
+    "first_reviewer": "All surviving cards receive intrinsic content review.",
+    "second_reviewer": "All high-risk or ambiguous cards plus a fixed 20 percent random sample of the remainder.",
+    "response_level_review": "Deferred until the catalog is frozen; do not continue the old five-card confirmation as formal evidence for the new catalog."
+  },
+  "retrieval_policy": {
+    "stage_1": "Apply observable safety, boundary, family, phase, burden, and risk eligibility filters.",
+    "stage_2": "Rank only the eligible cards with one frozen retriever shared by every PM and baseline.",
+    "default_injection": "Top-1 during mechanism qualification.",
+    "topk_calibration": "Compare R0, Top-1, and Top-k only after Top-1 is a strict prefix of the same frozen bank and ranking.",
+    "no_eligible_card": "R0"
+  },
+  "stopping_rule": [
+    "Stop adding cards when new cards fail the distinctness or minimum-source-support gate.",
+    "Do not add topic-only copies to reach 80.",
+    "It is acceptable to freeze below 80 if the data supports fewer genuinely distinct cards.",
+    "Do not exceed 100 in V1.5; broader or domain-information banks belong to later work."
+  ],
+  "claim_boundary": "The five-card catalog remains a mechanism baseline. Only the frozen, audited V3 catalog may support a Strategy-RAG claim."
+}

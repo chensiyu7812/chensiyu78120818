@@ -1,0 +1,89 @@
+{
+  "protocol": "pm-v1.5-v5-guard-and-human-outcome-boundary-v1",
+  "status": "FROZEN_DURING_V2_EXECUTION_NO_POST_OUTCOME_REPAIR",
+  "date": "2026-08-03",
+  "problem_class": "natural-language lexical proxy incorrectly promoted to semantic hard guard",
+  "severity": "HIGH",
+  "recurrence_lineage": [
+    "V15-OBS-10: advice/listen keyword regex could kill valid provider output and leak the target",
+    "V15-GEN-09: English keyword regex rejected valid advice requests",
+    "V15-IMPL-09: case-insensitive ME matched ordinary 'me'; before/earlier could not identify provenance"
+  ],
+  "root_cause": "Free natural language is not a typed serialization channel. Short labels collide with ordinary words, and temporal words do not encode whether a claim came from visible context, authorized memory, or invention.",
+  "three_layers": {
+    "mechanical_experiment_validity": {
+      "effect_on_itt_row": "invalid only for objective experiment failure",
+      "allowed_checks": [
+        "assignment matches frozen plan",
+        "exact candidate ID/version/owner binding",
+        "requested resource surface entered the executor",
+        "nonempty final response and reported usage",
+        "executor and generator identities match freeze"
+      ],
+      "natural_language_regex_allowed": false
+    },
+    "frozen_runtime_fallback": {
+      "effect_on_itt_row": "row remains valid; fallback is an observed outcome and cost",
+      "v2_checks": [
+        "empty response",
+        "explicit internal serialization or opaque resource ID leakage",
+        "authorized MS/ME response lacks any source attribution"
+      ],
+      "not_claimed": "These checks do not establish semantic grounding, functional use, response quality, or absence of memory misuse."
+    },
+    "human_semantic_outcome": {
+      "effect_on_itt_row": "never invalidates assignment; contributes frozen risk/mechanism outcomes",
+      "constructs": [
+        "stale_or_conflicting_use",
+        "unsupported_personal_claim",
+        "overgeneralized_pattern_or_cause",
+        "fabricated_recall",
+        "explicit_boundary_violation",
+        "excessive_directiveness",
+        "internal_resource_label_exposure",
+        "resource_functionally_contributed"
+      ]
+    }
+  },
+  "forbidden_future_machine_rules": [
+    "case-insensitive matching of two-letter component labels",
+    "bare MP/MS/ME/RS token occurrence as sufficient proof of internal leakage",
+    "before/earlier/previous/last-time occurrence as sufficient proof of memory provenance or misuse",
+    "keyword-only inference of owner, entity, current applicability, causal meaning, advice permission, or quality",
+    "generator self-reported use, reason, or copied span as semantic gold"
+  ],
+  "preferred_future_internal_namespace": {
+    "rule": "If machine-detectable sentinels are needed, use long project-unique reserved markers that cannot occur naturally; never expose them in the generator prompt.",
+    "example_pattern": "__METACOM_INTERNAL_<TYPE>_<OPAQUE_ID>__",
+    "v1_5_v2_method_change_allowed": false
+  },
+  "single_full_human_panel": {
+    "grain": "256 FIT states; two frozen seed-matched ON/OFF comparisons per state",
+    "quality_decisions": 512,
+    "on_arm_grounding_risk_checks": 512,
+    "off_arm_risk_checks": "retain for baseline/system comparison when shown in the same panel",
+    "functional_use": "secondary mechanism field, never an ITT validity filter",
+    "fixed_overlap": "20 percent of states selected by protocol hash before labels",
+    "adjudication": "one disagreement adjudication pass only; no rubric, prompt, guard, sample, seed, feature, or threshold repair",
+    "additional_small_packets_allowed": false
+  },
+  "human_grounding_evidence_standard": {
+    "required_for_material_risk_yes": [
+      "quote the exact response claim",
+      "identify whether its alleged basis is visible current context, authorized resource, or neither",
+      "state the concrete mismatch in owner, time, entity, fact, cause, boundary, or directive burden",
+      "judge whether the mismatch is large enough to change adoption"
+    ],
+    "insufficient_alone": [
+      "the response contains a temporal word",
+      "the response mentions history",
+      "the response is generic",
+      "the resource is not visibly quoted",
+      "the reviewer prefers a different style"
+    ],
+    "uncertain_rule": "Use uncertain when source attribution cannot be resolved from the shown current context and authorized evidence; do not force a semantic negative or positive.",
+    "hard_label_handling": "Risk-uncertain is nonpositive for conservative primary routing and excluded in a preregistered sensitivity analysis; it never triggers method repair."
+  },
+  "post_v2_freeze_rule": "Any remaining false fallback, nonuse, unsupported claim, or reviewer disagreement is reported as executor behavior or measurement uncertainty. It cannot change V2 and cannot authorize V3 within this paper.",
+  "external_feedback_allowed": false
+}

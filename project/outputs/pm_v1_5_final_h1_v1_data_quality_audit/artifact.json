@@ -1,0 +1,180 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PM V1.5 H1 v1 数据质量审计",
+    "description": "判断第一次 H1 主审是否可以形成四组件 PM 的训练 gold，并澄清 RS 的开关构念。",
+    "generatedAt": "2026-08-03T00:55:46+09:00",
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PM V1.5 H1 v1 数据质量审计"
+      },
+      {
+        "id": "technical-summary",
+        "type": "markdown",
+        "sourceId": "h1-audit-json",
+        "body": "## 技术结论：H1 v1 不可训练，但可用于修复\n\n第一次 H1 主审完整覆盖 256 个状态和 813 个有候选判断，但不能冻结为 gold：37 组公开状态完全重复，其中 36 组跨 split；MP 恒关可得 97.91%，RS 恒开可得 94.53%。这意味着模型即使没有学到资源开关，也能越过表面准确率门。当前标注只保留为开发诊断，P3 训练继续禁止。"
+      },
+      {
+        "id": "component-finding",
+        "type": "markdown",
+        "sourceId": "h1-audit-json",
+        "body": "## MP 与 RS 的标签分布不能证明学习\n\nMS 与 ME 尚有正负变化，但 MP 几乎全关、RS 几乎全开。尤其 RS 的 121 个正例共享同一类理由：原子动作与用户请求表面一致。该理由没有证明卡片相对 R0 增加了什么，因此不能当成“有收益时才开”的 operational gold。"
+      },
+      {
+        "id": "component-chart",
+        "type": "chart",
+        "chartId": "constant-baseline-chart"
+      },
+      {
+        "id": "component-table",
+        "type": "table",
+        "tableId": "component-metrics"
+      },
+      {
+        "id": "construction-finding",
+        "type": "markdown",
+        "sourceId": "h1-audit-json",
+        "body": "## 跨 split 重复使 confirmation 与 sealed 失去独立性\n\n256 条状态只有 219 个唯一公开 payload；74 个状态落入完全重复组。36 个重复组跨越 FIT、FRESH_CONFIRMATION 或 SEALED_INTERNAL_TEST，因此现有确认/测试结果会重复看到训练状态，不能解释为泛化。"
+      },
+      {
+        "id": "rs-contract",
+        "type": "markdown",
+        "sourceId": "research-plan",
+        "body": "## RS 仍然是有增量才开，但要分清事前机会和实际收益\n\nH1 在回复生成前判断两件事：卡片是否安全适用，以及它是否相对当前可见语境和 R0 增加一个足以改变回复计划的具体约束、澄清轴、机制或 guardrail。两者均满足才 ON。用户已经完整规定同一动作时，卡片只复述动作应 OFF。H2 验证 generator 是否真的执行资源，H3 再用同状态配对回复验证平均 quality/risk/cost 净收益。单次 A/B 胜负不会直接回写为 gold。"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "sourceId": "h1-audit-json",
+        "body": "## 审计口径与范围\n\n审计粒度是一个可见状态 × 一个 exact Rank-1 组件候选。检查了 packet/binding/annotation ID 完整性、候选存在分母、组件 ON/OFF/ABSTAIN 分布、常数分类器上限、公开 payload 精确重复以及重复是否跨 split。审计没有读取生成回复、quality outcome 或外部 lockbox，因此结论只涉及 H1 数据能否训练，不涉及资源最终是否有效。"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## 限制与稳健性\n\n本次没有收到旧包的独立 overlap 标注，因此不能计算预注册 IAA 与 Cohen κ。第二份构造审计关于 MP、重复和 RS 一点式边界的方向得到数据支持；其把 MS 几乎全部视为冗余则过强，因为部分 prior-session 候选能够直接回答明确的历史事实请求。不过 MS 正例过度集中在同一种事实回忆逻辑，仍需增加 prior distinction、outcome 与 unfinished-goal 的真实增量场景。四组件数据量很小且结论以精确表格最清楚，因此没有使用趋势图。"
+      },
+      {
+        "id": "next-steps",
+        "type": "markdown",
+        "sourceId": "research-plan",
+        "body": "## 下一步：先过静态门，再请求一次 H1 v2\n\n1. 去除 exact duplicate，并按语义模板族隔离 split。\n2. 重建真正增量的 MP preference/profile 与 MS distinction/outcome/open-goal 场景。\n3. 让 RS candidate-present 同时包含可开与不可开状态，且不在 PM 前用完整适用性规则预解任务。\n4. 冻结 one-point boundary，并在 H1 页面分开标 applicability_safe 与 incremental_over_r0。\n5. 只有公开 payload 重复为 0、跨 split 近模板泄漏为 0、每个 head 的多数类常数准确率低于 70% 后，才开放 H1 v2。"
+      },
+      {
+        "id": "further-questions",
+        "type": "markdown",
+        "body": "## 后续需要由数据回答的问题\n\nH1 v2 能否让四个 head 都出现真正可辨识的正负例；RS 的事前增量机会在 H3 ON strata 上是否转化为平均实际收益；若 H1 学得会但 H3 没收益，问题应归因于资源容量或 Step 2，而不是继续扩大 PM 标签。"
+      }
+    ],
+    "charts": [
+      {
+        "id": "constant-baseline-chart",
+        "title": "各组件多数类常数分类器准确率",
+        "subtitle": "H1 v1 candidate-present 标签；70% 为新版人评前允许上限",
+        "showDescription": true,
+        "type": "bar",
+        "dataset": "component_metrics",
+        "sourceId": "h1-audit-json",
+        "encodings": {
+          "x": {"field": "component", "type": "nominal", "label": "组件"},
+          "y": {"field": "majority_constant_accuracy", "type": "quantitative", "format": "percent", "label": "常数分类准确率"}
+        },
+        "valueFormat": "percent",
+        "layout": "full",
+        "maxRows": 4,
+        "referenceLines": [
+          {"value": 0.7, "label": "新版静态门 70%", "axis": "y"}
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "id": "component-metrics",
+        "title": "H1 v1 有候选标签与常数分类器上限",
+        "subtitle": "分母仅含 candidate-present；多数类准确率越高，越不能证明模型学会开关。",
+        "showDescription": true,
+        "dataset": "component_metrics",
+        "defaultSort": {
+          "field": "majority_constant_accuracy",
+          "direction": "desc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "sourceId": "h1-audit-json",
+        "columns": [
+          {"field": "component", "label": "组件", "type": "text"},
+          {"field": "present", "label": "有候选", "format": "number"},
+          {"field": "on", "label": "ON", "format": "number"},
+          {"field": "off", "label": "OFF", "format": "number"},
+          {"field": "on_rate", "label": "ON率", "format": "percent"},
+          {"field": "majority_constant_accuracy", "label": "常数分类准确率", "format": "percent"},
+          {"field": "decision", "label": "训练决定", "type": "text"}
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "h1-audit-json",
+        "label": "H1 v1 可复现数据质量审计",
+        "path": "outputs/pm_v1_5_final_h1_v1_data_quality_audit/component_metrics.jsonl",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT component, present, on, off, on_rate, majority_constant_accuracy, decision FROM read_json_auto('outputs/pm_v1_5_final_h1_v1_data_quality_audit/component_metrics.jsonl')",
+          "description": "读取 H1 v1 审计生成的四组件标签分布与多数类常数分类器上限。",
+          "tables_used": ["outputs/pm_v1_5_final_h1_v1_data_quality_audit/component_metrics.jsonl"],
+          "filters": ["candidate_present = true"],
+          "metric_definitions": [
+            "on_rate = ON / candidate-present judgments",
+            "majority_constant_accuracy = max(ON, OFF) / candidate-present judgments"
+          ]
+        }
+      },
+      {
+        "id": "research-plan",
+        "label": "PM V1.5 最终研究方案",
+        "path": "docs/PM_V1_5_FINAL_RESEARCH_PLAN_ZH.md"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-03T00:55:46+09:00",
+    "status": "ready",
+    "datasets": {
+      "component_metrics": [
+        {"component": "MP", "present": 191, "on": 4, "off": 187, "on_rate": 0.0209424084, "majority_constant_accuracy": 0.9790575916, "decision": "INVALID / rebuild"},
+        {"component": "MS", "present": 247, "on": 109, "off": 138, "on_rate": 0.4412955466, "majority_constant_accuracy": 0.5587044534, "decision": "diagnostic only"},
+        {"component": "ME", "present": 247, "on": 82, "off": 165, "on_rate": 0.3319838057, "majority_constant_accuracy": 0.6680161943, "decision": "diagnostic only"},
+        {"component": "RS", "present": 128, "on": 121, "off": 7, "on_rate": 0.9453125, "majority_constant_accuracy": 0.9453125, "decision": "INVALID / rebuild"}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "h1-audit-json",
+      "label": "H1 v1 可复现数据质量审计",
+      "path": "outputs/pm_v1_5_final_h1_v1_data_quality_audit/component_metrics.jsonl",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT component, present, on, off, on_rate, majority_constant_accuracy, decision FROM read_json_auto('outputs/pm_v1_5_final_h1_v1_data_quality_audit/component_metrics.jsonl')",
+        "description": "读取 H1 v1 审计生成的四组件标签分布与多数类常数分类器上限。",
+        "tables_used": ["outputs/pm_v1_5_final_h1_v1_data_quality_audit/component_metrics.jsonl"],
+        "filters": ["candidate_present = true"],
+        "metric_definitions": [
+          "on_rate = ON / candidate-present judgments",
+          "majority_constant_accuracy = max(ON, OFF) / candidate-present judgments"
+        ]
+      }
+    },
+    {
+      "id": "research-plan",
+      "label": "PM V1.5 最终研究方案",
+      "path": "docs/PM_V1_5_FINAL_RESEARCH_PLAN_ZH.md"
+    }
+  ]
+}

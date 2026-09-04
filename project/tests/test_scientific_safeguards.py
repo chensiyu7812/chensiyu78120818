@@ -17,7 +17,7 @@ from metacom_pm.evoemo import (
     make_evo_runtime_state,
 )
 from metacom_pm.features import FeatureBuilder
-from metacom_pm.io import iter_jsonl
+from metacom_pm.io import iter_jsonl, sha256_file
 from metacom_pm.policies import LearnedPMPolicy
 from metacom_pm.prompts import (
     fixed_context_pair_messages,
@@ -205,12 +205,21 @@ def test_model_role_gate_rejects_self_play_and_same_judge_family():
 
 
 def test_release_preflight_includes_model_family_independence(tmp_path):
+    manifest_before = sha256_file(ROOT / "release_manifest.json")
     report = run_release_preflight(
-        ROOT, tmp_path / "preflight.json", run_tests=False
+        ROOT,
+        tmp_path / "preflight.json",
+        run_tests=False,
+        manifest_out_path=tmp_path / "release_manifest.json",
     )
     assert "model_family_independence" in report["checks"]
     assert report["checks"]["model_family_independence"]["passed"] is True
     assert report["confirmatory_checks"]["model_family_independence"] is True
+    assert report["status"] == "API_PILOT_READY"
+    assert report["confirmatory_ready"] is False
+    assert report["freeze_verification"]["status"] == "STALE_HISTORICAL_FREEZE"
+    assert report["freeze_verification"]["blocking_scope"] == "confirmatory_only"
+    assert sha256_file(ROOT / "release_manifest.json") == manifest_before
 
 
 def test_esconv_confirmatory_sweep_forbids_max_cards():

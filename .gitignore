@@ -4,6 +4,8 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .venv/
+.venv-pm-v1-5/
+*.egg-info/
 venv/
 env/
 
@@ -17,3 +19,71 @@ raw_judge_calls.jsonl
 
 outputs/tmp/
 tmp/
+
+# PM-v2 generated data and research provenance stay local or in the
+# content-addressed artifact vault.  Public, sanitized summaries should be
+# promoted into docs/ explicitly instead of committing an entire run folder.
+/project/data/pm_v2/
+/project/data/pm_v1_5/
+/project/outputs/pm_v2*/
+/project/outputs/pm_v1_5*/
+/project/outputs/strategy_rag_v1_*/
+/project/outputs/evoemo_fixed_tracks_v22/
+/project/outputs/evoemo_fixed_tracks_v1_5/
+/project/outputs/evoemo_pm_v2*/
+/project/outputs/evoemo_pm_v1_5*/
+/project/outputs/evoemo_pmv22*/
+/project/outputs/posthoc_v1_bank_mechanism_diagnostic*/
+/project/outputs/posthoc_v1_bank*/
+/project/outputs/v1_bank_causal_probe*/
+/project/outputs/v1_5_*/
+
+# 2026-08-05 git-recovery audit: the prefix-specific rules above have fallen
+# behind the current output-naming conventions (e.g. esconv_auxiliary_*,
+# evoemo_fixed_tracks_v1_5_v2/v3_*, evoemo_selective*, full_judging_*,
+# synthetic_sweep, and hundreds of loose top-level files directly under
+# outputs/) -- none of those matched the old patterns and were sitting
+# untracked-but-stageable. Every entry under outputs/ that this repo has
+# produced is a pipeline run artifact (readiness reports, generation/judging
+# candidates, human-review packets, private per-run jsonl); see
+# project/docs/GIT_RECOVERY_INVENTORY_20260805.json for the full catalogued
+# list (category, size, file count) taken before this rule was added.
+# Ignore the whole directory; promote sanitized conclusions into docs/
+# explicitly per run, as the comment above already said to do.
+/project/outputs/
+
+# Same problem on the data/ side: these are pipeline-generated candidate/
+# repro/confirmation snapshots, not curated inputs. data/pm_v1_5_contracts/,
+# data/strategy/, and data/external/ are curated/contract content and must
+# stay tracked -- do not broaden these patterns to catch them.
+/project/data/esconv_auxiliary_v1_5*/
+/project/data/esconv_test_v1_5*/
+/project/data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/
+/project/data/pm_v1_5_final_*/
+/project/data/pm_v1_5_formal_v8_*/
+/project/data/pm_v1_5_v3_*/
+/project/data/pm_v1_5_v5_2_confirmation_v1/
+
+# Provider payloads, generated call plans, local checkpoints, and completed
+# reviews belong in the private vault regardless of their parent directory.
+**/raw_api_calls.jsonl
+**/raw_seeker_calls.jsonl
+**/raw_*_calls.jsonl
+**/*call_plan*.jsonl
+**/paired_generations.jsonl
+**/pilot_bundle.json
+**/*.joblib
+**/reviewer_*_completed.csv
+**/annotations_completed*.csv
+
+# Local migration/integrity reports contain machine paths and immediately
+# become stale when the workspace changes.
+/MIGRATION_REPORT_ZH.md
+/MIGRATION_SHA256SUMS.txt
+/project/migration_preflight.json
+
+# Never stage private blinding maps or append-only paid-attempt provenance by
+# accident, even when they are created outside the standard PM-v2 directories.
+**/private_condition_mapping.jsonl
+**/physical_attempt_ledger.jsonl
+**/failed_attempt_*.json

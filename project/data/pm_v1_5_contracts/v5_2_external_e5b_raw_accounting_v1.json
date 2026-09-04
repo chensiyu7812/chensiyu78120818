@@ -1,0 +1,51 @@
+{
+  "protocol": "pm-v1.5-v5.2-external-e5b-raw-accounting-contract-v1",
+  "status": "FROZEN_ZERO_API",
+  "purpose": "Automatic cost/token/coverage/generation-validity/lineage accounting for the EvoEmo Raw Session Top-4 / All Raw Sessions secondary tables. This is the response.automatic_scope portion of the existing v5_2_external_e5_scoring_v1 contract (token/cost, routing/coverage, policy alias, baseline call accounting) applied to response_raw_outcomes_private.jsonl, which the frozen 28f_score_v5_2_external_e5_v1_5.py implementation never reads. It does not replace, rescore, or reopen v5_2_external_e5_scoring_v1; that contract and its metric_freeze.json/scoring outputs remain sealed and unmodified.",
+  "scope": {
+    "in_scope": [
+      "verify original raw call plan count (552) against actual valid outcomes (551) and the registered invalid generation (1)",
+      "apply the already-frozen whole-state exclusion (registered_invalid_generation.json.raw_secondary_table_excluded_call_ids) to remove the excluded state from both raw conditions symmetrically",
+      "report, per condition (raw_session_top4_plus_frozen_strategy, all_raw_sessions_plus_frozen_strategy): state count, call count, prompt/completion/total tokens (sum and mean), proxy USD cost, physical generation validity relative to the original per-condition plan, retrieval/session coverage (candidate_session_count, selected_before/after_context_fit) inherited from E3",
+      "record explicit exclusion rationale and the excluded state_id/call_ids",
+      "record input/output/script/contract SHA256 lineage"
+    ],
+    "out_of_scope_forbidden": [
+      "any lexical, embedding, or LLM-based proxy for open-ended response quality",
+      "any grounding/interaction risk inference from raw response text",
+      "modifying, rescoring, or re-freezing v5_2_external_e5_scoring_v1 or its metric_freeze.json",
+      "modifying PM, retriever, generator, Strategy Bank, prompt, seed, or external data",
+      "reading response_or_outcome content for anything other than token/finish-reason/fallback/guard-error bookkeeping fields already present in the outcome rows"
+    ]
+  },
+  "pricing_usd_per_mtok": {"input": 0.15, "output": 0.6},
+  "endpoint_model": "meta/llama-3.1-8b-instruct",
+  "whole_state_exclusion": {
+    "excluded_state_id": "state_79702dbcf1f5ea0e6318",
+    "excluded_call_ids": [
+      "e3raw_0381a329c552a503fec6358c",
+      "e3raw_1f526d93a4d7a51e2161c504",
+      "e3raw_2afd08eb3f50ed117a4c3385",
+      "e3raw_7a592b64e6848bbc2f987a28"
+    ],
+    "reason": "deterministic_single_request_repetition_degeneration, independently confirmed at output-token caps 300 and 512; permanently registered invalid rather than retried, imputed, or adopted truncated (V15-ENG-22/23)",
+    "why_whole_state_not_just_the_one_call": "Raw Top-4 and All Raw must remain a fair paired comparison unit over the same state set; dropping only the failed call would leave this state present in one raw condition but not the other."
+  },
+  "expected_denominators": {
+    "original_planned_calls": 552,
+    "original_planned_states": 138,
+    "original_planned_calls_per_condition": 276,
+    "valid_outcome_calls_before_state_exclusion": 551,
+    "registered_invalid_calls": 1,
+    "final_analysis_states": 137,
+    "final_analysis_calls": 548,
+    "final_analysis_calls_per_condition": 274
+  },
+  "automatic_quality_claim": false,
+  "automatic_grounding_risk_claim": false,
+  "api_calls": 0,
+  "outcome_use": {
+    "external_outcome_used_to_choose_metric": false,
+    "external_outcome_used_to_change_method": false
+  }
+}

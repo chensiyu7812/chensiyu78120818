@@ -1,0 +1,53 @@
+{
+  "protocol": "pm-v1.5-role-decomposed-judge-endpoints-v1",
+  "candidates": {
+    "anthropic_claude_haiku_4_5": {
+      "anthropic_strict_tool_use": true,
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "base_url": "https://api.anthropic.com",
+      "family": "anthropic_claude_haiku_4_5",
+      "input_usd_per_million_tokens": 1.0,
+      "model": "claude-haiku-4-5-20251001",
+      "output_usd_per_million_tokens": 5.0,
+      "supports_strict_json_schema": true,
+      "transport": "anthropic_messages"
+    },
+    "google_gemini_2_5_flash": {
+      "api_key_env": "GEMINI_API_KEY",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta",
+      "family": "google_gemini_2_5_flash",
+      "gemini_thinking_budget": 0,
+      "input_usd_per_million_tokens": 0.3,
+      "model": "gemini-2.5-flash",
+      "output_usd_per_million_tokens": 2.5,
+      "supports_strict_json_schema": true,
+      "transport": "gemini_generate_content"
+    },
+    "openai_gpt_5_mini": {
+      "api_key_env": "OPENAI_API_KEY",
+      "base_url": "https://api.openai.com/v1",
+      "family": "openai_gpt_5_mini",
+      "input_usd_per_million_tokens": 0.25,
+      "max_output_tokens_parameter": "max_completion_tokens",
+      "model": "gpt-5-mini-2025-08-07",
+      "openai_reasoning_effort": "minimal",
+      "output_usd_per_million_tokens": 2.0,
+      "supports_strict_json_schema": true,
+      "temperature_mode": "omit",
+      "transport": "openai_chat_completions"
+    }
+  },
+  "request_contract": {
+    "audit_max_output_tokens": 1800,
+    "client_internal_retries": 1,
+    "input_token_safety_factor_by_transport": {
+      "anthropic_messages": 2.25,
+      "gemini_generate_content": 1.5,
+      "openai_chat_completions": 1.5
+    },
+    "maximum_physical_attempts_per_logical_call": 2,
+    "quality_max_output_tokens": 700,
+    "seed": 13091,
+    "temperature": 0.0
+  }
+}

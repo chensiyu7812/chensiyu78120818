@@ -1,0 +1,97 @@
+{
+  "protocol": "pm-v1.5-staged-policy-architecture-v3",
+  "status": "SUPERSEDED_BEFORE_IMPLEMENTATION_BY_V4_ITT_ARCHITECTURE",
+  "superseded_for_future_execution_by": "data/pm_v1_5_contracts/staged_policy_architecture_v4.json",
+  "supersedes": "data/pm_v1_5_contracts/staged_policy_architecture_v2.json",
+  "research_claim": "A bounded, auditable four-component policy manager learns conservative resource routing that balances immediate response quality, interaction-and-grounding risk, and generator/context cost under one fixed resource and generation stack.",
+  "not_claimed": [
+    "latent or complex user-need understanding",
+    "clinical safety or clinical effectiveness",
+    "perfect memory selection or perfect generator grounding",
+    "transport to arbitrary future resource schemas without retraining"
+  ],
+  "runtime": {
+    "stage_0_objective_hard_gate": {
+      "inputs": ["candidate_presence", "owner_id", "candidate_version", "active_status", "explicit_current_boundary", "subtype_schema"],
+      "behavior": "deterministic deny only when the backend can prove invalidity",
+      "unknown_semantics_are_negative_gold": false
+    },
+    "stage_1_candidate_observation": {
+      "outputs": ["goal_function_fit_score", "nonredundant_increment_score", "boundary_compatibility_score", "retrieval_margin", "candidate_age", "token_cost"],
+      "semantic_scope": "explicit and coarse relations only",
+      "primary_embedding": false,
+      "bge_role": "frozen challenger after transparent primary"
+    },
+    "stage_1_worth_opening": {
+      "heads": ["MP", "MS", "ME", "RS"],
+      "model": "standardized L2 logistic regression",
+      "features_per_head": "5_to_7",
+      "target": "repeated-seed expected net component value after valid V4 Step2 execution",
+      "direct_16_classification": false,
+      "output": "four probabilities plus uncertainty and in-support flags"
+    },
+    "joint_selector": {
+      "legal_actions": 16,
+      "default": "M0+R0",
+      "rule": "project independently requested bits into a boundary-, risk-, and budget-feasible action; lower expected net value bits are dropped first",
+      "m0_r0_always_legal": true
+    },
+    "stage_2_typed_resource_adapter": {
+      "generator_selects_or_reopens_components": false,
+      "generator_copies_audit_spans": false,
+      "backend_binds": ["resource_id", "owner_id", "time_scope", "source_type", "allowed_claim", "forbidden_claim"],
+      "MP_PREFERENCE": "compile the active preference into a response-format constraint; measure it only when its trigger move is present",
+      "MP_PROFILE": "compile a nonredundant stable fact or practical constraint into a silent planning constraint; never expose internal profile labels",
+      "MS_SESSION": "compile the exact prior fact, distinction, or question as prior-session evidence; answer a factual recall request directly or ask one tentative continuity check",
+      "ME_REUSABLE_OUTCOME": "compile past action plus observed outcome as one optional present action; preserve past attribution and never promise transfer",
+      "RS_ATOMIC_MOVE": "compile exactly one allowed support move with card-specific when-to-use and when-not-to-use constraints"
+    },
+    "generator": {
+      "input": "visible dialogue plus already compiled response constraints/evidence",
+      "output": "response text only",
+      "does_not_output": ["use_ignore", "resource IDs", "copied evidence spans", "free-form audit reason"],
+      "fixed_before_effect_data": true
+    },
+    "post_generation_guard": {
+      "deterministic_checks": ["internal_label_absent", "unsupported_past_attribution_absent", "owner_pronoun_conflict_absent", "RS_action_count_within_limit", "explicit_boundary_respected", "forbidden_high_stakes_claim_absent"],
+      "on_failure": "one deterministic context-only safe response; never a second unconstrained LLM fallback",
+      "fallback_may_claim_prior_history": false
+    }
+  },
+  "step1_capability_boundary": {
+    "expected_supported": ["explicit advice/listen/stop cues", "backend owner and time facts", "coarse goal-function match", "candidate redundancy", "retrieval strength and cost", "simple counterfactual cue changes"],
+    "expected_unsupported": ["latent psychological need diagnosis", "sarcasm or indirect social meaning", "complex multi-entity temporal inference from raw prose", "arbitrary unseen memory subtypes", "guaranteed single-response quality win"],
+    "ood_behavior": "abstain_or_off",
+    "qualification_thresholds": {"balanced_accuracy": 0.65, "recall": 0.60, "specificity": 0.60, "class_prediction_share_each": 0.15},
+    "maximum_reached_definition": "one frozen transparent primary and one frozen BGE challenger have been fit on the complete planned FIT set and consumed once on untouched confirmation; no post-confirmation model, feature, threshold, or sample changes"
+  },
+  "step2_confirmation": {
+    "development_evidence": "the consumed V3 32-item T1 may guide the architectural class but is not a V4 promotion set",
+    "new_confirmation_items": 32,
+    "single_per_component": 6,
+    "multi": 8,
+    "review_overlap": 8,
+    "machine_gates": ["exact resource ID and typed adapter binding", "zero internal label exposure", "zero unsupported history in deterministic fallback", "requested-to-feasible-to-realized consistency"],
+    "human_gates": {"single_functional_each": "at_least_5_of_6", "multi_all_functional": "at_least_6_of_8", "material_misuse": "at_most_1_of_32", "fabricated_recall": 0, "explicit_boundary_violation": 0},
+    "post_result_repairs_allowed": false
+  },
+  "effect_data_after_step2_pass": {
+    "fit_states_per_head": 64,
+    "confirmation_states_per_head": 32,
+    "sealed_states_per_head": 32,
+    "generation_seeds_per_state": 2,
+    "unit": "independent user-state-component contrast",
+    "invalid_treatment": "unknown_not_off",
+    "quality": "pairwise material adoption preference aggregated across frozen seeds",
+    "risk": "interaction-and-grounding material-risk categories",
+    "cost": "reported tokens and calls",
+    "training_target": "predeclared net-value label or soft probability derived after valid execution",
+    "no_small_packet_expansion": true
+  },
+  "external_relation": {
+    "ESConv": "tests RS and memory-unavailable/off with the same bank and runtime",
+    "EvoEmo": "tests MP_PROFILE, MS_SESSION, ME_REUSABLE_OUTCOME and in-support coverage with per-user isolation and the same compiler",
+    "internal_controlled": "tests MP_PREFERENCE, hard negatives, all 16 actions, and joint conflicts not covered externally",
+    "external_results_change_training_or_method": false
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "protocol": "pm-v1.5-final-research-plan-amendment-20260730-v1",
+  "status": "WITHDRAWN_SCOPE_CONFLATION_DO_NOT_EXECUTE",
+  "date": "2026-07-30",
+  "withdrawal_reason": "This amendment incorrectly generalized failure of one six-feature stochastic response-winner classifier into rejection of RS expansion, treated historical synthetic MP/MS/ME proxy diagnostics as formal component experiments, and changed the estimand to retrieve-then-admit without authorization. It is retained only as an auditable failed decision.",
+  "superseded_by": "data/pm_v1_5_contracts/reverse_designed_training_and_evaluation_v1.json",
+  "supersedes": [
+    "pre-retrieval decision boundary in pm-v1.5-final-research-plan-v1",
+    "G3/G4 state-level stochastic response-winner training route",
+    "any pending RS expansion or additional RS human annotation"
+  ],
+  "does_not_supersede": [
+    "same-stack requirement",
+    "16 legal runtime actions",
+    "factorized component reporting",
+    "default-off rule",
+    "grouped data splits",
+    "separate quality, atomic risk, and deterministic cost reporting",
+    "external no-retuning rule"
+  ],
+  "evidence_decisions": {
+    "RS": {
+      "status": "NOT_LEARNED_STOP_EXPANSION",
+      "pooled_quality_counts": {
+        "RS": 16,
+        "R0": 17,
+        "tie": 15
+      },
+      "pooled_netwin_rs": -0.020833333333333332,
+      "prospective_confirmation_predicted_on": 0,
+      "prospective_confirmation_groups": 16,
+      "nested_oof_predicted_on": 0,
+      "nested_oof_groups": 48,
+      "runtime_default": "R0"
+    },
+    "controlled_memory_routing": {
+      "raw_gate_passed_components": [
+        "MP",
+        "MS"
+      ],
+      "raw_gate_failed_components": [
+        "ME"
+      ],
+      "scientific_promotion": "BLOCKED_BY_MATERIAL_CONSTRUCTION_SHORTCUT_RISK",
+      "internal_split_role_after_audit": "CONSUMED_DEVELOPMENT_ONLY"
+    }
+  },
+  "revised_research_question": "Can a low-capacity, default-off retrieve-then-admit policy learn out-of-user signal for injecting at least one fixed memory component candidate, while preserving immediate support quality and prespecified interaction-and-grounding risk proxies and reducing generator prompt resources relative to a high-resource fixed policy?",
+  "revised_decision_boundary": {
+    "sequence": [
+      "visible dialogue",
+      "same-stack local Top-k candidate retrieval",
+      "fixed hard exclusions",
+      "learned candidate admission per component",
+      "at most one injected item per admitted source",
+      "fixed generator"
+    ],
+    "resource_on_definition": "At least one candidate item from that component enters the generator prompt.",
+    "retrieval_itself_is_not_the_learned_on_off_action": true,
+    "pm_visible_candidate_fields": [
+      "candidate text",
+      "source",
+      "rank-1 score",
+      "rank-1/rank-2 margin",
+      "age",
+      "estimated tokens",
+      "deployable conflict/staleness/boundary flags"
+    ],
+    "forbidden_features": [
+      "regime",
+      "needed_memory_sources",
+      "item utility annotation",
+      "gold or future response",
+      "judge outcome",
+      "external split identity"
+    ]
+  },
+  "training_targets": {
+    "primary": "candidate_admissible",
+    "primary_definition": "Relevant, nonredundant, current, nonconflicting evidence that may enter the response prompt.",
+    "response_outcome_role": "Qualify the treatment and evaluate the final policy; do not treat one stochastic response winner as a per-state oracle.",
+    "quality_risk_cost_composite_forbidden": true
+  },
+  "new_data_gate": {
+    "match_across_utility_classes": [
+      "candidate count",
+      "age",
+      "estimated tokens"
+    ],
+    "maximum_single_metadata_threshold_grouped_balanced_accuracy": 0.7,
+    "fresh_holdout_users": {
+      "minimum": 12,
+      "maximum": 16
+    },
+    "minimum_positive_groups_per_attempted_head": 8,
+    "minimum_nonpositive_groups_per_attempted_head": 8,
+    "minimum_predicted_on": 8,
+    "minimum_predicted_off": 8
+  },
+  "existing_candidate_data_decision": {
+    "raw_candidates": 2808,
+    "raw_pool_eligible": false,
+    "raw_explicit_negative_marker_rule_balanced_accuracy": 0.71875,
+    "marker_neutral_candidates": 1716,
+    "marker_neutral_positive": 312,
+    "marker_neutral_negative": 1404,
+    "marker_neutral_users": 52,
+    "marker_neutral_development_reusable": true,
+    "fresh_holdout_still_required": true
+  },
+  "model_order": [
+    "always off",
+    "transparent lexical and hard-rule baseline",
+    "low-capacity L2 logistic regression",
+    "BAAI item-level feature only if it improves grouped admission or retrieval evidence"
+  ],
+  "external_roles": {
+    "ESConv": "single-session resource-off/abstention and fixed RS diagnostic; not memory-on evidence",
+    "EvoEmo_or_ES_MemEval_derived": "development-informed ME transport and stale/conflict stress test",
+    "external_outcomes_may_change_method": false
+  },
+  "next": [
+    "compile state-by-retrieved-candidate development rows",
+    "balance construction metadata and run shortcut gate before fitting",
+    "fit grouped candidate-admission baseline",
+    "generate one fresh 12-16 user holdout",
+    "run only learned, always-off, and high-resource fixed end-to-end conditions"
+  ],
+  "human_annotation_policy": {
+    "more_RS_review": false,
+    "next_allowed_human_packet": "one final compact 24-32 state end-to-end policy comparison only",
+    "risk_if_event_count_is_small": "report descriptively; do not expand indefinitely to manufacture a trainable risk head"
+  },
+  "evidence_paths": [
+    "outputs/pm_v1_5_rs_corrected_16_pair_supplement_v1_analysis/supplement_analysis_report.json",
+    "outputs/pm_v1_5_corrected_pm_rs_v1/pm_rs_corrected_report.json",
+    "outputs/pm_v1_5_controlled_memory_routing_heads_v1/controlled_memory_routing_report.json",
+    "outputs/pm_v1_5_controlled_memory_routing_heads_v1/posthoc_shortcut_audit.json",
+    "outputs/pm_v1_5_candidate_admission_data_audit_v1/candidate_admission_data_audit.json",
+    "docs/PM_V1_5_FULL_SCHEME_AUDIT_20260730_ZH.md"
+  ]
+}

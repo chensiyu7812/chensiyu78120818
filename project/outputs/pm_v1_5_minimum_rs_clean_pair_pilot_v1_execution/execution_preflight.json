@@ -1,0 +1,11 @@
+{
+  "protocol": "pm-v1.5-minimum-rs-execution-preflight-v1",
+  "status": "READY_FOR_TRAIN_ONLY_GENERATION",
+  "ready": true,
+  "human_review_passed": true,
+  "logical_calls": 98,
+  "errors": [],
+  "api_calls_made": 0,
+  "one_shot_execution_required": false,
+  "resume_policy": "reuse matching completed pair_id+arm; run only missing rows"
+}

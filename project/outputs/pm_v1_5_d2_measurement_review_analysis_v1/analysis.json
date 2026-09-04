@@ -1,0 +1,424 @@
+{
+  "protocol": "pm-v1.5-d2-measurement-review-analysis-v1",
+  "status": "D2_MEASUREMENT_GATE_FAIL",
+  "primary_validation": {
+    "role": "primary_72",
+    "path": "/home/tokkio/.codex/attachments/99c08364-21d4-4bbb-8c84-0bc9601a0b5b/pasted-text.txt",
+    "sha256": "c732de6b3511837a8ce49fdf9e45b16849bb886867c5dbf46f0d3f2de2bc3af1",
+    "row_count": 72,
+    "expected_row_count": 72,
+    "protocol_counts": {
+      "pm-v1.5-d2-measurement-human-quality-blind-v1": 72
+    },
+    "preference_counts": {
+      "tie": 27,
+      "A": 22,
+      "B": 23
+    },
+    "criterion_counts_raw": {
+      "materially_equivalent": 27,
+      "clarity_naturalness": 9,
+      "request_and_dialogue_fit": 6,
+      "immediate_helpfulness": 17,
+      "visible_context_fidelity": 11,
+      "emotional_understanding": 2
+    },
+    "criterion_counts_normalized": {
+      "materially_equivalent": 27,
+      "clarity_naturalness": 9,
+      "request_and_dialogue_fit": 6,
+      "immediate_helpfulness": 17,
+      "visible_context_fidelity": 11,
+      "emotional_understanding": 2
+    },
+    "annotator_counts": {
+      "independent_psychology_support_reviewer": 72
+    },
+    "id_overlap_count": 72,
+    "missing_expected_ids": 0,
+    "unexpected_ids": 0,
+    "checks": {
+      "row_count": true,
+      "unique_blind_item_ids": true,
+      "exact_expected_id_set": true,
+      "protocol": true,
+      "valid_preferences": true,
+      "valid_criteria_or_frozen_aliases": true,
+      "all_reasons_nonempty": true,
+      "all_annotator_ids_nonempty": true
+    },
+    "valid": true
+  },
+  "secondary_validation": {
+    "role": "independent_overlap_32",
+    "path": "/home/tokkio/.codex/attachments/65f44240-5d9f-4343-844a-8479281143fd/pasted-text.txt",
+    "sha256": "7b50b7a21dc181b29ab220cf7529ab07bdb656fcb593f5a8bd226a5444d09488",
+    "row_count": 32,
+    "expected_row_count": 32,
+    "protocol_counts": {
+      "pm-v1.5-d2-measurement-human-quality-blind-v1": 32
+    },
+    "preference_counts": {
+      "A": 16,
+      "B": 11,
+      "tie": 5
+    },
+    "criterion_counts_raw": {
+      "visible_context_fidelity": 12,
+      "emotional_understanding": 5,
+      "immediate_helpfulness": 5,
+      "request_and_dialogue_fit": 4,
+      "clarity_naturalness": 1,
+      "materially_equivalent": 5
+    },
+    "criterion_counts_normalized": {
+      "visible_context_fidelity": 12,
+      "emotional_understanding": 5,
+      "immediate_helpfulness": 5,
+      "request_and_dialogue_fit": 4,
+      "clarity_naturalness": 1,
+      "materially_equivalent": 5
+    },
+    "annotator_counts": {
+      "clinician_reviewer_01": 32
+    },
+    "id_overlap_count": 32,
+    "missing_expected_ids": 0,
+    "unexpected_ids": 0,
+    "checks": {
+      "row_count": true,
+      "unique_blind_item_ids": true,
+      "exact_expected_id_set": true,
+      "protocol": true,
+      "valid_preferences": true,
+      "valid_criteria_or_frozen_aliases": true,
+      "all_reasons_nonempty": true,
+      "all_annotator_ids_nonempty": true
+    },
+    "valid": true
+  },
+  "effect_labels_created": false,
+  "formal_D2_gate_passed": false,
+  "primary_measurement_gate": {
+    "exact_three_way_reproduction_rate": 0.9375,
+    "exact_three_way_gate_min": 0.7,
+    "exact_three_way_gate_passed": true,
+    "binary_on_off_reproduction_rate_diagnostic": 1.0,
+    "uncertain_fraction": 0.0,
+    "uncertain_fraction_max": 0.1,
+    "uncertain_gate_passed": true,
+    "by_component": {
+      "RS": {
+        "states": 8,
+        "exact_three_way_reproduced": 7,
+        "binary_on_off_reproduced": 8,
+        "new_pair_directions": {
+          "treatment": 4,
+          "control": 9,
+          "tie": 3,
+          "uncertain": 0
+        }
+      },
+      "MP": {
+        "states": 8,
+        "exact_three_way_reproduced": 8,
+        "binary_on_off_reproduced": 8,
+        "new_pair_directions": {
+          "treatment": 7,
+          "control": 3,
+          "tie": 6,
+          "uncertain": 0
+        }
+      },
+      "MS": {
+        "states": 8,
+        "exact_three_way_reproduced": 8,
+        "binary_on_off_reproduced": 8,
+        "new_pair_directions": {
+          "treatment": 4,
+          "control": 5,
+          "tie": 15,
+          "uncertain": 0
+        }
+      },
+      "ME": {
+        "states": 8,
+        "exact_three_way_reproduced": 7,
+        "binary_on_off_reproduced": 8,
+        "new_pair_directions": {
+          "treatment": 9,
+          "control": 4,
+          "tie": 3,
+          "uncertain": 0
+        }
+      }
+    },
+    "nonreproduced_exact_states": [
+      {
+        "d2_state_id": "d2_state_d3313baadf2a5b2fb537e076",
+        "component": "RS",
+        "directions": [
+          "treatment",
+          "tie",
+          "control"
+        ],
+        "exact_three_way_majority": null,
+        "binary_on_off_majority": "off"
+      },
+      {
+        "d2_state_id": "d2_state_1b509a548c1181aeeefebcc6",
+        "component": "ME",
+        "directions": [
+          "control",
+          "treatment",
+          "tie"
+        ],
+        "exact_three_way_majority": null,
+        "binary_on_off_majority": "off"
+      }
+    ]
+  },
+  "inter_rater_gate": {
+    "shared_pairs": 32,
+    "exact_matches": 21,
+    "exact_agreement": 0.65625,
+    "exact_cohen_kappa_diagnostic": 0.4853801169590643,
+    "gate_min": 0.75,
+    "annotator_ids_are_disjoint": true,
+    "confusion_primary_by_secondary": {
+      "control|control": 7,
+      "control|treatment": 3,
+      "tie|control": 5,
+      "tie|tie": 4,
+      "tie|treatment": 2,
+      "treatment|tie": 1,
+      "treatment|treatment": 10
+    },
+    "component_agreement": {
+      "RS": {
+        "pairs": 8,
+        "exact_matches": 8,
+        "exact_agreement": 1.0
+      },
+      "MP": {
+        "pairs": 8,
+        "exact_matches": 5,
+        "exact_agreement": 0.625
+      },
+      "MS": {
+        "pairs": 8,
+        "exact_matches": 5,
+        "exact_agreement": 0.625
+      },
+      "ME": {
+        "pairs": 8,
+        "exact_matches": 3,
+        "exact_agreement": 0.375
+      }
+    },
+    "disagreements": [
+      {
+        "pair_id": "d2_pair_0fc8b0fd0846dba5ec5468e8",
+        "component": "MS",
+        "primary_blind_item_id": "d2_blind_a09e7fed4a3e481ec26ea2e3",
+        "secondary_blind_item_id": "d2_blind_8fd056abcf60d927d77b4874",
+        "primary_preference": "tie",
+        "secondary_preference": "B",
+        "primary_direction": "tie",
+        "secondary_direction": "treatment",
+        "primary_binary": "off",
+        "secondary_binary": "on",
+        "primary_criterion": "materially_equivalent",
+        "secondary_criterion": "visible_context_fidelity",
+        "primary_notes": "两条回复都验证照护需求增加和难以管理的压力；信息量差异不足以改变采用决定。",
+        "secondary_notes": "用户说了“需要的照护超出预期”和“什么都要管”两层，B两层都覆盖，A只覆盖前半。B的“独自”略超出可见文本，但不足以抵消覆盖度差距。"
+      },
+      {
+        "pair_id": "d2_pair_21454f4dcf826a43aa7f9c96",
+        "component": "ME",
+        "primary_blind_item_id": "d2_blind_65245d5d00c62f2517dbfa87",
+        "secondary_blind_item_id": "d2_blind_8e4705c6d5ec426b2be09765",
+        "primary_preference": "A",
+        "secondary_preference": "tie",
+        "primary_direction": "treatment",
+        "secondary_direction": "tie",
+        "primary_binary": "on",
+        "secondary_binary": "off",
+        "primary_criterion": "clarity_naturalness",
+        "secondary_criterion": "materially_equivalent",
+        "primary_notes": "A 询问当前最困难的部分，范围明确；B 使用更宽泛的“发生了什么让你这样感觉”，信息指向较弱。",
+        "secondary_notes": "互有得失：A“这对你来说有多难”指向本人更贴人，但提问“发生了什么”在用户已详述八轮后偏冗余；B提问更聚焦，但“这个季节压力大”把主语从人移向季节。差异不足以改变采用决定。"
+      },
+      {
+        "pair_id": "d2_pair_2d0f78d312d557c0f86b29e2",
+        "component": "MS",
+        "primary_blind_item_id": "d2_blind_ded11d9912c3400b70cde119",
+        "secondary_blind_item_id": "d2_blind_03b00d52a77cd5e16ffca95d",
+        "primary_preference": "tie",
+        "secondary_preference": "B",
+        "primary_direction": "tie",
+        "secondary_direction": "treatment",
+        "primary_binary": "off",
+        "secondary_binary": "on",
+        "primary_criterion": "materially_equivalent",
+        "secondary_criterion": "emotional_understanding",
+        "primary_notes": "两条回复都验证考试压力，并用相近的选项帮助澄清需要支持的领域；主要差异是长度。",
+        "secondary_notes": "B以反映替代A的“我很遗憾”（后者略带怜悯与距离感），并直接追问“最担心什么”，对应用户原话“worried”；A给出的二选一仍是上一轮刚谈过的时间管理，重复度更高。"
+      },
+      {
+        "pair_id": "d2_pair_40db6235442f656faf309d06",
+        "component": "ME",
+        "primary_blind_item_id": "d2_blind_cb5b80abed9a20f6a66cc44b",
+        "secondary_blind_item_id": "d2_blind_f9c1f13b5f83129c351b8472",
+        "primary_preference": "A",
+        "secondary_preference": "A",
+        "primary_direction": "control",
+        "secondary_direction": "treatment",
+        "primary_binary": "off",
+        "secondary_binary": "on",
+        "primary_criterion": "visible_context_fidelity",
+        "secondary_criterion": "visible_context_fidelity",
+        "primary_notes": "A 直接探索用户尝试学习时最先出现的想法，贴合其明确的注意力困难；B 的两个问题更泛且重复。",
+        "secondary_notes": "与52580f项同场景，判断一致：B引入“卡住、不知如何前进”等未陈述内容；A忠实且提问成形。需注明B结尾那句“试着学习时最先冒出的念头是什么”本身质量很高，若配上更忠实的反映会更强。"
+      },
+      {
+        "pair_id": "d2_pair_5cea171e73d783ad7eaace4e",
+        "component": "MS",
+        "primary_blind_item_id": "d2_blind_28e831b86d64795507dd7295",
+        "secondary_blind_item_id": "d2_blind_69d2457029b30b0803ed4a62",
+        "primary_preference": "tie",
+        "secondary_preference": "A",
+        "primary_direction": "tie",
+        "secondary_direction": "control",
+        "primary_binary": "off",
+        "secondary_binary": "off",
+        "primary_criterion": "materially_equivalent",
+        "secondary_criterion": "emotional_understanding",
+        "primary_notes": "两条回复都承接关系不确定感并邀请展开；B 的勇气肯定和 A 的直接表述主要属于文风差异。",
+        "secondary_notes": "用户反复说“不知道该怎么想/仍然困惑”，A的“以及你对此的感受”把方向从内容转向情绪，正是本轮缺口；B的“承认这些感受很有勇气”在此处无对应行为，提问仍停在“想法”层。"
+      },
+      {
+        "pair_id": "d2_pair_76ba3c49cd7f550829ff5691",
+        "component": "ME",
+        "primary_blind_item_id": "d2_blind_49ced2a26e43ab06c0d39969",
+        "secondary_blind_item_id": "d2_blind_32bd6fa5045e0f4641cb9d3c",
+        "primary_preference": "tie",
+        "secondary_preference": "A",
+        "primary_direction": "tie",
+        "secondary_direction": "control",
+        "primary_binary": "off",
+        "secondary_binary": "off",
+        "primary_criterion": "materially_equivalent",
+        "secondary_criterion": "clarity_naturalness",
+        "primary_notes": "两条回复都探索促使用户考虑转职的原因；A 更简洁，B 多一层职业路径概括，但没有明确净优势。",
+        "secondary_notes": "对话仅两轮、信息很少时A的简短+“是什么把你推向转行”能打开动机与价值；B的提问句式冗绕（“做过或想过的、导致你考虑改变的事”），增加作答负担。"
+      },
+      {
+        "pair_id": "d2_pair_ade976ee8110111c72e1feaf",
+        "component": "MP",
+        "primary_blind_item_id": "d2_blind_92a1396d7bb893bed1e55081",
+        "secondary_blind_item_id": "d2_blind_2deea5866e49fda2379652ca",
+        "primary_preference": "A",
+        "secondary_preference": "A",
+        "primary_direction": "control",
+        "secondary_direction": "treatment",
+        "primary_binary": "off",
+        "secondary_binary": "on",
+        "primary_criterion": "immediate_helpfulness",
+        "secondary_criterion": "visible_context_fidelity",
+        "primary_notes": "可见对话已经指出用户需要睡前放松例程。A 提供几种轻量选择并邀请用户判断，较 B 继续追问原因更能推进当下帮助。",
+        "secondary_notes": "可见对话中深呼吸/冥想已给过、数羊已失败，B再给一份同类放松清单，忽略了这些尝试的结果；A转向未被探索的“脑子停不下来”的成因，并说明了先问的理由。注意：用户确实说过想要一套助眠流程，因此本项分歧风险较高，属边界判断。"
+      },
+      {
+        "pair_id": "d2_pair_b12d7b581d11498a484ecdcc",
+        "component": "ME",
+        "primary_blind_item_id": "d2_blind_96d30a3ab53bcf7805c1efa8",
+        "secondary_blind_item_id": "d2_blind_588e249e35a49fb064e0532a",
+        "primary_preference": "tie",
+        "secondary_preference": "B",
+        "primary_direction": "tie",
+        "secondary_direction": "control",
+        "primary_binary": "off",
+        "secondary_binary": "off",
+        "primary_criterion": "materially_equivalent",
+        "secondary_criterion": "visible_context_fidelity",
+        "primary_notes": "两条回复都承接用户愿意重新描述被辜负经历的转变，并邀请说明具体发生了什么；差异不具实质性。",
+        "secondary_notes": "B点名“朋友”和“重建信任”（均为可见语境中的具体信息），提问落到具体事件；A用“你信任的人”泛化，且前半句谈“你在试着更开放”偏元层面。"
+      },
+      {
+        "pair_id": "d2_pair_b37c03aef26047453b06836c",
+        "component": "MP",
+        "primary_blind_item_id": "d2_blind_aeff191b421c0448a53052c5",
+        "secondary_blind_item_id": "d2_blind_67fdd50b382776da6d4dfa81",
+        "primary_preference": "tie",
+        "secondary_preference": "B",
+        "primary_direction": "tie",
+        "secondary_direction": "control",
+        "primary_binary": "off",
+        "secondary_binary": "off",
+        "primary_criterion": "materially_equivalent",
+        "secondary_criterion": "request_and_dialogue_fit",
+        "primary_notes": "两条回复都遵守不建议边界，只对失去动力和卡住感进行反映，作用相同。",
+        "secondary_notes": "用户明确要求“先帮我把它说成话，这一轮不要建议”。B用直陈句直接命名，并回收用户自己说过的“stuck”；A以“听起来像”弱化，属于复述而非命名。两者均正确未给建议。"
+      },
+      {
+        "pair_id": "d2_pair_c64b6f60d543c0eca13a42c1",
+        "component": "ME",
+        "primary_blind_item_id": "d2_blind_c228bca4400839a3522400ec",
+        "secondary_blind_item_id": "d2_blind_91d3b50c1eccd46ade69652d",
+        "primary_preference": "B",
+        "secondary_preference": "A",
+        "primary_direction": "control",
+        "secondary_direction": "treatment",
+        "primary_binary": "off",
+        "secondary_binary": "on",
+        "primary_criterion": "clarity_naturalness",
+        "secondary_criterion": "visible_context_fidelity",
+        "primary_notes": "B 使用一个开放、聚焦的问题；A 以“学习本身还是时间和责任”限定答案，问题更长且选择框架偏窄。",
+        "secondary_notes": "A的二选一（学习本身 vs 时间与其他责任）正好回到用户开场提出的“平衡”主线；B收窄到“学习的哪一部分”并丢掉责任线，还加了称赞式填充句。"
+      },
+      {
+        "pair_id": "d2_pair_db23a42638d2a2bad8fb8f59",
+        "component": "MP",
+        "primary_blind_item_id": "d2_blind_c4daa2f8f2659b1dac9af621",
+        "secondary_blind_item_id": "d2_blind_76a5e24d88e3e447a2d922b6",
+        "primary_preference": "tie",
+        "secondary_preference": "B",
+        "primary_direction": "tie",
+        "secondary_direction": "control",
+        "primary_binary": "off",
+        "secondary_binary": "off",
+        "primary_criterion": "materially_equivalent",
+        "secondary_criterion": "request_and_dialogue_fit",
+        "primary_notes": "两条回复都遵守本轮不建议的边界，只帮助用户把失去动力和卡住感说出来，差异仅在表达方式。",
+        "secondary_notes": "与67fdd50b项为同一对（A仅差“tough spot/place”），判断保持一致：用直陈句命名并回收用户原词“stuck”的那一版更贴合“这一轮不要建议、先帮我说出来”的请求。"
+      }
+    ],
+    "exact_disagreement_count": 11,
+    "binary_disagreement_count": 6,
+    "gate_passed": false,
+    "binary_on_off_diagnostic": {
+      "matches": 26,
+      "agreement": 0.8125,
+      "cohen_kappa": 0.6175298804780877,
+      "confusion_primary_by_secondary": {
+        "off|off": 16,
+        "off|on": 5,
+        "on|off": 1,
+        "on|on": 10
+      },
+      "not_a_substitute_for_the_frozen_exact_three_way_gate": true
+    }
+  },
+  "soft_target_recovery_outputs": {
+    "protocol": "pm-v1.5-d2-soft-expected-benefit-measurement-v1",
+    "pair_rows": 96,
+    "state_rows": 32,
+    "pairs_per_state": 3,
+    "same_pair_reviewer_disagreements": 11,
+    "pair_soft_measurements_sha256": "32a2f195602c0b320bc6767ca4070ad66414991da3936bab4aeadfdb94c04b1c",
+    "state_soft_targets_sha256": "3b8040e1cd1de0e17e1726c6343293fc9225561b46217e2187e3fdc463315cb6",
+    "effect_labels_created": false,
+    "use": "pre-D3 diagnostic only"
+  }
+}

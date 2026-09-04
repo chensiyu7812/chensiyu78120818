@@ -1,0 +1,11 @@
+{
+  "protocol": "pm-v1.5-h2v2-packet-invalidation-v1",
+  "status": "INVALIDATED_NOT_FOR_HUMAN_REVIEW",
+  "human_review_authorized": false,
+  "reasons": [
+    "The packet called a lexical ranker with an empty query, so its Top-1 and Top-3 do not reproduce runtime retrieval.",
+    "repair_v2 is a post-H2 treatment change and would invalidate same-stack interpretation of completed RS experiments."
+  ],
+  "disposition": "Preserve for historical diagnosis only. Do not annotate, aggregate, qualify, or use as PM data.",
+  "canonical_replacement": "data/pm_v1_5_contracts/canonical_component_marginal_effect_v1.json"
+}

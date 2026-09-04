@@ -1,0 +1,650 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-four-component-pm-fit-v1",
+  "status": "FOUR_COMPONENT_PRIMARY_LEARNING_GATE_NOT_PASSED",
+  "primary_model": {
+    "heads": 4,
+    "family": "L2 logistic regression",
+    "loss": "user-group-weighted binary cross entropy plus L2",
+    "C": 0.3,
+    "threshold": 0.5,
+    "grouped_oof_folds": 5,
+    "seeds": [
+      20260730,
+      20260731,
+      20260732,
+      20260733,
+      20260734
+    ],
+    "feature_count_by_component": {
+      "RS": 9,
+      "MP": 8,
+      "MS": 8,
+      "ME": 8
+    }
+  },
+  "outcome_fields_excluded": true,
+  "opaque_item_ids_excluded": true,
+  "semantic_family_excluded": true,
+  "split_identity_excluded": true,
+  "external_results_used": false,
+  "internal_test_used_for_selection": false,
+  "head_reports": {
+    "RS": {
+      "feature_names": [
+        "retrieval_score",
+        "execution_profile_minimal",
+        "family_is_question",
+        "family_is_suggestion",
+        "advice_welcome",
+        "low_burden_or_listen_only",
+        "background_MP_on",
+        "background_MS_on",
+        "background_ME_on"
+      ],
+      "development_rows": 48,
+      "development_users": 28,
+      "development_class_counts": {
+        "0": 26,
+        "1": 22
+      },
+      "internal_test_rows": 16,
+      "internal_test_users": 9,
+      "internal_test_class_counts": {
+        "0": 9,
+        "1": 7
+      },
+      "grouped_oof": {
+        "metrics": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.6433811676129433,
+          "group_weighted_prior_log_loss": 0.6944777163451904,
+          "group_weighted_brier": 0.22045224671821662,
+          "group_weighted_prior_brier": 0.25018683165373184,
+          "group_weighted_brier_gain_vs_prevalence_prior": 0.02973458493551523,
+          "group_weighted_accuracy": 0.6666666666666666,
+          "group_weighted_balanced_accuracy": 0.6222846165213537,
+          "group_weighted_positive_recall": 0.40298507462686556,
+          "row_accuracy": 0.6666666666666666,
+          "row_balanced_accuracy": 0.6538461538461539,
+          "predicted_on": 16,
+          "predicted_off": 32,
+          "predicted_on_fraction": 0.3333333333333333,
+          "predicted_off_fraction": 0.6666666666666666
+        },
+        "balanced_accuracy_by_seed": [
+          0.5662405792818088,
+          0.697133146150436,
+          0.6523570267474509,
+          0.6894487956258313,
+          0.6148219299541895
+        ],
+        "balanced_accuracy_seed_std": 0.05444366680645672,
+        "gate_checks": {
+          "balanced_accuracy_at_least_0_70": false,
+          "positive_recall_at_least_0_60": false,
+          "brier_beats_prevalence_prior": true,
+          "predicted_on_fraction_at_least_0_20": true,
+          "predicted_off_fraction_at_least_0_20": true,
+          "five_seed_ba_std_at_most_0_03": false
+        },
+        "gate_passed": false
+      },
+      "internal_test_frozen_threshold": {
+        "metrics": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.9381601807809092,
+          "group_weighted_prior_log_loss": 0.7064568946676961,
+          "group_weighted_brier": 0.3471631547714724,
+          "group_weighted_prior_brier": 0.25649171705719326,
+          "group_weighted_brier_gain_vs_prevalence_prior": -0.09067143771427916,
+          "group_weighted_accuracy": 0.42592592592592593,
+          "group_weighted_balanced_accuracy": 0.42719780219780223,
+          "group_weighted_positive_recall": 0.4615384615384615,
+          "row_accuracy": 0.375,
+          "row_balanced_accuracy": 0.38095238095238093,
+          "predicted_on": 9,
+          "predicted_off": 7,
+          "predicted_on_fraction": 0.5625,
+          "predicted_off_fraction": 0.4375
+        },
+        "development_range_support": {
+          "feature_minimum": {
+            "retrieval_score": 0.08184476,
+            "execution_profile_minimal": 0.0,
+            "family_is_question": 0.0,
+            "family_is_suggestion": 0.0,
+            "advice_welcome": 0.0,
+            "low_burden_or_listen_only": 0.0,
+            "background_MP_on": 0.0,
+            "background_MS_on": 0.0,
+            "background_ME_on": 0.0
+          },
+          "feature_maximum": {
+            "retrieval_score": 0.24268134,
+            "execution_profile_minimal": 1.0,
+            "family_is_question": 1.0,
+            "family_is_suggestion": 1.0,
+            "advice_welcome": 1.0,
+            "low_burden_or_listen_only": 1.0,
+            "background_MP_on": 1.0,
+            "background_MS_on": 1.0,
+            "background_ME_on": 1.0
+          },
+          "evaluation_rows": 16,
+          "joint_absolute_range_in_support_rows": 15,
+          "joint_absolute_range_in_support_fraction": 0.9375
+        },
+        "used_for_model_or_threshold_selection": false
+      },
+      "baselines": {
+        "always_off": {
+          "group_weighted_accuracy": 0.6011904761904762,
+          "group_weighted_balanced_accuracy": 0.5,
+          "group_weighted_positive_recall": 0.0,
+          "predicted_on": 0,
+          "predicted_off": 48
+        },
+        "always_on": {
+          "group_weighted_accuracy": 0.3988095238095238,
+          "group_weighted_balanced_accuracy": 0.5,
+          "group_weighted_positive_recall": 1.0,
+          "predicted_on": 48,
+          "predicted_off": 0
+        },
+        "frozen_transparent_rule": {
+          "group_weighted_accuracy": 0.4553571428571428,
+          "group_weighted_balanced_accuracy": 0.43021279739914287,
+          "group_weighted_positive_recall": 0.3059701492537313,
+          "predicted_on": 17,
+          "predicted_off": 31
+        },
+        "background_only_grouped_oof": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.6322431024941103,
+          "group_weighted_prior_log_loss": 0.6944777163451904,
+          "group_weighted_brier": 0.22198019431067642,
+          "group_weighted_prior_brier": 0.25018683165373184,
+          "group_weighted_brier_gain_vs_prevalence_prior": 0.028206637343055424,
+          "group_weighted_accuracy": 0.5982142857142857,
+          "group_weighted_balanced_accuracy": 0.5590734446578987,
+          "group_weighted_positive_recall": 0.36567164179104467,
+          "row_accuracy": 0.5833333333333334,
+          "row_balanced_accuracy": 0.5734265734265734,
+          "predicted_on": 18,
+          "predicted_off": 30,
+          "predicted_on_fraction": 0.375,
+          "predicted_off_fraction": 0.625
+        }
+      },
+      "shortcut_diagnostic": {
+        "background_only_ba": 0.5590734446578987,
+        "full_minus_background_only_ba": 0.06321117186345504,
+        "background_only_is_not_a_forbidden_feature_set": true,
+        "interpretation": "If background-only matches or exceeds the full model, the data do not show candidate-aware learning."
+      }
+    },
+    "MP": {
+      "feature_names": [
+        "top1_relevance_bucket",
+        "relevance_margin_bucket",
+        "token_cost_bucket",
+        "retrieved_fraction",
+        "minimum_relative_age_bucket",
+        "maximum_relative_age_bucket",
+        "background_other_memory_count",
+        "background_strategy_on"
+      ],
+      "development_rows": 48,
+      "development_users": 31,
+      "development_class_counts": {
+        "0": 18,
+        "1": 30
+      },
+      "internal_test_rows": 16,
+      "internal_test_users": 11,
+      "internal_test_class_counts": {
+        "0": 8,
+        "1": 8
+      },
+      "grouped_oof": {
+        "metrics": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.6464121179267526,
+          "group_weighted_prior_log_loss": 0.6721745680869441,
+          "group_weighted_brier": 0.22870807384588385,
+          "group_weighted_prior_brier": 0.23890801698893815,
+          "group_weighted_brier_gain_vs_prevalence_prior": 0.010199943143054307,
+          "group_weighted_accuracy": 0.543010752688172,
+          "group_weighted_balanced_accuracy": 0.5026515151515152,
+          "group_weighted_positive_recall": 0.6416666666666668,
+          "row_accuracy": 0.5416666666666666,
+          "row_balanced_accuracy": 0.5111111111111111,
+          "predicted_on": 30,
+          "predicted_off": 18,
+          "predicted_on_fraction": 0.625,
+          "predicted_off_fraction": 0.375
+        },
+        "balanced_accuracy_by_seed": [
+          0.5359848484848484,
+          0.5253787878787879,
+          0.5640151515151515,
+          0.4803030303030303,
+          0.5784090909090909
+        ],
+        "balanced_accuracy_seed_std": 0.0380624336079282,
+        "gate_checks": {
+          "balanced_accuracy_at_least_0_70": false,
+          "positive_recall_at_least_0_60": true,
+          "brier_beats_prevalence_prior": true,
+          "predicted_on_fraction_at_least_0_20": true,
+          "predicted_off_fraction_at_least_0_20": true,
+          "five_seed_ba_std_at_most_0_03": false
+        },
+        "gate_passed": false
+      },
+      "internal_test_frozen_threshold": {
+        "metrics": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.5740768292152846,
+          "group_weighted_prior_log_loss": 0.70999902218371,
+          "group_weighted_brier": 0.1935893770585013,
+          "group_weighted_prior_brier": 0.25787531926970014,
+          "group_weighted_brier_gain_vs_prevalence_prior": 0.06428594221119885,
+          "group_weighted_accuracy": 0.7272727272727273,
+          "group_weighted_balanced_accuracy": 0.7250000000000001,
+          "group_weighted_positive_recall": 0.7500000000000001,
+          "row_accuracy": 0.6875,
+          "row_balanced_accuracy": 0.6875,
+          "predicted_on": 9,
+          "predicted_off": 7,
+          "predicted_on_fraction": 0.5625,
+          "predicted_off_fraction": 0.4375
+        },
+        "development_range_support": {
+          "feature_minimum": {
+            "top1_relevance_bucket": 2.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 2.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 5.0,
+            "maximum_relative_age_bucket": 5.0,
+            "background_other_memory_count": 0.0,
+            "background_strategy_on": 0.0
+          },
+          "feature_maximum": {
+            "top1_relevance_bucket": 4.0,
+            "relevance_margin_bucket": 4.0,
+            "token_cost_bucket": 2.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 5.0,
+            "maximum_relative_age_bucket": 5.0,
+            "background_other_memory_count": 2.0,
+            "background_strategy_on": 1.0
+          },
+          "evaluation_rows": 16,
+          "joint_absolute_range_in_support_rows": 15,
+          "joint_absolute_range_in_support_fraction": 0.9375
+        },
+        "used_for_model_or_threshold_selection": false
+      },
+      "baselines": {
+        "always_off": {
+          "group_weighted_accuracy": 0.3548387096774193,
+          "group_weighted_balanced_accuracy": 0.5,
+          "group_weighted_positive_recall": 0.0,
+          "predicted_on": 0,
+          "predicted_off": 48
+        },
+        "always_on": {
+          "group_weighted_accuracy": 0.6451612903225806,
+          "group_weighted_balanced_accuracy": 0.5,
+          "group_weighted_positive_recall": 1.0,
+          "predicted_on": 48,
+          "predicted_off": 0
+        },
+        "frozen_transparent_rule": {
+          "group_weighted_accuracy": 0.553763440860215,
+          "group_weighted_balanced_accuracy": 0.4666666666666667,
+          "group_weighted_positive_recall": 0.7666666666666666,
+          "predicted_on": 39,
+          "predicted_off": 9
+        },
+        "background_only_grouped_oof": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.6358703372397252,
+          "group_weighted_prior_log_loss": 0.6721745680869441,
+          "group_weighted_brier": 0.22284724682636514,
+          "group_weighted_prior_brier": 0.23890801698893815,
+          "group_weighted_brier_gain_vs_prevalence_prior": 0.016060770162573013,
+          "group_weighted_accuracy": 0.5913978494623656,
+          "group_weighted_balanced_accuracy": 0.5708333333333333,
+          "group_weighted_positive_recall": 0.6416666666666668,
+          "row_accuracy": 0.5833333333333334,
+          "row_balanced_accuracy": 0.5666666666666667,
+          "predicted_on": 28,
+          "predicted_off": 20,
+          "predicted_on_fraction": 0.5833333333333334,
+          "predicted_off_fraction": 0.4166666666666667
+        }
+      },
+      "shortcut_diagnostic": {
+        "background_only_ba": 0.5708333333333333,
+        "full_minus_background_only_ba": -0.06818181818181812,
+        "background_only_is_not_a_forbidden_feature_set": true,
+        "interpretation": "If background-only matches or exceeds the full model, the data do not show candidate-aware learning."
+      }
+    },
+    "MS": {
+      "feature_names": [
+        "top1_relevance_bucket",
+        "relevance_margin_bucket",
+        "token_cost_bucket",
+        "retrieved_fraction",
+        "minimum_relative_age_bucket",
+        "maximum_relative_age_bucket",
+        "background_other_memory_count",
+        "background_strategy_on"
+      ],
+      "development_rows": 48,
+      "development_users": 32,
+      "development_class_counts": {
+        "0": 30,
+        "1": 18
+      },
+      "internal_test_rows": 16,
+      "internal_test_users": 11,
+      "internal_test_class_counts": {
+        "0": 11,
+        "1": 5
+      },
+      "grouped_oof": {
+        "metrics": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.7142542985468738,
+          "group_weighted_prior_log_loss": 0.6900592494870122,
+          "group_weighted_brier": 0.2555802737338046,
+          "group_weighted_prior_brier": 0.24781941759175088,
+          "group_weighted_brier_gain_vs_prevalence_prior": -0.0077608561420537125,
+          "group_weighted_accuracy": 0.5208333333333334,
+          "group_weighted_balanced_accuracy": 0.4678254863589271,
+          "group_weighted_positive_recall": 0.2465753424657534,
+          "row_accuracy": 0.5208333333333334,
+          "row_balanced_accuracy": 0.4722222222222222,
+          "predicted_on": 15,
+          "predicted_off": 33,
+          "predicted_on_fraction": 0.3125,
+          "predicted_off_fraction": 0.6875
+        },
+        "balanced_accuracy_by_seed": [
+          0.517785196270289,
+          0.5294693219753654,
+          0.4678254863589271,
+          0.5513986416484402,
+          0.5546794060089789
+        ],
+        "balanced_accuracy_seed_std": 0.03505622823163966,
+        "gate_checks": {
+          "balanced_accuracy_at_least_0_70": false,
+          "positive_recall_at_least_0_60": false,
+          "brier_beats_prevalence_prior": false,
+          "predicted_on_fraction_at_least_0_20": true,
+          "predicted_off_fraction_at_least_0_20": true,
+          "five_seed_ba_std_at_most_0_03": false
+        },
+        "gate_passed": false
+      },
+      "internal_test_frozen_threshold": {
+        "metrics": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.582327117692172,
+          "group_weighted_prior_log_loss": 0.6782799001738997,
+          "group_weighted_brier": 0.1977337501341187,
+          "group_weighted_prior_brier": 0.24256974037247478,
+          "group_weighted_brier_gain_vs_prevalence_prior": 0.04483599023835608,
+          "group_weighted_accuracy": 0.7424242424242425,
+          "group_weighted_balanced_accuracy": 0.7307692307692307,
+          "group_weighted_positive_recall": 0.6666666666666666,
+          "row_accuracy": 0.75,
+          "row_balanced_accuracy": 0.7090909090909091,
+          "predicted_on": 5,
+          "predicted_off": 11,
+          "predicted_on_fraction": 0.3125,
+          "predicted_off_fraction": 0.6875
+        },
+        "development_range_support": {
+          "feature_minimum": {
+            "top1_relevance_bucket": 3.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 1.0,
+            "retrieved_fraction": 0.5,
+            "minimum_relative_age_bucket": 1.0,
+            "maximum_relative_age_bucket": 3.0,
+            "background_other_memory_count": 0.0,
+            "background_strategy_on": 0.0
+          },
+          "feature_maximum": {
+            "top1_relevance_bucket": 5.0,
+            "relevance_margin_bucket": 5.0,
+            "token_cost_bucket": 2.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 4.0,
+            "maximum_relative_age_bucket": 5.0,
+            "background_other_memory_count": 2.0,
+            "background_strategy_on": 1.0
+          },
+          "evaluation_rows": 16,
+          "joint_absolute_range_in_support_rows": 16,
+          "joint_absolute_range_in_support_fraction": 1.0
+        },
+        "used_for_model_or_threshold_selection": false
+      },
+      "baselines": {
+        "always_off": {
+          "group_weighted_accuracy": 0.6197916666666666,
+          "group_weighted_balanced_accuracy": 0.5,
+          "group_weighted_positive_recall": 0.0,
+          "predicted_on": 0,
+          "predicted_off": 48
+        },
+        "always_on": {
+          "group_weighted_accuracy": 0.3802083333333333,
+          "group_weighted_balanced_accuracy": 0.5,
+          "group_weighted_positive_recall": 1.0,
+          "predicted_on": 48,
+          "predicted_off": 0
+        },
+        "frozen_transparent_rule": {
+          "group_weighted_accuracy": 0.4427083333333333,
+          "group_weighted_balanced_accuracy": 0.5504201680672269,
+          "group_weighted_positive_recall": 1.0,
+          "predicted_on": 46,
+          "predicted_off": 2
+        },
+        "background_only_grouped_oof": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.6935612887022543,
+          "group_weighted_prior_log_loss": 0.6900592494870122,
+          "group_weighted_brier": 0.2479309391363962,
+          "group_weighted_prior_brier": 0.24781941759175088,
+          "group_weighted_brier_gain_vs_prevalence_prior": -0.0001115215446453044,
+          "group_weighted_accuracy": 0.546875,
+          "group_weighted_balanced_accuracy": 0.4808909865315989,
+          "group_weighted_positive_recall": 0.2054794520547945,
+          "row_accuracy": 0.5625,
+          "row_balanced_accuracy": 0.49444444444444446,
+          "predicted_on": 11,
+          "predicted_off": 37,
+          "predicted_on_fraction": 0.22916666666666666,
+          "predicted_off_fraction": 0.7708333333333334
+        }
+      },
+      "shortcut_diagnostic": {
+        "background_only_ba": 0.4808909865315989,
+        "full_minus_background_only_ba": -0.013065500172671773,
+        "background_only_is_not_a_forbidden_feature_set": true,
+        "interpretation": "If background-only matches or exceeds the full model, the data do not show candidate-aware learning."
+      }
+    },
+    "ME": {
+      "feature_names": [
+        "top1_relevance_bucket",
+        "relevance_margin_bucket",
+        "token_cost_bucket",
+        "retrieved_fraction",
+        "minimum_relative_age_bucket",
+        "maximum_relative_age_bucket",
+        "background_other_memory_count",
+        "background_strategy_on"
+      ],
+      "development_rows": 48,
+      "development_users": 29,
+      "development_class_counts": {
+        "0": 37,
+        "1": 11
+      },
+      "internal_test_rows": 16,
+      "internal_test_users": 9,
+      "internal_test_class_counts": {
+        "0": 11,
+        "1": 5
+      },
+      "grouped_oof": {
+        "metrics": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.7473117264752601,
+          "group_weighted_prior_log_loss": 0.666731071168947,
+          "group_weighted_brier": 0.27092086196082227,
+          "group_weighted_prior_brier": 0.23492695701435498,
+          "group_weighted_brier_gain_vs_prevalence_prior": -0.03599390494646729,
+          "group_weighted_accuracy": 0.5574712643678161,
+          "group_weighted_balanced_accuracy": 0.44520469836925536,
+          "group_weighted_positive_recall": 0.13513513513513514,
+          "row_accuracy": 0.6458333333333334,
+          "row_balanced_accuracy": 0.4828009828009828,
+          "predicted_on": 10,
+          "predicted_off": 38,
+          "predicted_on_fraction": 0.20833333333333334,
+          "predicted_off_fraction": 0.7916666666666666
+        },
+        "balanced_accuracy_by_seed": [
+          0.39457178697685025,
+          0.4477705553654921,
+          0.4747405633481583,
+          0.444406431748204,
+          0.4190329570076406
+        ],
+        "balanced_accuracy_seed_std": 0.030471987713227303,
+        "gate_checks": {
+          "balanced_accuracy_at_least_0_70": false,
+          "positive_recall_at_least_0_60": false,
+          "brier_beats_prevalence_prior": false,
+          "predicted_on_fraction_at_least_0_20": true,
+          "predicted_off_fraction_at_least_0_20": true,
+          "five_seed_ba_std_at_most_0_03": false
+        },
+        "gate_passed": false
+      },
+      "internal_test_frozen_threshold": {
+        "metrics": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.6836374984753893,
+          "group_weighted_prior_log_loss": 0.6791262041259866,
+          "group_weighted_brier": 0.24045896931206254,
+          "group_weighted_prior_brier": 0.2425435988902101,
+          "group_weighted_brier_gain_vs_prevalence_prior": 0.002084629578147562,
+          "group_weighted_accuracy": 0.6851851851851852,
+          "group_weighted_balanced_accuracy": 0.6125541125541125,
+          "group_weighted_positive_recall": 0.2857142857142857,
+          "row_accuracy": 0.6875,
+          "row_balanced_accuracy": 0.5545454545454546,
+          "predicted_on": 2,
+          "predicted_off": 14,
+          "predicted_on_fraction": 0.125,
+          "predicted_off_fraction": 0.875
+        },
+        "development_range_support": {
+          "feature_minimum": {
+            "top1_relevance_bucket": 4.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 1.0,
+            "retrieved_fraction": 0.333333,
+            "minimum_relative_age_bucket": 2.0,
+            "maximum_relative_age_bucket": 3.0,
+            "background_other_memory_count": 0.0,
+            "background_strategy_on": 0.0
+          },
+          "feature_maximum": {
+            "top1_relevance_bucket": 5.0,
+            "relevance_margin_bucket": 5.0,
+            "token_cost_bucket": 4.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 4.0,
+            "maximum_relative_age_bucket": 5.0,
+            "background_other_memory_count": 2.0,
+            "background_strategy_on": 1.0
+          },
+          "evaluation_rows": 16,
+          "joint_absolute_range_in_support_rows": 15,
+          "joint_absolute_range_in_support_fraction": 0.9375
+        },
+        "used_for_model_or_threshold_selection": false
+      },
+      "baselines": {
+        "always_off": {
+          "group_weighted_accuracy": 0.6810344827586207,
+          "group_weighted_balanced_accuracy": 0.5,
+          "group_weighted_positive_recall": 0.0,
+          "predicted_on": 0,
+          "predicted_off": 48
+        },
+        "always_on": {
+          "group_weighted_accuracy": 0.3189655172413793,
+          "group_weighted_balanced_accuracy": 0.5,
+          "group_weighted_positive_recall": 1.0,
+          "predicted_on": 48,
+          "predicted_off": 0
+        },
+        "frozen_transparent_rule": {
+          "group_weighted_accuracy": 0.3591954022988506,
+          "group_weighted_balanced_accuracy": 0.5295358649789029,
+          "group_weighted_positive_recall": 1.0,
+          "predicted_on": 45,
+          "predicted_off": 3
+        },
+        "background_only_grouped_oof": {
+          "threshold": 0.5,
+          "group_weighted_log_loss": 0.636905907695888,
+          "group_weighted_prior_log_loss": 0.666731071168947,
+          "group_weighted_brier": 0.22180280855442866,
+          "group_weighted_prior_brier": 0.23492695701435498,
+          "group_weighted_brier_gain_vs_prevalence_prior": 0.013124148459926321,
+          "group_weighted_accuracy": 0.6896551724137931,
+          "group_weighted_balanced_accuracy": 0.5997263085870681,
+          "group_weighted_positive_recall": 0.35135135135135137,
+          "row_accuracy": 0.75,
+          "row_balanced_accuracy": 0.6142506142506143,
+          "predicted_on": 9,
+          "predicted_off": 39,
+          "predicted_on_fraction": 0.1875,
+          "predicted_off_fraction": 0.8125
+        }
+      },
+      "shortcut_diagnostic": {
+        "background_only_ba": 0.5997263085870681,
+        "full_minus_background_only_ba": -0.15452161021781274,
+        "background_only_is_not_a_forbidden_feature_set": true,
+        "interpretation": "If background-only matches or exceeds the full model, the data do not show candidate-aware learning."
+      }
+    }
+  },
+  "all_primary_gates_pass": false,
+  "formal_external_promotion_allowed": false,
+  "descriptive_external_diagnostic_allowed": true,
+  "claim_boundary": "This evaluates protocol-specific candidate-action benefit labels. It does not prove correct item retrieval, clinical safety, or transport to arbitrary memory stores.",
+  "lineage": {
+    "labels_sha256": "1a52463ca8856c6d269716a3ad926c09291b329e1307c6535dc8f3b59cb5b93b",
+    "memory_blueprint_sha256": "d620ed03004b042b355d357f00c9d82739ea2e3a65711d08d9b758edf702ab75",
+    "rs_blueprint_sha256": "5899966bfea121b72d64004111278ec1bbff318af422fb07b89408a7105ed71a",
+    "candidate_descriptors_sha256": "d4427b71a4b7dfb50fc71d96939442f28a635f0b1827a85c5f0a13a6e0249684"
+  }
+}

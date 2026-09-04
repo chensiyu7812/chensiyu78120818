@@ -1,0 +1,131 @@
+{
+  "protocol": "pm-v1.5-staged-policy-architecture-v2",
+  "status": "FROZEN_FINITE_SEMANTICS_EFFECT_ROUTING",
+  "date": "2026-08-03",
+  "claim": "a low-capacity auditable policy manager learns qualified component-level expected net benefit under fixed resources and generation, then is evaluated on quality, interaction-and-grounding risk, and cost",
+  "does_not_claim_complex_user_need_understanding": true,
+  "components": ["MP", "MS", "ME", "RS"],
+  "legal_action_count": 16,
+  "stages": [
+    {
+      "id": "RETRIEVAL",
+      "question": "what exact candidate belongs to this user and query",
+      "is_learned_pm_stage": false,
+      "outputs": ["exact_rank1_candidate", "top3_for_audit", "candidate_cost"]
+    },
+    {
+      "id": "OBSERVATION",
+      "question": "what explicitly visible facts are true about the state and exact candidate",
+      "is_learned_pm_stage": false,
+      "outputs": [
+        "candidate_type_and_presence",
+        "owner_time_entity_validity",
+        "explicit_current_goal",
+        "goal_function_fit",
+        "boundary_burden_compatibility",
+        "current_redundancy",
+        "reusable_action_outcome_or_mechanism",
+        "specific_increment",
+        "candidate_cost"
+      ],
+      "primary": "typed_compiler_and_preregistered_transparent_relation_factors",
+      "bge_role": "post_primary_frozen_relation_factor_challenger_only",
+      "may_output_final_on_off": false,
+      "may_read": ["visible_state", "exact_rank1_candidate", "frozen_catalog_metadata"],
+      "may_not_read": [
+        "construction_intent",
+        "human_worth_opening_gold",
+        "split_identity",
+        "dataset_identity",
+        "generator_reply",
+        "external_outcome"
+      ]
+    },
+    {
+      "id": "ELIGIBILITY",
+      "question": "does the candidate pass backend-provable objective admission before learned semantic routing",
+      "is_learned_pm_stage": false,
+      "role": "objective_mask_and_router_input_not_step1_gold",
+      "hard_off": [
+        "candidate_absent",
+        "backend_confirmed_wrong_owner_or_entity",
+        "backend_confirmed_inactive_or_stale_version",
+        "explicit_current_boundary_conflict",
+        "schema_confirmed_wrong_subtype_or_function"
+      ],
+      "not_hard_off_when_semantically_uncertain": [
+        "goal_function_fit",
+        "specific_increment",
+        "implicit_redundancy",
+        "latent_support_need"
+      ]
+    },
+    {
+      "id": "STEP1_ROUTING",
+      "question": "will opening this objective-admitted exact component have positive expected net value under the fixed qualified Step2 and generator",
+      "is_learned_pm_stage": true,
+      "model": "four_standardized_l2_logistic_component_effect_heads",
+      "inputs": ["frozen_observation_outputs", "eligibility", "candidate_cost"],
+      "outputs": ["MP_bit", "MS_bit", "ME_bit", "RS_bit"],
+      "gold": "repeated_same_state_single_component_clean_pair_worth_opening",
+      "not_gold": [
+        "surface_applicability",
+        "H1_two_gate_eligibility_alone",
+        "single_stochastic_generation_winner",
+        "generator_self_report",
+        "automatic_judge_score"
+      ]
+    },
+    {
+      "id": "JOINT_ACTION",
+      "question": "which requested bits remain jointly feasible under risk, boundary, and budget constraints",
+      "is_learned_pm_stage": false,
+      "selector": "deterministic_16_action_feasibility_projection"
+    },
+    {
+      "id": "STEP2_EXECUTION",
+      "question": "how must each already-authorized exact resource be used",
+      "is_learned_pm_stage": false,
+      "planner": "deterministic_exact_evidence_bound_execution_plan",
+      "generator": "fixed",
+      "may_reopen_step1_on_off": false,
+      "plan_fields": [
+        "component",
+        "candidate_identity",
+        "allowed_function",
+        "required_contribution",
+        "attribution_or_epistemic_mode",
+        "burden_cap",
+        "forbidden_inference",
+        "fallback"
+      ]
+    }
+  ],
+  "gold_separation": {
+    "observation_gold": "explicit_factor_and_evidence_code_review",
+    "eligibility_gold": "candidate_semantic_and_boundary_review",
+    "step1_gold": "repeated_clean_component_effect_worth_opening",
+    "step2_gold": "exact_binding_functional_use_and_misuse_review",
+    "end_to_end_gold": "final_blind_quality_risk_cost",
+    "one_layer_may_substitute_for_another": false
+  },
+  "limited_semantics_policy": {
+    "primary_handles": [
+      "explicit_request_and_boundary",
+      "typed_candidate_subtype",
+      "owner_time_entity",
+      "visible_redundancy",
+      "explicit_goal_function_fit",
+      "past_action_result_or_mechanism",
+      "cost"
+    ],
+    "primary_does_not_handle": [
+      "latent_complex_support_need",
+      "clinical_diagnosis",
+      "implicit_readiness_inference",
+      "unobserved_single_reply_causal_effect"
+    ],
+    "insufficient_visible_semantic_evidence_action": "ENTER_STEP1_AS_UNCERTAINTY_FEATURE_NOT_A_HARD_LABEL",
+    "calibrated_out_of_support_runtime_action": "ABSTAIN_OR_OFF_AND_REPORT_COVERAGE"
+  }
+}

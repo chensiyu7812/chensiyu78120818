@@ -1,0 +1,49 @@
+{
+  "protocol": "pm-v1.5-v5.3-external-source-leakage-audit-v1",
+  "status": "PROJECTION_CANARIES_COMPLETE_OVERLAP_PENDING",
+  "scope": {
+    "response_projection": "basic_info plus strictly prior same-user dialog_history only",
+    "qa_generation": "public question plus same-user session documents only",
+    "qa_gold_fields": "answer/evidence/capability and evaluator metadata are canary-protected",
+    "overlap": "internal model-visible text versus external question/answer/session surfaces"
+  },
+  "evoemo_source": {
+    "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/external/evo_emo.json",
+    "sha256": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420"
+  },
+  "implementation": {
+    "audit_module": "src/metacom_pm/v1_5_v5_3_external_leakage_audit.py",
+    "audit_module_sha256": "cb88d3c4941794af0b98c3e25c556ba4889dece99f5964f95cd6ad48e649037c",
+    "runner": "scripts/v1_5/69_audit_v5_3_external_source_leakage_v1_5.py",
+    "runner_sha256": "f017ad3b9c13c0e7c7bcf72c819f4100154adcdcde668382a5cac492dda8ccef"
+  },
+  "projection_and_gold_canaries": {
+    "users": 18,
+    "causal_response_projections_checked": 419,
+    "response_projection_allowed_top_level_fields": [
+      "basic_info",
+      "dialog_history"
+    ],
+    "response_projection_key_violations": 0,
+    "response_disallowed_top_level_fields_serialized": 0,
+    "response_current_or_future_session_exposures": 0,
+    "response_cross_user_session_exposures": 0,
+    "response_forbidden_gold_canary_failures": 0,
+    "qa_evaluator_rows_checked": 1552,
+    "qa_answer_evidence_canary_failures": 0,
+    "qa_gold_fields_visible_to_generation_or_query": 0,
+    "qa_cross_user_session_exposures": 0,
+    "raw_session_ids_shared_across_users": 1,
+    "session_identity_rule": "(user_id, session_id), never bare session_id",
+    "generation_or_retrieval_outcomes_read": false
+  },
+  "internal_external_content_overlap": {
+    "status": "PENDING_FORMAL_V5_3_SUPERDOMAIN_SURFACE",
+    "reason": "No formal V5.3 internal superdomain artifact was supplied. The exact/normalized-n-gram interface is implemented and fixture-tested, but absence of an input corpus is not a leakage PASS.",
+    "ngram_size": 8
+  },
+  "formal_v5_3_generation_runner_wired_to_this_projection": false,
+  "formal_v5_3_overlap_gate_passed": false,
+  "api_calls": 0,
+  "generated_response_or_quality_risk_outcome_read": false
+}

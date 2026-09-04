@@ -1,0 +1,370 @@
+{
+  "protocol": "pm-v1.5-v3-transparent-observation-qualification-v1",
+  "status": "FAIL_TRANSPARENT_OBSERVATION_REPAIR_REQUIRED",
+  "role": "OBSERVATION_QUALIFICATION_NOT_STEP1_GOLD_NOT_STEP2_EVALUATION",
+  "thresholds": {
+    "balanced_accuracy_min": 0.7,
+    "recall_min": 0.6,
+    "specificity_min": 0.6,
+    "minimal_counterfactual_direction_min": 0.75
+  },
+  "audited_factors": {
+    "owner_time_entity_valid": "owner_time_valid",
+    "goal_function_fit": "goal_function_fit",
+    "boundary_burden_compatible": "boundary_burden_fit",
+    "specific_increment": "specific_nonredundant_increment"
+  },
+  "auxiliary_currently_nonredundant_not_separately_supervised": true,
+  "global_factor_metrics": {
+    "owner_time_entity_valid": {
+      "n": 128,
+      "positive": 114,
+      "negative": 14,
+      "tp": 112,
+      "tn": 10,
+      "fp": 4,
+      "fn": 2,
+      "recall": 0.9824561403508771,
+      "specificity": 0.7142857142857143,
+      "balanced_accuracy": 0.8483709273182958,
+      "status": "PASS"
+    },
+    "goal_function_fit": {
+      "n": 128,
+      "positive": 80,
+      "negative": 48,
+      "tp": 80,
+      "tn": 24,
+      "fp": 24,
+      "fn": 0,
+      "recall": 1.0,
+      "specificity": 0.5,
+      "balanced_accuracy": 0.75,
+      "status": "FAIL"
+    },
+    "boundary_burden_compatible": {
+      "n": 128,
+      "positive": 107,
+      "negative": 21,
+      "tp": 99,
+      "tn": 5,
+      "fp": 16,
+      "fn": 8,
+      "recall": 0.9252336448598131,
+      "specificity": 0.23809523809523808,
+      "balanced_accuracy": 0.5816644414775256,
+      "status": "FAIL"
+    },
+    "specific_increment": {
+      "n": 128,
+      "positive": 88,
+      "negative": 40,
+      "tp": 62,
+      "tn": 29,
+      "fp": 11,
+      "fn": 26,
+      "recall": 0.7045454545454546,
+      "specificity": 0.725,
+      "balanced_accuracy": 0.7147727272727273,
+      "status": "PASS"
+    }
+  },
+  "per_component_diagnostics": {
+    "MP": {
+      "owner_time_entity_valid": {
+        "n": 32,
+        "positive": 28,
+        "negative": 4,
+        "tp": 28,
+        "tn": 0,
+        "fp": 4,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 0.0,
+        "balanced_accuracy": 0.5,
+        "status": "FAIL_DIAGNOSTIC"
+      },
+      "goal_function_fit": {
+        "n": 32,
+        "positive": 20,
+        "negative": 12,
+        "tp": 20,
+        "tn": 4,
+        "fp": 8,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 0.3333333333333333,
+        "balanced_accuracy": 0.6666666666666666,
+        "status": "FAIL_DIAGNOSTIC"
+      },
+      "boundary_burden_compatible": {
+        "n": 32,
+        "positive": 24,
+        "negative": 8,
+        "tp": 24,
+        "tn": 4,
+        "fp": 4,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 0.5,
+        "balanced_accuracy": 0.75,
+        "status": "FAIL_DIAGNOSTIC"
+      },
+      "specific_increment": {
+        "n": 32,
+        "positive": 24,
+        "negative": 8,
+        "tp": 18,
+        "tn": 4,
+        "fp": 4,
+        "fn": 6,
+        "recall": 0.75,
+        "specificity": 0.5,
+        "balanced_accuracy": 0.625,
+        "status": "FAIL_DIAGNOSTIC"
+      }
+    },
+    "MS": {
+      "owner_time_entity_valid": {
+        "n": 32,
+        "positive": 26,
+        "negative": 6,
+        "tp": 24,
+        "tn": 6,
+        "fp": 0,
+        "fn": 2,
+        "recall": 0.9230769230769231,
+        "specificity": 1.0,
+        "balanced_accuracy": 0.9615384615384616,
+        "status": "PASS_DIAGNOSTIC"
+      },
+      "goal_function_fit": {
+        "n": 32,
+        "positive": 20,
+        "negative": 12,
+        "tp": 20,
+        "tn": 8,
+        "fp": 4,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 0.6666666666666666,
+        "balanced_accuracy": 0.8333333333333333,
+        "status": "PASS_DIAGNOSTIC"
+      },
+      "boundary_burden_compatible": {
+        "n": 32,
+        "positive": 32,
+        "negative": 0,
+        "tp": 32,
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": null,
+        "balanced_accuracy": null,
+        "status": "SINGLE_CLASS_DIAGNOSTIC"
+      },
+      "specific_increment": {
+        "n": 32,
+        "positive": 20,
+        "negative": 12,
+        "tp": 4,
+        "tn": 8,
+        "fp": 4,
+        "fn": 16,
+        "recall": 0.2,
+        "specificity": 0.6666666666666666,
+        "balanced_accuracy": 0.43333333333333335,
+        "status": "FAIL_DIAGNOSTIC"
+      }
+    },
+    "ME": {
+      "owner_time_entity_valid": {
+        "n": 32,
+        "positive": 28,
+        "negative": 4,
+        "tp": 28,
+        "tn": 4,
+        "fp": 0,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 1.0,
+        "balanced_accuracy": 1.0,
+        "status": "PASS_DIAGNOSTIC"
+      },
+      "goal_function_fit": {
+        "n": 32,
+        "positive": 16,
+        "negative": 16,
+        "tp": 16,
+        "tn": 12,
+        "fp": 4,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 0.75,
+        "balanced_accuracy": 0.875,
+        "status": "PASS_DIAGNOSTIC"
+      },
+      "boundary_burden_compatible": {
+        "n": 32,
+        "positive": 28,
+        "negative": 4,
+        "tp": 28,
+        "tn": 0,
+        "fp": 4,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 0.0,
+        "balanced_accuracy": 0.5,
+        "status": "FAIL_DIAGNOSTIC"
+      },
+      "specific_increment": {
+        "n": 32,
+        "positive": 20,
+        "negative": 12,
+        "tp": 20,
+        "tn": 12,
+        "fp": 0,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 1.0,
+        "balanced_accuracy": 1.0,
+        "status": "PASS_DIAGNOSTIC"
+      }
+    },
+    "RS": {
+      "owner_time_entity_valid": {
+        "n": 32,
+        "positive": 32,
+        "negative": 0,
+        "tp": 32,
+        "tn": 0,
+        "fp": 0,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": null,
+        "balanced_accuracy": null,
+        "status": "SINGLE_CLASS_DIAGNOSTIC"
+      },
+      "goal_function_fit": {
+        "n": 32,
+        "positive": 24,
+        "negative": 8,
+        "tp": 24,
+        "tn": 0,
+        "fp": 8,
+        "fn": 0,
+        "recall": 1.0,
+        "specificity": 0.0,
+        "balanced_accuracy": 0.5,
+        "status": "FAIL_DIAGNOSTIC"
+      },
+      "boundary_burden_compatible": {
+        "n": 32,
+        "positive": 23,
+        "negative": 9,
+        "tp": 15,
+        "tn": 1,
+        "fp": 8,
+        "fn": 8,
+        "recall": 0.6521739130434783,
+        "specificity": 0.1111111111111111,
+        "balanced_accuracy": 0.3816425120772947,
+        "status": "FAIL_DIAGNOSTIC"
+      },
+      "specific_increment": {
+        "n": 32,
+        "positive": 24,
+        "negative": 8,
+        "tp": 20,
+        "tn": 5,
+        "fp": 3,
+        "fn": 4,
+        "recall": 0.8333333333333334,
+        "specificity": 0.625,
+        "balanced_accuracy": 0.7291666666666667,
+        "status": "PASS_DIAGNOSTIC"
+      }
+    }
+  },
+  "minimal_counterfactual_direction": {
+    "owner_time_entity_valid": {
+      "n": 14,
+      "correct": 10,
+      "rate": 0.7142857142857143,
+      "status": "FAIL",
+      "failed_family_pairs": {
+        "MP_ELIGIBLE_MP_CONTEXT -> MP_WRONG_OWNER_OR_STALE": 4
+      }
+    },
+    "goal_function_fit": {
+      "n": 48,
+      "correct": 24,
+      "rate": 0.5,
+      "status": "FAIL",
+      "failed_family_pairs": {
+        "MP_ELIGIBLE_MP_CONTEXT -> MP_WRONG_OWNER_OR_STALE": 4,
+        "MP_ELIGIBLE_MP_CONSTRAINT -> MP_IRRELEVANT_PROFILE": 4,
+        "RS_ELIGIBLE_RS_SUGGESTION -> RS_WRONG_FAMILY_BURDEN_OR_HIGH_STAKES": 4,
+        "ME_ELIGIBLE_ME_FAILURE -> ME_VALID_OUTCOME_WRONG_CURRENT_GOAL": 4,
+        "MS_ELIGIBLE_MS_DISTINCTION -> MS_TOPIC_ONLY_GENERIC": 4,
+        "RS_ELIGIBLE_RS_PARAPHRASE -> RS_SAME_MOVE_ALREADY_EXECUTED": 4
+      }
+    },
+    "boundary_burden_compatible": {
+      "n": 21,
+      "correct": 4,
+      "rate": 0.19047619047619047,
+      "status": "FAIL",
+      "failed_family_pairs": {
+        "MP_ELIGIBLE_MP_CONTEXT -> MP_WRONG_OWNER_OR_STALE": 4,
+        "RS_ELIGIBLE_RS_REFLECTION -> RS_GREETING_STOP_OR_LISTEN_ONLY": 4,
+        "RS_ELIGIBLE_RS_SUGGESTION -> RS_WRONG_FAMILY_BURDEN_OR_HIGH_STAKES": 4,
+        "ME_ELIGIBLE_ME_FAILURE -> ME_VALID_OUTCOME_WRONG_CURRENT_GOAL": 4,
+        "RS_ELIGIBLE_RS_PARAPHRASE -> RS_SAME_MOVE_ALREADY_EXECUTED": 1
+      }
+    },
+    "specific_increment": {
+      "n": 40,
+      "correct": 19,
+      "rate": 0.475,
+      "status": "FAIL",
+      "failed_family_pairs": {
+        "MP_ELIGIBLE_MP_CONTEXT -> MP_WRONG_OWNER_OR_STALE": 4,
+        "MS_ELIGIBLE_MS_GOAL -> MS_CURRENT_SESSION_ECHO": 4,
+        "RS_ELIGIBLE_RS_QUESTION -> RS_CURRENT_REQUEST_ALREADY_SPECIFIES_MOVE": 3,
+        "RS_ELIGIBLE_RS_PARAPHRASE -> RS_SAME_MOVE_ALREADY_EXECUTED": 4,
+        "MS_ELIGIBLE_MS_UNFINISHED -> MS_RESOLVED_OR_STALE": 4,
+        "MP_ELIGIBLE_MP_FORMAT -> MP_CURRENT_ECHO": 2
+      }
+    }
+  },
+  "composite_eligibility_diagnostic": {
+    "n": 128,
+    "positive": 64,
+    "negative": 64,
+    "tp": 46,
+    "tn": 37,
+    "fp": 27,
+    "fn": 18,
+    "recall": 0.71875,
+    "specificity": 0.578125,
+    "balanced_accuracy": 0.6484375
+  },
+  "failures": [
+    "GLOBAL_goal_function_fit",
+    "GLOBAL_boundary_burden_compatible",
+    "COUNTERFACTUAL_owner_time_entity_valid",
+    "COUNTERFACTUAL_goal_function_fit",
+    "COUNTERFACTUAL_boundary_burden_compatible",
+    "COUNTERFACTUAL_specific_increment"
+  ],
+  "reference_sha256": "640024ab7549fe257922cfd6c3c989ffb4233d58f9e8516e210018e8bfba1a35",
+  "candidate_rows_sha256": "4c9a42c4fa888818222873ac4f715de0c40d09fb13e10997db9bc142244f93a1",
+  "python_executable": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/.venv-pm-v1-5/bin/python",
+  "python_version": "3.13.2",
+  "bge_used": false,
+  "response_or_outcome_read": false,
+  "external_lockbox_read": false,
+  "step1_training_authorized": false
+}

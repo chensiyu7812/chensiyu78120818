@@ -1,0 +1,50 @@
+{"state_id": "state_358ef007d95890945162", "user_id": "p10", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_1b374438ed857b4943f1", "user_id": "p8", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_17e19f39c2bd3b32dca3", "user_id": "p13", "production_label": "exact_fit", "bge_label": "related_but_wrong_detail", "winner": "production"}
+{"state_id": "state_b787e7c50a99f9f91958", "user_id": "p13", "production_label": "unrelated", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_7c3689320b21adb72eb4", "user_id": "p12", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_99c6d31649e39647bda3", "user_id": "p11", "production_label": "related_but_wrong_detail", "bge_label": "unrelated", "winner": "production"}
+{"state_id": "state_9cf05a38f4904c656723", "user_id": "p10", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "production", "note": "prod closer/more specific match on financial theme"}
+{"state_id": "state_f242383378cc95a1c9d6", "user_id": "p9", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_6e50d38352fdcc7c9af6", "user_id": "p16", "production_label": "related_but_wrong_detail", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_37035a05eb6597a773d7", "user_id": "p8", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_1a17086bf257bdd4ec21", "user_id": "p8", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_2a1c4f8e26e6145a1c98", "user_id": "p8", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_97fa894325536083e3ac", "user_id": "p10", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_97e9afdcb3327203d693", "user_id": "p10", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "tie", "note": "same item selected by both (agree=True); mediocre match either way"}
+{"state_id": "state_0c5f92b9d435b9998cdf", "user_id": "p13", "production_label": "unrelated", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_eb39dc7a6c16ef16ea4b", "user_id": "p14", "production_label": "stale_conflicting", "bge_label": "related_but_wrong_detail", "winner": "bge", "note": "prod picked opposite-valence (smooth delivery vs current complications)"}
+{"state_id": "state_04fd2f014a478d516b13", "user_id": "p7", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "bge", "note": "bge closer to current financial-preparedness theme"}
+{"state_id": "state_58269868dd628c69d32d", "user_id": "p13", "production_label": "exact_fit", "bge_label": "exact_fit", "winner": "tie", "note": "same item selected by both (agree=True)"}
+{"state_id": "state_badfe0400de8925b7b3f", "user_id": "p10", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "tie", "note": "same item selected by both (agree=True)"}
+{"state_id": "state_9390d22754b58fb80b32", "user_id": "p15", "production_label": "unrelated", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_f594d400efe04bd02d52", "user_id": "p14", "production_label": "unrelated", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_e60a06fa339c5c6170b0", "user_id": "p14", "production_label": "exact_fit", "bge_label": "related_but_wrong_detail", "winner": "production"}
+{"state_id": "state_adfa06fa24a1669be785", "user_id": "p13", "production_label": "exact_fit", "bge_label": "related_but_wrong_detail", "winner": "production"}
+{"state_id": "state_12b20c654ad54eb3bfa1", "user_id": "p12", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "tie", "note": "both mediocre, similar quality"}
+{"state_id": "state_0c05de8376e5096a1b85", "user_id": "p18", "production_label": "exact_fit", "bge_label": "related_but_wrong_detail", "winner": "production", "note": "bge picked after-the-fact narrative, tense mismatch"}
+{"state_id": "state_f6a4415178a425dd45b8", "user_id": "p18", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "production", "note": "both same underlying arc, prod slightly more direct continuation"}
+{"state_id": "state_5e23bde88b2ba069e35a", "user_id": "p14", "production_label": "exact_fit", "bge_label": "exact_fit", "winner": "tie", "note": "same item selected by both (agree=True)"}
+{"state_id": "state_e3b7663fde691559f065", "user_id": "p18", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "tie"}
+{"state_id": "state_e3024c3ac35ccef64176", "user_id": "p16", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "production", "note": "prod's 'undervalued at work' closer to fear-of-failure theme"}
+{"state_id": "state_89f94570983610636711", "user_id": "p7", "production_label": "exact_fit", "bge_label": "exact_fit", "winner": "tie", "note": "same item selected by both (agree=True)"}
+{"state_id": "state_bdc037b9d527b0df432d", "user_id": "p15", "production_label": "exact_fit", "bge_label": "related_but_wrong_detail", "winner": "production"}
+{"state_id": "state_a0b244a9407b7525836c", "user_id": "p16", "production_label": "related_but_wrong_detail", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_1f45803da50f3925b349", "user_id": "p9", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_698fa472be47b30ee170", "user_id": "p17", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "bge", "note": "bge marginally closer (directly about advisor feedback)"}
+{"state_id": "state_0d2ac87eaaeb07bcb085", "user_id": "p12", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "bge", "note": "bge matches 'work-life balance' phrase directly"}
+{"state_id": "state_1aa55cc654210ca6d803", "user_id": "p12", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_ce31b693a453ea1452fc", "user_id": "p16", "production_label": "related_but_wrong_detail", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_523e70ce8b6e30ec5662", "user_id": "p9", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_b5ce69fbc7c6e126d59a", "user_id": "p17", "production_label": "related_but_wrong_detail", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_e25d8dad366d4d2f6c9d", "user_id": "p16", "production_label": "related_but_wrong_detail", "bge_label": "unrelated", "winner": "production", "note": "bge picked unrelated painting-hobby record"}
+{"state_id": "state_ab3367997f0444e039e4", "user_id": "p16", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "bge", "note": "bge's promotion/project theme more direct"}
+{"state_id": "state_238a265983e19969a761", "user_id": "p8", "production_label": "unrelated", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_8dc05094697833a8f44c", "user_id": "p17", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_ccb7052cf6842b7de877", "user_id": "p12", "production_label": "related_but_wrong_detail", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_1211fcfa6bc7a0fe49ca", "user_id": "p8", "production_label": "related_but_wrong_detail", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_0f6a82b823f1e1088121", "user_id": "p12", "production_label": "unrelated", "bge_label": "related_but_wrong_detail", "winner": "bge"}
+{"state_id": "state_357c54873a65f3e334e6", "user_id": "p12", "production_label": "unrelated", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_51301347365e38af0756", "user_id": "p17", "production_label": "related_but_wrong_detail", "bge_label": "exact_fit", "winner": "bge"}
+{"state_id": "state_73e5df874e8bd7ae6b31", "user_id": "p11", "production_label": "exact_fit", "bge_label": "related_but_wrong_detail", "winner": "production"}
+{"state_id": "state_a5536ca3b5c725dddb22", "user_id": "p7", "production_label": "related_but_wrong_detail", "bge_label": "related_but_wrong_detail", "winner": "bge", "note": "bge closer to 'overhaul financial management' theme"}

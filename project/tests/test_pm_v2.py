@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from types import MethodType
 
-import numpy as np
 import pytest
 from pydantic import ValidationError
 
@@ -18,8 +17,12 @@ from metacom_pm.pm_v2_contracts import (
     RiskDimensions,
 )
 from metacom_pm.pm_v2_data import validate_split_manifests
-from metacom_pm.pm_v2_features import PMV2FeatureBuilder
-from metacom_pm.pm_v2_judging import ResponseJudgeOutput, validate_judge_table
+from metacom_pm.pm_v2_judging import (
+    ResponseJudgeOutput,
+    build_response_messages,
+    build_risk_messages,
+    validate_judge_table,
+)
 from metacom_pm.pm_v2_model import PMV2Model, SelectionConfig
 
 
@@ -49,8 +52,6 @@ def make_state(*, state_id: str = "state_1", split: PMV2Split = PMV2Split.TRAIN)
             max_age_sessions=3,
             estimated_tokens=120,
             query_similarity_mean=0.2,
-            query_similarity_max=0.5,
-            query_similarity_p90=0.4,
             catalog_embedding=[0.0] * 64,
         ),
     }
@@ -155,6 +156,25 @@ def test_judge_schema_has_no_overall_field():
         )
 
 
+def test_judge_prompts_include_the_current_session_summary():
+    state = make_state()
+    response_prompt = build_response_messages(
+        state=state,
+        authorized_user_context="Authorized context.",
+        candidate_response="A candidate response.",
+    )
+    risk_prompt = build_risk_messages(
+        state=state,
+        authorized_user_context="Authorized context.",
+        selected_context="Selected context.",
+        candidate_response="A candidate response.",
+    )
+    for messages in (response_prompt, risk_prompt):
+        rendered = "\n".join(message["content"] for message in messages)
+        assert "CURRENT SESSION SUMMARY" in rendered
+        assert state.current_session_summary in rendered
+
+
 def test_explicit_abstention_can_choose_m0_r0():
     state = make_state()
     predictions = {
@@ -241,18 +261,17 @@ def test_joint_split_manifest_rejects_overlap():
         )
 
 
-def test_current_state_conflict_oracle_is_not_a_model_feature():
-    left = make_state(state_id="left")
-    right = make_state(state_id="right")
-    right.current_user_text = left.current_user_text
-    right.current_session_summary = left.current_session_summary
-    right.current_session_history = left.current_session_history
-    right.inventory[MemorySource.ME].conflict_fraction = 1.0
-    left.inventory[MemorySource.ME].conflict_fraction = 0.0
-    builder = PMV2FeatureBuilder(word_features=32, char_features=32).fit([left, right])
-    left_vector = builder.transform([(left, "ME+R0")])[0]
-    right_vector = builder.transform([(right, "ME+R0")])[0]
-    assert np.allclose(left_vector, right_vector)
+def test_evaluator_oracles_are_rejected_from_model_state_schema():
+    state = make_state(state_id="clean")
+    payload = state.model_dump()
+    payload["provenance"] = {"regime": "event_needed"}
+    with pytest.raises(ValidationError, match="operational references only"):
+        PMV2State.model_validate(payload)
+
+    summary = state.inventory[MemorySource.ME].model_dump()
+    summary["conflict_fraction"] = 1.0
+    with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        ObservableSourceSummary.model_validate(summary)
 
 
 def test_degenerate_risk_labels_fail_closed():
@@ -288,7 +307,21 @@ def test_degenerate_risk_labels_fail_closed():
                 judge_families=["a", "b"],
                 judge_count=2,
                 max_dimension_mad=0.0,
+                dimension_mad={
+                    **{
+                        f"response.{name}": 0.0
+                        for name in ResponseDimensions.model_fields
+                    },
+                    **{
+                        f"risk.{name}": 0.0
+                        for name in RiskDimensions.model_fields
+                    },
+                },
                 label_reliable=True,
+                composite_weights_sha256=(
+                    "854996e300bc0506a71679f12a179e1a0"
+                    "ae33b050b62eb4d77d7c8d222fcf0b2"
+                ),
             )
         )
     with pytest.raises(RuntimeError, match="judge quality gate failed"):

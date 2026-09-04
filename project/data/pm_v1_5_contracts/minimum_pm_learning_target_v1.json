@@ -1,0 +1,276 @@
+{
+  "protocol": "pm-v1.5-minimum-pm-learning-target-v1",
+  "status": "ACTIVE_CORRECTED_FORMAL_16_ACTION_TARGET",
+  "research_question": "Can a small pre-retrieval policy learn when one bounded resource component is likely to improve the next response, while defaulting off when benefit is absent or uncertain and respecting prespecified interaction/grounding-risk and cost constraints?",
+  "claim_boundary": {
+    "primary_claim": "conditional component gating is learnable and more selective than fixed always-on or always-off baselines",
+    "minimum_success": "at least one component head has reproducible grouped-OOF signal and improves the held-out quality-risk-cost table under the default-off decision rule",
+    "not_claimed": [
+      "complete diagnosis of user needs",
+      "globally optimal quality-risk-cost tradeoff",
+      "clinical safety or clinical benefit",
+      "all memory sources and RS interactions are learned",
+      "item-level retrieval is learned by the PM"
+    ],
+    "history_disclosure": "The default-off target and conditional RS stratum were clarified after the first RS outcome judge failed its frozen measurement gate. Any discovered RS stratum requires confirmation on an independent outcome-blind sample."
+  },
+  "action_space_and_identification": {
+    "formal_v1_5_action_space_retained": [
+      "M0+R0",
+      "M0+RS",
+      "MP+R0",
+      "MP+RS",
+      "MS+R0",
+      "MS+RS",
+      "ME+R0",
+      "ME+RS",
+      "MPMS+R0",
+      "MPMS+RS",
+      "MPE+R0",
+      "MPE+RS",
+      "MSE+R0",
+      "MSE+RS",
+      "MPMSME+R0",
+      "MPMSME+RS"
+    ],
+    "current_clean_pair_identification_slices": [
+      "M0+R0 versus M0+RS",
+      "M0+R0 versus ME+R0"
+    ],
+    "interpretation": "The clean-pair slices identify individual component effects; they do not replace the formal 16-action output space.",
+    "training_strategy": "Learn MP, MS, ME, and RS component effects rather than a direct 16-class argmax. Compose an action only from qualified components; a multi-component interaction that lacks its own clean evidence remains masked/default-off.",
+    "minimum_publishable_success": "At least one component effect is learned out of group; all 16 actions need not be selected or independently supported.",
+    "maximum_open_resource_components_in_formal_space": 4
+  },
+  "responsibility_split": {
+    "pm": [
+      "choose whether a source-level component is off or eligible to run",
+      "compose a formally valid action from qualified MP, MS, ME, and RS component decisions",
+      "abstain to M0+R0 under missing evidence, OOD, or high uncertainty"
+    ],
+    "pm_does_not": [
+      "select a specific memory item or strategy card",
+      "write the final response",
+      "observe gold outcome labels, oracle item IDs, raw future turns, or judge outputs"
+    ],
+    "retriever_and_filters": [
+      "use the same catalog, eligibility rules, and score definitions during opportunity preview and execution",
+      "the current frozen runtime retrieves source-specific top-k memory items (MP=2, MS=2, ME=3) and strategy top-k=3",
+      "the current frozen ranker is token-count lexical cosine with a strict score-above-zero floor; it does not itself prove freshness or conflict safety",
+      "realize an empty eligible set as the off action"
+    ],
+    "prompt_compiler_and_generator": [
+      "inject the bounded source-specific top-k selected by the frozen retriever",
+      "mark memory as evidence that may be uncertain and must not be expanded into unsupported personal claims",
+      "mark strategy cards as technique constraints rather than content to quote",
+      "produce the response with the generator, decoding, and visible-context contract held fixed across paired arms"
+    ],
+    "posthoc_audit_only": [
+      "verify treatment realization and item lineage",
+      "measure evidence uptake or misuse",
+      "judge paired response quality and atomic risks",
+      "create labels only after all pre-retrieval features have been sealed"
+    ]
+  },
+  "pre_retrieval_situation_features": {
+    "shared_observable_context": [
+      "current user message",
+      "bounded visible dialogue history",
+      "current session summary if it is part of the deployed visible stack",
+      "literal request and boundary cues",
+      "source-level availability, count, age, and estimated token cost",
+      "family-level opportunity metadata computed without revealing the selected item text"
+    ],
+    "rs_minimum_features": [
+      "advice explicitly welcomed, neutral, or declined",
+      "listen-only boundary",
+      "one-step or low-burden limit",
+      "strategy-family opportunity and compatibility flags"
+    ],
+    "me_minimum_features": [
+      "a specific prior event, commitment, or detail is available",
+      "the detail is not already present in visible context",
+      "recency and conflict checks pass",
+      "family-level relevance opportunity exists"
+    ],
+    "forbidden_leakage": [
+      "gold action or gold utility",
+      "oracle item identity",
+      "retrieved item text before the PM decision",
+      "response text from either experimental arm",
+      "judge scores, human preferences, or later dialogue turns",
+      "duplicate or near-duplicate user groups across train and evaluation"
+    ]
+  },
+  "operational_component_definitions": {
+    "M0": "No longitudinal memory item enters the generator prompt.",
+    "MP": "The profile-memory source is enabled; the frozen retriever may return up to two items.",
+    "MS": "The session-summary-memory source is enabled; the frozen retriever may return up to two items.",
+    "ME": "The event-memory source is enabled; the frozen retriever may return up to three items.",
+    "R0": "No strategy-bank card enters the generator prompt.",
+    "RS": "Strategy retrieval is enabled; the frozen retriever may return up to three strategy cards."
+  },
+  "retrieval_cardinality_calibration": {
+    "current_runtime": {
+      "MP_top_k": 2,
+      "MS_top_k": 2,
+      "ME_top_k": 3,
+      "historical_raw_RS_top_k": 3,
+      "current_human_reviewed_RS_catalog": "exactly one frozen card per family; Top-1 after family eligibility",
+      "maximum_items_for_MPMSME_plus_RS": 10,
+      "evidence_filter_enabled": false,
+      "prompt_behavior": "all retrieved items are serialized into the generator prompt"
+    },
+    "scientific_question": "For memory, does Top-1 preserve or improve response quality and grounding risk relative to the current source-specific Top-k while reducing prompt cost? The current five-card RS catalog is already a family-gated Top-1 treatment.",
+    "calibration_arms": {
+      "RS_current_paper_candidate": [
+        "M0+R0",
+        "M0+RS_family_gated_top1"
+      ],
+      "RS_historical_raw_bank_diagnostic_only": [
+        "M0+R0",
+        "M0+raw_RS_top1",
+        "M0+raw_RS_top3"
+      ],
+      "ME": [
+        "M0+R0",
+        "ME_top1+R0",
+        "ME_top3+R0"
+      ]
+    },
+    "controlled_fields": [
+      "same state and visible context",
+      "same candidate catalog and lexical-cosine ranking",
+      "same generator, decoding, system prompt, and output cap",
+      "Top-1 is the exact rank-1 prefix of the Top-k arm"
+    ],
+    "rs_noncomparability_guard": "Do not compare the five-card catalog Top-1 directly with the 11,590-card raw-bank Top-3 as a cardinality ablation; catalog quality and content change at the same time.",
+    "measures_reported_separately": [
+      "blind immediate-support quality",
+      "rank-wise selected-evidence relevance and freshness",
+      "unsupported-personal-claim and stale/conflicting-use events",
+      "excessive-directiveness for RS",
+      "input tokens and realized item count"
+    ],
+    "selection_rule": "Choose memory retrieval cardinality using train/calibration only, freeze it, and use the same chosen retrieval mechanism for learned PM and matched baselines. Freeze current RS to family-gated Top-1 unless at least three independently qualified within-family cards are later available.",
+    "final_evaluation_rule": "The main-table evaluation cannot be used to select Top-1 versus Top-k. A prespecified cardinality ablation belongs in calibration or an appendix; the main table uses the frozen winner.",
+    "action_space_note": "Retrieval cardinality is not added as a seventeenth-or-larger PM action dimension in V1.5."
+  },
+  "outcomes": {
+    "quality": {
+      "name": "immediate support quality",
+      "definition": "For the current turn, the response better satisfies the literal request and boundary; then emotional attunement; then immediate helpfulness; then clarity/naturalness.",
+      "aggregation": "ordered decision criteria, not an arithmetic weighted score",
+      "human_options_required": [
+        "treatment_better",
+        "control_better",
+        "materially_equivalent",
+        "uncertain"
+      ],
+      "minimum_positive_label": "treatment is decisively better with literal evidence and a nonempty decisive criterion",
+      "final_policy_noninferiority_margin": -0.05,
+      "true_tie": "materially equivalent after a qualified measurement; maps to off",
+      "unreliable_tie": "tie produced by an unqualified or inconsistent instrument; maps to unknown and is excluded from effect training"
+    },
+    "risk": {
+      "name": "interaction-and-grounding risk proxy",
+      "atomic_events": [
+        "explicit_boundary_violation",
+        "unsupported_personal_claim",
+        "stale_or_conflicting_evidence_use",
+        "excessive_directiveness"
+      ],
+      "material_event_rule": "programmatically applicable and severity >= 2",
+      "final_policy_rate_difference_noninferiority_margin": 0.05,
+      "aggregation": "each event keeps its own applicability denominator; no combined risk score",
+      "memory_specific_note": "stale_or_conflicting_evidence_use can be evaluated only when memory actually entered the generator prompt"
+    },
+    "cost": {
+      "primary_measures": [
+        "generator input tokens",
+        "generator total tokens",
+        "realized retrieval calls"
+      ],
+      "final_policy_minimum_input_token_reduction_vs_high_resource": 0.1,
+      "role": "hard budget and least-cost tie-breaker among qualified positive actions",
+      "not_allowed": "cost savings cannot turn a no-benefit or harmful action into a positive open label"
+    }
+  },
+  "effect_label_states": {
+    "positive_open": [
+      "the component was available and the intended treatment was realized",
+      "qualified paired measurement shows a material quality improvement",
+      "no prespecified material risk event worsens beyond its margin",
+      "cost remains within its frozen budget"
+    ],
+    "nonpositive_off": [
+      "no eligible opportunity exists",
+      "qualified paired measurement shows control better",
+      "qualified paired measurement shows material equivalence",
+      "a prespecified material risk event worsens",
+      "cost exceeds its frozen budget"
+    ],
+    "unknown_exclude_from_effect_training": [
+      "treatment was requested but not realized",
+      "measurement instrument is unqualified",
+      "human or judge outcome is uncertain",
+      "applicability or lineage is unresolved"
+    ],
+    "discovery_sample_policy": "A sample used to discover a stratum is never confirmatory/final evaluation. After the stratum is independently confirmed and its quality materiality is frozen or re-annotated, the discovery sample may be reused as train-only data."
+  },
+  "decision_rule": {
+    "default_action": "M0+R0",
+    "ordered_gates": [
+      "if no real eligible opportunity exists, keep the component off",
+      "if treatment realization or outcome measurement is invalid, mark unknown for training and keep off at inference",
+      "if probability of a material quality gain is below the frozen threshold, keep off",
+      "if any applicable material-risk constraint fails, keep off",
+      "if the cost budget fails, keep off",
+      "otherwise choose among formally valid actions composed only of qualified components; unsupported interactions remain masked and lower cost breaks ties"
+    ],
+    "quality_risk_cost_composite_forbidden": true
+  },
+  "minimum_data_and_evaluation": {
+    "independent_groups_per_component": {
+      "positive_open_minimum": 8,
+      "nonpositive_off_minimum": 8
+    },
+    "splitting": "user/dialogue-grouped out-of-fold; all duplicate, paraphrase, counterfactual, and source-item relatives stay in one group",
+    "baselines": [
+      "always off",
+      "always on when structurally available",
+      "literal rule-only gate"
+    ],
+    "model": "strongly regularized logistic regression or a depth-bounded tree over transparent pre-retrieval features; a semantic encoder is optional only if grouped validation adds value",
+    "reported_separately": [
+      "quality win/tie/loss and uncertainty",
+      "each atomic risk event with its applicability denominator",
+      "tokens and retrieval calls",
+      "coverage/abstention",
+      "decision rate by preregistered stratum"
+    ],
+    "promotion_rule": "one-standard-error preference for the smallest transparent model that beats the frozen baselines without failing risk or cost constraints"
+  },
+  "domain_and_distribution_policy": {
+    "primary_rule": "Train and evaluate component effects within observable opportunity strata; topic or corpus identity is not a target and cannot be used as a shortcut feature.",
+    "evoemo_role": "fixed external stress/OOD diagnostic for observable request, boundary, burden, and opportunity strata; it is not a source of oracle PM effect labels",
+    "alignment_allowed": [
+      "report results separately by preregistered observable strata",
+      "use train-only weights based only on sealed pre-outcome observable covariates",
+      "report target-population and unweighted estimates side by side"
+    ],
+    "alignment_forbidden": [
+      "resample or weight EvoEmo using response quality, risk, PM decisions, or judge outcomes",
+      "force marginal topic/emotion proportions to match ESConv and call that external generalization",
+      "treat states without a deployable longitudinal opportunity as ME negatives"
+    ],
+    "interpretation": "A distribution mismatch is a transport limitation to report, not something to hide by outcome-aware alignment."
+  },
+  "current_evidence_state": {
+    "rs": "The 12-pair human sanity audit is complete and suggests a candidate advice-welcome/Providing-Suggestions stratum, but is not training-authorized because it is one annotation set with six advice pairs and no human ties.",
+    "memory": "Oracle tests show clean single-item uptake capacity and multisource interference, not response-quality benefit, retriever quality, or PM learnability.",
+    "quality_judge": "The first LLM pairwise quality instrument failed its frozen AB/BA consistency gate and cannot create hard effect labels.",
+    "risk_judge": "The atomic material-risk rules are partially human-supported on the 12-pair audit; memory misuse still requires a memory-on audit.",
+    "pm_training": "not yet authorized"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "protocol": "pm-v1.5-reverse-designed-training-and-evaluation-v1",
+  "status": "ACTIVE_WITH_RS_OPEN_CLOSE_CONSTRUCT_V2_OVERRIDE",
+  "date": "2026-07-30",
+  "research_claim": "A low-capacity auditable pre-generation policy can learn four resource on/off decisions over 16 legal actions and improve the quality-risk-cost tradeoff under a fixed resource and generation stack.",
+  "components": ["MP", "MS", "ME", "RS"],
+  "legal_action_count": 16,
+  "decision_timing": "post_candidate_discovery_pre_injection_pre_generation",
+  "withdraws": [
+    "pm-v1.5-final-research-plan-amendment-20260730-v1",
+    "RS_INDIVIDUALIZED_ROUTING_NOT_LEARNED_STOP_EXPANSION",
+    "any formal MP/MS/ME conclusion derived from historical needed_memory_sources proxy data"
+  ],
+  "evidence_roles": {
+    "RS_routing_gold": "qualified same-state fixed-protocol paired material benefit, followed by applicable atomic risk and cost gates",
+    "RS_pre_action_resource_need_bits": "scope, coverage, negative-control, and transparent-feature design only; not sufficient for RS-on gold",
+    "MP_MS_ME_routing_gold": "not yet frozen; must follow a component-specific treatment construct and cannot be inferred from historical proxies or the RS result",
+    "matched_response_pairs": "RS benefit-head training proxy plus resource-capacity and frozen end-to-end evaluation evidence",
+    "claim_boundary": "a human-adjudicated deterministic paired outcome is a protocol-specific training proxy, not an individual causal treatment effect or human clinical benefit"
+  },
+  "same_stack": {
+    "strategy_bank": true,
+    "memory_schema": true,
+    "retriever_filter_topk": true,
+    "prompt_compiler_generator": true,
+    "pm_features": true,
+    "quality_risk_cost_codebook": true
+  },
+  "strategy_rag": {
+    "source": "ESConv train split plus existing train-derived candidate catalog",
+    "target_card_range": [60, 100],
+    "six_card_bank_role": "formative_minimum_pilot_only",
+    "human_review": "one_complete_H1_packet",
+    "retrieval_candidates_visible_to_review": 5,
+    "runtime_retrieve_top_k": 3,
+    "runtime_default_inject_top_k": 1,
+    "qualification": {
+      "card_review_coverage": 1.0,
+      "top1_suitable_min": 0.8,
+      "top3_acceptable_recall_min": 0.9,
+      "hard_exclusion_injected_max": 0
+    },
+    "baai_policy": "challenger_only_if_grouped_human_labels_show_gain_over_lexical"
+  },
+  "dataset_blueprint": {
+    "states": 256,
+    "synthetic_users": 64,
+    "states_per_user": 4,
+    "actions": 16,
+    "states_per_action": 16,
+    "split_by_user": true,
+    "train": {"states": 160, "per_action": 10},
+    "calibration": {"states": 48, "per_action": 3},
+    "internal_test": {"states": 48, "per_action": 3},
+    "train_on_off_per_component": {"on": 80, "off": 80},
+    "external_outcomes_used_for_generation_or_selection": false,
+    "shortcut_gate": {
+      "single_metadata_or_template_grouped_balanced_accuracy_max_exclusive": 0.7,
+      "match_dimensions": ["topic", "text_length", "resource_count", "age", "estimated_tokens", "similarity"]
+    }
+  },
+  "human_review_budget": {
+    "H1": "complete final RAG and retrieval review",
+    "historical_H2": "retrieval opportunity and candidate-suitability diagnosis only; not an RS benefit label",
+    "RS_effect_quality": "one bounded quality-only decision for each of 32 fresh same-stack pairs",
+    "RS_effect_risk": "atomic review only for human-adjudicated RS material wins",
+    "MP_MS_ME": "not yet authorized or frozen",
+    "H3": "one final blind end-to-end response review after policy freeze",
+    "additional_micro_packets": "forbidden unless a documented schema or integrity defect makes a frozen packet unusable"
+  },
+  "model": {
+    "primary": "four independent L2 logistic regression heads",
+    "loss": "group-weighted binary cross entropy plus L2",
+    "challengers": ["transparent_rule", "shallow_tree", "frozen_BGE_small_if_qualified"],
+    "grouped_oof_folds": 5,
+    "registered_seeds": 5,
+    "threshold_selection": "train OOF only",
+    "calibration": "calibration split only",
+    "internal_test_runs": 1
+  },
+  "learning_gate": {
+    "per_head_balanced_accuracy_min": 0.7,
+    "macro_balanced_accuracy_min": 0.8,
+    "per_head_positive_recall_min": 0.6,
+    "brier_must_beat_prevalence_prior": true,
+    "on_and_off_each_min_fraction": 0.2,
+    "five_seed_macro_ba_std_max": 0.03,
+    "exact_action_must_beat": ["always_off", "transparent_rule"]
+  },
+  "risk_events": [
+    "boundary_or_permission_violation",
+    "unsupported_or_overstated_claim",
+    "stale_conflicting_wrong-person_memory_use",
+    "excessive_directiveness_or_burden"
+  ],
+  "selection_order": [
+    "hard_risk",
+    "qualified_resource_opportunity",
+    "predicted_material_quality_benefit",
+    "cost_budget",
+    "lowest_cost_tiebreak"
+  ],
+  "external_roles": {
+    "ESConv": "single-session RS and correct memory-off evaluation",
+    "EvoEmo_or_ES_MemEval": "longitudinal MP/MS/ME and stale-conflict evaluation",
+    "retuning": false
+  }
+}

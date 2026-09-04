@@ -1,0 +1,112 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-four-component-final-labels-v1",
+  "status": "READY_FOR_FOUR_COMPONENT_GROUPED_OOF_TRAINING",
+  "checks": {
+    "risk_rows_109": true,
+    "risk_ids_unique": true,
+    "packet_rows_109": true,
+    "private_key_rows_109": true,
+    "ids_match_packet": true,
+    "ids_match_private_key": true,
+    "protocol_exact": true,
+    "one_nonempty_annotator": true,
+    "quality_rows_256": true,
+    "quality_contrasts_unique": true,
+    "all_annotation_rules_pass": true,
+    "risk_exactly_covers_quality_winners": true
+  },
+  "row_count": 256,
+  "label_counts": {
+    "on": 106,
+    "off": 150,
+    "unknown": 0
+  },
+  "risk_review_counts": {
+    "no": 106,
+    "yes": 3
+  },
+  "risk_event_counts": {
+    "stale_or_conflicting_evidence_use": 2,
+    "unsupported_personal_claim": 2
+  },
+  "final_labels_by_component": {
+    "ME": {
+      "OFF_CONTROL_QUALITY_WIN": 33,
+      "OFF_NO_MATERIAL_QUALITY_GAIN": 14,
+      "OFF_QUALITY_WIN_BUT_MATERIAL_RISK": 1,
+      "ON_QUALITY_WIN_NO_MATERIAL_RISK": 16
+    },
+    "MP": {
+      "OFF_CONTROL_QUALITY_WIN": 14,
+      "OFF_NO_MATERIAL_QUALITY_GAIN": 11,
+      "OFF_QUALITY_WIN_BUT_MATERIAL_RISK": 1,
+      "ON_QUALITY_WIN_NO_MATERIAL_RISK": 38
+    },
+    "MS": {
+      "OFF_CONTROL_QUALITY_WIN": 20,
+      "OFF_NO_MATERIAL_QUALITY_GAIN": 20,
+      "OFF_QUALITY_WIN_BUT_MATERIAL_RISK": 1,
+      "ON_QUALITY_WIN_NO_MATERIAL_RISK": 23
+    },
+    "RS": {
+      "OFF_CONTROL_QUALITY_WIN": 31,
+      "OFF_NO_MATERIAL_QUALITY_GAIN": 4,
+      "ON_QUALITY_WIN_NO_MATERIAL_RISK": 29
+    }
+  },
+  "final_labels_by_split": {
+    "calibration": {
+      "OFF_CONTROL_QUALITY_WIN": 25,
+      "OFF_NO_MATERIAL_QUALITY_GAIN": 12,
+      "ON_QUALITY_WIN_NO_MATERIAL_RISK": 27
+    },
+    "internal_test": {
+      "OFF_CONTROL_QUALITY_WIN": 24,
+      "OFF_NO_MATERIAL_QUALITY_GAIN": 13,
+      "OFF_QUALITY_WIN_BUT_MATERIAL_RISK": 2,
+      "ON_QUALITY_WIN_NO_MATERIAL_RISK": 25
+    },
+    "train": {
+      "OFF_CONTROL_QUALITY_WIN": 49,
+      "OFF_NO_MATERIAL_QUALITY_GAIN": 24,
+      "OFF_QUALITY_WIN_BUT_MATERIAL_RISK": 1,
+      "ON_QUALITY_WIN_NO_MATERIAL_RISK": 54
+    }
+  },
+  "development_binary_labels_by_component": {
+    "ME": {
+      "0": 37,
+      "1": 11
+    },
+    "MP": {
+      "0": 18,
+      "1": 30
+    },
+    "MS": {
+      "0": 30,
+      "1": 18
+    },
+    "RS": {
+      "0": 26,
+      "1": 22
+    }
+  },
+  "component_training_ready": {
+    "RS": true,
+    "MP": true,
+    "MS": true,
+    "ME": true
+  },
+  "internal_test_excluded_from_model_fitting": true,
+  "tie_policy": "Material equivalence maps to component-off because the component has positive retrieval/prompt cost.",
+  "risk_interpretation": "A material-risk verdict blocks adoption of the full component-on candidate action. It is not evidence that the added component causally created the event.",
+  "claim_boundary": "Labels are deterministic-protocol, single-primary-human paired-action admissibility proxies; they are neither clinical safety labels nor objective individual causal effects.",
+  "lineage": {
+    "quality_labels_sha256": "276e4407b9fa09bcd202c04bd631d58c0374258f4b1d7ba981c409fc3ea6cf3f",
+    "risk_annotations_sha256": "5d60ba5ea19f4bb70c00bf43501b8a507a577c98005c33b353b1ed2f857d000e",
+    "risk_packet_sha256": "57edbdedb1eeeb5ddbe0adf5e0ac35ef618bff81cef00a4d83bf31ce17676429",
+    "risk_private_key_sha256": "1f7d726111e7346df7e6e8e6591de3e08f1b7550e419edc84866d42267a4dc25",
+    "memory_generation_outcomes_sha256": "60a8cb72c52adbd1354e32482ef684a74387309e6067947238539461b9768ed4",
+    "rs_generation_outcomes_sha256": "b4b905efa52a9d929aaaebe49175fa4c58c4ac96c02565525980d2870b897655"
+  }
+}

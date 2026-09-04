@@ -1,0 +1,10 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-rs-generation-execution-v1",
+  "status": "COMPLETE",
+  "planned_calls": 128,
+  "completed_calls": 128,
+  "completed_now": 128,
+  "remaining_calls": 0,
+  "resumable": true,
+  "plan_freeze_manifest_sha256": "2e837d1229c5345ab3e1ab8d25d94944e818366c3c7725c4d4200e081f3964cb"
+}

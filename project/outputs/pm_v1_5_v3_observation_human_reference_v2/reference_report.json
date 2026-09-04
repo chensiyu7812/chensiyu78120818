@@ -1,0 +1,226 @@
+{
+  "protocol": "pm-v1.5-v3-observation-human-reference-v2",
+  "status": "PASS_REFERENCE_FROZEN",
+  "rows": 96,
+  "carry_forward_rows": 80,
+  "delta_rows": 16,
+  "per_component": {
+    "MP": 24,
+    "MS": 24,
+    "ME": 24,
+    "RS": 24
+  },
+  "label_shape": {
+    "FACTOR_FIT": {
+      "MP": {
+        "n": 16,
+        "factors": {
+          "owner_time_entity_valid": {
+            "no": 8,
+            "yes": 8
+          },
+          "goal_function_fit": {
+            "no": 8,
+            "yes": 8
+          },
+          "boundary_burden_compatible": {
+            "no": 8,
+            "yes": 8
+          },
+          "specific_increment": {
+            "no": 8,
+            "yes": 8
+          }
+        },
+        "derived_eligibility": {
+          "ineligible": 15,
+          "eligible": 1
+        }
+      },
+      "MS": {
+        "n": 16,
+        "factors": {
+          "owner_time_entity_valid": {
+            "yes": 8,
+            "no": 8
+          },
+          "goal_function_fit": {
+            "no": 8,
+            "yes": 8
+          },
+          "boundary_burden_compatible": {
+            "no": 8,
+            "yes": 8
+          },
+          "specific_increment": {
+            "no": 8,
+            "yes": 8
+          }
+        },
+        "derived_eligibility": {
+          "ineligible": 15,
+          "eligible": 1
+        }
+      },
+      "ME": {
+        "n": 16,
+        "factors": {
+          "owner_time_entity_valid": {
+            "yes": 8,
+            "no": 8
+          },
+          "goal_function_fit": {
+            "yes": 8,
+            "no": 8
+          },
+          "boundary_burden_compatible": {
+            "no": 8,
+            "yes": 8
+          },
+          "specific_increment": {
+            "no": 8,
+            "yes": 8
+          }
+        },
+        "derived_eligibility": {
+          "ineligible": 15,
+          "eligible": 1
+        }
+      },
+      "RS": {
+        "n": 16,
+        "factors": {
+          "goal_function_fit": {
+            "no": 8,
+            "yes": 8
+          },
+          "boundary_burden_compatible": {
+            "yes": 8,
+            "no": 8
+          },
+          "specific_increment": {
+            "yes": 8,
+            "no": 8
+          }
+        },
+        "derived_eligibility": {
+          "ineligible": 14,
+          "eligible": 2
+        }
+      }
+    },
+    "ELIGIBILITY_CONFIRMATION": {
+      "MP": {
+        "n": 8,
+        "factors": {
+          "owner_time_entity_valid": {
+            "yes": 6,
+            "no": 2
+          },
+          "goal_function_fit": {
+            "no": 1,
+            "yes": 7
+          },
+          "boundary_burden_compatible": {
+            "yes": 7,
+            "no": 1
+          },
+          "specific_increment": {
+            "yes": 6,
+            "no": 2
+          }
+        },
+        "derived_eligibility": {
+          "ineligible": 4,
+          "eligible": 4
+        }
+      },
+      "MS": {
+        "n": 8,
+        "factors": {
+          "owner_time_entity_valid": {
+            "yes": 6,
+            "no": 2
+          },
+          "goal_function_fit": {
+            "yes": 6,
+            "no": 2
+          },
+          "boundary_burden_compatible": {
+            "no": 1,
+            "yes": 7
+          },
+          "specific_increment": {
+            "yes": 7,
+            "no": 1
+          }
+        },
+        "derived_eligibility": {
+          "ineligible": 4,
+          "eligible": 4
+        }
+      },
+      "ME": {
+        "n": 8,
+        "factors": {
+          "owner_time_entity_valid": {
+            "yes": 7,
+            "no": 1
+          },
+          "goal_function_fit": {
+            "yes": 6,
+            "no": 2
+          },
+          "boundary_burden_compatible": {
+            "yes": 6,
+            "no": 2
+          },
+          "specific_increment": {
+            "yes": 7,
+            "no": 1
+          }
+        },
+        "derived_eligibility": {
+          "eligible": 4,
+          "ineligible": 4
+        }
+      },
+      "RS": {
+        "n": 8,
+        "factors": {
+          "goal_function_fit": {
+            "yes": 6,
+            "no": 2
+          },
+          "boundary_burden_compatible": {
+            "yes": 6,
+            "no": 2
+          },
+          "specific_increment": {
+            "yes": 7,
+            "no": 1
+          }
+        },
+        "derived_eligibility": {
+          "eligible": 4,
+          "ineligible": 4
+        }
+      }
+    }
+  },
+  "factor_fit_exact_8_8_pass": true,
+  "eligibility_confirmation_exact_4_4_pass": true,
+  "uncertain_rows": 0,
+  "construction_intent_used_as_gold": false,
+  "step1_worth_opening_labels_created": 0,
+  "response_or_outcome_read": false,
+  "external_lockbox_read": false,
+  "failures": [],
+  "delta_labels_sha256": "a4224f98569247a2abca3d1bc9b235ab995dfbd462fe87902b03a2c12bdad525",
+  "carry_forward_sha256": "c75dfd7e56705665ed27205695683a161ff369db470edc27bcc0b9dc65dfedc0",
+  "v2_binding_sha256": "f835828a4137f08d2658364504f5dc574e126efeffe6c7d639e38400b62a7de6",
+  "reference_sha256": "e1d368c4a8f2576515d8e685531050822416d384b5379c7edb0a18400757dc6a",
+  "python_executable": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/.venv-pm-v1-5/bin/python",
+  "python_version": "3.13.2",
+  "next_step_if_pass": "RUN_PRE_FROZEN_FACTOR_BAKEOFF_ON_FACTOR_FIT_THEN_ONE_SHOT_ELIGIBILITY_CONFIRMATION"
+}

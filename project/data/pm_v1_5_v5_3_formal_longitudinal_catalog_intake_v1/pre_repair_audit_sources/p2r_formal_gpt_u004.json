@@ -1,0 +1,2560 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_gpt_u004",
+  "content_author": "chatgpt_pro",
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "finance_housing",
+    "family_caregiving",
+    "relocation_cultural_adaptation"
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01_supply_chain_certificate",
+      "label": "evening supply-chain analytics certificate, assignments, and final assessment"
+    },
+    {
+      "thread_id": "thread_02_warehouse_schedule",
+      "label": "warehouse shift changes, inventory cycles, and workload boundaries"
+    },
+    {
+      "thread_id": "thread_03_professional_french",
+      "label": "professional French confidence for classes, interviews, and workplace communication"
+    },
+    {
+      "thread_id": "thread_04_household_housing",
+      "label": "household budget, lease decisions, and practical family scheduling"
+    },
+    {
+      "thread_id": "thread_05_family_abroad",
+      "label": "supporting mother and brother abroad without absorbing every financial or logistical problem"
+    },
+    {
+      "thread_id": "thread_06_networking_transition",
+      "label": "career networking, applications, and confidence moving toward analyst roles"
+    }
+  ],
+  "profile_history": [
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_profile_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "name",
+      "field_value": "Omar Haddad",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "Omar Haddad",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "addressing_or_disambiguating_user_identity"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_profile_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "age",
+      "field_value": "42",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "42",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "age_relevant_feasibility_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_profile_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "job",
+      "field_value": "warehouse inventory clerk",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I work as a warehouse inventory clerk",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "workplace_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_profile_nationality_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "nationality",
+      "field_value": "Jordanian",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I'm Jordanian",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "country_specific_process_or_language_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_profile_location_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "location",
+      "field_value": "Montreal, Quebec",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I live in Montreal, Quebec",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "local_logistics",
+        "commute",
+        "housing",
+        "location_specific_feasibility"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_profile_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "gender",
+      "field_value": "man",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I'm a man",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "gender_relevant_context_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_profile_education_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "education",
+      "field_value": "bachelor's degree in business administration",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I have a bachelor's degree in business administration",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "education_or_training_context"
+      ]
+    }
+  ],
+  "response_preference_history": [
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_preference_listen_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "listen_only_no_advice",
+      "preference_text": "When I say I just need to vent about a warehouse day, please don't start giving advice unless I ask for it.",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s004_t01"
+      ],
+      "literal_source_span": "When I say I just need to vent about a warehouse day, please don't start giving advice unless I ask for it.",
+      "valid_from_session": 4,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_preference_direct_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "direct_answer_before_explanation",
+      "preference_text": "For practical decisions, give me the direct answer first and explain after.",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s010_t01"
+      ],
+      "literal_source_span": "For practical decisions, give me the direct answer first and explain after.",
+      "valid_from_session": 10,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u004_mp_preference_reflect_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "reflection_before_question",
+      "preference_text": "Before you ask me a question about interviews, it helps if you first reflect what you think the problem is; otherwise I start defending myself against a question you may not even mean.",
+      "owner_id": "p2r_formal_gpt_u004",
+      "source_turn_ids": [
+        "s016_t01"
+      ],
+      "literal_source_span": "Before you ask me a question about interviews, it helps if you first reflect what you think the problem is; otherwise I start defending myself against a question you may not even mean.",
+      "valid_from_session": 16,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_melanie",
+      "name": "Mélanie Roy",
+      "relationship": "warehouse shift supervisor",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing supervisor"
+    },
+    {
+      "entity_id": "entity_jules",
+      "name": "Jules Tremblay",
+      "relationship": "inventory coworker on the evening rotation",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing coworker"
+    },
+    {
+      "entity_id": "entity_salma",
+      "name": "Salma Haddad",
+      "relationship": "spouse who shares household budgeting and parenting",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing spouse"
+    },
+    {
+      "entity_id": "entity_yara",
+      "name": "Yara Haddad",
+      "relationship": "teenage daughter",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing daughter relationship"
+    },
+    {
+      "entity_id": "entity_tareq",
+      "name": "Tareq Haddad",
+      "relationship": "younger brother living in Amman",
+      "valid_from_session": 5,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing sibling relationship"
+    },
+    {
+      "entity_id": "entity_huda",
+      "name": "Huda Haddad",
+      "relationship": "mother living in Amman",
+      "valid_from_session": 5,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing parent relationship"
+    },
+    {
+      "entity_id": "entity_karim",
+      "name": "Karim Mansour",
+      "relationship": "friend who works in software sales",
+      "valid_from_session": 6,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing friend"
+    },
+    {
+      "entity_id": "entity_benoit",
+      "name": "Benoît Caron",
+      "relationship": "instructor in the supply-chain analytics certificate",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing instructor"
+    },
+    {
+      "entity_id": "entity_claire",
+      "name": "Claire Nguyen",
+      "relationship": "certificate classmate and study partner",
+      "valid_from_session": 7,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing classmate"
+    },
+    {
+      "entity_id": "entity_luc",
+      "name": "Luc Beaulieu",
+      "relationship": "recruiter specializing in logistics roles",
+      "valid_from_session": 12,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing recruiter contact"
+    },
+    {
+      "entity_id": "entity_samir",
+      "name": "Samir Rahal",
+      "relationship": "landlord for Omar’s family apartment",
+      "valid_from_session": 8,
+      "valid_until_session": 18,
+      "status_after_session_20": "former active leasing contact after renewal"
+    },
+    {
+      "entity_id": "entity_nadia",
+      "name": "Nadia Bouchard",
+      "relationship": "neighbor and parent from Yara’s school community",
+      "valid_from_session": 10,
+      "valid_until_session": null,
+      "status_after_session_20": "ongoing neighbor"
+    },
+    {
+      "entity_id": "entity_victor",
+      "name": "Victor Chen",
+      "relationship": "operations analytics manager at a company Omar later interviews with",
+      "valid_from_session": 23,
+      "valid_until_session": null,
+      "status_after_session_20": "professional interview contact"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "event_01",
+      "session_index": 1,
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Omar begins an evening supply-chain analytics certificate during a demanding warehouse inventory cycle."
+    },
+    {
+      "event_id": "event_02",
+      "session_index": 2,
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar uses a short French vocabulary card before class and participates more easily in a technical discussion."
+    },
+    {
+      "event_id": "event_03",
+      "session_index": 3,
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie"
+      ],
+      "resolution_status": "mixed",
+      "description": "Omar distinguishes ordinary overtime from shift changes that erase fixed class sessions."
+    },
+    {
+      "event_id": "event_04",
+      "session_index": 4,
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie",
+        "entity_jules"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar negotiates a predictable Tuesday release during the first course module."
+    },
+    {
+      "event_id": "event_05",
+      "session_index": 5,
+      "topic_thread_ids": [
+        "thread_04_household_housing",
+        "thread_05_family_abroad"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_salma",
+        "entity_huda",
+        "entity_tareq"
+      ],
+      "resolution_status": "unresolved",
+      "description": "A lease renewal and family request arrive during the same month and expose Omar’s uncertainty about available cash."
+    },
+    {
+      "event_id": "event_06",
+      "session_index": 6,
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_06_networking_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar turns a broad inventory assignment into one measurable warehouse question and finishes the first analysis."
+    },
+    {
+      "event_id": "event_07",
+      "session_index": 7,
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_karim"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Karim offers an introduction to a logistics analyst, but Omar keeps postponing the outreach message."
+    },
+    {
+      "event_id": "event_08",
+      "session_index": 8,
+      "topic_thread_ids": [
+        "thread_04_household_housing",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_samir",
+        "entity_salma"
+      ],
+      "resolution_status": "mixed",
+      "description": "Omar and Salma compare renewing the apartment with moving closer to the warehouse and school."
+    },
+    {
+      "event_id": "event_09",
+      "session_index": 9,
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_claire"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar completes his first certificate presentation after practicing technical explanations with Claire."
+    },
+    {
+      "event_id": "event_10",
+      "session_index": 10,
+      "topic_thread_ids": [
+        "thread_04_household_housing",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_salma",
+        "entity_yara"
+      ],
+      "resolution_status": "resolved",
+      "description": "The family separates fixed monthly costs from variable overtime income before deciding on the lease."
+    },
+    {
+      "event_id": "event_11",
+      "session_index": 11,
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_karim"
+      ],
+      "resolution_status": "resolved",
+      "description": "A casual voice-message exchange with Karim helps Omar draft a networking introduction in his own style."
+    },
+    {
+      "event_id": "event_12",
+      "session_index": 12,
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie",
+        "entity_jules"
+      ],
+      "resolution_status": "conflicting",
+      "description": "Omar corrects a mistaken assumption about who approved a weekend inventory swap."
+    },
+    {
+      "event_id": "event_13",
+      "session_index": 13,
+      "topic_thread_ids": [
+        "thread_05_family_abroad",
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_huda",
+        "entity_tareq"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar sets a fixed amount for a family expense instead of negotiating from urgency during each call."
+    },
+    {
+      "event_id": "event_14",
+      "session_index": 14,
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_luc"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Recruiter Luc suggests an analyst opening, but Omar has not yet submitted a résumé."
+    },
+    {
+      "event_id": "event_15",
+      "session_index": 15,
+      "topic_thread_ids": [
+        "thread_05_family_abroad",
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_huda",
+        "entity_salma"
+      ],
+      "resolution_status": "mixed",
+      "description": "Huda’s medical appointment schedule raises a travel-planning question without requiring immediate travel."
+    },
+    {
+      "event_id": "event_16",
+      "session_index": 16,
+      "topic_thread_ids": [
+        "thread_03_professional_french",
+        "thread_06_networking_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_claire"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar rehearses a French interview answer using a concrete warehouse example and becomes less dependent on memorized wording."
+    },
+    {
+      "event_id": "event_17",
+      "session_index": 17,
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_karim"
+      ],
+      "resolution_status": "mixed",
+      "description": "Karim’s effortless sales presentations become an invalid comparison for Omar’s analyst interview preparation."
+    },
+    {
+      "event_id": "event_18",
+      "session_index": 18,
+      "topic_thread_ids": [
+        "thread_04_household_housing",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_samir",
+        "entity_salma"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar renews the apartment after comparing total moving cost with the actual commute savings."
+    },
+    {
+      "event_id": "event_19",
+      "session_index": 19,
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar protects one study evening during a quarterly stock count by arranging coverage in advance."
+    },
+    {
+      "event_id": "event_20",
+      "session_index": 20,
+      "topic_thread_ids": [
+        "thread_05_family_abroad",
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_tareq"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar narrows how he helps Tareq with a business idea, avoiding taking ownership of the plan."
+    },
+    {
+      "event_id": "event_21",
+      "session_index": 21,
+      "topic_thread_ids": [
+        "thread_03_professional_french",
+        "thread_06_networking_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nadia"
+      ],
+      "resolution_status": "resolved",
+      "description": "A spontaneous conversation with neighbor Nadia gives Omar a natural low-stakes way to practice explaining his career change in French."
+    },
+    {
+      "event_id": "event_22",
+      "session_index": 22,
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Omar completes most coursework but delays booking the optional French-language final presentation slot."
+    },
+    {
+      "event_id": "event_23",
+      "session_index": 23,
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_luc"
+      ],
+      "resolution_status": "mixed",
+      "description": "Omar submits a revised résumé and is invited to a preliminary analyst screening."
+    },
+    {
+      "event_id": "event_24",
+      "session_index": 24,
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_claire"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar uses one error log to focus final-assessment study and avoids redoing already-mastered exercises."
+    },
+    {
+      "event_id": "event_25",
+      "session_index": 25,
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_victor"
+      ],
+      "resolution_status": "mixed",
+      "description": "Omar prepares for an interview with Victor using examples tied to inventory decisions rather than generic leadership claims."
+    },
+    {
+      "event_id": "event_26",
+      "session_index": 26,
+      "topic_thread_ids": [
+        "thread_05_family_abroad",
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_huda",
+        "entity_salma"
+      ],
+      "resolution_status": "mixed",
+      "description": "A possible visit to Amman is timed around the certificate finish and household budget rather than treated as an emergency trip."
+    },
+    {
+      "event_id": "event_27",
+      "session_index": 27,
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_06_networking_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie"
+      ],
+      "resolution_status": "mixed",
+      "description": "Mélanie asks Omar to train a new coworker during the same week as an analyst interview."
+    },
+    {
+      "event_id": "event_28",
+      "session_index": 28,
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_victor"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Omar completes a first interview but has not decided whether to send a follow-up clarification about his French level."
+    },
+    {
+      "event_id": "event_29",
+      "session_index": 29,
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "resolved",
+      "description": "Omar submits his final certificate analysis and receives confirmation that all coursework is complete."
+    },
+    {
+      "event_id": "event_30",
+      "session_index": 30,
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_01_supply_chain_certificate",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_luc",
+        "entity_melanie"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Omar separates a concrete next interview step from generic career-change anxiety after finishing the certificate."
+    },
+    {
+      "event_id": "event_31",
+      "session_index": 8,
+      "topic_thread_ids": [
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_samir"
+      ],
+      "resolution_status": "mixed",
+      "description": "Samir provides a written renewal figure, replacing Omar’s earlier estimate of the rent increase."
+    },
+    {
+      "event_id": "event_32",
+      "session_index": 15,
+      "topic_thread_ids": [
+        "thread_05_family_abroad"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_huda"
+      ],
+      "resolution_status": "mixed",
+      "description": "Huda confirms that her appointment is routine and already has local transport arranged."
+    },
+    {
+      "event_id": "event_33",
+      "session_index": 18,
+      "topic_thread_ids": [
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_salma",
+        "entity_yara"
+      ],
+      "resolution_status": "resolved",
+      "description": "Yara confirms that remaining near her current school is preferable to a shorter warehouse commute."
+    },
+    {
+      "event_id": "event_34",
+      "session_index": 25,
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "resolved",
+      "description": "Benoît reviews Omar’s project summary and confirms the analysis is ready for final submission."
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 22 months ago",
+      "event_ids": [
+        "event_01"
+      ],
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Omar Haddad, 42, and I work as a warehouse inventory clerk. I started an evening supply-chain analytics certificate because I want to move toward analyst work, but month-end counts can keep our team late with very little warning."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "You have a clear transition goal, and the first obstacle is not the coursework itself but the unpredictability around it. What are you trying to protect?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "My goal is to finish the certificate without treating every warehouse emergency as more important than class. I enrolled and bought the software license, but I haven't decided what I will do when Mélanie asks me to stay on a class night."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "That leaves one practical boundary unresolved: how you will handle a genuine schedule collision when it happens."
+        }
+      ],
+      "summary": "Omar begins a supply-chain analytics certificate during unpredictable warehouse inventory cycles and defines the main goal as keeping class from becoming the default sacrifice.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_ms_001",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "My goal is to finish the certificate without treating every warehouse emergency as more important than class.",
+          "candidate_text": "My goal is to finish the certificate without treating every warehouse emergency as more important than class.",
+          "topic_thread": "thread_01_supply_chain_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "prior_goal"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_unresolved_001",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "I enrolled and bought the software license, but I haven't decided what I will do when Mélanie asks me to stay on a class night.",
+          "candidate_text": "I enrolled and bought the software license, but I haven't decided what I will do when Mélanie asks me to stay on a class night.",
+          "topic_thread": "thread_02_warehouse_schedule",
+          "entity_ids": [
+            "self",
+            "entity_melanie"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I enrolled and bought the software license",
+          "result_span": null
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_context_001",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "month-end counts can keep our team late with very little warning.",
+          "candidate_text": "month-end counts can keep our team late with very little warning.",
+          "topic_thread": "thread_02_warehouse_schedule",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 21 months ago",
+      "event_ids": [
+        "event_02"
+      ],
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I'm Jordanian and I live in Montreal, Quebec. The class is bilingual, but technical French still slows me down when discussion moves quickly."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "You already know the logistics concepts, so the useful target may be making familiar ideas easier to access in French."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "Before class I wrote five warehouse terms on one index card with the plain French sentence I would use to explain each one. I looked at it once on the bus, and when Benoît asked about cycle counting I answered without switching back to English halfway through."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "The card worked because it linked language to concepts you already use at work rather than creating a separate vocabulary project."
+        }
+      ],
+      "summary": "Omar prepares five plain French explanations of familiar warehouse terms and answers a class question without switching languages midway.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_core_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "Before class I wrote five warehouse terms on one index card with the plain French sentence I would use to explain each one. I looked at it once on the bus, and when Benoît asked about cycle counting I answered without switching back to English halfway through.",
+          "candidate_text": "Before class I wrote five warehouse terms on one index card with the plain French sentence I would use to explain each one. I looked at it once on the bus, and when Benoît asked about cycle counting I answered without switching back to English halfway through.",
+          "topic_thread": "thread_03_professional_french",
+          "entity_ids": [
+            "self",
+            "entity_benoit"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "Before class I wrote five warehouse terms on one index card with the plain French sentence I would use to explain each one.",
+          "result_span": "I looked at it once on the bus, and when Benoît asked about cycle counting I answered without switching back to English halfway through."
+        }
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 20 months ago",
+      "event_ids": [
+        "event_03"
+      ],
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I'm a man, and I have a bachelor's degree in business administration. Two extra hours after a normal shift don't bother me much on Friday; what bothers me is being told at four o'clock on Tuesday that I need to stay through the class I've already paid for."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "So the pressure is not overtime in general. It is short-notice overtime that displaces a fixed commitment."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "Exactly. I don't want to pretend every late shift has the same cost just because they all show up as overtime on the schedule."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "That distinction can support a much more specific conversation with Mélanie."
+        }
+      ],
+      "summary": "Omar distinguishes ordinary overtime from short-notice Tuesday extensions that directly erase paid class time, clarifying which schedule changes are genuinely costly.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_ms_002",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "Two extra hours after a normal shift don't bother me much on Friday; what bothers me is being told at four o'clock on Tuesday that I need to stay through the class I've already paid for.",
+          "candidate_text": "Two extra hours after a normal shift don't bother me much on Friday; what bothers me is being told at four o'clock on Tuesday that I need to stay through the class I've already paid for.",
+          "topic_thread": "thread_02_warehouse_schedule",
+          "entity_ids": [
+            "self",
+            "entity_melanie"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "pressure_distinction"
+        }
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 19 months ago",
+      "event_ids": [
+        "event_04"
+      ],
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie",
+        "entity_jules"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "When I say I just need to vent about a warehouse day, please don't start giving advice unless I ask for it. I did ask for help with the schedule this time, though. I told Mélanie that Tuesday class nights were fixed until June and offered to cover the Wednesday close instead. Jules agreed to take the Tuesday close, and the next six classes stayed untouched."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "You made the boundary specific and paired it with coverage, so it was easier for the team to use than a general request for fewer late shifts."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "It also stopped me from waiting until four o'clock every Tuesday to find out whether I was allowed to have an evening."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "That reduction in uncertainty is part of what the arrangement solved."
+        }
+      ],
+      "summary": "Omar swaps Wednesday closing coverage for protected Tuesday classes and gets six uninterrupted class nights, reducing both schedule conflict and anticipatory uncertainty.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_core_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "I told Mélanie that Tuesday class nights were fixed until June and offered to cover the Wednesday close instead. Jules agreed to take the Tuesday close, and the next six classes stayed untouched.",
+          "candidate_text": "I told Mélanie that Tuesday class nights were fixed until June and offered to cover the Wednesday close instead. Jules agreed to take the Tuesday close, and the next six classes stayed untouched.",
+          "topic_thread": "thread_02_warehouse_schedule",
+          "entity_ids": [
+            "self",
+            "entity_melanie",
+            "entity_jules"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I told Mélanie that Tuesday class nights were fixed until June and offered to cover the Wednesday close instead.",
+          "result_span": "Jules agreed to take the Tuesday close, and the next six classes stayed untouched."
+        }
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 18 months ago",
+      "event_ids": [
+        "event_05"
+      ],
+      "topic_thread_ids": [
+        "thread_04_household_housing",
+        "thread_05_family_abroad"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_salma",
+        "entity_huda",
+        "entity_tareq"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "Our lease renewal is due soon, and Mum asked whether I can help Tareq with a deposit for a small business idea. The specific thing I don't know is how much of our savings is actually free after the renewal, Yara's school costs, and my course fees."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "The family request feels urgent, but your available amount has not been established yet."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "Salma and I have rough numbers in three different notes, and Samir hasn't sent the final rent figure. I haven't promised Tareq anything yet."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "That is an important non-action: you have not converted incomplete household information into a family commitment."
+        }
+      ],
+      "summary": "A pending lease figure and family business request expose that Omar does not yet know how much household savings are genuinely available to send abroad.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_ms_003",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s005_t01"
+          ],
+          "literal_source_span": "The specific thing I don't know is how much of our savings is actually free after the renewal, Yara's school costs, and my course fees.",
+          "candidate_text": "The specific thing I don't know is how much of our savings is actually free after the renewal, Yara's school costs, and my course fees.",
+          "topic_thread": "thread_04_household_housing",
+          "entity_ids": [
+            "self",
+            "entity_salma",
+            "entity_yara"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "specific_old_observation"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_context_002",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "Samir hasn't sent the final rent figure.",
+          "candidate_text": "Samir hasn't sent the final rent figure.",
+          "topic_thread": "thread_04_household_housing",
+          "entity_ids": [
+            "self",
+            "entity_samir"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 17 months ago",
+      "event_ids": [
+        "event_06"
+      ],
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_06_networking_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "The first analytics assignment said to find an inventory improvement opportunity, and I kept trying to analyze the whole warehouse. I chose one question instead: which fast-moving items were being recounted most often after picking errors. That smaller query gave me a clean table, and I finished the analysis before the weekend."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "Narrowing the question created a dataset you could actually interpret instead of a warehouse-sized research project."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "Benoît said the scope was more convincing because I could explain why every column was there."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "That is good evidence for future assignments and for describing your analytical thinking in job conversations."
+        }
+      ],
+      "summary": "Omar narrows a broad warehouse-improvement assignment to repeated recounts after picking errors and finishes a clean, explainable analysis before the weekend.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_core_003",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s006_t01"
+          ],
+          "literal_source_span": "I chose one question instead: which fast-moving items were being recounted most often after picking errors. That smaller query gave me a clean table, and I finished the analysis before the weekend.",
+          "candidate_text": "I chose one question instead: which fast-moving items were being recounted most often after picking errors. That smaller query gave me a clean table, and I finished the analysis before the weekend.",
+          "topic_thread": "thread_01_supply_chain_certificate",
+          "entity_ids": [
+            "self",
+            "entity_benoit"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I chose one question instead: which fast-moving items were being recounted most often after picking errors.",
+          "result_span": "That smaller query gave me a clean table, and I finished the analysis before the weekend."
+        }
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 16 months ago",
+      "event_ids": [
+        "event_07"
+      ],
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_karim"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "Karim offered to introduce me to someone in logistics analytics. I said I was interested, then spent a week rewriting the first message because I don't want my French to make me sound less experienced."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "The introduction exists; the open thread is sending a human message rather than perfecting it indefinitely."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "I have Karim's contact and a draft in both English and French, but I still haven't asked him to make the introduction."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "That is a clear unfinished step, separate from whether the contact would eventually lead anywhere."
+        }
+      ],
+      "summary": "Omar has a willing networking introduction and two message drafts but keeps postponing the actual request because of concern about how his French will signal experience.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_ms_004",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "I have Karim's contact and a draft in both English and French, but I still haven't asked him to make the introduction.",
+          "candidate_text": "I have Karim's contact and a draft in both English and French, but I still haven't asked him to make the introduction.",
+          "topic_thread": "thread_06_networking_transition",
+          "entity_ids": [
+            "self",
+            "entity_karim"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "unfinished_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 15 months ago",
+      "event_ids": [
+        "event_08",
+        "event_31"
+      ],
+      "topic_thread_ids": [
+        "thread_04_household_housing",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_samir",
+        "entity_salma"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "Samir finally sent the written renewal figure. It is higher than I guessed, but not as high as the number I had been carrying around in my head."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "A real figure changes the decision from fear about an unknown increase to a specific comparison."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "Salma and I looked at two apartments closer to the warehouse, but the school commute for Yara would be worse. We haven't decided anything; I just feel less trapped now that the renewal is an actual number."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "That is progress in the information state even without a housing decision."
+        }
+      ],
+      "summary": "A written renewal quote replaces Omar’s inflated rent estimate and lets the family compare housing options using real costs and Yara’s school commute.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 14 months ago",
+      "event_ids": [
+        "event_09"
+      ],
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_claire"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "Claire practiced the first certificate presentation with me twice. The first time I kept apologizing for my French; the second time I just described the inventory chart and answered her questions. I finished the real presentation without apologizing once."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "You moved attention from evaluating your language to explaining the chart, and the real presentation followed that pattern."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "I was still searching for words, but the presentation itself is done now and Benoît marked it complete."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "That makes this a resolved course thread rather than an ongoing question about whether you can present at all."
+        }
+      ],
+      "summary": "Omar completes his first certificate presentation after rehearsing with Claire and learns that explaining the chart directly works better than apologizing for imperfect French.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_ms_005",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "the presentation itself is done now and Benoît marked it complete.",
+          "candidate_text": "the presentation itself is done now and Benoît marked it complete.",
+          "topic_thread": "thread_01_supply_chain_certificate",
+          "entity_ids": [
+            "self",
+            "entity_benoit"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "resolved_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 13 months ago",
+      "event_ids": [
+        "event_10"
+      ],
+      "topic_thread_ids": [
+        "thread_04_household_housing",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_salma",
+        "entity_yara"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "For practical decisions, give me the direct answer first and explain after. Salma and I put rent, utilities, groceries, Yara's school transit, and my course payment in a fixed-cost column, then treated overtime as extra instead of part of the baseline. The number we actually need each month was lower than my fear-number, so renewing the apartment stopped looking impossible."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "Direct answer: the renewal is affordable on your current baseline. The reason is that you separated guaranteed costs from income that varies with overtime."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "We still haven't signed, but the conversation is about preferences now, not whether we can survive the rent."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "That is a meaningful shift in the decision."
+        }
+      ],
+      "summary": "Omar and Salma separate fixed household costs from overtime income, lowering the realistic monthly floor and turning the lease discussion from crisis to preference.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_core_004",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "Salma and I put rent, utilities, groceries, Yara's school transit, and my course payment in a fixed-cost column, then treated overtime as extra instead of part of the baseline. The number we actually need each month was lower than my fear-number, so renewing the apartment stopped looking impossible.",
+          "candidate_text": "Salma and I put rent, utilities, groceries, Yara's school transit, and my course payment in a fixed-cost column, then treated overtime as extra instead of part of the baseline. The number we actually need each month was lower than my fear-number, so renewing the apartment stopped looking impossible.",
+          "topic_thread": "thread_04_household_housing",
+          "entity_ids": [
+            "self",
+            "entity_salma",
+            "entity_yara"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "Salma and I put rent, utilities, groceries, Yara's school transit, and my course payment in a fixed-cost column, then treated overtime as extra instead of part of the baseline.",
+          "result_span": "The number we actually need each month was lower than my fear-number, so renewing the apartment stopped looking impossible."
+        }
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 12 months ago",
+      "event_ids": [
+        "event_11"
+      ],
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_karim"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "Karim sent me a voice note saying, basically, 'stop writing a cover letter to a person who hasn't met you.' I laughed, then recorded a thirty-second reply about the warehouse analysis I was studying and asked if his contact would be open to a short call. He forwarded it as-is. The contact replied the next day, and for once my first networking message sounded like me rather than a translated corporate paragraph."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "The voice format seems to have pulled you toward ordinary communication and away from performing a perfect professional identity."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "I still had an accent and a few clumsy phrases. Apparently that did not prevent a reply."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "That outcome is worth keeping separate from any claim that every future contact will respond the same way."
+        }
+      ],
+      "summary": "A brief unscripted voice message through Karim leads to a networking reply and helps Omar sound more like himself than in repeatedly polished written introductions.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_challenge_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s011_t01"
+          ],
+          "literal_source_span": "I laughed, then recorded a thirty-second reply about the warehouse analysis I was studying and asked if his contact would be open to a short call. He forwarded it as-is. The contact replied the next day, and for once my first networking message sounded like me rather than a translated corporate paragraph.",
+          "candidate_text": "I laughed, then recorded a thirty-second reply about the warehouse analysis I was studying and asked if his contact would be open to a short call. He forwarded it as-is. The contact replied the next day, and for once my first networking message sounded like me rather than a translated corporate paragraph.",
+          "topic_thread": "thread_06_networking_transition",
+          "entity_ids": [
+            "self",
+            "entity_karim"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "I laughed, then recorded a thirty-second reply about the warehouse analysis I was studying and asked if his contact would be open to a short call.",
+          "result_span": "The contact replied the next day, and for once my first networking message sounded like me rather than a translated corporate paragraph."
+        }
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 11 months ago",
+      "event_ids": [
+        "event_12"
+      ],
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie",
+        "entity_jules"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "I thought Jules had agreed to cover the Saturday inventory count because Mélanie put his initials beside the shift. Jules showed me the message: Mélanie had only asked him if he was available, and he never confirmed. I had been treating a proposed swap as a finished agreement."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "That is a concrete status correction. The owner of the confirmation matters because the initials alone were ambiguous."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "I checked with Mélanie and she changed the sheet back to 'open.' I was annoyed, but at least we caught it before Saturday."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "That keeps the corrected version available for future scheduling decisions."
+        }
+      ],
+      "summary": "Omar corrects a mistaken belief that Jules had confirmed a Saturday swap, restoring the shift to open status before the inventory count.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_ms_006",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "Mélanie had only asked him if he was available, and he never confirmed. I had been treating a proposed swap as a finished agreement.",
+          "candidate_text": "Mélanie had only asked him if he was available, and he never confirmed. I had been treating a proposed swap as a finished agreement.",
+          "topic_thread": "thread_02_warehouse_schedule",
+          "entity_ids": [
+            "self",
+            "entity_melanie",
+            "entity_jules"
+          ],
+          "resolution_status": "conflicting",
+          "memory_function": "conflict_record"
+        }
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 10 months ago",
+      "event_ids": [
+        "event_13"
+      ],
+      "topic_thread_ids": [
+        "thread_05_family_abroad",
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_huda",
+        "entity_tareq"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "Tareq asked again about the business deposit, and Mum was worried I would say no because she thinks the opportunity is time-sensitive. I told them the exact amount I could contribute once, and that I would not add more until after our lease decision. Tareq adjusted the plan around that number instead of calling every few days to ask whether I could stretch it."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "You gave a real amount tied to your household timing, which let his plan adapt rather than keeping your contribution indefinite."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "I still wonder if I should have sent more, but the repeated negotiation stopped."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "Discomfort after the boundary does not erase the practical result you observed."
+        }
+      ],
+      "summary": "Omar sets one fixed contribution for Tareq’s business deposit until after the lease decision, ending repeated requests to stretch the amount.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_core_005",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "I told them the exact amount I could contribute once, and that I would not add more until after our lease decision. Tareq adjusted the plan around that number instead of calling every few days to ask whether I could stretch it.",
+          "candidate_text": "I told them the exact amount I could contribute once, and that I would not add more until after our lease decision. Tareq adjusted the plan around that number instead of calling every few days to ask whether I could stretch it.",
+          "topic_thread": "thread_05_family_abroad",
+          "entity_ids": [
+            "self",
+            "entity_tareq",
+            "entity_huda"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I told them the exact amount I could contribute once, and that I would not add more until after our lease decision.",
+          "result_span": "Tareq adjusted the plan around that number instead of calling every few days to ask whether I could stretch it."
+        }
+      ]
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 9 months ago",
+      "event_ids": [
+        "event_14"
+      ],
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_luc"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "Luc sent me an analyst posting that matches the certificate work better than anything I've seen so far. I saved it and changed the top half of my résumé, but I haven't submitted the application."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "You have moved from browsing to a specific role, and the remaining action is now visible."
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "I keep telling myself I should wait until my French sounds more professional, even though the job description says bilingual is preferred, not mandatory."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "That language concern may be real, but it is separate from the fact that the application itself remains unfinished."
+        }
+      ],
+      "summary": "Luc sends Omar a relevant analyst posting; Omar revises his résumé but has not submitted, partly because he is waiting for undefined improvement in professional French.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_unresolved_002",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s014_t01"
+          ],
+          "literal_source_span": "I saved it and changed the top half of my résumé, but I haven't submitted the application.",
+          "candidate_text": "I saved it and changed the top half of my résumé, but I haven't submitted the application.",
+          "topic_thread": "thread_06_networking_transition",
+          "entity_ids": [
+            "self",
+            "entity_luc"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I saved it and changed the top half of my résumé",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 8 months ago",
+      "event_ids": [
+        "event_15",
+        "event_32"
+      ],
+      "topic_thread_ids": [
+        "thread_05_family_abroad",
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_huda",
+        "entity_salma"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "Mum has a medical appointment next month, and my first reaction was that I should look at flights. She told me it is a routine follow-up and Tareq already arranged transport for the day."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "That changes the immediate need. Caring about the appointment does not automatically mean travel is required."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "Salma and I still want to see whether a visit later in the year fits the budget, but this appointment isn't an emergency trip I have to solve tonight."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "That is a useful context correction: local support is already in place for this appointment."
+        }
+      ],
+      "summary": "Omar learns that Huda’s appointment is routine and locally supported, allowing a future family visit to remain a budgeted choice rather than an emergency response.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_context_003",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s015_t01"
+          ],
+          "literal_source_span": "She told me it is a routine follow-up and Tareq already arranged transport for the day.",
+          "candidate_text": "She told me it is a routine follow-up and Tareq already arranged transport for the day.",
+          "topic_thread": "thread_05_family_abroad",
+          "entity_ids": [
+            "entity_huda",
+            "entity_tareq"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 16,
+      "relative_time": "about 7 months ago",
+      "event_ids": [
+        "event_16"
+      ],
+      "topic_thread_ids": [
+        "thread_03_professional_french",
+        "thread_06_networking_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_claire"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s016_t01",
+          "role": "user",
+          "text": "Before you ask me a question about interviews, it helps if you first reflect what you think the problem is; otherwise I start defending myself against a question you may not even mean. Claire helped me practice one French answer about an inventory discrepancy. I used three headings—situation, decision, result—and by the third run I could change the wording without losing the sequence."
+        },
+        {
+          "turn_id": "s016_t02",
+          "role": "assistant",
+          "text": "You're worried less about knowing the example than about losing the thread while speaking French. What Claire's structure gave you was a sequence sturdy enough to survive different wording."
+        },
+        {
+          "turn_id": "s016_t03",
+          "role": "user",
+          "text": "Yes. That felt much better than memorizing a paragraph, because forgetting one word didn't make the whole answer collapse."
+        },
+        {
+          "turn_id": "s016_t04",
+          "role": "assistant",
+          "text": "That gives you a reusable interview-preparation result with clear conditions."
+        }
+      ],
+      "summary": "A three-part example structure lets Omar vary French interview wording without losing the sequence, reducing dependence on memorized paragraphs.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_core_006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s016_t01"
+          ],
+          "literal_source_span": "Claire helped me practice one French answer about an inventory discrepancy. I used three headings—situation, decision, result—and by the third run I could change the wording without losing the sequence.",
+          "candidate_text": "Claire helped me practice one French answer about an inventory discrepancy. I used three headings—situation, decision, result—and by the third run I could change the wording without losing the sequence.",
+          "topic_thread": "thread_03_professional_french",
+          "entity_ids": [
+            "self",
+            "entity_claire"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I used three headings—situation, decision, result",
+          "result_span": "by the third run I could change the wording without losing the sequence."
+        }
+      ]
+    },
+    {
+      "session_index": 17,
+      "relative_time": "about 6 months ago",
+      "event_ids": [
+        "event_17"
+      ],
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_karim"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s017_t01",
+          "role": "user",
+          "text": "Karim showed me a recording of a sales pitch he gave in French without notes. For about a day I treated that as proof that I should be able to interview the same way. But Karim sells software every week and has been doing presentations for years; that is his job history, not mine."
+        },
+        {
+          "turn_id": "s017_t02",
+          "role": "assistant",
+          "text": "His fluency can be admirable without being a relevant benchmark for your current analyst interview task."
+        },
+        {
+          "turn_id": "s017_t03",
+          "role": "user",
+          "text": "I went back to my three-heading examples. Those are based on what I actually need to explain."
+        },
+        {
+          "turn_id": "s017_t04",
+          "role": "assistant",
+          "text": "That keeps the comparison from displacing evidence that is specific to you."
+        }
+      ],
+      "summary": "Omar rejects Karim’s polished sales-pitch style as an invalid benchmark for his own analyst interviews and returns to task-specific examples.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_ms_007",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s017_t01"
+          ],
+          "literal_source_span": "But Karim sells software every week and has been doing presentations for years; that is his job history, not mine.",
+          "candidate_text": "But Karim sells software every week and has been doing presentations for years; that is his job history, not mine.",
+          "topic_thread": "thread_06_networking_transition",
+          "entity_ids": [
+            "self",
+            "entity_karim"
+          ],
+          "resolution_status": "stale_or_wrong_entity",
+          "memory_function": "wrong_person_distractor"
+        }
+      ]
+    },
+    {
+      "session_index": 18,
+      "relative_time": "about 5 months ago",
+      "event_ids": [
+        "event_18",
+        "event_33"
+      ],
+      "topic_thread_ids": [
+        "thread_04_household_housing",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_samir",
+        "entity_salma",
+        "entity_yara"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s018_t01",
+          "role": "user",
+          "text": "We did the full moving comparison: deposit, truck, application fees, Yara's longer school trip, and the shorter ride to my warehouse. The first-year savings from moving were much smaller than they looked when I compared rent alone."
+        },
+        {
+          "turn_id": "s018_t02",
+          "role": "assistant",
+          "text": "That adds the transition costs and the family's actual travel patterns instead of treating rent as the whole decision."
+        },
+        {
+          "turn_id": "s018_t03",
+          "role": "user",
+          "text": "We renewed with Samir for another year. Yara was relieved to stay near school, and I feel better knowing we chose the apartment rather than simply failing to move."
+        },
+        {
+          "turn_id": "s018_t04",
+          "role": "assistant",
+          "text": "That closes this housing decision with an explicit reason and time horizon."
+        }
+      ],
+      "summary": "Omar and Salma include moving costs and Yara’s school commute in the housing comparison and choose a one-year renewal rather than a misleading rent-only move.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 19,
+      "relative_time": "about 4 months ago",
+      "event_ids": [
+        "event_19"
+      ],
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s019_t01",
+          "role": "user",
+          "text": "Quarterly stock count landed in the same week as a certificate lab. I asked Mélanie two weeks early whether I could take the Monday count and keep Thursday evening free. She approved the switch before the roster closed, so I attended the lab without asking anyone for emergency coverage."
+        },
+        {
+          "turn_id": "s019_t02",
+          "role": "assistant",
+          "text": "The advance timing changed the conflict from a last-minute favor into ordinary scheduling."
+        },
+        {
+          "turn_id": "s019_t03",
+          "role": "user",
+          "text": "That was much calmer than negotiating after everyone's hours were already fixed."
+        },
+        {
+          "turn_id": "s019_t04",
+          "role": "assistant",
+          "text": "You now have a second example where early availability planning protected study without reducing total work."
+        }
+      ],
+      "summary": "Omar moves his quarterly stock-count duty before the roster closes, preserving a certificate lab without last-minute coverage requests.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 20,
+      "relative_time": "about 14 weeks ago",
+      "event_ids": [
+        "event_20"
+      ],
+      "topic_thread_ids": [
+        "thread_05_family_abroad",
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_tareq"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s020_t01",
+          "role": "user",
+          "text": "Tareq wanted me to rewrite the cash-flow sheet for his business idea. I told him I would review the assumptions if he filled in the first version himself. He sent a rough sheet with three questions, and our call became about those questions instead of me building the plan for him."
+        },
+        {
+          "turn_id": "s020_t02",
+          "role": "assistant",
+          "text": "You stayed involved while moving ownership of the first draft back to him."
+        },
+        {
+          "turn_id": "s020_t03",
+          "role": "user",
+          "text": "It was actually easier to be helpful because I wasn't guessing what he wanted the business to be."
+        },
+        {
+          "turn_id": "s020_t04",
+          "role": "assistant",
+          "text": "That is a concrete family-support result, not just a boundary in theory."
+        }
+      ],
+      "summary": "Omar requires Tareq to draft his own cash-flow sheet before review, producing a focused call without Omar taking ownership of the business plan.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_core_007",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s020_t01"
+          ],
+          "literal_source_span": "I told him I would review the assumptions if he filled in the first version himself. He sent a rough sheet with three questions, and our call became about those questions instead of me building the plan for him.",
+          "candidate_text": "I told him I would review the assumptions if he filled in the first version himself. He sent a rough sheet with three questions, and our call became about those questions instead of me building the plan for him.",
+          "topic_thread": "thread_05_family_abroad",
+          "entity_ids": [
+            "self",
+            "entity_tareq"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I told him I would review the assumptions if he filled in the first version himself.",
+          "result_span": "He sent a rough sheet with three questions, and our call became about those questions instead of me building the plan for him."
+        }
+      ]
+    },
+    {
+      "session_index": 21,
+      "relative_time": "about 12 weeks ago",
+      "event_ids": [
+        "event_21"
+      ],
+      "topic_thread_ids": [
+        "thread_03_professional_french",
+        "thread_06_networking_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nadia"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s021_t01",
+          "role": "user",
+          "text": "Nadia asked at the lift why I keep carrying the course laptop. I tried to answer in French and ended up explaining that I work with inventory now but want to analyze why stock problems happen. She asked one ordinary follow-up, and suddenly I was having the career-change conversation I keep rehearsing for recruiters, except we were holding grocery bags and waiting for the elevator."
+        },
+        {
+          "turn_id": "s021_t02",
+          "role": "assistant",
+          "text": "The setting removed the performance frame, so you practiced explaining the transition rather than trying to sound employable."
+        },
+        {
+          "turn_id": "s021_t03",
+          "role": "user",
+          "text": "I stumbled over a word and just described around it. The conversation kept going, which is probably the part I needed to learn."
+        },
+        {
+          "turn_id": "s021_t04",
+          "role": "assistant",
+          "text": "That ordinary continuation is useful evidence for future spoken conversations."
+        }
+      ],
+      "summary": "A spontaneous French conversation with neighbor Nadia lets Omar explain his career change without an interview frame and discover that a missing word does not stop communication.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_challenge_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s021_t01"
+          ],
+          "literal_source_span": "I tried to answer in French and ended up explaining that I work with inventory now but want to analyze why stock problems happen. She asked one ordinary follow-up, and suddenly I was having the career-change conversation I keep rehearsing for recruiters, except we were holding grocery bags and waiting for the elevator.",
+          "candidate_text": "I tried to answer in French and ended up explaining that I work with inventory now but want to analyze why stock problems happen. She asked one ordinary follow-up, and suddenly I was having the career-change conversation I keep rehearsing for recruiters, except we were holding grocery bags and waiting for the elevator.",
+          "topic_thread": "thread_03_professional_french",
+          "entity_ids": [
+            "self",
+            "entity_nadia"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "I tried to answer in French and ended up explaining that I work with inventory now but want to analyze why stock problems happen.",
+          "result_span": "She asked one ordinary follow-up, and suddenly I was having the career-change conversation I keep rehearsing for recruiters, except we were holding grocery bags and waiting for the elevator."
+        }
+      ]
+    },
+    {
+      "session_index": 22,
+      "relative_time": "about 10 weeks ago",
+      "event_ids": [
+        "event_22"
+      ],
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s022_t01",
+          "role": "user",
+          "text": "All the main coursework is done. Benoît offered me a choice between presenting the final project in French or submitting a written French summary with an English presentation."
+        },
+        {
+          "turn_id": "s022_t02",
+          "role": "assistant",
+          "text": "Both options satisfy the course, but they test different things. What have you committed to?"
+        },
+        {
+          "turn_id": "s022_t03",
+          "role": "user",
+          "text": "I opened the booking page and checked both presentation dates, but I haven't chosen which language format I want."
+        },
+        {
+          "turn_id": "s022_t04",
+          "role": "assistant",
+          "text": "That leaves a specific final-format decision unresolved rather than a vague question about your language ability."
+        }
+      ],
+      "summary": "With coursework nearly complete, Omar has two acceptable final language formats but has not chosen between a French presentation and written French summary.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_unresolved_003",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s022_t03"
+          ],
+          "literal_source_span": "I opened the booking page and checked both presentation dates, but I haven't chosen which language format I want.",
+          "candidate_text": "I opened the booking page and checked both presentation dates, but I haven't chosen which language format I want.",
+          "topic_thread": "thread_01_supply_chain_certificate",
+          "entity_ids": [
+            "self",
+            "entity_benoit"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I opened the booking page and checked both presentation dates",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 23,
+      "relative_time": "about 8 weeks ago",
+      "event_ids": [
+        "event_23"
+      ],
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_luc"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s023_t01",
+          "role": "user",
+          "text": "Luc looked at my résumé and said the warehouse experience was buried under generic skills. I moved the recount analysis and the stock-count scheduling example to the top half and submitted the analyst application that afternoon."
+        },
+        {
+          "turn_id": "s023_t02",
+          "role": "assistant",
+          "text": "That made the résumé show decisions and outcomes before abstract qualities."
+        },
+        {
+          "turn_id": "s023_t03",
+          "role": "user",
+          "text": "They invited me to a twenty-minute screening next week. Now the application is real enough that I'm nervous in a new way."
+        },
+        {
+          "turn_id": "s023_t04",
+          "role": "assistant",
+          "text": "The application thread has advanced to a concrete interview stage, which is different from the earlier hesitation to submit."
+        }
+      ],
+      "summary": "Omar moves two concrete warehouse examples to the top of his résumé, submits an analyst application, and receives an invitation to a short screening interview.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 24,
+      "relative_time": "about 6 weeks ago",
+      "event_ids": [
+        "event_24"
+      ],
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_claire"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s024_t01",
+          "role": "user",
+          "text": "Claire and I compared our practice quizzes and I kept wanting to redo every spreadsheet exercise. Instead, I wrote down only the errors I made twice and practiced those three patterns. On the next quiz I got all three right and saved almost an hour of review time."
+        },
+        {
+          "turn_id": "s024_t02",
+          "role": "assistant",
+          "text": "You used repeated errors as the study filter rather than treating every previous exercise as equally uncertain."
+        },
+        {
+          "turn_id": "s024_t03",
+          "role": "user",
+          "text": "It made the final assessment feel much smaller."
+        },
+        {
+          "turn_id": "s024_t04",
+          "role": "assistant",
+          "text": "That is a measurable study result you can reuse under similar conditions."
+        }
+      ],
+      "summary": "Omar studies only three repeatedly missed spreadsheet patterns and gets them right on the next quiz while reducing review time by nearly an hour.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_reusable_core_008",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s024_t01"
+          ],
+          "literal_source_span": "Instead, I wrote down only the errors I made twice and practiced those three patterns. On the next quiz I got all three right and saved almost an hour of review time.",
+          "candidate_text": "Instead, I wrote down only the errors I made twice and practiced those three patterns. On the next quiz I got all three right and saved almost an hour of review time.",
+          "topic_thread": "thread_01_supply_chain_certificate",
+          "entity_ids": [
+            "self",
+            "entity_claire"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "Instead, I wrote down only the errors I made twice and practiced those three patterns.",
+          "result_span": "On the next quiz I got all three right and saved almost an hour of review time."
+        }
+      ]
+    },
+    {
+      "session_index": 25,
+      "relative_time": "about 1 month ago",
+      "event_ids": [
+        "event_25",
+        "event_34"
+      ],
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french",
+        "thread_01_supply_chain_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_victor",
+        "entity_benoit"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s025_t01",
+          "role": "user",
+          "text": "Victor is leading the interview. I found myself writing answers about being hardworking and adaptable, which could belong to anyone. Benoît looked over my project summary and said the inventory analysis is ready to submit, so I have better material than those generic claims."
+        },
+        {
+          "turn_id": "s025_t02",
+          "role": "assistant",
+          "text": "The finished project gives you evidence that is both current and specific to the analyst role."
+        },
+        {
+          "turn_id": "s025_t03",
+          "role": "user",
+          "text": "I'm building the interview around two decisions I actually made at work and one course analysis. I still feel nervous, but at least the examples have owners, dates, and results."
+        },
+        {
+          "turn_id": "s025_t04",
+          "role": "assistant",
+          "text": "That gives the interview preparation a grounded structure without pretending nervousness has disappeared."
+        }
+      ],
+      "summary": "Omar shifts interview preparation from generic strengths to two work decisions and one completed course analysis after Benoît confirms the project is submission-ready.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 26,
+      "relative_time": "about 3 weeks ago",
+      "event_ids": [
+        "event_26"
+      ],
+      "topic_thread_ids": [
+        "thread_05_family_abroad",
+        "thread_04_household_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_huda",
+        "entity_salma"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s026_t01",
+          "role": "user",
+          "text": "Mum would like us to visit Amman this year. Salma and I checked the school calendar and the certificate end date before looking at fares."
+        },
+        {
+          "turn_id": "s026_t02",
+          "role": "assistant",
+          "text": "You are sequencing the decision around known constraints instead of letting the request become an immediate purchase."
+        },
+        {
+          "turn_id": "s026_t03",
+          "role": "user",
+          "text": "We found two possible weeks later in the year and sent Mum those dates. Nothing is booked, but now she knows we are planning rather than avoiding the visit."
+        },
+        {
+          "turn_id": "s026_t04",
+          "role": "assistant",
+          "text": "That moves the family thread forward without creating a travel commitment before the budget is ready."
+        }
+      ],
+      "summary": "Omar and Salma identify two realistic later-year windows for visiting Huda and communicate them without booking before school, course, and budget constraints are settled.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 27,
+      "relative_time": "about 2 weeks ago",
+      "event_ids": [
+        "event_27"
+      ],
+      "topic_thread_ids": [
+        "thread_02_warehouse_schedule",
+        "thread_06_networking_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_melanie"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s027_t01",
+          "role": "user",
+          "text": "Mélanie asked me to train a new inventory clerk next Thursday, which is also the day before the second-round interview. My old instinct is to treat the training as proof that I'm reliable and say yes automatically."
+        },
+        {
+          "turn_id": "s027_t02",
+          "role": "assistant",
+          "text": "The request matters, but it is not the only evidence of reliability you have. What flexibility exists?"
+        },
+        {
+          "turn_id": "s027_t03",
+          "role": "user",
+          "text": "I asked whether I could do the training on Wednesday instead. She said she would check the new hire's schedule, so nothing is confirmed yet."
+        },
+        {
+          "turn_id": "s027_t04",
+          "role": "assistant",
+          "text": "Good. The work request is still in negotiation rather than already consuming the interview preparation day."
+        }
+      ],
+      "summary": "A new-hire training request conflicts with Omar’s interview preparation, and he asks to move the session before treating the original date as fixed.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_unresolved_004",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s027_t03"
+          ],
+          "literal_source_span": "I asked whether I could do the training on Wednesday instead. She said she would check the new hire's schedule, so nothing is confirmed yet.",
+          "candidate_text": "I asked whether I could do the training on Wednesday instead. She said she would check the new hire's schedule, so nothing is confirmed yet.",
+          "topic_thread": "thread_02_warehouse_schedule",
+          "entity_ids": [
+            "self",
+            "entity_melanie"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I asked whether I could do the training on Wednesday instead.",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 28,
+      "relative_time": "about 9 days ago",
+      "event_ids": [
+        "event_28"
+      ],
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_victor"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s028_t01",
+          "role": "user",
+          "text": "The first interview with Victor went better than I expected. I answered mostly in English and used French for the warehouse examples when it came naturally."
+        },
+        {
+          "turn_id": "s028_t02",
+          "role": "assistant",
+          "text": "What remains unsettled after the interview?"
+        },
+        {
+          "turn_id": "s028_t03",
+          "role": "user",
+          "text": "I drafted a follow-up note thanking him and clarifying that I'm still building professional French, but I haven't decided whether sending that clarification helps or just reopens something they did not treat as a problem."
+        },
+        {
+          "turn_id": "s028_t04",
+          "role": "assistant",
+          "text": "That is a genuine follow-up decision. It is not the same as whether the interview itself went well enough."
+        }
+      ],
+      "summary": "After a better-than-expected first interview, Omar remains undecided about sending an unsolicited clarification regarding his still-developing professional French.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_unresolved_005",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s028_t03"
+          ],
+          "literal_source_span": "I drafted a follow-up note thanking him and clarifying that I'm still building professional French, but I haven't decided whether sending that clarification helps or just reopens something they did not treat as a problem.",
+          "candidate_text": "I drafted a follow-up note thanking him and clarifying that I'm still building professional French, but I haven't decided whether sending that clarification helps or just reopens something they did not treat as a problem.",
+          "topic_thread": "thread_06_networking_transition",
+          "entity_ids": [
+            "self",
+            "entity_victor"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I drafted a follow-up note thanking him and clarifying that I'm still building professional French",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 29,
+      "relative_time": "about 4 days ago",
+      "event_ids": [
+        "event_29"
+      ],
+      "topic_thread_ids": [
+        "thread_01_supply_chain_certificate",
+        "thread_03_professional_french"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_benoit"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s029_t01",
+          "role": "user",
+          "text": "I submitted the final analysis and Benoît confirmed that every course requirement is complete. I chose the written French summary with an English presentation, and the summary passed without revision."
+        },
+        {
+          "turn_id": "s029_t02",
+          "role": "assistant",
+          "text": "That closes the certificate itself, including the language-format decision that had been open."
+        },
+        {
+          "turn_id": "s029_t03",
+          "role": "user",
+          "text": "It feels strange that the course is actually done while the job transition is still uncertain."
+        },
+        {
+          "turn_id": "s029_t04",
+          "role": "assistant",
+          "text": "Those threads can be at different stages. Finishing one does not require the other to be resolved at the same time."
+        }
+      ],
+      "summary": "Omar completes every certificate requirement, including a written French summary, while recognizing that the separate analyst job transition remains uncertain.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 30,
+      "relative_time": "this week",
+      "event_ids": [
+        "event_30"
+      ],
+      "topic_thread_ids": [
+        "thread_06_networking_transition",
+        "thread_01_supply_chain_certificate",
+        "thread_02_warehouse_schedule"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_luc",
+        "entity_melanie"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s030_t01",
+          "role": "user",
+          "text": "People keep telling me that changing careers in your forties is stressful. I know that, but the sentence is too broad to help me decide anything. The certificate is finished, and Mélanie has already moved the new-hire training away from my interview day."
+        },
+        {
+          "turn_id": "s030_t02",
+          "role": "assistant",
+          "text": "That removes two issues that could otherwise masquerade as the current problem. What is actually pending?"
+        },
+        {
+          "turn_id": "s030_t03",
+          "role": "user",
+          "text": "Luc says the company may invite me back for a second round next week. Right now the useful question is how to prepare for that possibility without acting as if I already have the job."
+        },
+        {
+          "turn_id": "s030_t04",
+          "role": "assistant",
+          "text": "That is a concrete next-stage preparation problem, not a verdict on the whole career transition."
+        }
+      ],
+      "summary": "Omar separates generic midlife career-change anxiety from two already-resolved constraints and identifies a possible second interview as the actual current transition question.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u004_ms_008",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s030_t01"
+          ],
+          "literal_source_span": "People keep telling me that changing careers in your forties is stressful. I know that, but the sentence is too broad to help me decide anything.",
+          "candidate_text": "People keep telling me that changing careers in your forties is stressful. I know that, but the sentence is too broad to help me decide anything.",
+          "topic_thread": "thread_06_networking_transition",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "not_specific",
+          "memory_function": "same_topic_no_specific_content"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u004_me_context_004",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u004",
+          "source_turn_ids": [
+            "s030_t01"
+          ],
+          "literal_source_span": "The certificate is finished",
+          "candidate_text": "The certificate is finished",
+          "topic_thread": "thread_01_supply_chain_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    }
+  ]
+}

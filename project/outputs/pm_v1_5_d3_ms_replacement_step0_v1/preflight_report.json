@@ -1,0 +1,83 @@
+{
+  "protocol": "pm-v1.5-d3-ms-seeker-query-replacement-blueprint-v1",
+  "status": "PASS_READY_TO_PREPARE_80_FROZEN_MS_REPLACEMENT_CALLS",
+  "api_calls_made": 0,
+  "human_labels_read": false,
+  "external_outcomes_read": false,
+  "scope": "replace_only_original_d3_ms_40_pairs",
+  "original_d3_ms_disposition": "DIAGNOSTIC_ONLY_NOT_FORMAL_TRAINING",
+  "preserved_original_components": [
+    "RS",
+    "MP",
+    "ME"
+  ],
+  "users": 32,
+  "primary_pairs": 32,
+  "repeat_pairs": 8,
+  "total_pairs": 40,
+  "planned_response_calls": 80,
+  "background_counts": {
+    "M0+R0": 4,
+    "M0+RS": 4,
+    "ME+R0": 4,
+    "ME+RS": 4,
+    "MP+R0": 4,
+    "MP+RS": 4,
+    "MPE+R0": 4,
+    "MPE+RS": 4
+  },
+  "candidate_strata_counts": {
+    "higher_match|higher_grounding": 4,
+    "higher_match|lower_grounding": 12,
+    "lower_match|higher_grounding": 12,
+    "lower_match|lower_grounding": 4
+  },
+  "relevance_qualification": {
+    "states": 32,
+    "top2_present_states": 32,
+    "all_top2_relevant_states": 32,
+    "at_least_one_relevant_states": 32,
+    "selected_item_precision": 1.0,
+    "correct_owner_states": 32,
+    "strictly_prior_states": 32,
+    "supporter_query_invariant_states": 32,
+    "supporter_selection_invariant_states": 32
+  },
+  "content_disjoint_audit": {
+    "audit_after_construction_only": true,
+    "external_content_used_for_generation_or_selection": false,
+    "exact_normalized_overlap_counts": {
+      "ESConv": 0,
+      "EvoEmo": 0
+    },
+    "pass": true
+  },
+  "checks": {
+    "32_new_users": true,
+    "32_ms_one_bit_contrasts": true,
+    "all_16_runtime_actions_available": true,
+    "eight_backgrounds_four_each": true,
+    "rs_candidate_present_when_background_on": true,
+    "top2_present_32_of_32": true,
+    "all_top2_relevant_32_of_32": true,
+    "selected_item_precision_one": true,
+    "ownership_and_causal_order_32_of_32": true,
+    "supporter_text_cannot_steer_ms_query_or_selection": true,
+    "formal_pairs_have_no_hard_off": true,
+    "match_and_grounding_crossed": true,
+    "five_numeric_features_only": true,
+    "32_primary_8_repeat_80_calls": true,
+    "no_outcome_or_human_label_read": true,
+    "content_disjoint_exact_audit": true
+  },
+  "files": {
+    "synthetic_users.jsonl": "ddd05cf34ac280618bb65318ea319630ae4e3abe6ef9b08580961902fc78bb26",
+    "runtime_states.jsonl": "c4cf17b8bd9926e53c52a9afb547a8e7216d9725974a96f499e2fa338ffd4dfb",
+    "memory_backend.jsonl": "54dcdd03e3a8ac15202fc026dc5f380d6d37ade786dc9a107a444c89d90272e4",
+    "memory_item_metadata.jsonl": "af42f98c5c2ec991ff974c72bcd79c05d90c53b5929578f2d212eb9fb2435a0f",
+    "d3_ms_replacement_contrasts.jsonl": "79fcd52b8d9e1295dab1d2687bf3f3f8e4d651354a2193d2237a1eef661e91f4",
+    "d3_ms_replacement_primary_pairs.jsonl": "eead440425da1f2b9251076935f7ca3c55d89a26d7e571210ac989b48e0005fd",
+    "d3_ms_replacement_repeat_pairs.jsonl": "1b3e6ae0dcc3635da500e6a11eaf497d8a94715f5cbc0bf78a312d4b4613120e",
+    "retrieval_qualification_audit.jsonl": "2720872f1ec91e9108935a744f33610067258663fd6a014ff802e25b96418926"
+  }
+}

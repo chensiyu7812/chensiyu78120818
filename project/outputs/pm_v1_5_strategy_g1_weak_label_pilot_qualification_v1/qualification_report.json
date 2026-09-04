@@ -1,0 +1,217 @@
+{
+  "protocol": "pm-v1.5-strategy-g1-weak-label-pilot-qualification-v1",
+  "status": "PILOT_LABELER_STRUCTURAL_PASS_CANDIDATE_RECALL_REDESIGN_REQUIRED",
+  "pilot_rows": 122,
+  "exact_id_coverage": true,
+  "all_evidence_literal": true,
+  "invalid_move_or_exclusion_ids": 0,
+  "all_17_moves_activated_at_least_once": true,
+  "label_cardinality_distribution": {
+    "0": 12,
+    "1": 75,
+    "2": 35
+  },
+  "exclusion_cardinality_distribution": {
+    "0": 66,
+    "1": 52,
+    "2": 4
+  },
+  "rows_with_any_move": 110,
+  "rows_with_any_exclusion": 56,
+  "source_compatible_weak_proposals_not_final_sources": 66,
+  "per_move": {
+    "AM01_invite_open_expression": {
+      "pilot_top_candidate_rows": 7,
+      "pilot_top_candidate_activations": 0,
+      "pilot_top_candidate_activation_rate": 0.0,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 6,
+      "retrieval_warning": true
+    },
+    "AM02_ask_one_focused_clarification": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 2,
+      "pilot_top_candidate_activation_rate": 0.25,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 12,
+      "retrieval_warning": false
+    },
+    "AM03_check_feeling_or_coping": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 1,
+      "pilot_top_candidate_activation_rate": 0.125,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 3,
+      "retrieval_warning": true
+    },
+    "AM04_tentative_paraphrase_check": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 1,
+      "pilot_top_candidate_activation_rate": 0.125,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 4,
+      "retrieval_warning": true
+    },
+    "AM05_grounded_validation": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 4,
+      "pilot_top_candidate_activation_rate": 0.5,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 22,
+      "retrieval_warning": false
+    },
+    "AM06_bounded_normalization": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 1,
+      "pilot_top_candidate_activation_rate": 0.125,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 8,
+      "retrieval_warning": true
+    },
+    "AM07_acknowledge_effort_strength_or_resource": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 3,
+      "pilot_top_candidate_activation_rate": 0.375,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 15,
+      "retrieval_warning": false
+    },
+    "AM08_repair_misunderstanding": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 1,
+      "pilot_top_candidate_activation_rate": 0.125,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 1,
+      "retrieval_warning": true
+    },
+    "AM09_offer_collaborative_structuring": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 0,
+      "pilot_top_candidate_activation_rate": 0.0,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 1,
+      "retrieval_warning": true
+    },
+    "AM10_offer_one_optional_micro_step": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 3,
+      "pilot_top_candidate_activation_rate": 0.375,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 4,
+      "low_score_control_activation_rate": 0.8,
+      "overall_pilot_activations": 26,
+      "retrieval_warning": false
+    },
+    "AM11_reinforce_user_generated_plan": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 0,
+      "pilot_top_candidate_activation_rate": 0.0,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 6,
+      "retrieval_warning": true
+    },
+    "AM12_connect_to_trusted_support": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 1,
+      "pilot_top_candidate_activation_rate": 0.125,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 5,
+      "retrieval_warning": true
+    },
+    "AM13_offer_bounded_hope": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 3,
+      "pilot_top_candidate_activation_rate": 0.375,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 1,
+      "low_score_control_activation_rate": 0.2,
+      "overall_pilot_activations": 20,
+      "retrieval_warning": false
+    },
+    "AM14_supportive_transition": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 1,
+      "pilot_top_candidate_activation_rate": 0.125,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 3,
+      "retrieval_warning": true
+    },
+    "AM15_explore_interpersonal_boundary": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 2,
+      "pilot_top_candidate_activation_rate": 0.25,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 5,
+      "retrieval_warning": false
+    },
+    "AM16_gentle_behavior_focused_challenge": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 1,
+      "pilot_top_candidate_activation_rate": 0.125,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 7,
+      "retrieval_warning": true
+    },
+    "AM17_explain_brief_non_domain_rationale": {
+      "pilot_top_candidate_rows": 8,
+      "pilot_top_candidate_activations": 0,
+      "pilot_top_candidate_activation_rate": 0.0,
+      "low_score_control_rows": 5,
+      "low_score_control_activations": 0,
+      "low_score_control_activation_rate": 0.0,
+      "overall_pilot_activations": 1,
+      "retrieval_warning": true
+    }
+  },
+  "moves_with_top_candidate_activation_at_most_one": [
+    "AM01_invite_open_expression",
+    "AM03_check_feeling_or_coping",
+    "AM04_tentative_paraphrase_check",
+    "AM06_bounded_normalization",
+    "AM08_repair_misunderstanding",
+    "AM09_offer_collaborative_structuring",
+    "AM11_reinforce_user_generated_plan",
+    "AM12_connect_to_trusted_support",
+    "AM14_supportive_transition",
+    "AM16_gentle_behavior_focused_challenge",
+    "AM17_explain_brief_non_domain_rationale"
+  ],
+  "retrieval_warning_move_count": 11,
+  "targeted_control_activation_spot_check": {
+    "reviewed_control_activations": 5,
+    "recognizable_move_count": 5,
+    "acceptable_exclusion_handling_count": 5,
+    "conclusion": "The activations do not establish systematic over-labeling. They expose candidate-ranking recall failures for AM10 and show that move recognition can coexist with fail-closed exclusion."
+  },
+  "weak_labeler_decision": "retain Coder B for bounded weak proposals; outputs remain non-gold",
+  "current_1273_pool_decision": "do_not_run_yet; first add native-label strata and transparent move-pattern recall because BGE/TF-IDF top ranks missed many moves that Coder B recognized elsewhere in the same pilot",
+  "next_step": "Build G1 candidate pool v2 with semantic, lexical, train-only native-label strata, and transparent pattern recall; preserve the same codebook, Coder B, exclusions, and source audit."
+}

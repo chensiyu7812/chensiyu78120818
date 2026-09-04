@@ -1,0 +1,65 @@
+{
+  "protocol": "pm-v1.5-strategy-g1-coverage-completion-v1",
+  "status": "FIXED_BEFORE_COVERAGE_COMPLETION_WAVE",
+  "date": "2026-07-29",
+  "standard_card_source_gate_independent_clean_weak_dialogues": 20,
+  "clean_weak_source_is_human_gold": false,
+  "coverage_regions": {
+    "accurate_listening_and_understanding": [
+      "AM04_tentative_paraphrase_check",
+      "AM05_grounded_validation"
+    ],
+    "low_burden_exploration": [
+      "AM01_invite_open_expression",
+      "AM02_ask_one_focused_clarification"
+    ],
+    "comfort_and_stabilization": [
+      "AM05_grounded_validation",
+      "AM07_acknowledge_effort_strength_or_resource"
+    ],
+    "welcomed_light_action_help": [
+      "AM07_acknowledge_effort_strength_or_resource",
+      "AM10_offer_one_optional_micro_step"
+    ],
+    "transition_and_boundary_management": [
+      "AM14_supportive_transition",
+      "AM15_explore_interpersonal_boundary"
+    ]
+  },
+  "mapping_note": "AM15 is explicitly an interpersonal-boundary move and therefore belongs to the pre-existing transition_and_boundary_management coverage region. This coverage correction does not alter the frozen move ID, definition, coder prompt, or any accepted weak label.",
+  "already_standard_gate_qualified_before_wave": [
+    "AM02_ask_one_focused_clarification",
+    "AM05_grounded_validation",
+    "AM10_offer_one_optional_micro_step"
+  ],
+  "coverage_completion_targets": {
+    "AM01_invite_open_expression": {
+      "current_clean_dialogues": 19,
+      "new_candidate_row_cap": 4
+    },
+    "AM04_tentative_paraphrase_check": {
+      "current_clean_dialogues": 15,
+      "new_candidate_row_cap": 10
+    },
+    "AM07_acknowledge_effort_strength_or_resource": {
+      "current_clean_dialogues": 14,
+      "new_candidate_row_cap": 12
+    },
+    "AM14_supportive_transition": {
+      "current_clean_dialogues": 13,
+      "new_candidate_row_cap": 12
+    },
+    "AM15_explore_interpersonal_boundary": {
+      "current_clean_dialogues": 6,
+      "new_candidate_row_cap": 25
+    }
+  },
+  "selection_forbidden_inputs": [
+    "ESConv_validation_outcomes",
+    "ESConv_test_outcomes",
+    "EvoEmo_outcomes",
+    "PM_labels",
+    "response_quality_outcomes"
+  ],
+  "post_wave_rule": "Stop weak-source API expansion. Moves still below the standard gate are omitted from the standard Bank unless a written narrow-move exception is approved before G2; do not rescue other sparse moves merely to preserve all 17 codebook entries."
+}

@@ -1,0 +1,66 @@
+{
+  "protocol": "pm-v1.5-longitudinal-response-mechanism-uptake-measurement-v1",
+  "status": "FROZEN_BEFORE_PILOT_OUTCOMES",
+  "scope": "longitudinal_train_only_report_only",
+  "pilot_contract_sha256": "e500c4d4cb18fe5f99ec29cab0e784694e5991f954728857c63ca5ce368fe093",
+  "semantic_encoder_spec_sha256": "febe9bbf8f7207607335284b98d7bc97a0b41231a4c2358cba0a027097911f65",
+  "paired_unit": "state_id",
+  "arms": [
+    "frozen_current_control",
+    "top1_evidence_surface_same_prompt"
+  ],
+  "reference_construction": {
+    "memory_helpful_regimes": "concatenate evaluator-annotated item_utility=helpful memory texts in (source,memory_id) order; identical reference for both arms",
+    "memory_harmful_regime": "concatenate evaluator-annotated item_utility=harmful memory texts in (source,memory_id) order; identical reference for both arms",
+    "strategy_regimes": "use the treatment arm's top-1 prompt-visible strategy guidance plus example as the identical reference for both arms",
+    "visible_dialogue_guardrail": "prompts.common_context(state), identical for both arms"
+  },
+  "primary_metric": {
+    "name": "paired_target_evidence_bge_cosine_delta",
+    "formula": "cosine(treatment_response,target_reference)-cosine(control_response,target_reference)",
+    "helpful_expected_direction": "positive",
+    "harmful_expected_direction": "negative"
+  },
+  "supportive_metrics": [
+    {
+      "name": "paired_target_evidence_lexical_cosine_delta",
+      "formula": "lexical_score(target_reference,treatment_response)-lexical_score(target_reference,control_response)"
+    },
+    {
+      "name": "paired_visible_dialogue_bge_cosine_delta",
+      "role": "grounding_guardrail_report_only"
+    },
+    {
+      "name": "response_target_evidence_5gram_jaccard",
+      "role": "verbatim_copy_guardrail_report_only"
+    },
+    {
+      "name": "selected_annotated_item_coverage",
+      "role": "retrieval-versus-generator-localization"
+    }
+  ],
+  "directional_signal_rule": {
+    "helpful_pair_count": 10,
+    "minimum_helpful_positive_pairs": 6,
+    "helpful_mean_delta_must_be": "greater_than_zero",
+    "harmful_pair_count": 4,
+    "minimum_harmful_negative_pairs": 3,
+    "harmful_mean_delta_must_be": "less_than_zero",
+    "primary_metric_only": true,
+    "lexical_and_guardrail_metrics": "reported_not_gating"
+  },
+  "allowed_statuses": [
+    "MECHANISM_SIGNAL_PRESENT_REPORT_ONLY",
+    "MECHANISM_SIGNAL_NOT_ESTABLISHED_REPORT_ONLY"
+  ],
+  "forbidden_consequences": [
+    "judge qualification",
+    "action label creation",
+    "PM training authorization",
+    "internal-test access",
+    "external efficacy claim"
+  ],
+  "api_judges_used": false,
+  "training_labels_created": false,
+  "contract_sha256": "d280fdfd1b1e724c457b230447c6e31d5423cb5765093c631dc2a261b460b3ed"
+}

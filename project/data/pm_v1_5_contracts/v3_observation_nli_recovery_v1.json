@@ -1,0 +1,76 @@
+{
+  "protocol": "pm-v1.5-v3-observation-nli-recovery-contract-v1",
+  "frozen_date": "2026-08-03",
+  "authorization": "PREAUTHORIZED_OPTIONAL_CHALLENGER_IN_V1_5B_ROOT_REPAIR_CONTRACT",
+  "trigger": "The frozen transparent, lexical-logistic, and BGE-small bakeoff failed before confirmation. Lexical passed owner/time and goal but failed boundary and increment generalization; BGE-small failed all four factors.",
+  "role": "SEMANTIC_RELATION_OBSERVATION_NOT_STEP1_WORTH_OPENING",
+  "reference_sha256": "e1d368c4a8f2576515d8e685531050822416d384b5379c7edb0a18400757dc6a",
+  "candidate_rows_sha256": "be0f5eff9d4cb2b170b43d4bdb26a9ce4bec2cf720594094daf26f6b435d9d14",
+  "blueprint_sha256": "5e76557f8048a04e44cd6ac3d7b2bd0fa49acdd2fd1e9ad16d6c9c6fd2717fe7",
+  "prior_failed_bakeoff_sha256": "6d327509b0344a2c53818ce5d2836a4101b8cc6ab1a2d2da2aefb197569c54ea",
+  "candidate": {
+    "id": "deberta_nli_fixed_hypotheses_v1",
+    "model": "cross-encoder/nli-deberta-v3-base",
+    "snapshot": "6c749ce3425cd33b46d187e45b92bbf96ee12ec7",
+    "config_sha256": "897e756eb59d3183adb505952e7910e7cbc7750a43f3b3747a96b688d2b02a47",
+    "model_sha256": "d8148c6d49e0a7925134294c56326c71fe0ab1dc390e37355e00c7efbb488afa",
+    "tokenizer_sha256": "5124ef2ead1a10a717703bc436de7f353da76d6340e4587719b42b1693707964",
+    "local_files_only": true,
+    "fit_on_project_labels": false,
+    "threshold": 0.5,
+    "probability_mapping": "softmax_across_positive_and_negative_hypotheses_of_entailment_minus_contradiction",
+    "semantic_input": "current_user_text_plus_exact_rank1_candidate_with_known_neutral_balancing_sentences_removed",
+    "raw_balanced_surface_retained_for_nuisance_audit": true
+  },
+  "hypotheses": {
+    "owner_time_entity_valid": {
+      "positive": "The retrieved candidate is about the same person as the current request and is still valid now.",
+      "negative": "The retrieved candidate is about a different person, or it has been withdrawn, replaced, resolved, or made stale."
+    },
+    "goal_function_fit": {
+      "positive": "Using the retrieved candidate would directly serve the user's current requested function.",
+      "negative": "Using the retrieved candidate would serve a different goal or function from the user's current request."
+    },
+    "boundary_burden_compatible": {
+      "positive": "Using the retrieved candidate once would respect the user's current boundary and interaction burden.",
+      "negative": "Using the retrieved candidate now would violate the user's current boundary or interaction burden."
+    },
+    "specific_increment": {
+      "positive": "The retrieved candidate provides a specific useful detail or action that is not already stated in the current exchange.",
+      "negative": "The retrieved candidate is generic or repeats information already stated in the current exchange."
+    }
+  },
+  "validation": {
+    "fit_track": "FACTOR_FIT",
+    "one_shot_confirmation_track": "ELIGIBILITY_CONFIRMATION",
+    "group_field": "counterfactual_group_id",
+    "semantic_family_field": "private_semantic_surface_family",
+    "confirmation_must_not_affect_hypotheses_threshold_or_selection": true
+  },
+  "gates": {
+    "each_factor_balanced_accuracy_min": 0.7,
+    "each_factor_recall_min": 0.6,
+    "each_factor_specificity_min": 0.6,
+    "each_factor_minimal_counterfactual_direction_min": 0.75,
+    "each_factor_worst_semantic_family_balanced_accuracy_min": 0.6,
+    "raw_surface_nuisance_probe_balanced_accuracy_max_exclusive": 0.65,
+    "confirmation_each_factor_balanced_accuracy_min": 0.7,
+    "confirmation_composite_balanced_accuracy_min": 0.7,
+    "confirmation_composite_recall_min": 0.6,
+    "confirmation_composite_specificity_min": 0.6
+  },
+  "forbidden_inputs": [
+    "construction_intent",
+    "human_factor_label",
+    "human_final_eligibility",
+    "response_text",
+    "response_quality",
+    "risk_outcome",
+    "cost_outcome",
+    "ESConv_test_or_validation",
+    "EvoEmo_p7_p18"
+  ],
+  "failure_rule": "If the fixed NLI candidate fails any frozen FIT gate, do not consume confirmation and do not add another V1.5 semantic model candidate.",
+  "success_rule": "If every FIT gate passes, consume the 32-row confirmation exactly once without changing hypotheses, mapping, or threshold. Authorize H-Step2 only if every frozen confirmation floor also passes; otherwise report failure and do not add another V1.5 semantic candidate.",
+  "external_lockbox_read": false
+}

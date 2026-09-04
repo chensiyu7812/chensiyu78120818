@@ -1,0 +1,118 @@
+{
+  "protocol": "pm-v1.5-strategy-bank-v3-core-build-report-v1",
+  "status": "CORE_50_BUILT_PENDING_TAXONOMY_AND_SOURCE_SAMPLE_REVIEW",
+  "card_count": 50,
+  "family_count": 5,
+  "cards_per_family": 10,
+  "source_rows": 6391,
+  "source_dialogue_count": 748,
+  "raw_examples_exposed_to_generator": false,
+  "embedding_role": "weak outcome-blind source-to-submove support mapping and duplicate warning only; not PM input, gold label, or card utility",
+  "embedding_model": "BAAI/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "device_type": "cuda",
+  "assignment_summary": {
+    "source_rows": 6391,
+    "confident_source_rows": 3660,
+    "minimum_score": 0.45,
+    "minimum_margin": 0.01,
+    "top_score_quantiles": {
+      "p05": 0.470485,
+      "p25": 0.528611,
+      "p50": 0.566587,
+      "p75": 0.604152,
+      "p95": 0.653869
+    },
+    "top_vs_second_margin_quantiles": {
+      "p05": 0.001032,
+      "p25": 0.005435,
+      "p50": 0.012748,
+      "p75": 0.023979,
+      "p95": 0.045873
+    },
+    "cards_passing_provisional_source_support": 31
+  },
+  "family_assignment_counts": {
+    "Question": {
+      "question_check_readiness": 17,
+      "question_check_understanding": 7,
+      "question_choose_priority": 33,
+      "question_clarify_context": 26,
+      "question_clarify_feeling": 72,
+      "question_clarify_goal": 330,
+      "question_clarify_impact": 499,
+      "question_clarify_meaning": 290,
+      "question_explore_past_coping": 357,
+      "question_open_invitation": 92
+    },
+    "Restatement or Paraphrasing": {
+      "restatement_boundary_preference": 70,
+      "restatement_central_concern": 4,
+      "restatement_change_over_time": 4,
+      "restatement_current_impact": 55,
+      "restatement_current_priority": 121,
+      "restatement_key_facts": 16,
+      "restatement_short_sequence": 3,
+      "restatement_stated_goal": 88,
+      "restatement_tentative_synthesis": 6,
+      "restatement_two_sides": 219
+    },
+    "Reflection of feelings": {
+      "reflection_emotional_load": 28,
+      "reflection_emotional_shift": 22,
+      "reflection_event_feeling_link": 51,
+      "reflection_explicit_emotion": 22,
+      "reflection_lingering_feeling": 87,
+      "reflection_mixed_feelings": 68,
+      "reflection_readiness_tension": 48,
+      "reflection_tentative_implicit_emotion": 40,
+      "reflection_uncertainty": 343,
+      "reflection_value_tension": 96
+    },
+    "Affirmation and Reassurance": {
+      "affirmation_acknowledge_disclosure": 400,
+      "affirmation_acknowledge_effort": 38,
+      "affirmation_acknowledge_progress": 98,
+      "affirmation_grounded_hope": 298,
+      "affirmation_name_demonstrated_strength": 17,
+      "affirmation_permission_to_pace": 257,
+      "affirmation_recognize_persistence": 294,
+      "affirmation_support_agency": 97,
+      "affirmation_support_boundary": 37,
+      "affirmation_validate_reaction": 103
+    },
+    "Providing Suggestions": {
+      "suggestion_adjust_environment": 106,
+      "suggestion_break_down_first_step": 45,
+      "suggestion_brief_pause_or_grounding": 404,
+      "suggestion_communication_opening": 261,
+      "suggestion_consider_qualified_support": 165,
+      "suggestion_generate_options": 37,
+      "suggestion_prioritize_one_focus": 137,
+      "suggestion_reach_trusted_support": 301,
+      "suggestion_single_microstep": 98,
+      "suggestion_small_experiment": 84
+    }
+  },
+  "distinctness": {
+    "warning_cosine": 0.9,
+    "within_family_maximum_pair_cosine": {
+      "Question": 0.82941645,
+      "Restatement or Paraphrasing": 0.87365925,
+      "Reflection of feelings": 0.88276523,
+      "Affirmation and Reassurance": 0.8488043,
+      "Providing Suggestions": 0.85744953
+    },
+    "warning_pair_count": 0,
+    "warning_pairs": [],
+    "semantic_similarity_is_automatic_deletion_rule": false
+  },
+  "automatic_promotion_authorized": false,
+  "next_gate": "Review the 50 taxonomy definitions, warning pairs, and a fixed source sample per card before authoring execution variants.",
+  "lineage": {
+    "taxonomy_sha256": "d05fb05ea54f8b8906c6a17c487b4f04fb243bdfd4cd1fca7867c20ff73b01d8",
+    "raw_cards_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e",
+    "v2_cards_sha256": "139670cf839181bbd286f03444f801b1bf1feeb324d15702f2ca8d288fe1b079",
+    "v2_lineage_sha256": "218301b3306c256cf758c00237018109c3741d9ca24190ec72ba7565a43224af",
+    "model_config_sha256": "094f8e891b932f2000c92cfc663bac4c62069f5d8af5b5278c4306aef3084750"
+  }
+}

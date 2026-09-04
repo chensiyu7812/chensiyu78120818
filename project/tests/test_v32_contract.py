@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from scripts.v32_contract import (
+from metacom_pm.v32_contract import (
     V32ContractError,
     canonical_action,
     parse_action,

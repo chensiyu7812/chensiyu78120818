@@ -1,0 +1,152 @@
+{
+  "protocol": "pm-v1.5-support-need-factorized-bakeoff-binding-v1",
+  "status": "COMPLETE_REPRODUCIBLE_QWEN_NOT_PROMOTED_AXIS_SPECIFIC_SIGNAL_MORE_HUMAN_ANCHORS_REQUIRED",
+  "candidate_report": {
+    "path": "outputs/pm_v1_5_support_need_factorized_bakeoff_v1/report.json",
+    "file_sha256": "51d75895596f52f48d8541b777669cf139e4af5caf68e955d7808662877bc4ee",
+    "report_sha256": "3421c4ade7aa6efe227a678fd204017bb50b8bd3e61e710cdc263ae359d75ac1"
+  },
+  "reproduction_report": {
+    "path": "outputs/pm_v1_5_support_need_factorized_bakeoff_v1_repro_check/report.json",
+    "file_sha256": "51d75895596f52f48d8541b777669cf139e4af5caf68e955d7808662877bc4ee",
+    "byte_identical_to_candidate": true,
+    "field_diff_count": 0
+  },
+  "source_lineage": {
+    "bakeoff_config_sha256": "2c53fd13ed284a4326c3980ae7349026d21caf1aeed55395980703303dba067b",
+    "packet_contract_sha256": "bf99ae0a12232f3b63f35bfe2383da370f76ee7eac1235f66b99d81e6fb10cd8",
+    "human_blind_packet_sha256": "04273cba744d8381089cfc00f30ec3367a1e342c59553801cb5d1f244a2807bb",
+    "normalized_anchors_sha256": "911369eaba0f91db655d5176186031184fd9dd1628aa5d079d6d6178dcee8144"
+  },
+  "candidate_snapshots": {
+    "bge_small_en_v1_5": {
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "snapshot_tree_sha256": "c94b5329116dedfb43349b42d8138ef0b7c3348373eb7339b35bbeef530de15b"
+    },
+    "bge_m3": {
+      "model_id": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "snapshot_tree_sha256": "f0384ec76e05ff5439dd455f7d65ea523bd90c6273c106cfe9c3629a867b80ba"
+    },
+    "qwen3_embedding_0_6b_support_need": {
+      "model_id": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "snapshot_tree_sha256": "3d0adeb555028451e16ff6b65c9d1d63d3973a47f25076891b613e19b41c2ba2"
+    },
+    "nli_deberta_v3_base": {
+      "model_id": "cross-encoder/nli-deberta-v3-base",
+      "revision": "6c749ce3425cd33b46d187e45b92bbf96ee12ec7",
+      "snapshot_tree_sha256": "731feaa9d5ac050259901848250bbea33ac9adb3016427f37101bab0dc3ce37d"
+    }
+  },
+  "independent_dialogue_groups": 23,
+  "primary_factor_findings": {
+    "need_to_be_heard": {
+      "class_counts": {
+        "negative": 12,
+        "positive": 11
+      },
+      "best_view": "embedding.bge_m3.current",
+      "best_soft_log_loss": 0.6529213390325944,
+      "best_per_class_recall": {
+        "negative": 0.6666666666666666,
+        "positive": 0.45454545454545453
+      }
+    },
+    "need_for_emotional_containment": {
+      "class_counts": {
+        "negative": 10,
+        "positive": 13
+      },
+      "best_view": "embedding.bge_m3.current",
+      "best_soft_log_loss": 0.678167570559011,
+      "best_per_class_recall": {
+        "negative": 0.3,
+        "positive": 0.8461538461538461
+      }
+    },
+    "need_for_exploration": {
+      "class_counts": {
+        "negative": 16,
+        "positive": 7
+      },
+      "best_view": "nli.current_plus_full_plus_observable",
+      "best_soft_log_loss": 0.5482975337219667,
+      "best_per_class_recall": {
+        "negative": 1.0,
+        "positive": 0.2857142857142857
+      }
+    },
+    "advance_readiness": {
+      "class_counts": {
+        "negative": 12,
+        "positive": 11
+      },
+      "best_view": "nli.current",
+      "best_soft_log_loss": 0.6625954296487604,
+      "best_per_class_recall": {
+        "negative": 0.6666666666666666,
+        "positive": 0.5454545454545454
+      }
+    },
+    "focused_question_readiness": {
+      "class_counts": {
+        "negative": 19,
+        "positive": 4
+      },
+      "best_view": "embedding.bge_m3.current",
+      "best_soft_log_loss": 0.4646738746319559,
+      "best_per_class_recall": {
+        "negative": 1.0,
+        "positive": 0.0
+      },
+      "best_noncollapsed_view": "nli.current_plus_full",
+      "best_noncollapsed_soft_log_loss": 0.4855436848271301,
+      "best_noncollapsed_per_class_recall": {
+        "negative": 0.9473684210526315,
+        "positive": 0.25
+      }
+    },
+    "advice_readiness": {
+      "class_counts": {
+        "negative": 16,
+        "positive": 7
+      },
+      "best_view": "observable_structure",
+      "best_soft_log_loss": 0.6089755452413157,
+      "best_per_class_recall": {
+        "negative": 1.0,
+        "positive": 0.0
+      },
+      "best_noncollapsed_view": "nli.full_visible",
+      "best_noncollapsed_soft_log_loss": 0.6369529070081973,
+      "best_noncollapsed_per_class_recall": {
+        "negative": 1.0,
+        "positive": 0.14285714285714285
+      }
+    }
+  },
+  "model_decisions": {
+    "bge_small_en_v1_5": "KEEP_AS_FORMAL_BASELINE_AND_FALLBACK",
+    "bge_m3": "KEEP_AS_AXIS_SPECIFIC_CANDIDATE_NOT_GLOBAL_REPLACEMENT",
+    "qwen3_embedding_0_6b_support_need": "NOT_PROMOTED_ON_CURRENT_ANCHORS",
+    "nli_deberta_v3_base": "KEEP_AS_INTERPRETABLE_AXIS_FEATURE_CANDIDATE_NOT_GOLD",
+    "predeclared_qwen_nli_observable_hybrid": "DID_NOT_PASS_ALL_PRIMARY_FACTOR_CHECKS",
+    "flat_five_way_support_mode": "REMAINS_DIAGNOSTIC_ONLY"
+  },
+  "next_action": {
+    "decision": "COLLECT_ONLY_PREPARED_EXPANSION_FIT_ANCHORS",
+    "reason": "exploration and advance show weak noncollapsed NLI signal, but focused-question and advice require higher-loss alternatives to recover only one positive each, planning has no noncollapsed view, and the instruction-aware embedding did not solve the sparse-axis problem",
+    "fit_anchor_count": 16,
+    "untouched_confirmation_count": 8,
+    "confirmation_labels_must_remain_unopened_during_fit_selection": true
+  },
+  "primary_all_hybrid_checks_pass": false,
+  "representation_promotion_authorized": false,
+  "formal_fit_authorized": false,
+  "automatic_gold_labels_created": false,
+  "api_calls_made": 0,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false
+}

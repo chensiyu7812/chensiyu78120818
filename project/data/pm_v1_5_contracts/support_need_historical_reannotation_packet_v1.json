@@ -1,0 +1,30 @@
+{
+  "protocol": "pm-v1.5-support-need-historical-state-reannotation-binding-v1",
+  "status": "PREPARED_REPRODUCIBLE_AWAITING_NEW_HUMAN_ANNOTATION",
+  "candidate_directory": "outputs/pm_v1_5_support_need_historical_reannotation_v1_candidate",
+  "repro_directory": "outputs/pm_v1_5_support_need_historical_reannotation_v1_repro_check",
+  "candidate_repro_byte_identical": true,
+  "files": {
+    "qualification_contract.json": "e00514798ed043a1577a1203cd7b186c07cfead9ae8bd529611624e6c3f5c12c",
+    "human_blind_packet.jsonl": "69a56f19fa4876b1557171a10760adcc795dcb618634d0925a114b668e94b024",
+    "human_annotation_template.jsonl": "add95ca23c452c27290981313557935fa4596d0f09c3abe41895545bfc0013c3",
+    "private_lineage.jsonl": "62aae97349d2e74d932b3ad660d91e6d8af03798286c66845985aa09b6edf5eb",
+    "human_blind_review.html": "83d35436ab6ea532ebee94c3c5907e3a182f40378e1fca76835a2c673a5aaca2"
+  },
+  "packet_contract_sha256": "62a35b364d3bba31159267f1e15d1c350fd2adcb7ef3c0f6c11805d05f192ca2",
+  "packet_size": 24,
+  "independent_dialogue_states": 24,
+  "exact_overlap_with_current_support_need": 0,
+  "old_human_labels_reused": false,
+  "old_preferences_or_risk_labels_reused": false,
+  "sampling_role": "response_difference_enriched_active_learning_not_prevalence",
+  "prevalence_estimation_allowed": false,
+  "automatic_gold_label": false,
+  "pm_action_gold": false,
+  "formal_fit_authorized": false,
+  "confirmation_rows_opened": false,
+  "api_calls_made": 0,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "binding_sha256": "2d49f13c99b877c247a24bd2c061643166eddacca6c9c99a9c94addcd0231726"
+}

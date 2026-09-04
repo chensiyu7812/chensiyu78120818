@@ -1,0 +1,10 @@
+{
+  "protocol": "pm-v1.5-d2-measurement-generation-execution-v1",
+  "status": "COMPLETE",
+  "planned_calls": 144,
+  "completed_calls": 144,
+  "completed_now": 144,
+  "remaining_calls": 0,
+  "resumable": true,
+  "plan_freeze_manifest_sha256": "66e447b6148d20ddf4f0640e40a1960fb3372b53c689fd494f38f168b7fb18cd"
+}

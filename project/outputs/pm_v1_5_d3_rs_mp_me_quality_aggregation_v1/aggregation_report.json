@@ -1,0 +1,71 @@
+{
+  "protocol": "pm-v1.5-d3-rs-mp-me-quality-aggregation-v1",
+  "status": "PASS_35_COMPONENT_ON_WINS_PENDING_MINIMAL_RISK",
+  "retained_components": [
+    "RS",
+    "MP",
+    "ME"
+  ],
+  "invalidated_component": "original D3 MS",
+  "retained_pairs": 120,
+  "independent_states": 96,
+  "component_pair_verdict_counts": {
+    "ME": {
+      "control": 19,
+      "tie": 6,
+      "treatment": 15
+    },
+    "MP": {
+      "control": 13,
+      "tie": 20,
+      "treatment": 7
+    },
+    "RS": {
+      "control": 20,
+      "tie": 7,
+      "treatment": 13
+    }
+  },
+  "component_on_quality_wins_pending_risk": 35,
+  "repeat_agreement": {
+    "ME": {
+      "exact_semantic_agreement": 2,
+      "repeat_groups": 8
+    },
+    "MP": {
+      "exact_semantic_agreement": 5,
+      "repeat_groups": 8
+    },
+    "RS": {
+      "exact_semantic_agreement": 6,
+      "repeat_groups": 8
+    }
+  },
+  "mp_me_visible_fidelity_rows": 4,
+  "checks": {
+    "160_annotations": true,
+    "annotation_ids_unique": true,
+    "ids_exactly_match_blind_packet": true,
+    "protocol_exact": true,
+    "preference_enum_valid": true,
+    "criterion_enum_valid": true,
+    "required_text_complete": true,
+    "one_annotator": true,
+    "120_retained_pairs": true,
+    "96_independent_states": true,
+    "40_original_ms_rows_excluded": true,
+    "35_on_wins": true,
+    "memory_fidelity_rows_exhaustively_identified": true,
+    "state_weights_one": true
+  },
+  "inputs": {
+    "annotations_sha256": "9a6f5b3e540c1568a8b1fd55b20baaa43f61fb372989b78c70c0ef54bdd9d82d",
+    "blind_manifest_sha256": "eaacaea7556ec3cbd1fc23381d1b1571ce9a2f4f0622541588bfa66b7a3cb19f"
+  },
+  "outputs": {
+    "validated_all_160_quality_annotations.jsonl": "c769f612322b202fd3f2682066d469f0a34be8c54f406d1e5e5eac0c47187d6d",
+    "pair_quality_measurements_pre_risk.jsonl": "ee6d54e2be9596b8e9a6c7ce36dfdc07ede9c7a8b88a80f4d586300887ff9e29",
+    "state_soft_targets_pre_risk.jsonl": "9dcf6d617ba04a90b081b03875925e5be246af91178744a5fdb4543d38005067",
+    "mp_me_fidelity_rows_for_evidence_audit.jsonl": "a10994bd08a0d645b1d7530df8e13b3bd95cffffc01147fb048965b9e1a60af6"
+  }
+}

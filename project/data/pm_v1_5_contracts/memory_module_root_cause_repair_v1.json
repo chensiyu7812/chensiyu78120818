@@ -1,0 +1,164 @@
+{
+  "protocol": "pm-v1.5-memory-module-root-cause-repair-v1",
+  "status": "T1_MACHINE_AND_HUMAN_GATES_FAIL_FULL_STEP2_NOT_QUALIFIED",
+  "date": "2026-08-03",
+  "claim_unchanged": "A finite auditable four-component PM learns conservative quality-risk-cost resource routing under fixed resources and generator.",
+  "current_v3_step1_trained": false,
+  "latest_h_step2_28_status": "DEVELOPMENT_DIAGNOSTIC_INVALID_FOR_STEP2_PROMOTION",
+  "latest_h_step2_observed": {
+    "items": 28,
+    "single_functional": {
+      "MP": "3/5",
+      "MS": "3/5",
+      "ME": "4/5",
+      "RS": "4/5"
+    },
+    "multi_all_requested_functional": "2/8",
+    "no_material_misuse": "22/28",
+    "material_misuse": "6/28"
+  },
+  "invalidating_packet_defects": [
+    "single selection used structural step1_candidate_admissible rather than frozen human eligibility",
+    "all five MP-containing multi items repeated the private-window resource in current text",
+    "MS exact-wording candidates omitted the actual wording",
+    "bundle validation authorized each component against the union of all selected resources",
+    "RS atomic-move intent and the generic prompt allowed different action counts",
+    "conditional MP preferences were scored without requiring their triggering move"
+  ],
+  "frozen_layer_contract": [
+    "retrieval_exact_rank1",
+    "observation_and_eligibility",
+    "step1_expected_net_value",
+    "joint_feasibility",
+    "step2_exact_evidence_application",
+    "end_to_end_quality_risk_cost"
+  ],
+  "memory_surface_contract": {
+    "MP_PREFERENCE": "active preference whose condition is triggered by the current response move",
+    "MP_PROFILE": "current-relevant nonredundant stable fact or practical constraint",
+    "MS_SESSION": "concrete strictly-prior fact, distinction, or unfinished question text",
+    "ME_REUSABLE_OUTCOME": "strictly-prior action or choice plus observed outcome or mechanism"
+  },
+  "replacement_h_step2": {
+    "total_items": 32,
+    "single_items_per_component": 6,
+    "multi_items": 8,
+    "single_source": "frozen eligible exact decision surfaces only",
+    "multi_precondition": "every constituent independently eligible, nonredundant, and jointly feasible",
+    "t0_implementation_status": "PASS_FROZEN",
+    "call_plan": "outputs/pm_v1_5_v3_replacement_h_step2_plan_v1_candidate/call_plan_private.jsonl",
+    "call_plan_sha256": "354a0eef8e9f56f0d7e2fa97b6762b9d9bd5e534d871a6e947a117066ae64964",
+    "freeze_manifest": "outputs/pm_v1_5_v3_replacement_h_step2_plan_v1_candidate/t0_freeze_manifest.json",
+    "generator": "meta/llama-3.1-8b-instruct",
+    "api_calls_so_far": 0,
+    "responses_generated_so_far": 0,
+    "regression_tests": "50/50_passed",
+    "t1_machine_result": {
+      "completed_calls": 32,
+      "exact_binding_pass": "12/32",
+      "fallback_calls": 20,
+      "single_machine_pass": {"MP": "0/6", "MS": "2/6", "ME": "1/6", "RS": "6/6"},
+      "multi_machine_pass": "3/8",
+      "full_promotion": "FAIL",
+      "rerun_allowed": false,
+      "human_review_can_reverse_full_failure": false
+    },
+    "t1_human_result": {
+      "items": 32,
+      "component_decisions": 43,
+      "single_functional": {"MP": "5/6", "MS": "3/6", "ME": "5/6", "RS": "6/6"},
+      "all_component_functional": {"MP": "8/11", "MS": "7/11", "ME": "8/11", "RS": "10/10"},
+      "multi_all_functional": "4/8",
+      "material_misuse": "10/32",
+      "fallback_adoptable": "14/20",
+      "uncertain": 0,
+      "full_promotion": "FAIL"
+    },
+    "machine_human_diagnostic": {
+      "machine_yes_human_yes": 16,
+      "machine_yes_human_no": 1,
+      "machine_no_human_yes": 17,
+      "machine_no_human_no": 9,
+      "interpretation": "exact-span validation was high-precision but low-recall for human functional use; genuine human-rated misuse and functional failures remain independently"
+    },
+    "gates": {
+      "single_functional_each": "at_least_5_of_6",
+      "multi_all_functional": "at_least_6_of_8",
+      "material_misuse": "at_most_1_of_32",
+      "fabricated_recall": 0,
+      "explicit_boundary_violation": 0,
+      "fallback_adoptable": "all"
+    }
+  },
+  "step2_required_repairs": [
+    "component_specific_response_evidence_excerpt",
+    "component_specific_resource_support_excerpt",
+    "no_union_authorization_for_component_claims",
+    "ms_answer_or_tentative_continuity_modes",
+    "me_action_outcome_to_tentative_option_mode",
+    "mp_preference_trigger_and_postcondition",
+    "rs_max_support_moves",
+    "requested_to_feasible_to_realized_projection"
+  ],
+  "step1_training_after_step2_pass": {
+    "primary_model": "standardized_l2_logistic_regression",
+    "primary_feature_count_per_head": "5_to_7",
+    "fit_states_per_head": 64,
+    "confirmation_states_per_head": 32,
+    "sealed_states_per_head": 32,
+    "two_frozen_generation_seeds": true,
+    "invalid_step2_treatment_label": "unknown_not_off",
+    "minimum_fit_shape": "at_least_16_on_and_16_off",
+    "minimum_confirmation_shape": "at_least_8_on_and_8_off",
+    "minimum_sealed_shape": "at_least_8_on_and_8_off",
+    "grouped_oof_ba_minimum": 0.65,
+    "recall_minimum": 0.60,
+    "specificity_minimum": 0.60,
+    "must_beat_prevalence_brier": true,
+    "must_beat_or_stably_improve_transparent_rule": true,
+    "nuisance_only_ba_maximum": 0.65
+  },
+  "one_way_termination_policy": {
+    "canonical_document": "docs/PM_V1_5_TERMINAL_EXECUTION_ROUTE_20260803_ZH.md",
+    "T0": "deterministic_code_and_static_fixture_repairs_only_no_new_outputs_or_human_outcomes",
+    "T1": "consume_exactly_one_32_item_replacement_h_step2_gate",
+    "T2": "consume_256_effect_fit_states_only_if_T1_passes",
+    "T3": "fit_one_frozen_primary_and_one_frozen_bge_challenger_without_post_fit_data_expansion",
+    "T4": "consume_128_fresh_confirmation_states_once_without_feedback_tuning",
+    "T5": "freeze_then_consume_128_sealed_internal_and_external_evaluations_without_feedback",
+    "post_T1_scattered_human_packets_allowed": false,
+    "human_or_external_outcome_driven_prompt_feature_threshold_or_sample_revision_allowed": false,
+    "terminal_states": [
+      "FULL_V1_5_PASS",
+      "BOUNDED_COMPONENT_PASS",
+      "NOT_LEARNED_ON_FROZEN_PROTOCOL"
+    ]
+  },
+  "external_scope": {
+    "ESConv": [
+      "memory_unavailable_off",
+      "RS_same_bank_routing_and_effect"
+    ],
+    "EvoEmo": [
+      "MP_PROFILE",
+      "MS_SESSION",
+      "ME_REUSABLE_OUTCOME",
+      "in_support_coverage_and_abstention"
+    ],
+    "internal_controlled_only": [
+      "MP_PREFERENCE",
+      "hard_negative_memory_misuse",
+      "joint_conflicts",
+      "all_16_actions"
+    ]
+  },
+  "forbidden_next_actions": [
+    "treat_latest_28_as_pm_training_or_pm_failure",
+    "recompute_latest_28_after_posthoc_item_deletion",
+    "generate_effect_pairs_before_replacement_step2_pass",
+    "read_external_lockbox_to_select_training_data_or_thresholds",
+    "replace_data_contract_repairs_with_a_larger_embedding",
+    "create_more_scattered_10_to_20_item_human_packets",
+    "collapse_eligibility_step1_step2_and_quality_into_one_label"
+  ]
+}

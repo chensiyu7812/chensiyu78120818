@@ -1,0 +1,729 @@
+{
+  "protocol": "pm-v1.5-final-research-plan-v1",
+  "status": "ACTIVE_NORMATIVE_PLAN_G2_STRATEGY_RAG_FROZEN_G3_PENDING",
+  "date": "2026-07-29",
+  "research_question": "Can a low-capacity, default-off, pre-retrieval policy learn out-of-group signal for enabling at least one fixed resource component when that component is likely to provide material immediate-response benefit, without materially worsening prespecified interaction-and-grounding risk proxies, while reducing observed generator input tokens relative to a high-resource fixed policy?",
+  "minimum_claim": {
+    "required_supported_component_count": 1,
+    "components_that_must_be_attempted": [
+      "MP",
+      "MS",
+      "ME",
+      "RS"
+    ],
+    "required_supported_component_count_is_a_claim_floor_not_an_execution_scope": true,
+    "does_not_claim": [
+      "clinical safety",
+      "psychological diagnosis",
+      "globally optimal quality-risk-cost utility",
+      "all 16 actions are learnable",
+      "universal topic coverage",
+      "pristine independence of EvoEmo or ES-MemEval-derived evaluation"
+    ]
+  },
+  "action_contract": {
+    "legal_runtime_actions": 16,
+    "memory_subsets": [
+      "M0",
+      "MP",
+      "MS",
+      "ME",
+      "MPMS",
+      "MPE",
+      "MSE",
+      "MPMSME"
+    ],
+    "strategy_modes": [
+      "R0",
+      "RS"
+    ],
+    "learning_form": "factorized_component_effect_heads",
+    "first_identification_contrasts": [
+      "M0+R0_vs_M0+RS",
+      "M0+R0_vs_MP+R0",
+      "M0+R0_vs_MS+R0",
+      "M0+R0_vs_ME+R0"
+    ],
+    "factorization_is_not_scope_reduction": "all_16_actions_remain_legal; four_heads_estimate_identifiable_component_marginal_effects_and_a_frozen_action_compiler_recovers_one_legal_bitset",
+    "why_not_direct_16_class": [
+      "multiple_actions_can_be_materially_equivalent_for_one_state",
+      "small_independent_group_count_would_be_fragmented_across_16_classes",
+      "component_effect_failures_and_interaction_failures_must_remain_distinguishable"
+    ],
+    "action_compiler": {
+      "remove_bits_if": [
+        "no_real_opportunity",
+        "quality_probability_below_frozen_threshold",
+        "applicable_risk_gate_fails",
+        "out_of_support_or_abstain"
+      ],
+      "remaining_bit_order": "descending_conservative_lower_bound_of_quality_benefit_probability_then_lower_incremental_tokens",
+      "incremental_addition_requires": [
+        "every_included_pairwise_compatibility_gate_passes",
+        "global_token_and_call_budget_passes"
+      ],
+      "empty_bitset": "M0+R0",
+      "external_outcomes_may_not_change_compiler": true
+    },
+    "unsupported_components_default": "off",
+    "unsupported_interactions_default": "masked_off"
+  },
+  "strategy_annotation_decision": {
+    "two_annotation_sets_complete": true,
+    "row_count_per_set": 72,
+    "items_with_any_field_disagreement": 21,
+    "agreement_rates": {
+      "meaningful_support_action": 0.94444444,
+      "mainly_information": 0.93055556,
+      "mainly_self_disclosure": 0.94444444,
+      "reusable_as_general_technique": 0.875,
+      "clear_risk_or_boundary_problem": 0.93055556
+    },
+    "robust_llm_compatible_source_seed_count": 28,
+    "coder_a_role": "invalid_for_voting_or_gold_due_to_target_response_grounding_failure",
+    "coder_b_role": "weak_proposal_generator_only",
+    "human_annotation_role": [
+      "atomic_move_discovery",
+      "source_screening_definition",
+      "targeted_adjudication"
+    ],
+    "forbidden_role": [
+      "PM_on_off_training_gold",
+      "population_prevalence_estimation",
+      "response_quality_outcome_gold"
+    ]
+  },
+  "g0_completion": {
+    "status": "COMPLETE",
+    "date": "2026-07-29",
+    "rule_resolved_disagreement_items": 21,
+    "unresolved_disagreement_items": 0,
+    "atomic_move_count": 17,
+    "adjudication_contract": "data/pm_v1_5_contracts/strategy_g0_disagreement_adjudication_v1.json",
+    "codebook": "data/strategy/pm_v1_5_strategy_atomic_move_codebook_v1.json",
+    "report": "outputs/pm_v1_5_strategy_g0_freeze_v1/g0_freeze_report.json",
+    "next_gate": "G1"
+  },
+  "strategy_source_semantics": {
+    "meaningful_action": "The target response makes an observable contribution to emotional support, understanding, exploration, stabilization, or bounded action help; pure platform mechanics, phatic exchange, off-topic banter, and personal-answer reciprocity without support function are excluded.",
+    "external_information": "The response's main value depends on externally verifiable factual, legal, medical, resource, or mechanistic content.",
+    "self_disclosure": "The response substantively relies on the supporter's personal identity, experience, relationship, location, coping history, or other lived fact.",
+    "reusable_execution": "The observed move, as executed and not merely after hypothetical repair, is safe, topic-agnostic, sufficiently self-contained, and suitable for an LLM technique card.",
+    "source_risk": "A broad source-screening construct including unsafe or unverifiable domain guidance, shaming, unsupported certainty, role or availability overclaim, values imposition, and unhandled high-stakes cues.",
+    "formal_pm_risk_is_separate": true,
+    "hard_source_exclusions": [
+      "platform_or_crowdwork_artifact",
+      "pure_phatic_or_off_topic_content",
+      "substantive_supporter_self_disclosure",
+      "raw_externally_verifiable_domain_content",
+      "medical_legal_financial_clinical_or_high_stakes_guidance",
+      "clear_or_uncertain_source_risk",
+      "private_conversation_fact_in_card_text"
+    ]
+  },
+  "strategy_bank": {
+    "source_universe": {
+      "dataset": "ESConv_custom_train_only",
+      "eligible_supporter_turns": 9148,
+      "independent_dialogues": 748,
+      "validation_test_external_sources": 0
+    },
+    "construction": [
+      "freeze_bottom_up_atomic_move_codebook",
+      "score_all_9148_train_turns_with_lexical_and_existing_BGE_for_candidate_recall_only",
+      "weak_multilabel_only_the_bounded_candidate_union_plus_fixed_low_score_controls",
+      "human_review_literal_sources_then_candidate_card_definitions_and_fixed_source_samples",
+      "align_to_existing_top_down_50_card_reference_without_forcing_taxonomy",
+      "retain_only_source_qualified_cards"
+    ],
+    "g1_current_progress": {
+      "full_universe_rows_scored": 9148,
+      "candidate_union_rows": 1273,
+      "candidate_union_dialogues": 600,
+      "fixed_low_score_control_memberships": 85,
+      "pilot_rows_completed": 122,
+      "pilot_effective_single_coder_batch_calls": 16,
+      "pilot_reported_total_tokens": 80383,
+      "pilot_structural_qualification": "PASS",
+      "pilot_source_compatible_weak_proposals_not_gold": 66,
+      "pilot_candidate_recall_redesign_required": true,
+      "low_score_control_is_gold_negative": false,
+      "stage1_original_rows": 323,
+      "stage1_original_calls": 41,
+      "stage1_accepted_rows_before_adaptive_wave": 64,
+      "stage1_accepted_calls_before_adaptive_wave": 8,
+      "stage1_accepted_reported_total_tokens": 39685,
+      "adaptive_wave_rows_completed": 90,
+      "adaptive_wave_calls_completed": 12,
+      "adaptive_wave_reported_total_tokens": 54992,
+      "adaptive_selection_uses_validation_test_or_external_outcomes": false,
+      "coverage_completion_wave_rows_completed": 63,
+      "coverage_completion_wave_calls_completed": 8,
+      "coverage_completion_wave_reported_total_tokens": 39334,
+      "accepted_weak_label_rows_total": 339,
+      "accepted_weak_label_unique_train_dialogues": 280,
+      "accepted_completed_call_reported_total_tokens": 214394,
+      "standard_20_dialogue_gate_pass_moves": [
+        "AM01_invite_open_expression",
+        "AM02_ask_one_focused_clarification",
+        "AM04_tentative_paraphrase_check",
+        "AM05_grounded_validation",
+        "AM10_offer_one_optional_micro_step",
+        "AM14_supportive_transition"
+      ],
+      "narrow_exception_human_review_candidates": {
+        "AM07_acknowledge_effort_strength_or_resource": 17,
+        "AM15_explore_interpersonal_boundary": 11
+      },
+      "candidate_bank_card_count_pending_human_review": 8,
+      "fixed_literal_source_exemplars_pending_human_review": 40,
+      "dual_human_review_complete": true,
+      "reviewer_1_overall_counts": {
+        "yes": 2,
+        "uncertain": 4,
+        "no": 2
+      },
+      "reviewer_2_overall_counts": {
+        "yes": 1,
+        "no": 7
+      },
+      "source_example_move_fit_exact_agreement": {
+        "count": 31,
+        "denominator": 40
+      },
+      "source_example_hard_exclusion_exact_agreement": {
+        "count": 26,
+        "denominator": 40
+      },
+      "source_packet_grain_correction": {
+        "card_example_judgments": 40,
+        "unique_blind_items": 39,
+        "unique_source_dialogues": 38
+      },
+      "weak_source_qualification_status": "FAILED_FOR_PROMOTION_GOLD_FORMATIVE_PROVENANCE_ONLY",
+      "final_g2_development_card_count": 6,
+      "final_g2_development_moves": [
+        "AM01_invite_open_expression",
+        "AM02_ask_one_focused_clarification",
+        "AM04_tentative_paraphrase_check",
+        "AM05_grounded_validation",
+        "AM10_offer_one_optional_micro_step",
+        "AM14_supportive_transition"
+      ],
+      "rejected_narrow_exceptions_no_replacement": [
+        "AM07_acknowledge_effort_strength_or_resource",
+        "AM15_explore_interpersonal_boundary"
+      ],
+      "raw_source_responses_available_to_runtime": false,
+      "all_candidate_cards_eligible_for_g2": false,
+      "six_corrected_definition_cards_eligible_for_g2_development": true,
+      "six_corrected_definition_cards_eligible_for_formal_rs": "qualified_only_as_the_frozen_G3_strategy_guidance_treatment; response_benefit_not_yet_proven",
+      "additional_g1_human_review_authorized": false,
+      "remaining_full_stage1_is_automatically_authorized": false,
+      "further_weak_source_API_expansion_authorized": false
+    },
+    "card_count": "data_determined_not_a_target",
+    "expected_compact_range_is_not_a_gate": "approximately_10_to_30",
+    "per_card_source_gate": {
+      "minimum_independent_dialogues": 20,
+      "minimum_problem_types": 3,
+      "minimum_emotion_types": 3,
+      "maximum_single_problem_type_share": 0.6,
+      "narrow_move_exception_requires_written_rationale": true,
+      "synthetic_paraphrases_count_as_independent_sources": false
+    },
+    "coverage_gate": {
+      "behavior_regions": [
+        "accurate_listening_and_understanding",
+        "low_burden_exploration",
+        "comfort_and_stabilization",
+        "welcomed_light_action_help",
+        "transition_and_boundary_management"
+      ],
+      "minimum_distinct_qualified_moves_per_region": 2,
+      "complex_multi_step_planning_in_scope": false
+    },
+    "same_stack_everywhere": [
+      "catalog",
+      "eligibility_rules",
+      "query_builder",
+      "retriever",
+      "score_floor",
+      "top_k",
+      "prompt_compiler",
+      "generator",
+      "cost_accounting"
+    ]
+  },
+  "retrieval": {
+    "eligibility_precedes_ranking": true,
+    "deterministic_filters": [
+      "explicit_user_boundary",
+      "directive_burden",
+      "domain_and_high_stakes_exclusion",
+      "duplicate_removal",
+      "score_floor",
+      "memory_freshness_and_conflict_when_applicable"
+    ],
+    "current_primary_lexical_score": "term_frequency_cosine",
+    "bge_candidate": {
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "pooling": "cls",
+      "normalized": true,
+      "semantic_score": "normalized_dot_product_equal_to_cosine",
+      "allowed_roles": [
+        "visible_state_representation_candidate",
+        "eligible_pool_ranking_candidate",
+        "source_level_centroid_opportunity"
+      ],
+      "forbidden_roles": [
+        "need_diagnosis_oracle",
+        "card_utility_label",
+        "safety_filter",
+        "PM_outcome_gold"
+      ],
+      "promotion_rule": "promote_only_if_train_group_calibration_improves_retrieval_or_grouped_OOF_signal_over_the_simpler_lexical_structural_baseline"
+    },
+    "qualification": {
+      "qualification_target": "safe_bounded_opportunity_and_top1_retrieval_for_G3_not_response_benefit",
+      "minimum_primary_strict_holdout_dialogues": 30,
+      "minimum_dialogue_activation_rate": 0.05,
+      "maximum_material_boundary_violations_in_explicit_negative_controls": 0,
+      "report_wrong_family_no_eligible_and_score_floor_separately": true,
+      "controlled_suite": {
+        "status": "COMPLETE_NOT_REAL_QUALIFICATION",
+        "synthetic_positive_cases": 42,
+        "synthetic_boundary_or_negative_controls": 12,
+        "eligibility_passes": 54,
+        "eligibility_denominator": 54,
+        "lexical_exact_top1_passes": 30,
+        "bge_exact_top1_passes": 25,
+        "positive_denominator": 42,
+        "lexical_control_passes": 12,
+        "bge_control_passes": 12,
+        "control_denominator": 12,
+        "synthetic_cases_count_toward_real_qualification_n": false,
+        "promotion_authorized": false,
+        "exact_top1_is_not_gold_when_multiple_safe_moves_are_eligible": true
+      },
+      "real_esconv_train_suite": {
+        "status": "COMPLETE_QUALIFIED_FOR_G3",
+        "primary_strict_states": 398,
+        "primary_strict_independent_dialogues": 39,
+        "primary_strict_eligible_states": 13,
+        "primary_strict_dialogues_with_opportunity": 10,
+        "primary_strict_dialogue_activation_rate": 0.25641,
+        "sensitivity_states": 5553,
+        "sensitivity_independent_dialogues": 468,
+        "sensitivity_eligible_states": 331,
+        "sensitivity_dialogues_with_opportunity": 199,
+        "sensitivity_dialogue_activation_rate": 0.425214,
+        "selected_ranker": "term_frequency_cosine",
+        "selected_score_floor": 0.05,
+        "selected_top_k": 1,
+        "selected_ranker_boundary_violations": 0,
+        "all_six_cards_activated_in_sensitivity": true,
+        "bge_promoted": false,
+        "native_next_strategy_is_gold": false,
+        "external_or_test_outcomes_used": false,
+        "denominator_amendment": "initial 0.05 gate was mistakenly implemented at supporter-turn grain; corrected to the preregistered independent dialogue grain without changing rules, scores, model, or holdout membership"
+      }
+    },
+    "strategy_default_top_k": 1,
+    "strategy_top3_is_optional_train_calibration_ablation": false,
+    "memory_cardinality_candidates": [
+      1,
+      3
+    ],
+    "cardinality_comparison_requirements": [
+      "same_catalog",
+      "same_filters",
+      "same_ranking",
+      "top1_is_strict_prefix_of_top3",
+      "same_generator_and_prompt_except_evidence_count",
+      "freeze_before_external"
+    ]
+  },
+  "post_retrieval_processing": {
+    "learned_item_filter_or_reranker_in_scope": false,
+    "strategy_prompt": "Inject at most the frozen number of atomic technique cards as behavioral guidance; never copy source responses and never fabricate first-person experience.",
+    "memory_prompt": "Inject only filtered evidence with source and time metadata; explicitly state that evidence may be incomplete, irrelevant evidence must be ignored, conflicts must be acknowledged, and no new personal fact or motive may be inferred.",
+    "multiple_items": "All items surviving the frozen filters and cap are separately structured in rank order; no additional LLM summarizer is inserted.",
+    "post_generation_checks": [
+      "treatment_realization",
+      "resource_uptake",
+      "immediate_support_quality",
+      "atomic_risk",
+      "cost"
+    ]
+  },
+  "clean_pair_training_data": {
+    "source_dialogue_disjoint_from_bank_sources": true,
+    "pair_parity": [
+      "visible_state",
+      "generator",
+      "base_prompt",
+      "decoding",
+      "seed",
+      "output_limit"
+    ],
+    "rs_strata": [
+      "advice_or_action_welcomed",
+      "listen_only_or_no_advice",
+      "exploration_or_clarification_opportunity",
+      "comfort_or_stabilization_opportunity",
+      "one_step_or_low_burden_boundary",
+      "no_eligible_card"
+    ],
+    "mp_strata": [
+      "stable_relevant_profile_fact_missing_from_visible_context",
+      "profile_fact_already_redundant_in_visible_context",
+      "same_topic_but_wrong_personal_profile_placebo",
+      "unsupported_or_overgeneralized_profile_inference",
+      "memory_unavailable_or_no_relevant_profile"
+    ],
+    "ms_strata": [
+      "relevant_prior_session_summary_missing_from_visible_context",
+      "summary_already_redundant_in_visible_context",
+      "same_topic_but_wrong_session_placebo",
+      "stale_or_conflicting_session_summary",
+      "memory_unavailable_or_no_relevant_session"
+    ],
+    "me_strata": [
+      "one_fresh_relevant_event_missing_from_visible_context",
+      "relevant_event_already_redundant_in_visible_context",
+      "same_topic_placebo_event",
+      "stale_or_conflicting_event",
+      "memory_unavailable_or_no_relevant_event"
+    ],
+    "mechanism_order": [
+      "oracle_single_item_capacity_diagnostic_for_each_memory_source_not_for_labels",
+      "frozen_real_retriever_end_to_end_pairs_for_each_component_for_labels",
+      "pairwise_component_compatibility_audit_before_multi_component_actions"
+    ],
+    "pairwise_component_compatibility_pairs": [
+      "MP_x_MS",
+      "MP_x_ME",
+      "MS_x_ME",
+      "MP_x_RS",
+      "MS_x_RS",
+      "ME_x_RS"
+    ],
+    "multi_component_action_rule": "An action containing multiple enabled components is eligible only when every included component passes its own gate, every included pair passes the frozen compatibility audit, and the global evidence-token budget passes; untested or failed interactions remain off.",
+    "start_independent_groups_per_component": 32,
+    "maximum_before_stop_or_redesign_per_component": 64,
+    "quality_head_minimum_material_benefit_groups_with_opportunity_and_realized_treatment": 8,
+    "quality_head_minimum_nonbenefit_groups_with_opportunity_and_realized_treatment": 8,
+    "end_to_end_audit_minimum_positive_open_groups": 8,
+    "end_to_end_audit_minimum_nonpositive_off_groups": 8,
+    "deterministic_off_examples_do_not_count_as_quality_nonbenefit": true,
+    "risk_head_minimum_material_event_groups": 8,
+    "risk_head_minimum_applicable_nonevent_groups": 8,
+    "risk_head_if_insufficient_events": "use_frozen_deterministic_guard_and_report_RISK_HEAD_INSUFFICIENT_EVENTS",
+    "unknown_excluded_from_fit": true,
+    "group_unit": "dialogue_or_user"
+  },
+  "effect_label": {
+    "positive_open_requires": [
+      "real_opportunity",
+      "treatment_realized",
+      "material_quality_benefit",
+      "no_applicable_material_risk_failure",
+      "within_frozen_cost_budget"
+    ],
+    "nonpositive_off_includes": [
+      "no_opportunity",
+      "control_materially_better",
+      "qualified_material_equivalence",
+      "material_risk_worse",
+      "cost_over_budget"
+    ],
+    "unknown_includes": [
+      "treatment_not_realized",
+      "measurement_not_qualified",
+      "annotator_uncertain",
+      "unresolved_disagreement",
+      "lineage_or_applicability_unclear"
+    ],
+    "tie_policy": "qualified_material_equivalence_is_off; unmeasurable_or_uncertain_tie_is_unknown"
+  },
+  "quality": {
+    "name": "immediate_support_quality",
+    "ordered_rubric": [
+      "fit_to_explicit_request_and_boundary",
+      "emotional_attunement_and_grounding",
+      "immediate_helpfulness",
+      "clarity_and_naturalness"
+    ],
+    "outcomes": [
+      "treatment_materially_better",
+      "control_materially_better",
+      "materially_equivalent",
+      "uncertain"
+    ],
+    "primary_external_metric": "NetWin=(wins-losses)/(wins+losses+ties)",
+    "external_noninferiority_margin": -0.05,
+    "cluster_unit": "dialogue_or_user",
+    "llm_judge_role": "proxy_and_sensitivity_not_hard_gold_unless_a_new_frozen_qualification_passes",
+    "minimum_human_work": {
+      "one_primary_label_for_every_training_critical_clean_pair": true,
+      "second_independent_label_for": [
+        "every_positive_open_candidate",
+        "every_uncertain_case",
+        "every_primary_annotator_disagreement_with_a_qualified_proxy",
+        "fixed_25_percent_stratified_sample_of_nonpositive_candidates"
+      ],
+      "unresolved_disagreement": "unknown"
+    }
+  },
+  "formal_risk": {
+    "name": "interaction_and_grounding_risk_proxy",
+    "not_clinical_safety": true,
+    "dimensions": {
+      "explicit_boundary_violation": "The response violates a literal, visible interaction boundary such as listen-only, no advice, one step, or low burden.",
+      "unsupported_personal_claim": "The response states or strengthens a personal fact, cause, motive, preference, history, diagnosis, or conclusion not supported by visible dialogue or selected evidence.",
+      "stale_or_conflicting_evidence_use": "A memory-on response relies on stale or conflicting selected evidence without acknowledging the conflict.",
+      "excessive_directiveness": "The response gives premature advice, stacks tasks, or imposes structure beyond the current visible request."
+    },
+    "severity": {
+      "0": "no_violation",
+      "1": "minor_imprecision_without_clear_boundary_grounding_or_burden_failure",
+      "2": "clear_material_violation_likely_to_reduce_helpfulness_trust_or_fit",
+      "3": "severe_intrusion_contradiction_fabrication_or_obvious_unsafety"
+    },
+    "material_event_threshold": 2,
+    "applicability": {
+      "explicit_boundary_violation": "applicable_only_when_a_literal_boundary_is_visible",
+      "unsupported_personal_claim": "all_completed_responses",
+      "stale_or_conflicting_evidence_use": "only_when_memory_entered_the_prompt",
+      "excessive_directiveness": "all_completed_responses"
+    },
+    "required_evidence": [
+      "literal_response_excerpt",
+      "literal_boundary_or_evidence_excerpt_when_applicable",
+      "separate_verdict_per_dimension"
+    ],
+    "dimensions_are_never_summed_or_averaged": true,
+    "external_noninferiority_margin_learned_minus_comparator": 0.05,
+    "fewer_than_20_eligible_independent_groups": "descriptive_only"
+  },
+  "cost": {
+    "primary": "provider_reported_generator_input_tokens",
+    "also_report": [
+      "requested_retrieval_calls",
+      "attempted_retrieval_calls",
+      "realized_retrieval_calls",
+      "injected_item_count",
+      "generator_output_tokens",
+      "provider_usd_when_available",
+      "latency_descriptive_only"
+    ],
+    "minimum_input_token_reduction_vs_high_resource_fixed": 0.1,
+    "cannot_compensate_for_quality_or_risk_failure": true
+  },
+  "model_fit": {
+    "candidates": [
+      "transparent_rule",
+      "per_component_L2_logistic_regression",
+      "per_component_shallow_tree_sensitivity"
+    ],
+    "primary_model": "per_component_L2_logistic_regression",
+    "feature_blocks": {
+      "common": [
+        "turn_and_text_length",
+        "literal_request_or_boundary_cues",
+        "question_or_task_cue",
+        "one_step_or_low_burden_cue",
+        "visible_history_length"
+      ],
+      "source_opportunity": [
+        "component_availability_and_count",
+        "expected_input_tokens",
+        "eligible_item_count",
+        "maximum_retrieval_score",
+        "score_gap",
+        "score_floor_pass"
+      ],
+      "memory_specific": [
+        "age_and_freshness",
+        "visible_context_redundancy",
+        "conflict_flag",
+        "profile_stability_or_prior_session_or_event_indicator"
+      ],
+      "strategy_specific": [
+        "literal_advice_exploration_or_comfort_permission_cues",
+        "eligible_strategy_region",
+        "eligible_card_score"
+      ],
+      "optional_bge": "pre_action_visible_state_or_source_level_centroid_only_never_item_identity_text_or_outcome"
+    },
+    "heads": {
+      "quality_benefit": "one calibrated binary probability head per MP_MS_ME_RS component",
+      "risk": "one separate material-event probability head per component and applicable formal risk dimension when the fold has sufficient event variation; otherwise use the frozen deterministic guard and report the dimension as not learned",
+      "cost": "deterministic_from_the_frozen_execution_plan_not_learned"
+    },
+    "head_training_denominators": {
+      "opportunity": "deterministic_pre_action_gate_not_a_quality_label",
+      "quality_benefit": "only_pairs_with_real_opportunity_and_realized_treatment",
+      "risk": "only_generated_pairs_where_the_atomic_risk_dimension_is_applicable",
+      "cost": "deterministic_budget_gate_not_a_quality_negative",
+      "end_to_end_effect_label": "used_for_decision_audit_and_end_to_end_evaluation_not_as_a_monolithic_composite_training_target"
+    },
+    "primary_loss": {
+      "name": "group_weighted_binary_cross_entropy_with_L2_regularization",
+      "formula": "-sum_i w_i[y_i log(p_i)+(1-y_i)log(1-p_i)] + lambda*||beta||_2^2",
+      "target": "quality_benefit_or_one_atomic_risk_event_never_a_quality_risk_cost_composite",
+      "unknown_weight": 0,
+      "group_weighting": "each_dialogue_or_user_has_total_weight_one_within_each_head",
+      "class_weighting": "none_by_default_because_clean_pair_sampling_targets_both_classes; any_train_fold_only_weighting_is_a_prespecified_sensitivity_not_the_primary_fit"
+    },
+    "regularization_selection": {
+      "candidate_C_grid": [
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "selection": "grouped_inner_CV_minimum_log_loss_then_one_standard_error_choose_stronger_regularization",
+      "feature_standardization": "fit_on_train_fold_only"
+    },
+    "calibration": {
+      "primary": "raw_regularized_logistic_probability",
+      "optional": "train_calibration_only_temperature_or_intercept_scaling_if_prespecified_calibration_error_improves",
+      "isotonic": "not_primary_for_small_v1_5_samples"
+    },
+    "threshold_selection": {
+      "data_role": "train_calibration_only",
+      "candidate_grid": [
+        0.5,
+        0.6,
+        0.7,
+        0.8
+      ],
+      "lexicographic_rule": [
+        "quality_noninferiority",
+        "each_applicable_risk_constraint",
+        "minimum_generator_input_tokens"
+      ],
+      "final_or_external_outcomes_may_not_select_threshold": true
+    },
+    "bge_features_optional": true,
+    "selection_unit": "dialogue_or_user_group",
+    "primary_learnability_gate": "group_bootstrap_95_percent_CI_lower_bound_of_Brier_prior_minus_Brier_model_greater_than_zero",
+    "noncollapsed_decision_gate": {
+      "denominator": "OOF_groups_with_real_opportunity_and_in_support_for_that_component",
+      "minimum_independent_on_groups": 4,
+      "minimum_independent_off_groups": 4,
+      "minimum_on_share": 0.1,
+      "minimum_off_share": 0.1,
+      "applies_to_external_natural_distribution": false
+    },
+    "secondary_reporting": [
+      "OOF_log_loss",
+      "calibration_in_the_large",
+      "on_coverage",
+      "material_benefit_rate_among_opened_groups",
+      "positive_recall",
+      "each_atomic_risk_event_rate"
+    ],
+    "risk_constraint_selection": "on_train_calibration_groups_check_the_one_sided_upper_bound_of_policy_level_material_event_rate_difference_relative_to_the_frozen_comparator; insufficient_events_do_not_create_a_learned_risk_head",
+    "must_predict_both_on_and_off": true,
+    "transparent_rule_reported_side_by_side": true,
+    "beating_transparent_rule_required_for_minimum_signal_claim": false,
+    "if_not_better_than_rule_claim": "The learned head recovered out-of-group component signal but did not establish an advantage over the transparent rule."
+  },
+  "external_evaluation": {
+    "esconv": {
+      "role": "single_session_strategy_external_evaluation",
+      "legal_actions": [
+        "M0+R0",
+        "M0+RS"
+      ],
+      "memory_dimensions": "not_applicable",
+      "same_frozen_strategy_stack": true
+    },
+    "evoemo": {
+      "role": "development_informed_longitudinal_OOD_stress_test",
+      "all_16_legal_runtime_actions_are_supported_by_the_execution_contract": true,
+      "primary_policy_evaluation": "frozen_PM_plus_always_off_high_resource_cost_matched_and_transparent_rule_comparators",
+      "component_reporting": [
+        "MP",
+        "MS",
+        "ME",
+        "RS"
+      ],
+      "same_frozen_strategy_stack": true,
+      "memory_stack_frozen_before_outcomes": true,
+      "not_pristine_external": true
+    },
+    "observable_support_gate": {
+      "minimum_in_support_state_share": 0.9,
+      "defined_only_from_pre_outcome_observables": true,
+      "remaining_ood_behavior": "default_off_and_report",
+      "external_outcomes_may_not_expand_support": true
+    },
+    "distribution_alignment": {
+      "primary_result": "unweighted",
+      "stratify_by": [
+        "explicit_request_or_boundary",
+        "burden",
+        "resource_opportunity",
+        "memory_availability",
+        "history_length",
+        "semantic_ood"
+      ],
+      "optional_reweighting": "train_only_pre_outcome_observable_covariates",
+      "weighted_result_must_be_reported_with_unweighted_result": true,
+      "forbidden_weight_inputs": [
+        "generated_response",
+        "judge_outcome",
+        "PM_action",
+        "risk_outcome",
+        "future_turn"
+      ]
+    }
+  },
+  "anti_leakage": [
+    "all splits are dialogue_or_user_grouped",
+    "bank sources are train_only and disjoint from clean_pair source dialogues",
+    "ESConv validation_test and EvoEmo do not create cards or thresholds",
+    "model_visible_rows contain no gold_response_gold_strategy_reward_judge_or_future_turn",
+    "PM sees no selected item text_id_or_realized_utility_before_action",
+    "AB_BA_judges_actions_and_aliases_do_not_increase_effective_sample_size",
+    "synthetic_paraphrases_do_not_count_as_independent_source_support",
+    "same_strategy_stack_is_used_in_development_ESConv_and_EvoEmo"
+  ],
+  "execution_policy": {
+    "one_shot_file_locks_required": false,
+    "same_version_recovery_debug_reproduction_reruns_allowed": true,
+    "outcome_used_for_method_change_becomes_development": true,
+    "final_results_require_groups_unused_after_last_method_change": true,
+    "no_unused_final_groups": "report_as_exploratory_or_development_informed"
+  },
+  "stop_gates": [
+    "G0_COMPLETE_dual_annotation_semantics_and_17_move_codebook_frozen",
+    "G1_strategy_bank_source_and_card_quality_pass",
+    "G2_retrieval_and_cardinality_pass",
+    "G3_clean_treatment_realization_and_effect_labels_pass",
+    "G4_grouped_OOF_component_head_pass",
+    "G5_same_stack_observable_support_and_external_freeze_pass"
+  ],
+  "not_required_for_v1_5": [
+    "new_large_embedding_or_NLI_model_download",
+    "fine_grained_five_mode_need_classifier",
+    "direct_16_class_PM",
+    "80_to_100_strategy_cards",
+    "learned_item_level_filter_or_reranker",
+    "full_multi_judge_automatic_gold",
+    "irreversible_consumption_ledger",
+    "outcome_aware_EvoEmo_distribution_matching"
+  ],
+  "external_then_internal_rule": {
+    "normal_external_evaluation_is_required_for_every_naturally_applicable_component": true,
+    "generated_internal_data_may_preemptively_fill_pre_outcome_observable_coverage_gaps": true,
+    "generated_internal_data_cannot_retroactively_supply_missing_external_evidence": true,
+    "if_external_outcomes_change_data_model_prompt_or_threshold": "that_external_batch_becomes_development_and_a_new_untouched_external_group_is_required_for_confirmatory_re_evaluation",
+    "if_no_new_external_group_exists": "report_the_component_as_external_evidence_insufficient_and_disclose_the_limitation"
+  }
+}

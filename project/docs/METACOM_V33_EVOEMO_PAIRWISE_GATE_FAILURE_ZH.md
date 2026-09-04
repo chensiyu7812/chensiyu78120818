@@ -1,5 +1,9 @@
 # MetaCom V3.3 EvoEmo Pairwise 评价失败报告
 
+> **ARCHIVED / 只读单次事故报告。** 本文不是当前问题清单或执行路线。可迁移问题统一由
+> `PM_V1_TO_V1_5_GLOBAL_FAILURE_LEDGER_ZH.md` 维护；本文只保留旧 V3.3 pairwise gate 的
+> 原始失败事实与证据。
+
 更新时间：2026-06-30
 状态：API 调用已完整完成，但 confirmatory judge gate 失败。该结果只能作为诊断，不能作为论文确认性外部结果。
 

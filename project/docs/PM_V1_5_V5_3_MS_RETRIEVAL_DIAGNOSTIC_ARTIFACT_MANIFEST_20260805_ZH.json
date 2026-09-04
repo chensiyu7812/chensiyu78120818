@@ -1,0 +1,77 @@
+{
+  "protocol": "pm-v1.5-v5.3-ms-retrieval-diagnostic-artifact-manifest-v1",
+  "status": "EXPLORATORY_DIAGNOSTIC_NOT_A_FROZEN_QUALIFYING_TRIAL",
+  "generated_at": "2026-08-05",
+  "original_directory": "project/outputs/pm_v1_5_v5_3_ms_retrieval_scoring_diagnostic_v1/",
+  "directory_git_status": "gitignored by design (bulk/pipeline-output policy, see .gitignore); not committed. This manifest plus the sanitized summary doc are the committed record of its contents.",
+  "generating_scripts": [
+    "project/scripts/v1_5/42_diagnose_ms_retrieval_scoring_v1_5.py",
+    "project/scripts/v1_5/43_diagnose_ms_rank1_on_real_states_v1_5.py",
+    "project/scripts/v1_5/44_diagnose_mp_me_rank1_on_real_states_v1_5.py"
+  ],
+  "contains_private_or_blinding_content": false,
+  "private_content_justification": "All source text is drawn from data/external/evo_emo.json, a synthetic (LLM-generated) EvoEmo persona dataset already present in the repo -- no real users, no human-subject data, no blinding/condition maps, no paid API call logs. No filename in this directory matches the project's private-marker patterns (private/blind/condition_mapping/physical_attempt_ledger/raw_*_calls).",
+  "files": [
+    {
+      "name": "PROPOSAL_MS_RETRIEVAL_SCORING_ZH.md",
+      "sha256": "b62421f462182a72f76c66dd0b168e6ff2a91388e370084ec2e07a8ea083940d",
+      "superseded_by": "docs/PM_V1_5_V5_3_MS_RETRIEVAL_SCORING_DIAGNOSTIC_ZH.md (corrected/sanitized version committed to git)"
+    },
+    {
+      "name": "MANUAL_RANK1_REVIEW_25_SAMPLE_ZH.md",
+      "sha256": "3da60123cb77d3357c03bd7e0e2377e49519956119f8fd6b0192cbe6395b1015",
+      "superseded_by": "docs/PM_V1_5_V5_3_MS_RETRIEVAL_SCORING_DIAGNOSTIC_ZH.md (corrected/sanitized version committed to git)"
+    },
+    {
+      "name": "MP_ME_EXTENSION_FINDINGS_ZH.md",
+      "sha256": "bd9b39851a81dd9c49ef8220f8a5f3d73f57d033c1f54c20039d2af4c5ca5309",
+      "superseded_by": "docs/PM_V1_5_V5_3_MS_RETRIEVAL_SCORING_DIAGNOSTIC_ZH.md (corrected/sanitized version committed to git)"
+    },
+    {
+      "name": "ms_retrieval_scoring_diagnostic_report.json",
+      "line_count": null,
+      "sha256": "f134545fda3feaa92c0e201039dd89deb2c693a7efd7eaec4278d78b68e0ccb8",
+      "content": "lexical / content_word_match_level / BGE-M3 recall@4 and nDCG@4 on the frozen 341-question ES-MemEval session-retrieval task; zero new API or model calls, reuses already-frozen embeddings and gold labels"
+    },
+    {
+      "name": "ms_rank1_real_states_lexical_vs_bge.jsonl",
+      "line_count": 138,
+      "sha256": "2b33ed89162e1cf8e2e01408a9b23c14cc91e04de7a9a48157f09b18023a31b1",
+      "content": "per-state Rank-1 pick (lexical vs BGE-M3) over all 138 real EvoEmo response-generation states, MS candidate pool built from data/external/evo_emo.json per-session `summary` fields",
+      "known_construction_gap": "candidate pool does not explicitly filter by `created_session < current_session_index`; see caveat in the sanitized summary doc and in the generating script's own docstring"
+    },
+    {
+      "name": "ms_rank1_real_states_summary.json",
+      "sha256": "e1fd5ffa13b000eaa171a47db17f62c2177737c6fc6ebe47b465158d5af34cb6",
+      "content": "aggregate agree/disagree counts for the file above"
+    },
+    {
+      "name": "mp_rank1_real_states_lexical_vs_bge.jsonl",
+      "line_count": 138,
+      "sha256": "bfb9fdeb40b8159c47990d75ee4009a56e16f2684bb4cf36a77eb106b31ac84c",
+      "content": "per-state Rank-1 pick (lexical vs BGE-M3) for MP (basic_info fields), same construction gap as MS above"
+    },
+    {
+      "name": "mp_rank1_real_states_summary.json",
+      "sha256": "0338a4c00d82c3d2328a5dda0af125cec373d93cc8f33103ed5407817c745d7b",
+      "content": "aggregate agree/disagree counts for the file above"
+    },
+    {
+      "name": "me_rank1_real_states_lexical_vs_bge.jsonl",
+      "line_count": 6,
+      "sha256": "f6a2568f8cf4070bb8e99fc17e3f42f5ac31a492100f402f406319ce932c4317",
+      "content": "only 6 of 138 states had >=2 ME candidates extracted by the production compile_atomic_reusable_outcome regex over seeker dialogue turns -- too sparse for any conclusion, see sanitized summary doc"
+    },
+    {
+      "name": "me_rank1_real_states_summary.json",
+      "sha256": "25590781f5ad4f50b717dd8f7196d3cd5107dc386e2b1d803f0a0c9b0a00fa88",
+      "content": "aggregate agree/disagree counts for the file above"
+    }
+  ],
+  "manual_annotation_disclosure": {
+    "exists": true,
+    "form": "single-pass reasoning over printed samples during the authoring conversation, not persisted as a structured per-item label file",
+    "not_auditable": "the 36%/32%/32% (lexical) and 70%/28%/2% (BGE) percentages quoted in the sanitized summary doc came from one annotator's (this session's) single read of 50 sampled states each; no independent second rater, no saved per-item label table, no adjudication. This is exactly the gap the user identified and the reason these numbers must be labeled diagnostic/unaudited, not confirmed results.",
+    "do_not": "do not re-run or expand this manual labeling as part of git recovery work -- that belongs to the formal same-stack MS qualifying trial, explicitly deferred until version governance is complete."
+  }
+}

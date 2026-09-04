@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh"><meta charset="utf-8"><title>Strategy Bank V2 五卡人评</title>
+<style>
+body{font:16px sans-serif;max-width:1000px;margin:24px auto;line-height:1.5}
+.card{border:1px solid #bbb;padding:16px;margin:18px 0;border-radius:8px}
+pre{white-space:pre-wrap;background:#f5f5f5;padding:12px}
+label{display:block;margin:7px 0} select,input,textarea{font:inherit}
+textarea{width:100%;height:60px} button{padding:10px 16px}
+</style>
+<h1>Strategy Bank V2 technique-only 五卡审查</h1>
+<p>只审核卡片定义是否清楚、安全、适合 train-only pilot。看不到原 supporter 回复；
+不得根据来源 survey 把卡片当成“已证明有益”。</p>
+<div id="root"></div><button onclick="download()">导出 JSONL</button>
+<script>
+const rows=[{"card_id": "strategy_v2_b5c09f30350b92c5adc940bd", "strategy_family": "Question", "support_move": "Ask one focused, low-burden question that helps the user clarify the most relevant feeling, fact, or goal.", "when_to_use": "Use during exploration when one answer would materially improve understanding.", "when_not_to_use": "Do not stack questions, repeat already answered facts, or question the user when they explicitly ask to be heard without probing.", "compatible_support_modes": ["explore"], "compatible_dialogue_phases": ["exploration"], "goal_types": ["make_sense", "decide"], "directive_burden": "light", "risk_flags": ["question_burden", "repeated_question"], "source_coverage": {"source_dialogue_count": 662, "raw_strategy_card_count": 1723}}, {"card_id": "strategy_v2_45ac2ce47581f56e06db417e", "strategy_family": "Restatement or Paraphrasing", "support_move": "Briefly paraphrase the user's central concern and leave room for correction.", "when_to_use": "Use when accurate understanding and being heard matter more than adding new advice.", "when_not_to_use": "Do not introduce motives, diagnoses, facts, or stronger conclusions than the user stated.", "compatible_support_modes": ["listen", "explore"], "compatible_dialogue_phases": ["exploration", "comforting"], "goal_types": ["be_heard", "make_sense"], "directive_burden": "none", "risk_flags": ["unsupported_inference"], "source_coverage": {"source_dialogue_count": 420, "raw_strategy_card_count": 586}}, {"card_id": "strategy_v2_48a27b2aae8fbe754784ce04", "strategy_family": "Reflection of feelings", "support_move": "Reflect the emotion or tension that is directly supported by the user's words, using tentative language when uncertain.", "when_to_use": "Use when naming and validating the present emotional experience may reduce load or deepen understanding.", "when_not_to_use": "Do not intensify, diagnose, or invent an emotion that is not supported by the visible dialogue.", "compatible_support_modes": ["listen", "explore", "comfort_reassure"], "compatible_dialogue_phases": ["exploration", "comforting"], "goal_types": ["be_heard", "make_sense", "stabilize"], "directive_burden": "none", "risk_flags": ["emotion_overreach", "unsupported_inference"], "source_coverage": {"source_dialogue_count": 495, "raw_strategy_card_count": 805}}, {"card_id": "strategy_v2_e956fc8a3582a98040421f6d", "strategy_family": "Affirmation and Reassurance", "support_move": "Acknowledge the user's effort or understandable reaction without generic praise or unsupported promises.", "when_to_use": "Use when the user needs validation, steadiness, or permission to move at a manageable pace.", "when_not_to_use": "Do not minimize the problem, guarantee outcomes, or praise traits not demonstrated in the visible dialogue.", "compatible_support_modes": ["comfort_reassure", "listen"], "compatible_dialogue_phases": ["comforting"], "goal_types": ["be_heard", "stabilize"], "directive_burden": "none", "risk_flags": ["generic_praise", "false_reassurance"], "source_coverage": {"source_dialogue_count": 660, "raw_strategy_card_count": 1639}}, {"card_id": "strategy_v2_7c59031ff0e290a574c70923", "strategy_family": "Providing Suggestions", "support_move": "Offer at most one optional, low-risk next step that follows the user's stated goal and can be declined.", "when_to_use": "Use only when advice is welcome and a concrete small step fits the current goal and phase.", "when_not_to_use": "Do not advise after a listen-only boundary, overload the user with multiple tasks, or provide medical, legal, financial, or other domain-specific claims.", "compatible_support_modes": ["light_guidance", "structured_planning"], "compatible_dialogue_phases": ["action"], "goal_types": ["decide", "act"], "directive_burden": "light", "risk_flags": ["unrequested_advice", "directive_overload", "domain_specific_claim"], "source_coverage": {"source_dialogue_count": 618, "raw_strategy_card_count": 1638}}];
+const checks=["support_move_clear","when_to_use_valid","when_not_to_use_valid",
+"mode_phase_goal_fit_valid","burden_and_risk_flags_valid","safe_general_technique",
+"approve_for_train_only_pilot"];
+function choice(cls){return `<select class="${cls}"><option value="">--请选择--</option><option>true</option><option>false</option></select>`}
+document.querySelector("#root").innerHTML=rows.map((r,i)=>`<section class="card" data-i="${i}">
+<h2>${i+1} / ${rows.length} — ${r.strategy_family}</h2>
+<pre>${JSON.stringify(r,null,2)}</pre>
+${checks.map(k=>`<label>${k} ${choice(k)}</label>`).join("")}
+<label>confidence <input class="confidence" type="number" min="1" max="5" value="3"></label>
+<label>required corrections<textarea class="corrections"></textarea></label>
+<label>notes<textarea class="notes"></textarea></label></section>`).join("");
+function download(){
+ const out=[];
+ for(let i=0;i<rows.length;i++){const r=rows[i],c=document.querySelector(`[data-i="${i}"]`),row={card_id:r.card_id};
+  for(const k of checks){const v=c.querySelector("."+k).value;if(!v){alert(`第 ${i+1} 条未完成 ${k}`);return;}row[k]=v==="true";}
+  row.confidence=Number(c.querySelector(".confidence").value);
+  row.required_corrections=c.querySelector(".corrections").value;
+  row.notes=c.querySelector(".notes").value;out.push(row);
+ }
+ const blob=new Blob([out.map(x=>JSON.stringify(x)).join("\n")+"\n"],{type:"application/jsonl"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="strategy_bank_v2_human_annotations.jsonl";a.click();
+}
+</script></html>

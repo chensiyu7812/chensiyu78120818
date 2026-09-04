@@ -1,0 +1,145 @@
+{
+  "protocol": "pm-v1.5-v3-h-eligibility-dual-review-audit-v1",
+  "status": "REVIEW_RELIABILITY_PASS_REALIZATION_REPAIR_REQUIRED_NO_GOLD_FREEZE",
+  "primary_rows": 128,
+  "overlap_rows": 32,
+  "agreement": {
+    "adjudicated_subtype": {
+      "n": 32,
+      "agreement_count": 32,
+      "raw_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "MS_SESSION -> MS_SESSION": 8,
+        "RS_ATOMIC_MOVE -> RS_ATOMIC_MOVE": 8,
+        "MP_PREFERENCE -> MP_PREFERENCE": 3,
+        "ME_REUSABLE_OUTCOME -> ME_REUSABLE_OUTCOME": 7,
+        "MP_PROFILE -> MP_PROFILE": 5,
+        "ME_UNRESOLVED_EVENT -> ME_UNRESOLVED_EVENT": 1
+      }
+    },
+    "owner_time_valid": {
+      "n": 32,
+      "agreement_count": 30,
+      "raw_agreement": 0.9375,
+      "cohen_kappa": 0.0,
+      "confusion": {
+        "yes -> yes": 30,
+        "yes -> no": 2
+      }
+    },
+    "goal_function_fit": {
+      "n": 32,
+      "agreement_count": 31,
+      "raw_agreement": 0.96875,
+      "cohen_kappa": 0.9375,
+      "confusion": {
+        "yes -> yes": 16,
+        "no -> no": 15,
+        "no -> yes": 1
+      }
+    },
+    "boundary_burden_fit": {
+      "n": 32,
+      "agreement_count": 31,
+      "raw_agreement": 0.96875,
+      "cohen_kappa": 0.92,
+      "confusion": {
+        "yes -> yes": 23,
+        "no -> no": 8,
+        "yes -> no": 1
+      }
+    },
+    "specific_nonredundant_increment": {
+      "n": 32,
+      "agreement_count": 27,
+      "raw_agreement": 0.84375,
+      "cohen_kappa": 0.6039603960396039,
+      "confusion": {
+        "yes -> yes": 21,
+        "yes -> no": 4,
+        "no -> no": 6,
+        "no -> yes": 1
+      }
+    },
+    "derived_eligibility": {
+      "n": 32,
+      "agreement_count": 31,
+      "raw_agreement": 0.96875,
+      "cohen_kappa": 0.9375,
+      "confusion": {
+        "eligible -> eligible": 15,
+        "ineligible -> ineligible": 16,
+        "ineligible -> eligible": 1
+      }
+    },
+    "derived_eligibility_per_component": {
+      "MP": {
+        "n": 8,
+        "agreement_count": 8,
+        "raw_agreement": 1.0,
+        "cohen_kappa": 1.0
+      },
+      "MS": {
+        "n": 8,
+        "agreement_count": 7,
+        "raw_agreement": 0.875,
+        "cohen_kappa": 0.75
+      },
+      "ME": {
+        "n": 8,
+        "agreement_count": 8,
+        "raw_agreement": 1.0,
+        "cohen_kappa": 1.0
+      },
+      "RS": {
+        "n": 8,
+        "agreement_count": 8,
+        "raw_agreement": 1.0,
+        "cohen_kappa": 1.0
+      }
+    }
+  },
+  "review_reliability_gate_pass": true,
+  "adjudicated_label_shape": {
+    "MP": {
+      "ineligible": 16,
+      "eligible": 16
+    },
+    "MS": {
+      "eligible": 16,
+      "ineligible": 16
+    },
+    "ME": {
+      "eligible": 16,
+      "ineligible": 16
+    },
+    "RS": {
+      "eligible": 18,
+      "ineligible": 14
+    }
+  },
+  "construction_intent_mismatch_count": 14,
+  "construction_intent_mismatch_by_logic_family": {
+    "MS_ELIGIBLE_MS_DISTINCTION": 4,
+    "MS_WRONG_OWNER_OR_GOAL": 4,
+    "RS_CURRENT_REQUEST_ALREADY_SPECIFIES_MOVE": 4,
+    "RS_ELIGIBLE_RS_SUGGESTION": 2
+  },
+  "required_realization_repairs": {
+    "MS_ELIGIBLE_MS_DISTINCTION": 4,
+    "RS_ELIGIBLE_RS_SUGGESTION": 2,
+    "RS_CURRENT_REQUEST_ALREADY_SPECIFIES_MOVE": 4,
+    "MS_WRONG_OWNER_OR_GOAL": 4
+  },
+  "current_gold_frozen": false,
+  "current_rows_trainable": false,
+  "identified_human_gold": false,
+  "python_executable": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/.venv-pm-v1-5/bin/python",
+  "python_version": "3.13.2",
+  "primary_sha256": "339808ec2d2217ee9e85019ce34d449b9ff6b3c7b595256bd022f21e79008f8a",
+  "overlap_sha256": "a8574a78daa8080607f0e3264c0d66080110646fd86cfb9e1b7e1c21b51d7a0b",
+  "binding_sha256": "c5c2968622ccc5ecb5113c1e5548447aeb4d97c49ca7bcaa475a6577c7cf2180",
+  "blueprint_sha256": "c601c7f16bad56c054d5e73c4a37f1fd22b8d329c35c128d06d6473bfc44e421",
+  "scientific_interpretation": "The reviewers can apply the four-gate codebook reliably. The current candidate realization cannot yet be frozen because several semantic families systematically realize the opposite eligibility construct."
+}

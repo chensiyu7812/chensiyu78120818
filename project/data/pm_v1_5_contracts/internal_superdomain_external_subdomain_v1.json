@@ -1,0 +1,103 @@
+{
+  "protocol": "pm-v1.5-internal-superdomain-external-subdomain-contract-v1",
+  "status": "FROZEN_BEFORE_NEW_D2_OR_D3_OUTCOMES",
+  "date": "2026-07-31",
+  "core_relationship": "The content-disjoint internal controlled environment must cover the resource ontology and pre-outcome decision support exercised by the external domains. External user identity, dialogue, memory text, and outcomes never become internal training data.",
+  "not_a_content_subset": true,
+  "same_runtime_stack_required": [
+    "resource ontology and MemoryItem schema",
+    "strictly causal prior-history compiler",
+    "current-session visible-state policy",
+    "query builder",
+    "retriever, filter, threshold, tie break, and Top-k",
+    "candidate descriptor",
+    "PM decision timing",
+    "resource injection prompt",
+    "generator identity and treatment"
+  ],
+  "internal_superdomain": {
+    "MP": [
+      "MP_PREFERENCE",
+      "MP_PROFILE"
+    ],
+    "MS": [
+      "MS_SESSION"
+    ],
+    "ME": [
+      "causal prior-session event chunks"
+    ],
+    "RS": [
+      "the same frozen topic-agnostic strategy Bank used by ESConv and EvoEmo"
+    ],
+    "internal_only_primary_evidence": [
+      "MP_PREFERENCE benefit",
+      "preference misuse and revocation",
+      "MP subtype competition",
+      "profile relevance and sensitive-profile nonuse",
+      "all 16 action combinations"
+    ]
+  },
+  "external_subdomains": {
+    "ESConv": {
+      "tests": [
+        "RS",
+        "correct memory-off behavior"
+      ],
+      "does_not_test": [
+        "MP",
+        "MS",
+        "ME"
+      ]
+    },
+    "EvoEmo": {
+      "tests": [
+        "MP_PROFILE where relevant",
+        "MS_SESSION",
+        "ME",
+        "cross-resource routing under real user-disjoint histories"
+      ],
+      "does_not_test": [
+        "MP_PREFERENCE",
+        "MS_PATTERN",
+        "very-long single-session rolling compaction"
+      ],
+      "status_wording": "outcome-free development-informed external evaluation"
+    }
+  },
+  "support_gates": {
+    "exact_mechanism_layers_pass_rate": 1.0,
+    "semantic_subtype_coverage_rate": 1.0,
+    "joint_primary_descriptor_support_per_component_min": 0.8,
+    "joint_primary_descriptor_support_per_component_target": 0.9,
+    "candidate_absent_policy": "deterministic off before the learned head",
+    "out_of_support_policy": "abstain or off without deleting the row from the all-state external result"
+  },
+  "reporting": {
+    "primary": "all external states, unweighted and clustered by user",
+    "secondary": [
+      "in-support states",
+      "OOD states",
+      "component and memory subtype",
+      "candidate present versus absent"
+    ],
+    "forbidden": [
+      "claiming pure untouched zero-shot external evaluation",
+      "using external quality or risk outcomes to choose training data, features, thresholds, or models",
+      "letting internal MP_PREFERENCE success mask external MP_PROFILE failure",
+      "describing numeric descriptor support as semantic equivalence"
+    ]
+  },
+  "MS_v1_5_scope": {
+    "current_session_context": "Fixed baseline context, not an MS action. The bounded ten-turn experiment supplies the complete current-session dialogue and no current-session summary.",
+    "MS_SESSION": "A bounded summary of one strictly completed prior session. This is the only V1.5 MS subtype.",
+    "MS_PATTERN": "Reserved for V2 because no qualified cross-session-pattern compiler currently exists.",
+    "action_space": "One MS bit; total actions remain 16.",
+    "hard_exclusions": [
+      "last-user-message fallback represented as a summary",
+      "current or future session content",
+      "conflict with a visible current update",
+      "already fully visible in current-session context",
+      "wrong-person or unsupported inference"
+    ]
+  }
+}

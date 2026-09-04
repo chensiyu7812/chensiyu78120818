@@ -1,0 +1,594 @@
+{
+  "protocol": "pm-v1.5-v3-observation-orthogonal-bakeoff-execution-v2",
+  "status": "FAIL_NO_FIT_CANDIDATE_QUALIFIED_CONFIRMATION_NOT_CONSUMED",
+  "selected_candidate": null,
+  "fit_rows": 64,
+  "confirmation_rows": 32,
+  "fit_data_quality": {
+    "per_component": {
+      "MS": 16,
+      "MP": 16,
+      "ME": 16,
+      "RS": 16
+    },
+    "nuisance_probe": {
+      "owner_time_entity_valid": {
+        "n": 48,
+        "positive": 24,
+        "negative": 24,
+        "tp": 13,
+        "tn": 14,
+        "fp": 10,
+        "fn": 11,
+        "recall": 0.5416666666666666,
+        "specificity": 0.5833333333333334,
+        "balanced_accuracy": 0.5625,
+        "five_seed_balanced_accuracy": [
+          0.5625,
+          0.5416666666666667,
+          0.5625,
+          0.5833333333333334,
+          0.5416666666666667
+        ],
+        "pass": true
+      },
+      "goal_function_fit": {
+        "n": 64,
+        "positive": 32,
+        "negative": 32,
+        "tp": 14,
+        "tn": 17,
+        "fp": 15,
+        "fn": 18,
+        "recall": 0.4375,
+        "specificity": 0.53125,
+        "balanced_accuracy": 0.484375,
+        "five_seed_balanced_accuracy": [
+          0.4375,
+          0.421875,
+          0.4375,
+          0.40625,
+          0.40625
+        ],
+        "pass": true
+      },
+      "boundary_burden_compatible": {
+        "n": 64,
+        "positive": 32,
+        "negative": 32,
+        "tp": 22,
+        "tn": 19,
+        "fp": 13,
+        "fn": 10,
+        "recall": 0.6875,
+        "specificity": 0.59375,
+        "balanced_accuracy": 0.640625,
+        "five_seed_balanced_accuracy": [
+          0.625,
+          0.640625,
+          0.625,
+          0.65625,
+          0.625
+        ],
+        "pass": true
+      },
+      "specific_increment": {
+        "n": 64,
+        "positive": 32,
+        "negative": 32,
+        "tp": 23,
+        "tn": 25,
+        "fp": 7,
+        "fn": 9,
+        "recall": 0.71875,
+        "specificity": 0.78125,
+        "balanced_accuracy": 0.75,
+        "five_seed_balanced_accuracy": [
+          0.75,
+          0.734375,
+          0.71875,
+          0.75,
+          0.75
+        ],
+        "pass": false
+      }
+    },
+    "nuisance_probe_pass": false,
+    "padding_removed_before_model_input": true,
+    "construction_intent_used_as_feature_or_gold": false
+  },
+  "fit_results": {
+    "transparent_v1": {
+      "factors": {
+        "owner_time_entity_valid": {
+          "n": 48,
+          "positive": 24,
+          "negative": 24,
+          "tp": 24,
+          "tn": 4,
+          "fp": 20,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.16666666666666666,
+          "balanced_accuracy": 0.5833333333333334,
+          "minimal_counterfactual_direction": {
+            "n": 24,
+            "correct": 4,
+            "rate": 0.16666666666666666
+          },
+          "leave_semantic_family_out": {
+            "n": 48,
+            "positive": 24,
+            "negative": 24,
+            "tp": 24,
+            "tn": 4,
+            "fp": 20,
+            "fn": 0,
+            "recall": 1.0,
+            "specificity": 0.16666666666666666,
+            "balanced_accuracy": 0.5833333333333334
+          },
+          "five_seed_balanced_accuracy": [
+            0.5833333333333334,
+            0.5833333333333334,
+            0.5833333333333334,
+            0.5833333333333334,
+            0.5833333333333334
+          ],
+          "five_seed_balanced_accuracy_sd": 0.0,
+          "status": "FAIL"
+        },
+        "goal_function_fit": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 28,
+          "tn": 5,
+          "fp": 27,
+          "fn": 4,
+          "recall": 0.875,
+          "specificity": 0.15625,
+          "balanced_accuracy": 0.515625,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 3,
+            "rate": 0.09375
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 28,
+            "tn": 5,
+            "fp": 27,
+            "fn": 4,
+            "recall": 0.875,
+            "specificity": 0.15625,
+            "balanced_accuracy": 0.515625
+          },
+          "five_seed_balanced_accuracy": [
+            0.515625,
+            0.515625,
+            0.515625,
+            0.515625,
+            0.515625
+          ],
+          "five_seed_balanced_accuracy_sd": 0.0,
+          "status": "FAIL"
+        },
+        "boundary_burden_compatible": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 28,
+          "tn": 4,
+          "fp": 28,
+          "fn": 4,
+          "recall": 0.875,
+          "specificity": 0.125,
+          "balanced_accuracy": 0.5,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 2,
+            "rate": 0.0625
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 28,
+            "tn": 4,
+            "fp": 28,
+            "fn": 4,
+            "recall": 0.875,
+            "specificity": 0.125,
+            "balanced_accuracy": 0.5
+          },
+          "five_seed_balanced_accuracy": [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "five_seed_balanced_accuracy_sd": 0.0,
+          "status": "FAIL"
+        },
+        "specific_increment": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 17,
+          "tn": 22,
+          "fp": 10,
+          "fn": 15,
+          "recall": 0.53125,
+          "specificity": 0.6875,
+          "balanced_accuracy": 0.609375,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 11,
+            "rate": 0.34375
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 17,
+            "tn": 22,
+            "fp": 10,
+            "fn": 15,
+            "recall": 0.53125,
+            "specificity": 0.6875,
+            "balanced_accuracy": 0.609375
+          },
+          "five_seed_balanced_accuracy": [
+            0.609375,
+            0.609375,
+            0.609375,
+            0.609375,
+            0.609375
+          ],
+          "five_seed_balanced_accuracy_sd": 0.0,
+          "status": "FAIL"
+        }
+      },
+      "status": "FAIL_ONE_OR_MORE_FIT_GATES"
+    },
+    "lexical_logistic_v1": {
+      "factors": {
+        "owner_time_entity_valid": {
+          "n": 48,
+          "positive": 24,
+          "negative": 24,
+          "tp": 23,
+          "tn": 19,
+          "fp": 5,
+          "fn": 1,
+          "recall": 0.9583333333333334,
+          "specificity": 0.7916666666666666,
+          "balanced_accuracy": 0.875,
+          "minimal_counterfactual_direction": {
+            "n": 24,
+            "correct": 22,
+            "rate": 0.9166666666666666
+          },
+          "leave_semantic_family_out": {
+            "n": 48,
+            "positive": 24,
+            "negative": 24,
+            "tp": 21,
+            "tn": 11,
+            "fp": 13,
+            "fn": 3,
+            "recall": 0.875,
+            "specificity": 0.4583333333333333,
+            "balanced_accuracy": 0.6666666666666666
+          },
+          "five_seed_balanced_accuracy": [
+            0.8958333333333333,
+            0.875,
+            0.8125,
+            0.875,
+            0.9166666666666667
+          ],
+          "five_seed_balanced_accuracy_sd": 0.034860834438919824,
+          "status": "PASS"
+        },
+        "goal_function_fit": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 26,
+          "tn": 21,
+          "fp": 11,
+          "fn": 6,
+          "recall": 0.8125,
+          "specificity": 0.65625,
+          "balanced_accuracy": 0.734375,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 27,
+            "rate": 0.84375
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 25,
+            "tn": 17,
+            "fp": 15,
+            "fn": 7,
+            "recall": 0.78125,
+            "specificity": 0.53125,
+            "balanced_accuracy": 0.65625
+          },
+          "five_seed_balanced_accuracy": [
+            0.75,
+            0.78125,
+            0.703125,
+            0.734375,
+            0.703125
+          ],
+          "five_seed_balanced_accuracy_sd": 0.029646353064078555,
+          "status": "PASS"
+        },
+        "boundary_burden_compatible": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 26,
+          "tn": 20,
+          "fp": 12,
+          "fn": 6,
+          "recall": 0.8125,
+          "specificity": 0.625,
+          "balanced_accuracy": 0.71875,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 25,
+            "rate": 0.78125
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 19,
+            "tn": 13,
+            "fp": 19,
+            "fn": 13,
+            "recall": 0.59375,
+            "specificity": 0.40625,
+            "balanced_accuracy": 0.5
+          },
+          "five_seed_balanced_accuracy": [
+            0.6875,
+            0.75,
+            0.71875,
+            0.6875,
+            0.71875
+          ],
+          "five_seed_balanced_accuracy_sd": 0.023385358667337132,
+          "status": "FAIL"
+        },
+        "specific_increment": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 18,
+          "tn": 22,
+          "fp": 10,
+          "fn": 14,
+          "recall": 0.5625,
+          "specificity": 0.6875,
+          "balanced_accuracy": 0.625,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 25,
+            "rate": 0.78125
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 17,
+            "tn": 22,
+            "fp": 10,
+            "fn": 15,
+            "recall": 0.53125,
+            "specificity": 0.6875,
+            "balanced_accuracy": 0.609375
+          },
+          "five_seed_balanced_accuracy": [
+            0.6875,
+            0.609375,
+            0.640625,
+            0.609375,
+            0.65625
+          ],
+          "five_seed_balanced_accuracy_sd": 0.029646353064078555,
+          "status": "FAIL"
+        }
+      },
+      "status": "FAIL_ONE_OR_MORE_FIT_GATES"
+    },
+    "bge_small_hybrid_v1": {
+      "factors": {
+        "owner_time_entity_valid": {
+          "n": 48,
+          "positive": 24,
+          "negative": 24,
+          "tp": 12,
+          "tn": 10,
+          "fp": 14,
+          "fn": 12,
+          "recall": 0.5,
+          "specificity": 0.4166666666666667,
+          "balanced_accuracy": 0.45833333333333337,
+          "minimal_counterfactual_direction": {
+            "n": 24,
+            "correct": 13,
+            "rate": 0.5416666666666666
+          },
+          "leave_semantic_family_out": {
+            "n": 48,
+            "positive": 24,
+            "negative": 24,
+            "tp": 5,
+            "tn": 6,
+            "fp": 18,
+            "fn": 19,
+            "recall": 0.20833333333333334,
+            "specificity": 0.25,
+            "balanced_accuracy": 0.22916666666666669
+          },
+          "five_seed_balanced_accuracy": [
+            0.47916666666666663,
+            0.47916666666666663,
+            0.4791666666666667,
+            0.5625,
+            0.5416666666666667
+          ],
+          "five_seed_balanced_accuracy_sd": 0.03632415786283897,
+          "status": "FAIL"
+        },
+        "goal_function_fit": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 17,
+          "tn": 23,
+          "fp": 9,
+          "fn": 15,
+          "recall": 0.53125,
+          "specificity": 0.71875,
+          "balanced_accuracy": 0.625,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 23,
+            "rate": 0.71875
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 11,
+            "tn": 11,
+            "fp": 21,
+            "fn": 21,
+            "recall": 0.34375,
+            "specificity": 0.34375,
+            "balanced_accuracy": 0.34375
+          },
+          "five_seed_balanced_accuracy": [
+            0.5625,
+            0.59375,
+            0.609375,
+            0.59375,
+            0.5
+          ],
+          "five_seed_balanced_accuracy_sd": 0.03903123748998999,
+          "status": "FAIL"
+        },
+        "boundary_burden_compatible": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 20,
+          "tn": 18,
+          "fp": 14,
+          "fn": 12,
+          "recall": 0.625,
+          "specificity": 0.5625,
+          "balanced_accuracy": 0.59375,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 20,
+            "rate": 0.625
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 17,
+            "tn": 12,
+            "fp": 20,
+            "fn": 15,
+            "recall": 0.53125,
+            "specificity": 0.375,
+            "balanced_accuracy": 0.453125
+          },
+          "five_seed_balanced_accuracy": [
+            0.578125,
+            0.625,
+            0.609375,
+            0.578125,
+            0.546875
+          ],
+          "five_seed_balanced_accuracy_sd": 0.027243118397129208,
+          "status": "FAIL"
+        },
+        "specific_increment": {
+          "n": 64,
+          "positive": 32,
+          "negative": 32,
+          "tp": 19,
+          "tn": 17,
+          "fp": 15,
+          "fn": 13,
+          "recall": 0.59375,
+          "specificity": 0.53125,
+          "balanced_accuracy": 0.5625,
+          "minimal_counterfactual_direction": {
+            "n": 32,
+            "correct": 20,
+            "rate": 0.625
+          },
+          "leave_semantic_family_out": {
+            "n": 64,
+            "positive": 32,
+            "negative": 32,
+            "tp": 15,
+            "tn": 17,
+            "fp": 15,
+            "fn": 17,
+            "recall": 0.46875,
+            "specificity": 0.53125,
+            "balanced_accuracy": 0.5
+          },
+          "five_seed_balanced_accuracy": [
+            0.5625,
+            0.546875,
+            0.578125,
+            0.5625,
+            0.5625
+          ],
+          "five_seed_balanced_accuracy_sd": 0.009882117688026186,
+          "status": "FAIL"
+        }
+      },
+      "status": "FAIL_ONE_OR_MORE_FIT_GATES"
+    }
+  },
+  "one_shot_confirmation": null,
+  "embedding": {
+    "model": "BAAI/bge-small-en-v1.5",
+    "hidden_size": 384,
+    "relation_size": 1536,
+    "pooling": "normalized_cls",
+    "device": "cpu_transformers_fallback",
+    "local_files_only": true
+  },
+  "step1_training_authorized": false,
+  "step2_qualification_authorized": false,
+  "response_or_outcome_read": false,
+  "external_lockbox_read": false,
+  "reference_sha256": "e1d368c4a8f2576515d8e685531050822416d384b5379c7edb0a18400757dc6a",
+  "candidate_rows_sha256": "be0f5eff9d4cb2b170b43d4bdb26a9ce4bec2cf720594094daf26f6b435d9d14",
+  "blueprint_sha256": "5e76557f8048a04e44cd6ac3d7b2bd0fa49acdd2fd1e9ad16d6c9c6fd2717fe7",
+  "contract_sha256": "b1b04fa4f6f588edd6748030ed4e3a6a574edb9301407671f524fb2a5f08b6a0",
+  "python_executable": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/.venv-pm-v1-5/bin/python",
+  "python_version": "3.13.2",
+  "fit_oof_predictions_sha256": "2583232c968595d5e5c7e143756ce1538930111249b753777138e319ed9dc4dd",
+  "confirmation_predictions_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

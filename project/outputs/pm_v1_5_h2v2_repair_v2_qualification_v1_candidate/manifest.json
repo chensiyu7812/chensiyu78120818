@@ -1,0 +1,31 @@
+{
+  "protocol": "pm-v1.5-h2v2-repair-v2-qualification-v1",
+  "status": "INVALIDATED_NOT_FOR_HUMAN_REVIEW",
+  "purpose": "Historical diagnostic only. The packet used an empty lexical query and therefore did not rank candidates as the runtime does. repair_v2 is also a post-H2 treatment change and is not part of the frozen V1.5 stack.",
+  "review_items": 82,
+  "items_with_zero_candidates": 26,
+  "top_k_shown": 3,
+  "method": "repair_v2_rank_applicable_cards (transparent tier+lexical, post-H2 evidence-gated overlay)",
+  "scores_hidden_from_reviewer": true,
+  "qualification_gates": {
+    "opportunity_uncertain_rate_maximum": 0.1,
+    "opportunity_balanced_accuracy_minimum": 0.9,
+    "top1_acceptable_minimum": 0.8,
+    "top3_acceptable_recall_minimum": 0.9,
+    "hard_exclusion_in_top3_maximum": 0
+  },
+  "bank_content_frozen": true,
+  "states_frozen_before_this_scoring": true,
+  "human_review_authorized": false,
+  "invalidation_reasons": [
+    "repair_v2_rank_applicable_cards was called with query=\"\" even though lexical_score(query, card_retrieval_text) affects ranking",
+    "repair_v2 changes the treatment used by completed RS training and ESConv effect experiments"
+  ],
+  "inputs": {
+    "states": "outputs/pm_v1_5_h2v2_retrieval_state_freeze_v1/h2v2_states_private.jsonl",
+    "bank": "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl"
+  },
+  "outputs": {
+    "h2v2_review_packet.jsonl": "7d2da1f7b058cede416e6cce06a65d51bb14f744db253358b9ca5ec0a921479c"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "protocol": "pm-v1.5-strategy-bank-v2-candidate-binding-v1",
+  "status": "CANDIDATE_BUILT_AWAITING_LLM_WEAK_AND_HUMAN_AUDIT",
+  "output_directory": "outputs/pm_v1_5_strategy_bank_v2_review_candidate",
+  "build_report_sha256": "2cafde63e9b0acb89e84a84ba006d7ef8bad1e5857d839b8158a042fdb7660d9",
+  "files": {
+    "build_report.json": "fc6382de6a5e7d0de20e898db4b14e7095f07e47f77787c452aeabff7558acd6",
+    "strategy_cards_v2_candidate.jsonl": "7a5fb05481741e453d24808611f1928f0df63d4fd6ed9fff35273763d2cd77a2",
+    "strategy_bank_v2_lineage.jsonl": "cd231c18ecd8c6d35dfd4bc39276e36711e73b761a3fff7d25e39cfcfa922d70",
+    "human_review_packet.jsonl": "25a1ea0199033b5a76a74a15ae68187850466a20e48d06ca34fa09f2064c6122",
+    "human_annotation_template.jsonl": "60bf40084ecc10d4b1d5c79b7de1a99ab6b53f29f2441a7bd2d613a8558277fc",
+    "human_review.html": "e40f6020091094768549dfd550ca3e873939dd5cbdbf75ee32fbe8c8a4ee6e0f"
+  },
+  "raw_strategy_bank_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e",
+  "support_need_lineage_sha256": "1c21a157806d73f3b681d42b7f5228f8259e9a52e34d2c6264ffa85cbe3adc05",
+  "raw_card_count": 11590,
+  "packet_source_excluded_raw_card_count": 1094,
+  "candidate_card_count": 5,
+  "candidate_lineage_row_count": 6501,
+  "candidate_source_dialogue_count": 748,
+  "candidate_packet_source_overlap_count": 0,
+  "candidate_raw_examples_exposed_to_generator": false,
+  "candidate_quality_status": "RULE_FILTERED_PENDING_LLM_WEAK_AND_HUMAN_AUDIT",
+  "candidate_eligible_for_formal_rs": false,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "api_calls_made": 0
+}

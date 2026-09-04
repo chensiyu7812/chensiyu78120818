@@ -1,0 +1,165 @@
+{
+  "protocol": "pm-v1.5-train-only-low-budget-judge-qualification-v2",
+  "status": "READY_FOR_ZERO_API_DRY_RUN",
+  "scope": "longitudinal_train_only_measurement_qualification",
+  "pairwise_state_count": 12,
+  "split_equivalence_state_count": 9,
+  "gpt_anchor_state_count": 8,
+  "regime_sample_counts": {
+    "profile_needed": 2,
+    "summary_needed": 1,
+    "event_needed": 1,
+    "multi_source_needed": 2,
+    "memory_harmful": 2,
+    "strategy_helpful": 1,
+    "strategy_harmful": 1,
+    "context_only": 1,
+    "ambiguous": 1
+  },
+  "pairwise_order_variants": [
+    0,
+    1
+  ],
+  "conditions": {
+    "qwen_nonthinking_pairwise": 24,
+    "qwen_thinking_pairwise": 24,
+    "qwen_nonthinking_combined": 9,
+    "qwen_nonthinking_split_quality": 9,
+    "qwen_nonthinking_split_risk": 9,
+    "gpt_high_quality_pairwise_anchor": 16
+  },
+  "planned_logical_calls": 91,
+  "blinding": {
+    "judge_action_ids_hidden": true,
+    "judge_regime_hidden": true,
+    "judge_proxy_expected_direction_hidden": true,
+    "human_action_ids_hidden": true,
+    "human_model_identity_hidden": true,
+    "memory_and_strategy_identifiers_hidden": true,
+    "balanced_ab_ba_for_model_pairwise": true
+  },
+  "decision_boundary": {
+    "qualification_only": true,
+    "creates_training_labels": false,
+    "majority_vote_is_gold": false,
+    "calibration_internal_test_external_outcomes_forbidden": true,
+    "thresholds_must_be_frozen_before_results": true,
+    "nonthinking_vs_thinking_compared_on_identical_items": true,
+    "combined_vs_split_is_measurement_equivalence_not_model_selection": true,
+    "gpt_is_a_small_anchor_not_a_bulk_labeler": true
+  },
+  "structured_output_instruction": {
+    "protocol": "explicit-json-literal-in-every-model-prompt-v1",
+    "required_literal_case_insensitive": "json",
+    "applies_to_qwen_loose_json_object_mode": true,
+    "applies_to_gpt_strict_json_schema_mode": true,
+    "purpose": "provider compatibility and equivalent output formatting only",
+    "loose_json_schema_bridge": {
+      "protocol": "provider-visible-full-pydantic-json-schema-v1",
+      "complete_schema_is_injected_for_every_loose_endpoint": true,
+      "field_names_required_set_types_enums_and_lengths_visible": true,
+      "schema_serialization": "canonical_json",
+      "strict_schema_endpoints_receive_constraints_out_of_band": true
+    }
+  },
+  "pre_outcome_qualification_thresholds": {
+    "loose_schema_compatibility_pilot": {
+      "required_logical_calls": 5,
+      "required_valid_outputs": 5,
+      "maximum_schema_validation_failures": 0,
+      "transport_retries_do_not_change_compatibility": true,
+      "creates_scientific_qualification_verdict": false
+    },
+    "minimum_pairwise_informative_rate": 0.5,
+    "minimum_ab_ba_order_consistency": 0.8,
+    "minimum_qwen_mode_direction_agreement": 0.7,
+    "minimum_qwen_gpt_anchor_direction_agreement": 0.7,
+    "maximum_combined_vs_split_dimension_mae": 0.5,
+    "minimum_combined_vs_split_within_half_point_rate": 0.8,
+    "human_anchor_is_required_before_promoting_a_bulk_labeler": true,
+    "failure_disposition": "NOT_SUPPORTED; no threshold tuning and no bulk relabeling"
+  },
+  "response_schema_sha256": {
+    "pairwise": "46b44380f882725ce44b621d8263fe5fc6868fd2055badda616ab141a53e2709",
+    "combined": "b26db1fbf67c3cd7c5c7d7da7d2333947c0b8e88af24bb58f586742ac24d597e"
+  },
+  "endpoint_contract": {
+    "protocol": "pm-v1.5-low-budget-judge-endpoints-v2",
+    "qwen": {
+      "api_key_env": "DASHSCOPE_API_KEY",
+      "base_url": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+      "family": "qwen3_7_plus",
+      "input_usd_per_million_tokens": 0.4,
+      "model": "qwen3.7-plus-2026-05-26",
+      "output_usd_per_million_tokens": 1.6,
+      "supports_strict_json_schema": false,
+      "transport": "openai_chat_completions"
+    },
+    "gpt_anchor": {
+      "api_key_env": "OPENAI_API_KEY",
+      "base_url": "https://api.openai.com/v1",
+      "family": "openai_gpt_5_6_sol",
+      "input_usd_per_million_tokens": 5.0,
+      "max_output_tokens_parameter": "max_completion_tokens",
+      "model": "gpt-5.6-sol",
+      "output_usd_per_million_tokens": 30.0,
+      "supports_strict_json_schema": true,
+      "temperature_mode": "omit",
+      "transport": "openai_chat_completions"
+    },
+    "request_contract": {
+      "client_internal_retries": 1,
+      "maximum_physical_attempts_per_logical_call": 2,
+      "seed": 9051,
+      "temperature": 0.0
+    },
+    "file_sha256": "1fb748a74f3c72b4e0912928d52d21ae00b97ff6b73858b91e2528529b6e4b78",
+    "content_sha256": "e6bfe240bac2294ff41dd3feedcac12d15b36637f6c60b0ffe2f4fdefb66c1f9"
+  },
+  "human_anchor": {
+    "protocol": "pm-v1.5-low-budget-judge-human-anchor-v1",
+    "status": "FROZEN_BEFORE_MODEL_RESULTS",
+    "annotation_role": "independent_researcher_anchor_not_automatic_gold",
+    "binding_path": "data/pm_v1_5_contracts/low_budget_judge_human_anchor_v1.json",
+    "binding_file_sha256": "43c479c92fb3c963048358e543d0832f2377b048e86a8c812d70e51f1468d64a",
+    "binding_sha256": "d51a61224db2bdc7b6c84d67b0f8a8508839c251b6f1fe5ae33c7424e0399c69",
+    "annotations_path": "data/pm_v1_5_contracts/low_budget_judge_human_annotations_v1.jsonl",
+    "annotations_file_sha256": "d925c7c9cf5101251cde573db9035c3aaac49050c749cd4ceaeacdae0f54ed2a",
+    "annotations": 12,
+    "human_blind_packet_canonical_content_sha256": "08aebfe0d959ba4f8708dc1e3eb787636cba4a8798fdb3c9d0fd2b95693a0343",
+    "human_blind_packet_file_sha256": "bffedce86fb6ad756caffa6546d1ab178216d9580af373cbde09c237714ca521",
+    "automatic_gold": false,
+    "may_auto_promote_bulk_labeler": false,
+    "requires_researcher_signoff": true
+  },
+  "source_lineage": {
+    "states_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+    "states_train_prefix": {
+      "rows_consumed": 216,
+      "serialized_prefix_sha256": "08de1595595864e4ce8bd613e1eec0aee96d9a07e29a0ba0eaecdb78cfbcda6a",
+      "canonical_content_sha256": "c5bf2cb26787d55519f598f15869171ff526610ddca2382c6a94b59c7b618e10"
+    },
+    "evaluator_contexts_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/evaluator_contexts.jsonl",
+    "evaluator_contexts_train_prefix": {
+      "rows_consumed": 216,
+      "serialized_prefix_sha256": "65ef8f0fd508bc25477839165cc8e24cd863836971c02a3220971b132c6bf17b",
+      "canonical_content_sha256": "3a98c75fa84acd02901ff6a5cec986a564ba8c615e1ff59b8df9deee9260d996"
+    },
+    "action_outcomes_path": "outputs/pm_v1_5_longitudinal_action_sweep_v8_19_2_continuation_v2_dry_run/action_outcomes.jsonl",
+    "action_outcomes_train_prefix": {
+      "rows_consumed": 3456,
+      "serialized_prefix_sha256": "cf711fd3469af9b1082ac37c00e651e5d911c9a12289a01e867c51880f100c25",
+      "canonical_content_sha256": "99d9fb229e67774d575d2dcaf946513d3f35ca2d3f39e03e4848aa769889d187"
+    },
+    "train_state_count": 216,
+    "train_outcome_count": 3456,
+    "selected_pairs_sha256": "55aeaf43f623857be098a1a7c6af2b9467517e6601d57184b6ff235c5be02374",
+    "ordered_pairwise_sha256": "7056627d8b5966f9e778235f2e15cbd65a8decf5216a32dfd1a4103b50c2abf7",
+    "split_equivalence_sha256": "12aa6d3c94ed72fea6e9644bf9f684cef02c4ad206efdd367c5a43675f4581cc",
+    "human_blind_packet_sha256": "08aebfe0d959ba4f8708dc1e3eb787636cba4a8798fdb3c9d0fd2b95693a0343",
+    "gpt_anchor_pair_ids_sha256": "ac69000ae12d4547aacebecb3d4b24bfa809605222fd1d017c91fb3fd975d3fa"
+  },
+  "api_calls_made_while_preparing": 0,
+  "training_labels_created": false,
+  "contract_sha256": "9d42d35b412a476987ee08d45c82362166695488ddd13831c2bb1fe3655f371b"
+}

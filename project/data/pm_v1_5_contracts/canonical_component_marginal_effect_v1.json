@@ -1,0 +1,139 @@
+{
+  "protocol": "pm-v1.5-canonical-component-marginal-effect-v1",
+  "status": "ACTIVE_CANONICAL_BEFORE_NEW_COMPONENT_EFFECT_LABELS",
+  "date": "2026-07-30",
+  "research_claim": "A low-capacity auditable pre-generation policy can learn four component-specific marginal-benefit gates over 16 legal actions and improve the quality-risk-cost tradeoff under one fixed resource and generation stack.",
+  "supersedes_as_formal_learning_target": [
+    "pm-v1.5-fast-controlled-memory-routing-v1",
+    "any plan that uses resource applicability or needed_memory_sources as PM gold",
+    "family-only RS lookup as the final PM_RS representation"
+  ],
+  "preserves_as_historical_diagnostic": [
+    "outputs/pm_v1_5_controlled_memory_routing_heads_v1",
+    "outputs/pm_v1_5_minimum_pm_rs_effect_v1",
+    "outputs/pm_v1_5_rs_esconv_frozen_quality_analysis_v1"
+  ],
+  "components": [
+    "MP",
+    "MS",
+    "ME",
+    "RS"
+  ],
+  "legal_action_count": 16,
+  "estimand": {
+    "name": "protocol_specific_conditional_component_marginal_benefit",
+    "contrast": "For component c and fixed background b, compare b+c with b while holding the state, all other component bits, candidate discovery, prompt compiler, generator, and evaluation protocol fixed.",
+    "positive": "The component-on response is materially better and has no material risk.",
+    "nonpositive": "The component-off response is materially better, the responses are materially equivalent, or the component-on response has material risk.",
+    "unknown": "The treatment did not execute as specified, the comparison cannot be adjudicated, or required evidence is missing.",
+    "tie_policy": "off because equal quality does not justify additional resource cost",
+    "claim_boundary": "A human-adjudicated paired response is a protocol-specific noisy effect observation, not an individual causal effect on human welfare."
+  },
+  "applicability_role": {
+    "hard_scope_and_safety_filter": true,
+    "candidate_discovery_input": true,
+    "pm_gold": false,
+    "reason": "A relevant or permissible resource may still add no material response benefit."
+  },
+  "decision_timing": "post_candidate_discovery_pre_injection_pre_generation",
+  "memory_transport_contract": {
+    "path": "data/pm_v1_5_contracts/memory_transport_candidate_contract_v1.json",
+    "status": "ACTIVE_BACKEND_AND_192_PAIR_BLUEPRINT_READY_GENERATION_PENDING",
+    "exact_memory_text_shared_across_domains": false,
+    "same_memory_construction_retrieval_descriptor_injection_contract_required": true,
+    "external_ood_candidates": "abstain_or_component_off"
+  },
+  "decision_order": [
+    "hard scope, permission, and candidate-safety filter",
+    "predict component-specific material-benefit probability",
+    "reject material-risk failures",
+    "apply frozen cost and budget constraints",
+    "prefer the lower-cost action when expected quality is materially equivalent"
+  ],
+  "contrast_blueprint": {
+    "component_heads": 4,
+    "contrast_groups_per_head": 64,
+    "total_contrast_groups": 256,
+    "backgrounds_per_head": 8,
+    "groups_per_background": 8,
+    "split_quotas_per_background": {
+      "train": 4,
+      "calibration": 2,
+      "internal_test": 2
+    },
+    "one_component_bit_changes_within_pair": true,
+    "user_grouped_splits": true,
+    "external_outcomes_used_for_selection_or_generation": false
+  },
+  "reuse_policy": {
+    "old_response_reuse_requires": [
+      "same state and user",
+      "same supporter generation treatment",
+      "same memory backend and deterministic retrieval",
+      "requested_action equals effective_action equals realized_action",
+      "the two actions differ by exactly one component bit",
+      "no strategy item is injected when reusing an R0 memory contrast"
+    ],
+    "retained_current_stack_RS_pairs": 64,
+    "retained_current_stack_RS_reason": "These pairs already use the frozen current Strategy Bank and treatment.",
+    "legacy_small_catalog_memory_pairs_formal": false,
+    "legacy_small_catalog_memory_pairs_role": "diagnostic only after the strong transport repair",
+    "transport_repaired_memory_pairs": 192,
+    "transport_repaired_memory_response_calls_required": 384,
+    "replacement_blueprint": "outputs/pm_v1_5_transport_repaired_memory_contrast_blueprint_v1/blueprint_report.json",
+    "frozen_generation_plan": "outputs/pm_v1_5_transport_repaired_memory_generation_v1/plan_report.json",
+    "generation_runner": "scripts/v1_5/24bs_run_transport_repaired_memory_generation_v1_5.py",
+    "generation_calls_made": 0
+  },
+  "features": {
+    "required_view": "state x realized candidate x other-component background",
+    "allowed_examples": [
+      "observable request and interaction-boundary cues",
+      "candidate family or memory source",
+      "candidate submove attributes, bounded retrieved count, age, token cost, and visible-input hard exclusions",
+      "candidate-state match and retrieval diagnostics available before injection",
+      "other component background bits"
+    ],
+    "forbidden": [
+      "generated response",
+      "human or judge outcome",
+      "regime or needed_memory_sources",
+      "split identity",
+      "opaque card or memory ID as an answer key",
+      "hidden evaluator stale, conflict, sensitivity, or utility labels",
+      "full catalog count or tokens as a primary domain-sensitive shortcut",
+      "external test result"
+    ]
+  },
+  "model": {
+    "primary": "four independent L2 logistic regression heads",
+    "loss": "group-weighted binary cross entropy plus L2",
+    "grouped_oof_folds": 5,
+    "registered_seeds": 5,
+    "challengers": [
+      "always-off",
+      "always-on",
+      "transparent rule",
+      "shallow tree",
+      "BGE-small state-candidate features only if they improve grouped validation"
+    ]
+  },
+  "learning_gate": {
+    "per_head_balanced_accuracy_minimum": 0.7,
+    "per_head_positive_recall_minimum": 0.6,
+    "brier_must_beat_prevalence_prior": true,
+    "on_and_off_each_minimum_fraction": 0.2,
+    "five_seed_balanced_accuracy_std_maximum": 0.03
+  },
+  "human_review": {
+    "quality": "one combined blind packet for all 256 contrasts",
+    "duplicate_review_fraction": 0.2,
+    "risk": "minimal atomic risk review only for component-on material wins",
+    "additional_RAG_card_or_H2_micro_packets": false
+  },
+  "invalidated_work": {
+    "h2v2_packet": "outputs/pm_v1_5_h2v2_repair_v2_qualification_v1_candidate",
+    "reason": "The packet ranked with an empty lexical query and does not represent runtime retrieval.",
+    "repair_v2_role": "future-treatment diagnostic only; not part of the frozen V1.5 stack"
+  }
+}

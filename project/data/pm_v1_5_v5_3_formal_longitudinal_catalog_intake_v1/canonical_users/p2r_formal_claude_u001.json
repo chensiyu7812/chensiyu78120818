@@ -1,0 +1,2071 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_claude_u001",
+  "content_author": "claude",
+  "superdomain_schedule_position": 3,
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "family_caregiving",
+    "social_identity_creative"
+  ],
+  "dialogue_language": "en",
+  "profile_history": [
+    {
+      "profile_item_id": "u001_pf_name_v1",
+      "field_type": "name",
+      "field_value": "Yusuf",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "salutation only; rarely decision-relevant"
+      ],
+      "item_id": "u001_pf_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I'm Yusuf"
+    },
+    {
+      "profile_item_id": "u001_pf_age_v1",
+      "field_type": "age",
+      "field_value": "41",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; mid-career retraining framing at most"
+      ],
+      "item_id": "u001_pf_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "forty-one"
+    },
+    {
+      "profile_item_id": "u001_pf_gender_v1",
+      "field_type": "gender",
+      "field_value": "male",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; department composition context at most"
+      ],
+      "item_id": "u001_pf_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I'm the only male teacher in the geography department"
+    },
+    {
+      "profile_item_id": "u001_pf_job_v1",
+      "field_type": "job",
+      "field_value": "secondary school geography teacher",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 1,
+      "valid_until_session": 11,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "term-time availability, workload and school-process feasibility"
+      ],
+      "item_id": "u001_pf_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "taught geography in the same secondary school for fourteen years"
+    },
+    {
+      "profile_item_id": "u001_pf_job_v2",
+      "field_type": "job",
+      "field_value": "geography teacher and acting head of year 9",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 12,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "u001_pf_job_v1",
+      "applicability_scope": [
+        "term-time availability, added pastoral duty, escalation authority"
+      ],
+      "item_id": "u001_pf_job_v2",
+      "subtype": "MP_PROFILE",
+      "item_role": "update",
+      "source_turn_ids": [
+        "s012_t01"
+      ],
+      "literal_source_span": "acting as head of year nine"
+    },
+    {
+      "profile_item_id": "u001_pf_edu_v1",
+      "field_type": "education",
+      "field_value": "BA geography; part-time MA in educational leadership, in progress",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "study load, supervision and submission-deadline logistics"
+      ],
+      "item_id": "u001_pf_edu_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "a part-time master's in educational leadership"
+    },
+    {
+      "profile_item_id": "u001_pf_nat_v1",
+      "field_type": "nationality",
+      "field_value": "Turkish",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 4,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "working language of study material and regional context"
+      ],
+      "item_id": "u001_pf_nat_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s004_t01"
+      ],
+      "literal_source_span": "I was born and schooled in Turkey"
+    },
+    {
+      "profile_item_id": "u001_pf_loc_v1",
+      "field_type": "location",
+      "field_value": "Izmir, Turkiye",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "travel distance to family, local institutions"
+      ],
+      "item_id": "u001_pf_loc_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I teach in Izmir"
+    }
+  ],
+  "response_preference_history": [
+    {
+      "preference_item_id": "u001_pr_concise_v1",
+      "preference_type": "concise_factual_answer",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 4,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u001_pr_concise_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s004_t05"
+      ],
+      "literal_source_span": "if I ask you something factual, give me the short version",
+      "preference_text": "if I ask you something factual, give me the short version"
+    },
+    {
+      "preference_item_id": "u001_pr_listen_v1",
+      "preference_type": "listen_only_no_advice",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 8,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u001_pr_listen_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s008_t03"
+      ],
+      "literal_source_span": "Just let me say it out and don't hand me things to do",
+      "preference_text": "Just let me say it out and don't hand me things to do"
+    },
+    {
+      "preference_item_id": "u001_pr_choices_v1",
+      "preference_type": "choices_rather_than_commands",
+      "owner_id": "p2r_formal_claude_u001",
+      "valid_from_session": 14,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u001_pr_choices_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s014_t03"
+      ],
+      "literal_source_span": "give me two or three ways I could go and let me pick",
+      "preference_text": "give me two or three ways I could go and let me pick"
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_02",
+      "name": "Bulent",
+      "relationship": "head of the geography department",
+      "valid_from_session": 5,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_03",
+      "name": "father",
+      "relationship": "father",
+      "valid_from_session": 3,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_04",
+      "name": "Deniz",
+      "relationship": "younger sister",
+      "valid_from_session": 3,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_05",
+      "name": "Selin",
+      "relationship": "dissertation supervisor",
+      "valid_from_session": 10,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_06",
+      "name": "Kerem",
+      "relationship": "colleague in the history department",
+      "valid_from_session": 6,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_07",
+      "name": "Emre",
+      "relationship": "student in his tutor group",
+      "valid_from_session": 6,
+      "valid_until_session": null
+    }
+  ],
+  "recurring_topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "part-time master's dissertation",
+      "session_indices": [
+        1,
+        4,
+        7,
+        10,
+        16,
+        19
+      ]
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "disputed lesson observation with Bulent",
+      "session_indices": [
+        2,
+        5,
+        8,
+        11,
+        15
+      ]
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "year 9 pastoral role and Emre's attendance",
+      "session_indices": [
+        6,
+        9,
+        12,
+        14,
+        17
+      ]
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "father's stroke and shared caregiving",
+      "session_indices": [
+        3,
+        7,
+        11,
+        16,
+        18
+      ]
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "Saturday coast photography walks",
+      "session_indices": [
+        6,
+        13,
+        18
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "u001_evt_01",
+      "session_index": 1,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Enrolled in a part-time master's in educational leadership after fourteen years teaching geography.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u001_evt_02",
+      "session_index": 2,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Moved from the corner seat to the front staffroom table, ending his position as last to hear about changes.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u001_evt_03",
+      "session_index": 3,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_04"
+      ],
+      "description": "Father had a minor stroke in Manisa; Deniz reached the hospital four hours ahead of him.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u001_evt_04",
+      "session_index": 3,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Drove down the same night and waited in the hospital corridor until the morning shift arrived.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u001_evt_05",
+      "session_index": 4,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Booked a recurring Thursday two-hour university library slot and entered it in the school calendar under his own name.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u001_evt_06",
+      "session_index": 5,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Bulent observed the year eleven lesson and told the deputy that written feedback had already been sent.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u001_evt_07",
+      "session_index": 5,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Asked Bulent twice for the observation notes in writing; both requests were deferred.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u001_evt_08",
+      "session_index": 6,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "description": "Replaced the why-are-you-absent question with a question about Emre's first ten morning minutes.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u001_evt_09",
+      "session_index": 6,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "description": "Kerem began inviting him on Saturday coast photography walks; invitations deferred for months.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u001_evt_10",
+      "session_index": 7,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "description": "Split the caregiving week with Deniz into named days, ending the middle-of-the-night phone calls.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u001_evt_11",
+      "session_index": 8,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Sent a written account of the observation to the union representative; no response followed.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u001_evt_12",
+      "session_index": 9,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "description": "Held the first meeting with Emre's mother about the attendance referral.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u001_evt_13",
+      "session_index": 10,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Recorded a chapter aloud and replayed it while driving, exposing the unclear passages Selin had flagged.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u001_evt_14",
+      "session_index": 11,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_04"
+      ],
+      "description": "Father discharged; medication times posted inside the kitchen cupboard door shared with Deniz.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u001_evt_15",
+      "session_index": 12,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Offered and accepted the acting head of year nine role from September, one year in the first instance.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u001_evt_16",
+      "session_index": 12,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Secured the extra teaching-free period in writing before accepting; it appeared in the September timetable.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u001_evt_17",
+      "session_index": 13,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "description": "Restarted Saturday coast walks with his mother's camera, six consecutive weekends.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u001_evt_18",
+      "session_index": 14,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "description": "Moved Emre to a front seat by the window with no observable change in attendance.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u001_evt_19",
+      "session_index": 15,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "March re-observation with the deputy present; written notes arrived the following day and the appraisal closed.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u001_evt_20",
+      "session_index": 19,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Sent Selin the complete dissertation draft; verdict still outstanding.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 20 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Yusuf, forty-one, and I have taught geography in the same secondary school for fourteen years. Last month I enrolled in a part-time master's in educational leadership, and the first assignment has been open on my screen for nine days without a paragraph in it."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "Fourteen years of knowing exactly what you're doing, and now a blank page that refuses to behave. What happens when you sit down to it?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "I plan the lesson for tomorrow instead. Every single time. Teaching is the thing I can do well, so my hands go there on their own."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "The competent task keeps outbidding the uncomfortable one. That is not laziness — it's a very reasonable retreat toward the ground where you're already good."
+        }
+      ],
+      "summary": "Yusuf, forty-one, enrols in a part-time educational leadership master's after fourteen years teaching geography, and finds himself planning lessons instead of writing his first assignment.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c001",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "name",
+          "field_value": "Yusuf",
+          "profile_item_id": "u001_pf_name_v1",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "I'm Yusuf",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u001_c002",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "age",
+          "field_value": "41",
+          "profile_item_id": "u001_pf_age_v1",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "forty-one",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u001_c003",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "job",
+          "field_value": "secondary school geography teacher",
+          "profile_item_id": "u001_pf_job_v1",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "taught geography in the same secondary school for fourteen years",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u001_c004",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "education",
+          "field_value": "BA geography; part-time MA in educational leadership, in progress",
+          "profile_item_id": "u001_pf_edu_v1",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "a part-time master's in educational leadership",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u001_evt_01"
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 19 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "Something small but constant: I'm the only male teacher in the geography department, and I am always the last one to hear anything. Timetable changes, trip dates, meeting rooms — I find out from the noticeboard."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "Being informed last, repeatedly, is its own quiet message about where you sit in the room."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "So I made myself a rule and started sitting at the front table in the staffroom instead of my usual corner by the window, and within a fortnight people were telling me about changes before the noticeboard did."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "You moved three metres and changed who talks to you. Information travels by proximity more than anyone likes to admit."
+        }
+      ],
+      "summary": "As the only man in his geography department Yusuf hears news last; moving to the front staffroom table gets colleagues telling him about changes before the noticeboard.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c005",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "gender",
+          "field_value": "male",
+          "profile_item_id": "u001_pf_gender_v1",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "I'm the only male teacher in the geography department",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u001_c006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I made myself a rule and started sitting at the front table in the staffroom instead of my usual corner by the window, and within a fortnight people were telling me about changes before the noticeboard did",
+          "action_span": "started sitting at the front table in the staffroom instead of my usual corner by the window",
+          "result_span": "people were telling me about changes before the noticeboard did",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I made myself a rule and started sitting at the front table in the staffroom instead of my usual corner by the window, and within a fortnight people were telling me about changes before the noticeboard did",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_02"
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 18 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_04"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "My father collapsed on Tuesday. A stroke, a small one they keep saying. I teach in Izmir and my parents are two hours down the road in Manisa, so my sister Deniz was at the hospital four hours before I was."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "Four hours behind, on a road you couldn't make go any faster. That gap tends to sit heavier than it deserves to."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "I drove down the same night and sat in that corridor until the morning shift came on, and I still have no idea whether that helped anybody or just kept me from thinking."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "Sometimes both at once. A corridor at three in the morning is not a place where usefulness is measurable."
+        },
+        {
+          "turn_id": "s003_t05",
+          "role": "user",
+          "text": "He has run the same hardware shop in Manisa since he was twenty-six, and he was asking about the delivery van before the doctors had finished their sentence."
+        },
+        {
+          "turn_id": "s003_t06",
+          "role": "assistant",
+          "text": "Forty years of opening that shop doesn't switch off because a doctor says so. The van is how he checks he's still himself."
+        }
+      ],
+      "summary": "Yusuf's father has a minor stroke in Manisa while he teaches in Izmir; his sister arrives first, and his overnight corridor vigil leaves him unsure it helped.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c007",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "location",
+          "field_value": "Izmir, Turkiye",
+          "profile_item_id": "u001_pf_loc_v1",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "I teach in Izmir",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u001_c008",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s003_t03"
+          ],
+          "literal_source_span": "I drove down the same night and sat in that corridor until the morning shift came on, and I still have no idea whether that helped anybody or just kept me from thinking",
+          "action_span": "drove down the same night and sat in that corridor until the morning shift came on",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I drove down the same night and sat in that corridor until the morning shift came on, and I still have no idea whether that helped anybody or just kept me from thinking"
+        },
+        {
+          "candidate_id": "u001_c009",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s003_t05"
+          ],
+          "literal_source_span": "He has run the same hardware shop in Manisa since he was twenty-six",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "entity_03"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "He has run the same hardware shop in Manisa since he was twenty-six"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_03",
+        "u001_evt_04"
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 17 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "Back to the master's. My whole reading list is in English, and I was born and schooled in Turkey, so here is what I have noticed: the chapters only stay with me when I write the summary in my own language first and translate it afterwards."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "Your understanding forms in one language and gets exported to the other. Translating last keeps the thinking where it actually happens."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "The other thing I did was book a two-hour slot in the university library every Thursday and put it in the school calendar under my own name, and not one person has taken those hours off me since."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "A named booking is much harder to erase than an intention. The calendar defends it for you now."
+        },
+        {
+          "turn_id": "s004_t05",
+          "role": "user",
+          "text": "One thing about how you answer me — if I ask you something factual, give me the short version. I read all day for work; I don't need an essay back."
+        },
+        {
+          "turn_id": "s004_t06",
+          "role": "assistant",
+          "text": "Short it is, from here on."
+        }
+      ],
+      "summary": "Yusuf finds English chapters only stick when summarised in his own language first, protects Thursday library hours in the school calendar, and asks for short factual answers.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c010",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "nationality",
+          "field_value": "Turkish",
+          "profile_item_id": "u001_pf_nat_v1",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "I was born and schooled in Turkey",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u001_c011",
+          "subtype": "MS_SESSION",
+          "ms_function": "specific_observation",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "the chapters only stay with me when I write the summary in my own language first and translate it afterwards",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        },
+        {
+          "candidate_id": "u001_c012",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "book a two-hour slot in the university library every Thursday and put it in the school calendar under my own name, and not one person has taken those hours off me since",
+          "action_span": "book a two-hour slot in the university library every Thursday and put it in the school calendar under my own name",
+          "result_span": "not one person has taken those hours off me since",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "book a two-hour slot in the university library every Thursday and put it in the school calendar under my own name, and not one person has taken those hours off me since",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u001_c013",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "concise_factual_answer",
+          "preference_item_id": "u001_pr_concise_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s004_t05"
+          ],
+          "literal_source_span": "if I ask you something factual, give me the short version",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u001_evt_05"
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 16 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "Bulent, our department head, observed my year eleven lesson three weeks ago. He told the deputy he had sent me written feedback the same week. I have never received a single line from him in writing, and my inbox agrees with me."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "Two accounts of the same three weeks, and his reached the deputy first. That is an awkward place to be arguing from."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "I have asked him twice now to put the observation notes in writing, and both times he said he would get to it."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "Twice asked, twice deferred. The delay is doing work for him whether or not that's deliberate."
+        }
+      ],
+      "summary": "Department head Bulent tells the deputy he sent written observation feedback that never arrived; two direct requests for the notes are deferred both times.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c014",
+          "subtype": "MS_SESSION",
+          "ms_function": "conflict_record",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s005_t01"
+          ],
+          "literal_source_span": "He told the deputy he had sent me written feedback the same week. I have never received a single line from him in writing",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "conflicting"
+        },
+        {
+          "candidate_id": "u001_c015",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "I have asked him twice now to put the observation notes in writing, and both times he said he would get to it",
+          "action_span": "asked him twice now to put the observation notes in writing",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I have asked him twice now to put the observation notes in writing, and both times he said he would get to it"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_06",
+        "u001_evt_07"
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 15 months ago",
+      "topic_thread_ids": [
+        "thread_03",
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_06",
+        "entity_07"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "There is a boy in my tutor group, Emre, whose attendance has fallen off a cliff. Every adult in that building has asked him why he is not in school, and every adult gets the same shrug."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "He has heard the question so often it has stopped being a question. The shrug is the only answer left that costs him nothing."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "So on Friday I stopped asking why he was absent and asked him what the first ten minutes of his morning look like, and he talked for a quarter of an hour without stopping."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "You asked about the mornings instead of the absence, and suddenly there was nothing to defend. Fifteen minutes from a shrugger is a lot."
+        },
+        {
+          "turn_id": "s006_t05",
+          "role": "user",
+          "text": "Separately, Kerem from the history department keeps trying to drag me out on Saturday photography walks along the coast. I keep telling him next week."
+        },
+        {
+          "turn_id": "s006_t06",
+          "role": "assistant",
+          "text": "Next week has been doing heavy lifting for a while now. He seems willing to keep asking, at least."
+        }
+      ],
+      "summary": "Emre's attendance has collapsed and every adult asks the same question; asking instead about his first ten morning minutes produces a quarter hour of talk.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c016",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s006_t03"
+          ],
+          "literal_source_span": "I stopped asking why he was absent and asked him what the first ten minutes of his morning look like, and he talked for a quarter of an hour without stopping",
+          "action_span": "stopped asking why he was absent and asked him what the first ten minutes of his morning look like",
+          "result_span": "he talked for a quarter of an hour without stopping",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_07"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I stopped asking why he was absent and asked him what the first ten minutes of his morning look like, and he talked for a quarter of an hour without stopping",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_08",
+        "u001_evt_09"
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 14 months ago",
+      "topic_thread_ids": [
+        "thread_01",
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "Deadline talk first: the aim is still to hand the dissertation in by June and stop borrowing hours from my family to do it."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "June, and paid for out of your own hours rather than theirs. Both halves of that matter."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "On the Manisa side something actually worked. Deniz and I split the week into named days instead of whoever-can-make-it, and the two in the morning phone calls have stopped completely."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "Named days turn a rolling emergency into a rota. No wonder the night calls died with it."
+        }
+      ],
+      "summary": "Yusuf restates his June submission goal without borrowing family hours, and splitting the caregiving week with Deniz into named days ends the middle-of-the-night calls.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c017",
+          "subtype": "MS_SESSION",
+          "ms_function": "old_goal",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s007_t01"
+          ],
+          "literal_source_span": "hand the dissertation in by June and stop borrowing hours from my family to do it",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u001_c018",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "Deniz and I split the week into named days instead of whoever-can-make-it, and the two in the morning phone calls have stopped completely",
+          "action_span": "split the week into named days instead of whoever-can-make-it",
+          "result_span": "the two in the morning phone calls have stopped completely",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_04"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "Deniz and I split the week into named days instead of whoever-can-make-it, and the two in the morning phone calls have stopped completely",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_10"
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 13 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "The observation business has grown teeth. I wrote a note to the union representative describing what happened, and three weeks on nothing at all has come back to me."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "So the silence has simply moved to a different desk. That is its own kind of answer, and not a comfortable one."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "And honestly, most evenings I am not looking for anything to be fixed. Just let me say it out and don't hand me things to do."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "Understood. I'll listen and leave the doing alone unless you ask for it."
+        }
+      ],
+      "summary": "A written account of the observation goes to the union representative and draws three weeks of silence; Yusuf asks to be heard rather than given tasks.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c019",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "I wrote a note to the union representative describing what happened, and three weeks on nothing at all has come back to me",
+          "action_span": "wrote a note to the union representative describing what happened",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I wrote a note to the union representative describing what happened, and three weeks on nothing at all has come back to me"
+        },
+        {
+          "candidate_id": "u001_c020",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "listen_only_no_advice",
+          "preference_item_id": "u001_pr_listen_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s008_t03"
+          ],
+          "literal_source_span": "Just let me say it out and don't hand me things to do",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u001_evt_11"
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 12 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "I have worked out that there are two different tirednesses in this job. Teaching six lessons leaves me empty but calm; the hour before meeting Emre's mother leaves me wired and useless, and the two need completely different evenings."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "Empty and calm versus wired and useless. Those really are two different states wearing the same word."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "His family moved between three districts last year, which nobody at school seems to have on file anywhere."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "Three districts in a year, and the file says nothing. The record is describing a different child than the one in front of you."
+        }
+      ],
+      "summary": "Yusuf separates the calm emptiness of teaching six lessons from the wired uselessness before meeting Emre's mother, and notes the family's unrecorded moves between three districts.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c021",
+          "subtype": "MS_SESSION",
+          "ms_function": "pressure_distinction",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s009_t01"
+          ],
+          "literal_source_span": "Teaching six lessons leaves me empty but calm; the hour before meeting Emre's mother leaves me wired and useless",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        },
+        {
+          "candidate_id": "u001_c022",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "His family moved between three districts last year",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "entity_07"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "His family moved between three districts last year"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_12"
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 11 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "A trick out of pure desperation: I read the whole chapter out loud into my phone and played it back on the drive home, and the sentences that made no sense were obvious inside the first minute."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "Your ear caught in sixty seconds what your eye had skimmed past for weeks. Reading aloud is unforgiving in the useful way."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "Selin, my supervisor, had written unclear argument four times in the margin and I genuinely could not see it on the page."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "You had read it too many times to hear it. The car gave you a stranger's ears for half an hour."
+        }
+      ],
+      "summary": "Recording a chapter aloud and replaying it on the drive home immediately exposes the unclear sentences Selin had flagged four times in the margin.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c023",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "I read the whole chapter out loud into my phone and played it back on the drive home, and the sentences that made no sense were obvious inside the first minute",
+          "action_span": "read the whole chapter out loud into my phone and played it back on the drive home",
+          "result_span": "the sentences that made no sense were obvious inside the first minute",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I read the whole chapter out loud into my phone and played it back on the drive home, and the sentences that made no sense were obvious inside the first minute",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_13"
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 10 months ago",
+      "topic_thread_ids": [
+        "thread_02",
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_03",
+        "entity_04"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "Bulent's observation paperwork is still hanging over me — no notes, no record, and the appraisal cycle closes next month."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "An empty file with a deadline attached. The closing date is doing the pressuring that he never had to."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "Different world at home. My father's discharge papers arrived on Saturday and I did not try to keep any of it in my head. The medication times went on the inside of the kitchen cupboard door, where Deniz and I both look every single morning. Neither of us has missed one since."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "You put the information where the two of you already were, instead of asking your memory to be somewhere new. That is a good deal quieter than a reminder app."
+        }
+      ],
+      "summary": "The observation file stays empty as the appraisal deadline nears, while medication times posted inside a shared kitchen cupboard door mean no missed doses at home.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c024",
+          "subtype": "MS_SESSION",
+          "ms_function": "unfinished_thread",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s011_t01"
+          ],
+          "literal_source_span": "Bulent's observation paperwork is still hanging over me — no notes, no record",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u001_c025",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "My father's discharge papers arrived on Saturday and I did not try to keep any of it in my head. The medication times went on the inside of the kitchen cupboard door, where Deniz and I both look every single morning. Neither of us has missed one since.",
+          "action_span": "The medication times went on the inside of the kitchen cupboard door",
+          "result_span": "Neither of us has missed one since.",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_03",
+            "entity_04"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "My father's discharge papers arrived on Saturday and I did not try to keep any of it in my head. The medication times went on the inside of the kitchen cupboard door, where Deniz and I both look every single morning. Neither of us has missed one since.",
+          "me_tier": "natural_coverage_challenge"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_14"
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 9 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "It has happened: from September I am teaching geography and acting as head of year nine, one year in the first instance."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "One year, with an exit written into it. That is a serious step and a reversible one, which is rarer than it sounds."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "Before I said yes I asked the deputy head to put the extra teaching-free period in writing, and it turned up in the September timetable exactly as agreed."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "You made the condition concrete before accepting, and the timetable honoured it. Verbal versions of that promise usually evaporate in August."
+        }
+      ],
+      "summary": "Yusuf becomes acting head of year nine from September alongside teaching, having secured the extra teaching-free period in writing before accepting the role.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c026",
+          "subtype": "MP_PROFILE",
+          "is_update": true,
+          "field_type": "job",
+          "field_value": "geography teacher and acting head of year 9",
+          "profile_item_id": "u001_pf_job_v2",
+          "supersedes_item_id": "u001_pf_job_v1",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "acting as head of year nine",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u001_c027",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s012_t03"
+          ],
+          "literal_source_span": "I asked the deputy head to put the extra teaching-free period in writing, and it turned up in the September timetable exactly as agreed",
+          "action_span": "asked the deputy head to put the extra teaching-free period in writing",
+          "result_span": "it turned up in the September timetable exactly as agreed",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I asked the deputy head to put the extra teaching-free period in writing, and it turned up in the September timetable exactly as agreed",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_15",
+        "u001_evt_16"
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 8 months ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "Kerem finally won. I started leaving the camera by the front door on Friday nights, and I got out on the coast road six Saturdays in a row."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "Six weekends is not a mood, it's a habit. The door did the deciding so you didn't have to."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "The camera was my mother's, and it had been in the hall cupboard since she died four years ago."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "So the walks are hers too, in a way. Four years in a cupboard and now it's out on the coast road every Saturday."
+        }
+      ],
+      "summary": "Leaving his late mother's camera by the front door on Friday nights gets Yusuf out on the coast road six consecutive Saturdays with Kerem.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c028",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "I started leaving the camera by the front door on Friday nights, and I got out on the coast road six Saturdays in a row",
+          "action_span": "leaving the camera by the front door on Friday nights",
+          "result_span": "I got out on the coast road six Saturdays in a row",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self",
+            "entity_06"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I started leaving the camera by the front door on Friday nights, and I got out on the coast road six Saturdays in a row",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u001_c029",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s013_t03"
+          ],
+          "literal_source_span": "The camera was my mother's, and it had been in the hall cupboard since she died four years ago",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "The camera was my mother's, and it had been in the hall cupboard since she died four years ago"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_17"
+      ]
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 7 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "Emre is back down to two days a week. I moved his seat to the front by the window and it has changed nothing so far."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "Two days, and the seat move hasn't touched it. Whatever keeps him home is bigger than where he sits when he arrives."
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "One more thing about these conversations: when you do put something forward, give me two or three ways I could go and let me pick. I have had enough of being told."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "Options on the table, the choosing left to you. That's how I'll put things from now on."
+        }
+      ],
+      "summary": "Emre drops to two days a week and a front-window seat change achieves nothing; Yusuf asks for two or three options rather than instructions.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c030",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s014_t01"
+          ],
+          "literal_source_span": "I moved his seat to the front by the window and it has changed nothing so far",
+          "action_span": "moved his seat to the front by the window",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_07"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I moved his seat to the front by the window and it has changed nothing so far"
+        },
+        {
+          "candidate_id": "u001_c031",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "choices_rather_than_commands",
+          "preference_item_id": "u001_pr_choices_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s014_t03"
+          ],
+          "literal_source_span": "give me two or three ways I could go and let me pick",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u001_evt_18"
+      ]
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 6 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "The observation dispute is finished. Bulent redid the whole thing in March with the deputy sitting at the back, and the written notes arrived the following day."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "A witness in the room and the paperwork appears overnight. Hard not to notice the sequence there."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "We will never be friends, but the appraisal closed clean and my year eleven results carried it anyway."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "Closed clean is enough. You were never going to get an apology out of that file."
+        }
+      ],
+      "summary": "A March re-observation with the deputy present produces written notes the next day, closing the appraisal cleanly though the relationship with Bulent stays cold.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c032",
+          "subtype": "MS_SESSION",
+          "ms_function": "resolved_thread",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s015_t01"
+          ],
+          "literal_source_span": "The observation dispute is finished",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_19"
+      ]
+    },
+    {
+      "session_index": 16,
+      "relative_time": "about 5 months ago",
+      "topic_thread_ids": [
+        "thread_01",
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_04",
+        "entity_05"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s016_t01",
+          "role": "user",
+          "text": "I changed how I go to Selin. Instead of sending the whole chapter I sent her one specific question about the sampling, and she replied inside a day for the first time in a year."
+        },
+        {
+          "turn_id": "s016_t02",
+          "role": "assistant",
+          "text": "A narrow question is answerable between meetings. A whole chapter needs a free afternoon she never has."
+        },
+        {
+          "turn_id": "s016_t03",
+          "role": "user",
+          "text": "There is a clock on this as well — the department covers half the tuition only if I submit inside four years."
+        },
+        {
+          "turn_id": "s016_t04",
+          "role": "assistant",
+          "text": "So the deadline has a price tag attached, not just a date. That changes how the last year has to be spent."
+        },
+        {
+          "turn_id": "s016_t05",
+          "role": "user",
+          "text": "My father is walking to the shop and back most days now, though Deniz still does the Tuesday drive."
+        },
+        {
+          "turn_id": "s016_t06",
+          "role": "assistant",
+          "text": "From a corridor at three in the morning to the walk to the shop. That is a long way in a year and a half."
+        }
+      ],
+      "summary": "Sending Selin one narrow sampling question instead of a full chapter earns a same-day reply; tuition support depends on submitting within four years.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c033",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s016_t01"
+          ],
+          "literal_source_span": "Instead of sending the whole chapter I sent her one specific question about the sampling, and she replied inside a day for the first time in a year",
+          "action_span": "Instead of sending the whole chapter I sent her one specific question about the sampling",
+          "result_span": "she replied inside a day for the first time in a year",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "Instead of sending the whole chapter I sent her one specific question about the sampling, and she replied inside a day for the first time in a year",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u001_c034",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s016_t03"
+          ],
+          "literal_source_span": "the department covers half the tuition only if I submit inside four years",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "the department covers half the tuition only if I submit inside four years"
+        }
+      ],
+      "event_ids": []
+    },
+    {
+      "session_index": 17,
+      "relative_time": "about 4 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s017_t01",
+          "role": "user",
+          "text": "Year nine is running, mostly. Emre's mother has appealed the attendance referral and wants the panel moved to the holidays."
+        },
+        {
+          "turn_id": "s017_t02",
+          "role": "assistant",
+          "text": "An appeal plus a date change buys several weeks. Whether that helps him or only her is the open question."
+        },
+        {
+          "turn_id": "s017_t03",
+          "role": "user",
+          "text": "Emre himself was in four days last week, which not one person in that building has said a word about."
+        },
+        {
+          "turn_id": "s017_t04",
+          "role": "assistant",
+          "text": "Four days after months of two, and the silence stays exactly where the shrugging used to be."
+        }
+      ],
+      "summary": "Emre's mother appeals the attendance referral and asks for a holiday panel date, while Emre's own four-day week passes without comment from anyone.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c035",
+          "subtype": "MS_SESSION",
+          "ms_function": "wrong_person_distractor",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s017_t01"
+          ],
+          "literal_source_span": "Emre's mother has appealed the attendance referral and wants the panel moved to the holidays",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "entity_07"
+          ],
+          "resolution_status": "unresolved"
+        }
+      ],
+      "event_ids": []
+    },
+    {
+      "session_index": 18,
+      "relative_time": "about 2 months ago",
+      "topic_thread_ids": [
+        "thread_04",
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_06"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s018_t01",
+          "role": "user",
+          "text": "Kerem talked me into leaving the phone in the glovebox for the Saturday walks. Three weeks of that and I noticed I had stopped composing school emails in my head while looking at the sea."
+        },
+        {
+          "turn_id": "s018_t02",
+          "role": "assistant",
+          "text": "The phone was in your pocket and the school was in your head. One of those was easier to lock in a car."
+        },
+        {
+          "turn_id": "s018_t03",
+          "role": "user",
+          "text": "My father came out with us as far as the first bench, which he could not have managed in the winter."
+        },
+        {
+          "turn_id": "s018_t04",
+          "role": "assistant",
+          "text": "The first bench in spring after a winter indoors. He'll have counted that distance more carefully than anyone."
+        }
+      ],
+      "summary": "Locking the phone in the glovebox for Saturday walks stops Yusuf mentally drafting school emails, and his father manages the walk to the first bench.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c036",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s018_t01"
+          ],
+          "literal_source_span": "Kerem talked me into leaving the phone in the glovebox for the Saturday walks. Three weeks of that and I noticed I had stopped composing school emails in my head while looking at the sea.",
+          "action_span": "leaving the phone in the glovebox for the Saturday walks",
+          "result_span": "I had stopped composing school emails in my head while looking at the sea",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self",
+            "entity_06"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "Kerem talked me into leaving the phone in the glovebox for the Saturday walks. Three weeks of that and I noticed I had stopped composing school emails in my head while looking at the sea.",
+          "me_tier": "natural_coverage_challenge"
+        }
+      ],
+      "event_ids": []
+    },
+    {
+      "session_index": 19,
+      "relative_time": "about 3 weeks ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s019_t01",
+          "role": "user",
+          "text": "We went round the dissertation again at the department meeting and came out with nothing concrete, the same as the last three times."
+        },
+        {
+          "turn_id": "s019_t02",
+          "role": "assistant",
+          "text": "Four meetings, four circuits, no decisions. That is a lot of everyone's afternoons."
+        },
+        {
+          "turn_id": "s019_t03",
+          "role": "user",
+          "text": "I sent Selin the complete draft three weeks ago and the verdict has not come back yet."
+        },
+        {
+          "turn_id": "s019_t04",
+          "role": "assistant",
+          "text": "Three weeks of waiting on someone else's inbox, right at the end of two years of work. Hard to do anything useful with that time."
+        }
+      ],
+      "summary": "Another department meeting circles the dissertation without a decision, and the complete draft sent to Selin three weeks ago still awaits a verdict.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u001_c037",
+          "subtype": "MS_SESSION",
+          "ms_function": "topic_only_no_content",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s019_t01"
+          ],
+          "literal_source_span": "We went round the dissertation again at the department meeting and came out with nothing concrete",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u001_c038",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u001",
+          "source_turn_ids": [
+            "s019_t03"
+          ],
+          "literal_source_span": "I sent Selin the complete draft three weeks ago and the verdict has not come back yet",
+          "action_span": "sent Selin the complete draft three weeks ago",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I sent Selin the complete draft three weeks ago and the verdict has not come back yet"
+        }
+      ],
+      "event_ids": [
+        "u001_evt_20"
+      ]
+    }
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "part-time master's dissertation"
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "disputed lesson observation with Bulent"
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "year 9 pastoral role and Emre's attendance"
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "father's stroke and shared caregiving"
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "Saturday coast photography walks"
+    }
+  ]
+}

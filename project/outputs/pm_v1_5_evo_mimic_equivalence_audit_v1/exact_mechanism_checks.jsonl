@@ -1,0 +1,13 @@
+{"evidence": "Both domains instantiate the same MemoryItem model and MemorySource enum.", "layer": "MemoryItem schema and MP/MS/ME ontology", "status": "PASS"}
+{"evidence": "pm-v1.5-shared-all-causal-prior-history-memory-compiler-v2:ec4768cb3b52932a11838196c45e41868b85d321716e18e26e6c6d8961c6c6cb", "layer": "memory compiler implementation", "status": "PASS"}
+{"evidence": "Internal items are strictly older than the current session; EvoEmo build_evo_memory reads dialog_history only.", "layer": "causal prior-history rule", "status": "PASS"}
+{"evidence": "fed848dc7348c2c2965cf47ed1db042cfe79bbb337315f34a46177ebad854b6d", "layer": "query builder", "status": "PASS"}
+{"evidence": "8b3da55e28dd0a26f0cee4a8deb3cec02abe16aca8fb5d6fafd6ed7001b84a06", "layer": "memory retriever score, threshold, tie-break and Top-k", "status": "PASS"}
+{"evidence": "disabled on both V1.5 internal and EvoEmo paths", "layer": "evidence filter", "status": "PASS"}
+{"evidence": "192/192 frozen calls exactly recompute through generation_messages", "layer": "R0 memory injection prompt compiler", "status": "PASS"}
+{"evidence": "192/192 frozen V4 calls exactly recompute through generation_messages", "layer": "RS-background injection prompt compiler", "status": "PASS"}
+{"evidence": "pm-v1.5-shared-memory-candidate-discovery-v1", "layer": "candidate descriptor extractor", "status": "PASS"}
+{"evidence": "72251b68ea51b080016afb7919e296aeda4cb8c970c5084bd61e6763afa61895", "layer": "PM decision timing", "status": "PASS"}
+{"evidence": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe", "layer": "generator identity and treatment", "status": "PASS"}
+{"evidence": "exact normalized memory-text overlap=0", "layer": "content disjointness", "status": "PASS"}
+{"evidence": "generation_messages renders created_session only as relative session age and ignores raw timestamp strings.", "layer": "timestamp surface normalization", "status": "PASS"}

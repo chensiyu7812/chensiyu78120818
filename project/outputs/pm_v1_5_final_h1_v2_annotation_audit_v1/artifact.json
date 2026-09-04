@@ -1,0 +1,122 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PM V1.5 H1 v2 标注与数据质量审计",
+    "description": "H1 v2 主标注、split 独立性、标签分布、捷径与特征表达审计。",
+    "sources": [
+      {
+        "id": "h1-audit",
+        "label": "H1 v2 annotation audit",
+        "path": "outputs/pm_v1_5_final_h1_v2_annotation_audit_v1/audit_report.json",
+        "query": {
+          "description": "由冻结 review packet、private binding、透明 feature rows 与主审 JSONL 重算。",
+          "language": "python",
+          "tables_used": ["human_review_packet.json", "private_binding.jsonl", "model_feature_rows.jsonl", "primary annotations JSONL"],
+          "filters": ["candidate-present rows for label and feature metrics"],
+          "metric_definitions": [
+            "majority_constant_accuracy = max(ON, OFF) / candidate-present",
+            "oracle_balanced_accuracy_ceiling = best retrospective mapping from exact feature vector to label",
+            "ME cue-only BA = mean(sensitivity, specificity)"
+          ]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "label-chart",
+        "title": "Candidate-present ON/OFF counts",
+        "type": "bar",
+        "dataset": "label_distribution",
+        "encodings": {
+          "x": {"field": "component", "type": "nominal", "title": "Component"},
+          "y": {"field": "count", "type": "quantitative", "title": "Rows"},
+          "color": {"field": "decision", "type": "nominal", "title": "Decision"}
+        },
+        "options": {"grouping": "grouped"},
+        "source": {
+          "id": "h1-audit",
+          "label": "H1 v2 annotation audit",
+          "path": "outputs/pm_v1_5_final_h1_v2_annotation_audit_v1/audit_report.json",
+          "query": {
+            "sql": "SELECT component, decision, count, candidate_present, constant_accuracy FROM label_distribution ORDER BY component, decision",
+            "description": "Candidate-present human label counts derived from the deterministic H1 v2 annotation audit.",
+            "tables_used": ["label_distribution"],
+            "filters": ["candidate_present = true"],
+            "metric_definitions": ["count = candidate-present human decisions per component and decision"]
+          }
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "quality-table",
+        "title": "Data-quality gate results",
+        "dataset": "component_audit",
+        "columns": [
+          {"field": "component", "label": "Component", "type": "text"},
+          {"field": "on", "label": "ON", "type": "number"},
+          {"field": "off", "label": "OFF", "type": "number"},
+          {"field": "constant_accuracy", "label": "Constant accuracy", "type": "percent"},
+          {"field": "feature_oracle_ba", "label": "Feature oracle BA", "type": "percent"},
+          {"field": "gate_status", "label": "Status", "type": "text"}
+        ],
+        "defaultSort": {"field": "component", "direction": "asc"},
+        "source": {
+          "id": "h1-audit",
+          "label": "H1 v2 annotation audit",
+          "path": "outputs/pm_v1_5_final_h1_v2_annotation_audit_v1/audit_report.json",
+          "query": {
+            "sql": "SELECT component, on, off, constant_accuracy, feature_oracle_ba, gate_status FROM component_audit ORDER BY component",
+            "description": "Per-component data-quality gate results.",
+            "tables_used": ["component_audit"],
+            "filters": ["candidate_present = true"],
+            "metric_definitions": ["rates use candidate-present human decisions"]
+          }
+        }
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# PM V1.5 H1 v2 标注与数据质量审计"},
+      {"id": "summary", "type": "markdown", "sourceId": "h1-audit", "body": "## Executive Summary\n\n主标注 256/256 行结构正确，但当前 H1 v2 必须保持 HOLD：40 组跨 split 决策面重复；MS 恒关达到 73.7%；ME 单一当前句 cue 的 balanced accuracy 约 89.0%；第二评审缺少逐行 JSONL，不能计算 κ。旧标注保留为开发证据，不直接训练。"},
+      {"id": "findings", "type": "markdown", "sourceId": "h1-audit", "body": "## Key Findings\n\n数据问题来自 split 构造和透明因素表达，不是 logistic 或 BAAI 的容量不足。MP 的增量特征与 RS 的非冗余特征在 candidate-present 中近乎恒定，无法表达人工 OFF 理由；MP_PREFERENCE 为 0 ON / 72 OFF，RS 仅看 strategy family 的回顾性 BA 约为 84.8%。"},
+      {"id": "label-chart-block", "type": "chart", "chartId": "label-chart"},
+      {"id": "table-block", "type": "table", "tableId": "quality-table"},
+      {"id": "method", "type": "markdown", "sourceId": "h1-audit", "body": "## Methodology\n\n逐行验证 schema、blind ID、双门派生和 subtype；以 current_user_text 加四个 exact candidate texts 构造决策面签名；在 candidate-present 分母上计算标签分布、捷径和透明 feature-vector 诊断上限。"},
+      {"id": "limits", "type": "markdown", "sourceId": "h1-audit", "body": "## Limitations\n\n第二评审只有汇总，没有逐行文件，因此不能报告 agreement 或 Cohen κ。feature oracle 是回顾性诊断上限，不是模型成绩。"},
+      {"id": "next", "type": "markdown", "sourceId": "h1-audit", "body": "## Next Steps\n\n导入第二评审逐行 JSONL；只裁决 overlap 分歧；修复决策面去重和透明 factors；用一个 64–96 state repair set 同时替换副本、补 MS 正例、加入 MP preference 真 ON、在 RS family 内反平衡 ON/OFF，并打破 ME cue 锁定；之后才训练四个 logistic heads。"}
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-08-03T00:00:00+09:00",
+    "datasets": {
+      "label_distribution": [
+        {"component": "MP", "decision": "ON", "count": 75, "candidate_present": 209, "constant_accuracy": 0.641148},
+        {"component": "MP", "decision": "OFF", "count": 134, "candidate_present": 209, "constant_accuracy": 0.641148},
+        {"component": "MS", "decision": "ON", "count": 62, "candidate_present": 236, "constant_accuracy": 0.737288},
+        {"component": "MS", "decision": "OFF", "count": 174, "candidate_present": 236, "constant_accuracy": 0.737288},
+        {"component": "ME", "decision": "ON", "count": 121, "candidate_present": 236, "constant_accuracy": 0.512712},
+        {"component": "ME", "decision": "OFF", "count": 115, "candidate_present": 236, "constant_accuracy": 0.512712},
+        {"component": "RS", "decision": "ON", "count": 84, "candidate_present": 224, "constant_accuracy": 0.625},
+        {"component": "RS", "decision": "OFF", "count": 140, "candidate_present": 224, "constant_accuracy": 0.625}
+      ],
+      "component_audit": [
+        {"component": "MP", "on": 75, "off": 134, "constant_accuracy": 0.641148, "feature_oracle_ba": 0.854478, "gate_status": "distribution pass"},
+        {"component": "MS", "on": 62, "off": 174, "constant_accuracy": 0.737288, "feature_oracle_ba": 0.771227, "gate_status": "distribution fail"},
+        {"component": "ME", "on": 121, "off": 115, "constant_accuracy": 0.512712, "feature_oracle_ba": 0.927165, "gate_status": "cue shortcut fail"},
+        {"component": "RS", "on": 84, "off": 140, "constant_accuracy": 0.625, "feature_oracle_ba": 0.813095, "gate_status": "distribution pass"}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "h1-audit",
+      "label": "H1 v2 annotation audit",
+      "path": "outputs/pm_v1_5_final_h1_v2_annotation_audit_v1/audit_report.json",
+      "query": {"description": "Deterministic local audit of frozen H1 v2 assets.", "language": "python"}
+    }
+  ]
+}

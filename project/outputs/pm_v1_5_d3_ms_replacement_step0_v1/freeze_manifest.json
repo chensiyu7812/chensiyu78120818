@@ -1,0 +1,10 @@
+{
+  "protocol": "pm-v1.5-d3-ms-seeker-query-replacement-blueprint-v1",
+  "status": "PASS_READY_TO_PREPARE_80_FROZEN_MS_REPLACEMENT_CALLS",
+  "preflight_report_sha256": "dc85aaefff6364aa90d0d081da7283f4cb265cfb2f61d3445b3a7119ba77ecdf",
+  "primary_pairs_sha256": "eead440425da1f2b9251076935f7ca3c55d89a26d7e571210ac989b48e0005fd",
+  "repeat_pairs_sha256": "1b3e6ae0dcc3635da500e6a11eaf497d8a94715f5cbc0bf78a312d4b4613120e",
+  "strategy_cards_sha256": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676",
+  "outcome_blind": true,
+  "api_calls_made": 0
+}

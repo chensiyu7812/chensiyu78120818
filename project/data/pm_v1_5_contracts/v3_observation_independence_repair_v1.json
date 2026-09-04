@@ -1,0 +1,82 @@
+{
+  "protocol": "pm-v1.5-v3-observation-independence-repair-contract-v1",
+  "frozen_date": "2026-08-03",
+  "role": "IMPLEMENTATION_CONTRACT_REPAIR_NOT_NEW_SEMANTIC_MODEL_SEARCH",
+  "trigger": "Code audit found that transparent Observation V1 computed goal and specific_increment by conjoining other gates, although the frozen dataset and method define the four gates as independently supervised variables.",
+  "reference_sha256": "e1d368c4a8f2576515d8e685531050822416d384b5379c7edb0a18400757dc6a",
+  "candidate_rows_sha256": "be0f5eff9d4cb2b170b43d4bdb26a9ce4bec2cf720594094daf26f6b435d9d14",
+  "blueprint_sha256": "5e76557f8048a04e44cd6ac3d7b2bd0fa49acdd2fd1e9ad16d6c9c6fd2717fe7",
+  "failed_primary_bakeoff_sha256": "6d327509b0344a2c53818ce5d2836a4101b8cc6ab1a2d2da2aefb197569c54ea",
+  "failed_nli_recovery_sha256": "9eb6441b814f3411782c4371098142f460eca5557f23e0aa14485f73ebfcd311",
+  "candidate": {
+    "id": "transparent_independent_factors_v2",
+    "learned": false,
+    "threshold": 0.5,
+    "factor_independence_required": true,
+    "no_factor_score_may_be_multiplied_or_min_composed_with_another_factor": true,
+    "inputs": [
+      "visible current user text",
+      "visible dialogue",
+      "component",
+      "actual Rank-1 candidate text",
+      "candidate subtype"
+    ],
+    "construction_intent_read": false,
+    "human_label_read": false
+  },
+  "observable_rules": {
+    "owner_time_entity_valid": [
+      "same-person versus other-person reference",
+      "explicitly withdrawn, replaced, superseded, resolved, or stale stored item",
+      "MP response preference is owned by the user and is not invalid merely because the current story concerns another person"
+    ],
+    "goal_function_fit": [
+      "component-specific requested function rather than topic similarity",
+      "RS exact support_move prerequisites rather than coarse strategy family"
+    ],
+    "boundary_burden_compatible": [
+      "explicit current-turn permission or refusal",
+      "stop, listen-only, no-probing, advice, and low-burden constraints"
+    ],
+    "specific_increment": [
+      "candidate specificity and current-dialogue redundancy only",
+      "owner, goal, and boundary must not alter this score"
+    ]
+  },
+  "validation": {
+    "fit_track": "FACTOR_FIT",
+    "one_shot_confirmation_track": "ELIGIBILITY_CONFIRMATION",
+    "confirmation_must_not_affect_rules_or_threshold": true
+  },
+  "gates": {
+    "each_factor_balanced_accuracy_min": 0.7,
+    "each_factor_recall_min": 0.6,
+    "each_factor_specificity_min": 0.6,
+    "each_factor_minimal_counterfactual_direction_min": 0.75,
+    "each_factor_worst_semantic_family_balanced_accuracy_min": 0.6,
+    "raw_surface_nuisance_probe_balanced_accuracy_max_exclusive": 0.65,
+    "confirmation_each_factor_balanced_accuracy_min": 0.7,
+    "confirmation_composite_balanced_accuracy_min": 0.7,
+    "confirmation_composite_recall_min": 0.6,
+    "confirmation_composite_specificity_min": 0.6
+  },
+  "forbidden_inputs": [
+    "state_id",
+    "topic_family",
+    "history_scale",
+    "prefix_family",
+    "semantic_surface_family",
+    "construction_intent",
+    "human_factor_label",
+    "human_final_eligibility",
+    "response_text",
+    "quality_outcome",
+    "risk_outcome",
+    "cost_outcome",
+    "ESConv_test_or_validation",
+    "EvoEmo_p7_p18"
+  ],
+  "failure_rule": "If this contract-correct implementation fails any frozen FIT gate, do not consume confirmation and stop V1.5 Observation repair. If FIT passes but confirmation fails, do not revise rules and do not authorize H-Step2.",
+  "success_rule": "Only PASS on all FIT gates may consume confirmation once; only PASS on all frozen confirmation floors authorizes H-Step2. This does not create Step1 worth_opening labels.",
+  "external_lockbox_read": false
+}

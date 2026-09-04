@@ -1,0 +1,66 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-memory-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_384_NEW_RESPONSE_CALLS",
+  "effect_labels_created": false,
+  "human_labels_read": false,
+  "api_calls_made": 0,
+  "contrast_groups": 192,
+  "response_arms_total": 384,
+  "new_response_calls": 384,
+  "calls_by_component": {
+    "ME": 128,
+    "MP": 128,
+    "MS": 128
+  },
+  "calls_by_split": {
+    "calibration": 96,
+    "internal_test": 96,
+    "train": 192
+  },
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "supporter_generation_treatment": {
+    "version": "pm-v2.2-supporter-generation-v1",
+    "generator_endpoint": "generator",
+    "system_prompt_id": "selective_esmem_v1",
+    "system_prompt_sha256": "a0313589ed0da2e45ea5dc411d3edd504f77fabb516fe6c262eb38fbb13c3a59",
+    "temperature": 0.0,
+    "max_output_tokens": 300,
+    "output_normalization": "normalize_space_v1",
+    "finish_reason_protocol": "pm-v2-finish-reason-v1",
+    "accepted_normalized_finish_reasons": [
+      "complete"
+    ],
+    "reject_length": true,
+    "reject_missing_or_unknown": true
+  },
+  "supporter_generation_treatment_sha256": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe",
+  "seed": 20260730,
+  "pricing_usd_per_mtok": {
+    "input": 0.15,
+    "output": 0.6
+  },
+  "estimated_input_tokens": 230837,
+  "max_output_tokens_upper_bound": 115200,
+  "estimated_generation_cost_usd_upper_bound": 0.103746,
+  "checks": {
+    "one_bit_memory_contrast_count_192": true,
+    "two_new_arms_per_contrast": true,
+    "all_effect_labels_unknown": true,
+    "all_rs_arms_use_current_card": true,
+    "all_r0_arms_have_no_strategy": true
+  },
+  "inputs": {
+    "blueprint_report": "outputs/pm_v1_5_transport_repaired_memory_contrast_blueprint_v1/blueprint_report.json",
+    "blueprint": "outputs/pm_v1_5_transport_repaired_memory_contrast_blueprint_v1/memory_contrast_blueprint.jsonl",
+    "runtime_states": "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/runtime_states.jsonl",
+    "memory_backend": "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/memory_backend.jsonl",
+    "strategy_cards": "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl",
+    "pm_config": "configs/pm_v1_5.yaml",
+    "experiment_config": "configs/experiment.yaml"
+  }
+}

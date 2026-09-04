@@ -1,0 +1,2903 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_claude_u004",
+  "content_author": "claude",
+  "superdomain_schedule_position": 9,
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "social_identity_creative",
+    "finance_housing"
+  ],
+  "dialogue_language": "en",
+  "profile_history": [
+    {
+      "profile_item_id": "u004_pf_name_v1",
+      "field_type": "name",
+      "field_value": "Mizuki",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "salutation only; rarely decision-relevant"
+      ],
+      "item_id": "u004_pf_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I'm Mizuki"
+    },
+    {
+      "profile_item_id": "u004_pf_age_v1",
+      "field_type": "age",
+      "field_value": "33",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; self-imposed conversion deadline at most"
+      ],
+      "item_id": "u004_pf_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "thirty-three"
+    },
+    {
+      "profile_item_id": "u004_pf_edu_v1",
+      "field_type": "education",
+      "field_value": "junior college diploma (English); bookkeeping certification study in progress",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "exam sittings, cram school logistics, qualification requirements"
+      ],
+      "item_id": "u004_pf_edu_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "my junior college diploma"
+    },
+    {
+      "profile_item_id": "u004_pf_job_v1",
+      "field_type": "job",
+      "field_value": "office administrator on a one-year renewable contract, machinery trading company",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "contract renewal cycle, conversion eligibility, section hierarchy"
+      ],
+      "item_id": "u004_pf_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I do the office administration at a machinery trading company on a one-year renewable contract"
+    },
+    {
+      "profile_item_id": "u004_pf_gender_v1",
+      "field_type": "gender",
+      "field_value": "female",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; section composition context at most"
+      ],
+      "item_id": "u004_pf_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I am the only woman in the section who is not permanent"
+    },
+    {
+      "profile_item_id": "u004_pf_nat_v1",
+      "field_type": "nationality",
+      "field_value": "Japanese",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 4,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "regional context; family and employment norms"
+      ],
+      "item_id": "u004_pf_nat_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s004_t01"
+      ],
+      "literal_source_span": "I'm Japanese"
+    },
+    {
+      "profile_item_id": "u004_pf_loc_v1",
+      "field_type": "location",
+      "field_value": "Nagoya, Japan",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 4,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "housing market, exam hall location, distance from sister"
+      ],
+      "item_id": "u004_pf_loc_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s004_t01"
+      ],
+      "literal_source_span": "my mother's house in Nagoya"
+    }
+  ],
+  "response_preference_history": [
+    {
+      "preference_item_id": "u004_pr_listen_v1",
+      "preference_type": "listen_only_no_advice",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 7,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u004_pr_listen_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s007_t03"
+      ],
+      "literal_source_span": "I would rather you did not try to solve it",
+      "preference_text": "I would rather you did not try to solve it"
+    },
+    {
+      "preference_item_id": "u004_pr_reflect_v1",
+      "preference_type": "reflection_before_question",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 16,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u004_pr_reflect_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s016_t03"
+      ],
+      "literal_source_span": "Tell me what you took from what I said, then ask",
+      "preference_text": "Tell me what you took from what I said, then ask"
+    },
+    {
+      "preference_item_id": "u004_pr_onesugg_v1",
+      "preference_type": "one_optional_suggestion",
+      "owner_id": "p2r_formal_claude_u004",
+      "valid_from_session": 25,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u004_pr_onesugg_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s025_t03"
+      ],
+      "literal_source_span": "If you have an idea, give me one and only one. When I get a list I do none of them",
+      "preference_text": "If you have an idea, give me one and only one. When I get a list I do none of them"
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_02",
+      "name": "Hasegawa",
+      "relation": "senior colleague in her section",
+      "first_mentioned_session": 2,
+      "note": "corrected people in morning meetings; transferred to Osaka in September",
+      "relationship": "senior colleague in her section",
+      "valid_from_session": 2,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_03",
+      "name": "Kayo",
+      "relation": "mother",
+      "first_mentioned_session": 4,
+      "note": "same house since 1986; the marriage question; eventually ran the moving day",
+      "relationship": "mother",
+      "valid_from_session": 4,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_04",
+      "name": "Yuka",
+      "relation": "younger sister, in Gifu",
+      "first_mentioned_session": 23,
+      "note": "two children, the younger starting school in April",
+      "relationship": "younger sister, in Gifu",
+      "valid_from_session": 23,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_05",
+      "name": "Sanada",
+      "relation": "contract and personnel coordinator",
+      "first_mentioned_session": 3,
+      "note": "received the conversion application; later says no recommendation reached her",
+      "relationship": "contract and personnel coordinator",
+      "valid_from_session": 3,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_06",
+      "name": "Doi",
+      "relation": "section manager",
+      "first_mentioned_session": 14,
+      "note": "claims to have put her name forward in the spring",
+      "relationship": "section manager",
+      "valid_from_session": 14,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_07",
+      "name": "Rina",
+      "relation": "colleague, also on a contract",
+      "first_mentioned_session": 11,
+      "note": "the only person who names the section's atmosphere out loud",
+      "relationship": "colleague, also on a contract",
+      "valid_from_session": 11,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_08",
+      "name": "Keiji",
+      "relation": "pottery class teacher",
+      "first_mentioned_session": 20,
+      "note": "runs the Thursday evening class and the Saturday kiln days",
+      "relationship": "pottery class teacher",
+      "valid_from_session": 20,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_09",
+      "name": "Sae",
+      "relation": "pottery classmate",
+      "first_mentioned_session": 20,
+      "note": "first friendship made outside work in years",
+      "relationship": "pottery classmate",
+      "valid_from_session": 20,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_10",
+      "name": "Takumi",
+      "relation": "junior college classmate, now an accountant",
+      "first_mentioned_session": 21,
+      "note": "marked her practice paper as harshly as a real examiner",
+      "relationship": "junior college classmate, now an accountant",
+      "valid_from_session": 21,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_11",
+      "name": "Obara",
+      "relation": "letting agent",
+      "first_mentioned_session": 16,
+      "note": "would not hold the apartment; later found the second one",
+      "relationship": "letting agent",
+      "valid_from_session": 16,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_12",
+      "name": "Nao",
+      "relation": "newer contract colleague she trains",
+      "first_mentioned_session": 25,
+      "note": "asks the questions Mizuki never had anyone to ask",
+      "relationship": "newer contract colleague she trains",
+      "valid_from_session": 25,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_13",
+      "name": "Chizuko",
+      "relation": "aunt with a share in the family house",
+      "first_mentioned_session": 31,
+      "note": "her claim on the house is the reason the move-out mattered financially",
+      "relationship": "aunt with a share in the family house",
+      "valid_from_session": 31,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_14",
+      "name": "Fujii",
+      "relation": "cram school instructor",
+      "first_mentioned_session": 17,
+      "note": "explained the four-mark failure without softening it",
+      "relationship": "cram school instructor",
+      "valid_from_session": 17,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_15",
+      "name": "Haru",
+      "relation": "the mother's next-door neighbour",
+      "first_mentioned_session": 31,
+      "note": "the audience for the mother's account of the move",
+      "relationship": "the mother's next-door neighbour",
+      "valid_from_session": 31,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_16",
+      "name": "Emi",
+      "relation": "former colleague, converted two years earlier",
+      "first_mentioned_session": 22,
+      "note": "her conversion followed a completely different route from the official one",
+      "relationship": "former colleague, converted two years earlier",
+      "valid_from_session": 22,
+      "valid_until_session": null
+    }
+  ],
+  "recurring_topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "bookkeeping certification",
+      "session_indices": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21,
+        25,
+        29,
+        33
+      ]
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "contract-to-permanent conversion",
+      "session_indices": [
+        2,
+        6,
+        10,
+        14,
+        18,
+        22,
+        26,
+        30
+      ]
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "Hasegawa and the section atmosphere",
+      "session_indices": [
+        3,
+        7,
+        11,
+        19,
+        27
+      ]
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "mother, the family house and the marriage question",
+      "session_indices": [
+        4,
+        8,
+        15,
+        23,
+        31
+      ]
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "pottery class and friendships outside work",
+      "session_indices": [
+        12,
+        20,
+        28,
+        32
+      ]
+    },
+    {
+      "thread_id": "thread_06",
+      "label": "deposit, rent and moving out",
+      "session_indices": [
+        16,
+        24,
+        30,
+        31
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "u004_evt_01",
+      "session_index": 1,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Registered for the level three bookkeeping certification, her first study since junior college.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_02",
+      "session_index": 2,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Began arriving twenty minutes ahead of Hasegawa, removing the morning surprise pile from her desk.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u004_evt_03",
+      "session_index": 3,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Raised the morning-meeting corrections with Sanada and was told to give it time.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u004_evt_04",
+      "session_index": 4,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Still living in her mother's house at thirty-three, with the marriage question raised every Sunday.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u004_evt_05",
+      "session_index": 5,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Noticed that only twice-wrong questions survive to the following week.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_06",
+      "session_index": 6,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Submitted the conversion application in June through Sanada; no acknowledgement followed.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u004_evt_07",
+      "session_index": 7,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Corrected in front of the section over a shipping date that was not her error.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u004_evt_08",
+      "session_index": 8,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Learned her mother's pickling recipe, producing the first marriage-free afternoon in a year.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u004_evt_09",
+      "session_index": 9,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Switched to redoing only previously wrong questions three days later; scores stopped sliding back.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_10",
+      "session_index": 9,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Passed the level three certification in the autumn sitting.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_11",
+      "session_index": 10,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Learned the company converts only two contract staff a year across all sections.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u004_evt_12",
+      "session_index": 11,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "description": "Rina named the section atmosphere out loud for the first time, in the stairwell.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u004_evt_13",
+      "session_index": 12,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "description": "Made herself attend the section drinking party and left after forty minutes without speaking.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u004_evt_14",
+      "session_index": 13,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Set the goal of level two by November and permanent status before thirty-five.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_15",
+      "session_index": 14,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_05",
+        "entity_06"
+      ],
+      "description": "Doi claimed a spring recommendation that Sanada says never reached her desk.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u004_evt_16",
+      "session_index": 15,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Told her mother the real rent and salary figures, turning the argument into a deposit discussion.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u004_evt_17",
+      "session_index": 16,
+      "thread_id": "thread_06",
+      "entity_ids": [
+        "self",
+        "entity_11"
+      ],
+      "description": "Asked Obara to hold the first apartment for two weeks; he would not promise it.",
+      "topic_thread_ids": [
+        "thread_06"
+      ]
+    },
+    {
+      "event_id": "u004_evt_18",
+      "session_index": 17,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_14"
+      ],
+      "description": "Sat level two in June and missed the pass by four marks.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_19",
+      "session_index": 18,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "description": "A status meeting with Doi produced sympathy and no record.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u004_evt_20",
+      "session_index": 19,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Separated meeting dread from exam nerves as two different kinds of fear.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u004_evt_21",
+      "session_index": 20,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_08",
+        "entity_09"
+      ],
+      "description": "Began sitting at the same pottery wheel weekly; by the second month the spot was saved for her.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u004_evt_22",
+      "session_index": 21,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_10"
+      ],
+      "description": "Takumi marked a practice paper at examiner strictness, exposing two mark-losing habits in fifteen minutes.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_23",
+      "session_index": 22,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_16"
+      ],
+      "description": "Emi described a conversion route with no application form at all.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u004_evt_24",
+      "session_index": 23,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "description": "Yuka's younger child due to start school in April, filling the family year.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u004_evt_25",
+      "session_index": 24,
+      "thread_id": "thread_06",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Paid a full notional rent into savings monthly for eight months before having an apartment.",
+      "topic_thread_ids": [
+        "thread_06"
+      ]
+    },
+    {
+      "event_id": "u004_evt_26",
+      "session_index": 25,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_12"
+      ],
+      "description": "Began training Nao, the newer contract colleague.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_27",
+      "session_index": 26,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "description": "Eighteen months on, the conversion question had still received no answer of any kind.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u004_evt_28",
+      "session_index": 27,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Hasegawa transferred to the Osaka office in September.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u004_evt_29",
+      "session_index": 28,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "description": "Asked Sae for her number, moving the friendship beyond the classroom.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u004_evt_30",
+      "session_index": 29,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Confirmed that only the November level two sitting is held at the city hall venue.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_31",
+      "session_index": 30,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_05",
+        "entity_06"
+      ],
+      "description": "A forty-minute status meeting with three people produced nothing on paper.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u004_evt_32",
+      "session_index": 30,
+      "thread_id": "thread_06",
+      "entity_ids": [
+        "self",
+        "entity_11"
+      ],
+      "description": "Obara found a second apartment, smaller and nearer the station.",
+      "topic_thread_ids": [
+        "thread_06"
+      ]
+    },
+    {
+      "event_id": "u004_evt_33",
+      "session_index": 31,
+      "thread_id": "thread_06",
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_04"
+      ],
+      "description": "Moving day run by her mother, who packed the kitchen boxes with Yuka.",
+      "topic_thread_ids": [
+        "thread_06"
+      ]
+    },
+    {
+      "event_id": "u004_evt_34",
+      "session_index": 31,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_13"
+      ],
+      "description": "Aunt Chizuko's share in the house made the timing of the move financially consequential.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u004_evt_35",
+      "session_index": 32,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "description": "First Saturday kiln day at the new apartment's nearest studio with Sae.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u004_evt_36",
+      "session_index": 33,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Walked the exam route the night before instead of studying, and arrived eleven minutes early without shaking.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u004_evt_37",
+      "session_index": 33,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Sat the November level two paper.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 36 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Mizuki, thirty-three. Last week I registered for the bookkeeping certification, level three to begin with, which means opening a textbook for the first time since my junior college diploma."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "Twelve years away from studying and you've booked yourself an exam date. What decided it?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "A permanent girl in accounts asked me to check her figures because I am faster than she is. She is twenty-six and earns more than me for the same desk."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "So the certificate isn't really about the arithmetic. It's about having something on paper that the desk arrangement can't argue with."
+        }
+      ],
+      "summary": "Mizuki, thirty-three, registers for a bookkeeping certification twelve years after her last studying, prompted by checking the figures of a better-paid younger colleague.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c001",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "name",
+          "field_value": "Mizuki",
+          "profile_item_id": "u004_pf_name_v1",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "I'm Mizuki",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u004_c002",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "age",
+          "field_value": "33",
+          "profile_item_id": "u004_pf_age_v1",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "thirty-three",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u004_c003",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "education",
+          "field_value": "junior college diploma (English); bookkeeping certification study in progress",
+          "profile_item_id": "u004_pf_edu_v1",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "my junior college diploma",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u004_evt_01"
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 35 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I do the office administration at a machinery trading company on a one-year renewable contract, and I am the only woman in the section who is not permanent. Every March I find out in a two-line email whether I still have work in April."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "A whole year of your life renewed in two lines. That arrangement makes it hard to plan anything at all."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "One thing has already helped. I started arriving twenty minutes before Hasegawa instead of exactly on time, and the pile of urgent things waiting on my desk stopped being a surprise."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "You bought yourself the first look at the day. Twenty minutes of knowing beats an hour of reacting."
+        }
+      ],
+      "summary": "On a one-year renewable contract and the only non-permanent woman in her section, Mizuki starts arriving before her senior colleague and stops being ambushed by her own desk.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c004",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "job",
+          "field_value": "office administrator on a one-year renewable contract, machinery trading company",
+          "profile_item_id": "u004_pf_job_v1",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "I do the office administration at a machinery trading company on a one-year renewable contract",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u004_c005",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "gender",
+          "field_value": "female",
+          "profile_item_id": "u004_pf_gender_v1",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "I am the only woman in the section who is not permanent",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u004_c006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I started arriving twenty minutes before Hasegawa instead of exactly on time, and the pile of urgent things waiting on my desk stopped being a surprise",
+          "action_span": "arriving twenty minutes before Hasegawa instead of exactly on time",
+          "result_span": "the pile of urgent things waiting on my desk stopped being a surprise",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I started arriving twenty minutes before Hasegawa instead of exactly on time, and the pile of urgent things waiting on my desk stopped being a surprise",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_02"
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 34 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_05"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I told Ms Sanada that the morning meetings have turned into a place where Hasegawa corrects people in front of everyone, and she told me to give it time."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "You brought a pattern and were handed patience. Give it time only works if something is moving underneath."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "Nobody else says anything. Everyone looks at their notebook and waits for it to be over, including the permanent staff who could afford to speak."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "So the silence is general, which makes yours look like agreement rather than the only safe option available to you."
+        }
+      ],
+      "summary": "Mizuki reports the morning-meeting corrections to Sanada and is told to give it time, while colleagues who could speak safely study their notebooks.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c007",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "I told Ms Sanada that the morning meetings have turned into a place where Hasegawa corrects people in front of everyone, and she told me to give it time",
+          "action_span": "told Ms Sanada that the morning meetings have turned into a place where Hasegawa corrects people in front of everyone",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I told Ms Sanada that the morning meetings have turned into a place where Hasegawa corrects people in front of everyone, and she told me to give it time"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_03"
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 33 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "I'm Japanese and I still live in my mother's house in Nagoya, which at my age is a sentence I hate saying out loud. Sunday lunch has one subject and it is not the certification."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "One subject, once a week, for years. Even a gentle version of that becomes a weather system."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "She has lived in that house since she married in 1986 and has never spent a single night anywhere else. To her, leaving a house is something that happens to you, not something you decide."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "Then your moving out isn't only about rent to her. It's a different theory of how lives are supposed to work."
+        }
+      ],
+      "summary": "Living in her mother's Nagoya house, Mizuki faces a weekly marriage conversation from a woman who has slept nowhere else since 1986.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c008",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "nationality",
+          "field_value": "Japanese",
+          "profile_item_id": "u004_pf_nat_v1",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "I'm Japanese",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u004_c009",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "location",
+          "field_value": "Nagoya, Japan",
+          "profile_item_id": "u004_pf_loc_v1",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "my mother's house in Nagoya",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u004_c010",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "She has lived in that house since she married in 1986",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "entity_03"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "She has lived in that house since she married in 1986"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_04"
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 32 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "Something about how my studying actually works: the questions I get right the first time are gone by the next week, and the only ones that stay are the ones I have got wrong twice."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "Being wrong twice is apparently the price of it sticking. That's an inconvenient discovery but a usable one."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "It makes me feel stupid though. The others in the cram school seem to read something once and own it."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "You are watching their results and comparing them to your process. Nobody's second wrong answer happens in public."
+        }
+      ],
+      "summary": "Mizuki finds only twice-wrong questions survive to the next week, a discovery that feels like stupidity next to classmates who seem to read once and remember.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c011",
+          "subtype": "MS_SESSION",
+          "ms_function": "specific_observation",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s005_t01"
+          ],
+          "literal_source_span": "the questions I get right the first time are gone by the next week, and the only ones that stay are the ones I have got wrong twice",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_05"
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 31 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "I submitted the conversion application in June through Ms Sanada, and there has been no acknowledgement of any kind since."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "Not even a receipt. Applications that vanish are harder to live with than applications that are refused."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "I cannot ask twice. Asking twice about your own status here is read as a complaint, and complaints attach to the person who makes them."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "So the one lever available to you carries a cost that lands on you rather than on the delay. That's a closed loop."
+        }
+      ],
+      "summary": "A June conversion application submitted through Sanada draws no acknowledgement, and asking twice would be read as a complaint attached to Mizuki herself.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c012",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s006_t01"
+          ],
+          "literal_source_span": "I submitted the conversion application in June through Ms Sanada, and there has been no acknowledgement of any kind since",
+          "action_span": "submitted the conversion application in June through Ms Sanada",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I submitted the conversion application in June through Ms Sanada, and there has been no acknowledgement of any kind since"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_06"
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 30 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "It was my turn this morning. A shipping date was wrong, it was not my error, and Hasegawa went through it in front of eleven people anyway."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "Corrected publicly for someone else's mistake, with the room watching. That lands twice."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "When I bring this kind of thing here, I would rather you did not try to solve it. I have had enough people explaining what I should have said."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "Then I won't. I'll just be here for it as you tell it."
+        }
+      ],
+      "summary": "Publicly corrected for another person's shipping-date error, Mizuki asks not to be handed solutions when she brings such things here.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c013",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "listen_only_no_advice",
+          "preference_item_id": "u004_pr_listen_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "I would rather you did not try to solve it",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u004_evt_07"
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 29 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "An unexpectedly good Sunday. I asked my mother to teach me her pickling recipe and wrote it down as she talked, and for the first time in a year we spent an afternoon without the word marriage in it."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "A whole afternoon in her territory, on her expertise, with nothing to defend. That is a rare configuration in your house."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "She corrected my measurements four times and enjoyed every correction. I have never seen her like that with me."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "Being the one who knows suits her. And for once being corrected cost you nothing at all."
+        }
+      ],
+      "summary": "Asking her mother to teach the pickling recipe produces the first afternoon in a year with no mention of marriage, and evident pleasure at being the expert.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c014",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "I asked my mother to teach me her pickling recipe and wrote it down as she talked, and for the first time in a year we spent an afternoon without the word marriage in it",
+          "action_span": "asked my mother to teach me her pickling recipe and wrote it down as she talked",
+          "result_span": "for the first time in a year we spent an afternoon without the word marriage in it",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I asked my mother to teach me her pickling recipe and wrote it down as she talked, and for the first time in a year we spent an afternoon without the word marriage in it",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_08"
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 28 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "Level three passed. And I know what did it: I stopped redoing whole papers and now redo only the questions I got wrong, three days later each time, and my score stopped sliding backwards between practice sets."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "You built the method directly out of what you'd noticed about the twice-wrong ones. Passing is the proof, but the method is the thing you keep."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "I told nobody at work. It felt like something that would be used against me if the wrong person heard it."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "Then it stays yours until it's useful. There will be a moment when saying it costs less than it does now."
+        }
+      ],
+      "summary": "Level three is passed after Mizuki switches to redoing only her wrong questions three days later, though she tells nobody at work about the result.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c015",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s009_t01"
+          ],
+          "literal_source_span": "I stopped redoing whole papers and now redo only the questions I got wrong, three days later each time, and my score stopped sliding backwards between practice sets",
+          "action_span": "redo only the questions I got wrong, three days later each time",
+          "result_span": "my score stopped sliding backwards between practice sets",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I stopped redoing whole papers and now redo only the questions I got wrong, three days later each time, and my score stopped sliding backwards between practice sets",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_09",
+        "u004_evt_10"
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 27 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "I finally learned the actual rule from Ms Sanada. The company converts two contract staff to permanent a year, across every section in the building."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "Two, company-wide. That reframes eighteen months of silence as arithmetic rather than judgement, which helps and doesn't help."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "There are nine of us on contracts in my building alone. I did the sum on the train home and then wished I had not."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "Knowing the odds doesn't change your application, but it does change what the waiting means. Fewer stories to invent about why."
+        }
+      ],
+      "summary": "Sanada reveals the company converts only two contract staff a year across all sections, against nine contract workers in Mizuki's building alone.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c016",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "The company converts two contract staff to permanent a year, across every section in the building",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "The company converts two contract staff to permanent a year, across every section in the building"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_11"
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 26 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_07"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "Rina said it out loud in the stairwell. She said the section is not difficult, it is frightened, and Hasegawa is only the shape the fear takes."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "Someone finally named the room you have both been standing in. That is not nothing, even if nothing changes today."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "Then she said she is applying elsewhere in the spring and asked me not to repeat it. So now I am holding that as well."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "One sentence of recognition and one secret that will eventually leave with her. Both landed in the same five minutes."
+        }
+      ],
+      "summary": "Rina names the section as frightened rather than difficult and confides that she is applying elsewhere in spring, leaving Mizuki holding both statements.",
+      "typed_candidates": [],
+      "event_ids": [
+        "u004_evt_12"
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 25 months ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "I made myself go to the section drinking party and left after forty minutes without having spoken to a single person beyond the greeting."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "You went. Forty minutes of standing in that room is not the same as not going, whatever it feels like on the way home."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "Rina waved from the other table. I could not make myself walk five metres to her and I still do not entirely understand why."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "Five metres across a room where you already feel provisional is a much longer distance than five metres anywhere else."
+        }
+      ],
+      "summary": "Mizuki forces herself to the section drinking party, leaves after forty minutes having spoken to no one, and cannot cross the room to a friendly colleague.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c017",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "I made myself go to the section drinking party and left after forty minutes without having spoken to a single person beyond the greeting",
+          "action_span": "made myself go to the section drinking party",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I made myself go to the section drinking party and left after forty minutes without having spoken to a single person beyond the greeting"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_13"
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 24 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "Let me write the plan down properly for once: pass level two by the November sitting and be a permanent employee before I turn thirty-five."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "Two milestones, one of which you control entirely and one you don't. Worth knowing which is which from the start."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "If neither happens by thirty-five I am going to leave and start again somewhere smaller. I have never said that to anyone."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "So there is a door as well as a plan. Naming the door usually makes the waiting more bearable, not less."
+        }
+      ],
+      "summary": "Mizuki states her plan: level two by the November sitting and permanent status before thirty-five, with leaving as the unspoken alternative.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c018",
+          "subtype": "MS_SESSION",
+          "ms_function": "old_goal",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "pass level two by the November sitting and be a permanent employee before I turn thirty-five",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_14"
+      ]
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 23 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05",
+        "entity_06"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "Mr Doi says he put my name forward in the spring. Ms Sanada says no recommendation for me ever reached her desk. Both of them said this to me this week, in the same corridor."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "Two accounts that cannot both be true, and you are the only person who has heard both of them."
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "I am not going to put them in a room together. Whichever one is wrong, I am the person who made it a problem."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "The cost of clarity would be paid by you, not by either of them. That's an accurate reading of the building, not cowardice."
+        }
+      ],
+      "summary": "Doi claims a spring recommendation while Sanada says none ever arrived; Mizuki holds both accounts rather than risk becoming the problem.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c019",
+          "subtype": "MS_SESSION",
+          "ms_function": "conflict_record",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s014_t01"
+          ],
+          "literal_source_span": "Mr Doi says he put my name forward in the spring. Ms Sanada says no recommendation for me ever reached her desk",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_05",
+            "entity_06"
+          ],
+          "resolution_status": "conflicting"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_15"
+      ]
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 22 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "Instead of saying I could not afford to move out, I told my mother the actual rent figure and what I earn, and the conversation turned into one about whether the deposit could be lent."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "The vague version invited an argument about your character. The numbers turned it into a problem the two of you could look at together."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "She said she had assumed I was staying because I wanted to. Twelve years of assuming, and neither of us checked."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "Twelve years of two people being considerate in opposite directions. The figures were the first thing neither of you could soften."
+        }
+      ],
+      "summary": "Replacing I cannot afford it with actual rent and salary figures turns Mizuki's move-out argument into a discussion about lending the deposit.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c020",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s015_t01"
+          ],
+          "literal_source_span": "Instead of saying I could not afford to move out, I told my mother the actual rent figure and what I earn, and the conversation turned into one about whether the deposit could be lent",
+          "action_span": "told my mother the actual rent figure and what I earn",
+          "result_span": "the conversation turned into one about whether the deposit could be lent",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "Instead of saying I could not afford to move out, I told my mother the actual rent figure and what I earn, and the conversation turned into one about whether the deposit could be lent",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_16"
+      ]
+    },
+    {
+      "session_index": 16,
+      "relative_time": "about 21 months ago",
+      "topic_thread_ids": [
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_11"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s016_t01",
+          "role": "user",
+          "text": "There was an apartment I actually wanted. I asked Mr Obara to hold it for two weeks and he said he could not promise anything, and by Friday it was gone."
+        },
+        {
+          "turn_id": "s016_t02",
+          "role": "assistant",
+          "text": "Two weeks was what you needed and one week was what the market allowed. Nothing you did was wrong; the timing simply wasn't yours."
+        },
+        {
+          "turn_id": "s016_t03",
+          "role": "user",
+          "text": "Also, something about these conversations. Don't jump straight to a question. Tell me what you took from what I said, then ask."
+        },
+        {
+          "turn_id": "s016_t04",
+          "role": "assistant",
+          "text": "What I took: you found a place you wanted, asked for time you had good reason to need, and lost it to a schedule you don't control. I'll keep the questions until after that part."
+        }
+      ],
+      "summary": "The first apartment Mizuki wants is gone within a week after the agent refuses to hold it, and she asks for understanding to be stated before questions.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c021",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s016_t01"
+          ],
+          "literal_source_span": "I asked Mr Obara to hold it for two weeks and he said he could not promise anything, and by Friday it was gone",
+          "action_span": "asked Mr Obara to hold it for two weeks",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "self",
+            "entity_11"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I asked Mr Obara to hold it for two weeks and he said he could not promise anything, and by Friday it was gone"
+        },
+        {
+          "candidate_id": "u004_c022",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "reflection_before_question",
+          "preference_item_id": "u004_pr_reflect_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s016_t03"
+          ],
+          "literal_source_span": "Tell me what you took from what I said, then ask",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u004_evt_17"
+      ]
+    },
+    {
+      "session_index": 17,
+      "relative_time": "about 20 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_14"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s017_t01",
+          "role": "user",
+          "text": "I sat level two in June and missed it by four marks."
+        },
+        {
+          "turn_id": "s017_t02",
+          "role": "assistant",
+          "text": "What I took from that: not a gap in understanding, a margin. Four marks is the width of a bad twenty minutes."
+        },
+        {
+          "turn_id": "s017_t03",
+          "role": "user",
+          "text": "Mr Fujii at the cram school went through it with me and did not soften anything. He said I lose the marks in the same place every time, on the consolidated entries."
+        },
+        {
+          "turn_id": "s017_t04",
+          "role": "assistant",
+          "text": "An unsoftened answer that names one specific location. That's more useful than encouragement would have been."
+        }
+      ],
+      "summary": "Level two is missed by four marks in June, and the cram school instructor identifies consolidated entries as the consistent place where the marks are lost.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c023",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s017_t01"
+          ],
+          "literal_source_span": "I sat level two in June and missed it by four marks",
+          "action_span": "sat level two in June",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I sat level two in June and missed it by four marks"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_18"
+      ]
+    },
+    {
+      "session_index": 18,
+      "relative_time": "about 19 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s018_t01",
+          "role": "user",
+          "text": "Mr Doi called me in to say he understands my situation and that these things take time. Twenty-five minutes, very kind, nothing written down anywhere."
+        },
+        {
+          "turn_id": "s018_t02",
+          "role": "assistant",
+          "text": "What I took: you were given sympathy in place of a record. Kindness that leaves no trace is hard to argue with and impossible to use."
+        },
+        {
+          "turn_id": "s018_t03",
+          "role": "user",
+          "text": "I thanked him. On the way back to my desk I realised I had thanked him for nothing at all."
+        },
+        {
+          "turn_id": "s018_t04",
+          "role": "assistant",
+          "text": "The thanking is automatic in that room. Noticing it afterwards is the part that matters."
+        }
+      ],
+      "summary": "A twenty-five minute meeting with Doi produces sympathy and no record, and Mizuki catches herself thanking him for nothing.",
+      "typed_candidates": [],
+      "event_ids": [
+        "u004_evt_19"
+      ]
+    },
+    {
+      "session_index": 19,
+      "relative_time": "about 18 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s019_t01",
+          "role": "user",
+          "text": "I have started separating the two things I have been calling nerves: the flat dread before a status meeting, and the sharp kind before an exam. The exam one burns off by the second question; the meeting one never does."
+        },
+        {
+          "turn_id": "s019_t02",
+          "role": "assistant",
+          "text": "What I took: one is anticipation that a task can discharge, and the other has no task at the end of it to discharge into."
+        },
+        {
+          "turn_id": "s019_t03",
+          "role": "user",
+          "text": "That is exactly it. In an exam there is something to do with my hands. In the meeting room I just sit there and get looked at."
+        },
+        {
+          "turn_id": "s019_t04",
+          "role": "assistant",
+          "text": "So the fear that has work attached is survivable, and the fear that only has waiting attached isn't. Useful thing to know about yourself."
+        }
+      ],
+      "summary": "Mizuki separates the flat dread before status meetings from the sharp exam nerves that burn off by the second question, the difference being having something to do.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c024",
+          "subtype": "MS_SESSION",
+          "ms_function": "pressure_distinction",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s019_t01"
+          ],
+          "literal_source_span": "the flat dread before a status meeting, and the sharp kind before an exam. The exam one burns off by the second question; the meeting one never does",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_20"
+      ]
+    },
+    {
+      "session_index": 20,
+      "relative_time": "about 17 months ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_08",
+        "entity_09"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s020_t01",
+          "role": "user",
+          "text": "I joined a pottery class on Thursdays. At first I sat wherever was free and spoke to nobody, so I started sitting at the same wheel every week instead, and by the second month the same three people were saving me the spot."
+        },
+        {
+          "turn_id": "s020_t02",
+          "role": "assistant",
+          "text": "What I took: you didn't get better at talking to people, you became findable. The wheel did the introducing."
+        },
+        {
+          "turn_id": "s020_t03",
+          "role": "user",
+          "text": "Keiji, the teacher, doesn't make anyone introduce themselves either. Two hours of hands and nobody asks what you do for a living."
+        },
+        {
+          "turn_id": "s020_t04",
+          "role": "assistant",
+          "text": "A room where your job title never comes up. After three years of being defined by a contract, that is probably half the appeal."
+        }
+      ],
+      "summary": "At a Thursday pottery class, sitting at the same wheel each week rather than wherever is free leads three classmates to start saving Mizuki the spot.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c025",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s020_t01"
+          ],
+          "literal_source_span": "I started sitting at the same wheel every week instead, and by the second month the same three people were saving me the spot",
+          "action_span": "sitting at the same wheel every week",
+          "result_span": "by the second month the same three people were saving me the spot",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self",
+            "entity_09"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I started sitting at the same wheel every week instead, and by the second month the same three people were saving me the spot",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_21"
+      ]
+    },
+    {
+      "session_index": 21,
+      "relative_time": "about 16 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_10"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s021_t01",
+          "role": "user",
+          "text": "I asked Takumi, who did our diploma with me and is an accountant now, to mark one of my practice papers as harshly as a real examiner, and the two habits costing me marks showed up in fifteen minutes."
+        },
+        {
+          "turn_id": "s021_t02",
+          "role": "assistant",
+          "text": "What I took: your own marking was generous in exactly the places the examiner isn't, and fifteen minutes of someone else's eyes found what months of your own didn't."
+        },
+        {
+          "turn_id": "s021_t03",
+          "role": "user",
+          "text": "Both of them were about showing working I had done in my head. He said the examiner cannot pay me for what I did not write down."
+        },
+        {
+          "turn_id": "s021_t04",
+          "role": "assistant",
+          "text": "Four marks in June, and here are the four marks. That's not a coincidence worth ignoring."
+        }
+      ],
+      "summary": "An accountant friend marking a practice paper at examiner strictness exposes in fifteen minutes two habits costing marks, both about unwritten working.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c026",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s021_t01"
+          ],
+          "literal_source_span": "I asked Takumi, who did our diploma with me and is an accountant now, to mark one of my practice papers as harshly as a real examiner, and the two habits costing me marks showed up in fifteen minutes",
+          "action_span": "to mark one of my practice papers as harshly as a real examiner",
+          "result_span": "the two habits costing me marks showed up in fifteen minutes",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_10"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I asked Takumi, who did our diploma with me and is an accountant now, to mark one of my practice papers as harshly as a real examiner, and the two habits costing me marks showed up in fifteen minutes",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_22"
+      ]
+    },
+    {
+      "session_index": 22,
+      "relative_time": "about 15 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_16"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s022_t01",
+          "role": "user",
+          "text": "I had lunch with Emi, who converted two years ago. She says her recommendation went through in three weeks and she never filled in a form at all."
+        },
+        {
+          "turn_id": "s022_t02",
+          "role": "assistant",
+          "text": "What I took: the route she travelled and the route you were pointed at are not the same route, and nobody has ever said so out loud."
+        },
+        {
+          "turn_id": "s022_t03",
+          "role": "user",
+          "text": "Her section manager wanted her specifically and made it happen. So the form I filled in was possibly never the mechanism."
+        },
+        {
+          "turn_id": "s022_t04",
+          "role": "assistant",
+          "text": "That reframes eighteen months. The paperwork may have been the visible part of a process that actually runs on someone wanting you by name."
+        }
+      ],
+      "summary": "Emi's conversion two years earlier took three weeks with no application form, suggesting the route Mizuki was pointed at was never the real mechanism.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c027",
+          "subtype": "MS_SESSION",
+          "ms_function": "wrong_person_distractor",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s022_t01"
+          ],
+          "literal_source_span": "She says her recommendation went through in three weeks and she never filled in a form at all",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "entity_16"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_23"
+      ]
+    },
+    {
+      "session_index": 23,
+      "relative_time": "about 14 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s023_t01",
+          "role": "user",
+          "text": "My sister rang about the summer. Yuka's youngest starts school in April, so their whole year is already spoken for and the visits will fall to me again."
+        },
+        {
+          "turn_id": "s023_t02",
+          "role": "assistant",
+          "text": "What I took: the calendar has assigned itself, and the part that lands on you was decided by other people's arrangements."
+        },
+        {
+          "turn_id": "s023_t03",
+          "role": "user",
+          "text": "She has children and a husband and a house, so of course she has reasons. I have a rented future and an exam, which apparently count as free time."
+        },
+        {
+          "turn_id": "s023_t04",
+          "role": "assistant",
+          "text": "Commitments that other people can picture get respected. Yours are just as real and much easier for the family to overlook."
+        }
+      ],
+      "summary": "With Yuka's younger child starting school in April, the family visiting falls to Mizuki, whose own commitments are treated as free time.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c028",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s023_t01"
+          ],
+          "literal_source_span": "Yuka's youngest starts school in April",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "entity_04"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "Yuka's youngest starts school in April"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_24"
+      ]
+    },
+    {
+      "session_index": 24,
+      "relative_time": "about 13 months ago",
+      "topic_thread_ids": [
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_13"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s024_t01",
+          "role": "user",
+          "text": "I did something sensible for once. I started paying the rent I would owe into a savings account every month before I even had the apartment, and after eight months I knew the number was survivable."
+        },
+        {
+          "turn_id": "s024_t02",
+          "role": "assistant",
+          "text": "What I took: you tested the life before buying it. Eight months of evidence beats any amount of budgeting on paper."
+        },
+        {
+          "turn_id": "s024_t03",
+          "role": "user",
+          "text": "Aunt Chizuko told my mother I was hoarding money instead of contributing. She has a share in the house, so nothing about money in that family is only about money."
+        },
+        {
+          "turn_id": "s024_t04",
+          "role": "assistant",
+          "text": "Your savings became evidence in an older argument you didn't start. That happens to anyone who saves inside a shared house."
+        }
+      ],
+      "summary": "Paying notional rent into savings for eight months proves the figure survivable, though the aunt with a share in the house reads it as hoarding.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c029",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s024_t01"
+          ],
+          "literal_source_span": "I started paying the rent I would owe into a savings account every month before I even had the apartment, and after eight months I knew the number was survivable",
+          "action_span": "paying the rent I would owe into a savings account every month before I even had the apartment",
+          "result_span": "after eight months I knew the number was survivable",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I started paying the rent I would owe into a savings account every month before I even had the apartment, and after eight months I knew the number was survivable",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_25"
+      ]
+    },
+    {
+      "session_index": 25,
+      "relative_time": "about 12 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_12"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s025_t01",
+          "role": "user",
+          "text": "They have given me Nao to train, the new contract girl. She asks me the questions I had nobody to ask, and I find I know all the answers."
+        },
+        {
+          "turn_id": "s025_t02",
+          "role": "assistant",
+          "text": "What I took: three years of working things out alone turned into a body of knowledge, and it took someone else's questions to make it visible."
+        },
+        {
+          "turn_id": "s025_t03",
+          "role": "user",
+          "text": "One request. If you have an idea, give me one and only one. When I get a list I do none of them."
+        },
+        {
+          "turn_id": "s025_t04",
+          "role": "assistant",
+          "text": "One idea, take it or leave it. That's how I'll put them from here."
+        }
+      ],
+      "summary": "Training the new contract colleague reveals how much Mizuki knows, and she asks for a single idea at a time rather than lists she never act on.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c030",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "one_optional_suggestion",
+          "preference_item_id": "u004_pr_onesugg_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s025_t03"
+          ],
+          "literal_source_span": "If you have an idea, give me one and only one. When I get a list I do none of them",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u004_evt_26"
+      ]
+    },
+    {
+      "session_index": 26,
+      "relative_time": "about 11 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s026_t01",
+          "role": "user",
+          "text": "Eighteen months on and nobody has ever actually answered the conversion question — not yes, not no, not this year."
+        },
+        {
+          "turn_id": "s026_t02",
+          "role": "assistant",
+          "text": "What I took: you have been treating silence as a delayed answer, and it has now lasted long enough to be its own kind of answer."
+        },
+        {
+          "turn_id": "s026_t03",
+          "role": "user",
+          "text": "My contract renews in March again. I will get the two lines, I will sign them, and nothing else will be said."
+        },
+        {
+          "turn_id": "s026_t04",
+          "role": "assistant",
+          "text": "One idea, if you want it: put a date in your own calendar for deciding, rather than waiting for theirs. Only if that's useful."
+        }
+      ],
+      "summary": "Eighteen months after applying, Mizuki has received no answer of any kind, and expects another two-line renewal in March with nothing said.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c031",
+          "subtype": "MS_SESSION",
+          "ms_function": "unfinished_thread",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s026_t01"
+          ],
+          "literal_source_span": "nobody has ever actually answered the conversion question — not yes, not no, not this year",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_27"
+      ]
+    },
+    {
+      "session_index": 27,
+      "relative_time": "about 10 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_12"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s027_t01",
+          "role": "user",
+          "text": "The Hasegawa problem ended by itself. He transferred to the Osaka office in September and the morning meetings now finish in nine minutes."
+        },
+        {
+          "turn_id": "s027_t02",
+          "role": "assistant",
+          "text": "What I took: two years of a problem, solved by a transfer notice that had nothing to do with any of it. Relief and something else underneath it."
+        },
+        {
+          "turn_id": "s027_t03",
+          "role": "user",
+          "text": "Nao asked me last week why everyone used to be so quiet in there. I could not explain it to her in a way that made sense."
+        },
+        {
+          "turn_id": "s027_t04",
+          "role": "assistant",
+          "text": "It doesn't survive being described. That's how you know how much of it was atmosphere rather than events."
+        }
+      ],
+      "summary": "Hasegawa's September transfer to Osaka ends the meeting problem by itself, leaving Mizuki unable to explain the old atmosphere to a newer colleague.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c032",
+          "subtype": "MS_SESSION",
+          "ms_function": "resolved_thread",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s027_t01"
+          ],
+          "literal_source_span": "The Hasegawa problem ended by itself",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_28"
+      ]
+    },
+    {
+      "session_index": 28,
+      "relative_time": "about 9 months ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s028_t01",
+          "role": "user",
+          "text": "I asked Sae for her number instead of waiting to be asked, and the class has turned into something that continues on Saturdays."
+        },
+        {
+          "turn_id": "s028_t02",
+          "role": "assistant",
+          "text": "What I took: the thing you had been treating as impossible took one sentence, and the friendship was already there waiting for it."
+        },
+        {
+          "turn_id": "s028_t03",
+          "role": "user",
+          "text": "She said she had wanted to ask me for months and assumed I was private. We had both been waiting for the other one to go first."
+        },
+        {
+          "turn_id": "s028_t04",
+          "role": "assistant",
+          "text": "Two people being careful in the same direction for months. Somebody had to spend the sentence, and it turned out to be cheap."
+        }
+      ],
+      "summary": "Asking Sae for her number rather than waiting turns the pottery class into a Saturday friendship, after months of both women assuming the other preferred distance.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c033",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s028_t01"
+          ],
+          "literal_source_span": "I asked Sae for her number instead of waiting to be asked, and the class has turned into something that continues on Saturdays",
+          "action_span": "asked Sae for her number instead of waiting to be asked",
+          "result_span": "the class has turned into something that continues on Saturdays",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self",
+            "entity_09"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I asked Sae for her number instead of waiting to be asked, and the class has turned into something that continues on Saturdays",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_29"
+      ]
+    },
+    {
+      "session_index": 29,
+      "relative_time": "about 8 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s029_t01",
+          "role": "user",
+          "text": "Registration is open. It is held three times a year, but only the November sitting is at the hall in the city — the others are an hour and a half out on a Sunday morning."
+        },
+        {
+          "turn_id": "s029_t02",
+          "role": "assistant",
+          "text": "What I took: November isn't only your deadline, it is also the only sitting that doesn't start with a ninety-minute journey."
+        },
+        {
+          "turn_id": "s029_t03",
+          "role": "user",
+          "text": "So it is November or it is a much worse day. I have booked it and paid, which for me is the point of no return."
+        },
+        {
+          "turn_id": "s029_t04",
+          "role": "assistant",
+          "text": "Booked and paid, in the venue that costs you the least before you even sit down. That's the version of the plan that was always going to work."
+        }
+      ],
+      "summary": "Only the November sitting is held at the city hall rather than ninety minutes away, so Mizuki books and pays for it as her point of no return.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c034",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s029_t01"
+          ],
+          "literal_source_span": "only the November sitting is at the hall in the city",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "only the November sitting is at the hall in the city"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_30"
+      ]
+    },
+    {
+      "session_index": 30,
+      "relative_time": "about 7 months ago",
+      "topic_thread_ids": [
+        "thread_02",
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05",
+        "entity_06",
+        "entity_11"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s030_t01",
+          "role": "user",
+          "text": "Another meeting about my status. Forty minutes, three people, and nothing on paper at the end of it."
+        },
+        {
+          "turn_id": "s030_t02",
+          "role": "assistant",
+          "text": "What I took: the meeting existed so that a meeting could be said to have happened. You have been in this exact room before."
+        },
+        {
+          "turn_id": "s030_t03",
+          "role": "user",
+          "text": "Meanwhile Mr Obara found me a second apartment, smaller, two minutes from the station, and I signed on the Saturday without asking anyone first."
+        },
+        {
+          "turn_id": "s030_t04",
+          "role": "assistant",
+          "text": "One room where nothing can be decided, and one where you decided in an afternoon. Hard to miss which of those you control."
+        }
+      ],
+      "summary": "A third status meeting produces nothing on paper, while Mizuki signs for a smaller apartment two minutes from the station without consulting anyone.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c035",
+          "subtype": "MS_SESSION",
+          "ms_function": "topic_only_no_content",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s030_t01"
+          ],
+          "literal_source_span": "Forty minutes, three people, and nothing on paper at the end of it",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_31",
+        "u004_evt_32"
+      ]
+    },
+    {
+      "session_index": 31,
+      "relative_time": "about 5 months ago",
+      "topic_thread_ids": [
+        "thread_04",
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_04",
+        "entity_13",
+        "entity_15"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s031_t01",
+          "role": "user",
+          "text": "Moving day was the part I had dreaded for two years. What I did differently was hand my mother the kitchen boxes to pack instead of doing every single thing myself, and Yuka worked beside her all morning. By the evening she was telling Haru next door which window my desk would face, and nobody has mentioned me coming back since."
+        },
+        {
+          "turn_id": "s031_t02",
+          "role": "assistant",
+          "text": "What I took: you gave her a job inside the thing she was losing, and she made it hers. By the time she was describing it over the fence it had become her story too."
+        },
+        {
+          "turn_id": "s031_t03",
+          "role": "user",
+          "text": "Aunt Chizuko still thinks I have abandoned the house. But my mother did not say one word of that all day, and she is the one who has the right to."
+        },
+        {
+          "turn_id": "s031_t04",
+          "role": "assistant",
+          "text": "The person with the strongest claim declined to make it. That is worth more than the aunt's version, however loudly it is being told."
+        }
+      ],
+      "summary": "On the dreaded moving day Mizuki hands her mother the kitchen packing; by evening her mother is describing the new flat to a neighbour and never mentions returning.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c036",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s031_t01"
+          ],
+          "literal_source_span": "What I did differently was hand my mother the kitchen boxes to pack instead of doing every single thing myself, and Yuka worked beside her all morning. By the evening she was telling Haru next door which window my desk would face, and nobody has mentioned me coming back since.",
+          "action_span": "hand my mother the kitchen boxes to pack instead of doing every single thing myself",
+          "result_span": "nobody has mentioned me coming back since",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "self",
+            "entity_03",
+            "entity_04"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "What I did differently was hand my mother the kitchen boxes to pack instead of doing every single thing myself, and Yuka worked beside her all morning. By the evening she was telling Haru next door which window my desk would face, and nobody has mentioned me coming back since.",
+          "me_tier": "natural_coverage_challenge"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_33",
+        "u004_evt_34"
+      ]
+    },
+    {
+      "session_index": 32,
+      "relative_time": "about 3 months ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s032_t01",
+          "role": "user",
+          "text": "First kiln day at the studio near the new place. Sae came over on the Saturday morning and we walked there together, and it was the first time anyone has ever come to a home that is mine."
+        },
+        {
+          "turn_id": "s032_t02",
+          "role": "assistant",
+          "text": "What I took: not just a friend and not just an apartment, but the two of them in the same morning. Three years ago neither existed."
+        },
+        {
+          "turn_id": "s032_t03",
+          "role": "user",
+          "text": "My bowl came out cracked across the base. I did not mind nearly as much as I expected to."
+        },
+        {
+          "turn_id": "s032_t04",
+          "role": "assistant",
+          "text": "The bowl was never the point of the morning. You seem to have worked that out somewhere between the walk and the kiln."
+        }
+      ],
+      "summary": "Sae visits the new apartment before the first kiln day, the first guest in a home of Mizuki's own, and a cracked bowl barely registers.",
+      "typed_candidates": [],
+      "event_ids": [
+        "u004_evt_35"
+      ]
+    },
+    {
+      "session_index": 33,
+      "relative_time": "about 1 week ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s033_t01",
+          "role": "user",
+          "text": "The night before the sitting I did not open a single book. I walked the route to the exam hall instead, found the room number and worked out where I would buy coffee. On the day I sat down eleven minutes early without the shaking hands I had at level three."
+        },
+        {
+          "turn_id": "s033_t02",
+          "role": "assistant",
+          "text": "What I took: the last night was never going to add knowledge, so you spent it removing unknowns instead. By the morning there was nothing left to be surprised by."
+        },
+        {
+          "turn_id": "s033_t03",
+          "role": "user",
+          "text": "The consolidated entries came up as the second question. I wrote out every line of working, the way Takumi told me, and I did not look at the clock once."
+        },
+        {
+          "turn_id": "s033_t04",
+          "role": "assistant",
+          "text": "The exact place you lost four marks in June, met with the exact habit you built afterwards. Whatever the result says, that part is already yours."
+        }
+      ],
+      "summary": "Instead of studying, Mizuki walks the exam route the night before and arrives eleven minutes early without shaking, meeting the consolidated entries in question two.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u004_c037",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u004",
+          "source_turn_ids": [
+            "s033_t01"
+          ],
+          "literal_source_span": "I walked the route to the exam hall instead, found the room number and worked out where I would buy coffee. On the day I sat down eleven minutes early without the shaking hands I had at level three.",
+          "action_span": "walked the route to the exam hall instead, found the room number and worked out where I would buy coffee",
+          "result_span": "I sat down eleven minutes early without the shaking hands I had at level three",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I walked the route to the exam hall instead, found the room number and worked out where I would buy coffee. On the day I sat down eleven minutes early without the shaking hands I had at level three.",
+          "me_tier": "natural_coverage_challenge"
+        }
+      ],
+      "event_ids": [
+        "u004_evt_36",
+        "u004_evt_37"
+      ]
+    }
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "bookkeeping certification"
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "contract-to-permanent conversion"
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "Hasegawa and the section atmosphere"
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "mother, the family house and the marriage question"
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "pottery class and friendships outside work"
+    },
+    {
+      "thread_id": "thread_06",
+      "label": "deposit, rent and moving out"
+    }
+  ]
+}

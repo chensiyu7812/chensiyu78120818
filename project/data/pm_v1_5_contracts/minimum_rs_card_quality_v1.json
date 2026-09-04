@@ -1,0 +1,42 @@
+{
+  "protocol": "pm-v1.5-minimum-rs-card-quality-contract-v1",
+  "research_object": "A frozen five-card technique catalog with exactly one card per family, not the historical 11,590-card Top-k bank.",
+  "qualification_layers": [
+    {
+      "layer": "construction_and_leakage",
+      "pass_rule": "No support-need packet source overlap; no raw response example is exposed to the generator; cards are technique-only."
+    },
+    {
+      "layer": "intrinsic_human_content",
+      "pass_rule": "Every frozen card passes clarity, use, non-use, fit, burden/risk, and safe-technique fields; confidence >= 3; approved for train-only pilot."
+    },
+    {
+      "layer": "retrieval_appropriateness",
+      "pass_rule": "A transparent boundary/family gate selects one eligible card. Ineligible or no-benefit states map to R0."
+    },
+    {
+      "layer": "response_effect",
+      "pass_rule": "Independent blind confirmation repeats a material quality-benefit direction and finds no added confirmed material risk for the promoted condition."
+    },
+    {
+      "layer": "cost",
+      "pass_rule": "The frozen one-card injection fits the declared RS token/latency budget; equal-quality states map to R0."
+    }
+  ],
+  "default_decision": "R0",
+  "open_rs_only_if": [
+    "a qualified strategy opportunity exists",
+    "the treatment is actually injected and evaluable",
+    "there is sufficient probability of a material quality benefit",
+    "the material-risk gate passes",
+    "the cost budget passes"
+  ],
+  "tie_policy": "If the responses are materially equivalent, choose R0.",
+  "topk_policy": {
+    "current_rs_catalog": "Top-1 after family eligibility because there is exactly one qualified card per family.",
+    "historical_raw_bank": "Not promoted by this contract.",
+    "future_topk_test": "Requires at least three independently qualified cards in the same eligible family; otherwise Top-1 versus Top-3 confounds cardinality with card-bank quality."
+  },
+  "llm_weak_audit_policy": "Optional diagnostic only. An unqualified LLM judge cannot promote or veto a human-reviewed card.",
+  "claim_boundary": "Passing this contract supports a minimum publishable train-only resource-allocation treatment; it does not establish clinical validity, universal card quality, or external generalization."
+}

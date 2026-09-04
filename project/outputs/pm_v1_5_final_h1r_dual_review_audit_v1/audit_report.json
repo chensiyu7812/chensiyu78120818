@@ -1,0 +1,379 @@
+{
+  "protocol": "pm-v1.5-final-h1r-dual-review-data-quality-audit-v1",
+  "status": "HOLD_DO_NOT_FREEZE_GOLD_OR_TRAIN",
+  "scientific_layer": "H1R_CANDIDATE_SEMANTICS_AND_STEP1_GOLD_QUALIFICATION",
+  "not_assessed": [
+    "PM_model_predictions",
+    "STEP2_generator_execution",
+    "response_quality",
+    "interaction_and_grounding_risk",
+    "cost_effect"
+  ],
+  "failures": [
+    "ME_decision_raw_agreement_below_0_70",
+    "MP_FIT_majority_constant_accuracy_ge_0_70",
+    "MP_FRESH_CONFIRMATION_majority_constant_accuracy_ge_0_70",
+    "MP_SEALED_INTERNAL_TEST_majority_constant_accuracy_ge_0_70",
+    "MS_FRESH_CONFIRMATION_majority_constant_accuracy_ge_0_70",
+    "MS_SEALED_INTERNAL_TEST_majority_constant_accuracy_ge_0_70",
+    "overall_cohen_kappa_below_0_60",
+    "overlap_disagreements_require_adjudication"
+  ],
+  "schema": {
+    "primary_rows": 96,
+    "secondary_rows": 24,
+    "primary_id_match": true,
+    "secondary_id_match": true,
+    "errors": []
+  },
+  "primary_label_distribution": {
+    "MP": {
+      "overall": {
+        "counts": {
+          "off": 71,
+          "on": 25
+        },
+        "n": 96,
+        "majority_constant_accuracy": 0.7395833333333334
+      },
+      "by_split": {
+        "FIT": {
+          "counts": {
+            "off": 24,
+            "on": 8
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.75
+        },
+        "FRESH_CONFIRMATION": {
+          "counts": {
+            "off": 23,
+            "on": 9
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.71875
+        },
+        "SEALED_INTERNAL_TEST": {
+          "counts": {
+            "on": 8,
+            "off": 24
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.75
+        }
+      }
+    },
+    "MS": {
+      "overall": {
+        "counts": {
+          "off": 64,
+          "on": 32
+        },
+        "n": 96,
+        "majority_constant_accuracy": 0.6666666666666666
+      },
+      "by_split": {
+        "FIT": {
+          "counts": {
+            "off": 17,
+            "on": 15
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.53125
+        },
+        "FRESH_CONFIRMATION": {
+          "counts": {
+            "off": 23,
+            "on": 9
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.71875
+        },
+        "SEALED_INTERNAL_TEST": {
+          "counts": {
+            "on": 8,
+            "off": 24
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.75
+        }
+      }
+    },
+    "ME": {
+      "overall": {
+        "counts": {
+          "on": 45,
+          "off": 51
+        },
+        "n": 96,
+        "majority_constant_accuracy": 0.53125
+      },
+      "by_split": {
+        "FIT": {
+          "counts": {
+            "on": 15,
+            "off": 17
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.53125
+        },
+        "FRESH_CONFIRMATION": {
+          "counts": {
+            "on": 15,
+            "off": 17
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.53125
+        },
+        "SEALED_INTERNAL_TEST": {
+          "counts": {
+            "on": 15,
+            "off": 17
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.53125
+        }
+      }
+    },
+    "RS": {
+      "overall": {
+        "counts": {
+          "on": 41,
+          "off": 55
+        },
+        "n": 96,
+        "majority_constant_accuracy": 0.5729166666666666
+      },
+      "by_split": {
+        "FIT": {
+          "counts": {
+            "off": 19,
+            "on": 13
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.59375
+        },
+        "FRESH_CONFIRMATION": {
+          "counts": {
+            "on": 14,
+            "off": 18
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.5625
+        },
+        "SEALED_INTERNAL_TEST": {
+          "counts": {
+            "off": 18,
+            "on": 14
+          },
+          "n": 32,
+          "majority_constant_accuracy": 0.5625
+        }
+      }
+    }
+  },
+  "pre_adjudication_iaa": {
+    "n_component_pairs": 96,
+    "decision_raw_agreement": 0.8333333333333334,
+    "cohen_kappa": 0.5755733628074055,
+    "per_component": {
+      "MP": {
+        "n": 24,
+        "confusion": {
+          "primary_off__secondary_off": 19,
+          "primary_on__secondary_off": 1,
+          "primary_on__secondary_on": 3,
+          "primary_off__secondary_on": 1
+        },
+        "decision_raw_agreement": 0.9166666666666666,
+        "cohen_kappa": 0.6999999999999997,
+        "gate_1_raw_agreement": 0.9583333333333334,
+        "gate_2_raw_agreement": 0.9166666666666666,
+        "subtype_raw_agreement": 1.0,
+        "disagreements": 2
+      },
+      "MS": {
+        "n": 24,
+        "confusion": {
+          "primary_on__secondary_on": 5,
+          "primary_off__secondary_off": 18,
+          "primary_on__secondary_off": 1
+        },
+        "decision_raw_agreement": 0.9583333333333334,
+        "cohen_kappa": 0.8823529411764707,
+        "gate_1_raw_agreement": 0.9166666666666666,
+        "gate_2_raw_agreement": 0.9583333333333334,
+        "subtype_raw_agreement": 1.0,
+        "disagreements": 1
+      },
+      "ME": {
+        "n": 24,
+        "confusion": {
+          "primary_off__secondary_off": 12,
+          "primary_on__secondary_off": 10,
+          "primary_on__secondary_on": 2
+        },
+        "decision_raw_agreement": 0.5833333333333334,
+        "cohen_kappa": 0.16666666666666674,
+        "gate_1_raw_agreement": 0.2916666666666667,
+        "gate_2_raw_agreement": 0.5833333333333334,
+        "subtype_raw_agreement": 1.0,
+        "disagreements": 10
+      },
+      "RS": {
+        "n": 24,
+        "confusion": {
+          "primary_off__secondary_off": 15,
+          "primary_on__secondary_on": 6,
+          "primary_on__secondary_off": 2,
+          "primary_on__secondary_abstain": 1
+        },
+        "decision_raw_agreement": 0.875,
+        "cohen_kappa": 0.7303370786516854,
+        "gate_1_raw_agreement": 0.875,
+        "gate_2_raw_agreement": 0.9166666666666666,
+        "subtype_raw_agreement": 1.0,
+        "disagreements": 3
+      }
+    }
+  },
+  "primary_gate_patterns": {
+    "MP": {
+      "gate1_no__gate2_no__decision_off": 30,
+      "gate1_yes__gate2_no__decision_off": 41,
+      "gate1_yes__gate2_yes__decision_on": 25
+    },
+    "MS": {
+      "gate1_no__gate2_no__decision_off": 12,
+      "gate1_yes__gate2_no__decision_off": 52,
+      "gate1_yes__gate2_yes__decision_on": 32
+    },
+    "ME": {
+      "gate1_yes__gate2_yes__decision_on": 45,
+      "gate1_no__gate2_no__decision_off": 51
+    },
+    "RS": {
+      "gate1_yes__gate2_yes__decision_on": 41,
+      "gate1_no__gate2_no__decision_off": 55
+    }
+  },
+  "primary_subtype_distribution": {
+    "MP": {
+      "MP_PREFERENCE": {
+        "off": 48
+      },
+      "MP_PROFILE": {
+        "off": 23,
+        "on": 25
+      }
+    },
+    "MS": {
+      "MS_SESSION": {
+        "off": 64,
+        "on": 32
+      }
+    },
+    "ME": {
+      "ME_CONTEXT_EVENT": {
+        "off": 15
+      },
+      "ME_REUSABLE_OUTCOME": {
+        "on": 45,
+        "off": 21
+      },
+      "ME_UNRESOLVED_EVENT": {
+        "off": 15
+      }
+    },
+    "RS": {
+      "RS_ATOMIC_MOVE": {
+        "on": 41,
+        "off": 55
+      }
+    }
+  },
+  "observation_vs_unadjudicated_primary_diagnostic": {
+    "MP": {
+      "n": 96,
+      "confusion": {
+        "gold_0__surface_0": 65,
+        "gold_0__surface_1": 6,
+        "gold_1__surface_1": 25
+      },
+      "recall": 1.0,
+      "specificity": 0.9154929577464789,
+      "balanced_accuracy": 0.9577464788732395,
+      "qualification_allowed": false,
+      "reason": "Primary labels failed IAA/data gates and remain unadjudicated; high agreement may reflect shared construction semantics rather than valid candidate understanding."
+    },
+    "MS": {
+      "n": 96,
+      "confusion": {
+        "gold_0__surface_0": 64,
+        "gold_1__surface_0": 12,
+        "gold_1__surface_1": 20
+      },
+      "recall": 0.625,
+      "specificity": 1.0,
+      "balanced_accuracy": 0.8125,
+      "qualification_allowed": false,
+      "reason": "Primary labels failed IAA/data gates and remain unadjudicated; high agreement may reflect shared construction semantics rather than valid candidate understanding."
+    },
+    "ME": {
+      "n": 96,
+      "confusion": {
+        "gold_0__surface_0": 51,
+        "gold_1__surface_0": 3,
+        "gold_1__surface_1": 42
+      },
+      "recall": 0.9333333333333333,
+      "specificity": 1.0,
+      "balanced_accuracy": 0.9666666666666667,
+      "qualification_allowed": false,
+      "reason": "Primary labels failed IAA/data gates and remain unadjudicated; high agreement may reflect shared construction semantics rather than valid candidate understanding."
+    },
+    "RS": {
+      "n": 96,
+      "confusion": {
+        "gold_0__surface_0": 31,
+        "gold_0__surface_1": 24,
+        "gold_1__surface_0": 8,
+        "gold_1__surface_1": 33
+      },
+      "recall": 0.8048780487804879,
+      "specificity": 0.5636363636363636,
+      "balanced_accuracy": 0.6842572062084258,
+      "qualification_allowed": false,
+      "reason": "Primary labels failed IAA/data gates and remain unadjudicated; high agreement may reflect shared construction semantics rather than valid candidate understanding."
+    }
+  },
+  "disagreement_summary": {
+    "items": 16,
+    "by_component": {
+      "MP": 2,
+      "MS": 1,
+      "ME": 10,
+      "RS": 3
+    },
+    "note": "Pre-adjudication IAA never changes after adjudication; final gold remains unavailable until disagreements are resolved."
+  },
+  "root_cause_diagnostics": [
+    "ME primary gate1 and gate2 never diverge; all owner-valid reusable outcomes are ON even when the current request is listening, paraphrase, factual recall, or a focused question.",
+    "The transparent Observation conjunction reaches 0.9667 BA against unadjudicated primary ME while independent ME agreement is only 0.5833; this is evidence of construct co-adaptation, not successful factor qualification.",
+    "The same Observation conjunction reaches only 0.6843 BA against primary RS, below the frozen 0.70 factor threshold.",
+    "All primary MP_PREFERENCE candidates are OFF; the packet provides no positive human evidence for the preference subtype.",
+    "MP label balance fails the frozen <0.70 majority gate in every split; MS fails it in FRESH and SEALED.",
+    "These are candidate-state construction and operational-codebook failures observed before PM fitting, not generator failures."
+  ],
+  "provenance": {
+    "primary": "/home/tokkio/.codex/attachments/e20eed9e-b840-412a-85d9-96664cb2ec83/pasted-text.txt",
+    "secondary": "/home/tokkio/.codex/attachments/9c1f8835-b330-4554-97b8-8ce5f2491e30/pasted-text.txt",
+    "packet": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_final_h1r_review_candidate/human_review_packet.json",
+    "overlap_packet": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_final_h1r_review_candidate/independent_overlap_packet.json",
+    "binding": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_final_h1r_review_candidate/private_binding.jsonl",
+    "observations": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_final_h1r_pre_human_gate_v1/semantic_observation_rows.jsonl",
+    "construction_intent_used_as_gold": false,
+    "response_or_outcome_read": false,
+    "external_lockbox_read": false
+  }
+}

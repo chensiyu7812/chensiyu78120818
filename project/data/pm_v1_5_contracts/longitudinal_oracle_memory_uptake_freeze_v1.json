@@ -1,0 +1,49 @@
+{
+  "protocol": "pm-v1.5-longitudinal-oracle-memory-uptake-freeze-v1",
+  "status": "ORACLE_MEMORY_UPTAKE_CAPACITY_SUPPORTED_REPORT_ONLY",
+  "frozen_at_utc": "2026-07-24T02:34:50.535548Z",
+  "paid_stage": "longitudinal_oracle_memory_upper_bound_pilot",
+  "approval_identity": "ffb6dc4a42d014fa4610c3da318c3f6d66705b12c0580c4a6867cd937dde2682",
+  "pilot_contract_sha256": "5f86d5aadf3d82991ab0125b7155d06822e94652bc1238a2607eb970944a3598",
+  "call_plan_sha256": "4badeac8e888444a50faabe321625b4c710e89cda1de42c3f6b64a06d339b746",
+  "pilot_outcomes_sha256": "1b2fb20ecacc4dc3a494f206588e7380443a521db417a63e80819cca8e05b61b",
+  "uptake_report_sha256": "6536b0aa2fb4111385c499b7d2123cdd67d01fe6190396ecbf2f5527a1c49857",
+  "uptake_artifact_attestation_sha256": "6c9f0d8b29cbf594730f64ad22f1d15dba6dc9f75108c29fb476f8305c76251d",
+  "sample": {
+    "scope": "longitudinal_train_only",
+    "states": 18,
+    "distinct_users": 18,
+    "helpful_pairs": 12,
+    "harmful_pairs": 6,
+    "previous_response_mechanism_pilot_state_overlap": 0
+  },
+  "preregistered_result": {
+    "helpful_rule_passed": true,
+    "helpful_mean_target_evidence_bge_cosine_delta": 0.02123624252433044,
+    "helpful_positive_pairs": 9,
+    "helpful_required_positive_pairs": 8,
+    "harmful_selectivity_guardrail_passed": true,
+    "harmful_mean_target_evidence_bge_cosine_delta": -0.007228501427833156,
+    "harmful_nonpositive_pairs": 4,
+    "harmful_required_nonpositive_pairs": 4
+  },
+  "scientific_interpretation": [
+    "The frozen generator and prompt are capable of conditionally incorporating evaluator-annotated helpful memory relative to an attested M0+R0 response.",
+    "The same mechanism did not show systematic uptake of evaluator-annotated harmful memory under the preregistered selectivity guardrail.",
+    "This rules out an absolute generator/prompt inability to use memory as the sole explanation for the failed full-corpus supervision signal.",
+    "This does not establish that the oracle-memory responses are higher quality, that the production retriever selects the right evidence, or that the existing judge panel is valid.",
+    "The previous top-1 evidence-surface diagnostic and this oracle-versus-M0 diagnostic use different contrasts and fresh state samples; their difference must not be represented as a causal estimate of retrieval quality."
+  ],
+  "next_required_decision": "Run a separately preregistered, blinded, balanced-order, memory-specific pairwise quality diagnostic on these already-generated responses before choosing between retrieval/evidence redesign and judge-instrument replacement.",
+  "forbidden_consequences": [
+    "do not create action labels from this pilot",
+    "do not authorize PM training from this pilot",
+    "do not inspect calibration or internal-test",
+    "do not use evaluator oracle annotations in deployable routing or external evaluation",
+    "do not claim response-quality, clinical, external-generalization, or PM-efficacy improvement",
+    "do not lower or retune existing longitudinal judge gates based on this result"
+  ],
+  "api_judges_used": false,
+  "training_labels_created": false,
+  "pm_training_authorized": false
+}

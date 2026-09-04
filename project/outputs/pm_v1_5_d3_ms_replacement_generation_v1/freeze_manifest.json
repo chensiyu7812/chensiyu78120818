@@ -1,0 +1,18 @@
+{
+  "protocol": "pm-v1.5-d3-ms-replacement-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_80_D3_MS_REPLACEMENT_CALLS",
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "supporter_generation_treatment_sha256": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe",
+  "outputs": {
+    "call_plan.jsonl": "c8aba7f25cd514cbdfadde56b7abc36b8892cf388376c4d02e81dada7e9883bc",
+    "generation_registry.jsonl": "0272ef6c80fce8bfc74e08f6b571e89d9057f8be3a3f8ef75bdecfd299bb9957",
+    "generation_plan_report.json": "53b0acd4a6ea58df96c11eb10d0a492326455ab2b49e8eda4cc02dac16ab26b8"
+  },
+  "outcome_blind": true,
+  "api_calls_made": 0
+}

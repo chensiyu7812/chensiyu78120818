@@ -1,0 +1,18 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-rs-generation-execution-v1",
+  "status": "READY_FOR_EXECUTION",
+  "planned_calls": 128,
+  "completed_calls": 0,
+  "remaining_calls": 128,
+  "lineage_ok": true,
+  "existing_outputs_ok": true,
+  "evo_mimic_equivalence_ok": true,
+  "evo_mimic_equivalence_status": "MIMIC_AND_CANDIDATE_SUPPORT_GATE_PASS",
+  "evo_mimic_failed_layers": [],
+  "api_key_environment_variable": "NVIDIA_API_KEY",
+  "api_key_present": true,
+  "estimated_input_tokens_remaining": 78911,
+  "max_output_tokens_upper_bound_remaining": 38400,
+  "run_requested": true,
+  "api_calls_made": 0
+}

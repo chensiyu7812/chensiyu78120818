@@ -1,0 +1,13 @@
+{
+  "protocol": "pm-v1.5-d3-ms-replacement-generation-execution-v1",
+  "status": "READY_FOR_EXECUTION",
+  "planned_calls": 80,
+  "completed_calls": 0,
+  "remaining_calls": 80,
+  "lineage_ok": true,
+  "existing_outputs_ok": true,
+  "api_key_environment_variable": "NVIDIA_API_KEY",
+  "api_key_present": true,
+  "run_requested": true,
+  "api_calls_made": 0
+}

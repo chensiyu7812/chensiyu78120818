@@ -1,0 +1,771 @@
+{
+  "protocol": "pm-v1.5-real-text-memory-opportunity-head-fit-v1",
+  "status": "PASS_THREE_MEMORY_HEADS_PROMOTED",
+  "scientific_scope": "Outcome-blind opportunity routing after production candidate discovery. This does not establish item retrieval quality, generator uptake, or system benefit.",
+  "components": {
+    "MP": {
+      "status": "PASS_PROMOTED",
+      "feature_names": [
+        "background_ME_on",
+        "background_MS_on",
+        "background_RS_on",
+        "candidate_grounding_or_nonredundancy_score",
+        "candidate_is_preference",
+        "candidate_state_match_score"
+      ],
+      "fixed_hyperparameters": {
+        "model": "standardized_l2_logistic_regression",
+        "C": 0.3,
+        "decision_threshold": 0.5,
+        "candidate_match_floor_rule": "MP/MS only: lower empirical 20th percentile of positive fit rows, estimated inside each OOF train fold; ME has no lexical floor",
+        "final_fit_candidate_match_floor": 0.0844400661841498,
+        "seeds": [
+          20260801,
+          20260802,
+          20260803,
+          20260804,
+          20260805
+        ]
+      },
+      "counts": {
+        "fit_rows": 48,
+        "confirmation_rows": 16,
+        "fit_class_counts": {
+          "0": 24,
+          "1": 24
+        },
+        "confirmation_class_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "fit_condition_families": 7
+      },
+      "transparent_rule_same_fit_rows": {
+        "balanced_accuracy": 0.8333333333333333,
+        "positive_recall": 0.6666666666666666,
+        "specificity": 1.0,
+        "brier": 0.16666666666666666,
+        "train_fold_prevalence_prior_brier": 0.25,
+        "brier_gain_vs_train_fold_prior": 0.08333333333333334,
+        "predicted_on": 16,
+        "predicted_off": 32,
+        "minority_decision_fraction": 0.3333333333333333
+      },
+      "five_seed_user_grouped_decision_agreement": 0.9166666666666666,
+      "five_seed_condition_holdout_decision_agreement": 1.0,
+      "five_seed_confirmation_decision_agreement": 1.0,
+      "seed_reports": [
+        {
+          "seed": 20260801,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.75,
+            "specificity": 1.0,
+            "brier": 0.12823963279407288,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.12176036720592712,
+            "predicted_on": 18,
+            "predicted_off": 30,
+            "minority_decision_fraction": 0.375
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.8125,
+            "positive_recall": 0.625,
+            "specificity": 1.0,
+            "brier": 0.21304088681054578,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.259023588497614,
+            "predicted_on": 15,
+            "predicted_off": 33,
+            "minority_decision_fraction": 0.3125
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.06909942568353902,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.18090057431646098,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260802,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.8958333333333333,
+            "positive_recall": 0.7916666666666666,
+            "specificity": 1.0,
+            "brier": 0.14216385875971146,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.10783614124028854,
+            "predicted_on": 19,
+            "predicted_off": 29,
+            "minority_decision_fraction": 0.3958333333333333
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.8125,
+            "positive_recall": 0.625,
+            "specificity": 1.0,
+            "brier": 0.21304088681054578,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.259023588497614,
+            "predicted_on": 15,
+            "predicted_off": 33,
+            "minority_decision_fraction": 0.3125
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.06909942568353902,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.18090057431646098,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260803,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.7916666666666666,
+            "specificity": 0.9583333333333334,
+            "brier": 0.1320064325253981,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.11799356747460191,
+            "predicted_on": 20,
+            "predicted_off": 28,
+            "minority_decision_fraction": 0.4166666666666667
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.8125,
+            "positive_recall": 0.625,
+            "specificity": 1.0,
+            "brier": 0.21304088681054578,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.259023588497614,
+            "predicted_on": 15,
+            "predicted_off": 33,
+            "minority_decision_fraction": 0.3125
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.06909942568353902,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.18090057431646098,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260804,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.8541666666666667,
+            "positive_recall": 0.75,
+            "specificity": 0.9583333333333334,
+            "brier": 0.15807104026236254,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.09192895973763746,
+            "predicted_on": 19,
+            "predicted_off": 29,
+            "minority_decision_fraction": 0.3958333333333333
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.8125,
+            "positive_recall": 0.625,
+            "specificity": 1.0,
+            "brier": 0.21304088681054578,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.259023588497614,
+            "predicted_on": 15,
+            "predicted_off": 33,
+            "minority_decision_fraction": 0.3125
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.06909942568353902,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.18090057431646098,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260805,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.75,
+            "specificity": 1.0,
+            "brier": 0.1395565695320277,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.11044343046797231,
+            "predicted_on": 18,
+            "predicted_off": 30,
+            "minority_decision_fraction": 0.375
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.8125,
+            "positive_recall": 0.625,
+            "specificity": 1.0,
+            "brier": 0.21304088681054578,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.259023588497614,
+            "predicted_on": 15,
+            "predicted_off": 33,
+            "minority_decision_fraction": 0.3125
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.06909942568353902,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.18090057431646098,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        }
+      ],
+      "checks": {
+        "48_fit_rows_48_users_24_on_24_off": true,
+        "16_confirmation_rows_16_users_8_on_8_off": true,
+        "fit_confirmation_users_disjoint": true,
+        "worst_five_seed_user_grouped_ba_min_0_70": true,
+        "worst_five_seed_positive_recall_min_0_65": true,
+        "worst_five_seed_specificity_min_0_65": true,
+        "every_seed_oof_brier_beats_train_fold_prior": true,
+        "five_seed_oof_decision_agreement_min_0_90": true,
+        "worst_five_seed_leave_condition_ba_min_0_65": true,
+        "untouched_confirmation_ba_min_0_70": true,
+        "untouched_confirmation_recall_specificity_min_0_65": true,
+        "confirmation_minority_decision_fraction_min_0_20": true,
+        "five_seed_confirmation_decision_agreement_min_0_90": true,
+        "no_outcome_fields_read": true
+      },
+      "model_path": "outputs/pm_v1_5_real_text_memory_opportunity_heads_v1/mp_opportunity_router.joblib"
+    },
+    "MS": {
+      "status": "PASS_PROMOTED",
+      "feature_names": [
+        "background_ME_on",
+        "background_MP_on",
+        "background_RS_on",
+        "candidate_grounding_or_nonredundancy_score",
+        "candidate_state_match_score"
+      ],
+      "fixed_hyperparameters": {
+        "model": "standardized_l2_logistic_regression",
+        "C": 0.3,
+        "decision_threshold": 0.5,
+        "candidate_match_floor_rule": "MP/MS only: lower empirical 20th percentile of positive fit rows, estimated inside each OOF train fold; ME has no lexical floor",
+        "final_fit_candidate_match_floor": 0.1617875572323585,
+        "seeds": [
+          20260801,
+          20260802,
+          20260803,
+          20260804,
+          20260805
+        ]
+      },
+      "counts": {
+        "fit_rows": 48,
+        "confirmation_rows": 16,
+        "fit_class_counts": {
+          "0": 24,
+          "1": 24
+        },
+        "confirmation_class_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "fit_condition_families": 7
+      },
+      "transparent_rule_same_fit_rows": {
+        "balanced_accuracy": 0.9166666666666667,
+        "positive_recall": 1.0,
+        "specificity": 0.8333333333333334,
+        "brier": 0.08333333333333333,
+        "train_fold_prevalence_prior_brier": 0.25,
+        "brier_gain_vs_train_fold_prior": 0.16666666666666669,
+        "predicted_on": 28,
+        "predicted_off": 20,
+        "minority_decision_fraction": 0.4166666666666667
+      },
+      "five_seed_user_grouped_decision_agreement": 0.9583333333333334,
+      "five_seed_condition_holdout_decision_agreement": 1.0,
+      "five_seed_confirmation_decision_agreement": 1.0,
+      "seed_reports": [
+        {
+          "seed": 20260801,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.9166666666666667,
+            "positive_recall": 0.8333333333333334,
+            "specificity": 1.0,
+            "brier": 0.12006224483670103,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.12993775516329897,
+            "predicted_on": 20,
+            "predicted_off": 28,
+            "minority_decision_fraction": 0.4166666666666667
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.7291666666666666,
+            "positive_recall": 0.4583333333333333,
+            "specificity": 1.0,
+            "brier": 0.29940880720113855,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.1726556681070212,
+            "predicted_on": 11,
+            "predicted_off": 37,
+            "minority_decision_fraction": 0.22916666666666666
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09068430608013325,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15931569391986675,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260802,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.9166666666666667,
+            "positive_recall": 0.8333333333333334,
+            "specificity": 1.0,
+            "brier": 0.1193046925590356,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.13069530744096441,
+            "predicted_on": 20,
+            "predicted_off": 28,
+            "minority_decision_fraction": 0.4166666666666667
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.7291666666666666,
+            "positive_recall": 0.4583333333333333,
+            "specificity": 1.0,
+            "brier": 0.29940880720113855,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.1726556681070212,
+            "predicted_on": 11,
+            "predicted_off": 37,
+            "minority_decision_fraction": 0.22916666666666666
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09068430608013325,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15931569391986675,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260803,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.75,
+            "specificity": 1.0,
+            "brier": 0.16289400630534215,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.08710599369465785,
+            "predicted_on": 18,
+            "predicted_off": 30,
+            "minority_decision_fraction": 0.375
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.7291666666666666,
+            "positive_recall": 0.4583333333333333,
+            "specificity": 1.0,
+            "brier": 0.29940880720113855,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.1726556681070212,
+            "predicted_on": 11,
+            "predicted_off": 37,
+            "minority_decision_fraction": 0.22916666666666666
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09068430608013325,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15931569391986675,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260804,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.8958333333333333,
+            "positive_recall": 0.7916666666666666,
+            "specificity": 1.0,
+            "brier": 0.13693824215510542,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.11306175784489458,
+            "predicted_on": 19,
+            "predicted_off": 29,
+            "minority_decision_fraction": 0.3958333333333333
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.7291666666666666,
+            "positive_recall": 0.4583333333333333,
+            "specificity": 1.0,
+            "brier": 0.29940880720113855,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.1726556681070212,
+            "predicted_on": 11,
+            "predicted_off": 37,
+            "minority_decision_fraction": 0.22916666666666666
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09068430608013325,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15931569391986675,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260805,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.8958333333333333,
+            "positive_recall": 0.7916666666666666,
+            "specificity": 1.0,
+            "brier": 0.13800559347055882,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.11199440652944118,
+            "predicted_on": 19,
+            "predicted_off": 29,
+            "minority_decision_fraction": 0.3958333333333333
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.7291666666666666,
+            "positive_recall": 0.4583333333333333,
+            "specificity": 1.0,
+            "brier": 0.29940880720113855,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.1726556681070212,
+            "predicted_on": 11,
+            "predicted_off": 37,
+            "minority_decision_fraction": 0.22916666666666666
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09068430608013325,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15931569391986675,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        }
+      ],
+      "checks": {
+        "48_fit_rows_48_users_24_on_24_off": true,
+        "16_confirmation_rows_16_users_8_on_8_off": true,
+        "fit_confirmation_users_disjoint": true,
+        "worst_five_seed_user_grouped_ba_min_0_70": true,
+        "worst_five_seed_positive_recall_min_0_65": true,
+        "worst_five_seed_specificity_min_0_65": true,
+        "every_seed_oof_brier_beats_train_fold_prior": true,
+        "five_seed_oof_decision_agreement_min_0_90": true,
+        "worst_five_seed_leave_condition_ba_min_0_65": true,
+        "untouched_confirmation_ba_min_0_70": true,
+        "untouched_confirmation_recall_specificity_min_0_65": true,
+        "confirmation_minority_decision_fraction_min_0_20": true,
+        "five_seed_confirmation_decision_agreement_min_0_90": true,
+        "no_outcome_fields_read": true
+      },
+      "model_path": "outputs/pm_v1_5_real_text_memory_opportunity_heads_v1/ms_opportunity_router.joblib"
+    },
+    "ME": {
+      "status": "PASS_PROMOTED",
+      "feature_names": [
+        "background_MP_on",
+        "background_MS_on",
+        "background_RS_on",
+        "candidate_grounding_or_nonredundancy_score",
+        "candidate_state_match_score"
+      ],
+      "fixed_hyperparameters": {
+        "model": "standardized_l2_logistic_regression",
+        "C": 0.3,
+        "decision_threshold": 0.5,
+        "candidate_match_floor_rule": "MP/MS only: lower empirical 20th percentile of positive fit rows, estimated inside each OOF train fold; ME has no lexical floor",
+        "final_fit_candidate_match_floor": null,
+        "seeds": [
+          20260801,
+          20260802,
+          20260803,
+          20260804,
+          20260805
+        ]
+      },
+      "counts": {
+        "fit_rows": 48,
+        "confirmation_rows": 16,
+        "fit_class_counts": {
+          "0": 24,
+          "1": 24
+        },
+        "confirmation_class_counts": {
+          "0": 8,
+          "1": 8
+        },
+        "fit_condition_families": 7
+      },
+      "transparent_rule_same_fit_rows": {
+        "balanced_accuracy": 0.9583333333333333,
+        "positive_recall": 1.0,
+        "specificity": 0.9166666666666666,
+        "brier": 0.041666666666666664,
+        "train_fold_prevalence_prior_brier": 0.25,
+        "brier_gain_vs_train_fold_prior": 0.20833333333333334,
+        "predicted_on": 26,
+        "predicted_off": 22,
+        "minority_decision_fraction": 0.4583333333333333
+      },
+      "five_seed_user_grouped_decision_agreement": 0.9583333333333334,
+      "five_seed_condition_holdout_decision_agreement": 1.0,
+      "five_seed_confirmation_decision_agreement": 1.0,
+      "seed_reports": [
+        {
+          "seed": 20260801,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.9583333333333333,
+            "positive_recall": 1.0,
+            "specificity": 0.9166666666666666,
+            "brier": 0.0577242272590753,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.1922757727409247,
+            "predicted_on": 26,
+            "predicted_off": 22,
+            "minority_decision_fraction": 0.4583333333333333
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.8333333333333334,
+            "specificity": 0.9166666666666666,
+            "brier": 0.09816240642325909,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.3739020688849007,
+            "predicted_on": 22,
+            "predicted_off": 26,
+            "minority_decision_fraction": 0.4583333333333333
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09205948879536385,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15794051120463615,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260802,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.9791666666666667,
+            "positive_recall": 1.0,
+            "specificity": 0.9583333333333334,
+            "brier": 0.05254403479764299,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.197455965202357,
+            "predicted_on": 25,
+            "predicted_off": 23,
+            "minority_decision_fraction": 0.4791666666666667
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.8333333333333334,
+            "specificity": 0.9166666666666666,
+            "brier": 0.09816240642325909,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.3739020688849007,
+            "predicted_on": 22,
+            "predicted_off": 26,
+            "minority_decision_fraction": 0.4583333333333333
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09205948879536385,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15794051120463615,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260803,
+          "user_grouped_oof": {
+            "balanced_accuracy": 1.0,
+            "positive_recall": 1.0,
+            "specificity": 1.0,
+            "brier": 0.054230483021848,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.195769516978152,
+            "predicted_on": 24,
+            "predicted_off": 24,
+            "minority_decision_fraction": 0.5
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.8333333333333334,
+            "specificity": 0.9166666666666666,
+            "brier": 0.09816240642325909,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.3739020688849007,
+            "predicted_on": 22,
+            "predicted_off": 26,
+            "minority_decision_fraction": 0.4583333333333333
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09205948879536385,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15794051120463615,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260804,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.9583333333333333,
+            "positive_recall": 1.0,
+            "specificity": 0.9166666666666666,
+            "brier": 0.057762527018726945,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.19223747298127306,
+            "predicted_on": 26,
+            "predicted_off": 22,
+            "minority_decision_fraction": 0.4583333333333333
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.8333333333333334,
+            "specificity": 0.9166666666666666,
+            "brier": 0.09816240642325909,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.3739020688849007,
+            "predicted_on": 22,
+            "predicted_off": 26,
+            "minority_decision_fraction": 0.4583333333333333
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09205948879536385,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15794051120463615,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        },
+        {
+          "seed": 20260805,
+          "user_grouped_oof": {
+            "balanced_accuracy": 0.9791666666666667,
+            "positive_recall": 1.0,
+            "specificity": 0.9583333333333334,
+            "brier": 0.05603201953375186,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.19396798046624814,
+            "predicted_on": 25,
+            "predicted_off": 23,
+            "minority_decision_fraction": 0.4791666666666667
+          },
+          "leave_condition_family_out": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 0.8333333333333334,
+            "specificity": 0.9166666666666666,
+            "brier": 0.09816240642325909,
+            "train_fold_prevalence_prior_brier": 0.47206447530815976,
+            "brier_gain_vs_train_fold_prior": 0.3739020688849007,
+            "predicted_on": 22,
+            "predicted_off": 26,
+            "minority_decision_fraction": 0.4583333333333333
+          },
+          "untouched_confirmation": {
+            "balanced_accuracy": 0.875,
+            "positive_recall": 1.0,
+            "specificity": 0.75,
+            "brier": 0.09205948879536385,
+            "train_fold_prevalence_prior_brier": 0.25,
+            "brier_gain_vs_train_fold_prior": 0.15794051120463615,
+            "predicted_on": 10,
+            "predicted_off": 6,
+            "minority_decision_fraction": 0.375
+          }
+        }
+      ],
+      "checks": {
+        "48_fit_rows_48_users_24_on_24_off": true,
+        "16_confirmation_rows_16_users_8_on_8_off": true,
+        "fit_confirmation_users_disjoint": true,
+        "worst_five_seed_user_grouped_ba_min_0_70": true,
+        "worst_five_seed_positive_recall_min_0_65": true,
+        "worst_five_seed_specificity_min_0_65": true,
+        "every_seed_oof_brier_beats_train_fold_prior": true,
+        "five_seed_oof_decision_agreement_min_0_90": true,
+        "worst_five_seed_leave_condition_ba_min_0_65": true,
+        "untouched_confirmation_ba_min_0_70": true,
+        "untouched_confirmation_recall_specificity_min_0_65": true,
+        "confirmation_minority_decision_fraction_min_0_20": true,
+        "five_seed_confirmation_decision_agreement_min_0_90": true,
+        "no_outcome_fields_read": true
+      },
+      "model_path": "outputs/pm_v1_5_real_text_memory_opportunity_heads_v1/me_opportunity_router.joblib"
+    }
+  },
+  "external_outcome_retuning": false,
+  "human_response_label_read": false,
+  "confirmation_status": "FRESH_V2_READ_ONCE_AFTER_REPAIR_FREEZE",
+  "repair_lineage": "V1 confirmation was consumed by the lexical-only diagnosis and is not reused. BGE was rejected on fit-only qualification. MP/MS then froze a train-derived positive-quintile lexical floor; ME retained logistic-only.",
+  "claim_boundary": {
+    "allowed_if_pass": "The memory heads learned the prespecified bounded opportunity definition on user- and semantic-family-disjoint controlled text.",
+    "requires_later_system_test": "Whether the frozen heads improve the quality-risk-cost tradeoff on ESConv/EvoEmo."
+  },
+  "inputs": {
+    "outputs/pm_v1_5_d3_memory_opportunity_recompile_v1/production_compiled_opportunity_rows.jsonl": "4870a9c38da8a4e93a08cd78347d68d29932899bd269d11a153dfa92c5a7d0f9",
+    "outputs/pm_v1_5_memory_opportunity_supplement_v1/opportunity_rows.jsonl": "2b46315bfc344340ea1f3420d71974f897ff0287cba9967035613240ae4f1747",
+    "outputs/pm_v1_5_memory_opportunity_fresh_confirmation_v2/opportunity_rows.jsonl": "ac9311809fc216f37961c2647ac747d19685c8fa08f8acbd1ee3efb41655de45"
+  }
+}

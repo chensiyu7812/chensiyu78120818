@@ -1,0 +1,39 @@
+{
+  "protocol": "pm-v1.5-esconv-expanded1300-custom-hash-70-15-15-dialogue-level-v1",
+  "status": "PASS",
+  "corpus_release": "expanded_1300_dialogues",
+  "split_is_official_original_1053_release": false,
+  "split_role": "frozen_custom_dialogue_level_external_partition",
+  "assignment": "stable_hash(seed=13, dialogue_index)",
+  "nominal_proportions": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "raw_counts": {
+    "test": 180,
+    "train": 934,
+    "validation": 186
+  },
+  "nonoverlap_counts": {
+    "test": 169,
+    "train": 875,
+    "validation": 172
+  },
+  "eligible_test_dialogues": 169,
+  "strategy_bank_source_dialogues": 823,
+  "development_seed_dialogues": 52,
+  "outcomes_used_for_split": false,
+  "checks": {
+    "strategy_bank_sources_are_train_only": true,
+    "strategy_bank_has_no_validation_or_test_sources": true,
+    "development_seeds_are_train_only": true,
+    "development_seeds_have_no_test_sources": true,
+    "development_seed_and_strategy_instances_are_disjoint": true,
+    "test_excludes_evoemo_overlap": true
+  },
+  "esconv_sha256": "aa0556c5b330562ba009c1cd5137486bfa2a7255f33225a6524cd58f7efdd9af",
+  "split_manifest_sha256": "0199fbe1cad5f42aacfd2ba52a92bc6530dfcb33a82bb7bb7e81e5abb6e63e63",
+  "strategy_bank_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e",
+  "selected_seed_sources_sha256": "c8af66113bb3284cf0b737443800f21a5a53be22589fab72f6624db1d1457065"
+}

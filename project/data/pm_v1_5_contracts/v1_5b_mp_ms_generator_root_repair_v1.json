@@ -1,0 +1,138 @@
+{
+  "protocol": "pm-v1.5b-mp-ms-generator-root-repair-v1",
+  "status": "FROZEN_BEFORE_V1_5B_FIT_CONFIRMATION_OR_GENERATION",
+  "scope": [
+    "MP opportunity head",
+    "MS opportunity head",
+    "generator resource application contract"
+  ],
+  "out_of_scope": [
+    "changing the 16-action interface",
+    "relabeling ME or RS from response outcomes",
+    "using ESConv or EvoEmo external outcomes for feature or threshold selection",
+    "claiming that an injected resource must improve every stochastic reply"
+  ],
+  "scientific_target": "Learn whether the realized source-specific candidate is allowed, relevant, incremental, and executable before injection; evaluate downstream quality, interaction-and-grounding risk, and cost separately on frozen complete systems.",
+  "old_v1_5_status": "PRESERVED_AS_A_FROZEN_BASELINE_NOT_OVERWRITTEN",
+  "action_interface": {
+    "heads": ["MP", "MS", "ME", "RS"],
+    "actions": 16,
+    "mp_or_ms_repair_adds_new_action": false,
+    "full_and_conservative_arms_both_retained": true
+  },
+  "candidate_stage": {
+    "order": "post_retrieval_pre_injection_pre_generation",
+    "deduplicate_exact_normalized_candidate_text": true,
+    "deduplication_is_source_local": true,
+    "item_correctness_is_evaluated_separately_from_routing": true
+  },
+  "data_grain": "one independent user-state x one realized source candidate x one component",
+  "fit_design": {
+    "rows_per_repaired_head": 64,
+    "positive_rows_per_head": 32,
+    "negative_rows_per_head": 32,
+    "independent_users_per_head": 64,
+    "background_bits": "fully crossed within every condition family and independent of the target",
+    "required_positive_shapes": [
+      "direct semantic match",
+      "low-lexical paraphrase match",
+      "source-specific incremental information",
+      "current request or recurrence makes the candidate usable"
+    ],
+    "required_negative_shapes": [
+      "high-lexical wrong scope or wrong goal",
+      "already-visible redundancy",
+      "same topic but wrong entity or completed issue",
+      "realistic irrelevant candidate"
+    ]
+  },
+  "confirmation_design": {
+    "rows_per_repaired_head": 32,
+    "positive_rows_per_head": 16,
+    "negative_rows_per_head": 16,
+    "independent_users_per_head": 32,
+    "semantic_families_disjoint_from_fit": true,
+    "surface_realizer_disjoint_from_fit": true,
+    "sealed_before_model_fit": true
+  },
+  "model_inputs": {
+    "allowed": [
+      "source-specific semantic-fit factors derived from current visible text and the realized candidate",
+      "candidate grounding and nonredundancy checks",
+      "orthogonally assigned background component bits",
+      "bounded incremental cost"
+    ],
+    "forbidden": [
+      "target label",
+      "condition family name",
+      "user or dataset identity",
+      "row order",
+      "response text",
+      "judge result",
+      "external split or outcome",
+      "private memory id"
+    ]
+  },
+  "source_specific_constructs": {
+    "MP": [
+      "preference behavior applies to the current interaction",
+      "profile fact is relevant to the current entity or task",
+      "candidate adds information not already visible",
+      "no current preference or profile conflict"
+    ],
+    "MS": [
+      "same unresolved or recurrent issue",
+      "same present conversational goal",
+      "prior summary adds a usable distinction or outcome",
+      "candidate is not already visible or stale"
+    ]
+  },
+  "learner": {
+    "primary": "standardized L2 logistic regression",
+    "loss": "binary cross entropy plus L2",
+    "C": 0.3,
+    "threshold": 0.5,
+    "generic_embedding_scalar_is_not_primary": true,
+    "optional_challenger": "fit-only NLI/cross-encoder hypothesis scores; promotion only if every frozen gate improves without shortcut failure"
+  },
+  "promotion_gates": {
+    "fresh_confirmation_balanced_accuracy_min": 0.8,
+    "fresh_confirmation_positive_recall_min": 0.75,
+    "fresh_confirmation_specificity_min": 0.75,
+    "counterfactual_direction_accuracy_min": 0.8,
+    "brier_gain_vs_train_prevalence_prior_min_exclusive": 0.0,
+    "five_seed_decision_agreement_min": 0.9,
+    "nuisance_only_grouped_balanced_accuracy_max": 0.55,
+    "external_outcome_blind_in_support_coverage_min": 0.8,
+    "promotion_requires_all_gates": true,
+    "lowering_a_gate_after_results": false
+  },
+  "generator_contract": {
+    "upstream_injection_decision_is_reopened_freely": false,
+    "input": "deterministic source-specific execution plan plus selected resource",
+    "output_status": ["applied", "cannot_apply"],
+    "cannot_apply_allowed_only_for": [
+      "newly visible exact conflict",
+      "newly visible redundancy",
+      "unsafe or malformed resource",
+      "resource cannot perform the declared function"
+    ],
+    "model_must_copy_private_ids_or_exact_audit_spans": false,
+    "bounded_fallback": "cannot_apply or failed machine validation realizes the component bit as off and permits at most one resource-free regeneration; fallback cost is counted",
+    "functional_qualification": {
+      "use_items": 32,
+      "ignore_or_fallback_items": 16,
+      "functional_use_rate_min": 0.8,
+      "per_source_functional_use_min": "6/8",
+      "correct_ignore_or_fallback_min": "14/16",
+      "material_misuse_max": "1/32",
+      "machine_trace_valid_min": 0.95
+    }
+  },
+  "stop_rules": [
+    "Zero-API anti-shortcut preflight must pass before paid generation.",
+    "A failed fresh confirmation is reported as an unsupported MP or MS claim; it is not rescued with external outcomes.",
+    "A failed generator functional gate is attributed to Step2 execution and must not rewrite Step1 opportunity labels.",
+    "No additional large human review is opened until the automatic preflight and minimum generator check pass."
+  ]
+}

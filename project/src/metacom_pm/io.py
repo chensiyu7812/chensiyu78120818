@@ -4,12 +4,40 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import subprocess
 from typing import Any, Iterable, Iterator, Mapping
 from datetime import datetime, timezone
 
 
 def canonical_json(obj: Any) -> str:
     return json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def dict_field_diff(saved: Any, current: Any) -> list[str]:
+    """Dotted field paths where two (possibly deeply nested) dicts disagree.
+
+    Several fail-closed identity/binding checks in this project compare two
+    dicts only via a hash of their canonical JSON and, on mismatch, report
+    nothing beyond "they differ" -- which turns every real mismatch into a
+    manual forensic reconstruction. This gives any such check a cheap way to
+    say exactly which field(s) changed.
+    """
+    differing_paths: list[str] = []
+
+    def _walk(saved_value: Any, current_value: Any, path: str) -> None:
+        if isinstance(saved_value, dict) and isinstance(current_value, dict):
+            for key in sorted(set(saved_value) | set(current_value)):
+                _walk(
+                    saved_value.get(key),
+                    current_value.get(key),
+                    f"{path}.{key}" if path else key,
+                )
+            return
+        if canonical_json(saved_value) != canonical_json(current_value):
+            differing_paths.append(path)
+
+    _walk(saved, current, "")
+    return differing_paths
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -126,11 +154,43 @@ def unique_jsonl_keys(
     return set(index_jsonl_unique(path, key_fields))
 
 
-def build_manifest(root: str | Path, exclude: set[str] | None = None) -> dict[str, Any]:
-    root = Path(root)
+def build_manifest(
+    root: str | Path,
+    exclude: set[str] | None = None,
+    *,
+    tracked_only: bool = False,
+) -> dict[str, Any]:
+    """Build a content manifest without accidentally publishing local artifacts.
+
+    Release callers should set ``tracked_only=True``.  This keeps ignored paid
+    call logs, private reviewer mappings, generated checkpoints, and other
+    vault-owned files out of the manifest even when they exist below ``root``.
+    """
+
+    root = Path(root).resolve()
     exclude = exclude or set()
     entries = []
-    for path in sorted(p for p in root.rglob("*") if p.is_file()):
+    if tracked_only:
+        result = subprocess.run(
+            ["git", "ls-files", "-z", "--", "."],
+            cwd=root,
+            check=True,
+            capture_output=True,
+        )
+        candidates = [
+            root / raw.decode("utf-8")
+            for raw in result.stdout.split(b"\0")
+            if raw
+        ]
+        missing = [path for path in candidates if not path.is_file()]
+        if missing:
+            raise RuntimeError(
+                "tracked release files are missing from the worktree: "
+                + str([str(path.relative_to(root)) for path in missing[:10]])
+            )
+    else:
+        candidates = [path for path in root.rglob("*") if path.is_file()]
+    for path in sorted(candidates):
         rel = path.relative_to(root).as_posix()
         if rel in exclude or any(part in {"__pycache__", ".pytest_cache"} for part in path.parts):
             continue

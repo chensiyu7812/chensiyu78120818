@@ -1,0 +1,84 @@
+{
+  "protocol": "pm-v1.5-method-version-registry-v1",
+  "date": "2026-08-03",
+  "status": "V5_ITT_METHOD_ACTIVE_FULL_FIT_PANEL_AND_PRE_LABEL_TRAINING_SURFACE_READY",
+  "purpose": "Prevent repeated reuse of failed methods under new packet names and keep Step1, Step2, data, and evaluation evidence roles separate.",
+  "versions": [
+    {
+      "id": "LEGACY_V1_0",
+      "method": "direct or effectively joint 16-action prediction with high-capacity HGB-style modeling and heterogeneous internal/external resource stores",
+      "result": "FAILED_OR_NOT_COMPARABLE",
+      "reusable": ["historical baselines only when exactly replayable on the current stack"],
+      "forbidden": ["reuse old scores as current evidence", "train direct 16-class PM on small grouped data", "switch resource stores between training and external evaluation"]
+    },
+    {
+      "id": "V1_5_PROXY_ROUTING",
+      "method": "component applicability or opportunity proxies trained from constructed labels",
+      "result": "DIAGNOSTIC_ONLY",
+      "evidence": {
+        "controlled_memory_proxy_balanced_accuracy": {"MP": 0.703125, "MS": 0.8950892857142857, "ME": 0.625},
+        "formal_components_passed": []
+      },
+      "reusable": ["feature hypotheses", "grouped validation utilities", "negative control tests"],
+      "forbidden": ["call proxy applicability a learned quality-risk-cost policy", "grandfather old checkpoints"]
+    },
+    {
+      "id": "V1_5_EFFECT_HEADS_PRE_V3",
+      "method": "four component effect heads on transport-repaired but noisy single-response labels",
+      "result": "FAILED",
+      "evidence": {
+        "grouped_oof_balanced_accuracy": {"RS": 0.6222846165213537, "MP": 0.5026515151515152, "MS": 0.4678254863589271, "ME": 0.44520469836925536},
+        "all_primary_gates_pass": false
+      },
+      "root_causes": ["single-response outcome noise", "Step2 execution instability", "feature capacity and group-count mismatch", "candidate/background shortcuts"],
+      "forbidden": ["lower pass thresholds after seeing results", "append small packets until a head passes"]
+    },
+    {
+      "id": "V1_5_STEP2_SELF_REPORT",
+      "method": "source-matched prompts plus generator use/ignore declarations, reasons, and copied evidence spans",
+      "result": "FAILED_MEASUREMENT_AND_EXECUTION",
+      "root_causes": ["generator trace writing was confused with resource function", "decorative mention counted as use", "past evidence promoted to current fact", "self-reported reasons hallucinated"]
+    },
+    {
+      "id": "V1_5_V3_TYPED_PLAN_EXACT_SPAN",
+      "method": "typed component plans, component-specific exact spans, fail-closed shared bundle, eligible-only 32-item Step2 gate",
+      "result": "FAILED",
+      "evidence": {
+        "machine_exact_binding_calls": "12/32",
+        "machine_fallback_calls": "20/32",
+        "human_single_functional": {"MP": "5/6", "MS": "3/6", "ME": "5/6", "RS": "6/6"},
+        "human_multi_all_functional": "4/8",
+        "human_material_misuse": "10/32",
+        "fallback_adoptable": "14/20"
+      },
+      "root_causes": ["exact-span bookkeeping reintroduced a known 8B interface burden", "MS temporal continuity remained unreliable", "multi-component realization remained unstable", "base and fallback generation hallucinated unsupported history or claims"],
+      "reusable": ["eligible exact candidates", "typed resource ontology", "joint feasibility projection", "risk taxonomy", "T1 failure evidence"],
+      "forbidden": ["rerun the same T1", "treat all machine fallbacks as memory non-use", "treat human functional use as safety"]
+    },
+    {
+      "id": "V1_5_V4_DETERMINISTIC_RESOURCE_ADAPTER",
+      "method": "backend-bound typed resource compiler, response-only generator, deterministic provenance and safety guards, four low-capacity Step1 net-value heads",
+      "result": "SUPERSEDED_BEFORE_IMPLEMENTATION_STEP2_HUMAN_GATE_WAS_OVERCOUPLED",
+      "change_class": "ARCHITECTURE_VERSION_CHANGE_NOT_PROMPT_TUNING",
+      "implementation_budget": "one implementation plus one untouched Step2 confirmation; no iterative small packets",
+      "formal_training_allowed": false
+    },
+    {
+      "id": "V1_5_V5_ITT_SEPARATED_POLICY",
+      "method": "existing outcome-blind opportunity layer plus four requested-action ITT value heads under one frozen deterministic typed adapter and response-only generator",
+      "result": "CANONICAL_ACTIVE_METHOD_FIT_EXECUTION_COMPLETE_SINGLE_FULL_OUTCOME_PANEL_READY",
+      "change_class": "ESTIMAND_AND_PIPELINE_CORRECTION_BEFORE_NEW_FIT_OR_EXTERNAL_OUTCOMES",
+      "step1_step2_joint_training": false,
+      "step2_human_gate_before_fit": false,
+      "valid_itt_includes": ["generator nonuse", "fallback", "quality tie or loss", "material misuse"],
+      "invalid_itt_only": "mechanical assignment, binding, missing-outcome, or frozen-identity failure",
+      "formal_training_allowed": "after complete primary and independent-overlap annotation exports only",
+      "fit_generation_plan": "outputs/pm_v1_5_v5_itt_fit_plan_v2/freeze_manifest.json",
+      "fit_outcome_panel": "outputs/pm_v1_5_v5_single_full_fit_outcome_review_v1/manifest.json",
+      "fit_training_surface": "outputs/pm_v1_5_v5_fit_training_surface_v1/freeze_report.json",
+      "statistical_unit": "256 state-candidate units nested in 128 two-unit counterfactual groups"
+    }
+  ],
+  "canonical_next": "V1_5_V5_ITT_SEPARATED_POLICY",
+  "external_lockbox_read_for_version_selection": false
+}

@@ -1,0 +1,38 @@
+{
+  "protocol": "pm-v1.5-final-execution-plan-v4",
+  "status": "SUPERSEDED_BEFORE_IMPLEMENTATION_BY_V5_ITT_SEPARATION",
+  "superseded_for_future_execution_by": "data/pm_v1_5_contracts/final_execution_plan_v5.json",
+  "date": "2026-08-03",
+  "supersedes_for_future_execution": "data/pm_v1_5_contracts/final_execution_plan_v3.json",
+  "preserves_v3_results_without_reinterpretation": true,
+  "architecture": "data/pm_v1_5_contracts/staged_policy_architecture_v3.json",
+  "method_registry": "data/pm_v1_5_contracts/method_version_registry_v1.json",
+  "next_steps": [
+    "V4-S0 implement typed deterministic MP/MS/ME/RS resource adapters and deterministic fallback, pass unit and historical regression tests, then freeze implementation identity with zero API",
+    "V4-S1 consume one untouched 32-item Step2 confirmation; no post-result repairs",
+    "V4-S2 only after Step2 pass, generate the complete 256-state EFFECT_FIT dataset with two frozen seeds",
+    "V4-S3 train four transparent L2 logistic heads once and one frozen BGE challenger",
+    "V4-S4 consume 128-state fresh confirmation once",
+    "V4-S5 freeze and run sealed internal baselines and ablations without feedback",
+    "V4-S6 run ESConv, EvoEmo, final quality-risk-cost analyses, and paper reporting without feedback"
+  ],
+  "stop_conditions": [
+    "V4 Step2 confirmation fails any frozen machine or human gate",
+    "FIT lacks at least 16 valid positive and 16 valid nonpositive independent groups per head",
+    "primary and challenger both fail the frozen Step1 gates",
+    "fresh confirmation fails any frozen Step1 gate"
+  ],
+  "forbidden": [
+    "reuse V3 T1 as V4 confirmation",
+    "create another self-reported exact-span interface",
+    "let generator choose use or ignore after Step1",
+    "use Step2 failure as Step1 OFF gold",
+    "change method from confirmation or external outcomes",
+    "create scattered 10-to-20 item review packets",
+    "treat external content as training memory",
+    "claim complex need understanding"
+  ],
+  "api_calls_authorized_now": 0,
+  "formal_training_authorized_now": false,
+  "external_lockbox_read": false
+}

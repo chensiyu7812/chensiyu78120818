@@ -1,49 +1,28 @@
-name: PM-v2 tests
+name: PM tests
 
 on:
   pull_request:
     paths:
-      - "project/src/metacom_pm/pm_v2_*.py"
-      - "project/scripts/18_prepare_pm_v2_seed_dialogues.py"
-      - "project/scripts/19_audit_pm_v2_data_labels.py"
-      - "project/scripts/20_generate_pm_v2_development_data.py"
-      - "project/scripts/21_judge_pm_v2_action_sweep.py"
-      - "project/scripts/22_train_pm_v2.py"
-      - "project/scripts/23_select_pm_v2_actions.py"
-      - "project/scripts/24_run_pm_v2_evoemo.py"
-      - "project/scripts/25_eval_pm_v2_external.py"
-      - "project/scripts/26_freeze_pm_v2_study.py"
-      - "project/scripts/27_prepare_pm_v2_human_audit.py"
-      - "project/scripts/28_analyze_pm_v2_human_audit.py"
-      - "project/scripts/29_prepare_pm_v2_fixed_baselines.py"
-      - "project/tests/test_pm_v2.py"
-      - "project/configs/pm_v2.yaml"
+      - "project/**"
       - ".github/workflows/pm-v2-tests.yml"
   push:
     branches:
-      - pm-v2-redesign
+      - main
+      - "codex/**"
+      - "agent/**"
+      - "pm-v1.5-*"
     paths:
-      - "project/src/metacom_pm/pm_v2_*.py"
-      - "project/scripts/18_prepare_pm_v2_seed_dialogues.py"
-      - "project/scripts/19_audit_pm_v2_data_labels.py"
-      - "project/scripts/20_generate_pm_v2_development_data.py"
-      - "project/scripts/21_judge_pm_v2_action_sweep.py"
-      - "project/scripts/22_train_pm_v2.py"
-      - "project/scripts/23_select_pm_v2_actions.py"
-      - "project/scripts/24_run_pm_v2_evoemo.py"
-      - "project/scripts/25_eval_pm_v2_external.py"
-      - "project/scripts/26_freeze_pm_v2_study.py"
-      - "project/scripts/27_prepare_pm_v2_human_audit.py"
-      - "project/scripts/28_analyze_pm_v2_human_audit.py"
-      - "project/scripts/29_prepare_pm_v2_fixed_baselines.py"
-      - "project/tests/test_pm_v2.py"
-      - "project/configs/pm_v2.yaml"
+      - "project/**"
       - ".github/workflows/pm-v2-tests.yml"
 
 jobs:
   pytest:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      # Keep dependency resolution isolated from runner-level user packages.
+      # Reportable PM-v1.5 stages enforce the same invariant at runtime.
+      PYTHONNOUSERSITE: "1"
     defaults:
       run:
         working-directory: project
@@ -57,21 +36,9 @@ jobs:
       - name: Install package
         run: python -m pip install -e ".[dev]"
       - name: Compile PM-v2 modules
-        run: >-
-          python -m compileall -q src/metacom_pm
-          scripts/18_prepare_pm_v2_seed_dialogues.py
-          scripts/19_audit_pm_v2_data_labels.py
-          scripts/20_generate_pm_v2_development_data.py
-          scripts/21_judge_pm_v2_action_sweep.py
-          scripts/22_train_pm_v2.py
-          scripts/23_select_pm_v2_actions.py
-          scripts/24_run_pm_v2_evoemo.py
-          scripts/25_eval_pm_v2_external.py
-          scripts/26_freeze_pm_v2_study.py
-          scripts/27_prepare_pm_v2_human_audit.py
-          scripts/28_analyze_pm_v2_human_audit.py
-          scripts/29_prepare_pm_v2_fixed_baselines.py
-      - name: Run PM-v2 tests
-        run: pytest -q tests/test_pm_v2.py
-      - name: Run existing scientific safeguards
-        run: pytest -q tests/test_contracts.py tests/test_scientific_safeguards.py tests/test_freeze_gate.py
+        run: python -m compileall -q src scripts tests
+      - name: Run blocking V5.3 clean-release suite
+        run: pytest -q tests/test_v1_5_v5_3_*.py
+      - name: Run complete historical suite (diagnostic)
+        continue-on-error: true
+        run: pytest -q

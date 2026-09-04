@@ -1,0 +1,69 @@
+{
+  "alias_groups": 2,
+  "fairness_attestations": {
+    "api_calls": 0,
+    "only_policy_action_may_differ": true,
+    "response_or_evaluation_outcome_read": false,
+    "same_candidate_snapshot_within_state": true,
+    "same_step2_shared_surface_within_state": true,
+    "six_logical_arms_retained_even_when_aliased": true
+  },
+  "logical_policy_bindings": 60,
+  "matched_random": {
+    "all_cells_exact_estimated_cost_match": true,
+    "all_cells_exact_on_rate_match": true,
+    "cell_audit": [
+      {
+        "cell_sha256": "0dd527c709ed3602b30fa894c94baa35eddf133fcc88b4e1cf33239980c543e8",
+        "changed_assignments": 4,
+        "component_on_counts": {
+          "ME": 2,
+          "MP": 2,
+          "MS": 2,
+          "RS": 2
+        },
+        "estimated_incremental_tokens": 230,
+        "exact_estimated_cost_match": true,
+        "exact_on_rate_match": true,
+        "shift": 1,
+        "states": 4,
+        "stratum": "fixture_external_replication"
+      },
+      {
+        "cell_sha256": "1c5313574e999dad0687337b706e00f793c70445158e822beefafe3cf81ce0b1",
+        "changed_assignments": 0,
+        "component_on_counts": {
+          "ME": 0,
+          "MP": 0,
+          "MS": 0,
+          "RS": 0
+        },
+        "estimated_incremental_tokens": 0,
+        "exact_estimated_cost_match": true,
+        "exact_on_rate_match": true,
+        "shift": 0,
+        "states": 1,
+        "stratum": "fixture_external_replication"
+      }
+    ],
+    "changed_state_assignments": 4,
+    "exchangeability_cells": 2,
+    "has_nonalias_contrast": true
+  },
+  "physical_calls_after_alias_deduplication": 56,
+  "policies": [
+    "always_off",
+    "fixed_high_eligible",
+    "transparent_rule",
+    "cost_matched_fixed",
+    "cost_and_on_rate_matched_random",
+    "learned_pm_full"
+  ],
+  "protocol": "pm-v1.5-v5.3-response-baseline-fairness-scaffold-v1",
+  "seed_labels": [
+    "seed-a",
+    "seed-b"
+  ],
+  "states": 5,
+  "status": "COMPLETE_ZERO_API_OUTCOME_BLIND_BASELINE_SCAFFOLD"
+}

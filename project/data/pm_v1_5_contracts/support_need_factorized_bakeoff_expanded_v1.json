@@ -1,0 +1,46 @@
+{
+  "protocol": "pm-v1.5-support-need-factorized-expanded-bakeoff-binding-v1",
+  "status": "COMPLETE_REPRODUCIBLE_FORMAL_FIT_NOT_AUTHORIZED",
+  "candidate_report": "outputs/pm_v1_5_support_need_factorized_bakeoff_expanded_v1_candidate/report.json",
+  "repro_report": "outputs/pm_v1_5_support_need_factorized_bakeoff_expanded_v1_repro_check/report.json",
+  "analysis_report": "outputs/pm_v1_5_support_need_factorized_bakeoff_expanded_v1_analysis/report.json",
+  "analysis_repro_report": "outputs/pm_v1_5_support_need_factorized_bakeoff_expanded_v1_analysis_repro_check/report.json",
+  "candidate_repro_byte_identical": true,
+  "analysis_repro_byte_identical": true,
+  "bakeoff_report_file_sha256": "6cd7de381b39eaf67826304d04dae10b8648dd785c7ed553107695db56c9030c",
+  "bakeoff_report_sha256": "d952461858607bcb42292b2c692c2cc00c21f9166b7eab343515ec3dede67b4e",
+  "analysis_report_file_sha256": "d511b5f5540c2b6e38169ad0329ade96abda749479213003253472c29e3609d7",
+  "analysis_report_sha256": "5f2b761288d56f4b37474f43ef641d6aa46159975b928920805bda6fcff2004b",
+  "prior_nonabstaining_groups": 23,
+  "expanded_nonabstaining_groups": 39,
+  "independent_dialogue_groups": 39,
+  "confirmation_groups_opened": 0,
+  "qwen_embedding_best_primary_factor_ids": [],
+  "qwen_embedding_promoted": false,
+  "nli_best_primary_factor_ids": [
+    "need_to_be_heard",
+    "need_for_emotional_containment",
+    "advance_readiness"
+  ],
+  "nli_best_and_ci_better_than_lexical_factor_ids": [
+    "need_to_be_heard",
+    "need_for_emotional_containment"
+  ],
+  "nli_role": "axis_specific_feature_candidate_only",
+  "collapsed_best_primary_factor_ids": [
+    "need_for_exploration",
+    "focused_question_readiness"
+  ],
+  "primary_best_view_changed_factor_count": 4,
+  "predeclared_hybrid_all_primary_checks_pass": false,
+  "single_representation_promoted": false,
+  "representation_promotion_authorized": false,
+  "formal_factorized_fit_authorized": false,
+  "flat_support_mode_fit_authorized": false,
+  "confirmation_opening_authorized": false,
+  "automatic_gold_labels_created": false,
+  "api_calls_made": 0,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "binding_sha256": "d9824582aa5a4520be04e75fb1e4be5874f8756909f620d5d1b9ba7cd1445152"
+}

@@ -1,0 +1,44 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-repaired-batch-audit-v1",
+  "status": "PASS",
+  "users": 11,
+  "formal_surfaces": 1950,
+  "source_fidelity": {
+    "users_compared": 11,
+    "protected_dialogue_candidate_profile_or_preference_drift_users": [],
+    "protected_surface_drift_count": 0,
+    "authorized_mutable_fields": [
+      "three versioned source-turn/literal-span template repairs",
+      "relationships",
+      "session.entity_ids",
+      "session.event_ids",
+      "event.entity_ids",
+      "candidate.entity_ids",
+      "p2r_formal_claude_u003/u003_evt_14 session and grounded description"
+    ]
+  },
+  "cross_user_overlap": {
+    "eligible_surface_count": 1845,
+    "cross_user_exact_groups": 0,
+    "cross_user_normalized_8gram_groups": 0,
+    "exact_groups": [],
+    "normalized_8gram_groups": [],
+    "raw_text_in_report": false
+  },
+  "external_overlap": {
+    "ngram_size": 8,
+    "internal_surface_count": 1932,
+    "external_surface_count": 48959,
+    "internal_surfaces_with_exact_overlap": 0,
+    "internal_surfaces_with_normalized_ngram_overlap": 0,
+    "exact_collision_count": 0,
+    "normalized_ngram_collision_count": 0,
+    "collisions_by_external_category": {},
+    "raw_external_text_in_report": false
+  },
+  "external_surface_note": "EvoEmo sessions and embedded ES-MemEval questions/answers come from the shared released artifact; ESConv is scanned separately.",
+  "relationship_future_or_alias_fields": [],
+  "failures": [],
+  "api_calls": 0,
+  "training_label_or_outcome_read": false
+}

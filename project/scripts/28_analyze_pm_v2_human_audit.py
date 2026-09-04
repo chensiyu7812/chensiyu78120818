@@ -11,7 +11,15 @@ import numpy as np
 from scipy.stats import spearmanr
 from sklearn.metrics import cohen_kappa_score
 
-from metacom_pm.io import write_json
+from metacom_pm.config import load_config
+from metacom_pm.io import canonical_json, read_json, sha256_file, sha256_text, write_json
+from metacom_pm.pm_v2_contracts import ResponseDimensions
+from metacom_pm.pm_v2_judging import (
+    JUDGE_RUBRIC_VERSION,
+    composite_spec_from_config,
+    composite_weights_hash,
+    prompt_contract_hash,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -32,6 +40,8 @@ RISK_FIELDS = (
     "strategy_overuse",
     "strategy_omission",
 )
+MANUAL_VERSION = "pm-v2-human-rating-manual-v2-independent-dimensions"
+SAMPLE_PLAN_VERSION = "pm-v2-human-sample-plan-v1"
 
 
 def read_completed(paths):
@@ -47,6 +57,11 @@ def read_completed(paths):
                             f"missing {field} for item {row['item_id']} annotator {row['annotator_id']}"
                         )
                     row[field] = float(row[field])
+                    if not row[field].is_integer():
+                        raise ValueError(
+                            f"{field} must use the manual's whole-number scale for "
+                            f"item {row['item_id']} annotator {row['annotator_id']}"
+                        )
                 if any(not 1.0 <= row[field] <= 5.0 for field in RESPONSE_FIELDS):
                     raise ValueError("response score outside 1-5")
                 if any(not 0.0 <= row[field] <= 3.0 for field in RISK_FIELDS):
@@ -62,21 +77,193 @@ def safe_spearman(left, right):
     return None if np.isnan(value) else float(value)
 
 
+def agreement_metrics(human, llm):
+    human_array = np.asarray(human, dtype=float)
+    llm_array = np.asarray(llm, dtype=float)
+    return {
+        "n": len(human),
+        "mae": float(np.mean(np.abs(human_array - llm_array))),
+        "within_one_rate": float(np.mean(np.abs(human_array - llm_array) <= 1.0)),
+        "exact_rate": float(np.mean(human_array == llm_array)),
+        "spearman": safe_spearman(human, llm),
+        "human_mean": float(np.mean(human_array)),
+        "llm_mean": float(np.mean(llm_array)),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--completed", type=Path, nargs="+", required=True)
     parser.add_argument("--key", type=Path, default=ROOT / "outputs" / "pm_v2_human_audit" / "human_rating_key.json")
     parser.add_argument("--out", type=Path, default=ROOT / "outputs" / "pm_v2_human_audit" / "human_audit_report.json")
-    parser.add_argument("--minimum-annotators", type=int, default=2)
-    parser.add_argument("--maximum-response-mae", type=float, default=0.80)
-    parser.add_argument("--minimum-response-spearman", type=float, default=0.20)
-    parser.add_argument("--maximum-risk-mae", type=float, default=0.60)
-    parser.add_argument("--minimum-within-one-rate", type=float, default=0.80)
-    parser.add_argument("--minimum-interrater-kappa", type=float, default=0.10)
+    parser.add_argument(
+        "--manual",
+        type=Path,
+        default=ROOT / "outputs" / "pm_v2_human_audit" / "human_rating_manual.md",
+    )
+    parser.add_argument(
+        "--sample-plan",
+        type=Path,
+        default=ROOT / "outputs" / "pm_v2_human_audit" / "human_sample_plan.json",
+    )
+    parser.add_argument(
+        "--judge-manifest",
+        type=Path,
+        default=ROOT / "outputs" / "pm_v2_judging" / "run_manifest.json",
+    )
+    parser.add_argument(
+        "--pm-v2-config", type=Path, default=ROOT / "configs" / "pm_v2.yaml"
+    )
     args = parser.parse_args()
 
+    config = load_config(args.pm_v2_config)
+    audit_cfg = config["human_label_audit"]
+    minimum_annotators = int(audit_cfg["minimum_annotators"])
+    maximum_response_mae = float(audit_cfg["maximum_response_mae"])
+    minimum_response_spearman = float(audit_cfg["minimum_response_spearman"])
+    maximum_risk_mae = float(audit_cfg["maximum_risk_mae"])
+    minimum_within_one_rate = float(audit_cfg["minimum_within_one_rate"])
+    minimum_interrater_kappa = float(audit_cfg["minimum_interrater_kappa"])
+    composite_spec = composite_spec_from_config(config)
     key_data = json.loads(args.key.read_text(encoding="utf-8"))
+    if key_data.get("pm_v2_config_sha256") != sha256_file(args.pm_v2_config):
+        raise RuntimeError("human audit key was prepared under a different PM-v2 config")
+    if key_data.get("human_audit_config") != audit_cfg:
+        raise RuntimeError("human audit key thresholds do not match frozen PM-v2 YAML")
+    if key_data.get("quality_composite_version") != composite_spec.version:
+        raise RuntimeError("human audit key composite version does not match PM-v2 YAML")
+    expected_manual = {
+        "manual": str(args.manual),
+        "manual_version": MANUAL_VERSION,
+        "manual_sha256": sha256_file(args.manual),
+    }
+    for field, expected in expected_manual.items():
+        actual = key_data.get(field)
+        if field == "manual":
+            if Path(str(actual)).resolve() != args.manual.resolve():
+                raise RuntimeError("human audit manual path mismatch")
+        elif actual != expected:
+            raise RuntimeError(f"human audit manual contract mismatch: {field}")
+    manual_text = args.manual.read_text(encoding="utf-8")
+    required_manual_fragments = [MANUAL_VERSION]
+    for field in (
+        "response_dimension_definitions",
+        "response_dimension_boundaries",
+        "response_scale_anchors",
+        "risk_dimension_definitions",
+        "risk_scale_anchors",
+    ):
+        value = key_data.get(field)
+        if not isinstance(value, dict) or not value:
+            raise RuntimeError(f"human audit key lacks manual anchors: {field}")
+        for name, description in value.items():
+            required_manual_fragments.append(str(name))
+            if isinstance(description, list):
+                required_manual_fragments.extend(str(item) for item in description)
+            else:
+                required_manual_fragments.append(str(description))
+    missing_manual_fragments = sorted(
+        fragment for fragment in required_manual_fragments if fragment not in manual_text
+    )
+    if missing_manual_fragments:
+        raise RuntimeError(
+            "human rating manual is inconsistent with its frozen anchors: "
+            + str(missing_manual_fragments[:10])
+        )
+
+    sample_wrapper = key_data.get("sample_plan") or {}
+    sample_plan = read_json(args.sample_plan)
+    expected_sample_wrapper = {
+        "version": SAMPLE_PLAN_VERSION,
+        "sha256": sha256_text(canonical_json(sample_plan)),
+        "file_sha256": sha256_file(args.sample_plan),
+        "sample_seed": int(audit_cfg["sample_seed"]),
+        "seed_source": "pm_v2.yaml:human_label_audit.sample_seed",
+    }
+    if Path(str(sample_wrapper.get("path") or "")).resolve() != args.sample_plan.resolve():
+        raise RuntimeError("human sample-plan path mismatch")
+    for field, expected in expected_sample_wrapper.items():
+        if sample_wrapper.get(field) != expected:
+            raise RuntimeError(f"human sample-plan wrapper mismatch: {field}")
+    expected_sample_plan_keys = {
+        "version",
+        "sample_seed",
+        "seed_source",
+        "target_items",
+        "regime_order",
+        "initial_per_regime_quota",
+        "candidate_pool_count",
+        "candidate_pool_sha256",
+        "ordered_selection",
+        "input_bindings",
+    }
+    if set(sample_plan) != expected_sample_plan_keys:
+        raise RuntimeError("human sample plan has an unexpected schema")
+    if (
+        sample_plan["version"] != SAMPLE_PLAN_VERSION
+        or int(sample_plan["sample_seed"]) != int(audit_cfg["sample_seed"])
+        or sample_plan["seed_source"]
+        != "pm_v2.yaml:human_label_audit.sample_seed"
+        or int(sample_plan["target_items"]) != int(audit_cfg["items"])
+        or len(sample_plan["ordered_selection"]) != int(audit_cfg["items"])
+    ):
+        raise RuntimeError("human sample plan violates frozen YAML")
+    sample_inputs = sample_plan.get("input_bindings") or {}
+    expected_sample_inputs = {
+        "pm_v2_config_sha256": sha256_file(args.pm_v2_config),
+        "judge_manifest_sha256": sha256_file(args.judge_manifest),
+        "llm_rubric_version": JUDGE_RUBRIC_VERSION,
+        "llm_prompt_contract_sha256": prompt_contract_hash(),
+        "quality_composite_version": composite_spec.version,
+        "quality_composite_weights_sha256": composite_weights_hash(
+            composite_spec
+        ),
+    }
+    for field, expected in expected_sample_inputs.items():
+        if sample_inputs.get(field) != expected:
+            raise RuntimeError(f"human sample-plan input mismatch: {field}")
+
+    rubric = key_data.get("llm_rubric_contract") or {}
+    judge_manifest = read_json(args.judge_manifest)
+    expected_rubric = {
+        "version": JUDGE_RUBRIC_VERSION,
+        "prompt_contract_sha256": prompt_contract_hash(),
+        "requests_overall_field": False,
+        "judge_manifest_sha256": sha256_file(args.judge_manifest),
+    }
+    if Path(str(rubric.get("judge_manifest") or "")).resolve() != args.judge_manifest.resolve():
+        raise RuntimeError("human audit LLM-rubric judge-manifest path mismatch")
+    for field, expected in expected_rubric.items():
+        if rubric.get(field) != expected:
+            raise RuntimeError(f"human audit LLM-rubric mismatch: {field}")
+    expected_judge_bindings = {
+        "prompt_contract_hash": prompt_contract_hash(),
+        "pm_v2_config_sha256": sha256_file(args.pm_v2_config),
+        "composite_weights_sha256": composite_weights_hash(composite_spec),
+    }
+    for field, expected in expected_judge_bindings.items():
+        if judge_manifest.get(field) != expected:
+            raise RuntimeError(f"human audit judge-manifest mismatch: {field}")
     key_rows = {row["item_id"]: row for row in key_data["key_rows"]}
+    ordered_item_ids = [str(row["item_id"]) for row in sample_plan["ordered_selection"]]
+    if len(set(ordered_item_ids)) != len(ordered_item_ids) or set(ordered_item_ids) != set(
+        key_rows
+    ):
+        raise RuntimeError("human sample plan and rating key item matrix differ")
+    for selection in sample_plan["ordered_selection"]:
+        key_row = key_rows[str(selection["item_id"])]
+        for field in (
+            "state_id",
+            "card_id",
+            "action_id",
+            "regime",
+            "outcome_request_hash",
+        ):
+            if selection.get(field) != key_row.get(field):
+                raise RuntimeError(
+                    "human sample plan/rating-key mismatch: "
+                    f"{selection['item_id']}/{field}"
+                )
     human_rows = read_completed(args.completed)
     by_item = defaultdict(list)
     seen = set()
@@ -91,11 +278,11 @@ def main() -> None:
     missing = [
         item_id
         for item_id in key_rows
-        if len(by_item[item_id]) < args.minimum_annotators
+        if len(by_item[item_id]) < minimum_annotators
     ]
     if missing:
         raise RuntimeError(
-            f"{len(missing)} audit items have fewer than {args.minimum_annotators} ratings"
+            f"{len(missing)} audit items have fewer than {minimum_annotators} ratings"
         )
 
     human_median = {}
@@ -113,20 +300,12 @@ def main() -> None:
         for field in fields:
             human = [human_median[item_id][field] for item_id in sorted(key_rows)]
             llm = [float(key_rows[item_id][llm_key][field]) for item_id in sorted(key_rows)]
-            dimensions[f"{group}.{field}"] = {
-                "n": len(human),
-                "mae": float(np.mean(np.abs(np.asarray(human) - np.asarray(llm)))),
-                "within_one_rate": float(
-                    np.mean(np.abs(np.asarray(human) - np.asarray(llm)) <= 1.0)
-                ),
-                "exact_rate": float(np.mean(np.asarray(human) == np.asarray(llm))),
-                "spearman": safe_spearman(human, llm),
-                "human_mean": float(np.mean(human)),
-                "llm_mean": float(np.mean(llm)),
-            }
+            dimensions[f"{group}.{field}"] = agreement_metrics(human, llm)
 
     annotators = sorted({str(row["annotator_id"]) for row in human_rows})
-    pairwise_kappa = []
+    kappas_by_dimension = {
+        f"response.{field}": [] for field in RESPONSE_FIELDS
+    } | {f"risk.{field}": [] for field in RISK_FIELDS}
     for left_index in range(len(annotators)):
         for right_index in range(left_index + 1, len(annotators)):
             left_id, right_id = annotators[left_index], annotators[right_index]
@@ -142,36 +321,75 @@ def main() -> None:
                 )
                 if left is not None and right is not None:
                     common.append((left, right))
-            for field in RESPONSE_FIELDS:
-                if len(common) < 3:
-                    continue
-                left_values = [round(row[0][field]) for row in common]
-                right_values = [round(row[1][field]) for row in common]
-                value = cohen_kappa_score(
-                    left_values, right_values, weights="quadratic"
-                )
-                if not np.isnan(value):
-                    pairwise_kappa.append(float(value))
-    mean_kappa = float(np.mean(pairwise_kappa)) if pairwise_kappa else None
+            for group, fields in (("response", RESPONSE_FIELDS), ("risk", RISK_FIELDS)):
+                for field in fields:
+                    if len(common) < 3:
+                        continue
+                    left_values = [round(row[0][field]) for row in common]
+                    right_values = [round(row[1][field]) for row in common]
+                    value = cohen_kappa_score(
+                        left_values, right_values, weights="quadratic"
+                    )
+                    if not np.isnan(value):
+                        kappas_by_dimension[f"{group}.{field}"].append(float(value))
+    dimension_kappa = {
+        name: (float(np.mean(values)) if values else None)
+        for name, values in kappas_by_dimension.items()
+    }
+    observed_kappas = [value for value in dimension_kappa.values() if value is not None]
+    mean_kappa = float(np.mean(observed_kappas)) if observed_kappas else None
     response_rows = [dimensions[f"response.{field}"] for field in RESPONSE_FIELDS]
     risk_rows = [dimensions[f"risk.{field}"] for field in RISK_FIELDS]
     response_spearman = [
         row["spearman"] for row in response_rows if row["spearman"] is not None
     ]
-    checks = {
-        "response_mae": float(np.mean([row["mae"] for row in response_rows]))
-        <= args.maximum_response_mae,
-        "response_spearman": bool(response_spearman)
-        and float(np.mean(response_spearman)) >= args.minimum_response_spearman,
-        "response_within_one": float(
-            np.mean([row["within_one_rate"] for row in response_rows])
+    sorted_item_ids = sorted(key_rows)
+    human_composite = []
+    llm_composite = []
+    for item_id in sorted_item_ids:
+        human_dimensions = ResponseDimensions(
+            **{field: human_median[item_id][field] for field in RESPONSE_FIELDS}
         )
-        >= args.minimum_within_one_rate,
-        "risk_mae": float(np.mean([row["mae"] for row in risk_rows]))
-        <= args.maximum_risk_mae,
-        "interrater_kappa": mean_kappa is not None
-        and mean_kappa >= args.minimum_interrater_kappa,
-    }
+        llm_dimensions = ResponseDimensions.model_validate(key_rows[item_id]["llm_response"])
+        human_composite.append(1.0 + 4.0 * composite_spec.score(human_dimensions))
+        llm_composite.append(1.0 + 4.0 * composite_spec.score(llm_dimensions))
+    composite_validity = agreement_metrics(human_composite, llm_composite)
+
+    checks = {}
+    for field in RESPONSE_FIELDS:
+        row = dimensions[f"response.{field}"]
+        checks[f"response.{field}.mae"] = row["mae"] <= maximum_response_mae
+        checks[f"response.{field}.spearman"] = (
+            row["spearman"] is not None
+            and row["spearman"] >= minimum_response_spearman
+        )
+        checks[f"response.{field}.within_one"] = (
+            row["within_one_rate"] >= minimum_within_one_rate
+        )
+        checks[f"response.{field}.kappa"] = (
+            dimension_kappa[f"response.{field}"] is not None
+            and dimension_kappa[f"response.{field}"] >= minimum_interrater_kappa
+        )
+    for field in RISK_FIELDS:
+        row = dimensions[f"risk.{field}"]
+        checks[f"risk.{field}.mae"] = row["mae"] <= maximum_risk_mae
+        checks[f"risk.{field}.within_one"] = (
+            row["within_one_rate"] >= minimum_within_one_rate
+        )
+        checks[f"risk.{field}.kappa"] = (
+            dimension_kappa[f"risk.{field}"] is not None
+            and dimension_kappa[f"risk.{field}"] >= minimum_interrater_kappa
+        )
+    checks.update(
+        {
+            "quality_composite.mae": composite_validity["mae"]
+            <= maximum_response_mae,
+            "quality_composite.spearman": composite_validity["spearman"] is not None
+            and composite_validity["spearman"] >= minimum_response_spearman,
+            "quality_composite.within_one": composite_validity["within_one_rate"]
+            >= minimum_within_one_rate,
+        }
+    )
     report = {
         "status": "PASS" if all(checks.values()) else "FAIL",
         "n_items": len(key_rows),
@@ -187,14 +405,38 @@ def main() -> None:
         ),
         "mean_risk_mae": float(np.mean([row["mae"] for row in risk_rows])),
         "mean_pairwise_quadratic_kappa": mean_kappa,
+        "interrater_kappa_by_dimension": dimension_kappa,
+        "quality_composite": {
+            "version": composite_spec.version,
+            "spec_sha256": sha256_text(
+                canonical_json(composite_spec.model_dump(mode="json"))
+            ),
+            "validity": composite_validity,
+        },
         "checks": checks,
         "thresholds": {
-            "minimum_annotators": args.minimum_annotators,
-            "maximum_response_mae": args.maximum_response_mae,
-            "minimum_response_spearman": args.minimum_response_spearman,
-            "maximum_risk_mae": args.maximum_risk_mae,
-            "minimum_within_one_rate": args.minimum_within_one_rate,
-            "minimum_interrater_kappa": args.minimum_interrater_kappa,
+            "minimum_annotators": minimum_annotators,
+            "maximum_response_mae": maximum_response_mae,
+            "minimum_response_spearman": minimum_response_spearman,
+            "maximum_risk_mae": maximum_risk_mae,
+            "minimum_within_one_rate": minimum_within_one_rate,
+            "minimum_interrater_kappa": minimum_interrater_kappa,
+        },
+        "pm_v2_config_sha256": sha256_file(args.pm_v2_config),
+        "human_key_sha256": sha256_file(args.key),
+        "manual": str(args.manual.resolve()),
+        "manual_version": MANUAL_VERSION,
+        "manual_sha256": sha256_file(args.manual),
+        "sample_plan": {
+            **expected_sample_wrapper,
+            "path": str(args.sample_plan.resolve()),
+        },
+        "llm_rubric_contract": {
+            **expected_rubric,
+            "judge_manifest": str(args.judge_manifest.resolve()),
+        },
+        "completed_inputs_sha256": {
+            str(path.resolve()): sha256_file(path) for path in sorted(args.completed)
         },
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)

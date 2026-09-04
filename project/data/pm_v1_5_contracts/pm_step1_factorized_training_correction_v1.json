@@ -1,0 +1,113 @@
+{
+  "protocol": "pm-v1.5-step1-factorized-causal-training-correction-v1",
+  "status": "FROZEN_BEFORE_ANY_WAVE2_RESPONSE_OUTCOME",
+  "frozen_at_date": "2026-07-30",
+  "research_object": "A pre-retrieval policy manager that selects a legal subset of MP, MS, ME, and RS before a fixed downstream generator writes the response.",
+  "runtime_causal_flow": {
+    "step1_pm": {
+      "sees": [
+        "current visible user text and bounded visible dialogue",
+        "runtime-valid session summary when genuinely available",
+        "explicit observable user boundaries",
+        "component availability, count, age, and deterministic expected cost",
+        "outcome-blind source-level opportunity metadata"
+      ],
+      "must_not_see": [
+        "generated response",
+        "judge or human outcome label",
+        "future dialogue turn",
+        "gold strategy",
+        "specific retrieved item or card identity/text before the action is selected"
+      ],
+      "outputs": [
+        "MP on/off",
+        "MS on/off",
+        "ME on/off",
+        "RS on/off",
+        "uncertainty or abstain"
+      ]
+    },
+    "step2_fixed_stack": [
+      "retrieve and filter only components enabled by Step1",
+      "realize zero-hit or filtered-off components honestly",
+      "inject the frozen evidence surface",
+      "use the same frozen generator and prompt compiler to write the response"
+    ]
+  },
+  "training_decomposition": {
+    "opportunity_layer": {
+      "estimand": "Whether a real, admissible resource opportunity exists before outcome generation.",
+      "supervision": "Outcome-blind structural labels or audited transparent rules.",
+      "role": "A condition or deterministic gate, never a realized-benefit label."
+    },
+    "quality_effect_heads": {
+      "estimand": "P(material immediate support-quality benefit from adding one component | pre-action state, real opportunity, treatment realized).",
+      "unit": "Independent dialogue/user group with a matched single-component pair.",
+      "loss": "Group-weighted binary cross-entropy with L2 regularization."
+    },
+    "atomic_risk_heads": {
+      "estimand": "P(one named material interaction-or-grounding risk event | applicable completed response).",
+      "rule": "Each risk is retained separately; N/A, abstain, and insufficient evidence are not zero-risk labels.",
+      "fallback": "If either event or non-event support is insufficient, use a deterministic guard or report INSUFFICIENT_EVIDENCE."
+    },
+    "cost": {
+      "estimand": "Actual incremental retrieval calls, injected items, provider input/output tokens, and available USD/latency.",
+      "rule": "Cost is deterministic accounting and a selector constraint, not a learned reward and not a quality label."
+    },
+    "selector": {
+      "order": [
+        "no opportunity -> off",
+        "insufficient conservative quality-benefit probability -> off",
+        "any applicable risk constraint fails -> off",
+        "cost or global budget fails -> off",
+        "otherwise allow on",
+        "compose qualified component bits into one of the 16 legal actions"
+      ],
+      "default": "M0+R0"
+    }
+  },
+  "minimum_data_and_capacity_guards": {
+    "clean_effect_groups_per_component_pilot": {
+      "minimum": 48,
+      "target_range": [
+        48,
+        80
+      ]
+    },
+    "minimum_positive_groups_per_binary_head": 8,
+    "minimum_nonpositive_groups_per_binary_head": 8,
+    "maximum_primary_feature_dimension": "floor(effective_independent_groups / 5)",
+    "cross_validation": "Dialogue/user-grouped out-of-fold; all scaling and optional projection fit inside the training fold.",
+    "model_selection": "Beat the prevalence-only probability baseline on both log-loss and Brier; apply a one-standard-error preference for the smaller model.",
+    "anti_collapse": "OOF must produce both on and off, each in at least four independent groups and at least 10 percent of applicable groups.",
+    "tie_rule": "Materially equivalent is off; measurement uncertainty or unresolved disagreement is unknown and excluded from supervised loss."
+  },
+  "rs_specific_corrections": {
+    "bank": "Use the frozen definition-only six-card development Bank with source responses removed; AM14 routine stop/thanks is runtime-disabled, leaving five active opportunity moves.",
+    "retrieval": "Use the corrected lexical family-gated Top-1 runtime for V1.5. BAAI is not promoted as the RS ranker or PM feature.",
+    "wave1_role": "The 32-pair six-card run is a conditional direct-effect pilot and training-design diagnostic, not evidence that the full Step1 PM failed.",
+    "wave2_role": "No response generation until this corrected preflight passes. The old wave2 prediction freeze may remain only as a secondary prospective diagnostic of the already failed 22-feature composite candidate."
+  },
+  "superseded_primary_artifacts": [
+    {
+      "path": "outputs/pm_v1_5_transparent_pm_rs_v1/pm_rs_model.json",
+      "reason": "22 features for 32 groups violates the frozen capacity guard and the model collapses quality, risk, and opportunity-conditional routing into one hard target."
+    },
+    {
+      "path": "outputs/pm_v1_5_pm_rs_wave2_confirmation_freeze_v1/confirmation_contract.json",
+      "reason": "Frozen before the causal-target re-audit; retained as history and secondary prospective diagnosis only."
+    }
+  ],
+  "paid_execution_policy": {
+    "rs_wave2_generation_authorized": false,
+    "corrected_minimal_supplement": "At most 16 new independent clean pairs may be planned after the data-collection gate passes; this is distinct from confirming the failed wave1 candidate.",
+    "unlock_condition": "The data-collection half of a fresh zero-API preflight passes, a corrected multi-select atomic-risk packet is frozen, and a new minimal-supplement call identity is separately reviewed.",
+    "forbidden_shortcuts": [
+      "adding BAAI after observing wave1 labels",
+      "pooling heterogeneous historical RS rounds as independent training rows",
+      "treating each pair outcome as an individually predictable treatment effect without repeated pre-action cells",
+      "changing threshold, features, or target after seeing wave2 outcomes",
+      "calling an unidentified independent reviewer human gold"
+    ]
+  }
+}

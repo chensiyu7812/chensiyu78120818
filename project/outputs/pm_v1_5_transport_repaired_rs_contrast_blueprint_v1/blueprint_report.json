@@ -1,0 +1,44 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-rs-contrast-blueprint-v1",
+  "status": "READY_64_RS_PAIRS_ON_TRANSPORT_REPAIRED_STACK",
+  "api_calls_made": 0,
+  "human_labels_read": false,
+  "effect_labels_created": false,
+  "rs_contrasts": 64,
+  "new_response_calls_required": 128,
+  "distinct_states": 64,
+  "overlap_with_memory_contrast_states": 0,
+  "split_counts": {
+    "calibration": 16,
+    "internal_test": 16,
+    "train": 32
+  },
+  "background_counts": {
+    "M0+R0": 8,
+    "ME+R0": 8,
+    "MP+R0": 8,
+    "MPE+R0": 8,
+    "MPMS+R0": 8,
+    "MPMSME+R0": 8,
+    "MS+R0": 8,
+    "MSE+R0": 8
+  },
+  "checks": {
+    "exactly_64_rs": true,
+    "eight_per_memory_background": true,
+    "split_32_16_16": true,
+    "no_state_overlap_with_memory_pairs": true,
+    "one_bit_rs_only": true
+  },
+  "inputs": {
+    "backend_report": "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/report.json",
+    "backend_report_sha256": "76f72f2a2ffbc09c3ff8e8c0fb18bad503c2f4365a263393eecd163a4e3bdbe0",
+    "memory_blueprint": "outputs/pm_v1_5_transport_repaired_memory_contrast_blueprint_v1/memory_contrast_blueprint.jsonl",
+    "memory_blueprint_sha256": "d620ed03004b042b355d357f00c9d82739ea2e3a65711d08d9b758edf702ab75",
+    "strategy_cards": "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl",
+    "strategy_cards_sha256": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676"
+  },
+  "outputs": {
+    "rs_contrast_blueprint.jsonl": "5899966bfea121b72d64004111278ec1bbff318af422fb07b89408a7105ed71a"
+  }
+}

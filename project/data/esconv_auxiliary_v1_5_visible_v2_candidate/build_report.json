@@ -1,0 +1,139 @@
+{
+  "protocol": "pm-v1.5-esconv-auxiliary-visible-dialogue-only-v2",
+  "status": "COMPLETE",
+  "semantic_family": "esconv_auxiliary_strategy_routing",
+  "legal_actions": [
+    "M0+R0",
+    "M0+RS"
+  ],
+  "turn_selection_protocol": "pm-v1.5-esconv-all-support-eligible-turns-recent-even-window-v1",
+  "turn_selection_uses_response_or_judge_outcomes": false,
+  "sample_selection_rule": "first_eligible_train_sources_in_manifest_order",
+  "sample_selection_is_outcome_free_deterministic_not_random": true,
+  "bank_disjoint": true,
+  "dialogue_level_situation_exposed_to_pm": false,
+  "strategy_bank_source_dialogue_overlap_count": 0,
+  "seed_dialogue_count": 52,
+  "excluded_history_below_two_count": 60,
+  "raw_history_turn_counts": {
+    "0": 20,
+    "1": 40,
+    "2": 23,
+    "3": 26,
+    "4": 21,
+    "5": 23,
+    "6": 24,
+    "7": 30,
+    "8": 572
+  },
+  "split_reports": {
+    "train": {
+      "dialogue_count": 24,
+      "state_count": 318
+    },
+    "calibration": {
+      "dialogue_count": 12,
+      "state_count": 170
+    },
+    "internal_test": {
+      "dialogue_count": 16,
+      "state_count": 231
+    }
+  },
+  "split_audit": {
+    "protocol": "pm-v1.5-esconv-expanded1300-custom-hash-70-15-15-dialogue-level-v1",
+    "status": "PASS",
+    "corpus_release": "expanded_1300_dialogues",
+    "split_is_official_original_1053_release": false,
+    "split_role": "frozen_custom_dialogue_level_external_partition",
+    "assignment": "stable_hash(seed=13, dialogue_index)",
+    "nominal_proportions": {
+      "train": 0.7,
+      "validation": 0.15,
+      "test": 0.15
+    },
+    "raw_counts": {
+      "test": 180,
+      "train": 934,
+      "validation": 186
+    },
+    "nonoverlap_counts": {
+      "test": 169,
+      "train": 875,
+      "validation": 172
+    },
+    "eligible_test_dialogues": 169,
+    "strategy_bank_source_dialogues": 823,
+    "development_seed_dialogues": 52,
+    "outcomes_used_for_split": false,
+    "checks": {
+      "strategy_bank_sources_are_train_only": true,
+      "strategy_bank_has_no_validation_or_test_sources": true,
+      "development_seeds_are_train_only": true,
+      "development_seeds_have_no_test_sources": true,
+      "development_seed_and_strategy_instances_are_disjoint": true,
+      "test_excludes_evoemo_overlap": true
+    },
+    "esconv_sha256": "aa0556c5b330562ba009c1cd5137486bfa2a7255f33225a6524cd58f7efdd9af",
+    "split_manifest_sha256": "0199fbe1cad5f42aacfd2ba52a92bc6530dfcb33a82bb7bb7e81e5abb6e63e63",
+    "strategy_bank_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e",
+    "selected_seed_sources_sha256": "c8af66113bb3284cf0b737443800f21a5a53be22589fab72f6624db1d1457065"
+  },
+  "semantic_encoder_spec_sha256": "febe9bbf8f7207607335284b98d7bc97a0b41231a4c2358cba0a027097911f65",
+  "outputs": {
+    "train": {
+      "runtime_states": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/train/runtime_states.jsonl",
+        "sha256": "92cf17d29f1c31851c9093e5e9116d0601678e8c953093524df0bcb2f47b7f72"
+      },
+      "pm_v2_states": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/train/pm_v2_states.jsonl",
+        "sha256": "4ed712e69913f5393aa964d853345a35187aece9ba5ee4137064c90b53593280"
+      },
+      "memory_backend": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/train/memory_backend.jsonl",
+        "sha256": "473811e266ede16e14a0af10c2170132d81a52b2899dd0af62fce7b74ef1d7e6"
+      },
+      "audit_only": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/train/audit_only.jsonl",
+        "sha256": "b52c406a7ff84dc00b716cb87922161f414301794d7ca39d7dffcd25f1910b56"
+      }
+    },
+    "calibration": {
+      "runtime_states": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/calibration/runtime_states.jsonl",
+        "sha256": "06fa5ba4ef5a934985cfa96a1323a850cfda9620c313bd6f50a8973e5fae3a60"
+      },
+      "pm_v2_states": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/calibration/pm_v2_states.jsonl",
+        "sha256": "d5038936a6285de04fc9643db27cbf7dbba5f958722a5a79cfe657bba9bc56cf"
+      },
+      "memory_backend": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/calibration/memory_backend.jsonl",
+        "sha256": "c57cbc838b7de2ea8a129e88c210a3e252eb3bec9b28095ebc08c25aeacbe431"
+      },
+      "audit_only": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/calibration/audit_only.jsonl",
+        "sha256": "645dcc5ef8b8464e3f31a3e7736a03806fc87ca92b210544c56088765fa26280"
+      }
+    },
+    "internal_test": {
+      "runtime_states": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/internal_test/runtime_states.jsonl",
+        "sha256": "2a0b468cb05743495000d44229e00bfc5317636ce10c770c42ca95a60d66ac73"
+      },
+      "pm_v2_states": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/internal_test/pm_v2_states.jsonl",
+        "sha256": "41d7bbb5226daf6bb4df46bc233175b766acb86154b3cc38da1318d60e71ae90"
+      },
+      "memory_backend": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/internal_test/memory_backend.jsonl",
+        "sha256": "d38db6b836e4cd8ad44d251893762b6a07b278bd811a03c3b64f0f728dc84c80"
+      },
+      "audit_only": {
+        "path": "data/esconv_auxiliary_v1_5_visible_v2_candidate/internal_test/audit_only.jsonl",
+        "sha256": "d1a6ef2ef9d53cc488d67e4108966b3d042b990c860d15faa6706d870175d120"
+      }
+    }
+  }
+}

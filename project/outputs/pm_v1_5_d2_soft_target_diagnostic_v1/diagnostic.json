@@ -1,0 +1,158 @@
+{
+  "protocol": "pm-v1.5-d2-soft-target-directional-diagnostic-v1",
+  "status": "PRE_D3_DIAGNOSTIC_COMPLETE_NOT_MODEL_PROMOTION",
+  "formal_D2_gate_remains_failed": true,
+  "api_calls": 0,
+  "new_human_decisions": 0,
+  "data_and_grain": {
+    "state_rows": 32,
+    "states_per_component": 8,
+    "independent_pairs_per_state": 3,
+    "soft_target_definition": "Within-pair reviewer mean of treatment-win=1 and control-win/tie=0, followed by an equal-weight mean over three independent generated pairs per state."
+  },
+  "checks": {
+    "target_rows_32": true,
+    "unique_d2_state_ids": true,
+    "exact_component_balance": true,
+    "three_independent_pairs_per_state": true,
+    "all_targets_observed_and_bounded": true,
+    "no_hard_label_claim": true,
+    "blueprint_identity_complete": true
+  },
+  "component_reports": {
+    "RS": {
+      "states": 8,
+      "independent_user_groups": 8,
+      "capacity_floor_groups_div_5": 1,
+      "feature_count": 1,
+      "feature_name": "strategy_top1_lexical_retrieval_score",
+      "target_mean": 0.3333333333333333,
+      "target_std": 0.4364357804719848,
+      "target_distribution": {
+        "0.0": 4,
+        "0.3333333333333333": 2,
+        "1.0": 2
+      },
+      "candidate_score_min": 0.08554162,
+      "candidate_score_max": 0.19285833,
+      "spearman_rho": 0.41147559989891175,
+      "spearman_p_value_descriptive_only": 0.3111446791773791,
+      "above_or_equal_median_target_mean": 0.5833333333333334,
+      "below_median_target_mean": 0.08333333333333333,
+      "median_split_target_difference": 0.5,
+      "leave_one_user_out": {
+        "mse": 0.1996143181875645,
+        "training_mean_baseline_mse": 0.217687074829932,
+        "mse_gain_vs_training_mean": 0.018072756642367488
+      },
+      "positive_direction_on_both_diagnostics": true
+    },
+    "MP": {
+      "states": 8,
+      "independent_user_groups": 8,
+      "capacity_floor_groups_div_5": 1,
+      "feature_count": 1,
+      "feature_name": "memory_top1_lexical_relevance",
+      "target_mean": 0.47916666666666663,
+      "target_std": 0.4312909745889714,
+      "target_distribution": {
+        "0.0": 3,
+        "0.5": 1,
+        "0.6666666666666666": 2,
+        "1.0": 2
+      },
+      "candidate_score_min": 0.11987721350736254,
+      "candidate_score_max": 0.28941438070815306,
+      "spearman_rho": -0.07412493166611013,
+      "spearman_p_value_descriptive_only": 0.8615240137559392,
+      "above_or_equal_median_target_mean": 0.41666666666666663,
+      "below_median_target_mean": 0.5416666666666666,
+      "median_split_target_difference": -0.125,
+      "leave_one_user_out": {
+        "mse": 0.29241412355708885,
+        "training_mean_baseline_mse": 0.21258503401360546,
+        "mse_gain_vs_training_mean": -0.07982908954348339
+      },
+      "positive_direction_on_both_diagnostics": false
+    },
+    "MS": {
+      "states": 8,
+      "independent_user_groups": 8,
+      "capacity_floor_groups_div_5": 1,
+      "feature_count": 1,
+      "feature_name": "memory_top1_lexical_relevance",
+      "target_mean": 0.20833333333333331,
+      "target_std": 0.2635231383473649,
+      "target_distribution": {
+        "0.0": 4,
+        "0.16666666666666666": 1,
+        "0.3333333333333333": 1,
+        "0.5": 1,
+        "0.6666666666666666": 1
+      },
+      "candidate_score_min": 0.10206207261596577,
+      "candidate_score_max": 0.4571503208824944,
+      "spearman_rho": 0.012683657235796028,
+      "spearman_p_value_descriptive_only": 0.9762206931665316,
+      "above_or_equal_median_target_mean": 0.16666666666666666,
+      "below_median_target_mean": 0.25,
+      "median_split_target_difference": -0.08333333333333334,
+      "leave_one_user_out": {
+        "mse": 0.08832303430718497,
+        "training_mean_baseline_mse": 0.07936507936507936,
+        "mse_gain_vs_training_mean": -0.008957954942105606
+      },
+      "positive_direction_on_both_diagnostics": false
+    },
+    "ME": {
+      "states": 8,
+      "independent_user_groups": 8,
+      "capacity_floor_groups_div_5": 1,
+      "feature_count": 1,
+      "feature_name": "memory_top1_lexical_relevance",
+      "target_mean": 0.5625,
+      "target_std": 0.42666573660612916,
+      "target_distribution": {
+        "0.0": 2,
+        "0.3333333333333333": 1,
+        "0.5": 1,
+        "0.6666666666666666": 1,
+        "1.0": 3
+      },
+      "candidate_score_min": 0.4450123667345041,
+      "candidate_score_max": 0.6172559621125888,
+      "spearman_rho": 0.35599574670167133,
+      "spearman_p_value_descriptive_only": 0.3867593227979817,
+      "above_or_equal_median_target_mean": 0.6666666666666666,
+      "below_median_target_mean": 0.4583333333333333,
+      "median_split_target_difference": 0.20833333333333331,
+      "leave_one_user_out": {
+        "mse": 0.28922931027079923,
+        "training_mean_baseline_mse": 0.20804988662131518,
+        "mse_gain_vs_training_mean": -0.08117942364948405
+      },
+      "positive_direction_on_both_diagnostics": false
+    }
+  },
+  "components_with_positive_candidate_match_direction": [
+    "RS"
+  ],
+  "candidate_match_only_supported_for_all_four_heads": false,
+  "interpretation_rule": "A positive Spearman direction plus lower leave-one-user-out MSE than a training-mean baseline is descriptive evidence that the single candidate match score carries direction. This is not a formal pass gate and cannot promote a PM with eight states.",
+  "decision_boundary": {
+    "if_all_four_positive": "A minimal D3 may retain candidate match as the single primary score, while pre-registering grounding and explicit background features only when group capacity permits.",
+    "otherwise": "Do not expand the same match-score-only design. Implement the already-frozen grounding/nonredundancy and explicit background features before any D3 outcome generation."
+  },
+  "limitations": [
+    "Eight states per component cannot estimate a deployable head.",
+    "RS/MP/ME states were selected partly by historical realized-pair direction for measurement balance, so this is not a prevalence estimate.",
+    "P-values are descriptive and are not corrected for four components.",
+    "The diagnostic tests candidate match alone, not the complete corrected feature contract."
+  ],
+  "source_hashes": {
+    "soft_targets": "3b8040e1cd1de0e17e1726c6343293fc9225561b46217e2187e3fdc463315cb6",
+    "blueprint": "43dd8f8534fb10306764ffb0a96b6342dd73b452aca8157e4c0a89361346a8bb",
+    "descriptors": "d4427b71a4b7dfb50fc71d96939442f28a635f0b1827a85c5f0a13a6e0249684"
+  },
+  "state_features_and_soft_targets_sha256": "7044c3367ddab73adeecc5b460f010d6212d6dc7204024a53f33d1c0bd0e51d3"
+}

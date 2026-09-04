@@ -636,7 +636,7 @@ Go/no-go：
 - `outputs/v31_api_full/action_sweep_results.jsonl`
 - `outputs/v32_source/action_outcomes_sanitized.jsonl`
 - `outputs/v32_pair_graph_n20/pair_graph.jsonl`
-- `scripts/v32_contract.py`
+- `src/metacom_pm/v32_contract.py`（唯一实现；`scripts/v32_contract.py` 仅为兼容 wrapper）
 - `scripts/build_v32_rejudge_source.py`
 - `scripts/run_v32_judge_pilot.py`
 - `scripts/analyze_v32_judge_pilot.py`

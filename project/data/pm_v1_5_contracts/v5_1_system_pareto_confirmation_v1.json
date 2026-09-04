@@ -1,0 +1,273 @@
+{
+  "protocol": "pm-v1.5-v5.1-system-pareto-confirmation-freeze-v1",
+  "status": "FROZEN_BEFORE_CONFIRMATION_OUTCOMES",
+  "research_estimand": "Whether the frozen learned pre-injection policy reduces material interaction-and-grounding risk and context cost while preserving immediate response quality relative to fixed-high and transparent rules.",
+  "decision_correction": {
+    "preserve_v5_head_result": "PARTIAL_OR_NOT_LEARNED_ON_FROZEN_FIT",
+    "why_system_confirmation_is_allowed": "Per-head balanced-accuracy promotion was a diagnostic gate, not the paper's asymmetric quality-risk-cost utility. The frozen grouped-OOF policy exhibits a non-degenerate development Pareto signal.",
+    "not_allowed": [
+      "relabel V5 head qualification as passed",
+      "change a feature, model, threshold, resource, executor, or generator",
+      "use confirmation, sealed, or external outcomes for repair",
+      "create another small human-review development packet"
+    ]
+  },
+  "frozen_policy": {
+    "model_family": "per-component standardized L2 logistic regression",
+    "joint_action": "independent MP/MS/ME/RS bits projected to the legal 16-action interface",
+    "heads": {
+      "MP": {
+        "feature_names": [
+          "candidate_content_match_level",
+          "candidate_current_scope_conflict",
+          "candidate_incremental_information",
+          "candidate_preference_scope_fit",
+          "candidate_profile_entity_scope_fit",
+          "candidate_profile_relevance"
+        ],
+        "scaler_mean": [
+          1.0,
+          0.0,
+          1.0,
+          0.5,
+          0.53125,
+          0.515625
+        ],
+        "scaler_scale": [
+          1.0,
+          1.0,
+          1.0,
+          0.5,
+          0.4990224819584785,
+          0.4918773824592873
+        ],
+        "coefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.374556276882678,
+          0.17357676208217088,
+          -0.10232167142296843
+        ],
+        "intercept": -0.010592971646518328,
+        "threshold": 0.5
+      },
+      "MS": {
+        "feature_names": [
+          "candidate_content_match_level",
+          "candidate_current_goal_fit",
+          "candidate_incremental_information",
+          "candidate_prior_issue_marked_resolved",
+          "candidate_prior_outcome_or_distinction",
+          "candidate_specific_issue_or_distinction",
+          "current_continuity_invitation"
+        ],
+        "scaler_mean": [
+          1.0,
+          0.40625,
+          1.0,
+          0.0,
+          0.125,
+          0.375,
+          0.78125
+        ],
+        "scaler_scale": [
+          1.0,
+          0.19515618744994995,
+          1.0,
+          1.0,
+          0.33071891388307384,
+          0.4841229182759271,
+          0.41339864235384227
+        ],
+        "coefficients": [
+          0.0,
+          0.6425282041506746,
+          0.0,
+          0.0,
+          -0.7947464787863076,
+          0.2759777847382444,
+          -0.49009207499051194
+        ],
+        "intercept": 0.43853283343691757,
+        "threshold": 0.5
+      },
+      "ME": {
+        "feature_names": [
+          "candidate_contains_action",
+          "candidate_contains_mechanism",
+          "candidate_contains_result",
+          "candidate_content_match_level",
+          "candidate_current_goal_fit",
+          "candidate_incremental_information",
+          "current_continuity_invitation"
+        ],
+        "scaler_mean": [
+          1.0,
+          0.25,
+          1.0,
+          1.0,
+          0.640625,
+          1.0,
+          0.6875
+        ],
+        "scaler_scale": [
+          1.0,
+          0.4330127018922193,
+          1.0,
+          1.0,
+          0.2572199630180364,
+          1.0,
+          0.46351240544347894
+        ],
+        "coefficients": [
+          0.0,
+          -0.11312921767213391,
+          0.0,
+          0.0,
+          0.45566342421553696,
+          0.0,
+          -0.006527592818002506
+        ],
+        "intercept": -0.05963018602959551,
+        "threshold": 0.5
+      },
+      "RS": {
+        "feature_names": [
+          "candidate_boundary_fit",
+          "candidate_burden_fit",
+          "candidate_content_match_level",
+          "candidate_goal_fit",
+          "candidate_mode_fit",
+          "candidate_nonredundancy"
+        ],
+        "scaler_mean": [
+          1.0,
+          0.625,
+          0.7890625,
+          0.75,
+          1.0,
+          1.0
+        ],
+        "scaler_scale": [
+          1.0,
+          0.21650635094610965,
+          0.32840389932787034,
+          0.33071891388307384,
+          1.0,
+          1.0
+        ],
+        "coefficients": [
+          0.0,
+          0.06678205497550589,
+          0.4953817182379556,
+          -0.010432403461701467,
+          0.0,
+          0.0
+        ],
+        "intercept": -0.07271263731097206,
+        "threshold": 0.5
+      }
+    }
+  },
+  "confirmation_population": {
+    "split": "FRESH_CONFIRMATION",
+    "state_candidate_units": 128,
+    "counterfactual_groups": 64,
+    "units_per_component": {
+      "ME": 32,
+      "MP": 32,
+      "MS": 32,
+      "RS": 32
+    },
+    "generation_seeds_per_unit": 2,
+    "review_unit": "same-state blinded ON/OFF pair; both arms receive quality and risk review"
+  },
+  "pre_execution_data_gate": {
+    "timing": "after actual Rank-1 materialization and before any confirmation API call",
+    "required": [
+      "exactly 128 units, 64 counterfactual groups, and 32 units per component",
+      "no counterfactual_group_id shared with EFFECT_FIT",
+      "zero canonical current-state-plus-candidate duplicates across EFFECT_FIT and FRESH_CONFIRMATION",
+      "paired counterfactual units remain in one statistical group",
+      "actual Rank-1 candidate is non-empty, owner/time bound, and produced by the same frozen retriever",
+      "construction benefit enrichment, split identity, topic prefix length, and outcome are absent from model inputs",
+      "visible cue phrases are not perfectly predictive of ON/OFF outcome or candidate subtype"
+    ],
+    "if_failed": "repair only the outcome-blind construction/materialization bug before any confirmation call; never use generated replies or labels to select the repair"
+  },
+  "comparators": [
+    "always_off",
+    "component_fixed_high",
+    "transparent_rule",
+    "learned_pm"
+  ],
+  "metrics": {
+    "quality_score": "better=+1, tie=0, worse=-1 for learned minus comparator",
+    "quality_uncertainty": "95% percentile bootstrap clustered by counterfactual_group_id",
+    "material_risk": "named interaction-and-grounding event rate; both selected arms reviewed",
+    "risk_uncertainty": "95% percentile bootstrap clustered by counterfactual_group_id",
+    "cost": "reported prompt and total tokens on the realized selected arm",
+    "policy_activity": "fraction of state-candidate units requested ON"
+  },
+  "single_use_system_gate": {
+    "quality_vs_fixed_high": {
+      "lower_95_ci_min": -0.05,
+      "meaning": "noninferior immediate response quality"
+    },
+    "quality_vs_always_off": {
+      "point_estimate_min": 0.0,
+      "lower_95_ci_min": -0.05,
+      "meaning": "resources retain non-negative value rather than being universally useless"
+    },
+    "risk_vs_fixed_high": {
+      "point_difference_max": 0.0,
+      "upper_95_ci_max": 0.05,
+      "meaning": "directionally lower and statistically noninferior material risk"
+    },
+    "prompt_cost_vs_fixed_high": {
+      "relative_reduction_min": 0.05
+    },
+    "transparent_rule_comparison": {
+      "quality_lower_95_ci_min": -0.05,
+      "risk_point_difference_max": 0.0,
+      "prompt_token_point_difference_max": 0.0,
+      "at_least_one_strict_point_improvement": true
+    },
+    "nondegenerate_policy": {
+      "requested_on_fraction_min": 0.1,
+      "requested_on_fraction_max": 0.9
+    },
+    "critical_grounding_failures": {
+      "categories": [
+        "fabricated_recall",
+        "internal_resource_label_exposure"
+      ],
+      "learned_count_max": 2,
+      "learned_count_must_not_exceed_fixed_high": true
+    },
+    "all_checks_required": true
+  },
+  "development_evidence_not_confirmation": {
+    "learned_quality_better_vs_fixed_high": 84,
+    "learned_quality_worse_vs_fixed_high": 81,
+    "learned_quality_tie_vs_fixed_high": 347,
+    "learned_risk_reduction_vs_fixed_high": 0.5145631067961165,
+    "learned_prompt_token_reduction_vs_fixed_high": 0.10289891290765962,
+    "learned_total_token_reduction_vs_fixed_high": 0.08332189699453019,
+    "learned_quality_better_vs_always_off": 148,
+    "learned_quality_worse_vs_always_off": 33,
+    "rule_quality_better_vs_fixed_high": 12,
+    "rule_quality_worse_vs_fixed_high": 70
+  },
+  "stopping_rule": {
+    "pass": "freeze the complete 16-action runtime and proceed once to sealed/internal/external comparison",
+    "fail": "report a bounded or negative V1.5 result; do not repair on this confirmation set"
+  },
+  "input_sha256": {
+    "fit_report": "65833df7c2004955c59e63ed3f0467678e9598014623e4f925b8c6c9d4c35531",
+    "pareto_report": "dc8f7cf94eb9cf9298a9abc4c443eb09fe4395a6e159b1143ee7d3bbb6dae0c8",
+    "blueprint": "c601c7f16bad56c054d5e73c4a37f1fd22b8d329c35c128d06d6473bfc44e421"
+  },
+  "confirmation_or_external_outcomes_read": false
+}

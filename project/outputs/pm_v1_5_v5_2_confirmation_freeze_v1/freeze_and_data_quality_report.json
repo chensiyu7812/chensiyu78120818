@@ -1,0 +1,157 @@
+{
+  "protocol": "pm-v1.5-v5.2-content-disjoint-confirmation-freeze-v1",
+  "status": "PASS_V5_2_CONTENT_DISJOINT_CONFIRMATION_IDENTITY_FROZEN",
+  "dataset_grain": "state_candidate_unit; paired units share one counterfactual group",
+  "checks": {
+    "128_units_64_two_member_groups": true,
+    "32_units_per_component": true,
+    "four_per_logic_family": true,
+    "history_scale_balanced": true,
+    "new_topic_balanced": true,
+    "private_enrichment_balanced": true,
+    "state_ids_disjoint_from_all_old_internal_splits": true,
+    "counterfactual_groups_disjoint_from_all_old_internal_splits": true,
+    "complete_decision_surfaces_unique_within_confirmation": true,
+    "complete_decision_surfaces_disjoint_from_all_old_internal_splits": true,
+    "visible_surfaces_disjoint_from_all_old_internal_splits": true,
+    "actual_rank1_present_and_same_stack": true,
+    "old_effect_fit_fresh_and_sealed_all_previously_exposed": true,
+    "no_api_human_external_or_response_outcomes_read": true
+  },
+  "component_counts": {
+    "ME": 32,
+    "MP": 32,
+    "MS": 32,
+    "RS": 32
+  },
+  "logic_family_counts": {
+    "ME_FAILURE_RESULT_AVOIDS_KNOWN_FAILURE": 4,
+    "ME_HIGH_TOKEN_COST_FOR_WEAK_PERSONALIZATION": 4,
+    "ME_MECHANISM_PREVENTS_REPEAT": 4,
+    "ME_REVERSIBLE_PRIOR_EXPERIMENT_DIRECTLY_INVITED": 4,
+    "ME_SUCCESS_RESULT_ACTION_READY": 4,
+    "ME_VALID_RESULT_AMONG_MANY_EQUIVALENT_OPTIONS": 4,
+    "ME_VALID_RESULT_BUT_OBVIOUS_BASE_STEP": 4,
+    "ME_VALID_RESULT_WITH_CHANGED_NONCONFLICTING_CONTEXT": 4,
+    "MP_CONTEXT_ALREADY_SUFFICIENT_WITH_SMALL_INCREMENT": 4,
+    "MP_HIGH_TOKEN_COST_FOR_MINOR_PERSONALIZATION": 4,
+    "MP_PREFERENCE_BURDEN_DECISIVE": 4,
+    "MP_PREFERENCE_FORMAT_DECISIVE": 4,
+    "MP_PREFERENCE_MINOR_REFINEMENT": 4,
+    "MP_PROFILE_CONSTRAINT_CHANGES_RESPONSE": 4,
+    "MP_PROFILE_CONTEXT_PREVENTS_GENERIC_REPLY": 4,
+    "MP_PROFILE_WEAKLY_RELEVANT": 4,
+    "MS_BROAD_PRIOR_GOAL_MINOR_INCREMENT": 4,
+    "MS_EXPLICIT_FACT_RECALL": 4,
+    "MS_HIGH_TOKEN_COST_FOR_SMALL_CONTINUITY_GAIN": 4,
+    "MS_PRIOR_DISTINCTION_ANSWERS_CURRENT": 4,
+    "MS_PRIOR_GOAL_DIRECTLY_CONTINUES": 4,
+    "MS_RELEVANT_DETAIL_WITH_WEAK_DECISION_VALUE": 4,
+    "MS_SAFE_CONTINUITY_BUT_SELF_CONTAINED_CURRENT": 4,
+    "MS_UNFINISHED_THREAD_DIRECTLY_REQUESTED": 4,
+    "RS_BROAD_SUPPORT_CARD_WITH_SMALL_INCREMENT": 4,
+    "RS_FOCUSED_QUESTION_ADDS_NEEDED_AXIS": 4,
+    "RS_HIGH_TOKEN_COST_FOR_SIMPLE_MOVE": 4,
+    "RS_LOW_STAKES_OPTIONAL_TECHNIQUE": 4,
+    "RS_REFLECTION_ADDS_EVIDENCE_BOUND_EMOTION": 4,
+    "RS_REVERSIBLE_SUGGESTION_DIRECTLY_REQUESTED": 4,
+    "RS_SAFE_MINOR_STRUCTURE_BASE_LLM_LIKELY_KNOWS": 4,
+    "RS_TENTATIVE_PARAPHRASE_REPAIRS_AMBIGUITY": 4
+  },
+  "history_scale_counts": {
+    "EVOEMO_LIKE_LARGE": 32,
+    "LARGE": 32,
+    "MEDIUM": 32,
+    "SMALL": 32
+  },
+  "topic_counts": {
+    "appointment_planning_nonurgent": 16,
+    "commute_disruption": 16,
+    "course_project": 16,
+    "hobby_group_tension": 16,
+    "household_coordination": 16,
+    "seasonal_routine_change": 16,
+    "shared_space_noise": 16,
+    "volunteer_commitment": 16
+  },
+  "private_enrichment_counts": {
+    "HIGH": 64,
+    "LOW_OR_NEUTRAL": 64
+  },
+  "historical_exposure_audit": {
+    "EFFECT_FIT": {
+      "saved_rows": 1024,
+      "expected_states": 256,
+      "exposed_states": 256,
+      "all_states_exposed": true,
+      "source": "outputs/pm_v1_5_v5_2_locked_fit_execution_v2/outcomes_private.jsonl",
+      "source_sha256": "907f2c6caa1cc65efff592e97a94313a5c7e4537fb80c149b71080df15cb4c62"
+    },
+    "FRESH_CONFIRMATION": {
+      "saved_rows": 512,
+      "expected_states": 128,
+      "exposed_states": 128,
+      "all_states_exposed": true,
+      "source": "outputs/pm_v1_5_v5_1_confirmation_execution_v1/outcomes_private.jsonl",
+      "source_sha256": "1e67aef1aa469023ceb1f994ce10254a780afb4101344f8cbd79dc1f8bac9ab7"
+    },
+    "SEALED_INTERNAL_TEST": {
+      "saved_rows": 2920,
+      "expected_states": 128,
+      "exposed_states": 128,
+      "all_states_exposed": true,
+      "source": "outputs/pm_v1_5_v5_1_t5_execution_v1/outcomes_private.jsonl",
+      "source_sha256": "4db8fcb78d82b5cef6c2274de9f787654acdc974786e250381e23638b106a6c6"
+    }
+  },
+  "candidate_materialization": {
+    "protocol": "pm-v1.5-v3-p2-exact-rank1-materialization-v4",
+    "status": "PASS",
+    "states": 128,
+    "exact_rank1_present": {
+      "MP": 32,
+      "MS": 32,
+      "ME": 32,
+      "RS": 32
+    },
+    "compiler_subtype_matches": {
+      "MP": 32,
+      "MS": 32,
+      "ME": 32,
+      "RS": 32
+    },
+    "formal_rank1_constructed_target_matches": {
+      "MP": 32,
+      "MS": 32,
+      "ME": 32,
+      "RS": 32
+    },
+    "source_catalog_size_matches": {
+      "MP": 32,
+      "MS": 32,
+      "ME": 32,
+      "RS": 32
+    },
+    "rs_family_matches": {
+      "RS": 32
+    },
+    "duplicate_complete_step1_decision_surfaces": 0,
+    "memory_compiler_protocol": "pm-v1.5-shared-all-causal-prior-history-memory-compiler-v2",
+    "memory_candidate_protocol": "pm-v1.5-final-content-filtered-typed-rank1-discovery-v1",
+    "strategy_candidate_protocol": "pm-v1.5-strategy-rag-pre-pm-content-candidate-rank-v3",
+    "api_calls": 0,
+    "human_labels_read": 0,
+    "external_lockbox_read": false,
+    "responses_generated": 0,
+    "construction_intent_is_gold": false,
+    "scientific_interpretation": "P2 proves only that the actual frozen compiler/retriever produces the intended exact Rank-1 decision surfaces. It does not prove eligibility, resource benefit, generator execution, or PM learning.",
+    "failures": []
+  },
+  "contract_path": "data/pm_v1_5_contracts/v5_2_content_disjoint_confirmation_v1.json",
+  "contract_sha256": "34af5102ab4c60ae8156938a8d7e0b7355375dedebfdf86555eaf3f60df8bf05",
+  "api_calls": 0,
+  "human_labels_read": 0,
+  "external_outcomes_read": 0,
+  "generated_responses": 0,
+  "next_step": "MATERIALIZE_FROZEN_FEATURES_POLICY_DECISIONS_AND_LOCKED_ON_OFF_CALL_PLAN"
+}

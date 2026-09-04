@@ -1,0 +1,92 @@
+[
+  {
+    "blind_item_id": "v52cq_0613a90b539fa8404c4682ce",
+    "quality_preference": "A",
+    "decisive_criterion": "request_and_dialogue_fit",
+    "quality_notes": "B直接否定了用户的需求（“而不是仅仅专注于当前目标”），这在心理支持上是破坏边界的行为。A虽然引用了外部看似历史对话的内容，但在维持当前目标方面更贴合请求。"
+  },
+  {
+    "blind_item_id": "v52cq_0f0f88fd6f7aade6a6cb870b",
+    "quality_preference": "A",
+    "decisive_criterion": "emotional_understanding",
+    "quality_notes": "A关注到了用户“放下手机”这一物理动作背后的情绪状态，更具共情。B的“分解复杂问题”过于机械和指令化。"
+  },
+  {
+    "blind_item_id": "v52cq_35e86aa674b1aa2d609668e1",
+    "quality_preference": "A",
+    "decisive_criterion": "immediate_helpfulness",
+    "quality_notes": "用户明确表示“泛泛的认可无法解决核心的不确定性”，A给出了具体的探索方向（成员互动、活动等），比B的空泛套话更有实质帮助。"
+  },
+  {
+    "blind_item_id": "v52cq_3811261f8786e062d500466c",
+    "quality_preference": "A",
+    "decisive_criterion": "grounded_context_fidelity",
+    "quality_notes": "A准确反映了用户的目标。B错误地将目标扭曲为“兴趣小组的当前目标”，属于语境理解错误。"
+  },
+  {
+    "blind_item_id": "v52cq_3cef2f339129bd021ccbcfe4",
+    "quality_preference": "B",
+    "decisive_criterion": "request_and_dialogue_fit",
+    "quality_notes": "用户要求“简洁的语言准确描述，不变成计划”。B直接给出了客观描述，而A在谈论自己将如何做，显得冗余。"
+  },
+  {
+    "blind_item_id": "v52cq_55c0e92bb307ce165cdb8172",
+    "quality_preference": "B",
+    "decisive_criterion": "clarity_naturalness_not_overloaded",
+    "quality_notes": "B做到了极致的简洁，完美契合用户要求降低认知负荷的需求。A包含过多的“元对话”（meta-talk）。"
+  },
+  {
+    "blind_item_id": "v52cq_56dc2ef202f14bf6c1aaaf3a",
+    "quality_preference": "B",
+    "decisive_criterion": "emotional_understanding",
+    "quality_notes": "与Item 2类似，B通过提及“放下手机”将用户锚定在当下（Grounding），在心理学上是更好的安抚技巧。"
+  },
+  {
+    "blind_item_id": "v52cq_64d8d75bdaaf65f616707bc4",
+    "quality_preference": "B",
+    "decisive_criterion": "request_and_dialogue_fit",
+    "quality_notes": "用户明确要求“不变成计划”，A却询问“目前的状况是什么”，这不仅增加了用户的认知负担，还诱导对话走向计划制定。B更好。"
+  },
+  {
+    "blind_item_id": "v52cq_788c26dae90a4e5f51b66832",
+    "quality_preference": "B",
+    "decisive_criterion": "emotional_understanding",
+    "quality_notes": "B的语气更加自然、共情，直接针对用户感到“纠结（tangled）”的情绪进行探索，而A显得生硬。"
+  },
+  {
+    "blind_item_id": "v52cq_83bc2d164fef163fbcb032ab",
+    "quality_preference": "B",
+    "decisive_criterion": "request_and_dialogue_fit",
+    "quality_notes": "用户要求“简短且只提供一点”。B是一个完美的心理学镜映（Mirroring），只确认事实；A附加了问题，索取了额外的信息，打破了简短原则。"
+  },
+  {
+    "blind_item_id": "v52cq_9828925f2c5f9672901d83e1",
+    "quality_preference": "A",
+    "decisive_criterion": "request_and_dialogue_fit",
+    "quality_notes": "同样基于“不变成计划”的诉求，A提供了客观陈述，B试图开启讨论（“想讨论哪个方面”），给焦虑中的用户施加了压力。"
+  },
+  {
+    "blind_item_id": "v52cq_9a92f6aa887f265efd91f72e",
+    "quality_preference": "B",
+    "decisive_criterion": "grounded_context_fidelity",
+    "quality_notes": "A出现了幻觉（Hallucination），错把用户的目标当成了兴趣小组的目标。B忠实于可见对话。"
+  },
+  {
+    "blind_item_id": "v52cq_b49f43b96a441b0ce2269e89",
+    "quality_preference": "B",
+    "decisive_criterion": "grounded_context_fidelity",
+    "quality_notes": "A捏造了一段可见对话中不存在的详细引语（“你之前说过...”）。虽然B提出了一个稍显庞大的建议，但在零样本盲评中，A的严重幻觉不可接受。"
+  },
+  {
+    "blind_item_id": "v52cq_f14237b1faeb7ea13839f6d6",
+    "quality_preference": "A",
+    "decisive_criterion": "grounded_context_fidelity",
+    "quality_notes": "逻辑同上，B捏造了不存在的历史对话细节。A虽然平庸，但没有虚构事实。"
+  },
+  {
+    "blind_item_id": "v52cq_fdf0b82993061cd716ff8b57",
+    "quality_preference": "A",
+    "decisive_criterion": "grounded_context_fidelity",
+    "quality_notes": "逻辑同上，B存在严重的上下文幻觉，直接影响了对话的真实性和信任感。"
+  }
+]

@@ -1,0 +1,167 @@
+#!/usr/bin/env python3
+"""Preflight or execute the frozen 320-call D3 generation plan."""
+
+from __future__ import annotations
+
+import argparse
+import os
+from pathlib import Path
+from typing import Any
+
+from metacom_pm.api import make_client, require_reported_usage
+from metacom_pm.config import endpoint_from_config, load_config
+from metacom_pm.generation_contract import SupporterGenerationContract
+from metacom_pm.io import append_jsonl, canonical_json, iter_jsonl, read_json, sha256_file, sha256_text, utc_now, write_json
+
+
+ROOT = Path(__file__).resolve().parents[2]
+PLAN_PROTOCOL = "pm-v1.5-d3-generation-plan-v1"
+PLAN_STATUS = "FROZEN_READY_FOR_320_D3_RESPONSE_CALLS"
+PROTOCOL = "pm-v1.5-d3-generation-execution-v1"
+EXPECTED_CALLS = 320
+
+
+def _rows(path: Path) -> list[dict[str, Any]]:
+    return [dict(row) for row in iter_jsonl(path)]
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--plan-dir", type=Path, default=ROOT / "outputs/pm_v1_5_d3_generation_v1")
+    parser.add_argument("--out-dir", type=Path, default=ROOT / "outputs/pm_v1_5_d3_generation_v1_execution")
+    parser.add_argument("--pm-config", type=Path, default=ROOT / "configs/pm_v1_5.yaml")
+    parser.add_argument("--experiment-config", type=Path, default=ROOT / "configs/experiment.yaml")
+    parser.add_argument("--max-new-calls", type=int, default=None)
+    parser.add_argument("--run", action="store_true")
+    args = parser.parse_args()
+
+    plan_report = read_json(args.plan_dir / "generation_plan_report.json")
+    manifest = read_json(args.plan_dir / "freeze_manifest.json")
+    calls = _rows(args.plan_dir / "call_plan.jsonl")
+    pm_config = load_config(args.pm_config)
+    experiment = load_config(args.experiment_config)
+    generation = SupporterGenerationContract.from_config(pm_config)
+    endpoint = endpoint_from_config(experiment, generation.generator_endpoint)
+    identity = {
+        "base_url": endpoint.base_url,
+        "model": endpoint.model,
+        "family": endpoint.family,
+        "transport": endpoint.transport,
+    }
+    expected_ids = {str(row["call_id"]) for row in calls}
+    lineage_ok = (
+        plan_report.get("protocol") == PLAN_PROTOCOL
+        and plan_report.get("status") == PLAN_STATUS
+        and manifest.get("protocol") == PLAN_PROTOCOL
+        and manifest.get("status") == PLAN_STATUS
+        and manifest.get("generator_identity") == identity
+        and manifest.get("supporter_generation_treatment_sha256") == generation.digest()
+        and len(calls) == EXPECTED_CALLS
+        and len(expected_ids) == EXPECTED_CALLS
+        and all(
+            (args.plan_dir / name).is_file()
+            and sha256_file(args.plan_dir / name) == digest
+            for name, digest in dict(manifest.get("outputs") or {}).items()
+        )
+        and all(row.get("protocol") == PLAN_PROTOCOL for row in calls)
+        and all(row.get("generator_identity") == identity for row in calls)
+        and all(
+            {key: value for key, value in row["generation"].items() if key != "seed"}
+            == generation.payload()
+            for row in calls
+        )
+        and all(row.get("messages_sha256") == sha256_text(canonical_json(row.get("messages"))) for row in calls)
+        and all(row.get("effect_label") == "UNKNOWN_BEFORE_BLIND_HUMAN_REVIEW" for row in calls)
+    )
+
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    outcomes_path = args.out_dir / "generation_outcomes.jsonl"
+    existing_rows = _rows(outcomes_path) if outcomes_path.is_file() else []
+    existing = {str(row["call_id"]): row for row in existing_rows}
+    existing_ok = (
+        len(existing) == len(existing_rows)
+        and set(existing) <= expected_ids
+        and all(
+            row.get("protocol") == PROTOCOL
+            and row.get("normalized_finish_reason") == "complete"
+            and row.get("effect_label") == "UNKNOWN_BEFORE_BLIND_HUMAN_REVIEW"
+            for row in existing.values()
+        )
+    )
+    pending = [row for row in calls if str(row["call_id"]) not in existing]
+    key_present = bool(os.environ.get(endpoint.api_key_env, ""))
+    preflight = {
+        "protocol": PROTOCOL,
+        "status": "READY_FOR_EXECUTION" if lineage_ok and existing_ok and key_present else "BLOCKED_ONLY_ON_GENERATOR_API_KEY" if lineage_ok and existing_ok else "BLOCKED_BY_PLAN_LINEAGE_OR_EXISTING_OUTPUT",
+        "planned_calls": len(calls),
+        "completed_calls": len(existing),
+        "remaining_calls": len(pending),
+        "lineage_ok": lineage_ok,
+        "existing_outputs_ok": existing_ok,
+        "api_key_environment_variable": endpoint.api_key_env,
+        "api_key_present": key_present,
+        "run_requested": args.run,
+        "api_calls_made": 0,
+    }
+    write_json(args.out_dir / "execution_preflight.json", preflight)
+    if not args.run:
+        print(preflight)
+        return
+    if not lineage_ok or not existing_ok or not key_present:
+        raise RuntimeError(canonical_json(preflight))
+    max_new_calls = EXPECTED_CALLS if args.max_new_calls is None else int(args.max_new_calls)
+    if len(pending) > max_new_calls:
+        raise RuntimeError(f"{len(pending)} calls remain but --max-new-calls={max_new_calls}")
+
+    client = make_client(endpoint)
+    completed_now = 0
+    for row in pending:
+        request = dict(row["generation"])
+        result, _ = client.chat(
+            list(row["messages"]),
+            temperature=float(request["temperature"]),
+            max_tokens=int(request["max_output_tokens"]),
+            seed=int(request["seed"]),
+            response_schema=None,
+            retries=3,
+        )
+        error = generation.completion_gate_error(
+            normalized_finish_reason=result.normalized_finish_reason,
+            provider_finish_reason=result.provider_finish_reason,
+        )
+        if error is not None:
+            raise RuntimeError(error)
+        response = generation.normalize_output(result.text)
+        if not response:
+            raise RuntimeError("generator returned an empty response")
+        usage = require_reported_usage(result.usage, stage="d3_generation")
+        outcome = {
+            **{key: value for key, value in row.items() if key not in {"messages", "estimated_input_tokens"}},
+            "protocol": PROTOCOL,
+            "response": response,
+            "response_sha256": sha256_text(response),
+            "provider_finish_reason": result.provider_finish_reason,
+            "normalized_finish_reason": result.normalized_finish_reason,
+            "usage": usage,
+            "completed_at": utc_now(),
+        }
+        append_jsonl(outcomes_path, outcome)
+        existing[str(row["call_id"])] = outcome
+        completed_now += 1
+
+    summary = {
+        "protocol": PROTOCOL,
+        "status": "COMPLETE" if len(existing) == EXPECTED_CALLS else "PARTIAL_RESUMABLE",
+        "planned_calls": EXPECTED_CALLS,
+        "completed_calls": len(existing),
+        "completed_now": completed_now,
+        "remaining_calls": EXPECTED_CALLS - len(existing),
+        "resumable": True,
+        "plan_freeze_manifest_sha256": sha256_file(args.plan_dir / "freeze_manifest.json"),
+    }
+    write_json(args.out_dir / "execution_summary.json", summary)
+    print(summary)
+
+
+if __name__ == "__main__":
+    main()

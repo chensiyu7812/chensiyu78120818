@@ -1,0 +1,1532 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_gpt_u000",
+  "content_author": "chatgpt_pro",
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "finance_housing",
+    "relationships",
+    "sleep_daily_energy"
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01_certificate_pacing",
+      "label": "part-time project management certificate and exam pacing"
+    },
+    {
+      "thread_id": "thread_02_work_priorities",
+      "label": "workload prioritization and supervisor communication"
+    },
+    {
+      "thread_id": "thread_03_job_transition",
+      "label": "searching for and entering a new program-coordination role"
+    },
+    {
+      "thread_id": "thread_04_housing_move",
+      "label": "rent, moving, and commute decisions"
+    },
+    {
+      "thread_id": "thread_05_friendship_roommate_transition",
+      "label": "friendship changes around ending a shared home"
+    },
+    {
+      "thread_id": "thread_06_energy_and_switching",
+      "label": "energy limits and switching from work into study"
+    }
+  ],
+  "profile_history": [
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "name",
+      "field_value": "Maya Laurent",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "Maya Laurent",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "addressing_or_disambiguating_user_identity"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "age",
+      "field_value": "31",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I'm 31",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "age_relevant_feasibility_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "gender",
+      "field_value": "woman",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I'm a woman",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "gender_relevant_context_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "job",
+      "field_value": "admissions coordinator at a vocational college",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I work as an admissions coordinator at a vocational college",
+      "valid_from_session": 1,
+      "valid_until_session": 10,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "workplace_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_education_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "education",
+      "field_value": "BA in sociology",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I did a BA in sociology",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "education_or_training_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_nationality_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "nationality",
+      "field_value": "Canadian",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I'm Canadian",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "country_specific_process_or_language_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_location_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "location",
+      "field_value": "Winnipeg, Manitoba",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I live in Winnipeg, Manitoba",
+      "valid_from_session": 2,
+      "valid_until_session": 10,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "local_logistics",
+        "commute",
+        "housing",
+        "location_specific_feasibility"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_job_v2",
+      "subtype": "MP_PROFILE",
+      "item_role": "update",
+      "field_type": "job",
+      "field_value": "program coordinator at a nonprofit employment centre",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s011_t01"
+      ],
+      "literal_source_span": "my job is now program coordinator at a nonprofit employment centre",
+      "valid_from_session": 11,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "p2r_formal_gpt_u000_mp_profile_job_v1",
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "workplace_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_profile_location_v2",
+      "subtype": "MP_PROFILE",
+      "item_role": "update",
+      "field_type": "location",
+      "field_value": "Brandon, Manitoba",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s011_t01"
+      ],
+      "literal_source_span": "I've moved to Brandon, Manitoba",
+      "valid_from_session": 11,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "p2r_formal_gpt_u000_mp_profile_location_v1",
+      "applicability_scope": [
+        "local_logistics",
+        "commute",
+        "housing",
+        "location_specific_feasibility"
+      ]
+    }
+  ],
+  "response_preference_history": [
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_preference_reflect_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "reflection_before_question",
+      "preference_text": "When I'm trying to make a decision, it helps if you reflect what you're hearing before you ask me anything.",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "When I'm trying to make a decision, it helps if you reflect what you're hearing before you ask me anything.",
+      "valid_from_session": 2,
+      "valid_until_session": 7,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_preference_choices_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "choices_rather_than_commands",
+      "preference_text": "I respond better when options are framed as choices, not instructions.",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s004_t01"
+      ],
+      "literal_source_span": "I respond better when options are framed as choices, not instructions.",
+      "valid_from_session": 4,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u000_mp_preference_direct_v2",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "direct_answer_before_explanation",
+      "preference_text": "When I'm asking about a choice, give me the direct answer first and explain after; I don't need a reflection before every question.",
+      "owner_id": "p2r_formal_gpt_u000",
+      "source_turn_ids": [
+        "s008_t03"
+      ],
+      "literal_source_span": "When I'm asking about a choice, give me the direct answer first and explain after; I don't need a reflection before every question.",
+      "valid_from_session": 8,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "p2r_formal_gpt_u000_mp_preference_reflect_v1"
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_elena",
+      "name": "Elena Park",
+      "relationship": "direct supervisor at the vocational college",
+      "valid_from_session": 1,
+      "valid_until_session": 10
+    },
+    {
+      "entity_id": "entity_jonah",
+      "name": "Jonah Reed",
+      "relationship": "classmate and occasional study partner in the certificate program",
+      "valid_from_session": 7,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_camila",
+      "name": "Camila Ortiz",
+      "relationship": "close friend and former roommate",
+      "valid_from_session": 4,
+      "valid_until_session": null
+    }
+  ],
+  "events": [
+    {
+      "event_id": "event_01",
+      "session_index": 1,
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_02_work_priorities"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elena"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Maya begins a part-time project management certificate during a demanding orientation season at work."
+    },
+    {
+      "event_id": "event_02",
+      "session_index": 2,
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_04_housing_move",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "mixed",
+      "description": "Maya experiments with using part of her long bus commute for low-friction course reading."
+    },
+    {
+      "event_id": "event_03",
+      "session_index": 3,
+      "topic_thread_ids": [
+        "thread_02_work_priorities",
+        "thread_03_job_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elena"
+      ],
+      "resolution_status": "mixed",
+      "description": "Maya clarifies work priorities with Elena and signals interest in an internal coordinator opening."
+    },
+    {
+      "event_id": "event_04",
+      "session_index": 4,
+      "topic_thread_ids": [
+        "thread_04_housing_move",
+        "thread_05_friendship_roommate_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_camila"
+      ],
+      "resolution_status": "mixed",
+      "description": "Camila plans to leave the shared apartment, forcing Maya to examine rent options and a friendship transition together."
+    },
+    {
+      "event_id": "event_05",
+      "session_index": 5,
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "mixed",
+      "description": "Maya prepares for the first certificate workshop while still postponing a practice-exam date."
+    },
+    {
+      "event_id": "event_06",
+      "session_index": 6,
+      "topic_thread_ids": [
+        "thread_03_job_transition",
+        "thread_04_housing_move",
+        "thread_05_friendship_roommate_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elena",
+        "entity_camila"
+      ],
+      "resolution_status": "mixed",
+      "description": "Maya submits an internal application while she and Camila settle the last-month rent arrangement."
+    },
+    {
+      "event_id": "event_07",
+      "session_index": 7,
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jonah"
+      ],
+      "resolution_status": "mixed",
+      "description": "Maya studies with Jonah, discovers a specific knowledge gap, and still avoids booking the exam."
+    },
+    {
+      "event_id": "event_08",
+      "session_index": 8,
+      "topic_thread_ids": [
+        "thread_02_work_priorities",
+        "thread_03_job_transition",
+        "thread_01_certificate_pacing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elena"
+      ],
+      "resolution_status": "resolved",
+      "description": "Maya is rejected for the internal role, uses the feedback to widen her job search, and rewrites her résumé."
+    },
+    {
+      "event_id": "event_09",
+      "session_index": 9,
+      "topic_thread_ids": [
+        "thread_03_job_transition",
+        "thread_04_housing_move"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "mixed",
+      "description": "A Brandon nonprofit offers Maya a program coordinator job, prompting a start-date and moving-cost decision."
+    },
+    {
+      "event_id": "event_10",
+      "session_index": 10,
+      "topic_thread_ids": [
+        "thread_04_housing_move",
+        "thread_05_friendship_roommate_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_camila"
+      ],
+      "resolution_status": "mixed",
+      "description": "After accepting the new job, Maya breaks the move into smaller tasks while processing the end of living with Camila."
+    },
+    {
+      "event_id": "event_11",
+      "session_index": 11,
+      "topic_thread_ids": [
+        "thread_02_work_priorities",
+        "thread_03_job_transition",
+        "thread_04_housing_move"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "description": "Maya moves to Brandon, starts the new program-coordinator role, and corrects a mistaken assumption about reporting frequency."
+    },
+    {
+      "event_id": "event_12",
+      "session_index": 12,
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_02_work_priorities",
+        "thread_03_job_transition",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Once onboarding settles, Maya returns to the certificate and notices mental switching after public-facing days is the newer obstacle."
+    },
+    {
+      "event_id": "event_13",
+      "session_index": 13,
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_04_housing_move",
+        "thread_05_friendship_roommate_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jonah",
+        "entity_camila"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Maya approaches her capstone presentation, asks Jonah for one rehearsal, and protects Camila's visit from becoming all about coursework."
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 11 months ago",
+      "event_ids": [
+        "event_01"
+      ],
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_02_work_priorities"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elena"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Maya Laurent. I'm 31, and I work as an admissions coordinator at a vocational college. Orientation season is the busiest part of my work year. I enrolled in a part-time project management certificate last week because I want more room to grow, but seeing the course calendar next to orientation season made my stomach drop."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "You are trying to build toward something important while your busiest work period is already taking up a lot of room. Which part feels harder to hold right now: the course itself or the unpredictability at work?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "The course itself doesn't scare me as much as Elena changing priorities midweek. My goal is to finish the certificate without turning every evening into catch-up work. I registered for the first module, but I still haven't figured out where the study time is supposed to come from."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "That makes the pressure more specific: it is less about doubting your ability and more about protecting time when work keeps moving. You do not have to solve the whole semester tonight."
+        }
+      ],
+      "summary": "Maya begins a certificate during peak work season and identifies shifting workplace priorities, rather than course difficulty, as the main obstacle to protected study time.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_ms_001",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "The course itself doesn't scare me as much as Elena changing priorities midweek.",
+          "candidate_text": "The course itself doesn't scare me as much as Elena changing priorities midweek.",
+          "topic_thread": "thread_02_work_priorities",
+          "entity_ids": [
+            "self",
+            "entity_elena"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "pressure_distinction"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_ms_002",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "My goal is to finish the certificate without turning every evening into catch-up work.",
+          "candidate_text": "My goal is to finish the certificate without turning every evening into catch-up work.",
+          "topic_thread": "thread_01_certificate_pacing",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "prior_goal"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_unresolved_001",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "I registered for the first module, but I still haven't figured out where the study time is supposed to come from.",
+          "candidate_text": "I registered for the first module, but I still haven't figured out where the study time is supposed to come from.",
+          "topic_thread": "thread_01_certificate_pacing",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I registered for the first module",
+          "result_span": null
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_context_001",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "Orientation season is the busiest part of my work year.",
+          "candidate_text": "Orientation season is the busiest part of my work year.",
+          "topic_thread": "thread_02_work_priorities",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 10 months ago",
+      "event_ids": [
+        "event_02"
+      ],
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_04_housing_move",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I live in Winnipeg, Manitoba, and I'm Canadian. The bus ride home is about fifty minutes, and lately I arrive with enough energy to scroll but not enough to open the course portal. When I'm trying to make a decision, it helps if you reflect what you're hearing before you ask me anything."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "The long ride is not empty time in practice; by the time you get home, starting feels like a separate task with its own resistance. It sounds like you are looking for a gentler entry point."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "I tried one small change on Tuesday: I packed the reading and a pencil into my tote before work. On the ride home I read six pages, and getting started before I reached my apartment meant I didn't have to restart the whole debate with myself."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "That gives you one concrete observation from your own routine: beginning before you get home reduced the friction of beginning again later. It does not have to become a rule for every commute."
+        }
+      ],
+      "summary": "Maya describes commute-related study friction and finds that preparing materials before work lets her begin reading on the bus without recreating the start-up struggle at home.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_core_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I packed the reading and a pencil into my tote before work. On the ride home I read six pages, and getting started before I reached my apartment meant I didn't have to restart the whole debate with myself.",
+          "candidate_text": "I packed the reading and a pencil into my tote before work. On the ride home I read six pages, and getting started before I reached my apartment meant I didn't have to restart the whole debate with myself.",
+          "topic_thread": "thread_06_energy_and_switching",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I packed the reading and a pencil into my tote before work.",
+          "result_span": "On the ride home I read six pages, and getting started before I reached my apartment meant I didn't have to restart the whole debate with myself."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_context_002",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "The bus ride home is about fifty minutes",
+          "candidate_text": "The bus ride home is about fifty minutes",
+          "topic_thread": "thread_01_certificate_pacing",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 9 months ago",
+      "event_ids": [
+        "event_03"
+      ],
+      "topic_thread_ids": [
+        "thread_02_work_priorities",
+        "thread_03_job_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elena"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I did a BA in sociology, and I'm a woman. I mention that because I keep second-guessing how assertive I sound with Elena. She asked for three different versions of the orientation plan this week, and I caught myself treating each request as equally urgent."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "You are noticing both the workload and the extra layer of monitoring how you come across. That can make a basic priority question feel more charged than it otherwise would."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "After our meeting, I emailed her a short list and asked which two items actually had to be done first. She replied with an order of priority, and I stopped bouncing between all three drafts that afternoon."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "You turned a vague pile of urgency into an explicit order, and the immediate task switching eased once Elena answered."
+        },
+        {
+          "turn_id": "s003_t05",
+          "role": "user",
+          "text": "I also told her I'm interested in the internal program coordinator opening. She didn't promise anything, which is probably healthier for me than trying to treat every encouraging comment like a signal."
+        },
+        {
+          "turn_id": "s003_t06",
+          "role": "assistant",
+          "text": "That leaves the career question open while keeping the current evidence small: you expressed interest, and there is not a decision yet."
+        }
+      ],
+      "summary": "Maya notices that she treats multiple requests as equally urgent, gets Elena to rank two priorities, and separately expresses interest in an internal coordinator role without assuming an outcome.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_ms_003",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "I caught myself treating each request as equally urgent.",
+          "candidate_text": "I caught myself treating each request as equally urgent.",
+          "topic_thread": "thread_02_work_priorities",
+          "entity_ids": [
+            "self",
+            "entity_elena"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "specific_observation"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_core_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s003_t03"
+          ],
+          "literal_source_span": "I emailed her a short list and asked which two items actually had to be done first. She replied with an order of priority, and I stopped bouncing between all three drafts that afternoon.",
+          "candidate_text": "I emailed her a short list and asked which two items actually had to be done first. She replied with an order of priority, and I stopped bouncing between all three drafts that afternoon.",
+          "topic_thread": "thread_02_work_priorities",
+          "entity_ids": [
+            "self",
+            "entity_elena"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I emailed her a short list and asked which two items actually had to be done first.",
+          "result_span": "She replied with an order of priority, and I stopped bouncing between all three drafts that afternoon."
+        }
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 8 months ago",
+      "event_ids": [
+        "event_04"
+      ],
+      "topic_thread_ids": [
+        "thread_04_housing_move",
+        "thread_05_friendship_roommate_transition",
+        "thread_02_work_priorities"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_camila"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "Camila, my roommate and close friend, told me she's likely to move in with her partner when our lease ends. I'm happy for her, but it turns the apartment into a money question at the same time work is messy. I respond better when options are framed as choices, not instructions."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "The housing question is practical, but it is also tied to a friendship change you did not choose the timing of. Having options may make it easier to examine without making the decision feel imposed."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "I was about to search every neighborhood at once, so I limited the evening to comparing the current rent with two nearby one-bedroom listings. That gave me a real range instead of a vague fear, and I could stop for the night without feeling like I'd ignored it. The part I still need to settle with Camila is whether she will stay through the final month."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "You got enough information to replace an undefined cost fear with a bounded comparison, while the final-month arrangement with Camila remains a separate open question."
+        }
+      ],
+      "summary": "Camila's planned move creates both a friendship transition and a rent decision; Maya narrows the housing search enough to learn a price range while the final-month arrangement stays open.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_ms_004",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "The part I still need to settle with Camila is whether she will stay through the final month.",
+          "candidate_text": "The part I still need to settle with Camila is whether she will stay through the final month.",
+          "topic_thread": "thread_05_friendship_roommate_transition",
+          "entity_ids": [
+            "self",
+            "entity_camila"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "unfinished_thread"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_core_003",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "I limited the evening to comparing the current rent with two nearby one-bedroom listings. That gave me a real range instead of a vague fear, and I could stop for the night without feeling like I'd ignored it.",
+          "candidate_text": "I limited the evening to comparing the current rent with two nearby one-bedroom listings. That gave me a real range instead of a vague fear, and I could stop for the night without feeling like I'd ignored it.",
+          "topic_thread": "thread_04_housing_move",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I limited the evening to comparing the current rent with two nearby one-bedroom listings.",
+          "result_span": "That gave me a real range instead of a vague fear, and I could stop for the night without feeling like I'd ignored it."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_context_003",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "Camila, my roommate and close friend, told me she's likely to move in with her partner when our lease ends.",
+          "candidate_text": "Camila, my roommate and close friend, told me she's likely to move in with her partner when our lease ends.",
+          "topic_thread": "thread_05_friendship_roommate_transition",
+          "entity_ids": [
+            "self",
+            "entity_camila"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 7 months ago",
+      "event_ids": [
+        "event_05"
+      ],
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "The first certificate workshop is tomorrow night, and I notice the dread gets worse when I tell myself I need to understand the whole module before I log in."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "The expectation to arrive already prepared for everything is making the workshop feel like a verdict rather than a place to learn."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "Yesterday I gave myself twenty minutes just to skim the headings and write one question in the margin. I went into the workshop knowing what I wanted to ask, and the session felt less like a test I was already failing. I put three possible practice-exam dates in my calendar, but I haven't committed to one."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "The brief preview changed how you entered the workshop, while the practice-exam date is still undecided. Those are two different pieces rather than one measure of whether you are keeping up."
+        }
+      ],
+      "summary": "A short, question-focused preview makes Maya's first workshop feel more learnable, but she still leaves the practice-exam date open despite placing several possibilities on her calendar.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_challenge_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "Yesterday I gave myself twenty minutes just to skim the headings and write one question in the margin. I went into the workshop knowing what I wanted to ask, and the session felt less like a test I was already failing.",
+          "candidate_text": "Yesterday I gave myself twenty minutes just to skim the headings and write one question in the margin. I went into the workshop knowing what I wanted to ask, and the session felt less like a test I was already failing.",
+          "topic_thread": "thread_06_energy_and_switching",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "Yesterday I gave myself twenty minutes just to skim the headings and write one question in the margin.",
+          "result_span": "I went into the workshop knowing what I wanted to ask, and the session felt less like a test I was already failing."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_unresolved_002",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "I put three possible practice-exam dates in my calendar, but I haven't committed to one.",
+          "candidate_text": "I put three possible practice-exam dates in my calendar, but I haven't committed to one.",
+          "topic_thread": "thread_01_certificate_pacing",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I put three possible practice-exam dates in my calendar",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 6 months ago",
+      "event_ids": [
+        "event_06"
+      ],
+      "topic_thread_ids": [
+        "thread_03_job_transition",
+        "thread_04_housing_move",
+        "thread_05_friendship_roommate_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elena",
+        "entity_camila"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "Elena encouraged me to apply for the internal coordinator role, so I submitted the application yesterday. There isn't a decision yet, and I can feel myself reading meaning into every normal message from her."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "The application is real, but the outcome is still unknown. It makes sense that ordinary messages feel loaded when you are waiting for a decision that matters to you."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "Camila and I also needed to talk about the last month of rent. I sent her two concrete options instead of a long anxious paragraph. She picked one, and we agreed she'll cover half the final month even if she moves early."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "That housing question now has a specific agreement, which is different from the uncertainty around the job application."
+        },
+        {
+          "turn_id": "s006_t05",
+          "role": "user",
+          "text": "Yes. I'm trying not to make one unresolved thing contaminate everything else. The rent conversation feels finished; the application does not."
+        },
+        {
+          "turn_id": "s006_t06",
+          "role": "assistant",
+          "text": "Keeping those outcomes separate may help you avoid treating the whole month as one undifferentiated wait."
+        }
+      ],
+      "summary": "Maya waits on an internal job application while she and Camila resolve their final-month rent arrangement, deliberately separating one open outcome from another issue that is now settled.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_unresolved_003",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s006_t01"
+          ],
+          "literal_source_span": "I submitted the application yesterday. There isn't a decision yet",
+          "candidate_text": "I submitted the application yesterday. There isn't a decision yet",
+          "topic_thread": "thread_03_job_transition",
+          "entity_ids": [
+            "self",
+            "entity_elena"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I submitted the application yesterday",
+          "result_span": null
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_core_004",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s006_t03"
+          ],
+          "literal_source_span": "I sent her two concrete options instead of a long anxious paragraph. She picked one, and we agreed she'll cover half the final month even if she moves early.",
+          "candidate_text": "I sent her two concrete options instead of a long anxious paragraph. She picked one, and we agreed she'll cover half the final month even if she moves early.",
+          "topic_thread": "thread_05_friendship_roommate_transition",
+          "entity_ids": [
+            "self",
+            "entity_camila"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I sent her two concrete options instead of a long anxious paragraph.",
+          "result_span": "She picked one, and we agreed she'll cover half the final month even if she moves early."
+        }
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 5 months ago",
+      "event_ids": [
+        "event_07"
+      ],
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jonah"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "Jonah from the certificate class said he may drop the course because his commute changed. That's his situation, not mine; my problem is that I freeze when a practice question looks unfamiliar."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "It is useful to keep his commute problem separate from your own sticking point. Yours is showing up when uncertainty appears inside the material."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "We met online for half an hour and took turns explaining one practice question out loud. I found the exact place where I was guessing instead of understanding, so I knew what to review afterward. I opened the exam-booking page last night, but I closed it without choosing a date."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "The practice session gave you a concrete learning target, even though booking the exam is still unfinished."
+        }
+      ],
+      "summary": "Maya distinguishes Jonah's commute concern from her own study freeze, uses an explanation exercise to locate a knowledge gap, and still leaves the exam unbooked.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_ms_005",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s007_t01"
+          ],
+          "literal_source_span": "Jonah from the certificate class said he may drop the course because his commute changed. That's his situation, not mine",
+          "candidate_text": "Jonah from the certificate class said he may drop the course because his commute changed. That's his situation, not mine",
+          "topic_thread": "thread_01_certificate_pacing",
+          "entity_ids": [
+            "self",
+            "entity_jonah"
+          ],
+          "resolution_status": "conflicting",
+          "memory_function": "wrong_person_distractor"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_core_005",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "We met online for half an hour and took turns explaining one practice question out loud. I found the exact place where I was guessing instead of understanding, so I knew what to review afterward.",
+          "candidate_text": "We met online for half an hour and took turns explaining one practice question out loud. I found the exact place where I was guessing instead of understanding, so I knew what to review afterward.",
+          "topic_thread": "thread_01_certificate_pacing",
+          "entity_ids": [
+            "self",
+            "entity_jonah"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "We met online for half an hour and took turns explaining one practice question out loud.",
+          "result_span": "I found the exact place where I was guessing instead of understanding, so I knew what to review afterward."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_unresolved_004",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "I opened the exam-booking page last night, but I closed it without choosing a date.",
+          "candidate_text": "I opened the exam-booking page last night, but I closed it without choosing a date.",
+          "topic_thread": "thread_01_certificate_pacing",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I opened the exam-booking page last night",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 4 months ago",
+      "event_ids": [
+        "event_08"
+      ],
+      "topic_thread_ids": [
+        "thread_02_work_priorities",
+        "thread_03_job_transition",
+        "thread_01_certificate_pacing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_elena"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "I heard back about the internal role and didn't get it. I'm disappointed, but the useful part is that the panel said my examples were strong and my budget experience was thin. So I'm going to widen the search instead of waiting for another opening here."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "The rejection hurts, but it also closes one uncertain loop and gives you a more specific direction for the wider search."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "Also, I've changed my mind about the way I want help with decisions. When I'm asking about a choice, give me the direct answer first and explain after; I don't need a reflection before every question. This week I blocked one lunch break to rewrite my résumé around measurable outcomes. I finished the first full draft before going back to work."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "You are adjusting both the search and how you want decision support delivered. The résumé draft is a concrete step that is already finished, rather than another open application."
+        }
+      ],
+      "summary": "The internal rejection closes one career thread and highlights a budget-experience gap; Maya widens her search, revises her response-format preference, and completes a measurable-outcomes résumé draft.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_ms_006",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "I heard back about the internal role and didn't get it.",
+          "candidate_text": "I heard back about the internal role and didn't get it.",
+          "topic_thread": "thread_03_job_transition",
+          "entity_ids": [
+            "self",
+            "entity_elena"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "resolved_thread"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_core_006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s008_t03"
+          ],
+          "literal_source_span": "This week I blocked one lunch break to rewrite my résumé around measurable outcomes. I finished the first full draft before going back to work.",
+          "candidate_text": "This week I blocked one lunch break to rewrite my résumé around measurable outcomes. I finished the first full draft before going back to work.",
+          "topic_thread": "thread_03_job_transition",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "This week I blocked one lunch break to rewrite my résumé around measurable outcomes.",
+          "result_span": "I finished the first full draft before going back to work."
+        }
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 3 months ago",
+      "event_ids": [
+        "event_09"
+      ],
+      "topic_thread_ids": [
+        "thread_03_job_transition",
+        "thread_04_housing_move"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "A nonprofit employment centre in Brandon offered me a program coordinator job. The salary is a little higher, but moving would eat a chunk of the first month's difference, and I don't want excitement to erase the math."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "You have a real opportunity and a real relocation cost at the same time. Looking at both does not make you ungrateful; it is part of deciding whether the offer fits your life."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "I asked whether the start date could move back by one week so I wouldn't be paying movers and starting orientation on the same Monday. They agreed to the later date, which took the sharpest edge off the move. I want one night to look at the budget before I sign."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "The later start date changes one practical constraint in your favor, while the final acceptance decision can still wait for the budget review."
+        }
+      ],
+      "summary": "Maya receives a Brandon job offer, keeps relocation costs in view, and successfully shifts the proposed start date so moving and first-day demands do not collide.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_core_007",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "I asked whether the start date could move back by one week so I wouldn't be paying movers and starting orientation on the same Monday. They agreed to the later date, which took the sharpest edge off the move.",
+          "candidate_text": "I asked whether the start date could move back by one week so I wouldn't be paying movers and starting orientation on the same Monday. They agreed to the later date, which took the sharpest edge off the move.",
+          "topic_thread": "thread_03_job_transition",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I asked whether the start date could move back by one week so I wouldn't be paying movers and starting orientation on the same Monday.",
+          "result_span": "They agreed to the later date, which took the sharpest edge off the move."
+        }
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 2 months ago",
+      "event_ids": [
+        "event_10"
+      ],
+      "topic_thread_ids": [
+        "thread_04_housing_move",
+        "thread_05_friendship_roommate_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_camila"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "I accepted the Brandon offer, and now the move is real. The move has been on my mind a lot lately. Camila is helping me sort the apartment, but I keep flipping between practical details and feeling strange that we're ending the roommate chapter at the same time."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "There are two layers moving together: a logistics project and a change in a close friendship's everyday shape. Either one could take up a full conversation by itself."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "Last night I drew three boxes on scrap paper—utilities, movers, address changes—and only let myself fill the first box. The move stopped feeling like one giant emergency long enough for me to finish the utilities calls."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "Breaking the move into visible lanes gave the practical part an edge and a stopping point, rather than asking you to hold every task at once."
+        },
+        {
+          "turn_id": "s010_t05",
+          "role": "user",
+          "text": "I still need to decide what to do with the desk Camila and I bought together. I don't want the furniture decision to become a proxy fight about whether we're still close."
+        },
+        {
+          "turn_id": "s010_t06",
+          "role": "assistant",
+          "text": "That sounds worth keeping separate: the desk needs a practical decision, while the friendship does not have to be settled by what happens to one piece of furniture."
+        }
+      ],
+      "summary": "After accepting the new job, Maya separates move logistics from the emotional shift with Camila and finds that a three-box paper map makes one practical task feel containable.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_ms_007",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "The move has been on my mind a lot lately.",
+          "candidate_text": "The move has been on my mind a lot lately.",
+          "topic_thread": "thread_04_housing_move",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "same_topic_only"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_challenge_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s010_t03"
+          ],
+          "literal_source_span": "Last night I drew three boxes on scrap paper—utilities, movers, address changes—and only let myself fill the first box. The move stopped feeling like one giant emergency long enough for me to finish the utilities calls.",
+          "candidate_text": "Last night I drew three boxes on scrap paper—utilities, movers, address changes—and only let myself fill the first box. The move stopped feeling like one giant emergency long enough for me to finish the utilities calls.",
+          "topic_thread": "thread_04_housing_move",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "Last night I drew three boxes on scrap paper—utilities, movers, address changes—and only let myself fill the first box.",
+          "result_span": "The move stopped feeling like one giant emergency long enough for me to finish the utilities calls."
+        }
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 6 weeks ago",
+      "event_ids": [
+        "event_11"
+      ],
+      "topic_thread_ids": [
+        "thread_02_work_priorities",
+        "thread_03_job_transition",
+        "thread_04_housing_move",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "I've moved to Brandon, Manitoba, and I started the new job, so my job is now program coordinator at a nonprofit employment centre. The first week was busy but not hostile; I mostly feel disoriented by how many community partners have different calendars."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "A new role can be tiring even when nothing is going badly. You are learning a network of people, rhythms, and expectations that used to be invisible."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "One thing I corrected quickly: I thought my new supervisor wanted a status email every day, but she clarified that she only wants a Friday summary. I wrote the Friday note once, and it kept the small updates from spilling across the whole week. The centre also runs some evening community events, so not every week has the same quiet study night."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "That clarification removed a reporting demand you had accidentally added for yourself. The varying evening schedule is a different constraint, so it may need to stay flexible rather than become another fixed rule."
+        }
+      ],
+      "summary": "Maya has moved and started the new role; she corrects a mistaken daily-reporting assumption, contains updates in a Friday summary, and notes that evening work events vary by week.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_ms_008",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "I thought my new supervisor wanted a status email every day, but she clarified that she only wants a Friday summary.",
+          "candidate_text": "I thought my new supervisor wanted a status email every day, but she clarified that she only wants a Friday summary.",
+          "topic_thread": "thread_02_work_priorities",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "conflicting",
+          "memory_function": "conflict_record"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_reusable_core_008",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "I wrote the Friday note once, and it kept the small updates from spilling across the whole week.",
+          "candidate_text": "I wrote the Friday note once, and it kept the small updates from spilling across the whole week.",
+          "topic_thread": "thread_02_work_priorities",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I wrote the Friday note once",
+          "result_span": "it kept the small updates from spilling across the whole week."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_context_004",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "The centre also runs some evening community events, so not every week has the same quiet study night.",
+          "candidate_text": "The centre also runs some evening community events, so not every week has the same quiet study night.",
+          "topic_thread": "thread_06_energy_and_switching",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 3 weeks ago",
+      "event_ids": [
+        "event_12"
+      ],
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_02_work_priorities",
+        "thread_03_job_transition",
+        "thread_06_energy_and_switching"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "The new job is settling, but the certificate came back onto my radar fast. I had been assuming evenings were the hard part; actually, after two weeks here, the bigger problem is switching mental gears after community-facing days."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "That is a useful update to the old picture. The issue is not simply 'evening equals bad' anymore; some days leave you carrying the social pace of work into study time."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "I made a rough voice note for the capstone on my walk home, but I don't want to pretend it solved anything. I still need to decide what belongs in the final presentation, and I'm mostly looking for a way to think about the transition without turning it into another performance test."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "You can treat the voice note as part of the current process without making it evidence that the whole capstone problem is solved. The presentation structure is still open."
+        }
+      ],
+      "summary": "Maya returns to the certificate after onboarding and revises her understanding of the difficulty: mental switching after community-facing workdays matters more than evenings in general.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 10 days ago",
+      "event_ids": [
+        "event_13"
+      ],
+      "topic_thread_ids": [
+        "thread_01_certificate_pacing",
+        "thread_04_housing_move",
+        "thread_05_friendship_roommate_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jonah",
+        "entity_camila"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "My capstone presentation is in two weeks. I know the material better than I did in winter, but the fact that it's the final piece is making me weirdly avoidant. Camila is visiting next weekend, and I don't want the whole visit to become me talking about the presentation."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "The finality seems to be changing the emotional weight of something you are more prepared for than before. You also want to protect time with Camila from being absorbed by that pressure."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "I sent Jonah a message asking if he'd do one rehearsal with me, but he hasn't replied yet. For now, I mostly want to figure out what part of the presentation is actually scaring me rather than adding another study trick."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "The rehearsal request is pending, so it does not have to become a plan yet. Staying with what feels threatening about the presentation may be more useful for this conversation."
+        }
+      ],
+      "summary": "With the capstone two weeks away, Maya feels avoidant despite stronger preparation, keeps Camila's visit separate from coursework, and waits for Jonah to answer a rehearsal request.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u000_me_unresolved_005",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u000",
+          "source_turn_ids": [
+            "s013_t03"
+          ],
+          "literal_source_span": "I sent Jonah a message asking if he'd do one rehearsal with me, but he hasn't replied yet.",
+          "candidate_text": "I sent Jonah a message asking if he'd do one rehearsal with me, but he hasn't replied yet.",
+          "topic_thread": "thread_01_certificate_pacing",
+          "entity_ids": [
+            "self",
+            "entity_jonah"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I sent Jonah a message asking if he'd do one rehearsal with me",
+          "result_span": null
+        }
+      ]
+    }
+  ]
+}

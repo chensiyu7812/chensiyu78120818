@@ -1,0 +1,26 @@
+{
+  "protocol": "pm-v1.5-support-need-factorized-fit-packet-binding-v1",
+  "status": "PREPARED_REPRODUCIBLE_AWAITING_HUMAN_ANNOTATION",
+  "candidate_directory": "outputs/pm_v1_5_support_need_factorized_fit_packet_v1_candidate",
+  "reproduction_directory": "outputs/pm_v1_5_support_need_factorized_fit_packet_v1_repro_check",
+  "candidate_reproduction_byte_identical": true,
+  "contract_sha256": "8de38c9b6506b5ddcf45ed47967c344896f4ff216aa35e0e2eb830beb173cfd0",
+  "files": {
+    "qualification_contract.json": "6c6d5ad9eba433d2caba11127fdf87509d47d9c888777b86aebe4b917a5cb702",
+    "human_blind_packet.jsonl": "6ccc4f028c40d8939080b1744827306e7336bcc99cc4a9b480e4ff7436ed94a6",
+    "human_annotation_template.jsonl": "aebf2fad44ed29ff464799e9eef7e4087b88f44e6cf4d02964b37538c96cf667",
+    "private_lineage.jsonl": "2b015997a9e9fce1c35b3decf4bf9138d07a99ae344eed47acd25fd4d51771d1",
+    "human_blind_review.html": "82d1349f1d4bbec25ae9bfd2cad5bf2f7b4d323331e734a6e0274d56d5761e2c"
+  },
+  "packet_size": 16,
+  "fit_anchor_count": 16,
+  "untouched_confirmation_count": 8,
+  "confirmation_rows_exposed": false,
+  "blind_packet_exposes_anchor_role": false,
+  "selection_used_completed_human_labels": false,
+  "automatic_gold_label": false,
+  "pm_action_gold": false,
+  "api_calls_made": 0,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false
+}

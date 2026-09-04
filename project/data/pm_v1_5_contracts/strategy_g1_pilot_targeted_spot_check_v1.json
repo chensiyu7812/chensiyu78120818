@@ -1,0 +1,50 @@
+{
+  "protocol": "pm-v1.5-strategy-g1-pilot-targeted-methodological-spot-check-v1",
+  "status": "COMPLETE_NOT_INDEPENDENT_HUMAN_GOLD",
+  "date": "2026-07-29",
+  "scope": "all five move-specific activations among fixed low-BGE-score controls",
+  "interpretation_guard": "low BGE score is not a negative gold label",
+  "items": [
+    {
+      "blind_item_id": "strategy_g1_28dc71ae7836493bd4d2",
+      "move_id": "AM10_offer_one_optional_micro_step",
+      "weak_label_substantively_recognizable": true,
+      "exclusion_handling_acceptable": true,
+      "note": "Joining a book club is a concrete optional step; low semantic score is a retrieval miss, not a Coder-B false positive."
+    },
+    {
+      "blind_item_id": "strategy_g1_35a93c44393159969344",
+      "move_id": "AM10_offer_one_optional_micro_step",
+      "weak_label_substantively_recognizable": true,
+      "exclusion_handling_acceptable": true,
+      "note": "Comfort and lighting are concrete low-burden suggestions."
+    },
+    {
+      "blind_item_id": "strategy_g1_3df6bca96ba523071340",
+      "move_id": "AM10_offer_one_optional_micro_step",
+      "weak_label_substantively_recognizable": true,
+      "exclusion_handling_acceptable": true,
+      "note": "A walk is a concrete step and the factual health claim was separately excluded."
+    },
+    {
+      "blind_item_id": "strategy_g1_c027471301a7940e300e",
+      "move_id": "AM10_offer_one_optional_micro_step",
+      "weak_label_substantively_recognizable": true,
+      "exclusion_handling_acceptable": true,
+      "note": "Replacing a thought is presented as a concrete step; the unsupported research/time-frame claim was separately excluded."
+    },
+    {
+      "blind_item_id": "strategy_g1_c6cd0e113e3087d13b5c",
+      "move_id": "AM13_offer_bounded_hope",
+      "weak_label_substantively_recognizable": true,
+      "exclusion_handling_acceptable": true,
+      "note": "The response attempts hope, but it is deterministic; Coder B correctly co-labeled false-hope exclusion, so the source is not compatible."
+    }
+  ],
+  "summary": {
+    "reviewed_control_activations": 5,
+    "recognizable_move_count": 5,
+    "acceptable_exclusion_handling_count": 5,
+    "conclusion": "The activations do not establish systematic over-labeling. They expose candidate-ranking recall failures for AM10 and show that move recognition can coexist with fail-closed exclusion."
+  }
+}

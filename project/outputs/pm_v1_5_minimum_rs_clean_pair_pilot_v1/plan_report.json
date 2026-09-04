@@ -1,0 +1,58 @@
+{
+  "protocol": "pm-v1.5-minimum-rs-clean-pair-pilot-v1",
+  "status": "READY_FOR_TRAIN_ONLY_GENERATION",
+  "scope": "train_only_development_pilot",
+  "api_calls_made": 0,
+  "runtime_states_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/runtime_states.jsonl",
+  "runtime_states_sha256": "5ff31de14a5e3a0757f561958153a97f295eb04dd0a23febd19257c370d07ded",
+  "strategy_cards_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_strategy_bank_v2_review_candidate_v2/strategy_cards_v2_candidate.jsonl",
+  "strategy_cards_sha256": "139670cf839181bbd286f03444f801b1bf1feeb324d15702f2ca8d288fe1b079",
+  "strategy_lineage_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_strategy_bank_v2_review_candidate_v2/strategy_bank_v2_lineage.jsonl",
+  "strategy_lineage_sha256": "218301b3306c256cf758c00237018109c3741d9ca24190ec72ba7565a43224af",
+  "selected_seed_sources_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/strategy/pm_v1_5_selected_seed_sources.jsonl",
+  "selected_seed_sources_sha256": "c8af66113bb3284cf0b737443800f21a5a53be22589fab72f6624db1d1457065",
+  "strategy_development_seed_source_overlap_count": 0,
+  "supporter_generation_treatment_sha256": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe",
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "seed": 4311,
+  "selected_states": 49,
+  "independent_user_groups": 24,
+  "planned_logical_calls": 98,
+  "boundary_cue_counts": {
+    "advice_welcome": 27,
+    "listen_only": 22
+  },
+  "boundary_cue_group_counts": {
+    "advice_welcome": 24,
+    "listen_only": 22
+  },
+  "selected_strategy_family_counts": {
+    "Affirmation and Reassurance": 13,
+    "Providing Suggestions": 27,
+    "Reflection of feelings": 5,
+    "Restatement or Paraphrasing": 4
+  },
+  "estimated_total_input_tokens": 33691,
+  "maximum_output_tokens": 29400,
+  "human_bank_review_passed": true,
+  "scientific_checks": {
+    "train_only": true,
+    "minimum_eight_groups_per_cue": true,
+    "exact_two_arms_per_state": true,
+    "same_stack_except_strategy_section": true,
+    "raw_supporter_examples_absent": true,
+    "generated_session_summary_omitted": true,
+    "dataset_situation_not_declared_exposed": true,
+    "judge_reward_and_action_outcomes_unused": true,
+    "strategy_sources_disjoint_from_development_seeds": true
+  },
+  "parity_errors": [],
+  "claim_boundary": "This is a controlled train-only treatment-uptake pilot. It cannot establish PM learnability, final quality, risk, cost, or external generalization until outcomes are generated, judged, and evaluated with user-group-held-out procedures.",
+  "plan_sha256": "31156b181e91d1936d0a6c593c837d149cedf103ac2d8301e45d041916ad9d88",
+  "report_sha256": "ed3cc61ed3634ebd4be5a2c4c190c9e7a2dbb68c9d6e6380f1fb04d6320a72a9"
+}

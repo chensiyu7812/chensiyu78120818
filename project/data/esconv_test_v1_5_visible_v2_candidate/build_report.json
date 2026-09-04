@@ -1,0 +1,125 @@
+{
+  "protocol": "pm-v1.5-esconv-single-session-visible-dialogue-only-v2",
+  "status": "COMPLETE",
+  "same_pm_checkpoint_required": true,
+  "retraining_or_esconv_outcome_tuning_authorized": false,
+  "memory_capability_claim_authorized": false,
+  "dialogue_level_situation_exposed_to_pm": false,
+  "legal_actions": [
+    "M0+R0",
+    "M0+RS"
+  ],
+  "turn_selection_protocol": "pm-v1.5-esconv-all-support-eligible-turns-recent-even-window-v1",
+  "turn_selection_uses_response_or_judge_outcomes": false,
+  "all_support_eligible_test_turns_included": true,
+  "raw_supporter_turns": 2275,
+  "excluded_history_below_two_count": 163,
+  "raw_history_turn_counts": {
+    "0": 88,
+    "1": 75,
+    "2": 92,
+    "3": 87,
+    "4": 74,
+    "5": 88,
+    "6": 89,
+    "7": 71,
+    "8": 1611
+  },
+  "test_dialogues": 169,
+  "test_turns": 2112,
+  "current_user_duplicated_in_history_count": 0,
+  "summary_present_count": 0,
+  "history_turn_counts": {
+    "2": 179,
+    "4": 162,
+    "6": 160,
+    "8": 1611
+  },
+  "split_audit": {
+    "protocol": "pm-v1.5-esconv-expanded1300-custom-hash-70-15-15-dialogue-level-v1",
+    "status": "PASS",
+    "corpus_release": "expanded_1300_dialogues",
+    "split_is_official_original_1053_release": false,
+    "split_role": "frozen_custom_dialogue_level_external_partition",
+    "assignment": "stable_hash(seed=13, dialogue_index)",
+    "nominal_proportions": {
+      "train": 0.7,
+      "validation": 0.15,
+      "test": 0.15
+    },
+    "raw_counts": {
+      "test": 180,
+      "train": 934,
+      "validation": 186
+    },
+    "nonoverlap_counts": {
+      "test": 169,
+      "train": 875,
+      "validation": 172
+    },
+    "eligible_test_dialogues": 169,
+    "strategy_bank_source_dialogues": 823,
+    "development_seed_dialogues": 52,
+    "outcomes_used_for_split": false,
+    "checks": {
+      "strategy_bank_sources_are_train_only": true,
+      "strategy_bank_has_no_validation_or_test_sources": true,
+      "development_seeds_are_train_only": true,
+      "development_seeds_have_no_test_sources": true,
+      "development_seed_and_strategy_instances_are_disjoint": true,
+      "test_excludes_evoemo_overlap": true
+    },
+    "esconv_sha256": "aa0556c5b330562ba009c1cd5137486bfa2a7255f33225a6524cd58f7efdd9af",
+    "split_manifest_sha256": "0199fbe1cad5f42aacfd2ba52a92bc6530dfcb33a82bb7bb7e81e5abb6e63e63",
+    "strategy_bank_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e",
+    "selected_seed_sources_sha256": "c8af66113bb3284cf0b737443800f21a5a53be22589fab72f6624db1d1457065"
+  },
+  "observable_state_support": {
+    "protocol": "pm-v1.5-development-external-observable-state-support-v1",
+    "status": "PASS",
+    "role": "structural_support_gate_distribution_shift_report_only",
+    "outcome_labels_used": false,
+    "external_threshold_selection_or_retuning_authorized": false,
+    "state_count": 2112,
+    "history_turn_counts": {
+      "2": 179,
+      "4": 162,
+      "6": 160,
+      "8": 1611
+    },
+    "summary_present_count": 0,
+    "summary_absent_count": 2112,
+    "current_user_tokens_est_min": 1,
+    "current_user_tokens_est_max": 118,
+    "checks": {
+      "history_lengths_within_development_support": true,
+      "summary_treatments_within_development_support": true,
+      "current_user_text_nonempty": true,
+      "no_evoemo_outcome_used_for_support_decision": true
+    }
+  },
+  "development_observable_state_support_sha256": "73337587c070c44e80eaf1f6b557f2c88516d6cd07c033c6b25cb034bb804fcb",
+  "semantic_encoder_spec_sha256": "febe9bbf8f7207607335284b98d7bc97a0b41231a4c2358cba0a027097911f65",
+  "outputs": {
+    "runtime_states": {
+      "path": "data/esconv_test_v1_5_visible_v2_candidate/runtime_states.jsonl",
+      "sha256": "8a2ab466ddc4feee10073dda857ce73db3ca72594e7138db087d27f76b8f4569"
+    },
+    "pm_v2_states": {
+      "path": "data/esconv_test_v1_5_visible_v2_candidate/pm_v2_states.jsonl",
+      "sha256": "4f44f73aceaa87a07119035a85390aaaa99d75a47a4a12acd397b91277d4d899"
+    },
+    "memory_backend": {
+      "path": "data/esconv_test_v1_5_visible_v2_candidate/memory_backend.jsonl",
+      "sha256": "8d18b9920a959c0e3250d92c188392390d8616e0875ad2f68a1a6cdbc4c09559"
+    },
+    "audit_only": {
+      "path": "data/esconv_test_v1_5_visible_v2_candidate/audit_only.jsonl",
+      "sha256": "3e7a4d767ff09055f4faa9a8c01d2cac4436ac11d41637b6331b6499bd4c66c8"
+    },
+    "split_audit": {
+      "path": "data/esconv_test_v1_5_visible_v2_candidate/split_audit.json",
+      "sha256": "323dfb780168fcb81a48bc65b66ba1408a24ed73d63588132ae5f98fbb599282"
+    }
+  }
+}

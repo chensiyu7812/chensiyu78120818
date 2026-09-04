@@ -1,0 +1,98 @@
+{
+  "protocol": "pm-v1.5-fast-controlled-memory-routing-v1",
+  "status": "FROZEN_BEFORE_INTERNAL_HEAD_EVALUATION_AFTER_DEVELOPMENT_DIAGNOSTIC",
+  "date": "2026-07-30",
+  "reason_for_revision": {
+    "rs_result": "The corrected six-feature RS quality-benefit head failed both the 32-to-16 prospective check and 48-group nested OOF; it predicted all off at the frozen 0.60 threshold.",
+    "estimand_problem": "A single stochastic response winner is too noisy to serve as a per-state oracle for a small V1.5 router.",
+    "v1_5_scope_decision": "Train transparent component-use/applicability proxies from pre-response controlled labels; use matched response outcomes only to qualify a resource treatment and to evaluate the final policy."
+  },
+  "research_object": "A low-capacity supervised pre-retrieval gate that predicts whether MP, MS, or ME is needed in a controlled state, then passes the predicted bits through fixed risk and cost constraints before a fixed retrieval/generation stack runs.",
+  "claim_limits": [
+    "This is supervised controlled resource-use routing, not individual treatment-effect estimation.",
+    "The labels are synthetic/evaluator-side intended resource requirements, not clinical need, human welfare, or latent psychological diagnosis.",
+    "A component-use head passing does not by itself prove the retrieved item improves response quality.",
+    "End-to-end quality, interaction/grounding risk, and cost remain separate evaluation outcomes.",
+    "RS is not promoted from this contract; its corrected outcome-based head is NOT_LEARNED."
+  ],
+  "data": {
+    "source": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate",
+    "grain": "one state per controlled case; nine states per synthetic user",
+    "development_users": {
+      "train": 24,
+      "calibration": 12,
+      "combined_for_final_fit": 36
+    },
+    "internal_users": 16,
+    "split_rule": "All fitting, standardization, C selection, and feature decisions use development users only. Internal users are evaluated after this contract is frozen.",
+    "independence": "User-grouped; nine regimes from one user never cross a fold.",
+    "labels": {
+      "MP": "1 iff evaluator_context.needed_memory_sources contains MP",
+      "MS": "1 iff evaluator_context.needed_memory_sources contains MS",
+      "ME": "1 iff evaluator_context.needed_memory_sources contains ME"
+    },
+    "model_must_not_read": [
+      "regime",
+      "needed_memory_sources",
+      "memory_annotations.item_utility",
+      "coverage_rationale",
+      "semantic_family",
+      "strategy_resource_target",
+      "allowed_actions",
+      "generated response",
+      "judge or human outcome"
+    ]
+  },
+  "heads": [
+    "MP",
+    "MS",
+    "ME"
+  ],
+  "features_per_head": [
+    "component_query_similarity",
+    "component_estimated_tokens",
+    "component_min_age_sessions",
+    "component_max_age_sessions",
+    "current_user_token_estimate",
+    "visible_history_turn_count"
+  ],
+  "feature_count": 6,
+  "embedding_features": false,
+  "model": {
+    "primary": "StandardScaler plus L2 logistic regression",
+    "loss": "binary cross-entropy with L2 regularization",
+    "C_grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "selection": "user-grouped development CV; minimum mean log-loss then one-standard-error preference for smaller C",
+    "class_weight": null,
+    "decision_threshold": 0.5
+  },
+  "comparators": [
+    "development prevalence probability",
+    "always off",
+    "single-feature component-query-similarity threshold selected on development only"
+  ],
+  "internal_minimum_signal_gate_per_head": {
+    "model_log_loss_better_than_development_prior": true,
+    "model_brier_better_than_development_prior": true,
+    "accuracy_at_least": 0.8,
+    "balanced_accuracy_at_least": 0.7,
+    "minimum_predicted_on_groups": 8,
+    "minimum_predicted_off_groups": 8
+  },
+  "interpretation": {
+    "passes_prior_but_not_rule": "The learned head recovered controlled out-of-user component-use signal but did not establish an advantage over a transparent similarity rule.",
+    "passes_rule": "The learned head recovered controlled out-of-user component-use signal and improved on the frozen single-feature rule.",
+    "fails": "Keep that component off and report NOT_LEARNED; do not tune on internal users."
+  },
+  "next_gate_after_learning": {
+    "preferred_component": "ME",
+    "reason": "ME was the strongest V1 cost-matched comparator and directly tests memory-use/misuse risk.",
+    "required_before_external": "A small frozen actual-retriever M0+R0 versus ME+R0 matched-pair check must show that the ME treatment is usable; this check evaluates treatment quality/risk, not per-state training labels.",
+    "human_work_cap": "One final compact blind packet; no new RS annotation."
+  }
+}

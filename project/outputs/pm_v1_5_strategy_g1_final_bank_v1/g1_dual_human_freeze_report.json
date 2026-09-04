@@ -1,0 +1,332 @@
+{
+  "protocol": "pm-v1.5-strategy-g1-dual-human-bank-freeze-v1",
+  "status": "G1_COMPLETE_SIX_CARD_BANK_FROZEN_FOR_G2_DEVELOPMENT",
+  "review_1_sha256": "cd2f4b5aabd8c7d79859cb99feaff13b9c6e16f830f4172a5b41f89a8f05aff1",
+  "review_2_sha256": "3afbf50355552ec0c6ff8d49d20bd411af12e95836472198e1504eca824feb5b",
+  "review_row_count_each": 8,
+  "reviewer_1_overall_counts": {
+    "yes": 2,
+    "uncertain": 4,
+    "no": 2
+  },
+  "reviewer_2_overall_counts": {
+    "no": 7,
+    "yes": 1
+  },
+  "field_agreement": {
+    "support_move_clear": {
+      "exact_agreement_count": 8,
+      "denominator": 8
+    },
+    "when_to_use_valid": {
+      "exact_agreement_count": 8,
+      "denominator": 8
+    },
+    "when_not_to_use_valid": {
+      "exact_agreement_count": 4,
+      "denominator": 8
+    },
+    "eligibility_metadata_valid": {
+      "exact_agreement_count": 8,
+      "denominator": 8
+    },
+    "burden_and_risk_valid": {
+      "exact_agreement_count": 7,
+      "denominator": 8
+    },
+    "safe_topic_agnostic_technique": {
+      "exact_agreement_count": 7,
+      "denominator": 8
+    },
+    "source_gate_or_exception_acceptable": {
+      "exact_agreement_count": 3,
+      "denominator": 8
+    },
+    "approve_for_g2_candidate": {
+      "exact_agreement_count": 2,
+      "denominator": 8
+    }
+  },
+  "source_example_agreement": {
+    "move_fit_exact": {
+      "count": 31,
+      "denominator": 40,
+      "rate": 0.775
+    },
+    "missed_hard_exclusion_exact": {
+      "count": 26,
+      "denominator": 40,
+      "rate": 0.65
+    }
+  },
+  "source_packet_grain_correction": {
+    "card_example_judgments": 40,
+    "unique_blind_items": 39,
+    "unique_source_dialogues": 38,
+    "duplicate_blind_items": {
+      "strategy_g1_8a12fcc491a159920da9": [
+        {
+          "source_dialogue_id": "esconv_1052",
+          "move_id": "AM02_ask_one_focused_clarification"
+        },
+        {
+          "source_dialogue_id": "esconv_1052",
+          "move_id": "AM05_grounded_validation"
+        }
+      ]
+    },
+    "cross_card_source_dialogues": {
+      "esconv_1052": [
+        "AM02_ask_one_focused_clarification",
+        "AM05_grounded_validation"
+      ],
+      "esconv_0793": [
+        "AM05_grounded_validation",
+        "AM07_acknowledge_effort_strength_or_resource"
+      ]
+    }
+  },
+  "automated_high_stakes_rescan": {
+    "role": "lexical_review_candidates_not_clinical_labels",
+    "fixed_examples_flagged": 5,
+    "examples": [
+      {
+        "move_id": "AM02_ask_one_focused_clarification",
+        "blind_item_id": "strategy_g1_b6f8a26c6f45554076b7",
+        "source_dialogue_id": "esconv_0159",
+        "lexical_review_hits_not_automatic_clinical_labels": [
+          "aggressive"
+        ]
+      },
+      {
+        "move_id": "AM04_tentative_paraphrase_check",
+        "blind_item_id": "strategy_g1_c693cbe179253e199803",
+        "source_dialogue_id": "esconv_0310",
+        "lexical_review_hits_not_automatic_clinical_labels": [
+          "feel like dying"
+        ]
+      },
+      {
+        "move_id": "AM14_supportive_transition",
+        "blind_item_id": "strategy_g1_1e982abb6d288e84fa04",
+        "source_dialogue_id": "esconv_0263",
+        "lexical_review_hits_not_automatic_clinical_labels": [
+          "can't accept this pain"
+        ]
+      },
+      {
+        "move_id": "AM14_supportive_transition",
+        "blind_item_id": "strategy_g1_6b0c88f46bf30fc55009",
+        "source_dialogue_id": "esconv_0615",
+        "lexical_review_hits_not_automatic_clinical_labels": [
+          "aggressive"
+        ]
+      },
+      {
+        "move_id": "AM15_explore_interpersonal_boundary",
+        "blind_item_id": "strategy_g1_467005c09f2bb52c9df8",
+        "source_dialogue_id": "esconv_0818",
+        "lexical_review_hits_not_automatic_clinical_labels": [
+          "emergency"
+        ]
+      }
+    ]
+  },
+  "source_qualification_conclusion": "FAILED_FOR_PROMOTION_GOLD; weak-source counts and five-example sets are formative provenance only",
+  "included_moves": [
+    "AM01_invite_open_expression",
+    "AM02_ask_one_focused_clarification",
+    "AM04_tentative_paraphrase_check",
+    "AM05_grounded_validation",
+    "AM10_offer_one_optional_micro_step",
+    "AM14_supportive_transition"
+  ],
+  "rejected_moves": [
+    "AM07_acknowledge_effort_strength_or_resource",
+    "AM15_explore_interpersonal_boundary"
+  ],
+  "final_card_count": 6,
+  "runtime_source_response_count": 0,
+  "eligible_for_formal_rs": false,
+  "g1_human_review_complete": true,
+  "additional_g1_human_review_authorized": false,
+  "per_move_decision": {
+    "AM01_invite_open_expression": {
+      "reviewer_1_overall": "yes",
+      "reviewer_2_overall": "no",
+      "reviewer_1_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "uncertain",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "reviewer_2_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "final_g1_decision": "INCLUDE_DEFINITION_AFTER_CORRECTIONS_SOURCE_NOT_QUALIFIED",
+      "decision_basis": "Core move/use/eligibility fields were human-supported; overall approval was confounded by weak-source failures. The card is retained only as a corrected human-definition development resource, with source qualification withdrawn."
+    },
+    "AM02_ask_one_focused_clarification": {
+      "reviewer_1_overall": "uncertain",
+      "reviewer_2_overall": "no",
+      "reviewer_1_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "reviewer_2_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "final_g1_decision": "INCLUDE_DEFINITION_AFTER_CORRECTIONS_SOURCE_NOT_QUALIFIED",
+      "decision_basis": "Core move/use/eligibility fields were human-supported; overall approval was confounded by weak-source failures. The card is retained only as a corrected human-definition development resource, with source qualification withdrawn."
+    },
+    "AM04_tentative_paraphrase_check": {
+      "reviewer_1_overall": "uncertain",
+      "reviewer_2_overall": "yes",
+      "reviewer_1_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "uncertain",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "reviewer_2_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "final_g1_decision": "INCLUDE_DEFINITION_AFTER_CORRECTIONS_SOURCE_NOT_QUALIFIED",
+      "decision_basis": "Core move/use/eligibility fields were human-supported; overall approval was confounded by weak-source failures. The card is retained only as a corrected human-definition development resource, with source qualification withdrawn."
+    },
+    "AM05_grounded_validation": {
+      "reviewer_1_overall": "uncertain",
+      "reviewer_2_overall": "no",
+      "reviewer_1_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "reviewer_2_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "final_g1_decision": "INCLUDE_DEFINITION_AFTER_CORRECTIONS_SOURCE_NOT_QUALIFIED",
+      "decision_basis": "Core move/use/eligibility fields were human-supported; overall approval was confounded by weak-source failures. The card is retained only as a corrected human-definition development resource, with source qualification withdrawn."
+    },
+    "AM07_acknowledge_effort_strength_or_resource": {
+      "reviewer_1_overall": "no",
+      "reviewer_2_overall": "no",
+      "reviewer_1_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "reviewer_2_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "final_g1_decision": "REJECT_NARROW_EXCEPTION_NO_REPLACEMENT",
+      "decision_basis": "Both reviewers rejected the below-20-dialogue exception."
+    },
+    "AM10_offer_one_optional_micro_step": {
+      "reviewer_1_overall": "uncertain",
+      "reviewer_2_overall": "no",
+      "reviewer_1_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "reviewer_2_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "final_g1_decision": "INCLUDE_DEFINITION_AFTER_CORRECTIONS_SOURCE_NOT_QUALIFIED",
+      "decision_basis": "Core move/use/eligibility fields were human-supported; overall approval was confounded by weak-source failures. The card is retained only as a corrected human-definition development resource, with source qualification withdrawn."
+    },
+    "AM14_supportive_transition": {
+      "reviewer_1_overall": "yes",
+      "reviewer_2_overall": "no",
+      "reviewer_1_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "reviewer_2_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "no",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "final_g1_decision": "INCLUDE_DEFINITION_AFTER_CORRECTIONS_SOURCE_NOT_QUALIFIED",
+      "decision_basis": "Core move/use/eligibility fields were human-supported; overall approval was confounded by weak-source failures. The card is retained only as a corrected human-definition development resource, with source qualification withdrawn."
+    },
+    "AM15_explore_interpersonal_boundary": {
+      "reviewer_1_overall": "no",
+      "reviewer_2_overall": "no",
+      "reviewer_1_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "uncertain",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "uncertain",
+        "safe_topic_agnostic_technique": "uncertain"
+      },
+      "reviewer_2_core_fields": {
+        "support_move_clear": "yes",
+        "when_to_use_valid": "yes",
+        "when_not_to_use_valid": "yes",
+        "eligibility_metadata_valid": "yes",
+        "burden_and_risk_valid": "yes",
+        "safe_topic_agnostic_technique": "yes"
+      },
+      "final_g1_decision": "REJECT_NARROW_EXCEPTION_NO_REPLACEMENT",
+      "decision_basis": "Both reviewers rejected the below-20-dialogue exception."
+    }
+  },
+  "next_gate": "G2 transparent eligibility and lexical-vs-BGE retrieval qualification"
+}

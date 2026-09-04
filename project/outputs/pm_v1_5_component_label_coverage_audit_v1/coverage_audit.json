@@ -1,0 +1,225 @@
+{
+  "protocol": "pm-v1.5-component-label-covariate-coverage-audit-v1",
+  "status": "COMPLETE_OUTCOME_BLIND_COVERAGE_DIAGNOSIS",
+  "external_outcomes_used": false,
+  "component_reports": {
+    "MP": {
+      "available_internal_candidate_rows": 416,
+      "labeled_development_rows": 48,
+      "external_candidate_rows": 114,
+      "unique_candidate_patterns": {
+        "all_internal": 16,
+        "labeled_development": 9,
+        "external": 9
+      },
+      "external_exact_pattern_coverage": {
+        "by_all_internal_rows": 80,
+        "by_all_internal_fraction": 0.7017543859649122,
+        "by_labeled_development_rows": 0,
+        "by_labeled_development_fraction": 0.0
+      },
+      "external_joint_range_support": {
+        "by_all_internal": {
+          "reference_rows": 416,
+          "evaluation_rows": 114,
+          "supported_rows": 114,
+          "supported_fraction": 1.0,
+          "minimum": {
+            "top1_relevance_bucket": 1.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 1.0,
+            "retrieved_fraction": 0.5,
+            "minimum_relative_age_bucket": 5.0,
+            "maximum_relative_age_bucket": 5.0
+          },
+          "maximum": {
+            "top1_relevance_bucket": 4.0,
+            "relevance_margin_bucket": 4.0,
+            "token_cost_bucket": 2.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 5.0,
+            "maximum_relative_age_bucket": 5.0
+          }
+        },
+        "by_labeled_development": {
+          "reference_rows": 48,
+          "evaluation_rows": 114,
+          "supported_rows": 0,
+          "supported_fraction": 0.0,
+          "minimum": {
+            "top1_relevance_bucket": 2.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 2.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 5.0,
+            "maximum_relative_age_bucket": 5.0
+          },
+          "maximum": {
+            "top1_relevance_bucket": 4.0,
+            "relevance_margin_bucket": 4.0,
+            "token_cost_bucket": 2.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 5.0,
+            "maximum_relative_age_bucket": 5.0
+          }
+        }
+      },
+      "labeled_full_feature_pattern_diagnostic": {
+        "unique_patterns": 27,
+        "singleton_patterns": 15,
+        "conflicting_patterns": 8,
+        "rows_in_conflicting_patterns": 21,
+        "optimistic_in_sample_majority_accuracy": 0.8125,
+        "interpretation": "This is an optimistic descriptive ceiling within exact observed feature patterns, not a valid OOF estimate."
+      }
+    },
+    "MS": {
+      "available_internal_candidate_rows": 416,
+      "labeled_development_rows": 48,
+      "external_candidate_rows": 204,
+      "unique_candidate_patterns": {
+        "all_internal": 98,
+        "labeled_development": 33,
+        "external": 50
+      },
+      "external_exact_pattern_coverage": {
+        "by_all_internal_rows": 127,
+        "by_all_internal_fraction": 0.6225490196078431,
+        "by_labeled_development_rows": 62,
+        "by_labeled_development_fraction": 0.30392156862745096
+      },
+      "external_joint_range_support": {
+        "by_all_internal": {
+          "reference_rows": 416,
+          "evaluation_rows": 204,
+          "supported_rows": 177,
+          "supported_fraction": 0.8676470588235294,
+          "minimum": {
+            "top1_relevance_bucket": 2.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 1.0,
+            "retrieved_fraction": 0.5,
+            "minimum_relative_age_bucket": 1.0,
+            "maximum_relative_age_bucket": 3.0
+          },
+          "maximum": {
+            "top1_relevance_bucket": 5.0,
+            "relevance_margin_bucket": 5.0,
+            "token_cost_bucket": 2.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 4.0,
+            "maximum_relative_age_bucket": 5.0
+          }
+        },
+        "by_labeled_development": {
+          "reference_rows": 48,
+          "evaluation_rows": 204,
+          "supported_rows": 177,
+          "supported_fraction": 0.8676470588235294,
+          "minimum": {
+            "top1_relevance_bucket": 3.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 1.0,
+            "retrieved_fraction": 0.5,
+            "minimum_relative_age_bucket": 1.0,
+            "maximum_relative_age_bucket": 3.0
+          },
+          "maximum": {
+            "top1_relevance_bucket": 5.0,
+            "relevance_margin_bucket": 5.0,
+            "token_cost_bucket": 2.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 4.0,
+            "maximum_relative_age_bucket": 5.0
+          }
+        }
+      },
+      "labeled_full_feature_pattern_diagnostic": {
+        "unique_patterns": 44,
+        "singleton_patterns": 40,
+        "conflicting_patterns": 3,
+        "rows_in_conflicting_patterns": 6,
+        "optimistic_in_sample_majority_accuracy": 0.9375,
+        "interpretation": "This is an optimistic descriptive ceiling within exact observed feature patterns, not a valid OOF estimate."
+      }
+    },
+    "ME": {
+      "available_internal_candidate_rows": 416,
+      "labeled_development_rows": 48,
+      "external_candidate_rows": 204,
+      "unique_candidate_patterns": {
+        "all_internal": 88,
+        "labeled_development": 31,
+        "external": 39
+      },
+      "external_exact_pattern_coverage": {
+        "by_all_internal_rows": 99,
+        "by_all_internal_fraction": 0.4852941176470588,
+        "by_labeled_development_rows": 45,
+        "by_labeled_development_fraction": 0.22058823529411764
+      },
+      "external_joint_range_support": {
+        "by_all_internal": {
+          "reference_rows": 416,
+          "evaluation_rows": 204,
+          "supported_rows": 192,
+          "supported_fraction": 0.9411764705882353,
+          "minimum": {
+            "top1_relevance_bucket": 3.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 1.0,
+            "retrieved_fraction": 0.333333,
+            "minimum_relative_age_bucket": 1.0,
+            "maximum_relative_age_bucket": 3.0
+          },
+          "maximum": {
+            "top1_relevance_bucket": 5.0,
+            "relevance_margin_bucket": 5.0,
+            "token_cost_bucket": 4.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 4.0,
+            "maximum_relative_age_bucket": 5.0
+          }
+        },
+        "by_labeled_development": {
+          "reference_rows": 48,
+          "evaluation_rows": 204,
+          "supported_rows": 122,
+          "supported_fraction": 0.5980392156862745,
+          "minimum": {
+            "top1_relevance_bucket": 4.0,
+            "relevance_margin_bucket": 1.0,
+            "token_cost_bucket": 1.0,
+            "retrieved_fraction": 0.333333,
+            "minimum_relative_age_bucket": 2.0,
+            "maximum_relative_age_bucket": 3.0
+          },
+          "maximum": {
+            "top1_relevance_bucket": 5.0,
+            "relevance_margin_bucket": 5.0,
+            "token_cost_bucket": 4.0,
+            "retrieved_fraction": 1.0,
+            "minimum_relative_age_bucket": 4.0,
+            "maximum_relative_age_bucket": 5.0
+          }
+        }
+      },
+      "labeled_full_feature_pattern_diagnostic": {
+        "unique_patterns": 44,
+        "singleton_patterns": 40,
+        "conflicting_patterns": 1,
+        "rows_in_conflicting_patterns": 2,
+        "optimistic_in_sample_majority_accuracy": 0.9791666666666666,
+        "interpretation": "This is an optimistic descriptive ceiling within exact observed feature patterns, not a valid OOF estimate."
+      }
+    }
+  },
+  "finding": "The complete 416-state internal catalog covers materially more external covariate patterns than the 48 labeled development rows per head. The current label selection, not only the shared compiler, is a transport bottleneck.",
+  "repair_boundary": "External covariates may diagnose coverage before outcomes, but external responses, quality, risk, or PM actions must not select new training rows. Any repaired model requires untouched external outcome groups for confirmation.",
+  "lineage": {
+    "labels_sha256": "1a52463ca8856c6d269716a3ad926c09291b329e1307c6535dc8f3b59cb5b93b",
+    "blueprint_sha256": "d620ed03004b042b355d357f00c9d82739ea2e3a65711d08d9b758edf702ab75",
+    "internal_descriptors_sha256": "d4427b71a4b7dfb50fc71d96939442f28a635f0b1827a85c5f0a13a6e0249684",
+    "external_descriptors_sha256": "1eecdb3b8f048971f5039ca13cd14315fd98f910055fc6e272cdfced8048b715"
+  }
+}

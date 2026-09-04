@@ -1,0 +1,106 @@
+{
+  "protocol": "pm-v1.5-v5-itt-fit-design-v1",
+  "status": "PRE_OUTCOME_DESIGN_FROZEN_EXECUTION_PLAN_NOT_YET_MATERIALIZED",
+  "date": "2026-08-03",
+  "method_version": "V1_5_V5_ITT_SEPARATED_POLICY",
+  "estimand": "expected net deployment value of requesting one component under the frozen typed-adapter plus response-only generator stack",
+  "treatment": "requested_component_bit",
+  "unit": "independent user-state by target component by frozen generation seed",
+  "factorization": {
+    "components": ["MP", "MS", "ME", "RS"],
+    "direct_16_classification": false,
+    "other_component_background": "balanced and fixed before outcomes",
+    "joint_runtime": "four requested bits projected to the existing 16 legal actions after independent head inference"
+  },
+  "fit_panel": {
+    "independent_states_per_component": 64,
+    "total_independent_states": 256,
+    "arms_per_state": 2,
+    "arm_definition": ["target_component_requested_off", "target_component_requested_on"],
+    "generation_seeds_per_arm": 2,
+    "planned_primary_response_calls": 1024,
+    "candidate_requirement": "exact Rank-1 candidate discovered before assignment and mechanically valid for the current user/version",
+    "semantic_range": "include fit, redundant, weak-fit, and goal-mismatch candidates unless an objective backend hard gate makes treatment impossible",
+    "external_content_used": false
+  },
+  "opportunity_layer_reuse": {
+    "MP": "outputs/pm_v1_5b_mp_ms_opportunity_heads_v1/fit_report.json",
+    "MS": "outputs/pm_v1_5b_mp_ms_opportunity_heads_v1/fit_report.json",
+    "ME": "outputs/pm_v1_5_scale_stable_memory_opportunity_heads_v1/fit_report.json",
+    "RS": "outputs/pm_v1_5_same_bank_rs_opportunity_router_fit_v1/fit_report.json",
+    "role": "pre-action mask or input only; never copied as ITT value gold"
+  },
+  "frozen_generator_candidate": {
+    "provider": "NVIDIA API",
+    "model": "meta/llama-3.1-8b-instruct",
+    "final_identity_freeze_required_before_calls": true,
+    "generator_outputs": "response text only"
+  },
+  "quality_measurement": {
+    "human_pairwise_labels": ["ON_materially_better", "materially_equivalent", "OFF_materially_better", "uncertain"],
+    "primary_rule": "Only a difference that could change adoption is a win; style-only differences are ties.",
+    "seed_aggregation": "ON benefit requires at least one ON material win and no OFF material win across the two frozen seeds; opposite or conflicting evidence is nonpositive for the hard-label primary and retained numerically for sensitivity analysis."
+  },
+  "risk_measurement": {
+    "construct": "material interaction-and-grounding risk, not clinical safety",
+    "categories": [
+      "stale_or_conflicting_use",
+      "unsupported_personal_claim",
+      "overgeneralized_pattern_or_cause",
+      "fabricated_recall",
+      "explicit_boundary_violation",
+      "excessive_directiveness",
+      "internal_resource_label_exposure"
+    ],
+    "rule": "Any material risk in an ON-arm final response vetoes the hard ON label; risk remains separately reported."
+  },
+  "cost_measurement": {
+    "primary": ["incremental_generator_input_tokens", "injected_item_count"],
+    "secondary": ["completion_tokens", "fallback_rate"],
+    "decision_rule": "A quality tie is OFF because requested resources add nonzero context cost; explicit token budgets are applied again by joint feasibility."
+  },
+  "itt_row_rules": {
+    "invalid_only": [
+      "assignment_mismatch",
+      "wrong_resource_or_owner_binding",
+      "requested_resource_not_presented_to_executor",
+      "missing_final_response_or_usage",
+      "executor_or_generator_identity_drift"
+    ],
+    "valid_outcomes": [
+      "functional_nonuse",
+      "guard_or_context_only_fallback",
+      "quality_tie_or_loss",
+      "material_misuse"
+    ]
+  },
+  "primary_learner": {
+    "model": "standardized group-weighted L2 logistic regression",
+    "features_per_component": "5-7 pre-action transparent factors",
+    "grouping": "user and semantic-family grouped OOF",
+    "threshold": 0.5,
+    "hyperparameters_and_fold_seeds": "must be materialized before response generation",
+    "challenger": "one frozen BGE-small representation challenger after transparent primary; no tuning from challenger outcome"
+  },
+  "fit_promotion_gates": {
+    "balanced_accuracy_min": 0.65,
+    "recall_min": 0.6,
+    "specificity_min": 0.6,
+    "brier_beats_prevalence_and_transparent_rule": true,
+    "independent_positive_groups_min": 8,
+    "independent_nonpositive_groups_min": 8
+  },
+  "confirmation_and_test": {
+    "fresh_confirmation_states_per_component": 32,
+    "sealed_internal_states_per_component": 32,
+    "confirmation_consumed_once": true,
+    "external_feedback_to_method": false
+  },
+  "forbidden": [
+    "exclude a row because the generator ignored the resource",
+    "use realized action as treatment",
+    "use generator explanations or copied spans as gold",
+    "create another pre-FIT Step2 human packet",
+    "modify prompts, features, thresholds, samples, or labels from FIT, confirmation, sealed, ESConv, or EvoEmo outcomes"
+  ]
+}

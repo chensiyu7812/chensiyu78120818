@@ -1,0 +1,27 @@
+{
+  "protocol": "pm-v1.5-support-need-human-expansion-packet-binding-v2",
+  "status": "PREPARED_FRESH_TRAIN_ONLY_AWAITING_HUMAN_ANNOTATION",
+  "output_directory": "outputs/pm_v1_5_support_need_expansion_packet_v2_candidate",
+  "contract_sha256": "5e676a9d0d65d13ec61f7bc3f4342f294715af3d6d2b5cafeb68fcbeeac33ab9",
+  "files": {
+    "qualification_contract.json": "4a1b8975170eabac2f81987f8892d3dad01d0f2a0bd204e653dd4574e373379b",
+    "human_blind_packet.jsonl": "38e46478cdcff2e9cbc2a552737f974e99607e7af3644be6627edcd481e08481",
+    "human_annotation_template.jsonl": "bb73797c48315805e08b4b6fff076e9ede144c39612bdf5a595aff0aa4e4e411",
+    "private_lineage.jsonl": "b01adc48fa54c4ce5fb219242af2210fb8ad9f3c2750f7776e34d084abf7350f",
+    "human_blind_review.html": "9d90b069c5eea0e9443c066e8334983f5232a4a5600f2df5eb698013c131351a"
+  },
+  "source_packet_binding": "data/pm_v1_5_contracts/support_need_human_packet_v1.json",
+  "packet_size": 24,
+  "fit_anchor_count": 16,
+  "untouched_confirmation_count": 8,
+  "selection_used_completed_human_labels": false,
+  "selection_used_target_supporter_responses": false,
+  "selection_used_target_strategy_annotations": false,
+  "selection_used_surveys": false,
+  "blind_packet_exposes_anchor_role": false,
+  "automatic_gold_label": false,
+  "pm_action_gold": false,
+  "api_calls_made": 0,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false
+}

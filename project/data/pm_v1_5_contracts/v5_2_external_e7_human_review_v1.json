@@ -1,0 +1,114 @@
+{
+  "protocol": "pm-v1.5-v5.2-external-e7-human-review-v1",
+  "status": "FROZEN_BEFORE_E6_OR_E7_OUTCOMES",
+  "purpose": "One final outcome-blind stratified human evaluation of external ESConv and EvoEmo response quality and interaction-and-grounding risk. ES-MemEval QA is excluded because it uses objective answer metrics plus the separate E6-QA robustness judge.",
+  "inputs": {
+    "response_core_plan": "outputs/pm_v1_5_v5_2_external_e2_plan_v1/response_core_call_plan_private.jsonl",
+    "response_raw_plan": "outputs/pm_v1_5_v5_2_external_e3_retrieval_v1/response_raw_call_plan_private.jsonl",
+    "response_core_outcomes": "outputs/pm_v1_5_v5_2_external_e4_degenerate_exclusion_continuation_execution_v1/response_core_outcomes_private.jsonl",
+    "response_raw_outcomes": "outputs/pm_v1_5_v5_2_external_e4_degenerate_exclusion_continuation_execution_v1/response_raw_outcomes_private.jsonl",
+    "registered_invalid_generation": "outputs/pm_v1_5_v5_2_external_e4_degenerate_exclusion_continuation_execution_v1/registered_invalid_generation.json"
+  },
+  "forbidden_inputs": [
+    "any E6 LLM-judge request or outcome",
+    "any E7 human annotation or partial aggregate",
+    "quality or risk inferred from E5 lexical or resource-use proxies",
+    "gold QA answer, evidence, capability or E6-QA outcome"
+  ],
+  "representative_seed": {
+    "rule": "one seed per state selected only by protocol hash over state_id",
+    "reason": "E7 estimates human response quality/risk at the user/dialogue surface; E6 retains both stochastic seeds for full robustness. The representative seed must not depend on response text or outcome."
+  },
+  "quality_sampling": {
+    "esconv": {
+      "state_clusters": 64,
+      "cluster_unit": "ESConv dialogue/user",
+      "comparators": [
+        "always_off",
+        "fixed_high_eligible",
+        "transparent_rule",
+        "cost_matched_fixed"
+      ],
+      "alias_rule": "Collapse comparator aliases that map to the same physical call before human review."
+    },
+    "evoemo_core": {
+      "users": 12,
+      "states_per_user": 4,
+      "state_clusters": 48,
+      "comparators": [
+        "always_off",
+        "fixed_high_eligible",
+        "transparent_rule",
+        "cost_matched_fixed"
+      ]
+    },
+    "evoemo_raw_secondary": {
+      "users": 12,
+      "states_per_user": 2,
+      "state_clusters": 24,
+      "comparators": [
+        "raw_session_top4_plus_frozen_strategy",
+        "all_raw_sessions_plus_frozen_strategy"
+      ],
+      "role": "secondary localization table, not a replacement for the core policy table"
+    },
+    "pair_rule": "Compare frozen learned_pm with each available comparator on the same state and representative seed.",
+    "position_rule": "A/B position is protocol-hashed and balanced within domain-comparator strata without reading response text.",
+    "identity_rule": "Byte-identical response pairs are deterministic ties and do not require a human decision; exact duplicate public surfaces are reviewed once and propagated."
+  },
+  "risk_sampling": {
+    "esconv": {
+      "state_clusters": 32,
+      "selection": "nested protocol-hashed subset of the 64 ESConv quality clusters",
+      "responses": "all distinct physical core-policy calls available for each selected state and representative seed"
+    },
+    "evoemo_core": {
+      "users": 12,
+      "states_per_user": 2,
+      "state_clusters": 24,
+      "selection": "nested protocol-hashed subset of the four quality states per user",
+      "responses": "all distinct physical core-policy calls available for each selected state and representative seed"
+    },
+    "evoemo_raw_secondary": {
+      "users": 12,
+      "states_per_user": 1,
+      "state_clusters": 12,
+      "selection": "nested protocol-hashed subset of the two raw-quality states per user",
+      "responses": "both valid raw-session conditions"
+    },
+    "surface_rule": "Review each exact (visible conversation, authorized evidence/instruction, candidate response) surface once and propagate to every sampled call/policy alias sharing it."
+  },
+  "review_contract": {
+    "quality": "Anonymous A/B review using visible conversation and replies only; treatment, policy, component, memory and dataset identity are absent from the public packet.",
+    "risk": "Single-response interaction-and-grounding material-risk review using visible conversation, exact authorized evidence/instruction and candidate response; do not re-score quality or resource functional contribution.",
+    "risk_categories": [
+      "stale_or_conflicting_use",
+      "unsupported_personal_claim",
+      "overgeneralized_pattern_or_cause",
+      "fabricated_recall",
+      "explicit_boundary_violation",
+      "excessive_directiveness",
+      "internal_resource_label_exposure"
+    ],
+    "independent_overlap_fraction": 0.2,
+    "overlap_rule": "Select about 20% independently within public analysis strata by protocol hash; use the same public surface and A/B position so agreement measures the same semantic decision.",
+    "adjudication": "One centralized disagreement adjudication after both panels are complete; no sample, PM, generator, resource, threshold, baseline or rubric change is allowed."
+  },
+  "analysis_contract": {
+    "cluster_units": {
+      "esconv": "dialogue/user",
+      "evoemo": "user"
+    },
+    "quality_and_risk_remain_separate": true,
+    "automatic_cost_coverage_routing_source": "E5/E5b only",
+    "human_primary_llm_judge_secondary": true,
+    "partial_panel_peeking_for_method_changes_forbidden": true
+  },
+  "attestations": {
+    "e6_judge_outcomes_read": false,
+    "sampling_used_llm_judge_result": false,
+    "sampling_used_quality_or_risk_outcome": false,
+    "pm_route_generator_or_resource_changed": false,
+    "api_calls": 0
+  }
+}

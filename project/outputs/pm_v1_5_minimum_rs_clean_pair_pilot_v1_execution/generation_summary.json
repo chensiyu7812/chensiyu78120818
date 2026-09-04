@@ -1,0 +1,11 @@
+{
+  "protocol": "pm-v1.5-resumable-development-execution-v1",
+  "status": "COMPLETE",
+  "planned_calls": 98,
+  "completed_calls": 98,
+  "completed_now": 98,
+  "remaining_calls": 0,
+  "one_shot_execution_required": false,
+  "resume_key": "pair_id+arm",
+  "api_calls_made_this_run": 98
+}

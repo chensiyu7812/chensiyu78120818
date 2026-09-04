@@ -1,0 +1,251 @@
+{
+  "protocol": "pm-v1.5-final-h1-v1-data-quality-audit-v1",
+  "status": "INVALID_FOR_TRAINING_REBUILD_H1_PACKET",
+  "intended_grain": "one visible state by one exact rank-1 component candidate",
+  "states": 256,
+  "present_candidate_judgments": 813,
+  "deterministic_absent_judgments": 211,
+  "component_summary": {
+    "MP": {
+      "present_candidates": 191,
+      "on": 4,
+      "off": 187,
+      "abstain": 0,
+      "on_rate": 0.020942408376963352,
+      "majority_constant_accuracy": 0.9790575916230366,
+      "unique_nonempty_note_templates": 7,
+      "most_common_note": {
+        "count": 72,
+        "text": "当前用户已在本轮明确提出相同的回复格式或互动边界，候选偏好没有新增作用。"
+      }
+    },
+    "MS": {
+      "present_candidates": 247,
+      "on": 109,
+      "off": 138,
+      "abstain": 0,
+      "on_rate": 0.44129554655870445,
+      "majority_constant_accuracy": 0.5587044534412956,
+      "unique_nonempty_note_templates": 7,
+      "most_common_note": {
+        "count": 107,
+        "text": "候选是同一主题的既往会话摘要，可直接支持当前事实核对或提醒请求。"
+      }
+    },
+    "ME": {
+      "present_candidates": 247,
+      "on": 82,
+      "off": 165,
+      "abstain": 0,
+      "on_rate": 0.3319838056680162,
+      "majority_constant_accuracy": 0.6680161943319838,
+      "unique_nonempty_note_templates": 7,
+      "most_common_note": {
+        "count": 71,
+        "text": "候选包含同一主题下的过去动作与结果，可作为用户所问既往记录的直接事实依据。"
+      }
+    },
+    "RS": {
+      "present_candidates": 128,
+      "on": 121,
+      "off": 7,
+      "abstain": 0,
+      "on_rate": 0.9453125,
+      "majority_constant_accuracy": 0.9453125,
+      "unique_nonempty_note_templates": 4,
+      "most_common_note": {
+        "count": 121,
+        "text": "该原子支持动作与用户当前明确请求一致，能够以单一、低负担方式推进本轮对话。"
+      }
+    }
+  },
+  "split_component_summary": {
+    "FIT": {
+      "MP": {
+        "off": 92,
+        "on": 3
+      },
+      "MS": {
+        "off": 69,
+        "on": 56
+      },
+      "ME": {
+        "off": 87,
+        "on": 38
+      },
+      "RS": {
+        "on": 62,
+        "off": 2
+      }
+    },
+    "FRESH_CONFIRMATION": {
+      "MP": {
+        "off": 47
+      },
+      "MS": {
+        "off": 34,
+        "on": 27
+      },
+      "ME": {
+        "off": 40,
+        "on": 21
+      },
+      "RS": {
+        "on": 29,
+        "off": 3
+      }
+    },
+    "SEALED_INTERNAL_TEST": {
+      "MP": {
+        "off": 48,
+        "on": 1
+      },
+      "MS": {
+        "on": 26,
+        "off": 35
+      },
+      "ME": {
+        "on": 23,
+        "off": 38
+      },
+      "RS": {
+        "on": 30,
+        "off": 2
+      }
+    }
+  },
+  "duplicate_audit": {
+    "unique_public_payloads": 219,
+    "exact_duplicate_groups": 37,
+    "states_in_exact_duplicate_groups": 74,
+    "duplicate_excess_rows": 37,
+    "cross_split_exact_duplicate_groups": 36,
+    "examples": [
+      [
+        "h1_state_2bc6ad8766942d02e0592fc8",
+        "h1_state_e61300cca2a5bae9d25c1d31"
+      ],
+      [
+        "h1_state_761f87efd4bf7c857ce800d9",
+        "h1_state_91a28ad0ac42226d98202c6e"
+      ],
+      [
+        "h1_state_181cccef01bc89b1d31fcb5f",
+        "h1_state_ed36ede9486edf00a6caa480"
+      ],
+      [
+        "h1_state_01aea1a0b3d89ce21ef2b0f2",
+        "h1_state_2b7d1cc75a8b5a5ebfc08792"
+      ],
+      [
+        "h1_state_1250d73a3349a254f00a2438",
+        "h1_state_ee6f9c0f721ca159719d6ef3"
+      ],
+      [
+        "h1_state_879e85f1a96fee8ec635cf24",
+        "h1_state_f91bb210944b55065a78c708"
+      ],
+      [
+        "h1_state_cb5f3063eae6f4d4dfc4886e",
+        "h1_state_a4225184daff073c66a4fb64"
+      ],
+      [
+        "h1_state_3f453f565297bb67a16257f7",
+        "h1_state_9ae45ebe242b1696e4468b25"
+      ],
+      [
+        "h1_state_45628fb9bcdc8e46eb6267e9",
+        "h1_state_c96e0af6dc5be38837fccece"
+      ],
+      [
+        "h1_state_0a5d1d0c8b4a10c4d5580519",
+        "h1_state_598ee6512afcc4a2438d9cb5"
+      ],
+      [
+        "h1_state_aadd339645661d3dfa10e8a4",
+        "h1_state_b1bd7f13870227e21586da31"
+      ],
+      [
+        "h1_state_58c98684e49901af70959e71",
+        "h1_state_b12aced90576dd5c245f586b"
+      ]
+    ]
+  },
+  "critical_findings": [
+    {
+      "id": "CROSS_SPLIT_EXACT_DUPLICATES",
+      "severity": "CRITICAL",
+      "evidence": {
+        "exact_duplicate_groups": 37,
+        "states_in_duplicate_groups": 74,
+        "cross_split_duplicate_groups": 36
+      },
+      "impact": "Confirmation and sealed estimates would reuse identical public states seen in another split."
+    },
+    {
+      "id": "MP_DEGENERATE_LABEL_DISTRIBUTION",
+      "severity": "CRITICAL",
+      "evidence": {
+        "present_candidates": 191,
+        "on": 4,
+        "off": 187,
+        "abstain": 0,
+        "on_rate": 0.020942408376963352,
+        "majority_constant_accuracy": 0.9790575916230366,
+        "unique_nonempty_note_templates": 7,
+        "most_common_note": {
+          "count": 72,
+          "text": "当前用户已在本轮明确提出相同的回复格式或互动边界，候选偏好没有新增作用。"
+        }
+      },
+      "impact": "An always-OFF classifier already exceeds the planned accuracy gate, so MP learning cannot be demonstrated."
+    },
+    {
+      "id": "RS_DEGENERATE_AND_INCREMENTALITY_NOT_ADJUDICATED",
+      "severity": "CRITICAL",
+      "evidence": {
+        "present_candidates": 128,
+        "on": 121,
+        "off": 7,
+        "abstain": 0,
+        "on_rate": 0.9453125,
+        "majority_constant_accuracy": 0.9453125,
+        "unique_nonempty_note_templates": 4,
+        "most_common_note": {
+          "count": 121,
+          "text": "该原子支持动作与用户当前明确请求一致，能够以单一、低负担方式推进本轮对话。"
+        }
+      },
+      "impact": "An always-ON classifier already exceeds the planned accuracy gate, while the dominant rationale establishes surface fit rather than incremental value over R0."
+    },
+    {
+      "id": "NO_INDEPENDENT_OVERLAP_LABELS_YET",
+      "severity": "HIGH",
+      "evidence": {
+        "primary_states": 256,
+        "independent_overlap_received": false
+      },
+      "impact": "The pre-registered H1 agreement and kappa gates cannot be evaluated."
+    }
+  ],
+  "decision": {
+    "annotations_usable_as_final_gold": false,
+    "annotations_usable_as_development_diagnostic": true,
+    "training_authorized": false,
+    "required_remediation": [
+      "rebuild unique public states and enforce zero exact/near-template leakage across splits",
+      "construct genuinely incremental MP preference/profile positives rather than current-turn echoes",
+      "construct MS positives that add a prior distinction/outcome/open goal beyond the visible turn",
+      "separate RS card surface fit from incremental expected value over R0 and balance both ON and OFF candidate-present cases",
+      "freeze the one-point boundary rule before review",
+      "run static shortcut and class-balance gates before requesting another human label"
+    ]
+  },
+  "provenance": {
+    "packet_sha256": "58a776d40fdd740dca2a07205c7eabf89da299934ba39d5cf301457248388b2c",
+    "binding_sha256": "1231cd922c02aacde24029872109fd5e899155b09a00a57fdfd393117e5f00dd",
+    "annotations_sha256": "57c258a2f2a633db1a1a98487baae587052c07c91071bdb506fb8c34bf8e3c70",
+    "generated_response_or_outcome_read": false,
+    "external_lockbox_read": false
+  }
+}

@@ -1,0 +1,1531 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_gpt_u005",
+  "content_author": "chatgpt_pro",
+  "primary_superdomain": "relationships",
+  "secondary_superdomains": [
+    "work_education",
+    "finance_housing",
+    "relocation_cultural_adaptation"
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01_partner_trust",
+      "label": "trust and decision-making with long-term partner after major plans were disclosed late"
+    },
+    {
+      "thread_id": "thread_02_separation_transition",
+      "label": "deciding whether to repair, pause, or end the partnership and handling the transition"
+    },
+    {
+      "thread_id": "thread_03_friendship_boundary",
+      "label": "using close friendship for support without making the friend responsible for every relationship decision"
+    },
+    {
+      "thread_id": "thread_04_sister_support",
+      "label": "support from an older sister and keeping family concern from becoming pressure"
+    },
+    {
+      "thread_id": "thread_05_move_housing",
+      "label": "housing and relocation decisions connected to relationship and work changes"
+    },
+    {
+      "thread_id": "thread_06_work_transition",
+      "label": "career change and practical work decisions occurring alongside relationship upheaval"
+    }
+  ],
+  "profile_history": [
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "job",
+      "field_value": "customer insights analyst",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I work as a customer insights analyst",
+      "valid_from_session": 1,
+      "valid_until_session": 10,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "workplace_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "name",
+      "field_value": "Priya Nair",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "Priya Nair",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "addressing_or_disambiguating_user_identity"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "age",
+      "field_value": "34",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "34",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "age_relevant_feasibility_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_nationality_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "nationality",
+      "field_value": "Indian",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I'm Indian",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "country_specific_process_or_language_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_location_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "location",
+      "field_value": "Dublin, Ireland",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I live in Dublin, Ireland",
+      "valid_from_session": 2,
+      "valid_until_session": 10,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "local_logistics",
+        "commute",
+        "housing",
+        "location_specific_feasibility"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "gender",
+      "field_value": "woman",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I'm a woman",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "gender_relevant_context_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_education_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "education",
+      "field_value": "MSc in marketing",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I have an MSc in marketing",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "education_or_training_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_location_v2",
+      "subtype": "MP_PROFILE",
+      "item_role": "update",
+      "field_type": "location",
+      "field_value": "Cork, Ireland",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s011_t01"
+      ],
+      "literal_source_span": "I've moved to Cork, Ireland",
+      "valid_from_session": 11,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "p2r_formal_gpt_u005_mp_profile_location_v1",
+      "applicability_scope": [
+        "local_logistics",
+        "commute",
+        "housing",
+        "location_specific_feasibility"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_profile_job_v2",
+      "subtype": "MP_PROFILE",
+      "item_role": "update",
+      "field_type": "job",
+      "field_value": "research operations manager at a regional consumer cooperative",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s011_t01"
+      ],
+      "literal_source_span": "my job is now research operations manager at a regional consumer cooperative",
+      "valid_from_session": 11,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "p2r_formal_gpt_u005_mp_profile_job_v1",
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "workplace_context"
+      ]
+    }
+  ],
+  "response_preference_history": [
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_preference_optional_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "one_optional_suggestion",
+      "preference_text": "If you suggest something, one optional next step is easier for me than a list.",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "If you suggest something, one optional next step is easier for me than a list.",
+      "valid_from_session": 2,
+      "valid_until_session": 7,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_preference_concise_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "concise_factual_answer",
+      "preference_text": "For decisions, I prefer a concise answer before a long explanation because otherwise I lose track of what I'm actually asking.",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s004_t01"
+      ],
+      "literal_source_span": "For decisions, I prefer a concise answer before a long explanation because otherwise I lose track of what I'm actually asking.",
+      "valid_from_session": 4,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u005_mp_preference_listen_v2",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "listen_only_no_advice",
+      "preference_text": "I don't want suggestions about Evan tonight. I need you to stay with what I'm saying and not turn it into a decision tree.",
+      "owner_id": "p2r_formal_gpt_u005",
+      "source_turn_ids": [
+        "s008_t01"
+      ],
+      "literal_source_span": "I don't want suggestions about Evan tonight. I need you to stay with what I'm saying and not turn it into a decision tree.",
+      "valid_from_session": 8,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "p2r_formal_gpt_u005_mp_preference_optional_v1"
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_evan",
+      "name": "Evan Doyle",
+      "relationship": "long-term partner at the start of the trajectory",
+      "valid_from_session": 1,
+      "valid_until_session": 10,
+      "status_after_session_10": "former partner after mutual separation"
+    },
+    {
+      "entity_id": "entity_tessa",
+      "name": "Tessa Byrne",
+      "relationship": "close friend in Dublin",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "status_after_session_10": "ongoing close friend"
+    },
+    {
+      "entity_id": "entity_meera",
+      "name": "Meera Nair",
+      "relationship": "older sister living in London",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "status_after_session_10": "ongoing sibling relationship"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "event_01",
+      "session_index": 1,
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_02_separation_transition",
+        "thread_06_work_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Priya learns that Evan has been pursuing a six-month Manchester assignment without discussing it with her until late in the process."
+    },
+    {
+      "event_id": "event_02",
+      "session_index": 2,
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "mixed",
+      "description": "Priya separates anger about being excluded from the decision from fear of temporary distance itself."
+    },
+    {
+      "event_id": "event_03",
+      "session_index": 3,
+      "topic_thread_ids": [
+        "thread_03_friendship_boundary",
+        "thread_01_partner_trust"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_tessa"
+      ],
+      "resolution_status": "resolved",
+      "description": "Priya limits a late-night call with Tessa to listening and one practical question rather than asking Tessa to decide the relationship."
+    },
+    {
+      "event_id": "event_04",
+      "session_index": 4,
+      "topic_thread_ids": [
+        "thread_04_sister_support",
+        "thread_01_partner_trust",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_meera",
+        "entity_evan"
+      ],
+      "resolution_status": "mixed",
+      "description": "Meera visits and Priya identifies one unresolved conversation she still needs with Evan before deciding anything."
+    },
+    {
+      "event_id": "event_05",
+      "session_index": 5,
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_05_move_housing",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Priya and Evan discuss a temporary Manchester arrangement while the Dublin lease decision remains open."
+    },
+    {
+      "event_id": "event_06",
+      "session_index": 6,
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "resolved",
+      "description": "A structured weekly check-in gives Priya clearer evidence about whether repair conversations are becoming more mutual."
+    },
+    {
+      "event_id": "event_07",
+      "session_index": 7,
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_06_work_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "conflicting",
+      "description": "Priya corrects a misunderstanding about whether Evan had already accepted the Manchester assignment when he first disclosed it."
+    },
+    {
+      "event_id": "event_08",
+      "session_index": 8,
+      "topic_thread_ids": [
+        "thread_02_separation_transition",
+        "thread_04_sister_support"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_meera",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Priya asks for a quiet weekend without problem-solving and begins considering a trial separation."
+    },
+    {
+      "event_id": "event_09",
+      "session_index": 9,
+      "topic_thread_ids": [
+        "thread_03_friendship_boundary",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_tessa"
+      ],
+      "resolution_status": "mixed",
+      "description": "Tessa’s own recent breakup becomes an unhelpful template while Priya negotiates how much relationship analysis to do with her friend."
+    },
+    {
+      "event_id": "event_10",
+      "session_index": 10,
+      "topic_thread_ids": [
+        "thread_02_separation_transition",
+        "thread_05_move_housing",
+        "thread_01_partner_trust"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "resolved",
+      "description": "Priya and Evan agree to end the relationship and divide immediate household tasks before making longer-term housing decisions."
+    },
+    {
+      "event_id": "event_11",
+      "session_index": 11,
+      "topic_thread_ids": [
+        "thread_05_move_housing",
+        "thread_06_work_transition",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_tessa"
+      ],
+      "resolution_status": "resolved",
+      "description": "Priya moves to Cork for a new research-management role and establishes a smaller home after the breakup."
+    },
+    {
+      "event_id": "event_12",
+      "session_index": 12,
+      "topic_thread_ids": [
+        "thread_04_sister_support",
+        "thread_03_friendship_boundary",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_meera",
+        "entity_tessa",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Priya gets support from Meera and Tessa while one practical exchange of shared belongings with Evan remains unfinished."
+    },
+    {
+      "event_id": "event_13",
+      "session_index": 13,
+      "topic_thread_ids": [
+        "thread_02_separation_transition",
+        "thread_06_work_transition",
+        "thread_05_move_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Months after the breakup, Priya separates generic breakup narratives from a specific decision about attending a mutual friend’s event."
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 12 months ago",
+      "event_ids": [
+        "event_01"
+      ],
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_02_separation_transition",
+        "thread_06_work_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Priya Nair, 34, and I work as a customer insights analyst. Evan and I have been together for six years. Tonight he told me he has been interviewing for a six-month assignment in Manchester, and the part that hurts is that he waited until the final interview stage to mention it."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "That is a major plan to learn about after much of the process already happened. What are you trying to protect before you decide what the assignment means for the relationship?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "My goal is to understand whether I can trust our decisions to be shared again, not to force myself to be fine with the move. He asked if we could decide this weekend, but I haven't agreed to any timeline yet."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "You are separating the trust question from the travel question and resisting an immediate deadline that you did not help create."
+        }
+      ],
+      "summary": "Priya learns late about Evan’s Manchester assignment process and defines the central issue as restoring shared decision-making rather than simply accepting or rejecting distance.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_ms_001",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "My goal is to understand whether I can trust our decisions to be shared again, not to force myself to be fine with the move.",
+          "candidate_text": "My goal is to understand whether I can trust our decisions to be shared again, not to force myself to be fine with the move.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "prior_goal"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_unresolved_001",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "He asked if we could decide this weekend, but I haven't agreed to any timeline yet.",
+          "candidate_text": "He asked if we could decide this weekend, but I haven't agreed to any timeline yet.",
+          "topic_thread": "thread_02_separation_transition",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": null,
+          "result_span": null
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_context_001",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "Evan and I have been together for six years.",
+          "candidate_text": "Evan and I have been together for six years.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 11 months ago",
+      "event_ids": [
+        "event_02"
+      ],
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I'm Indian and I live in Dublin, Ireland. If you suggest something, one optional next step is easier for me than a list. I've realized I'm not mainly afraid of six months apart; I'm angry that Evan let me think we were planning the year together while he was privately planning another possibility."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "One optional step: write down the one question about shared decision-making that you need answered before discussing travel logistics."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "I wrote, 'What made you decide this was something to tell me only after the final interview?' and I asked just that before we talked about flights or visits. He answered for almost twenty minutes, and for the first time the conversation stayed on the secrecy instead of turning into a debate about long distance."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "That helped you test the trust issue directly without letting practical logistics absorb it."
+        }
+      ],
+      "summary": "Priya distinguishes the secrecy from the temporary distance and asks one direct question about why Evan withheld the assignment process, keeping the discussion on trust.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_ms_002",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "I've realized I'm not mainly afraid of six months apart; I'm angry that Evan let me think we were planning the year together while he was privately planning another possibility.",
+          "candidate_text": "I've realized I'm not mainly afraid of six months apart; I'm angry that Evan let me think we were planning the year together while he was privately planning another possibility.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "pressure_distinction"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_core_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I wrote, 'What made you decide this was something to tell me only after the final interview?' and I asked just that before we talked about flights or visits. He answered for almost twenty minutes, and for the first time the conversation stayed on the secrecy instead of turning into a debate about long distance.",
+          "candidate_text": "I wrote, 'What made you decide this was something to tell me only after the final interview?' and I asked just that before we talked about flights or visits. He answered for almost twenty minutes, and for the first time the conversation stayed on the secrecy instead of turning into a debate about long distance.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I wrote, 'What made you decide this was something to tell me only after the final interview?' and I asked just that before we talked about flights or visits.",
+          "result_span": "He answered for almost twenty minutes, and for the first time the conversation stayed on the secrecy instead of turning into a debate about long distance."
+        }
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 10 months ago",
+      "event_ids": [
+        "event_03"
+      ],
+      "topic_thread_ids": [
+        "thread_03_friendship_boundary",
+        "thread_01_partner_trust"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_tessa"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I'm a woman, and I have an MSc in marketing. I called Tessa after another argument and noticed I was asking her, 'Would you stay if you were me?' even though she cannot know what I want. The useful part of talking to her is that she can hear me without being inside the relationship."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "That is a specific distinction: support from outside the relationship is valuable, but outsourcing the decision would ask Tessa to do something she cannot actually do."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "I told her I only wanted ten minutes to say what happened and then one question about whether my version made sense. We stopped before midnight, and I felt supported without waking up with three new opinions about what I should do."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "You changed the role of the friendship from decision-maker to witness and reality check."
+        }
+      ],
+      "summary": "Priya limits a late-night call with Tessa to listening and one reality-check question, gaining support without collecting multiple new instructions about her relationship.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_ms_003",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "The useful part of talking to her is that she can hear me without being inside the relationship.",
+          "candidate_text": "The useful part of talking to her is that she can hear me without being inside the relationship.",
+          "topic_thread": "thread_03_friendship_boundary",
+          "entity_ids": [
+            "self",
+            "entity_tessa"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "specific_old_observation"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_core_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s003_t03"
+          ],
+          "literal_source_span": "I told her I only wanted ten minutes to say what happened and then one question about whether my version made sense. We stopped before midnight, and I felt supported without waking up with three new opinions about what I should do.",
+          "candidate_text": "I told her I only wanted ten minutes to say what happened and then one question about whether my version made sense. We stopped before midnight, and I felt supported without waking up with three new opinions about what I should do.",
+          "topic_thread": "thread_03_friendship_boundary",
+          "entity_ids": [
+            "self",
+            "entity_tessa"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I told her I only wanted ten minutes to say what happened and then one question about whether my version made sense.",
+          "result_span": "We stopped before midnight, and I felt supported without waking up with three new opinions about what I should do."
+        }
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 9 months ago",
+      "event_ids": [
+        "event_04"
+      ],
+      "topic_thread_ids": [
+        "thread_04_sister_support",
+        "thread_01_partner_trust",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_meera",
+        "entity_evan"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "Meera came over for the weekend and immediately wanted to know whether I was leaving Evan. For decisions, I prefer a concise answer before a long explanation because otherwise I lose track of what I'm actually asking."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "Concise answer: you do not need to decide the whole relationship this weekend. The more useful task is identifying what information you still need from Evan."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "I told Meera I wasn't asking her to judge him, and I wrote down the one conversation I still need: I want to know what he thinks shared planning should look like after this, not just whether he is sorry. She stopped pressing for a yes-or-no answer, and I felt less cornered in my own flat."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "That set a boundary with your sister and clarified the unfinished relationship question at the same time."
+        }
+      ],
+      "summary": "Priya tells Meera not to push for an immediate breakup decision and identifies one unfinished conversation with Evan about how future shared planning would actually work.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_ms_004",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "I want to know what he thinks shared planning should look like after this, not just whether he is sorry.",
+          "candidate_text": "I want to know what he thinks shared planning should look like after this, not just whether he is sorry.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "unfinished_thread"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_core_003",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "I told Meera I wasn't asking her to judge him, and I wrote down the one conversation I still need: I want to know what he thinks shared planning should look like after this, not just whether he is sorry. She stopped pressing for a yes-or-no answer, and I felt less cornered in my own flat.",
+          "candidate_text": "I told Meera I wasn't asking her to judge him, and I wrote down the one conversation I still need: I want to know what he thinks shared planning should look like after this, not just whether he is sorry. She stopped pressing for a yes-or-no answer, and I felt less cornered in my own flat.",
+          "topic_thread": "thread_04_sister_support",
+          "entity_ids": [
+            "self",
+            "entity_meera"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I told Meera I wasn't asking her to judge him, and I wrote down the one conversation I still need: I want to know what he thinks shared planning should look like after this, not just whether he is sorry.",
+          "result_span": "She stopped pressing for a yes-or-no answer, and I felt less cornered in my own flat."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_unresolved_002",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "I wrote down the one conversation I still need: I want to know what he thinks shared planning should look like after this, not just whether he is sorry.",
+          "candidate_text": "I wrote down the one conversation I still need: I want to know what he thinks shared planning should look like after this, not just whether he is sorry.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 8 months ago",
+      "event_ids": [
+        "event_05"
+      ],
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_05_move_housing",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "Evan suggested that if he gets the assignment, we could keep the Dublin flat and take turns visiting. That sounds more concrete than before, but our lease renewal is also coming up."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "The relationship experiment and the housing commitment now overlap. Which part has evidence, and which part is still hypothetical?"
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "We put one weekly video call and one monthly visit on a sample calendar for the six months. Seeing it made the plan less mysterious, but I haven't contacted the landlord about whether a shorter renewal is possible."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "The sample schedule tested the relationship logistics; the lease flexibility remains a separate unresolved action."
+        }
+      ],
+      "summary": "Priya and Evan make a sample long-distance calendar that reduces uncertainty about contact frequency, while a shorter lease option remains uninvestigated.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_core_004",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "We put one weekly video call and one monthly visit on a sample calendar for the six months. Seeing it made the plan less mysterious, but I haven't contacted the landlord about whether a shorter renewal is possible.",
+          "candidate_text": "We put one weekly video call and one monthly visit on a sample calendar for the six months. Seeing it made the plan less mysterious, but I haven't contacted the landlord about whether a shorter renewal is possible.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "We put one weekly video call and one monthly visit on a sample calendar for the six months.",
+          "result_span": "Seeing it made the plan less mysterious"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_unresolved_003",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "I haven't contacted the landlord about whether a shorter renewal is possible.",
+          "candidate_text": "I haven't contacted the landlord about whether a shorter renewal is possible.",
+          "topic_thread": "thread_05_move_housing",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 7 months ago",
+      "event_ids": [
+        "event_06"
+      ],
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "We tried one weekly check-in where neither of us was allowed to start with logistics. We each answered what felt closer this week and what felt more distant. After four weeks, Evan was bringing up difficult things before I asked, and I could see that the repair wasn't entirely being managed by me."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "That gave you repeated behavior to observe instead of relying only on apologies or one intense conversation."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "I still don't know if it is enough for the long term, but that particular question—whether he would initiate hard conversations—has an answer now."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "Then that piece of the trust thread is resolved even though the relationship decision remains open."
+        }
+      ],
+      "summary": "A weekly non-logistical check-in gives Priya four weeks of evidence that Evan can initiate difficult conversations, resolving one specific trust question without resolving the relationship.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_core_005",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s006_t01"
+          ],
+          "literal_source_span": "We tried one weekly check-in where neither of us was allowed to start with logistics. We each answered what felt closer this week and what felt more distant. After four weeks, Evan was bringing up difficult things before I asked, and I could see that the repair wasn't entirely being managed by me.",
+          "candidate_text": "We tried one weekly check-in where neither of us was allowed to start with logistics. We each answered what felt closer this week and what felt more distant. After four weeks, Evan was bringing up difficult things before I asked, and I could see that the repair wasn't entirely being managed by me.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "We tried one weekly check-in where neither of us was allowed to start with logistics.",
+          "result_span": "After four weeks, Evan was bringing up difficult things before I asked, and I could see that the repair wasn't entirely being managed by me."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_ms_005",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s006_t03"
+          ],
+          "literal_source_span": "that particular question—whether he would initiate hard conversations—has an answer now.",
+          "candidate_text": "that particular question—whether he would initiate hard conversations—has an answer now.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "resolved_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 6 months ago",
+      "event_ids": [
+        "event_07"
+      ],
+      "topic_thread_ids": [
+        "thread_01_partner_trust",
+        "thread_06_work_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "I need to correct something I've been repeating. I said Evan had already accepted the Manchester assignment before he told me. He showed me the emails: he had accepted the final interview, not the job itself. I was still excluded from months of planning, but the version where the decision was completely final was wrong."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "That correction matters without erasing why the late disclosure hurt. The timeline can become more accurate without making the trust issue disappear."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "I wrote the corrected sequence down before our next conversation. It stopped us wasting the first twenty minutes arguing about a fact that wasn't actually true."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "That gave the conversation a cleaner starting point and preserves the active version of the event."
+        }
+      ],
+      "summary": "Priya corrects the timeline from “accepted the job” to “accepted the final interview,” preserving the trust issue while removing a factual argument from later conversations.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_ms_006",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s007_t01"
+          ],
+          "literal_source_span": "He showed me the emails: he had accepted the final interview, not the job itself. I was still excluded from months of planning, but the version where the decision was completely final was wrong.",
+          "candidate_text": "He showed me the emails: he had accepted the final interview, not the job itself. I was still excluded from months of planning, but the version where the decision was completely final was wrong.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "conflicting",
+          "memory_function": "conflict_record"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_core_006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "I wrote the corrected sequence down before our next conversation. It stopped us wasting the first twenty minutes arguing about a fact that wasn't actually true.",
+          "candidate_text": "I wrote the corrected sequence down before our next conversation. It stopped us wasting the first twenty minutes arguing about a fact that wasn't actually true.",
+          "topic_thread": "thread_01_partner_trust",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I wrote the corrected sequence down before our next conversation.",
+          "result_span": "It stopped us wasting the first twenty minutes arguing about a fact that wasn't actually true."
+        }
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 5 months ago",
+      "event_ids": [
+        "event_08"
+      ],
+      "topic_thread_ids": [
+        "thread_02_separation_transition",
+        "thread_04_sister_support"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_meera",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "I don't want suggestions about Evan tonight. I need you to stay with what I'm saying and not turn it into a decision tree. Meera keeps asking what our 'plan' is, and I don't have one."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "I can stay with the uncertainty. You sound tired of having every feeling treated as evidence for a verdict."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "This weekend I left my phone in the kitchen, walked along the canal without checking whether Evan had messaged, and let myself be angry without drafting a speech back to him. By the time I got home, I still didn't know what I wanted, but the anger felt like mine rather than part of an argument I was rehearsing."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "That did not solve the relationship, but it gave you a stretch of time where the feeling did not have to become a response."
+        }
+      ],
+      "summary": "Priya explicitly asks for listening rather than advice and takes a phone-free canal walk that lets anger exist without immediately turning into an argument or decision.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_challenge_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s008_t03"
+          ],
+          "literal_source_span": "This weekend I left my phone in the kitchen, walked along the canal without checking whether Evan had messaged, and let myself be angry without drafting a speech back to him. By the time I got home, I still didn't know what I wanted, but the anger felt like mine rather than part of an argument I was rehearsing.",
+          "candidate_text": "This weekend I left my phone in the kitchen, walked along the canal without checking whether Evan had messaged, and let myself be angry without drafting a speech back to him. By the time I got home, I still didn't know what I wanted, but the anger felt like mine rather than part of an argument I was rehearsing.",
+          "topic_thread": "thread_02_separation_transition",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "This weekend I left my phone in the kitchen, walked along the canal without checking whether Evan had messaged, and let myself be angry without drafting a speech back to him.",
+          "result_span": "By the time I got home, I still didn't know what I wanted, but the anger felt like mine rather than part of an argument I was rehearsing."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_unresolved_004",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "Meera keeps asking what our 'plan' is, and I don't have one.",
+          "candidate_text": "Meera keeps asking what our 'plan' is, and I don't have one.",
+          "topic_thread": "thread_02_separation_transition",
+          "entity_ids": [
+            "self",
+            "entity_meera"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 4 months ago",
+      "event_ids": [
+        "event_09"
+      ],
+      "topic_thread_ids": [
+        "thread_03_friendship_boundary",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_tessa"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "Tessa went through a very abrupt breakup last year and keeps saying the cleanest thing is to leave as soon as trust is damaged. I understand why she feels that way, but her relationship ended after a different kind of betrayal and that is her history, not mine."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "Her experience may explain the advice, but it is not evidence about what your relationship requires."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "I asked her if we could stop comparing our breakups and just have dinner. She laughed, changed the subject, and I went home feeling like I still had a friend instead of a committee member."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "That protected the friendship from becoming only a channel for relationship analysis."
+        }
+      ],
+      "summary": "Priya rejects Tessa’s past breakup as a template for her own relationship and asks for an ordinary dinner, restoring some friendship space outside advice.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_ms_007",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s009_t01"
+          ],
+          "literal_source_span": "her relationship ended after a different kind of betrayal and that is her history, not mine.",
+          "candidate_text": "her relationship ended after a different kind of betrayal and that is her history, not mine.",
+          "topic_thread": "thread_03_friendship_boundary",
+          "entity_ids": [
+            "self",
+            "entity_tessa"
+          ],
+          "resolution_status": "stale_or_wrong_entity",
+          "memory_function": "wrong_person_distractor"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_core_007",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "I asked her if we could stop comparing our breakups and just have dinner. She laughed, changed the subject, and I went home feeling like I still had a friend instead of a committee member.",
+          "candidate_text": "I asked her if we could stop comparing our breakups and just have dinner. She laughed, changed the subject, and I went home feeling like I still had a friend instead of a committee member.",
+          "topic_thread": "thread_03_friendship_boundary",
+          "entity_ids": [
+            "self",
+            "entity_tessa"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I asked her if we could stop comparing our breakups and just have dinner.",
+          "result_span": "She laughed, changed the subject, and I went home feeling like I still had a friend instead of a committee member."
+        }
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 3 months ago",
+      "event_ids": [
+        "event_10"
+      ],
+      "topic_thread_ids": [
+        "thread_02_separation_transition",
+        "thread_05_move_housing",
+        "thread_01_partner_trust"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "Evan and I agreed yesterday that we're ending the relationship. We sat on the floor with two mugs of tea and wrote three columns on the back of an envelope: this week, this month, later. Keys and bills went in the first column, furniture in the second, and mutual-friend questions in 'later.' For the first time that evening, the breakup stopped arriving as twenty tasks at once."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "The envelope gave the immediate practical shock a time structure without pretending the emotional part was orderly."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "I cried while we did it, which somehow made the ridiculous little columns feel more human, not less."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "The method did not need you to be calm in order to reduce the task pile."
+        }
+      ],
+      "summary": "Priya and Evan mutually end the relationship and sort breakup logistics into three time horizons, making the immediate practical load feel finite even while both are emotional.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_challenge_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "We sat on the floor with two mugs of tea and wrote three columns on the back of an envelope: this week, this month, later. Keys and bills went in the first column, furniture in the second, and mutual-friend questions in 'later.' For the first time that evening, the breakup stopped arriving as twenty tasks at once.",
+          "candidate_text": "We sat on the floor with two mugs of tea and wrote three columns on the back of an envelope: this week, this month, later. Keys and bills went in the first column, furniture in the second, and mutual-friend questions in 'later.' For the first time that evening, the breakup stopped arriving as twenty tasks at once.",
+          "topic_thread": "thread_02_separation_transition",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "We sat on the floor with two mugs of tea and wrote three columns on the back of an envelope: this week, this month, later.",
+          "result_span": "For the first time that evening, the breakup stopped arriving as twenty tasks at once."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_context_002",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "Evan and I agreed yesterday that we're ending the relationship.",
+          "candidate_text": "Evan and I agreed yesterday that we're ending the relationship.",
+          "topic_thread": "thread_02_separation_transition",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 7 weeks ago",
+      "event_ids": [
+        "event_11"
+      ],
+      "topic_thread_ids": [
+        "thread_05_move_housing",
+        "thread_06_work_transition",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_tessa"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "I've moved to Cork, Ireland, and my job is now research operations manager at a regional consumer cooperative. The timing was not planned around the breakup—the role came from an application I had already made—but the move meant I had to set up a new flat while everything else was changing."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "Two major changes landed together even though they did not cause each other. What helped make the first week workable?"
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "I unpacked only the things that made the next morning function—bedding, kettle, work clothes, laptop—and left the decorative boxes closed. I got through my first three workdays without searching through cartons every morning, and the flat could stay unfinished without feeling unusable."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "You defined 'set up' by daily function rather than by completing the whole home at once."
+        }
+      ],
+      "summary": "Priya moves to Cork for a previously pursued job and makes the new flat functional by unpacking only morning essentials before leaving nonessential boxes for later.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_reusable_core_008",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "I unpacked only the things that made the next morning function—bedding, kettle, work clothes, laptop—and left the decorative boxes closed. I got through my first three workdays without searching through cartons every morning, and the flat could stay unfinished without feeling unusable.",
+          "candidate_text": "I unpacked only the things that made the next morning function—bedding, kettle, work clothes, laptop—and left the decorative boxes closed. I got through my first three workdays without searching through cartons every morning, and the flat could stay unfinished without feeling unusable.",
+          "topic_thread": "thread_05_move_housing",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I unpacked only the things that made the next morning function—bedding, kettle, work clothes, laptop—and left the decorative boxes closed.",
+          "result_span": "I got through my first three workdays without searching through cartons every morning, and the flat could stay unfinished without feeling unusable."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_context_003",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s011_t01"
+          ],
+          "literal_source_span": "The timing was not planned around the breakup—the role came from an application I had already made",
+          "candidate_text": "The timing was not planned around the breakup—the role came from an application I had already made",
+          "topic_thread": "thread_06_work_transition",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 3 weeks ago",
+      "event_ids": [
+        "event_12"
+      ],
+      "topic_thread_ids": [
+        "thread_04_sister_support",
+        "thread_03_friendship_boundary",
+        "thread_02_separation_transition"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_meera",
+        "entity_tessa",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "Meera visited Cork and Tessa calls every few days, which has helped more than I expected. Evan and I still have one box of shared documents and a small lamp that somehow never got exchanged."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "The emotional support around you sounds more stable, while one practical tie is still unfinished."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "I drafted a message offering two dates for the exchange, but I haven't sent it because I don't know whether seeing him again will feel simple or not."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "That is an unresolved practical action with an emotional uncertainty attached to it; neither needs to be guessed away."
+        }
+      ],
+      "summary": "Priya receives steady support from Meera and Tessa in Cork while a small exchange of shared belongings with Evan remains practically and emotionally unresolved.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_unresolved_005",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s012_t03"
+          ],
+          "literal_source_span": "I drafted a message offering two dates for the exchange, but I haven't sent it because I don't know whether seeing him again will feel simple or not.",
+          "candidate_text": "I drafted a message offering two dates for the exchange, but I haven't sent it because I don't know whether seeing him again will feel simple or not.",
+          "topic_thread": "thread_02_separation_transition",
+          "entity_ids": [
+            "self",
+            "entity_evan"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I drafted a message offering two dates for the exchange",
+          "result_span": null
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u005_me_context_004",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "Meera visited Cork and Tessa calls every few days",
+          "candidate_text": "Meera visited Cork and Tessa calls every few days",
+          "topic_thread": "thread_04_sister_support",
+          "entity_ids": [
+            "self",
+            "entity_meera",
+            "entity_tessa"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "this week",
+      "event_ids": [
+        "event_13"
+      ],
+      "topic_thread_ids": [
+        "thread_02_separation_transition",
+        "thread_06_work_transition",
+        "thread_05_move_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_evan"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "People keep saying breakups take time, and I know that's true, but it doesn't tell me what to do with this particular invitation. A mutual friend is getting married in Dublin next month, and Evan will probably be there."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "The generic truth about recovery does not decide whether this specific event is something you want to attend."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "My new job is steady enough that I can take the Friday off, and Cork feels like home more often now. The actual question is whether going to the wedding would be about seeing my friend or about testing myself around Evan."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "That is a concrete motive question with real options, distinct from the broad question of whether you are 'over' the breakup."
+        }
+      ],
+      "summary": "Months after the breakup, Priya separates generic recovery language from a specific decision about attending a mutual friend’s wedding where Evan is likely to be present.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u005_ms_008",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u005",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "People keep saying breakups take time, and I know that's true, but it doesn't tell me what to do with this particular invitation.",
+          "candidate_text": "People keep saying breakups take time, and I know that's true, but it doesn't tell me what to do with this particular invitation.",
+          "topic_thread": "thread_02_separation_transition",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "not_specific",
+          "memory_function": "same_topic_no_specific_content"
+        }
+      ]
+    }
+  ]
+}

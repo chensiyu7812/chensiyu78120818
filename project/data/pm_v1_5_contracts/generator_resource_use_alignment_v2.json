@@ -1,0 +1,60 @@
+{
+  "protocol": "pm-v1.5-generator-resource-use-alignment-v2",
+  "status": "CONTRAST_EXECUTED_AUTOMATED_USE_JUDGES_DISQUALIFIED_TRACE_HUMAN_SPOT_CHECK_PENDING",
+  "base_contract": {
+    "path": "data/pm_v1_5_contracts/generator_resource_use_alignment_v1.json",
+    "sha256": "1b5ab4e03277565790e5eae6e6334edb09efc0bd6b18bc39cd736a1f04ace954"
+  },
+  "l2_generator_use_revision": {
+    "method": "Generator-declared use/ignore and source-specific function with deterministic full-resource/full-response audit surfaces; small human qualification second. Unqualified automated judges cannot create labels.",
+    "labels": [
+      "correct_nonuse",
+      "grounded_functional_use",
+      "grounded_surface_only",
+      "missed_usable_resource",
+      "misuse"
+    ],
+    "rules": [
+      "Do not reward mentioning memory.",
+      "MP preference can be used behaviorally without explicit reference.",
+      "If selected evidence is redundant or irrelevant, ignoring it is correct.",
+      "A use decision binds one authorized resource label and one source-specific function.",
+      "The runtime attaches the full selected-resource and response surfaces; copied snippets are not a scientific outcome.",
+      "A self-declaration is not gold until a small stratified human check confirms the declared function."
+    ]
+  },
+  "executed_diagnostics": {
+    "same_state_prompt_contrast": {
+      "states": 32,
+      "calls": 64,
+      "components": {"RS": 8, "MP": 8, "MS": 8, "ME": 8},
+      "fixed_within_state": ["selected_resource", "seed", "generator", "visible_context"],
+      "only_change": "legacy_generic versus source_matched prompt contract",
+      "status": "COMPLETE"
+    },
+    "two_automated_use_judges": {
+      "calls": 128,
+      "exact_label_agreement": "20/64",
+      "exact_label_agreement_rate": 0.3125,
+      "training_gold": false,
+      "status": "DISQUALIFIED"
+    },
+    "structured_trace_v2": {
+      "responses": 32,
+      "declared_use_by_component": {"RS": "7/8", "MP": "8/8", "MS": "7/8", "ME": "8/8"},
+      "all_span_and_bookkeeping_checks": "19/32",
+      "interpretation": "Copied excerpt failures are treated as interface bookkeeping, not failed resource use; the formal trace uses runtime-attached full surfaces.",
+      "human_gold": false
+    }
+  },
+  "minimum_human_qualification": {
+    "items": 10,
+    "selection": "two stable-hash use declarations per component plus every ignore declaration",
+    "selection_uses_quality_judge_or_risk": false,
+    "pass_gate": {
+      "declaration_supported_and_functional": "at least 8/10",
+      "material_misuse": "at most 1/10"
+    },
+    "failure_action": "Repair only generator prompt/trace; do not change PM labels or expand routing data."
+  }
+}

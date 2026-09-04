@@ -1,0 +1,416 @@
+{
+  "protocol": "pm-v1.5-strategy-card-evoemo-turn-overlap-audit-v1",
+  "status": "FINDINGS_PRESENT",
+  "n_cards_checked": 12429,
+  "n_evoemo_turns_checked": 8596,
+  "jaccard_threshold": 0.85,
+  "min_turn_tokens": 8,
+  "n_findings": 27,
+  "findings": [
+    {
+      "strategy_id": "strat_35a04e12859f27502f3a",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_3852a85203743bf78260",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p8",
+          "session_id": "esc1082",
+          "turn_idx": 4,
+          "role": "supporter",
+          "content": "is there anything I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_5d3f8e746152b893523e",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p9",
+          "session_id": "esc539",
+          "turn_idx": 4,
+          "role": "supporter",
+          "content": "I'm doing well. How can I help you today?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_d3c0a2df60a35b4857fc",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_de0f20d1a52002f4b055",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p9",
+          "session_id": "esc539",
+          "turn_idx": 4,
+          "role": "supporter",
+          "content": "I'm doing well. How can I help you today?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_80248499a5da9bbf7b18",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p9",
+          "session_id": "esc539",
+          "turn_idx": 6,
+          "role": "supporter",
+          "content": "I'm so sorry. I went through a bad break up last year. Can you tell me what happened?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_6af2a6e4af06dcd8398e",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p9",
+          "session_id": "esc539",
+          "turn_idx": 11,
+          "role": "supporter",
+          "content": "I'm sorry, I'm sure that has made you feel rejected."
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_492c26b3d7c4698e6b67",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p9",
+          "session_id": "esc539",
+          "turn_idx": 13,
+          "role": "supporter",
+          "content": "I'm sure it is hard to express how you feel with it being a short relationship, people may not understand. But sometimes we can feel such a strong connection and have faith in people very fast."
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_cddece341a4ce99bfc1c",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p9",
+          "session_id": "esc539",
+          "turn_idx": 16,
+          "role": "supporter",
+          "content": "I understand feeling connected to someone you've only known for a short amount of time. I'm sure you feel like you wont be able to let your guard down again anytime soon."
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_06e13c5c0f86de35101e",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p9",
+          "session_id": "esc539",
+          "turn_idx": 19,
+          "role": "supporter",
+          "content": "Maybe this could be a learning experience? I always try to see the best in people, but have learned to let people earn my trust. Not just get it for free."
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_8c8fee88f747d6e97684",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p13",
+          "session_id": "esc585",
+          "turn_idx": 3,
+          "role": "supporter",
+          "content": "Do you want to talk about whats going on right now?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_fcfcdf9851d37041271b",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p13",
+          "session_id": "esc585",
+          "turn_idx": 6,
+          "role": "supporter",
+          "content": "Ive done some things like that before. I know this might sound weird but what helped me through it was to actually own it. Take control of it before they can."
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_9013933bc37868c33aca",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p13",
+          "session_id": "esc585",
+          "turn_idx": 8,
+          "role": "supporter",
+          "content": "Yea that is definitely one way to control it"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_d95214b9a968fdc3398e",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_175a9361985b000ce906",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p13",
+          "session_id": "esc785",
+          "turn_idx": 2,
+          "role": "supporter",
+          "content": "Hi there.  How can I help you today?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_573b6572a431069a61f3",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_c85d78668cc27d063862",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p13",
+          "session_id": "esc785",
+          "turn_idx": 2,
+          "role": "supporter",
+          "content": "Hi there.  How can I help you today?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_18b4427c5a3b88728f96",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_fb568c838dfa2c296a49",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_d76e8d8777d906af6f78",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_d4588d319ffcb5ad1da8",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_5f0be9db15f43f667503",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p8",
+          "session_id": "esc1082",
+          "turn_idx": 4,
+          "role": "supporter",
+          "content": "is there anything I can help you with?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_00f2b3275e0b0d145a12",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p12",
+          "session_id": "esc1212",
+          "turn_idx": 4,
+          "role": "supporter",
+          "content": "I am sorry to hear that. Is there anything I can do for you? Please tell me what's wrong?"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_300582df38834fc75159",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p12",
+          "session_id": "esc1212",
+          "turn_idx": 8,
+          "role": "supporter",
+          "content": "For sure, I am happy to talk to you. I am sorry for your breakup."
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_d63bc62682a86abed9c0",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p12",
+          "session_id": "esc1212",
+          "turn_idx": 10,
+          "role": "supporter",
+          "content": "Is there anything you want to do right now that helps maybe. For example, to eat something, to listen good music or take small walk in fresh air etc"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_97fe35915c3f80bad375",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p12",
+          "session_id": "esc1212",
+          "turn_idx": 11,
+          "role": "supporter",
+          "content": "I can feel you, it must be so hard to you. take your time do not think about a lot"
+        }
+      ]
+    },
+    {
+      "strategy_id": "strat_8b29d9999ae349011683",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p12",
+          "session_id": "esc1212",
+          "turn_idx": 12,
+          "role": "supporter",
+          "content": "when I have bad times, I just want to take a nap. It maybe help you feel better"
+        }
+      ]
+    }
+  ]
+}

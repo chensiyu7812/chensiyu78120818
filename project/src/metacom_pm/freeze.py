@@ -34,7 +34,11 @@ def _is_current_release_python(root: Path, path: Path) -> bool:
     if parts[0] == "src" and len(parts) >= 2 and parts[1] == "metacom_pm":
         return True
     if parts[0] == "scripts":
-        return bool(re.match(r"^(?:\d{2}[a-z]?_|99_).+\.py$", path.name))
+        return bool(
+            (len(parts) >= 2 and parts[1] == "v1_5")
+            or path.name.startswith("v1_5_")
+            or re.match(r"^(?:\d{2}[a-z]?_|99_).+\.py$", path.name)
+        )
     return False
 
 

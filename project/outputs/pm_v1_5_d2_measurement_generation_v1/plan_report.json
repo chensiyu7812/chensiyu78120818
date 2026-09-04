@@ -1,0 +1,64 @@
+{
+  "protocol": "pm-v1.5-d2-measurement-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_144_D2_RESPONSE_CALLS",
+  "effect_labels_created": false,
+  "human_labels_read": false,
+  "api_calls_made": 0,
+  "states": 32,
+  "pairs": 72,
+  "new_response_calls": 144,
+  "calls_by_component": {
+    "ME": 32,
+    "MP": 32,
+    "MS": 48,
+    "RS": 32
+  },
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "supporter_generation_treatment": {
+    "version": "pm-v2.2-supporter-generation-v1",
+    "generator_endpoint": "generator",
+    "system_prompt_id": "selective_esmem_v1",
+    "system_prompt_sha256": "a0313589ed0da2e45ea5dc411d3edd504f77fabb516fe6c262eb38fbb13c3a59",
+    "temperature": 0.0,
+    "max_output_tokens": 300,
+    "output_normalization": "normalize_space_v1",
+    "finish_reason_protocol": "pm-v2-finish-reason-v1",
+    "accepted_normalized_finish_reasons": [
+      "complete"
+    ],
+    "reject_length": true,
+    "reject_missing_or_unknown": true
+  },
+  "supporter_generation_treatment_sha256": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe",
+  "pricing_usd_per_mtok": {
+    "input": 0.15,
+    "output": 0.6
+  },
+  "estimated_input_tokens": 83117,
+  "max_output_tokens_upper_bound": 43200,
+  "estimated_generation_cost_usd_upper_bound": 0.038388,
+  "checks": {
+    "32_states": true,
+    "72_pairs": true,
+    "144_calls": true,
+    "two_arms_per_pair": true,
+    "all_state_summaries_empty": true,
+    "all_labels_unknown": true,
+    "replicate_seed_varies_within_state": true
+  },
+  "inputs": {
+    "outputs/pm_v1_5_d2_measurement_blueprint_v1/d2_measurement_blueprint.jsonl": "43dd8f8534fb10306764ffb0a96b6342dd73b452aca8157e4c0a89361346a8bb",
+    "outputs/pm_v1_5_d2_measurement_blueprint_v1/blueprint_report.json": "fea11694cf7b75cb2db34e6365792d23fc1b9d2f38de128255b7a96ef477a658",
+    "outputs/pm_v1_5_d2_measurement_blueprint_v1/freeze_manifest.json": "eed40c7af2b66a5ad0e5308ff61f11ab7473837cec6ae8d599b6dd38e441ab12",
+    "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/runtime_states.jsonl": "c013fe0439aff844452e3e58bd91703b781db75f3a90cd33b9518116c1d7efeb",
+    "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/memory_backend.jsonl": "d32165f0cc72da4ecf23c5fe6a4048195b8b4c6f8785cb3f2d426cb7d8c24875",
+    "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676",
+    "configs/pm_v1_5.yaml": "7aaa4ad296936e298d4beb16f9d1a9f5ca096e224d5e518da22b49682842a94b",
+    "configs/experiment.yaml": "35cc6c98d29ffcbeef00a61d58b36e33cf1789bd9568a301cab28d2d6429790e"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "protocol": "pm-v1.5-d3-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_320_D3_RESPONSE_CALLS",
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "supporter_generation_treatment_sha256": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe",
+  "outputs": {
+    "call_plan.jsonl": "ccd5ce0d714c847e355f47c1524f2829dcdbd21b030012ed6ba0020382695401",
+    "generation_registry.jsonl": "2e576b534299871138a53e8083fdcd25c3a4dca17b74b58223b65ef11345e805",
+    "generation_plan_report.json": "ca9f6354ab085d0ef0e5bc01308231e5cc10a7e47850ba0fe18ef801812b405f"
+  },
+  "outcome_blind": true,
+  "api_calls_made": 0
+}

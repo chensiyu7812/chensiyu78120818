@@ -1,0 +1,186 @@
+{
+  "protocol": "pm-v1.5-d3-minimum-stochastic-effect-training-v1",
+  "status": "FROZEN_BEFORE_ANY_D3_STATE_OR_OUTCOME_GENERATION",
+  "date": "2026-07-31",
+  "implementation_status": {
+    "date": "2026-08-01",
+    "step0": "PASS_AND_FROZEN",
+    "step0_report": "outputs/pm_v1_5_d3_step0_blueprint_v1/preflight_report.json",
+    "generation_plan": "COMPLETE_320_OF_320",
+    "generation_plan_report": "outputs/pm_v1_5_d3_generation_v1/generation_plan_report.json",
+    "outcome_calls_completed": 320,
+    "blind_quality_packet": "outputs/pm_v1_5_d3_blind_review_v1/human_blind_review.html",
+    "blind_quality_packet_status": "READY_FOR_SINGLE_BOUNDED_160_PAIR_D3_QUALITY_REVIEW",
+    "human_D3_decisions_completed": 0
+  },
+  "supersedes": [
+    "D3_coverage_rebuild_if_D2_passes in first_fit_root_cause_recovery_v1.json because the strict D2 gate failed",
+    "any plan to use one realized pair as deterministic state-level hard gold",
+    "any plan to expand candidate-match-only memory features"
+  ],
+  "trigger_evidence": {
+    "formal_D2_gate": "FAIL",
+    "strict_inter_rater_exact": 0.65625,
+    "binary_on_off_inter_rater_diagnostic": 0.8125,
+    "soft_target_diagnostic": "outputs/pm_v1_5_d2_soft_target_diagnostic_v1/diagnostic.json",
+    "candidate_match_positive_direction_components": [
+      "RS"
+    ],
+    "candidate_match_not_sufficient_components": [
+      "MP",
+      "MS",
+      "ME"
+    ]
+  },
+  "research_target": "Estimate, before generation, the probability that adding one qualified component to an exact fixed background produces a materially better immediate support response under the frozen generator stack.",
+  "not_the_target": [
+    "deterministic truth for every individual state",
+    "resource applicability alone",
+    "specific memory-item or strategy-card selection",
+    "clinical diagnosis or clinical safety",
+    "future arbitrary Bank or memory-schema generalization"
+  ],
+  "data_design": {
+    "new_content_disjoint_users": 32,
+    "contrasts_per_user": 4,
+    "one_contrast_per_component": true,
+    "state_contrasts": 128,
+    "one_primary_pair_per_state": 128,
+    "outcome_blind_repeat_states": 32,
+    "repeat_states_per_component": 8,
+    "additional_repeat_pairs": 32,
+    "total_pairs": 160,
+    "response_calls": 320,
+    "primary_human_quality_decisions": 160,
+    "additional_D3_second_reviewer_required": false,
+    "reason_second_reviewer_not_repeated": "D2 already measures the binary decision reliability on a fixed independent overlap. D3 preserves that measured limitation instead of starting another open-ended review cycle.",
+    "state_weighting": "Every state has total training weight one. Repeated pairs refine the state soft target but do not multiply effective sample size.",
+    "D2_rows_used_for_training": false,
+    "D2_role": "measurement qualification, noise characterization, and feature-direction diagnosis only"
+  },
+  "coverage": {
+    "background_actions": "For each component, balance the eight exact combinations of the other three component bits; four new users per background.",
+    "domain_shape": "Balance ESConv-like bounded support states and longitudinal-like states without copying ESConv test or EvoEmo content.",
+    "candidate_strata": [
+      "high versus low candidate-state match",
+      "high versus low grounding/nonredundancy",
+      "low versus higher injected token cost",
+      "candidate available versus deterministic hard-off control"
+    ],
+    "MP": {
+      "MP_PREFERENCE_users": 16,
+      "MP_PROFILE_users": 16,
+      "preference_families_min": 8,
+      "mixed_catalog_competition_is_confirmation_only": true
+    },
+    "MS": {
+      "subtype": "MS_SESSION",
+      "supplied_strictly_prior_summary_rate": 1.0,
+      "last_message_fallback_rate": 0.0,
+      "current_session_summary": "empty shared baseline"
+    },
+    "ME": {
+      "strictly_prior_event_only": true,
+      "wrong_person_candidates_for_hard_gate_tests_only": true,
+      "stale_request_and_conflict_controls_required": true
+    },
+    "RS": {
+      "bank": "same frozen Strategy Bank V4 and natural Top-1 stack",
+      "hard_off": "phatic, closing, explicit stop, high-stakes, or no eligible card",
+      "top_k_injected": 1
+    }
+  },
+  "feature_contract": {
+    "capacity_rule": "feature count <= floor(32 independent development users / 5) = 6",
+    "RS": [
+      "candidate_state_match_score",
+      "candidate_grounding_or_nonredundancy_score",
+      "background_MP_on",
+      "background_MS_on",
+      "background_ME_on"
+    ],
+    "MP": [
+      "candidate_state_match_score",
+      "candidate_grounding_or_nonredundancy_score",
+      "candidate_is_preference",
+      "background_MS_on",
+      "background_ME_on",
+      "background_RS_on"
+    ],
+    "MS": [
+      "candidate_state_match_score",
+      "candidate_grounding_or_nonredundancy_score",
+      "background_MP_on",
+      "background_ME_on",
+      "background_RS_on"
+    ],
+    "ME": [
+      "candidate_state_match_score",
+      "candidate_grounding_or_nonredundancy_score",
+      "background_MP_on",
+      "background_MS_on",
+      "background_RS_on"
+    ],
+    "candidate_state_match_score": "Frozen natural lexical retrieval score produced by the same runtime retriever. BGE is not a primary feature or selection requirement.",
+    "candidate_grounding_or_nonredundancy_score": "A pre-outcome transparent score constructed only from belonged-to-current-user, strictly-prior, nonconflicting, not-already-visible, request-currentness, and source-specific eligibility checks. Any hard violation forces component off before the learned head.",
+    "forbidden": [
+      "dataset identity",
+      "user, state, card, or memory ID",
+      "generated response text",
+      "human or LLM judgment",
+      "future turn",
+      "external outcome",
+      "native source strategy label",
+      "topic or template token that directly identifies the intended action"
+    ]
+  },
+  "measurement_and_loss": {
+    "human_choices": [
+      "treatment_materially_better",
+      "control_materially_better",
+      "materially_equivalent",
+      "uncertain"
+    ],
+    "pair_bernoulli_observation": {
+      "treatment_materially_better": 1.0,
+      "control_materially_better": 0.0,
+      "materially_equivalent": 0.0,
+      "uncertain": null
+    },
+    "state_target": "Mean of observed Bernoulli pair outcomes for that state; one-pair states remain stochastic observations and are never called deterministic state gold.",
+    "loss": "State-equal-weighted binary cross-entropy with fractional soft targets plus L2 regularization.",
+    "model": "Four independent low-capacity logistic heads.",
+    "grouping": "All fitting, OOF folds, uncertainty, and bootstrap resampling are grouped by user.",
+    "risk": "Quality benefit is modeled separately. Candidate hard-risk and grounding exclusions run before the learned head; residual interaction-and-grounding risks are reported atomically and never hidden in a composite reward.",
+    "cost": "If predicted benefit does not exceed the frozen threshold, turn the component off. Among otherwise admissible actions, deterministic incremental token budget and lower-cost tie breaking apply."
+  },
+  "promotion_gates": {
+    "grouped_OOF_balanced_accuracy_min": 0.7,
+    "positive_recall_min": 0.6,
+    "brier_must_beat_grouped_prevalence_prior": true,
+    "predicted_on_fraction_min": 0.2,
+    "predicted_off_fraction_min": 0.2,
+    "five_seed_balanced_accuracy_std_max": 0.03,
+    "all_gates_required_per_head": true,
+    "no_head_can_be_rescued_by_another_head_or_by_external_results": true
+  },
+  "execution_order": [
+    "implement and unit-test the exact grounding/nonredundancy feature and explicit background bits",
+    "build 32 content-disjoint synthetic longitudinal users and all 128 state contrasts without outcomes",
+    "run leakage, shortcut, subtype, background, domain-shape, and feature-capacity preflight",
+    "freeze 32 repeat states before response generation",
+    "generate 320 response calls on one frozen generator stack",
+    "complete one bounded 160-pair blind quality packet",
+    "fit four logistic heads once under grouped OOF",
+    "only passing heads receive a new user-disjoint internal confirmation and then frozen external evaluation"
+  ],
+  "stop_rules": [
+    "Do not generate D3 outcomes until all feature and data preflights pass.",
+    "Do not add BGE, Qwen, NLI, a larger model, or searched hyperparameters before the transparent primary is evaluated.",
+    "Do not add more D3 users after observing a failed head in this V1.5 recovery.",
+    "Do not lower promotion gates or reinterpret external outcomes to rescue a failed head.",
+    "Do not request more RAG card review as a response to a memory-head feature failure."
+  ],
+  "claim_if_successful": "On the fixed V1.5 resource stack and measured support domains, a low-capacity auditable Step-1 PM learned above-baseline conditional component gates that improve the frozen quality-risk-cost policy under grouped internal confirmation and one-time external evaluation.",
+  "claim_if_failed": "The V1.5 study establishes an auditable resource-effect measurement and routing framework, but does not establish learnable pre-generation gating for the failed component heads under the available small-sample features."
+}

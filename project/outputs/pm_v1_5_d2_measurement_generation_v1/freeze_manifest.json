@@ -1,0 +1,16 @@
+{
+  "protocol": "pm-v1.5-d2-measurement-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_144_D2_RESPONSE_CALLS",
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "supporter_generation_treatment_sha256": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe",
+  "outputs": {
+    "call_plan.jsonl": "ba4101a912650481734cf2bcc1b068b006723979ca70a944f8562e49b4657663",
+    "response_arm_registry.jsonl": "21619a69e8c23c98dbb4c3edaa081239d6f59acd206b6e79cd4a160604849891",
+    "plan_report.json": "18f9119d1d69fce206962edce3fb8944616097d6264e5b0ca02ff1e6f7d27a67"
+  }
+}

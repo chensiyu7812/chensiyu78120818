@@ -1,0 +1,778 @@
+{
+  "protocol": "pm-v1.5-final-h1-v2-annotation-data-quality-audit-v1",
+  "status": "HOLD_DO_NOT_TRAIN",
+  "decision": "PRIMARY_LABELS_ARE_VALID_DEVELOPMENT_EVIDENCE_BUT_CURRENT_H1_V2_IS_NOT_CONFIRMATORY_GOLD",
+  "failures": [
+    "ME_current_message_single_cue_shortcut_ge_0_65",
+    "MP_PREFERENCE_has_zero_human_ON_examples",
+    "MS_FIT_human_label_constant_baseline_ge_0_70",
+    "MS_FRESH_CONFIRMATION_human_label_constant_baseline_ge_0_70",
+    "MS_SEALED_INTERNAL_TEST_human_label_constant_baseline_ge_0_70",
+    "RS_strategy_family_only_shortcut_ge_0_65",
+    "meaningful_state_signature_cross_split_duplicates",
+    "row_level_secondary_overlap_missing_iaa_not_computable"
+  ],
+  "warnings": [
+    "MS_existing_transparent_feature_vectors_have_low_empirical_separation"
+  ],
+  "primary_contract": {
+    "rows": 256,
+    "unique_blind_state_ids": 256,
+    "packet_id_match": true,
+    "schema_error_count": 0,
+    "schema_errors": [],
+    "annotator_ids": [
+      "independent_h1_v2_double_gate_reviewer"
+    ]
+  },
+  "human_label_distribution": {
+    "MP": {
+      "overall": {
+        "counts": {
+          "off": 134,
+          "on": 75
+        },
+        "candidate_present": 209,
+        "majority_constant_accuracy": 0.6411483253588517
+      },
+      "by_split": {
+        "FIT": {
+          "counts": {
+            "off": 69,
+            "on": 34
+          },
+          "candidate_present": 103,
+          "majority_constant_accuracy": 0.6699029126213593
+        },
+        "FRESH_CONFIRMATION": {
+          "counts": {
+            "off": 29,
+            "on": 23
+          },
+          "candidate_present": 52,
+          "majority_constant_accuracy": 0.5576923076923077
+        },
+        "SEALED_INTERNAL_TEST": {
+          "counts": {
+            "on": 18,
+            "off": 36
+          },
+          "candidate_present": 54,
+          "majority_constant_accuracy": 0.6666666666666666
+        }
+      }
+    },
+    "MS": {
+      "overall": {
+        "counts": {
+          "off": 174,
+          "on": 62
+        },
+        "candidate_present": 236,
+        "majority_constant_accuracy": 0.7372881355932204
+      },
+      "by_split": {
+        "FIT": {
+          "counts": {
+            "off": 88,
+            "on": 32
+          },
+          "candidate_present": 120,
+          "majority_constant_accuracy": 0.7333333333333333
+        },
+        "FRESH_CONFIRMATION": {
+          "counts": {
+            "off": 44,
+            "on": 15
+          },
+          "candidate_present": 59,
+          "majority_constant_accuracy": 0.7457627118644068
+        },
+        "SEALED_INTERNAL_TEST": {
+          "counts": {
+            "off": 42,
+            "on": 15
+          },
+          "candidate_present": 57,
+          "majority_constant_accuracy": 0.7368421052631579
+        }
+      }
+    },
+    "ME": {
+      "overall": {
+        "counts": {
+          "off": 115,
+          "on": 121
+        },
+        "candidate_present": 236,
+        "majority_constant_accuracy": 0.5127118644067796
+      },
+      "by_split": {
+        "FIT": {
+          "counts": {
+            "off": 61,
+            "on": 59
+          },
+          "candidate_present": 120,
+          "majority_constant_accuracy": 0.5083333333333333
+        },
+        "FRESH_CONFIRMATION": {
+          "counts": {
+            "off": 27,
+            "on": 32
+          },
+          "candidate_present": 59,
+          "majority_constant_accuracy": 0.5423728813559322
+        },
+        "SEALED_INTERNAL_TEST": {
+          "counts": {
+            "off": 27,
+            "on": 30
+          },
+          "candidate_present": 57,
+          "majority_constant_accuracy": 0.5263157894736842
+        }
+      }
+    },
+    "RS": {
+      "overall": {
+        "counts": {
+          "off": 140,
+          "on": 84
+        },
+        "candidate_present": 224,
+        "majority_constant_accuracy": 0.625
+      },
+      "by_split": {
+        "FIT": {
+          "counts": {
+            "off": 60,
+            "on": 48
+          },
+          "candidate_present": 108,
+          "majority_constant_accuracy": 0.5555555555555556
+        },
+        "FRESH_CONFIRMATION": {
+          "counts": {
+            "off": 40,
+            "on": 18
+          },
+          "candidate_present": 58,
+          "majority_constant_accuracy": 0.6896551724137931
+        },
+        "SEALED_INTERNAL_TEST": {
+          "counts": {
+            "off": 40,
+            "on": 18
+          },
+          "candidate_present": 58,
+          "majority_constant_accuracy": 0.6896551724137931
+        }
+      }
+    }
+  },
+  "candidate_subtype_distribution": {
+    "MP": {
+      "MP_PREFERENCE": {
+        "off": 72
+      },
+      "MP_PROFILE": {
+        "off": 62,
+        "on": 75
+      }
+    },
+    "MS": {
+      "MS_SESSION": {
+        "off": 174,
+        "on": 62
+      }
+    },
+    "ME": {
+      "ME_CONTEXT_EVENT": {
+        "off": 61
+      },
+      "ME_REUSABLE_OUTCOME": {
+        "on": 121,
+        "off": 14
+      },
+      "ME_UNRESOLVED_EVENT": {
+        "off": 40
+      }
+    },
+    "RS": {
+      "RS_ATOMIC_MOVE": {
+        "off": 140,
+        "on": 84
+      }
+    }
+  },
+  "meaningful_state_duplicate_audit": {
+    "signature_definition": "current_user_text + four exact candidate texts; decorative visible-dialogue prefix excluded",
+    "duplicate_groups": 40,
+    "affected_states": 80,
+    "cross_split_duplicate_groups": 40,
+    "cross_split_affected_states": 80,
+    "groups": [
+      {
+        "blind_state_ids": [
+          "h1v2_state_6ecf4a83b3bd9da79311d88e",
+          "h1v2_state_2dbe93a93ebf3f631da396e6"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_0607bb4baa990c96b6ee41d5",
+          "h1v2_state_94dbf8bcb5ebaec529056a61"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_81cee08391546afe6fb189e9",
+          "h1v2_state_74960c8690a8d289c3cff7a6"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_1b91ab5ab48830b5beedae02",
+          "h1v2_state_662037f5268f2b44404b286c"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_226e03acfdf5bdbe82e62b2d",
+          "h1v2_state_2a3c974a049b141fe2d03974"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_83034e1c35e6dac47c468a96",
+          "h1v2_state_9c12745d4e7b44ff3f2e258b"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_cc4b05bb44f7798ab069091b",
+          "h1v2_state_79fdf68ce1ad80c8be5e2652"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_965fa912efd1a9f718e57ea3",
+          "h1v2_state_b11c81a8f09311a9430d74c1"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_a3d30f5f47add8205113d638",
+          "h1v2_state_ad7e3a741516f3ca1a13d9a4"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_4a3ac8b243be3ced3d4bbd0e",
+          "h1v2_state_d70e84ce26e692a61b07eb97"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_ef8ade95f6fbc2be52857e15",
+          "h1v2_state_cb6dedfe2fc044f9f726b58a"
+        ],
+        "splits": [
+          "FIT",
+          "FRESH_CONFIRMATION"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_d5d160e9bc626df83edbb135",
+          "h1v2_state_026702e788c491b45d3265cc"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_e80168bee7e5d5ce67e9d6ad",
+          "h1v2_state_e3ba65553124efe960fea624"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_f27e0145f933593f5d754c61",
+          "h1v2_state_5874c0ceab25296fcc00879d"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_75095dc03fd1a905d191e747",
+          "h1v2_state_28ece257a2b6a6c20094d55b"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_63c79c7311092e0d8575d77f",
+          "h1v2_state_34d4319484c0d7400b9d5026"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_71318acd10e1edeb40dfd95c",
+          "h1v2_state_8216fd2a084f349c50ff4df4"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_2bf92d3fcef92ac21544c3a8",
+          "h1v2_state_040254b8ab89d00a5a1055f7"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_1bf93db2569f1d8f17ba77c0",
+          "h1v2_state_5c862b963821f418c29ac3d1"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_bd6de49edbc1dc7ea1e47ec2",
+          "h1v2_state_d6ed72c545bc085bdd8daed7"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_8814ac221145cbcf2e91284c",
+          "h1v2_state_9a080cb033e5d1afda579b6e"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_df01eed41fab29554344439b",
+          "h1v2_state_b3e53897e0aec9115f0a6f51"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_9d8f5106015533aef3628fc5",
+          "h1v2_state_b8dcf8d9862fe38f0957de76"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_efa73780b023483602868b4b",
+          "h1v2_state_559585031ed28d1353ba9395"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_42e50041252f4f0a631d0c8a",
+          "h1v2_state_6f5b9425b9d115de1cff15b0"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_5b3fc57ca2499b271a3930a4",
+          "h1v2_state_717a46f97e0bb8011b7c4011"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_11b76a46754323f67ef13340",
+          "h1v2_state_0eb751fc4b85cd9cae723233"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_c4fe7b1ae30e9dd62a2bc110",
+          "h1v2_state_b30bb59f067076b76145883d"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_2048daceec80724faf35533e",
+          "h1v2_state_69e4a522c3f6ea3ece5baa69"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_10c278d8a68162b027ee4361",
+          "h1v2_state_d48ea399f95ce14cc37d3758"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_c9c593c13bd0bb5ede5949f3",
+          "h1v2_state_7ca8fef15ce7de9d0471b19b"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_2c99fe34c8c6927f111e53cb",
+          "h1v2_state_33a2d24268e6a8c14c6af96d"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_8e2466bc1e080f2be82b2cb7",
+          "h1v2_state_a492eb2c049725e06e6a28ee"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_3197ce4368ff570fec739d37",
+          "h1v2_state_ceecb816e5b33635c5ae81b6"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_b4222769192649cc47185d8a",
+          "h1v2_state_9f405a187b65fd90cf797328"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_f588f80fd3096ff93e30cec5",
+          "h1v2_state_62b4c0d0b8d3d33c17fc9949"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_a5b18a1a8c60aba7b71f25d9",
+          "h1v2_state_65d8bb0cfa88ce535734e381"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_db857afa14423fca0b2e718f",
+          "h1v2_state_57e2b30b7339cae290ae03d4"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_7f0483a1ab1be25e36c3b139",
+          "h1v2_state_04d300e8b384978f66d1ec5c"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      },
+      {
+        "blind_state_ids": [
+          "h1v2_state_92a1227b35719bd9b1c5372b",
+          "h1v2_state_e75296b32ff7ff9b588701d8"
+        ],
+        "splits": [
+          "FRESH_CONFIRMATION",
+          "SEALED_INTERNAL_TEST"
+        ],
+        "cross_split": true
+      }
+    ]
+  },
+  "single_cue_shortcut_audit": {
+    "ME_cue": "a tentative option based on what helped before is welcome.",
+    "counts": {
+      "cue_false__on_false": 103,
+      "cue_false__on_true": 14,
+      "cue_true__on_true": 107,
+      "cue_true__on_false": 12
+    },
+    "cue_only_accuracy": 0.8898305084745762,
+    "cue_only_sensitivity": 0.8842975206611571,
+    "cue_only_specificity": 0.8956521739130435,
+    "cue_only_balanced_accuracy": 0.8899748472871003,
+    "frozen_single_feature_gate": "balanced_accuracy_below_0.65"
+  },
+  "RS_strategy_family_shortcut_audit": {
+    "counts": {
+      "Providing Suggestions": {
+        "off": 33,
+        "on": 1
+      },
+      "Question": {
+        "off": 106,
+        "on": 24
+      },
+      "Reflection of feelings": {
+        "on": 24
+      },
+      "Restatement or Paraphrasing": {
+        "on": 35,
+        "off": 1
+      }
+    },
+    "family_only_oracle_balanced_accuracy": 0.8476190476190476,
+    "note": "Current Question/Restatement/Suggestion/Reflection families are not counterbalanced across ON/OFF."
+  },
+  "transparent_feature_collision_audit": {
+    "MP": {
+      "candidate_present_rows": 209,
+      "distinct_feature_vectors": 6,
+      "mixed_label_vectors": 1,
+      "rows_in_mixed_label_vectors": 114,
+      "oracle_accuracy_ceiling": 0.8133971291866029,
+      "oracle_balanced_accuracy_ceiling": 0.8544776119402986
+    },
+    "MS": {
+      "candidate_present_rows": 236,
+      "distinct_feature_vectors": 12,
+      "mixed_label_vectors": 7,
+      "rows_in_mixed_label_vectors": 133,
+      "oracle_accuracy_ceiling": 0.8050847457627118,
+      "oracle_balanced_accuracy_ceiling": 0.7712272895810159
+    },
+    "ME": {
+      "candidate_present_rows": 236,
+      "distinct_feature_vectors": 14,
+      "mixed_label_vectors": 6,
+      "rows_in_mixed_label_vectors": 133,
+      "oracle_accuracy_ceiling": 0.9279661016949152,
+      "oracle_balanced_accuracy_ceiling": 0.9271649299317284
+    },
+    "RS": {
+      "candidate_present_rows": 224,
+      "distinct_feature_vectors": 8,
+      "mixed_label_vectors": 4,
+      "rows_in_mixed_label_vectors": 198,
+      "oracle_accuracy_ceiling": 0.8526785714285714,
+      "oracle_balanced_accuracy_ceiling": 0.8130952380952381
+    }
+  },
+  "primary_overlap_distribution": {
+    "MP": {
+      "present": 50,
+      "counts": {
+        "on": 16,
+        "off": 34
+      },
+      "absent": 14
+    },
+    "MS": {
+      "present": 58,
+      "counts": {
+        "off": 42,
+        "on": 16
+      },
+      "absent": 6
+    },
+    "ME": {
+      "present": 58,
+      "counts": {
+        "off": 26,
+        "on": 32
+      },
+      "absent": 6
+    },
+    "RS": {
+      "present": 55,
+      "counts": {
+        "off": 37,
+        "on": 18
+      },
+      "absent": 9
+    }
+  },
+  "inter_annotator_agreement": {
+    "status": "ROW_LEVEL_SECONDARY_ANNOTATIONS_NOT_PROVIDED"
+  },
+  "salvage_boundary": {
+    "retain": "Primary labels may be retained as development evidence; FIT may seed feature/codebook diagnosis after removing malformed/duplicate-linked cases.",
+    "do_not_use": "Current FRESH_CONFIRMATION and SEALED_INTERNAL_TEST may not qualify or select a model because meaningful duplicate states cross split and ME has a visible cue shortcut.",
+    "minimum_next_data_action": "Repair the static gate and transparent factors using development evidence, then construct genuinely new counterbalanced confirmation and sealed states. Do not relabel all 256 by default."
+  },
+  "provenance": {
+    "annotations": "/home/tokkio/.codex/attachments/7bf76bd3-75c3-427a-998d-890563406294/pasted-text.txt",
+    "packet": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_final_h1_v2_candidate/human_review_packet.json",
+    "overlap_packet": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_final_h1_v2_candidate/independent_overlap_packet.json",
+    "binding": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_final_h1_v2_candidate/private_binding.jsonl",
+    "features": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_p2_h1_v2_exact_rank1_v10/model_feature_rows.jsonl",
+    "strategy_cards": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl",
+    "secondary_overlap_annotations": null
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "protocol": "pm-v1.5-v3-claim-same-stack-readiness-audit-v1",
+  "study_stage": "V3_PREIMPLEMENTATION_FAIL_CLOSED",
+  "claims": {
+    "allowed_current_statement": "Train-only evidence supports limited axis-specific SupportNeed signal, but neither a diagnostic module, formal Strategy Bank V2 RAG, nor a learned router has been established.",
+    "future_primary_claim_template": "Under one frozen supporter, prompt, Strategy Bank, query builder, retriever, evidence filter, decoding treatment, and accounting contract, a shared pre-retrieval PM may be tested for quality non-inferiority and lower observed resource use relative to same-stack fixed policies.",
+    "prohibited_interpretations": [
+      "clinical or psychological diagnosis",
+      "human-level understanding of user needs",
+      "Strategy Bank V2 effectiveness before matched R0/RS effects",
+      "RAG superiority from a different corpus or retriever",
+      "learned routing success from savings versus only a high-resource fixed comparator",
+      "reuse of raw-Bank outcomes or checkpoints as V2-RAG evidence",
+      "total cost or latency reduction from generator input-token reduction alone",
+      "long-term user improvement or pristine external generalization"
+    ]
+  },
+  "same_stack_definition": {
+    "scientific_variable_allowed_to_change": "requested MP/MS/ME source set and RS on/off decision produced by the policy",
+    "must_be_identical_across_learned_rule_fixed_internal_external": [
+      "Strategy Bank version and card bytes",
+      "memory corpus and source semantics",
+      "visible-state and retrieval query builder",
+      "retriever implementation and tie breaking",
+      "top-k, score floors, token budget, and eligible subset rules",
+      "post-retrieval Evidence Filter and reranker",
+      "requested-attempted-realized-prompt-equivalence semantics",
+      "supporter endpoint, model, prompt, decoding, seed protocol, output cap, finish normalization",
+      "legal action mask for the same environment",
+      "cost accounting and unit definitions",
+      "evaluation rubric and candidate information condition"
+    ],
+    "allowed_item_level_difference": "Different visible states may retrieve different eligible items; this is not a stack difference when corpus, query builder, retriever, and settings are identical."
+  },
+  "strategy_bank_v2": {
+    "candidate_binding": {
+      "path": "data/pm_v1_5_contracts/strategy_bank_v2_candidate_v2.json",
+      "file_sha256": "5c684591692f4779fc2ed6db045d17127e73f9a96ecaa9d0cba8df089a1f3ce5"
+    },
+    "reproduction_directory": "outputs/pm_v1_5_strategy_bank_v2_review_candidate_v2_repro_check",
+    "human_annotation_path": "data/pm_v1_5_contracts/strategy_bank_v2_human_annotations_v2.jsonl",
+    "llm_weak_audit_path": "data/pm_v1_5_contracts/strategy_bank_v2_llm_weak_audit_v1.json"
+  },
+  "support_need": {
+    "binding": {
+      "path": "data/pm_v1_5_contracts/support_need_factorized_bakeoff_expanded_v1.json",
+      "file_sha256": "972bc6dc8c21f6d80ed8f81ffe79134f6e7bbdf248b913cb4475b59cccca599d"
+    }
+  },
+  "historical_same_stack": {
+    "sweep_manifest": {
+      "path": "outputs/pm_v1_5_longitudinal_action_sweep_v8_19_2_qualified_transport_v1_dry_run/run_manifest.json",
+      "file_sha256": "d7408c73150a598e3e67445a85eb1b87d1ab485447b1a4a757766ad6e97c3b77"
+    },
+    "pm_config": {
+      "path": "configs/pm_v1_5.yaml",
+      "file_sha256": "d45aab7fa6490b084c596c724020ca762642b973ad5c9608b871c5881ccf37fa"
+    },
+    "strategy_bank_v2_binding_path": "data/pm_v1_5_contracts/strategy_bank_v2_candidate_v2.json"
+  },
+  "runtime_integration": {
+    "v2_runtime_needles": [
+      "StrategyBankV2Card",
+      "strategy_cards_v2_candidate",
+      "v1_5_strategy_bank"
+    ],
+    "consumer_source_paths": [
+      "src/metacom_pm/action_execution.py",
+      "src/metacom_pm/evidence_filter.py",
+      "src/metacom_pm/prompts.py",
+      "src/metacom_pm/sweep.py",
+      "src/metacom_pm/pm_v22_reference_baselines.py",
+      "src/metacom_pm/pm_v2_evoemo.py",
+      "src/metacom_pm/esconv.py"
+    ]
+  },
+  "future_same_stack": {
+    "consumer_matrix_path": "data/pm_v1_5_contracts/v3_same_stack_consumer_matrix_v1.json",
+    "required_consumer_roles": [
+      "clean_component_pair_generation",
+      "train_sweep",
+      "transparent_rule",
+      "fixed_comparators",
+      "internal_evaluation",
+      "external_esconv",
+      "external_evoemo"
+    ]
+  },
+  "allowed_now": [
+    "complete the five-card Bank V2 human review on the exact V2 packet",
+    "run a separately bound LLM weak audit of the five technique cards",
+    "reannotate outcome-blind historical visible states for scarce SupportNeed axes",
+    "add train-only planning and interaction-burden counterfactual anchors",
+    "implement and test a technique-only eligible-subset retriever and prompt surface",
+    "build deterministic dry-runs and same-stack consumer identities without API calls"
+  ],
+  "prohibited_until_ready": [
+    "formal SupportNeed fit",
+    "paid clean R0/RS treatment generation",
+    "calibration, internal-test, or external outcome opening",
+    "promotion of Strategy Bank V2 to formal RS",
+    "reuse of historical raw-Bank outcomes or checkpoints for V3",
+    "paper claims of diagnosis, need understanding, RAG benefit, learned routing, or external efficiency"
+  ],
+  "contract_sha256": "54188fdba2390be370a40617074d28e212671ec95c475950806a024021723ae9"
+}

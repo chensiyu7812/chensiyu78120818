@@ -1,0 +1,96 @@
+{
+  "protocol": "pm-v1.5-factorized-small-sample-weak-learning-v1",
+  "status": "TRAIN_ONLY_REDESIGN_FROZEN_BEFORE_HUMAN_ANCHOR_SELECTION",
+  "trigger": {
+    "failed_candidate_status": "NOT_SUPPORTED_FOR_INTERNAL_TEST_CONSUMPTION",
+    "failure_mode": "both calibration domains routed every state to M0+R0",
+    "post_failure_threshold_only_repair_forbidden": true
+  },
+  "scope": {
+    "design_and_label_model_fit": "train_only",
+    "calibration_use": "one frozen threshold-and-viability evaluation after train-only model family is fixed",
+    "internal_test_outcomes_opened": false,
+    "external_outcomes_opened": false
+  },
+  "estimand": {
+    "unit": "state-by-component effect",
+    "components": ["MP", "MS", "ME", "RS"],
+    "factorial_backgrounds_are_repeated_measurements": true,
+    "judge_families_are_retained_separately": true,
+    "direct_16_action_absolute_score_argmax_forbidden": true,
+    "reason": "taking the maximum of sixteen noisy absolute scores creates winner's-curse pseudo-oracles and spends model capacity on state difficulty rather than action value"
+  },
+  "supervision_channels": {
+    "structural_need": {
+      "source": "synthetic evaluator-only needed_memory_sources and strategy_resource_target",
+      "role": "silver source-need labeling function",
+      "not_response_quality_gold": true,
+      "ambiguous_is_unlabeled_not_negative": true
+    },
+    "paired_realized_effect": {
+      "definition": "within-state treatment-minus-control quality effect averaged over matched factorial backgrounds separately for each judge family",
+      "quality_margin": 0.01,
+      "opposite_family_directions": "abstain",
+      "uncertain_or_small_effect": "low-confidence_or_abstain",
+      "individual_backgrounds_may_not_be_counted_as_independent_training_examples": true
+    },
+    "risk": {
+      "structural_memory_harm_annotations": "high-precision silver flags",
+      "llm_risk_dimensions": "soft weak evidence with action-applicability mask",
+      "inapplicable_dimensions": "N/A_not_zero",
+      "hard_safety_rules_remain_transparent": true
+    },
+    "cost": {
+      "source": "deterministic token and retrieval-call accounting",
+      "llm_judgment_forbidden": true
+    }
+  },
+  "human_anchor": {
+    "role": "single-researcher descriptive calibration of labeling-function reliability, never bulk gold",
+    "packet_size": 32,
+    "train_only": true,
+    "items_per_component": 8,
+    "strata_per_component": {
+      "judge_consensus_positive": 2,
+      "judge_consensus_negative": 2,
+      "judge_opposite": 2,
+      "judge_uncertain": 2
+    },
+    "candidate_order": "deterministic_blinded_AB_or_BA",
+    "model_action_regime_and_expected_direction_hidden": true,
+    "packet_and_annotations_content_addressed_before_model_fit": true
+  },
+  "weak_label_model": {
+    "latent_target": "component_is_expected_to_improve_support_quality_without_unacceptable_applicable_risk",
+    "labeling_functions": [
+      "deepseek_family_paired_effect",
+      "gemini_family_paired_effect",
+      "structural_need_or_harm_annotation"
+    ],
+    "human_anchors_calibrate_but_do_not_replace_labeling_functions": true,
+    "output": "posterior_probability_plus_entropy_plus_abstention",
+    "hard_majority_vote_forbidden": true,
+    "unidentifiable_accuracy_claim_forbidden": true
+  },
+  "small_sample_model": {
+    "family": "factorized_regularized_component_benefit_model",
+    "high_dimensional_unregularized_or_tree_only_16_action_model_forbidden": true,
+    "grouping": "user_or_dialogue_group_bootstrap_and_cross_validation",
+    "domain_weighting": "equal_top_level_domain_then_group_then_state",
+    "targets": "probabilistic_component_benefit_with_confidence_weight",
+    "action_construction": "component benefit minus explicit risk minus deterministic cost",
+    "multi_source_policy": "apply a frozen conservative interaction penalty; never multiply component probabilities as if independent",
+    "fallback": "M0+R0_when_no_component_has_positive_conservative_advantage"
+  },
+  "selection_and_stopping": {
+    "train_only_model_selection": true,
+    "calibration_threshold_grid_must_be_frozen_before_calibration_run": true,
+    "calibration_action_viability_gate_reused": "pm-v1.5-pre-internal-calibration-action-viability-v1",
+    "no_diversity_forcing": true,
+    "one_calibration_evaluation_before_decision": true,
+    "if_not_supported": "freeze learned_PM_NOT_SUPPORTED and do not open internal",
+    "threshold_or_label_iterations_until_pass_forbidden": true
+  },
+  "interpretation_boundary": "The route may support judge-conditioned weak-supervision learnability under synthetic/development-informed conditions; it cannot establish human-optimal routing, clinical benefit, or item-level understanding.",
+  "contract_sha256": "7e4e5aea64dc8a9d98c7f5d7379d60ce5267641dcf4f015b0a31e1b0d866bdcf"
+}

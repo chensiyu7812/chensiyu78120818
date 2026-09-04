@@ -1,0 +1,11 @@
+{
+  "protocol": "pm-v1.5-d3-step0-blueprint-v1",
+  "status": "PASS_READY_TO_PREPARE_320_FROZEN_RESPONSE_CALLS",
+  "preflight_report_sha256": "ae007e38a7b8ad9364033193f687063b74e91dabc0a8b7fb1f1c68a024bca856",
+  "contrast_blueprint_sha256": "d5bcb1a97e119daea85b801912c80e45bb024d15c1ed3fa438d93c05759e4826",
+  "primary_pairs_sha256": "d3a30c50aa5790f665b161a06d30c3dcf5a9541c1c10f5dd278fa7cf4c3a5ec8",
+  "repeat_pairs_sha256": "a1febd6292c75dc29765ef6f98497914c3b477bb2d8a34e559e4f09a2fd46b2e",
+  "strategy_cards_sha256": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676",
+  "outcome_blind": true,
+  "api_calls_made": 0
+}

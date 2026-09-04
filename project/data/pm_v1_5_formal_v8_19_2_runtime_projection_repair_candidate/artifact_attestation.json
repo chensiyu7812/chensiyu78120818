@@ -1,0 +1,83 @@
+{
+  "status": "ATTESTED",
+  "stage": "pm_v1_5_development_data",
+  "created_at": "2026-07-22T13:26:36.991974+00:00",
+  "study_freeze_sha256": null,
+  "inputs": {
+    "classification": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_contracts/context_grounding_defect_classification_v1.jsonl",
+      "bytes": 253574,
+      "sha256": "a20a1003e02cccd42a9dedb720073a73172e0228e4638d2a5bbdc1f69d6b9af5"
+    },
+    "original_bundles": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_18_duplicate_repair_candidate/pm_v2_bundles.jsonl",
+      "bytes": 5048739,
+      "sha256": "7e9d6157d856fff850f8c59a2b8aadf07c4c5ae9221a90f654120cc239c4621d"
+    },
+    "pm_v1_5_config": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/configs/pm_v1_5.yaml",
+      "bytes": 55436,
+      "sha256": "d45aab7fa6490b084c596c724020ca762642b973ad5c9608b871c5881ccf37fa"
+    },
+    "repair_overlays": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_context_grounding_repair_v8_19_1_manual_micro_repair/repair_overlays.jsonl",
+      "bytes": 15542,
+      "sha256": "5b5eb640a898cb64df1fd7bb22d9fff77f3d86b9949932c455aea673e1971b0e"
+    },
+    "selected_seed_sources": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/strategy/pm_v1_5_selected_seed_sources.jsonl",
+      "bytes": 24215,
+      "sha256": "c8af66113bb3284cf0b737443800f21a5a53be22589fab72f6624db1d1457065"
+    },
+    "strategy_bank": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/strategy/strategy_cards_v1_5.jsonl",
+      "bytes": 13033682,
+      "sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e"
+    }
+  },
+  "outputs": {
+    "backend": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/memory_backend.jsonl",
+      "bytes": 765838,
+      "sha256": "bf2173ffc42cac8da3560d8c356ee9304537e746b5e4c28cd046bd6dc5f8cd49",
+      "rows": 468
+    },
+    "bundles": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_bundles.jsonl",
+      "bytes": 5050584,
+      "sha256": "63708d5ad2ff71582d096aafd2f59a6e2a69a7ec9858d55122424a332738af04",
+      "rows": 52
+    },
+    "data_report": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_data_report.json",
+      "bytes": 298381,
+      "sha256": "1a52774aa68aa859952f1aa611ec836e3ad8e181eae2239ab2dabe992ec5afd9"
+    },
+    "evaluator_contexts": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/evaluator_contexts.jsonl",
+      "bytes": 907111,
+      "sha256": "31f30eeba5ca33bdf6e8e0d0dab7270b8a8c4a620873fa5a017dc74b9478641b",
+      "rows": 468
+    },
+    "runtime_states": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/runtime_states.jsonl",
+      "bytes": 1595880,
+      "sha256": "5ff31de14a5e3a0757f561958153a97f295eb04dd0a23febd19257c370d07ded",
+      "rows": 468
+    },
+    "states": {
+      "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+      "bytes": 10893006,
+      "sha256": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+      "rows": 468
+    }
+  },
+  "parameters": {
+    "recompile_script": "scripts/v1_5/20f_recompile_context_grounding_repair_v1_5.py",
+    "repaired_state_count": 25
+  },
+  "expected": {
+    "total_states": 468
+  },
+  "attestation_sha256": "e97778843073298b5b6a0139301226b9fbe144aa99eb00705b17ae5fcfe813e9"
+}

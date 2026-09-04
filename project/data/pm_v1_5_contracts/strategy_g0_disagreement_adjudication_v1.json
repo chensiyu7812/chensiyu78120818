@@ -1,0 +1,148 @@
+{
+  "protocol": "pm-v1.5-strategy-g0-rule-based-disagreement-resolution-v1",
+  "status": "FROZEN_FOR_CODEBOOK_AND_SOURCE_SCREENING",
+  "date": "2026-07-29",
+  "input_disagreement_count": 21,
+  "resolver_role": "rule_based_methodological_synthesis_not_an_independent_blind_human_annotation",
+  "not_valid_for": [
+    "PM_on_off_training_gold",
+    "population_prevalence_estimation",
+    "response_quality_outcome_gold",
+    "claiming_three_independent_annotators"
+  ],
+  "field_semantics": {
+    "meaningful_support_action": "observable contribution to current emotional support, understanding, exploration, stabilization, or bounded action help",
+    "mainly_information": "main value depends on externally verifiable factual, legal, medical, resource, or mechanistic content; platform mechanics are a separate corpus artifact",
+    "mainly_self_disclosure": "support effect substantively relies on the supporter's real identity, experience, relationship, location, or coping history; phatic status does not count",
+    "reusable_as_general_technique": "the move as actually executed is already safe, topic-agnostic, self-contained, and directly translatable into an LLM technique",
+    "clear_risk_or_boundary_problem": "broad fail-closed source-screening risk, distinct from the four formal PM outcome risk dimensions"
+  },
+  "resolutions": [
+    {
+      "blind_item_id": "strategy_discovery_0e3ea0aa87975893d8c5",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": true, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["personal_answer_without_support_progress", "substantive_identity_disclosure"],
+      "codebook_use": "exclude_as_source_and_move"
+    },
+    {
+      "blind_item_id": "strategy_discovery_23460594d3fbd42eb91d",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["platform_message_delivery_artifact", "not_external_information"],
+      "codebook_use": "exclude_as_corpus_artifact"
+    },
+    {
+      "blind_item_id": "strategy_discovery_28100511a602627a4dcb",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["recognizable_challenge_move", "person_labeling_and_shaming", "unsafe_execution_not_reusable"],
+      "codebook_use": "abstract_move_candidate_only"
+    },
+    {
+      "blind_item_id": "strategy_discovery_2eb79224180aa6aa534c",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": true, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["minimizing_agency", "categorical_directive_without_preference_check"],
+      "codebook_use": "abstract_move_candidate_only_source_excluded"
+    },
+    {
+      "blind_item_id": "strategy_discovery_36f7e0b7b4cfcd8c07ca",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": true, "reusable_as_general_technique": true, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["personal_local_experience", "public_health_overgeneralization", "context_insensitive_reassurance"],
+      "codebook_use": "abstract_move_candidate_only_source_excluded"
+    },
+    {
+      "blind_item_id": "strategy_discovery_519a1816197b585a2c6b",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": true, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["personal_endorsement", "not_self_contained", "depends_on_previous_advice"],
+      "codebook_use": "exclude_as_direct_source"
+    },
+    {
+      "blind_item_id": "strategy_discovery_55bf25863dcabdf6efda",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": true, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["unbounded_availability_promise", "role_boundary_overclaim"],
+      "codebook_use": "abstract_transition_move_only_source_excluded"
+    },
+    {
+      "blind_item_id": "strategy_discovery_597ba6d863c0be8555ec",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": true, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["personal_account_answer_without_support_progress", "not_external_information_under_frozen_definition"],
+      "codebook_use": "exclude_as_source_and_move"
+    },
+    {
+      "blind_item_id": "strategy_discovery_5aa401916893294bd160",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": true, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["personal_relationship_status_answer_without_support_progress"],
+      "codebook_use": "exclude_as_source_and_move"
+    },
+    {
+      "blind_item_id": "strategy_discovery_742ad4853733f1539cbc",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": true, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["religious_value_introduction", "conditional_hedge_does_not_remove_source_risk"],
+      "codebook_use": "affirmation_move_only_source_excluded"
+    },
+    {
+      "blind_item_id": "strategy_discovery_7bb7680beeab6c5e6f22",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["off_topic_phatic_question", "not_self_disclosure"],
+      "codebook_use": "exclude_as_phatic"
+    },
+    {
+      "blind_item_id": "strategy_discovery_7ec55a758777c336a595",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": true, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["mirrored_biographical_disclosure", "rapport_only_without_support_progress"],
+      "codebook_use": "exclude_as_direct_source"
+    },
+    {
+      "blind_item_id": "strategy_discovery_8c9b945ba83a0895d02e",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["phatic_greeting_status", "not_substantive_self_disclosure"],
+      "codebook_use": "exclude_as_phatic"
+    },
+    {
+      "blind_item_id": "strategy_discovery_a4d3d2ca29f1e7e60935",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": true, "reusable_as_general_technique": true, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["personal_age_and_weather_comparison_carries_reassurance"],
+      "codebook_use": "abstract_validation_move_only_source_excluded"
+    },
+    {
+      "blind_item_id": "strategy_discovery_a65df8d601cf67f12969",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["unsupported_deterministic_prediction", "fear_pressure", "unsafe_execution_not_reusable"],
+      "codebook_use": "abstract_consequence_exploration_only"
+    },
+    {
+      "blind_item_id": "strategy_discovery_a85f755e7ed6a27485f0",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["high_stakes_intimate_partner_violence", "specific_safety_advice_without_specialist_assessment", "unsafe_execution_not_reusable"],
+      "codebook_use": "exclude_from_v1_5_bank"
+    },
+    {
+      "blind_item_id": "strategy_discovery_cb35d7b307d1e3dcf10b",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["platform_quit_instruction", "not_external_information"],
+      "codebook_use": "exclude_as_corpus_artifact"
+    },
+    {
+      "blind_item_id": "strategy_discovery_e458c93e828b6e5f3c50",
+      "final": {"meaningful_support_action": false, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["crowdwork_duration_artifact", "not_external_information"],
+      "codebook_use": "exclude_as_corpus_artifact"
+    },
+    {
+      "blind_item_id": "strategy_discovery_e6dadb9d0176f464cdeb",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": true, "reusable_as_general_technique": true, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["personal_relationship_success_story_carries_persuasion", "romance_fraud_markers_not_explored", "normalization_may_lower_caution"],
+      "codebook_use": "slow_pacing_move_only_source_excluded"
+    },
+    {
+      "blind_item_id": "strategy_discovery_eb26a4d7d295e22cc4a0",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": true, "clear_risk_or_boundary_problem": false},
+      "reason_codes": ["positive_reinforcement_with_humorous_frame", "mechanistic_language_not_primary_value"],
+      "codebook_use": "reinforcement_move_candidate"
+    },
+    {
+      "blind_item_id": "strategy_discovery_f97eb2d3424a333708fc",
+      "final": {"meaningful_support_action": true, "mainly_information": false, "mainly_self_disclosure": false, "reusable_as_general_technique": false, "clear_risk_or_boundary_problem": true},
+      "reason_codes": ["false_hope_against_explicit_statement", "unaddressed_perinatal_loss", "unsafe_execution_not_reusable"],
+      "codebook_use": "bounded_hope_counterexample_only"
+    }
+  ]
+}

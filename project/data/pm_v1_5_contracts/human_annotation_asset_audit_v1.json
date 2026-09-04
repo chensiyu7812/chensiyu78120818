@@ -1,0 +1,28 @@
+{
+  "protocol": "pm-v1.5-historical-human-annotation-asset-audit-binding-v1",
+  "status": "COMPLETE_REPRODUCIBLE_USE_RESTRICTED_INVENTORY",
+  "output_directory": "outputs/pm_v1_5_human_annotation_asset_audit_v1_candidate",
+  "repro_directory": "outputs/pm_v1_5_human_annotation_asset_audit_v1_repro_check",
+  "candidate_repro_byte_identical": true,
+  "report_file_sha256": "4d19710b4f1dcd5628fd71d322b9a8914acb77bcd27118d058a1850fe85a22fe",
+  "report_sha256": "61651068d5de6d097af9e1fa8ac95b33185d38b6beaee53be53982d6d0c69cce",
+  "current_project_named_human_files": 101,
+  "current_project_distinct_named_human_file_hashes": 46,
+  "completed_support_need_human_rows": 40,
+  "support_need_nonabstaining_independent_groups": 39,
+  "completed_non_support_need_human_rows": 24,
+  "support_need_fit_eligible_asset_ids": [
+    "support_need_human_anchor_v1",
+    "support_need_factorized_fit_adjudication_v1"
+  ],
+  "non_support_need_human_assets_may_enter_fit": false,
+  "historical_judge_state_reannotation_candidate_count": 24,
+  "historical_judge_state_current_support_need_exact_overlap": 0,
+  "historical_judge_labels_reused_as_need_targets": false,
+  "external_v2_completed_review_rows_found": 0,
+  "confirmation_rows_exposed": false,
+  "api_calls_made": 0,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "binding_sha256": "a0d1d7e55509aed0e1e619c234a921f2908ab6a1aaab44ac13763fb72cc54d41"
+}

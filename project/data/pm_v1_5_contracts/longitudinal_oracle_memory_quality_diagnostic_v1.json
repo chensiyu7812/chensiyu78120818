@@ -1,0 +1,65 @@
+{
+  "protocol": "pm-v1.5-train-only-oracle-memory-blinded-quality-diagnostic-v1",
+  "schema_protocol": "pm-v1.5-oracle-memory-anonymous-quality-evidence-safety-preference-v1",
+  "status": "READY_ZERO_API_PACKET",
+  "scope": "longitudinal_train_only_existing_responses",
+  "state_count": 18,
+  "order_variants": [
+    0,
+    1
+  ],
+  "planned_pair_items": 36,
+  "max_output_tokens": 700,
+  "blinding": {
+    "hide_action_ids": true,
+    "hide_control_and_treatment_identity": true,
+    "hide_memory_source_labels_and_ids": true,
+    "hide_generator_identity": true,
+    "show_same_visible_state_and_candidate_records_to_both_responses": true,
+    "balanced_ab_ba_orders": true
+  },
+  "dimensions": [
+    "support_quality_preference",
+    "evidence_handling_preference",
+    "safety_preference"
+  ],
+  "expected_direction_is_not_shown_to_judges": {
+    "helpful_memory_pairs": "oracle_helpful_memory_same_prompt over frozen_m0_r0_control",
+    "harmful_memory_pairs": "frozen_m0_r0_control over oracle_harmful_memory_same_prompt"
+  },
+  "analysis": {
+    "primary_unit": "state/user",
+    "within_family_order_consistency": "required_and_reported",
+    "directional_accuracy_by_family": "reported_separately",
+    "cross_family_agreement": "reported_separately",
+    "third_family_majority": "descriptive diagnostic only; never a gold label",
+    "ties_and_insufficient": "retained, never forced to A or B",
+    "no_pooled_training_label": true,
+    "no_threshold_or_family_selection_after_outcomes": true
+  },
+  "interpretation_boundary": [
+    "This diagnostic tests response-level consequences of already generated oracle evidence.",
+    "It does not validate the production retriever or learned PM.",
+    "It does not authorize training labels, calibration/internal-test access, or external claims.",
+    "A third judge may diagnose panel instability but majority vote is not ground truth."
+  ],
+  "source_lineage": {
+    "pilot_contract_path": "data/pm_v1_5_contracts/longitudinal_oracle_memory_upper_bound_pilot_v1.json",
+    "pilot_contract_file_sha256": "157aadc51ce75262124b9deebbb89cb3c7ab9c05d132f9562ac2623f4533db2a",
+    "pilot_contract_sha256": "5f86d5aadf3d82991ab0125b7155d06822e94652bc1238a2607eb970944a3598",
+    "states_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+    "states_sha256": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+    "backend_path": "data/pm_v1_5_contracts/longitudinal_oracle_memory_upper_bound_backend_v1.jsonl",
+    "backend_sha256": "ae4257bec103cacaaf612f7be9d97a2a668dabc30443ad40bee3bbd20bec2a59",
+    "outcomes_path": "outputs/pm_v1_5_longitudinal_oracle_memory_upper_bound_pilot_v1_execution_candidate/pilot_outcomes.jsonl",
+    "outcomes_sha256": "1b2fb20ecacc4dc3a494f206588e7380443a521db417a63e80819cca8e05b61b",
+    "preparation_code_sha256": "c0d14911ab493324b444dbc877d8ccb8b9beb2b714fe243b808ac02ae6e0e572",
+    "preparation_runner_sha256": "3a2e4f0ccd07fd8b39f876415b8017d9c97dd6efbebba3125b52e127550488f8",
+    "items_sha256": "63ee5aad29f5cb0b6959309fd553eaba40140f5b0dca8baa0fa2055225162286",
+    "prompt_rows_sha256": "47a86df387634e7bdf17f81fdf917b84e60fb1cc272694ef1e268b75c4e88a51"
+  },
+  "response_schema_sha256": "d4c20b977a203854cb38bed2941fa6c18d2398424038049a76061d77a011a168",
+  "api_calls_made_while_preparing_packet": 0,
+  "training_labels_created": false,
+  "contract_sha256": "82eef42b91c42b57969f4142679e440d922e87e77714e764e082819e64a89465"
+}

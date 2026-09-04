@@ -1,0 +1,232 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PM V1.5 V3 Eligibility 参考集冻结报告",
+    "description": "对 H-Eligibility delta 双评、字段裁决、Rank-1 修复及最终参考集用途边界的技术审计。",
+    "generatedAt": "2026-08-03T14:00:00+09:00",
+    "filters": [],
+    "cards": [],
+    "charts": [
+      {
+        "id": "agreement_chart",
+        "title": "Delta 双评的字段一致率",
+        "subtitle": "每个字段 n=24；最终 Eligibility 一致率不能替代独立门检查。",
+        "type": "bar",
+        "dataset": "agreement",
+        "sourceId": "agreement_source",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {"field": "field", "type": "nominal", "label": "审核字段"},
+          "y": {"field": "raw_agreement", "type": "quantitative", "label": "一致率"},
+          "tooltip": [
+            {"field": "agreement", "type": "nominal", "label": "一致数"},
+            {"field": "kappa", "type": "quantitative", "label": "Cohen κ", "format": "number"}
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "component_shape_table",
+        "title": "最终 Eligibility 参考集标签形状",
+        "subtitle": "受控资格审计集，每个组件 32 个状态；该比例不是自然开启率。",
+        "dataset": "component_shape",
+        "sourceId": "component_shape_source",
+        "defaultSort": {"field": "component", "direction": "asc"},
+        "columns": [
+          {"field": "component", "label": "组件", "type": "text"},
+          {"field": "eligible", "label": "Eligible", "format": "number"},
+          {"field": "ineligible", "label": "Ineligible", "format": "number"},
+          {"field": "total", "label": "合计", "format": "number"}
+        ]
+      },
+      {
+        "id": "agreement_table",
+        "title": "24 项 delta 双评一致性",
+        "subtitle": "最终资格一致不代表每个独立门都无误。",
+        "dataset": "agreement",
+        "sourceId": "agreement_source",
+        "defaultSort": {"field": "field", "direction": "asc"},
+        "columns": [
+          {"field": "field", "label": "字段", "type": "text"},
+          {"field": "agreement", "label": "一致数", "type": "text"},
+          {"field": "raw_agreement", "label": "Raw agreement", "format": "percent"},
+          {"field": "kappa", "label": "Cohen κ", "format": "number"}
+        ]
+      },
+      {
+        "id": "lineage_table",
+        "title": "128 项最终 reference 的标签血缘",
+        "subtitle": "只复审改变的决策面，未改变项按 exact hash 继承。",
+        "dataset": "lineage",
+        "sourceId": "lineage_source",
+        "defaultSort": {"field": "basis", "direction": "asc"},
+        "columns": [
+          {"field": "basis", "label": "血缘基础", "type": "text"},
+          {"field": "rows", "label": "条数", "format": "number"},
+          {"field": "interpretation", "label": "解释", "type": "text"}
+        ]
+      }
+    ],
+    "sources": [
+      {"id": "freeze_report", "label": "Eligibility freeze report", "path": "freeze_report.json"},
+      {"id": "eligibility_reference", "label": "Frozen Eligibility reference", "path": "eligibility_reference.jsonl"},
+      {"id": "component_shape_source", "label": "Eligibility label shape query", "path": "eligibility_reference.jsonl"},
+      {"id": "agreement_source", "label": "Delta agreement query", "path": "freeze_report.json"},
+      {"id": "lineage_source", "label": "Reference lineage query", "path": "freeze_report.json"}
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PM V1.5 V3 Eligibility 参考集冻结报告"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "freeze_report",
+        "body": "## 结论：资格参考集可以冻结，但不能拿来训练“值得开启”\n\n最终冻结 **128** 个 H-Eligibility 状态，MP、MS、ME、RS 各 **16 eligible / 16 ineligible**。两份 delta 复审对最终资格为 **24/24 一致**，但具体增量门只有 **20/24 一致**，并且两位评审共同漏掉了四条 RS 的资源冗余。因此本轮采用字段级裁决和一次透明 Rank-1 profile 修复，而不是把表面一致直接当作正确。\n\n该 reference 只回答候选是否安全、相关、符合边界且有具体非冗余用途；它用于资格化 Observation 和 Step 2，**不是** Step 1 的 `worth_opening` gold。后者仍必须来自合格 Step 2 下的同状态 clean-pair 质量、风险与成本效应。"
+      },
+      {
+        "id": "shape_finding",
+        "type": "markdown",
+        "sourceId": "eligibility_reference",
+        "body": "## 四组件都获得了可用于资格测试的正负覆盖\n\n每个组件恰好有 32 条，正负各半，使 Observation 的 balanced accuracy、recall、specificity 和最小反事实方向可以被正常测量。这个对称性来自受控出题，不应外推为真实对话中组件应有 50% 开启率。"
+      },
+      {"id": "shape_table_block", "type": "table", "tableId": "component_shape_table"},
+      {
+        "id": "agreement_finding",
+        "type": "markdown",
+        "sourceId": "freeze_report",
+        "body": "## 完美的最终标签一致性仍掩盖了门级错误\n\nowner、goal、boundary 和 subtype 均 24/24 一致；具体增量门只有 20/24。四条朋友归属 MS 的记录本身仍然具体且新增，因此 increment 应为 yes，但 owner 与 goal 为 no，最终仍关闭。反过来，四条 RS 虽然动作尚未执行，用户已经逐字指定了同一完整原子动作，资源相对 R0 没有新增指令，因此 increment 应为 no。\n\n这说明 Eligibility 的四个门必须独立审核，不能让某一门的失败向其他门扩散，也不能把“尚未执行”误当作“资源有增量”。"
+      },
+      {"id": "agreement_chart_block", "type": "chart", "chartId": "agreement_chart"},
+      {"id": "agreement_table_block", "type": "table", "tableId": "agreement_table"},
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "sourceId": "freeze_report",
+        "body": "## 冻结方法只改变确实变化的决策面\n\n完整 decision surface 定义为可见对话、当前消息、目标组件、actual Rank-1 候选文本及其 age。104 条 V1 surface 未变化，按 hash 继承；16 条 V2 由双评逐字段完全一致；4 条 wrong-owner MS 做字段独立性裁决；4 条 current-request RS 先修复 low-burden profile，再按非冗余定义裁决。\n\n所有步骤使用项目正式 `.venv-pm-v1-5` Python 3.13.2，API 调用为 0，未读取外部 lockbox，也未生成回复。construction intent 只在冻结后做 128/128 出题 QA，没有进入评审页面或训练标签。"
+      },
+      {"id": "lineage_table_block", "type": "table", "tableId": "lineage_table"},
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## 资格、执行与效应是三个不同问题\n\n- **Eligibility**：actual Rank-1 候选的 owner/time、goal/function、boundary/burden 与具体非冗余增量是否全部通过。\n- **Step 2 functional execution**：已决定使用资源后，generator 是否准确、非装饰性地让资源做功，且无 fabricated recall、陈旧证据升级或边界违反。\n- **Step 1 worth_opening**：在 Eligibility 与 Step 2 均合格的前提下，开启相对关闭是否带来正的质量—风险—成本净效应。\n\n本报告只关闭第一个问题，既没有证明 PM 已学会，也没有评价 generator。"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "freeze_report",
+        "body": "## 限制：这是受控 reviewer-proxy reference，不是自然分布或已核验人类 gold\n\n两个附件记录的是两个独立 review-agent 身份，未建立真实人类身份，论文必须据实报告。四条 RS 的最终裁决依赖已冻结 codebook 中“资源相对 R0 的增量”定义，并伴随可复算的单调 profile 修复；它不是第三位评审投票。128/128 construction QA 只证明实现与受控设计一致，不证明真实世界标签分布或端到端效用。\n\n报告只用一张字段一致率条形图呈现关键差距；标签形状与血缘仍用精确表格，避免用图形弱化审计细节。"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 下一步：先资格化 Observation，再单独验证 Step 2\n\n1. 在这 128 条冻结 reference 上评估各透明 Observation 因子及其最小反事实方向。\n2. 仅在 Observation 通过后构造全新 H-Step2 gate，检查 exact binding、真正做功与 material misuse。\n3. 两层都过门后才运行正式 H-Effect clean pairs，并由质量、风险、成本形成 `worth_opening`。\n4. 最后训练四个低容量 heads，组合成完整 16 动作，并与 always-off、fixed-high、transparent-rule、cost-matched 和可复现 legacy baseline 比较。"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 后续仍需回答的问题\n\n- 透明 Observation 能否在不依赖模板 cue 的情况下同时达到预先冻结的 BA、recall、specificity 与反事实方向门？\n- Step 2 在单组件和多组件动作中能否稳定做功，并将 material misuse 控制在 5% 以内？\n- 合格候选中是否同时存在值得开启与不值得开启的效应样本，使四个 heads 学到净效用而不是复刻 Eligibility？"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-03T14:00:00+09:00",
+    "status": "ready",
+    "datasets": {
+      "component_shape": [
+        {"component_order": 1, "component": "MP", "eligible": 16, "ineligible": 16, "total": 32},
+        {"component_order": 2, "component": "MS", "eligible": 16, "ineligible": 16, "total": 32},
+        {"component_order": 3, "component": "ME", "eligible": 16, "ineligible": 16, "total": 32},
+        {"component_order": 4, "component": "RS", "eligible": 16, "ineligible": 16, "total": 32}
+      ],
+      "agreement": [
+        {"field_order": 1, "field": "Subtype", "agreement": "24/24", "raw_agreement": 1.0, "kappa": 1.0},
+        {"field_order": 2, "field": "Owner / time", "agreement": "24/24", "raw_agreement": 1.0, "kappa": 1.0},
+        {"field_order": 3, "field": "Goal / function", "agreement": "24/24", "raw_agreement": 1.0, "kappa": 1.0},
+        {"field_order": 4, "field": "Boundary / burden", "agreement": "24/24", "raw_agreement": 1.0, "kappa": 1.0},
+        {"field_order": 5, "field": "Specific nonredundant increment", "agreement": "20/24", "raw_agreement": 0.8333333333333334, "kappa": 0.0},
+        {"field_order": 6, "field": "Derived eligibility", "agreement": "24/24", "raw_agreement": 1.0, "kappa": 1.0}
+      ],
+      "lineage": [
+        {"lineage_order": 1, "basis": "V1 exact-surface carry-forward", "rows": 104, "interpretation": "公开决策面未改变，机械继承原裁决"},
+        {"lineage_order": 2, "basis": "V2 dual-review exact agreement", "rows": 16, "interpretation": "改变面逐字段双评一致"},
+        {"lineage_order": 3, "basis": "V2 field-independence adjudication", "rows": 4, "interpretation": "wrong-owner 不否定具体增量"},
+        {"lineage_order": 4, "basis": "V3 profile repair + redundancy adjudication", "rows": 4, "interpretation": "边界兼容，但资源相对 R0 无增量"}
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "freeze_report",
+      "label": "Eligibility freeze report",
+      "path": "freeze_report.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('freeze_report.json')",
+        "description": "Formal deterministic merge and field-level adjudication of two 24-item delta reviews with exact decision-surface lineage.",
+        "executed_at": "2026-08-03T14:00:00+09:00",
+        "filters": ["ELIGIBILITY_AUDIT track only", "actual Rank-1 candidates", "no external lockbox", "no response outcomes"]
+      }
+    },
+    {
+      "id": "eligibility_reference",
+      "label": "Frozen Eligibility reference",
+      "path": "eligibility_reference.jsonl",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('eligibility_reference.jsonl')",
+        "description": "Final 128-row Eligibility reviewer-proxy reference after exact-surface carry-forward and explicit adjudication.",
+        "executed_at": "2026-08-03T14:00:00+09:00",
+        "filters": ["32 states per component", "16 eligible and 16 ineligible per component", "not Step1 worth_opening gold"]
+      }
+    },
+    {
+      "id": "component_shape_source",
+      "label": "Eligibility label shape query",
+      "path": "eligibility_reference.jsonl",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT component, SUM(CASE WHEN derived_eligibility = 'eligible' THEN 1 ELSE 0 END) AS eligible, SUM(CASE WHEN derived_eligibility = 'ineligible' THEN 1 ELSE 0 END) AS ineligible, COUNT(*) AS total FROM read_json_auto('eligibility_reference.jsonl') GROUP BY component",
+        "description": "Counts final eligible and ineligible labels by component.",
+        "executed_at": "2026-08-03T14:00:00+09:00",
+        "filters": ["frozen 128-row Eligibility reference"]
+      }
+    },
+    {
+      "id": "agreement_source",
+      "label": "Delta agreement query",
+      "path": "freeze_report.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT 'Subtype' AS field, '24/24' AS agreement, 1.0 AS raw_agreement, 1.0 AS kappa UNION ALL SELECT 'Owner / time', '24/24', 1.0, 1.0 UNION ALL SELECT 'Goal / function', '24/24', 1.0, 1.0 UNION ALL SELECT 'Boundary / burden', '24/24', 1.0, 1.0 UNION ALL SELECT 'Specific nonredundant increment', '20/24', 20.0/24.0, 0.0 UNION ALL SELECT 'Derived eligibility', '24/24', 1.0, 1.0",
+        "description": "Projects the field-level dual-review agreement values saved in freeze_report.json.",
+        "executed_at": "2026-08-03T14:00:00+09:00",
+        "filters": ["24 changed Eligibility decision surfaces", "pre-adjudication reviewer labels"]
+      }
+    },
+    {
+      "id": "lineage_source",
+      "label": "Reference lineage query",
+      "path": "freeze_report.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT 'V1 exact-surface carry-forward' AS basis, 104 AS rows UNION ALL SELECT 'V2 dual-review exact agreement', 16 UNION ALL SELECT 'V2 field-independence adjudication', 4 UNION ALL SELECT 'V3 profile repair + redundancy adjudication', 4",
+        "description": "Projects the four lineage counts saved in freeze_report.json.",
+        "executed_at": "2026-08-03T14:00:00+09:00",
+        "filters": ["final 128-row Eligibility reference"]
+      }
+    }
+  ]
+}

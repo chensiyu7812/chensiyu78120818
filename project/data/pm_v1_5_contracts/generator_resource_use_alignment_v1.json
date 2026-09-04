@@ -1,0 +1,118 @@
+{
+  "protocol": "pm-v1.5-generator-resource-use-alignment-v1",
+  "status": "FROZEN_DIAGNOSTIC_AND_NEXT_RUN_PROMPT_CONTRACT",
+  "research_role": "Separate PM routing, item retrieval, prompt execution, generator uptake, and final system effect so a poor reply is localized instead of attributed to the wrong module.",
+  "causal_order": [
+    "candidate_discovery_and_item_ranking",
+    "pm_step1_component_routing",
+    "selected_item_hard_validation",
+    "prompt_injection",
+    "generator_selective_grounded_use",
+    "system_quality_risk_cost_evaluation"
+  ],
+  "failure_localization": {
+    "routing_error": "The component is opened without a qualified opportunity, or closed when a qualified opportunity exists.",
+    "retrieval_error": "The component decision is reasonable but the selected item is not the safest relevant candidate available under the frozen catalog and retriever.",
+    "execution_error": "The intended selected item or strategy is absent, altered, assigned to the wrong source, noncausal, or not delivered to the generator prompt.",
+    "grounded_nonuse": "A usable selected resource reaches the generator but makes no discernible functional contribution. Merely changing wording or mentioning history does not count.",
+    "misuse": "The response uses selected evidence in a stale, conflicting, intrusive, overgeneralized, unsupported, or boundary-violating way.",
+    "generator_capability_or_prompt_mismatch": "Routing, retrieval, and injection pass, but repeated fixed-seed or replicated generations still fail to use a clearly useful resource correctly.",
+    "no_material_system_gain": "All upstream layers pass and use is grounded, but blinded quality-risk-cost evaluation shows no material net benefit. This is a system-effect result, not a routing-label correction."
+  },
+  "resource_contribution_contract": {
+    "RS": {
+      "what_can_change": "The primary support move, sequencing, question/advice burden, or response structure.",
+      "what_must_not_change": "It must not add personal facts, override explicit boundaries, or become a full canned reply.",
+      "grounded_use_test": "The response clearly performs the selected move without merely echoing the card wording."
+    },
+    "MP_PREFERENCE": {
+      "what_can_change": "Tone, pacing, permission, format, question count, suggestion count, or whether prior history may be referenced.",
+      "what_must_not_change": "Current-turn instructions always override stored preference; no need to announce the preference.",
+      "grounded_use_test": "The response behavior observably follows the active preference even if the preference is not mentioned."
+    },
+    "MP_PROFILE": {
+      "what_can_change": "A directly relevant, non-stereotyped interpretation or practical framing.",
+      "what_must_not_change": "Do not expose sensitive facts merely to personalize and do not infer traits from demographics.",
+      "grounded_use_test": "The profile fact resolves a current reference or changes a concrete response choice."
+    },
+    "MS": {
+      "what_can_change": "Continuity with one completed prior session, including a prior focus, agreed next point, or verified update.",
+      "what_must_not_change": "Do not repeat information already visible or treat a session summary as a stable trait.",
+      "grounded_use_test": "The prior-session information helps answer the current request or prevents redundant exploration."
+    },
+    "ME": {
+      "what_can_change": "Grounding in a specific prior event, action, or outcome that informs the present exchange.",
+      "what_must_not_change": "Do not generalize one event into a pattern, use stale/conflicting facts, or invent causality.",
+      "grounded_use_test": "The exact event or outcome performs a clear role in understanding, continuity, or a present choice."
+    }
+  },
+  "measurement_layers": [
+    {
+      "layer": "L0_lineage_and_execution",
+      "method": "Deterministic machine audit",
+      "required": [
+        "selected ids bind to the intended catalog and user",
+        "timestamps are strictly prior",
+        "prompt contains exactly the authorized selected items",
+        "action bits and injected sources agree",
+        "no response or judge outcome was visible to routing"
+      ]
+    },
+    {
+      "layer": "L1_retrieval_fit",
+      "method": "Candidate-level rubric or bounded human qualification",
+      "required": [
+        "top item is relevant and source-correct",
+        "no hard exclusion",
+        "better safe candidate is not skipped",
+        "abstention is allowed when no qualified candidate exists"
+      ]
+    },
+    {
+      "layer": "L2_generator_use",
+      "method": "Source-aware narrow audit; deterministic checks first, scoped judge or small human overlap second",
+      "labels": [
+        "not_needed_and_correctly_ignored",
+        "grounded_functional_use",
+        "grounded_surface_only",
+        "missed_usable_evidence",
+        "misuse"
+      ],
+      "rules": [
+        "Do not reward mentioning memory.",
+        "MP preference can be used behaviorally without explicit reference.",
+        "If the selected evidence is redundant or irrelevant, ignoring it is correct rather than nonuse.",
+        "A use decision must cite the selected evidence and the response span or observable behavior."
+      ]
+    },
+    {
+      "layer": "L3_system_effect",
+      "method": "Blinded same-state paired quality plus interaction-and-grounding risk and measured token/call cost",
+      "rule": "System effect never retroactively becomes PM routing gold."
+    }
+  ],
+  "minimum_generator_diagnosis": {
+    "sample_unit": "independent state, not repeated generation",
+    "replication": "Use at least two deterministic or fixed-prompt realizations only for states where upstream opportunity, retrieval, and injection all pass.",
+    "minimum_per_component": 8,
+    "human_overlap": "Use a small fixed overlap only to qualify the narrow use auditor; do not repeat full response-quality review.",
+    "decision": "If grounded functional use remains below 0.60 after excluding correctly ignored resources, repair prompt/resource representation before changing PM labels or adding routing data."
+  },
+  "anti_cheating": [
+    "PM cannot see selected item ids, raw memory text, response text, generator output, judge scores, dataset identity, or future turns.",
+    "Item retriever cannot use external test outcomes or future user turns.",
+    "Generator receives only selected authorized evidence after the PM decision.",
+    "Use auditors cannot change Step1 labels after seeing whether one stochastic response won.",
+    "External EvoEmo content remains absent from internal PM fitting."
+  ],
+  "claim_boundary": {
+    "allowed": "V1.5 can separately report basic component routing learnability, candidate retrieval qualification, correct prompt execution, grounded generator use, and downstream quality-risk-cost effect.",
+    "forbidden": [
+      "A correct PM action guarantees a better response.",
+      "A quality tie proves the component should always be off.",
+      "A grounded memory mention proves useful personalization.",
+      "A scoped use judge is a clinical-safety evaluator.",
+      "Internal controlled learnability alone proves EvoEmo generalization."
+    ]
+  }
+}

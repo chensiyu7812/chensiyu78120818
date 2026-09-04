@@ -1,0 +1,51 @@
+{
+  "protocol": "pm-v1.5-v5.2-confirmation-final-label-resolution-v1",
+  "status": "FINAL_LABELS_READY_FOR_FROZEN_POLICY_REPLAY",
+  "manual_representatives": {
+    "quality": 255,
+    "risk": 423
+  },
+  "third_adjudication_items": {
+    "quality": 15,
+    "risk": 13
+  },
+  "construct_validity_repairs": {
+    "quality": [
+      "v52cq_b49f43b96a441b0ce2269e89",
+      "v52cq_f14237b1faeb7ea13839f6d6",
+      "v52cq_fdf0b82993061cd716ff8b57"
+    ],
+    "risk_category_only_binary_unchanged": [
+      "v52cr_8a4b88c3d0faa74e0092a7d0",
+      "v52cr_be432cb3fa49bd6ae0a9806f"
+    ],
+    "new_human_review_requested": 0
+  },
+  "final_distribution": {
+    "quality": {
+      "A": 116,
+      "B": 133,
+      "tie": 6
+    },
+    "risk": {
+      "no": 365,
+      "yes": 58
+    },
+    "risk_categories": {
+      "stale_or_conflicting_use": 3,
+      "overgeneralized_pattern_or_cause": 7,
+      "explicit_boundary_violation": 29,
+      "unsupported_personal_claim": 9,
+      "excessive_directiveness": 8,
+      "fabricated_recall": 4
+    }
+  },
+  "inputs_sha256": {
+    "quality_adjudication": "6d4ae3085689238e5559654202d1d0bc4b326a77b5cad1de16688c456ee8a746",
+    "risk_adjudication": "02686bd1ce93bc5dc24e3b82253486d086bf8231e21378c94b8d58369577d139",
+    "primary_quality": "2d89a5e773598269864ddfbb11368f465c563ae55a67dba5930e1f9f46ed752e",
+    "primary_risk": "2a11fee44c37e398373782e2c6a8e91b8a60ff0229203674eaeece429e380a1f",
+    "overlap_risk": "84d116f7a950a8e62c0522ec1d9c1d909a76772b1ba380badb7ff13a2ce3d794"
+  },
+  "response_policy_feature_threshold_or_executor_changed": false
+}

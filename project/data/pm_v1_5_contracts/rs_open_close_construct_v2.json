@@ -1,0 +1,103 @@
+{
+  "protocol": "pm-v1.5-rs-open-close-construct-v2",
+  "status": "ACTIVE_CORRECTED_BEFORE_NEW_PAIRED_OUTCOMES",
+  "research_decision": "Should the fixed transparent Top-1 Strategy RAG treatment be added to the same base generator for this state?",
+  "decision_timing": {
+    "candidate_discovery": "runs before PM_RS and returns only an eligible coarse family plus internal item identity",
+    "PM_RS": "runs after candidate discovery but before card injection and response generation",
+    "PM_visible_resource_descriptor": "coarse strategy family only in the active development candidate",
+    "PM_hidden": [
+      "generated response",
+      "quality or risk outcome",
+      "judge result",
+      "retrieval score",
+      "card id and full card text"
+    ],
+    "cost_accounting": "candidate lookup is reported separately and is not counted as a realized RS injection"
+  },
+  "open_rule": [
+    "state_is_within_the_v1_5_topic_agnostic_ordinary_support_scope",
+    "the_fixed_retriever_realizes_one_family_compatible_top1_card",
+    "a_qualified_same_state_R0_RS_pair_shows_material_response_quality_benefit",
+    "no_applicable_atomic_material_risk_guard_fails",
+    "the_frozen_cost_budget_passes"
+  ],
+  "off_rule": [
+    "out_of_scope_or_explicit_stop",
+    "no_family_compatible_card_is_realized",
+    "qualified_R0_win",
+    "qualified_material_equivalence",
+    "applicable_material_risk_worsens",
+    "cost_budget_fails"
+  ],
+  "unknown_excluded_from_effect_fit": [
+    "treatment_not_realized",
+    "outcome_measurement_unqualified",
+    "annotator_uncertain",
+    "lineage_or_applicability_unresolved"
+  ],
+  "construct_layers": {
+    "structural_eligibility": {
+      "role": "deterministic scope and explicit-boundary gate",
+      "is_not": "a response-benefit label"
+    },
+    "candidate_suitability": {
+      "role": "diagnostic of whether the fixed retriever selected an admissible technique",
+      "is_not": "proof that the strong base generator needs the technique"
+    },
+    "paired_material_benefit": {
+      "role": "the RS quality-benefit head target",
+      "eligible_denominator": "same-stack pairs with structural eligibility and realized Top-1 treatment"
+    },
+    "atomic_risk": {
+      "role": "separate applicable response-event guardrails",
+      "must_not_be_collapsed_with": "ordinary candidate mismatch or a quality loss"
+    },
+    "cost": {
+      "role": "hard budget and least-cost tie-breaker after quality and risk",
+      "is_not": "a reason to open an otherwise nonbeneficial component"
+    }
+  },
+  "family_specific_boundaries": {
+    "stop_bye_phatic": "all_RS_off",
+    "ordinary_legal_medical_crisis_or_factual_correction": "ordinary_RS_off_in_v1_5_scope",
+    "explicit_advice_welcome": "Suggestions_only_as_primary_move",
+    "listen_only_or_no_advice": "Question_and_Suggestions_off; Reflection_Restatement_Affirmation_may_remain",
+    "no_probing": "Question_off; nonquestion_families_may_remain",
+    "low_burden_or_one_point": "minimal_profile_one_card_not_component_off"
+  },
+  "retrieval_treatment": {
+    "bank": "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl",
+    "ranker": "transparent_compatibility_tier_then_lexical",
+    "bge": "rejected_as_a_v1_5_challenger_by_the_consumed_H2_comparison",
+    "retrieve_top_k_for_diagnostics": 3,
+    "inject_top_k": 1,
+    "bank_content_change": false
+  },
+  "h2_role_correction": {
+    "valid_uses": [
+      "compare_transparent_and_BGE_ranking",
+      "diagnose_structural_gate_errors",
+      "diagnose_candidate_coverage_and_suitability"
+    ],
+    "invalid_uses": [
+      "create_RS_response_benefit_labels",
+      "claim_that_RS_should_always_be_off",
+      "block_same_stack_paired_effect_generation_only_because_average_Top1_suitability_is_below_0.80"
+    ],
+    "top3_hard_exclusion": "diagnostic_only_when_runtime_injects_only_Top1",
+    "formal_rs_enabled_field": "withdrawn_as_a_scientific_conclusion; retained only for exact historical reproduction"
+  },
+  "minimum_before_RS_head_fit": {
+    "independent_material_benefit_groups": 8,
+    "independent_nonbenefit_groups_with_realized_treatment": 8,
+    "group_key": "source_dialogue_or_user",
+    "outcome_feature_leakage": false,
+    "same_stack_except_strategy_section": true
+  },
+  "primary_learning_evidence": {
+    "metric": "grouped_out_of_fold_Brier_gain_over_train_fold_prevalence_prior",
+    "requires_both_on_and_off_decisions": true,
+    "always_off_and_transparent_rule_baselines_reported": true
+  }
+}

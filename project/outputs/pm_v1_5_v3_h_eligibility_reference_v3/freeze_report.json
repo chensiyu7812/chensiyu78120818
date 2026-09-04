@@ -1,0 +1,167 @@
+{
+  "protocol": "pm-v1.5-v3-h-eligibility-reference-v3",
+  "status": "PASS_ELIGIBILITY_REFERENCE_FROZEN_OBSERVATION_QUALIFICATION_NEXT",
+  "rows": 128,
+  "per_component_shape": {
+    "MP": {
+      "ineligible": 16,
+      "eligible": 16
+    },
+    "MS": {
+      "ineligible": 16,
+      "eligible": 16
+    },
+    "ME": {
+      "eligible": 16,
+      "ineligible": 16
+    },
+    "RS": {
+      "eligible": 16,
+      "ineligible": 16
+    }
+  },
+  "delta_pre_adjudication_agreement": {
+    "adjudicated_subtype": {
+      "n": 24,
+      "agreement_count": 24,
+      "raw_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "RS_ATOMIC_MOVE -> RS_ATOMIC_MOVE": 12,
+        "MS_SESSION -> MS_SESSION": 12
+      }
+    },
+    "owner_time_valid": {
+      "n": 24,
+      "agreement_count": 24,
+      "raw_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "yes -> yes": 20,
+        "no -> no": 4
+      }
+    },
+    "goal_function_fit": {
+      "n": 24,
+      "agreement_count": 24,
+      "raw_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "yes -> yes": 16,
+        "no -> no": 8
+      }
+    },
+    "boundary_burden_fit": {
+      "n": 24,
+      "agreement_count": 24,
+      "raw_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "yes -> yes": 20,
+        "no -> no": 4
+      }
+    },
+    "specific_nonredundant_increment": {
+      "n": 24,
+      "agreement_count": 20,
+      "raw_agreement": 0.8333333333333334,
+      "cohen_kappa": 0.0,
+      "confusion": {
+        "yes -> yes": 20,
+        "no -> yes": 4
+      }
+    },
+    "derived_eligibility": {
+      "n": 24,
+      "agreement_count": 24,
+      "raw_agreement": 1.0,
+      "cohen_kappa": 1.0,
+      "confusion": {
+        "eligible -> eligible": 16,
+        "ineligible -> ineligible": 8
+      }
+    }
+  },
+  "delta_final_decision_agreement": {
+    "n": 24,
+    "agreement_count": 24,
+    "raw_agreement": 1.0,
+    "cohen_kappa": 1.0,
+    "confusion": {
+      "eligible -> eligible": 16,
+      "ineligible -> ineligible": 8
+    }
+  },
+  "explicit_adjudications": [
+    {
+      "state_id": "v3bp_057b6d1f71f26c144e5f1438",
+      "field": "specific_nonredundant_increment",
+      "final": "yes",
+      "reason": "specific/new information is distinct from owner and goal validity"
+    },
+    {
+      "state_id": "v3bp_1f348bef856a8d44e64ef110",
+      "field": "specific_nonredundant_increment",
+      "final": "yes",
+      "reason": "specific/new information is distinct from owner and goal validity"
+    },
+    {
+      "state_id": "v3bp_e1c89513f38b7d62b982e9fc",
+      "field": "specific_nonredundant_increment",
+      "final": "yes",
+      "reason": "specific/new information is distinct from owner and goal validity"
+    },
+    {
+      "state_id": "v3bp_46e02d4707f6cd508c9c22e7",
+      "field": "specific_nonredundant_increment",
+      "final": "yes",
+      "reason": "specific/new information is distinct from owner and goal validity"
+    },
+    {
+      "state_id": "v3bp_dd9c21a5ff0ff77f69b34ee2",
+      "field": "specific_nonredundant_increment",
+      "final": "no",
+      "reason": "the current request already specifies the card's complete atomic move; the resource adds no instruction over R0"
+    },
+    {
+      "state_id": "v3bp_805715efbfff6dd5a3d746d3",
+      "field": "specific_nonredundant_increment",
+      "final": "no",
+      "reason": "the current request already specifies the card's complete atomic move; the resource adds no instruction over R0"
+    },
+    {
+      "state_id": "v3bp_2000d38ca0a88c63d06f075c",
+      "field": "specific_nonredundant_increment",
+      "final": "no",
+      "reason": "the current request already specifies the card's complete atomic move; the resource adds no instruction over R0"
+    },
+    {
+      "state_id": "v3bp_8750564d09569ce6dab61078",
+      "field": "specific_nonredundant_increment",
+      "final": "no",
+      "reason": "the current request already specifies the card's complete atomic move; the resource adds no instruction over R0"
+    }
+  ],
+  "lineage_counts": {
+    "v1_exact_surface": 104,
+    "v2_exact_dual_review": 16,
+    "v2_dual_review_adjudicated": 4,
+    "v3_monotone_profile_repair_adjudicated": 4
+  },
+  "posthoc_construction_qa_match": "128/128",
+  "construction_intent_used_as_gold": false,
+  "eligible_for_observation_development": true,
+  "is_step1_worth_opening_gold": false,
+  "identified_human_gold": false,
+  "reviewer_identity_caveat": "Two independent review-agent identities are recorded; identified human status is not established.",
+  "v1_reference_sha256": "fa766fa3d6c49e94be990ad53e0837a50da37b58095d26216d8e69251cd40578",
+  "primary_delta_sha256": "26392563554016890b8bcf4ce9b129aa198a0c4b5452e4533f849eebff1b851d",
+  "independent_delta_sha256": "e6800bd29619d010e4ffa839a15d831de87e9940cd848769c7b245a4000f0665",
+  "v3_candidates_sha256": "4c9a42c4fa888818222873ac4f715de0c40d09fb13e10997db9bc142244f93a1",
+  "python_executable": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/.venv-pm-v1-5/bin/python",
+  "python_version": "3.13.2",
+  "responses_generated": 0,
+  "external_lockbox_read": false,
+  "failures": [],
+  "eligibility_reference_sha256": "640024ab7549fe257922cfd6c3c989ffb4233d58f9e8516e210018e8bfba1a35"
+}

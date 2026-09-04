@@ -1,0 +1,10 @@
+{
+  "protocol": "pm-v1.5-rs-six-card-clean-pair-execution-v1",
+  "status": "BLOCKED_ONLY_ON_GENERATOR_API_KEY",
+  "planned_calls": 64,
+  "lineage_ok": true,
+  "api_key_environment_variable": "NVIDIA_API_KEY",
+  "api_key_present": false,
+  "run_requested": false,
+  "api_calls_made": 0
+}

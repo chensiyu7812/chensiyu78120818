@@ -1,0 +1,55 @@
+{
+  "protocol": "pm-v1.5-v5.2-external-e5-scoring-contract-v1",
+  "status": "FROZEN_BEFORE_E4_OUTCOMES",
+  "response": {
+    "automatic_scope": [
+      "reported prompt and completion tokens",
+      "requested action and resource-component coverage",
+      "policy alias and baseline call accounting",
+      "candidate-present, structurally-executable, in-support and abstention counts inherited from E1/E3"
+    ],
+    "automatic_quality_claim": false,
+    "automatic_grounding_risk_claim": false,
+    "note": "Response quality and grounding risk remain separate E6/E7 constructs; E5 must not infer them from resource use or lexical guards."
+  },
+  "qa": {
+    "questions": 418,
+    "conditions": [
+      "no_memory",
+      "full_history",
+      "official_session_rag_top4",
+      "typed_memory_fixed_high",
+      "typed_memory_learned_pm"
+    ],
+    "prediction_surface_normalization": "Reproduce official qa_experiment.py: prediction.replace('*','').replace('#','').strip('Answer:').strip(). Raw E4 output remains immutable and is also retained.",
+    "token_f1": "Reproduce official set-overlap F1: lowercase; regex \\W+ to one space; whitespace split; unique-token set intersection; precision=|common|/|prediction tokens|; recall=|common|/|gold tokens|; zero when common is empty.",
+    "bertscore": {
+      "package": "bert-score==0.3.13",
+      "model_type": "bert-base-uncased",
+      "layer": "bert_score.utils.model2layers['bert-base-uncased']",
+      "idf": "all ordinary tokens 1.0; CLS and SEP 0.0",
+      "rescale_with_baseline": false,
+      "reported_value": "F1",
+      "exact_model_snapshot_must_be_recorded_before_first_scoring_execution": true
+    },
+    "aggregation": [
+      "macro mean over all 418 questions for each condition",
+      "macro mean by released capability for each condition",
+      "per-item scores retained",
+      "no filtering by observed answer quality",
+      "retrieval Recall@4 and nDCG@4 remain the E3 evaluator-only metrics on exactly 341 mappable questions"
+    ],
+    "llm_as_judge": "not E5; separate E6 robustness metric and never training gold"
+  },
+  "official_source": {
+    "repository": "https://github.com/slptongji/ES-MemEval",
+    "commit": "692624208acc077b8867698c1d6fcd998dee641a",
+    "qa_experiment_sha256": "0607d0316d508db0002fb63e18ab86f3dbd2119ec6d90978d7170ed3db99b1db",
+    "qa_bert_score_sha256": "f30dd6579ef19b3e762add92df388d354160d2cc7d442a9823b4e04b8779e0e9",
+    "requirements_sha256": "05631040fa935a364bd15d49b27c03ae62f05f81cc7e0b47ad6d570b60b57b0e"
+  },
+  "outcome_use": {
+    "external_outcome_used_to_choose_metric": false,
+    "external_outcome_used_to_change_method": false
+  }
+}

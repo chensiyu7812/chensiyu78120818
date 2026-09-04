@@ -1,0 +1,2539 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_claude_u003",
+  "content_author": "claude",
+  "superdomain_schedule_position": 7,
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "loss_grief_transition",
+    "sleep_health_energy"
+  ],
+  "dialogue_language": "en",
+  "profile_history": [
+    {
+      "profile_item_id": "u003_pf_name_v1",
+      "field_type": "name",
+      "field_value": "Tomasz",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "salutation only; rarely decision-relevant"
+      ],
+      "item_id": "u003_pf_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I'm Tomasz"
+    },
+    {
+      "profile_item_id": "u003_pf_age_v1",
+      "field_type": "age",
+      "field_value": "52",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; late-career retraining framing at most"
+      ],
+      "item_id": "u003_pf_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "fifty-two"
+    },
+    {
+      "profile_item_id": "u003_pf_job_v1",
+      "field_type": "job",
+      "field_value": "maintenance fitter at a paper mill, rotating shifts",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "shift rotation, plant procedures, internal posting rules"
+      ],
+      "item_id": "u003_pf_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "a maintenance fitter at the paper mill here for twenty-four years"
+    },
+    {
+      "profile_item_id": "u003_pf_gender_v1",
+      "field_type": "gender",
+      "field_value": "male",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; crew composition context at most"
+      ],
+      "item_id": "u003_pf_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I'm the oldest man on the maintenance crew"
+    },
+    {
+      "profile_item_id": "u003_pf_edu_v1",
+      "field_type": "education",
+      "field_value": "technical secondary (technikum, 1991); vocational instructor course in progress",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "course logistics, assessment format, logbook requirements"
+      ],
+      "item_id": "u003_pf_edu_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t03"
+      ],
+      "literal_source_span": "I did my technikum in 1991"
+    },
+    {
+      "profile_item_id": "u003_pf_nat_v1",
+      "field_type": "nationality",
+      "field_value": "Polish",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "regional context; language of course and workplace"
+      ],
+      "item_id": "u003_pf_nat_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I'm Polish"
+    },
+    {
+      "profile_item_id": "u003_pf_loc_v1",
+      "field_type": "location",
+      "field_value": "Bydgoszcz, Poland",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "commute, allotment, distance from son abroad"
+      ],
+      "item_id": "u003_pf_loc_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "born in Bydgoszcz and still living twenty minutes from the house I grew up in"
+    }
+  ],
+  "response_preference_history": [
+    {
+      "preference_item_id": "u003_pr_reflect_v1",
+      "preference_type": "reflection_before_question",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 6,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u003_pr_reflect_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s006_t05"
+      ],
+      "literal_source_span": "Say back what you have understood before you ask me anything",
+      "preference_text": "Say back what you have understood before you ask me anything"
+    },
+    {
+      "preference_item_id": "u003_pr_listen_v1",
+      "preference_type": "listen_only_no_advice",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 13,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u003_pr_listen_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s013_t05"
+      ],
+      "literal_source_span": "do not offer me anything to do about any of this. I do not want steps",
+      "preference_text": "do not offer me anything to do about any of this. I do not want steps"
+    },
+    {
+      "preference_item_id": "u003_pr_concise_v1",
+      "preference_type": "concise_factual_answer",
+      "owner_id": "p2r_formal_claude_u003",
+      "valid_from_session": 21,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u003_pr_concise_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s021_t03"
+      ],
+      "literal_source_span": "When I ask you a plain question, give me the plain answer. No paragraphs, no working out",
+      "preference_text": "When I ask you a plain question, give me the plain answer. No paragraphs, no working out"
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_02",
+      "name": "Zenon",
+      "relation": "retired foreman who trained him",
+      "first_mentioned_session": 7,
+      "note": "hospital visits, death in winter, toolbox left to Tomasz",
+      "relationship": "retired foreman who trained him",
+      "valid_from_session": 7,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_03",
+      "name": "Kamil",
+      "relation": "son, twenty-four",
+      "first_mentioned_session": 5,
+      "note": "took a rotation contract in Norway; contact improved through workshop photographs",
+      "relationship": "son, twenty-four",
+      "valid_from_session": 5,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_04",
+      "name": "Halina",
+      "relation": "wife, works in a school kitchen",
+      "first_mentioned_session": 5,
+      "note": "opposite shift pattern; the household runs on notes left on the table",
+      "relationship": "wife, works in a school kitchen",
+      "valid_from_session": 5,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_05",
+      "name": "Marek",
+      "relation": "colleague on the opposite shift",
+      "first_mentioned_session": 10,
+      "note": "applied for the same training-bay post; his account of the timeline differs",
+      "relationship": "colleague on the opposite shift",
+      "valid_from_session": 10,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_06",
+      "name": "Iwona",
+      "relation": "training coordinator at the mill",
+      "first_mentioned_session": 10,
+      "note": "wrote the shortlist email that later got contradicted",
+      "relationship": "training coordinator at the mill",
+      "valid_from_session": 10,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_07",
+      "name": "Dorota",
+      "relation": "lecturer on the instructor course",
+      "first_mentioned_session": 4,
+      "note": "her recorded lectures carried him through the theory paper",
+      "relationship": "lecturer on the instructor course",
+      "valid_from_session": 4,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_08",
+      "name": "Slawek",
+      "relation": "neighbour at the allotments",
+      "first_mentioned_session": 13,
+      "note": "joint motorcycle restoration in the garage; both-present rule",
+      "relationship": "neighbour at the allotments",
+      "valid_from_session": 13,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_09",
+      "name": "Ewa",
+      "relation": "daughter, nurse in Gdansk",
+      "first_mentioned_session": 15,
+      "note": "night-shift veteran; the one who asks about the sleeping rather than the course",
+      "relationship": "daughter, nurse in Gdansk",
+      "valid_from_session": 15,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_10",
+      "name": "Jacek",
+      "relation": "union representative at the mill",
+      "first_mentioned_session": 18,
+      "note": "advised on the frozen posting and the logbook hours",
+      "relationship": "union representative at the mill",
+      "valid_from_session": 18,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_11",
+      "name": "Bogdan",
+      "relation": "production manager",
+      "first_mentioned_session": 14,
+      "note": "denied that the training-bay role had been promised to anyone",
+      "relationship": "production manager",
+      "valid_from_session": 14,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_12",
+      "name": "Piotr",
+      "relation": "apprentice on his crew",
+      "first_mentioned_session": 16,
+      "note": "the first person he taught deliberately rather than by habit",
+      "relationship": "apprentice on his crew",
+      "valid_from_session": 16,
+      "valid_until_session": null
+    }
+  ],
+  "recurring_topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "evening instructor qualification",
+      "session_indices": [
+        1,
+        4,
+        8,
+        12,
+        16,
+        20,
+        25
+      ]
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "mill restructuring and the training-bay post",
+      "session_indices": [
+        2,
+        6,
+        10,
+        14,
+        18,
+        22,
+        26
+      ]
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "shift rotation, sleep and energy",
+      "session_indices": [
+        3,
+        9,
+        15,
+        21
+      ]
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "Kamil's move to Norway",
+      "session_indices": [
+        5,
+        11,
+        17,
+        23,
+        27
+      ]
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "Zenon's illness and death",
+      "session_indices": [
+        7,
+        13,
+        19
+      ]
+    },
+    {
+      "thread_id": "thread_06",
+      "label": "garage motorcycle project with Slawek",
+      "session_indices": [
+        13,
+        24,
+        27
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "u003_evt_01",
+      "session_index": 1,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Signed up for the evening vocational instructor course after twenty-four years on the machines.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u003_evt_02",
+      "session_index": 2,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Merged shift handover notes into the fault log notebook, ending the morning disputes about the night shift.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u003_evt_03",
+      "session_index": 3,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Tried the earlier bus to gain sleep before nights, with no change in how he arrived.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u003_evt_04",
+      "session_index": 4,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "description": "First written assignment returned with comments; noticed hand-taught material sticks and read material does not.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u003_evt_05",
+      "session_index": 5,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Began sending Kamil workshop photographs with a question about one part instead of asking about his job.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u003_evt_06",
+      "session_index": 6,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Management announced a review of the number two line, the oldest in the country.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u003_evt_07",
+      "session_index": 7,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Two hospital visits to Zenon, who refused to talk about the mill either time.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u003_evt_08",
+      "session_index": 8,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Set the goal of finishing his working life in the training bay rather than on the machines.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u003_evt_09",
+      "session_index": 9,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Moved heavy allotment work to the morning after nights instead of lying down immediately; sleep lengthened.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u003_evt_10",
+      "session_index": 10,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "description": "Put his name down for the training-bay post in March; no news followed.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u003_evt_11",
+      "session_index": 11,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Offered to cover half of Kamil's deposit; the offer went unanswered.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u003_evt_12",
+      "session_index": 12,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "description": "Listened to recorded lectures while filing at the bench and passed the theory paper.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u003_evt_13",
+      "session_index": 13,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Zenon died in December; the funeral filled the chapel with three generations of fitters.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u003_evt_14",
+      "session_index": 13,
+      "thread_id": "thread_06",
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "description": "Slawek brought the mill's old fire-station motorcycle into the garage as a joint project.",
+      "topic_thread_ids": [
+        "thread_06"
+      ]
+    },
+    {
+      "event_id": "u003_evt_15",
+      "session_index": 14,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_11",
+        "entity_06"
+      ],
+      "description": "Bogdan denied the training-bay role had been promised, contradicting Iwona's shortlist email.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u003_evt_16",
+      "session_index": 15,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "description": "Separated turnaround ache from the flat grey that follows a week of nights.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u003_evt_17",
+      "session_index": 16,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_12"
+      ],
+      "description": "Had Piotr explain the pump back to him, exposing three steps he had skipped in his own demonstration.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u003_evt_18",
+      "session_index": 17,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Kamil's Norwegian contract confirmed as a six-weeks-there, two-weeks-home rotation.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u003_evt_19",
+      "session_index": 18,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_10"
+      ],
+      "description": "Union representative confirmed the posting decision had gone nowhere for four months.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u003_evt_20",
+      "session_index": 19,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Sorted Zenon's inherited toolbox onto the bench in his old size order, one Saturday in February.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u003_evt_21",
+      "session_index": 20,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Filmed his assessed demonstration a week early and watched it silently, spotting that he blocked the workpiece.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u003_evt_22",
+      "session_index": 21,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Cut coffee after eight in the evening with no discernible effect.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u003_evt_23",
+      "session_index": 22,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Marek reported being told a different timeline for the same post.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u003_evt_24",
+      "session_index": 23,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Asked Kamil what he would need in his first month abroad instead of arguing about the move.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u003_evt_25",
+      "session_index": 24,
+      "thread_id": "thread_06",
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "description": "Agreed with Slawek to work on the bike only when both are present, ending the stalled parts pile.",
+      "topic_thread_ids": [
+        "thread_06"
+      ]
+    },
+    {
+      "event_id": "u003_evt_26",
+      "session_index": 25,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Submitted logbook hours to the course coordinator; confirmation never arrived.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u003_evt_27",
+      "session_index": 26,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_06",
+        "entity_10"
+      ],
+      "description": "Post frozen, but two shifts a week reassigned to the training bay from April.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u003_evt_28",
+      "session_index": 26,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_12"
+      ],
+      "description": "Piotr assigned to him formally as first apprentice under the new arrangement.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u003_evt_29",
+      "session_index": 27,
+      "thread_id": "thread_06",
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_08"
+      ],
+      "description": "Kamil spent two evenings of his home rotation in the garage with the bike.",
+      "topic_thread_ids": [
+        "thread_06"
+      ]
+    },
+    {
+      "event_id": "u003_evt_30",
+      "session_index": 27,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Kamil telephoned from Norway unprompted for the first time.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 30 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Tomasz, fifty-two, and I have been a maintenance fitter at the paper mill here for twenty-four years. In September I signed up for the evening instructor course, which at my age feels slightly ridiculous."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "Twenty-four years of doing the work and now a classroom about how to teach it. Where does the ridiculous part come from?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "I did my technikum in 1991 and have not sat behind a desk since. Half the people on the course could be my children, and they type notes while I am still finding the page."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "Thirty years is a long time to be away from that particular kind of room. Speed of typing is not the same thing as knowing the machine."
+        }
+      ],
+      "summary": "Tomasz, fifty-two, a paper mill fitter of twenty-four years, starts an evening instructor course three decades after his last classroom and feels out of place.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c001",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "name",
+          "field_value": "Tomasz",
+          "profile_item_id": "u003_pf_name_v1",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "I'm Tomasz",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u003_c002",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "age",
+          "field_value": "52",
+          "profile_item_id": "u003_pf_age_v1",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "fifty-two",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u003_c003",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "job",
+          "field_value": "maintenance fitter at a paper mill, rotating shifts",
+          "profile_item_id": "u003_pf_job_v1",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "a maintenance fitter at the paper mill here for twenty-four years",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u003_c004",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "education",
+          "field_value": "technical secondary (technikum, 1991); vocational instructor course in progress",
+          "profile_item_id": "u003_pf_edu_v1",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "I did my technikum in 1991",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u003_evt_01"
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 29 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I'm the oldest man on the maintenance crew now, and every morning handover had turned into an argument about what did or did not happen on nights."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "Everyone defending their own eight hours before the first coffee. That sours a whole shift before it starts."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "So I started keeping the handover notes in the same notebook as the fault log instead of on loose paper, and the morning arguments stopped inside three weeks."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "One book, one version of the night. Nobody has to remember who said what when it's written next to the fault."
+        }
+      ],
+      "summary": "As the crew's oldest member Tomasz ends three weeks of morning handover disputes by keeping handover notes in the fault log notebook rather than on loose paper.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c005",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "gender",
+          "field_value": "male",
+          "profile_item_id": "u003_pf_gender_v1",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "I'm the oldest man on the maintenance crew",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u003_c006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I started keeping the handover notes in the same notebook as the fault log instead of on loose paper, and the morning arguments stopped inside three weeks",
+          "action_span": "keeping the handover notes in the same notebook as the fault log instead of on loose paper",
+          "result_span": "the morning arguments stopped inside three weeks",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I started keeping the handover notes in the same notebook as the fault log instead of on loose paper, and the morning arguments stopped inside three weeks",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_02"
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 28 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I'm Polish, born in Bydgoszcz and still living twenty minutes from the house I grew up in. Thirty years of rotating shifts and my body has started sending me the bill."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "Three decades of asking your body to sleep on someone else's timetable. It tends to submit that invoice around now."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "I tried swapping to the earlier bus so I could get a couple of hours before the night shift, and I still arrive flat."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "So the extra time was available and the sleep wasn't. Those are two different problems wearing the same clothes."
+        }
+      ],
+      "summary": "Thirty years of rotating shifts are catching up with Tomasz in his home city, and an earlier bus taken to gain sleep leaves him arriving just as flat.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c007",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "nationality",
+          "field_value": "Polish",
+          "profile_item_id": "u003_pf_nat_v1",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "I'm Polish",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u003_c008",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "location",
+          "field_value": "Bydgoszcz, Poland",
+          "profile_item_id": "u003_pf_loc_v1",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "born in Bydgoszcz and still living twenty minutes from the house I grew up in",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u003_c009",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s003_t03"
+          ],
+          "literal_source_span": "I tried swapping to the earlier bus so I could get a couple of hours before the night shift, and I still arrive flat",
+          "action_span": "swapping to the earlier bus so I could get a couple of hours before the night shift",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I tried swapping to the earlier bus so I could get a couple of hours before the night shift, and I still arrive flat"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_03"
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 27 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "First assignment back from Dorota, the lecturer, covered in red. But I have worked something out about myself: I remember everything I have ever been shown with someone's hands, and almost nothing I have only read."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "That is not a small thing to know at week six. It tells you which half of that course you will have to translate before you can use it."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "The trouble is the whole assessment is written. Nobody is going to grade me on rebuilding a gearbox."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "So the thing you're best at is the thing that earns no marks. That gap is going to need managing, not fixing."
+        }
+      ],
+      "summary": "A heavily corrected first assignment leads Tomasz to notice he retains what he is shown by hand and little of what he only reads, while assessment stays written.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c010",
+          "subtype": "MS_SESSION",
+          "ms_function": "specific_observation",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "I remember everything I have ever been shown with someone's hands, and almost nothing I have only read",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_04"
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 26 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_04"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "My son Kamil is twenty-four and answers my calls with three words. Halina says I only ever ring him to check up on him, and she is not entirely wrong."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "Three words is a door held mostly closed. And your wife has named what he is probably hearing on the other end of it."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "So instead of asking him how the job is going, I started sending him photographs of whatever is on my workbench with a question about one part, and he answers within the hour now."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "You gave him something to answer instead of something to account for. The bench turned out to be easier ground than his week."
+        }
+      ],
+      "summary": "Kamil answers his father in three words until Tomasz starts sending workbench photographs with a single question about one part, which brings replies within the hour.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c011",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "instead of asking him how the job is going, I started sending him photographs of whatever is on my workbench with a question about one part, and he answers within the hour now",
+          "action_span": "sending him photographs of whatever is on my workbench with a question about one part",
+          "result_span": "he answers within the hour now",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "instead of asking him how the job is going, I started sending him photographs of whatever is on my workbench with a question about one part, and he answers within the hour now",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_05"
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 25 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "Management have announced a review of the number two line. Everyone knows what a review means, and nobody will say the word."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "A word everyone is carrying and nobody is putting down. That silence does its own damage across a shift."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "That line has run three shifts a day since 1974 and it is the oldest machine of its kind still working in the country."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "Fifty years of continuous running, and now under review. The machine has outlasted most of the people who were told it would."
+        },
+        {
+          "turn_id": "s006_t05",
+          "role": "user",
+          "text": "One thing, if you don't mind. Say back what you have understood before you ask me anything. I find questions easier to answer once I know you have followed."
+        },
+        {
+          "turn_id": "s006_t06",
+          "role": "assistant",
+          "text": "Then what I have understood is this: the line is under review, everyone knows what that means, and the not-saying is heavier than the saying would be. Questions can wait."
+        }
+      ],
+      "summary": "A review of the fifty-year-old number two line goes unspoken across the shifts, and Tomasz asks to hear understanding reflected back before any questions.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c012",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s006_t03"
+          ],
+          "literal_source_span": "That line has run three shifts a day since 1974 and it is the oldest machine of its kind still working in the country",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "That line has run three shifts a day since 1974 and it is the oldest machine of its kind still working in the country"
+        },
+        {
+          "candidate_id": "u003_c013",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "reflection_before_question",
+          "preference_item_id": "u003_pr_reflect_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s006_t05"
+          ],
+          "literal_source_span": "Say back what you have understood before you ask me anything",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u003_evt_06"
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 24 months ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "Zenon, the foreman who trained me in ninety-nine, is in the hospital on Ujejskiego. I went twice and neither time did he want to talk about the mill at all."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "What I understand: you went with the mill in your pocket, and he had already put it down. Two visits and the one subject you share was closed."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "He wanted to talk about his brother's boat. I know nothing about boats. I sat there for an hour and understood one sentence in three."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "An hour of not understanding, given anyway. That is a different sort of visit than the one you planned, and probably the one he wanted."
+        }
+      ],
+      "summary": "Tomasz visits his old foreman Zenon in hospital twice; both times Zenon refuses to discuss the mill and talks instead about his brother's boat.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c014",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s007_t01"
+          ],
+          "literal_source_span": "I went twice and neither time did he want to talk about the mill at all",
+          "action_span": "went twice",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I went twice and neither time did he want to talk about the mill at all"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_07"
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 23 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "Let me say the point of all this out loud for once: I want to finish out my working life in the training bay instead of on the machines, and the certificate is the only door into that room."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "What I hear is a specific ending you're aiming at, not just an escape from shifts. The certificate is the key, not the goal."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "Thirteen years left if I go at sixty-five. I would rather spend them showing twenty-year-olds how not to lose a finger than climbing over a hot machine at four in the morning."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "Thirteen years is long enough to matter and short enough to plan. And you have already named exactly what you want to be doing in them."
+        }
+      ],
+      "summary": "Tomasz names his goal plainly: to spend his last thirteen working years teaching in the training bay rather than climbing over hot machines at night.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c015",
+          "subtype": "MS_SESSION",
+          "ms_function": "old_goal",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "I want to finish out my working life in the training bay instead of on the machines",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_08"
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 22 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "Something worked, finally. I stopped going straight to bed after nights and did the heavy digging at the allotment first, and I now sleep four solid hours instead of two broken ones."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "What I understand: lying down was the plan and staying asleep was the problem. Two hours of spade first, and the body arrived at bed already finished."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "Halina thinks I have lost my mind, digging potatoes at eight in the morning after twelve hours on the machines."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "It does look mad from the kitchen window. It also works, which is the only test that matters here."
+        }
+      ],
+      "summary": "Digging at the allotment before bed after night shifts gives Tomasz four solid hours of sleep instead of two broken ones, to his wife's bafflement.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c016",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s009_t01"
+          ],
+          "literal_source_span": "I stopped going straight to bed after nights and did the heavy digging at the allotment first, and I now sleep four solid hours instead of two broken ones",
+          "action_span": "stopped going straight to bed after nights and did the heavy digging at the allotment first",
+          "result_span": "I now sleep four solid hours instead of two broken ones",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I stopped going straight to bed after nights and did the heavy digging at the allotment first, and I now sleep four solid hours instead of two broken ones",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_09"
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 21 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05",
+        "entity_06"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "I put my name down for the training-bay post with Iwona in March and there has been nothing since, not even a no."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "What I understand: the asking is done, the waiting has no end date, and silence is being allowed to do the work of a decision."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "Marek from the opposite shift put his name down the same week. He has twenty years and no course, I have twenty-four and half a course."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "Two men with almost the same case, and neither of you can find out what the case is being measured against."
+        }
+      ],
+      "summary": "Tomasz registers for the training-bay post in March and hears nothing at all; Marek applied the same week with similar service and no course.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c017",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "I put my name down for the training-bay post with Iwona in March and there has been nothing since, not even a no",
+          "action_span": "put my name down for the training-bay post with Iwona in March",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_06"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I put my name down for the training-bay post with Iwona in March and there has been nothing since, not even a no"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_10"
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 20 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "Kamil is talking about Norway. Six weeks on, two weeks home, more money in a month than I see in three."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "What I hear: the arithmetic is unanswerable and you are trying not to argue with arithmetic."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "I offered to cover half of his deposit if he stayed and took the technical course here, and he has not answered either way for three weeks."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "An offer with a condition attached is a hard thing to answer quickly. His silence may be about the condition rather than the money."
+        }
+      ],
+      "summary": "Kamil weighs a Norwegian rotation contract; Tomasz's offer to cover half a deposit if he stays and studies locally goes unanswered for three weeks.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c018",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "I offered to cover half of his deposit if he stayed and took the technical course here, and he has not answered either way for three weeks",
+          "action_span": "offered to cover half of his deposit if he stayed and took the technical course here",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I offered to cover half of his deposit if he stayed and took the technical course here, and he has not answered either way for three weeks"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_11"
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 19 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "Theory paper passed, seventy-eight. I recorded Dorota's lectures on my phone and listened to them while I was filing at the bench, and the definitions finally went in."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "What I understand: reading them never worked, and hearing them while your hands were busy did. You found the channel that's still open."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "Two of the young ones asked me how I did it. I did not tell them it was because I cannot read for forty minutes without falling asleep."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "They asked because it worked, not because of why you tried it. The method stands on its own either way."
+        }
+      ],
+      "summary": "Listening to recorded lectures while filing at the bench carries Tomasz through the theory paper at seventy-eight, and younger classmates ask how he managed it.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c019",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "I recorded Dorota's lectures on my phone and listened to them while I was filing at the bench, and the definitions finally went in",
+          "action_span": "recorded Dorota's lectures on my phone and listened to them while I was filing at the bench",
+          "result_span": "the definitions finally went in",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_07"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I recorded Dorota's lectures on my phone and listened to them while I was filing at the bench, and the definitions finally went in",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_12"
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 18 months ago",
+      "topic_thread_ids": [
+        "thread_05",
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_08"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "Zenon died on the eleventh. The chapel was full of fitters, three generations of them, and half were people I have not seen since the old canteen closed."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "A chapel full of people who all learned the same hands. That is the size of what has gone."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "He trained more than half the fitters who have ever worked in that plant. There is nobody left who was there before him."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "So the line back through the plant ends with him. You are all standing at the front of it now, whether or not anyone said so."
+        },
+        {
+          "turn_id": "s013_t05",
+          "role": "user",
+          "text": "For a while, do not offer me anything to do about any of this. I do not want steps. I want to say it and have it heard, and that is all."
+        },
+        {
+          "turn_id": "s013_t06",
+          "role": "assistant",
+          "text": "Then I will hold it and not hand anything back. Say as much or as little as you want."
+        }
+      ],
+      "summary": "Zenon dies in December and three generations of fitters fill the chapel; Tomasz asks to be heard about it rather than offered anything to do.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c020",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s013_t03"
+          ],
+          "literal_source_span": "He trained more than half the fitters who have ever worked in that plant",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "entity_02"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "He trained more than half the fitters who have ever worked in that plant"
+        },
+        {
+          "candidate_id": "u003_c021",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "listen_only_no_advice",
+          "preference_item_id": "u003_pr_listen_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s013_t05"
+          ],
+          "literal_source_span": "do not offer me anything to do about any of this. I do not want steps",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u003_evt_13",
+        "u003_evt_14"
+      ]
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 17 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_06",
+        "entity_11"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "Bogdan stood in the corridor and told me the training-bay role had never been promised to anybody. I have Iwona's email from April with my name on a shortlist of two."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "What I understand: one account was spoken in a corridor, the other exists in writing with your name in it, and they cannot both be describing the same April."
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "I did not take out my phone and show him. I am still not sure whether that was dignity or cowardice."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "Corridors are bad rooms for evidence. Not producing it there is not the same as not having it."
+        }
+      ],
+      "summary": "Bogdan denies in a corridor that the training-bay role was ever promised, contradicting Iwona's April email listing Tomasz on a shortlist of two.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c022",
+          "subtype": "MS_SESSION",
+          "ms_function": "conflict_record",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s014_t01"
+          ],
+          "literal_source_span": "told me the training-bay role had never been promised to anybody. I have Iwona's email from April with my name on a shortlist of two",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_06",
+            "entity_11"
+          ],
+          "resolution_status": "conflicting"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_15"
+      ]
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 16 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "My daughter Ewa is a nurse in Gdansk and she asked me a question nobody else asks. Now I can name it: the ache after a twelve-hour turnaround goes when I sit down, and the flat grey after a week of nights does not go at all."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "What I understand: one is a debt the body settles the same day, the other accumulates quietly across a whole rotation."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "She has done nights for nine years. She said the grey one is the one to watch and that nobody at work will ever ask about it."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "She's telling you both the thing and the reason nobody told you sooner. Nine years of her own evidence behind it."
+        }
+      ],
+      "summary": "Prompted by his nurse daughter, Tomasz distinguishes the turnaround ache that passes on sitting down from the flat grey that persists through a week of nights.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c023",
+          "subtype": "MS_SESSION",
+          "ms_function": "pressure_distinction",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s015_t01"
+          ],
+          "literal_source_span": "the ache after a twelve-hour turnaround goes when I sit down, and the flat grey after a week of nights does not go at all",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_16"
+      ]
+    },
+    {
+      "session_index": 16,
+      "relative_time": "about 15 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_12"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s016_t01",
+          "role": "user",
+          "text": "The course wants a taught session logged, so I used Piotr, the apprentice. After showing him the pump I asked him to explain the whole thing back to me, and it turned up three steps I had skipped without noticing."
+        },
+        {
+          "turn_id": "s016_t02",
+          "role": "assistant",
+          "text": "What I understand: you set out to log a session and accidentally audited yourself. His gaps mapped your omissions exactly."
+        },
+        {
+          "turn_id": "s016_t03",
+          "role": "user",
+          "text": "Twenty-four years of doing those three steps with my hands and never once saying them aloud. That is what frightens me about teaching."
+        },
+        {
+          "turn_id": "s016_t04",
+          "role": "assistant",
+          "text": "The steps your hands know are the invisible ones. Finding them is most of what the course is actually for."
+        }
+      ],
+      "summary": "Asking the apprentice Piotr to explain the pump back after a demonstration reveals three steps Tomasz performs by hand but never articulates.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c024",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s016_t01"
+          ],
+          "literal_source_span": "After showing him the pump I asked him to explain the whole thing back to me, and it turned up three steps I had skipped without noticing",
+          "action_span": "asked him to explain the whole thing back to me",
+          "result_span": "it turned up three steps I had skipped without noticing",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_12"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "After showing him the pump I asked him to explain the whole thing back to me, and it turned up three steps I had skipped without noticing",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_17"
+      ]
+    },
+    {
+      "session_index": 17,
+      "relative_time": "about 14 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s017_t01",
+          "role": "user",
+          "text": "Kamil signed. His contract runs six weeks there and two weeks home, and the first rotation starts after Easter."
+        },
+        {
+          "turn_id": "s017_t02",
+          "role": "assistant",
+          "text": "What I hear: it is decided, the shape of the year is now fixed, and there is nothing left to persuade him about."
+        },
+        {
+          "turn_id": "s017_t03",
+          "role": "user",
+          "text": "I told him the deposit money stands whatever he does with it. He said thank you like a man being handed something at a border."
+        },
+        {
+          "turn_id": "s017_t04",
+          "role": "assistant",
+          "text": "You took the condition off it, and he did not quite know how to receive that. Awkward thanks is still thanks."
+        }
+      ],
+      "summary": "Kamil signs a six-weeks-away, two-weeks-home rotation starting after Easter, and Tomasz removes the condition from his deposit offer.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c025",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s017_t01"
+          ],
+          "literal_source_span": "His contract runs six weeks there and two weeks home",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "entity_03"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "His contract runs six weeks there and two weeks home"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_18"
+      ]
+    },
+    {
+      "session_index": 18,
+      "relative_time": "about 13 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_10"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s018_t01",
+          "role": "user",
+          "text": "Jacek from the union checked for me. The training-bay decision has not moved an inch in four months and no one owns it — that whole question is still sitting exactly where it was in March."
+        },
+        {
+          "turn_id": "s018_t02",
+          "role": "assistant",
+          "text": "What I understand: it is not that you were refused, it is that there is no one to refuse you. Four months of nobody's desk."
+        },
+        {
+          "turn_id": "s018_t03",
+          "role": "user",
+          "text": "Jacek says the review of the line has frozen everything and nothing will move until that is decided."
+        },
+        {
+          "turn_id": "s018_t04",
+          "role": "assistant",
+          "text": "So your small question is stuck behind a much larger one that has its own timetable. That explains the silence without excusing it."
+        }
+      ],
+      "summary": "The union representative confirms the training-bay decision has not moved in four months and owns no desk, frozen behind the review of the line.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c026",
+          "subtype": "MS_SESSION",
+          "ms_function": "unfinished_thread",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s018_t01"
+          ],
+          "literal_source_span": "that whole question is still sitting exactly where it was in March",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_19"
+      ]
+    },
+    {
+      "session_index": 19,
+      "relative_time": "about 12 months ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s019_t01",
+          "role": "user",
+          "text": "Zenon's toolbox came to me. It stood shut in the hall for six weeks and I walked past it every day. Then one Saturday in February I laid the whole thing out on the bench, every spanner in size order the way he kept it, and I slept that night for the first time since the funeral."
+        },
+        {
+          "turn_id": "s019_t02",
+          "role": "assistant",
+          "text": "What I understand: the box was the last closed thing, and going through it in his order was a way of finishing something no words were going to finish."
+        },
+        {
+          "turn_id": "s019_t03",
+          "role": "user",
+          "text": "His initials are punched into the handles. I am not going to file them off."
+        },
+        {
+          "turn_id": "s019_t04",
+          "role": "assistant",
+          "text": "Then whoever you hand them to one day will get his name along with the tools. That seems about right."
+        }
+      ],
+      "summary": "After six weeks unopened in the hall, Zenon's toolbox is laid out on the bench in his old order, and Tomasz sleeps that night for the first time since the funeral.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c027",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s019_t01"
+          ],
+          "literal_source_span": "It stood shut in the hall for six weeks and I walked past it every day. Then one Saturday in February I laid the whole thing out on the bench, every spanner in size order the way he kept it, and I slept that night for the first time since the funeral.",
+          "action_span": "I laid the whole thing out on the bench, every spanner in size order the way he kept it",
+          "result_span": "I slept that night for the first time since the funeral",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "It stood shut in the hall for six weeks and I walked past it every day. Then one Saturday in February I laid the whole thing out on the bench, every spanner in size order the way he kept it, and I slept that night for the first time since the funeral.",
+          "me_tier": "natural_coverage_challenge"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_20"
+      ]
+    },
+    {
+      "session_index": 20,
+      "relative_time": "about 11 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s020_t01",
+          "role": "user",
+          "text": "Assessed demonstration next month. I filmed myself doing the whole thing on my phone a week early and watched it back with the sound off, and I saw straight away that I stand between the workpiece and everyone watching."
+        },
+        {
+          "turn_id": "s020_t02",
+          "role": "assistant",
+          "text": "What I understand: with the sound off there was nothing to listen to but the view, and the view was blocked by you for most of it."
+        },
+        {
+          "turn_id": "s020_t03",
+          "role": "user",
+          "text": "Twenty-four years of nobody needing to see, because I was the only one doing it. My shoulder has been in the way my whole career."
+        },
+        {
+          "turn_id": "s020_t04",
+          "role": "assistant",
+          "text": "Working alone taught your body a stance that teaching cannot use. Now you know exactly which habit is in the way."
+        }
+      ],
+      "summary": "Filming his assessed demonstration a week early and watching it without sound shows Tomasz he stands between the workpiece and everyone watching.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c028",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s020_t01"
+          ],
+          "literal_source_span": "I filmed myself doing the whole thing on my phone a week early and watched it back with the sound off, and I saw straight away that I stand between the workpiece and everyone watching",
+          "action_span": "filmed myself doing the whole thing on my phone a week early and watched it back with the sound off",
+          "result_span": "I saw straight away that I stand between the workpiece and everyone watching",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I filmed myself doing the whole thing on my phone a week early and watched it back with the sound off, and I saw straight away that I stand between the workpiece and everyone watching",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_21"
+      ]
+    },
+    {
+      "session_index": 21,
+      "relative_time": "about 10 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s021_t01",
+          "role": "user",
+          "text": "I gave up coffee after eight in the evening for a month and I cannot point to a single thing that changed."
+        },
+        {
+          "turn_id": "s021_t02",
+          "role": "assistant",
+          "text": "What I understand: a month of a real change, honestly observed, and no effect worth the name. That is a clean result even if it is not the one you wanted."
+        },
+        {
+          "turn_id": "s021_t03",
+          "role": "user",
+          "text": "One more thing. When I ask you a plain question, give me the plain answer. No paragraphs, no working out. I am usually reading this in the van."
+        },
+        {
+          "turn_id": "s021_t04",
+          "role": "assistant",
+          "text": "Plain answer, no working out. Understood."
+        }
+      ],
+      "summary": "A month without evening coffee produces no change Tomasz can identify, and he asks for plain answers without paragraphs while he is reading in the van.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c029",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "concise_factual_answer",
+          "preference_item_id": "u003_pr_concise_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s021_t03"
+          ],
+          "literal_source_span": "When I ask you a plain question, give me the plain answer. No paragraphs, no working out",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u003_evt_22"
+      ]
+    },
+    {
+      "session_index": 22,
+      "relative_time": "about 9 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s022_t01",
+          "role": "user",
+          "text": "Marek told me in the canteen that he was given a date for the post back in September, and that he was told the decision was only waiting on paperwork."
+        },
+        {
+          "turn_id": "s022_t02",
+          "role": "assistant",
+          "text": "What I understand: he was given a timeline and you were given silence, from what ought to be the same process."
+        },
+        {
+          "turn_id": "s022_t03",
+          "role": "user",
+          "text": "Either one of us is being handled, or he is telling the canteen version of the truth. I have known him fifteen years and I still cannot tell which."
+        },
+        {
+          "turn_id": "s022_t04",
+          "role": "assistant",
+          "text": "Fifteen years of knowing someone does not settle it, because the canteen version is often sincerely believed by the man telling it."
+        }
+      ],
+      "summary": "Marek claims he was given a September date and told the post awaited only paperwork, a timeline nobody ever offered Tomasz.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c030",
+          "subtype": "MS_SESSION",
+          "ms_function": "wrong_person_distractor",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s022_t01"
+          ],
+          "literal_source_span": "he was given a date for the post back in September, and that he was told the decision was only waiting on paperwork",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "entity_05"
+          ],
+          "resolution_status": "conflicting"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_23"
+      ]
+    },
+    {
+      "session_index": 23,
+      "relative_time": "about 8 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s023_t01",
+          "role": "user",
+          "text": "Kamil flies on the ninth. Instead of going through all the reasons again, I asked him what he thinks he will need from us in the first month, and he talked for forty minutes."
+        },
+        {
+          "turn_id": "s023_t02",
+          "role": "assistant",
+          "text": "Forty minutes, from a man who used to answer in three words. You asked about the month ahead instead of the decision behind it."
+        },
+        {
+          "turn_id": "s023_t03",
+          "role": "user",
+          "text": "Mostly he needs somebody to deal with his post and his car. But he also asked whether we would come at Christmas, which I did not expect."
+        },
+        {
+          "turn_id": "s023_t04",
+          "role": "assistant",
+          "text": "The car and the post were the easy list. The Christmas question was the real one underneath it."
+        }
+      ],
+      "summary": "Rather than reopening the argument, Tomasz asks Kamil what he will need in his first month abroad, drawing forty minutes and an unexpected Christmas invitation.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c031",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s023_t01"
+          ],
+          "literal_source_span": "Instead of going through all the reasons again, I asked him what he thinks he will need from us in the first month, and he talked for forty minutes",
+          "action_span": "asked him what he thinks he will need from us in the first month",
+          "result_span": "he talked for forty minutes",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "Instead of going through all the reasons again, I asked him what he thinks he will need from us in the first month, and he talked for forty minutes",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_24"
+      ]
+    },
+    {
+      "session_index": 24,
+      "relative_time": "about 6 months ago",
+      "topic_thread_ids": [
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s024_t01",
+          "role": "user",
+          "text": "The bike had been a pile of parts on my garage floor since spring. Slawek and I agreed we only touch it when both of us are there, and in two months it has become a machine with wheels on it again."
+        },
+        {
+          "turn_id": "s024_t02",
+          "role": "assistant",
+          "text": "The rule removed the option of picking at it alone at midnight, which is how it became a pile in the first place."
+        },
+        {
+          "turn_id": "s024_t03",
+          "role": "user",
+          "text": "It came out of the mill's old fire station when they cleared it in the nineties. Zenon signed the paper that let it leave the site."
+        },
+        {
+          "turn_id": "s024_t04",
+          "role": "assistant",
+          "text": "So it is a mill machine either way, and the man who released it is in the story too. That garage has more in it than a bike."
+        }
+      ],
+      "summary": "A both-present rule turns the motorcycle from a garage-floor parts pile into a rolling machine in two months; it left the mill's old fire station in the nineties.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c032",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s024_t01"
+          ],
+          "literal_source_span": "Slawek and I agreed we only touch it when both of us are there, and in two months it has become a machine with wheels on it again",
+          "action_span": "agreed we only touch it when both of us are there",
+          "result_span": "in two months it has become a machine with wheels on it again",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "self",
+            "entity_08"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "Slawek and I agreed we only touch it when both of us are there, and in two months it has become a machine with wheels on it again",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u003_c033",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s024_t03"
+          ],
+          "literal_source_span": "It came out of the mill's old fire station when they cleared it in the nineties",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "It came out of the mill's old fire station when they cleared it in the nineties"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_25"
+      ]
+    },
+    {
+      "session_index": 25,
+      "relative_time": "about 5 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s025_t01",
+          "role": "user",
+          "text": "The coordinator rang about the qualification and we went round it for twenty minutes and settled nothing at all."
+        },
+        {
+          "turn_id": "s025_t02",
+          "role": "assistant",
+          "text": "Twenty minutes, no outcome. That is a phone call that costs more than it looks."
+        },
+        {
+          "turn_id": "s025_t03",
+          "role": "user",
+          "text": "I sent in my logbook hours six weeks ago and nobody has confirmed a single one of them."
+        },
+        {
+          "turn_id": "s025_t04",
+          "role": "assistant",
+          "text": "So the hours are done, submitted, and unacknowledged. Same shape as the post at work, different building."
+        }
+      ],
+      "summary": "A twenty-minute call with the course coordinator settles nothing, and logbook hours submitted six weeks earlier remain entirely unconfirmed.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c034",
+          "subtype": "MS_SESSION",
+          "ms_function": "topic_only_no_content",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s025_t01"
+          ],
+          "literal_source_span": "we went round it for twenty minutes and settled nothing at all",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u003_c035",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s025_t03"
+          ],
+          "literal_source_span": "I sent in my logbook hours six weeks ago and nobody has confirmed a single one of them",
+          "action_span": "sent in my logbook hours six weeks ago",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I sent in my logbook hours six weeks ago and nobody has confirmed a single one of them"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_26"
+      ]
+    },
+    {
+      "session_index": 26,
+      "relative_time": "about 3 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_06",
+        "entity_10",
+        "entity_12"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s026_t01",
+          "role": "user",
+          "text": "The training-bay question is answered at last, and not the way anyone expected. The post itself stays frozen, but from April I am in the bay two shifts a week and on the machines the other three."
+        },
+        {
+          "turn_id": "s026_t02",
+          "role": "assistant",
+          "text": "Not the title, but the room. After fourteen months of nobody's desk, someone finally moved something."
+        },
+        {
+          "turn_id": "s026_t03",
+          "role": "user",
+          "text": "Piotr is assigned to me as the first one. Jacek says once the roster shows it for a year, the post has to follow the practice."
+        },
+        {
+          "turn_id": "s026_t04",
+          "role": "assistant",
+          "text": "So the roster becomes the argument. Doing the job visibly for a year is a stronger case than any shortlist email."
+        }
+      ],
+      "summary": "The frozen post is bypassed: from April Tomasz spends two shifts a week in the training bay with Piotr assigned to him, three shifts still on the machines.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c036",
+          "subtype": "MS_SESSION",
+          "ms_function": "resolved_thread",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s026_t01"
+          ],
+          "literal_source_span": "The training-bay question is answered at last, and not the way anyone expected",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_27",
+        "u003_evt_28"
+      ]
+    },
+    {
+      "session_index": 27,
+      "relative_time": "about 2 weeks ago",
+      "topic_thread_ids": [
+        "thread_04",
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_08"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s027_t01",
+          "role": "user",
+          "text": "Kamil was home for his two weeks. Both evenings that I expected the usual silence at the kitchen table, the two of us were out in the garage with the bike until midnight instead. He rang me from Norway on the Tuesday, which in twenty-four years he has never once done."
+        },
+        {
+          "turn_id": "s027_t02",
+          "role": "assistant",
+          "text": "The kitchen table always wanted a conversation. The garage only wanted two people facing the same engine, and that turned out to be the easier place to talk."
+        },
+        {
+          "turn_id": "s027_t03",
+          "role": "user",
+          "text": "He asked whether the bike would be finished by his next rotation. I said only if he is standing there, because Slawek and I have a rule."
+        },
+        {
+          "turn_id": "s027_t04",
+          "role": "assistant",
+          "text": "You just extended the rule to include him. That is an invitation with a date on it, which is harder to let slide than a phone call."
+        }
+      ],
+      "summary": "Kamil spends both home evenings in the garage rather than at the kitchen table, then telephones from Norway unprompted for the first time in twenty-four years.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u003_c037",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u003",
+          "source_turn_ids": [
+            "s027_t01"
+          ],
+          "literal_source_span": "Both evenings that I expected the usual silence at the kitchen table, the two of us were out in the garage with the bike until midnight instead. He rang me from Norway on the Tuesday, which in twenty-four years he has never once done.",
+          "action_span": "the two of us were out in the garage with the bike until midnight instead",
+          "result_span": "He rang me from Norway on the Tuesday, which in twenty-four years he has never once done.",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "Both evenings that I expected the usual silence at the kitchen table, the two of us were out in the garage with the bike until midnight instead. He rang me from Norway on the Tuesday, which in twenty-four years he has never once done.",
+          "me_tier": "natural_coverage_challenge"
+        }
+      ],
+      "event_ids": [
+        "u003_evt_29",
+        "u003_evt_30"
+      ]
+    }
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "evening instructor qualification"
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "mill restructuring and the training-bay post"
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "shift rotation, sleep and energy"
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "Kamil's move to Norway"
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "Zenon's illness and death"
+    },
+    {
+      "thread_id": "thread_06",
+      "label": "garage motorcycle project with Slawek"
+    }
+  ]
+}

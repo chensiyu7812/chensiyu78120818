@@ -1,0 +1,61 @@
+{
+  "protocol": "pm-v1.5-v3-observation-structured-policy-boundary-v2",
+  "status": "FROZEN_AFTER_OUTCOME_BLIND_ZERO_COVERAGE_AUDIT",
+  "frozen_date": "2026-08-03",
+  "supersedes": "data/pm_v1_5_contracts/v3_observation_structured_hard_gate_amendment_v1.json",
+  "trigger": {
+    "coverage_report": "outputs/pm_v1_5_v3_structured_gate_coverage_v1/coverage_report.json",
+    "coverage_report_sha256": "f5fc6c5b8a91b1a99aa8e9e09131b21abb694a545433d6109fc5511ff5e8208e",
+    "candidate_rows_sha256": "88188b14fe9e489ef7f282eb3af44a3722282bda441c9fac8f4fc83ac1ea8f6a",
+    "human_labels_read": 0,
+    "responses_or_outcomes_read": 0,
+    "external_lockbox_read": false,
+    "finding": "Unknown-to-OFF forced MP, MS, ME, and RS all to 0/160 coverage and therefore recreated an always-off policy before Step1."
+  },
+  "responsibility_boundary": {
+    "pre_step1_hard_denials": [
+      "candidate absent",
+      "wrong owner or missing owner provenance",
+      "inactive or superseded candidate",
+      "explicit current-turn boundary conflict"
+    ],
+    "step1_observations_not_hard_labels": [
+      "goal/function match allow or unknown",
+      "specific increment allow, redundant, or unknown",
+      "boundary evidence explicit allow or no explicit evidence",
+      "candidate and retrieval descriptors",
+      "estimated generator token cost"
+    ],
+    "step1_target": "expected component marginal utility under fixed qualified Step2 and generator",
+    "step2_target": "bind and functionally apply exactly the resources selected by the feasible Step1 action",
+    "generator_target": "write the response without fabricated recall, stale upgrades, or boundary violations"
+  },
+  "runtime_rule": {
+    "hard_denial": "OFF before Step1",
+    "no_hard_denial": "candidate reaches its component-effect head",
+    "semantic_unknown": "retained as an uncertainty feature and never converted into a negative gold label",
+    "default_action_when_no_component_survives_or_all_heads_off": "M0+R0"
+  },
+  "training_rule": {
+    "unknown_candidates_may_receive_same-state_on_off_treatments": true,
+    "worth_opening_gold_requires_valid_execution_and_human_effect_evidence": true,
+    "ties_are_off_due_to_nonzero_cost": true,
+    "eligibility_or_construction_intent_is_step1_gold": false,
+    "unexecuted_treatment_is_negative": false
+  },
+  "scope": {
+    "components": ["MP", "MS", "ME", "RS"],
+    "legal_actions": 16,
+    "primary_quality_risk_cost_claim_changed": false,
+    "complex_free_text_need_understanding_claimed": false,
+    "external_domain_coverage_and_unknown_rates_must_be_reported": true
+  },
+  "next_gate": {
+    "name": "VERSIONED_H_STEP2_EXECUTION_QUALIFICATION",
+    "prerequisite": "all requested candidates carry complete structured provenance and no hard denial",
+    "does_not_require_more_h_eligibility_packets": true,
+    "does_not_read_esconv_or_evoemo_lockbox": true,
+    "pass_then": "generate same-state single-component effect pairs for four Step1 heads",
+    "fail_then": "repair only the isolated Step2 binding/application defect before effect generation"
+  }
+}

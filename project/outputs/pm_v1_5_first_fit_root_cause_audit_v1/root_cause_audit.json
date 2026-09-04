@@ -1,0 +1,864 @@
+{
+  "protocol": "pm-v1.5-first-four-component-fit-root-cause-audit-v1",
+  "status": "ROOT_CAUSES_SEPARATED_REPAIR_ORDER_IDENTIFIED",
+  "formal_model_promotion_allowed": false,
+  "external_outcomes_used_for_new_model_selection": false,
+  "technical_conclusion": "The first-fit failure cannot be attributed to BAAI or to intrinsically unlearnable labels yet. The implemented primary model violated its own low-capacity and state×candidate×background feature contract; the labeled subset failed external covariate coverage; and the old MS treatment did not implement a qualified prior-session-summary construct. Label reproducibility remains unmeasured.",
+  "data_and_grain": {
+    "labels": 256,
+    "contrasts_per_component": {
+      "MP": 64,
+      "ME": 64,
+      "MS": 64,
+      "RS": 64
+    },
+    "state_pool": {
+      "train": {
+        "rows": 192,
+        "users": 24
+      },
+      "calibration": {
+        "rows": 96,
+        "users": 12
+      },
+      "internal_test": {
+        "rows": 128,
+        "users": 16
+      }
+    },
+    "available_development_users": 36,
+    "selected_development_capacity": {
+      "RS": {
+        "development_rows": 48,
+        "independent_user_groups": 28,
+        "plan_feature_cap_floor_groups_div_5": 5,
+        "actual_primary_feature_count": 9,
+        "capacity_contract_passed": false,
+        "minimum_48_independent_groups_passed": false
+      },
+      "MP": {
+        "development_rows": 48,
+        "independent_user_groups": 31,
+        "plan_feature_cap_floor_groups_div_5": 6,
+        "actual_primary_feature_count": 8,
+        "capacity_contract_passed": false,
+        "minimum_48_independent_groups_passed": false
+      },
+      "MS": {
+        "development_rows": 48,
+        "independent_user_groups": 32,
+        "plan_feature_cap_floor_groups_div_5": 6,
+        "actual_primary_feature_count": 8,
+        "capacity_contract_passed": false,
+        "minimum_48_independent_groups_passed": false
+      },
+      "ME": {
+        "development_rows": 48,
+        "independent_user_groups": 29,
+        "plan_feature_cap_floor_groups_div_5": 5,
+        "actual_primary_feature_count": 8,
+        "capacity_contract_passed": false,
+        "minimum_48_independent_groups_passed": false
+      }
+    }
+  },
+  "confirmed_method_failures": {
+    "capacity_contract": {
+      "plan_rule": "primary feature count <= floor(effective independent groups / 5)",
+      "by_component": {
+        "RS": {
+          "development_rows": 48,
+          "independent_user_groups": 28,
+          "plan_feature_cap_floor_groups_div_5": 5,
+          "actual_primary_feature_count": 9,
+          "capacity_contract_passed": false,
+          "minimum_48_independent_groups_passed": false
+        },
+        "MP": {
+          "development_rows": 48,
+          "independent_user_groups": 31,
+          "plan_feature_cap_floor_groups_div_5": 6,
+          "actual_primary_feature_count": 8,
+          "capacity_contract_passed": false,
+          "minimum_48_independent_groups_passed": false
+        },
+        "MS": {
+          "development_rows": 48,
+          "independent_user_groups": 32,
+          "plan_feature_cap_floor_groups_div_5": 6,
+          "actual_primary_feature_count": 8,
+          "capacity_contract_passed": false,
+          "minimum_48_independent_groups_passed": false
+        },
+        "ME": {
+          "development_rows": 48,
+          "independent_user_groups": 29,
+          "plan_feature_cap_floor_groups_div_5": 5,
+          "actual_primary_feature_count": 8,
+          "capacity_contract_passed": false,
+          "minimum_48_independent_groups_passed": false
+        }
+      }
+    },
+    "memory_background_identity_collapsed": {
+      "actual": "MP/MS/ME primary heads use only background_other_memory_count plus strategy on/off",
+      "required": "other-component background bits because the estimand is conditional on the fixed background action",
+      "observed_background_effect_rates": {
+        "RS": {
+          "M0+R0": {
+            "rows": 6,
+            "on": 2,
+            "on_fraction": 0.3333333333333333
+          },
+          "ME+R0": {
+            "rows": 6,
+            "on": 5,
+            "on_fraction": 0.8333333333333334
+          },
+          "MP+R0": {
+            "rows": 6,
+            "on": 0,
+            "on_fraction": 0.0
+          },
+          "MPE+R0": {
+            "rows": 6,
+            "on": 2,
+            "on_fraction": 0.3333333333333333
+          },
+          "MPMS+R0": {
+            "rows": 6,
+            "on": 2,
+            "on_fraction": 0.3333333333333333
+          },
+          "MPMSME+R0": {
+            "rows": 6,
+            "on": 4,
+            "on_fraction": 0.6666666666666666
+          },
+          "MS+R0": {
+            "rows": 6,
+            "on": 3,
+            "on_fraction": 0.5
+          },
+          "MSE+R0": {
+            "rows": 6,
+            "on": 4,
+            "on_fraction": 0.6666666666666666
+          }
+        },
+        "MP": {
+          "M0+R0": {
+            "rows": 6,
+            "on": 6,
+            "on_fraction": 1.0
+          },
+          "M0+RS": {
+            "rows": 6,
+            "on": 4,
+            "on_fraction": 0.6666666666666666
+          },
+          "ME+R0": {
+            "rows": 6,
+            "on": 5,
+            "on_fraction": 0.8333333333333334
+          },
+          "ME+RS": {
+            "rows": 6,
+            "on": 3,
+            "on_fraction": 0.5
+          },
+          "MS+R0": {
+            "rows": 6,
+            "on": 4,
+            "on_fraction": 0.6666666666666666
+          },
+          "MS+RS": {
+            "rows": 6,
+            "on": 1,
+            "on_fraction": 0.16666666666666666
+          },
+          "MSE+R0": {
+            "rows": 6,
+            "on": 4,
+            "on_fraction": 0.6666666666666666
+          },
+          "MSE+RS": {
+            "rows": 6,
+            "on": 3,
+            "on_fraction": 0.5
+          }
+        },
+        "MS": {
+          "M0+R0": {
+            "rows": 6,
+            "on": 3,
+            "on_fraction": 0.5
+          },
+          "M0+RS": {
+            "rows": 6,
+            "on": 5,
+            "on_fraction": 0.8333333333333334
+          },
+          "ME+R0": {
+            "rows": 6,
+            "on": 1,
+            "on_fraction": 0.16666666666666666
+          },
+          "ME+RS": {
+            "rows": 6,
+            "on": 3,
+            "on_fraction": 0.5
+          },
+          "MP+R0": {
+            "rows": 6,
+            "on": 2,
+            "on_fraction": 0.3333333333333333
+          },
+          "MP+RS": {
+            "rows": 6,
+            "on": 0,
+            "on_fraction": 0.0
+          },
+          "MPE+R0": {
+            "rows": 6,
+            "on": 2,
+            "on_fraction": 0.3333333333333333
+          },
+          "MPE+RS": {
+            "rows": 6,
+            "on": 2,
+            "on_fraction": 0.3333333333333333
+          }
+        },
+        "ME": {
+          "M0+R0": {
+            "rows": 6,
+            "on": 1,
+            "on_fraction": 0.16666666666666666
+          },
+          "M0+RS": {
+            "rows": 6,
+            "on": 0,
+            "on_fraction": 0.0
+          },
+          "MP+R0": {
+            "rows": 6,
+            "on": 1,
+            "on_fraction": 0.16666666666666666
+          },
+          "MP+RS": {
+            "rows": 6,
+            "on": 1,
+            "on_fraction": 0.16666666666666666
+          },
+          "MPMS+R0": {
+            "rows": 6,
+            "on": 4,
+            "on_fraction": 0.6666666666666666
+          },
+          "MPMS+RS": {
+            "rows": 6,
+            "on": 2,
+            "on_fraction": 0.3333333333333333
+          },
+          "MS+R0": {
+            "rows": 6,
+            "on": 1,
+            "on_fraction": 0.16666666666666666
+          },
+          "MS+RS": {
+            "rows": 6,
+            "on": 1,
+            "on_fraction": 0.16666666666666666
+          }
+        }
+      },
+      "posthoc_explicit_background_probe": {
+        "MP": {
+          "role": "posthoc root-cause probe only; cannot promote a model or tune the existing internal/external evaluation",
+          "features": [
+            "candidate_state_bge_similarity",
+            "source_catalog_bge_similarity",
+            "background_MS_on",
+            "background_ME_on",
+            "background_RS_on"
+          ],
+          "feature_count": 5,
+          "metrics": {
+            "balanced_accuracy": 0.47992424242424236,
+            "positive_recall": 0.6416666666666668,
+            "brier": 0.23976350624767073,
+            "prior_brier": 0.23890801698893815,
+            "brier_gain_vs_prior": -0.000855489258732578,
+            "predicted_on": 30,
+            "predicted_off": 18
+          },
+          "balanced_accuracy_by_seed": [
+            0.40909090909090906,
+            0.590530303030303,
+            0.5454545454545454,
+            0.556060606060606,
+            0.4772727272727272
+          ],
+          "balanced_accuracy_seed_std": 0.07238100173598641
+        },
+        "MS": {
+          "role": "posthoc root-cause probe only; cannot promote a model or tune the existing internal/external evaluation",
+          "features": [
+            "candidate_state_bge_similarity",
+            "source_catalog_bge_similarity",
+            "background_MP_on",
+            "background_ME_on",
+            "background_RS_on"
+          ],
+          "feature_count": 5,
+          "metrics": {
+            "balanced_accuracy": 0.5126625992862899,
+            "positive_recall": 0.3698630136986301,
+            "brier": 0.24472288613924786,
+            "prior_brier": 0.24781941759175088,
+            "brier_gain_vs_prior": 0.0030965314525030208,
+            "predicted_on": 18,
+            "predicted_off": 30
+          },
+          "balanced_accuracy_by_seed": [
+            0.5836307125589961,
+            0.5126625992862899,
+            0.6158627834695523,
+            0.5378726833199033,
+            0.5462760446644411
+          ],
+          "balanced_accuracy_seed_std": 0.040605187127650294
+        },
+        "ME": {
+          "role": "posthoc root-cause probe only; cannot promote a model or tune the existing internal/external evaluation",
+          "features": [
+            "candidate_state_bge_similarity",
+            "source_catalog_bge_similarity",
+            "background_MP_on",
+            "background_MS_on",
+            "background_RS_on"
+          ],
+          "feature_count": 5,
+          "metrics": {
+            "balanced_accuracy": 0.5608963393773521,
+            "positive_recall": 0.32432432432432434,
+            "brier": 0.2478229769774929,
+            "prior_brier": 0.23492695701435498,
+            "brier_gain_vs_prior": -0.012896019963137911,
+            "predicted_on": 9,
+            "predicted_off": 39
+          },
+          "balanced_accuracy_by_seed": [
+            0.5752651385562778,
+            0.5414528452503137,
+            0.44942410765195584,
+            0.5144828372676474,
+            0.47901699167521955
+          ],
+          "balanced_accuracy_seed_std": 0.04969835970102116
+        }
+      },
+      "probe_result": "Restoring explicit background identity raises ME from BGE BA 0.482 to about 0.561 but does not reach the gate; the representation bug is real but not the only cause."
+    },
+    "state_view_incomplete": {
+      "plan_required_common_block": [
+        "turn/text length",
+        "explicit request/boundary",
+        "question/task",
+        "one-step/low-burden",
+        "history length"
+      ],
+      "actual_memory_primary": "candidate retrieval/age/cost summaries and collapsed background only",
+      "actual_rs_primary": "two coarse request/burden flags, candidate family/score, and explicit memory-background bits",
+      "missing_candidate_safety_descriptors": [
+        "current context already covers the memory",
+        "conflict flag",
+        "turn-specific request versus stable preference",
+        "profile stability"
+      ]
+    },
+    "declared_but_zero_variance_features": {
+      "MP": {
+        "zero_variance_features": [
+          "token_cost_bucket",
+          "retrieved_fraction",
+          "minimum_relative_age_bucket",
+          "maximum_relative_age_bucket"
+        ],
+        "nonzero_variance_feature_count": 4
+      },
+      "MS": {
+        "zero_variance_features": [],
+        "nonzero_variance_feature_count": 8
+      },
+      "ME": {
+        "zero_variance_features": [],
+        "nonzero_variance_feature_count": 8
+      }
+    }
+  },
+  "confirmed_data_design_failures": {
+    "effective_groups_below_plan_minimum": {
+      "plan_minimum": 48,
+      "selected_independent_users_by_component": {
+        "RS": 28,
+        "MP": 31,
+        "MS": 32,
+        "ME": 29
+      },
+      "maximum_available_train_calibration_users": 36,
+      "interpretation": "The current 36-user development pool cannot satisfy a 48-independent-group formal claim without new users or a pre-outcome protocol amendment."
+    },
+    "blueprint_selection_axis_too_narrow": {
+      "actual_axis": "component_top1_lexical_score quantiles only",
+      "external_coverage_report": {
+        "MP": {
+          "available_internal_candidate_rows": 416,
+          "labeled_development_rows": 48,
+          "external_candidate_rows": 114,
+          "unique_candidate_patterns": {
+            "all_internal": 16,
+            "labeled_development": 9,
+            "external": 9
+          },
+          "external_exact_pattern_coverage": {
+            "by_all_internal_rows": 80,
+            "by_all_internal_fraction": 0.7017543859649122,
+            "by_labeled_development_rows": 0,
+            "by_labeled_development_fraction": 0.0
+          },
+          "external_joint_range_support": {
+            "by_all_internal": {
+              "reference_rows": 416,
+              "evaluation_rows": 114,
+              "supported_rows": 114,
+              "supported_fraction": 1.0,
+              "minimum": {
+                "top1_relevance_bucket": 1.0,
+                "relevance_margin_bucket": 1.0,
+                "token_cost_bucket": 1.0,
+                "retrieved_fraction": 0.5,
+                "minimum_relative_age_bucket": 5.0,
+                "maximum_relative_age_bucket": 5.0
+              },
+              "maximum": {
+                "top1_relevance_bucket": 4.0,
+                "relevance_margin_bucket": 4.0,
+                "token_cost_bucket": 2.0,
+                "retrieved_fraction": 1.0,
+                "minimum_relative_age_bucket": 5.0,
+                "maximum_relative_age_bucket": 5.0
+              }
+            },
+            "by_labeled_development": {
+              "reference_rows": 48,
+              "evaluation_rows": 114,
+              "supported_rows": 0,
+              "supported_fraction": 0.0,
+              "minimum": {
+                "top1_relevance_bucket": 2.0,
+                "relevance_margin_bucket": 1.0,
+                "token_cost_bucket": 2.0,
+                "retrieved_fraction": 1.0,
+                "minimum_relative_age_bucket": 5.0,
+                "maximum_relative_age_bucket": 5.0
+              },
+              "maximum": {
+                "top1_relevance_bucket": 4.0,
+                "relevance_margin_bucket": 4.0,
+                "token_cost_bucket": 2.0,
+                "retrieved_fraction": 1.0,
+                "minimum_relative_age_bucket": 5.0,
+                "maximum_relative_age_bucket": 5.0
+              }
+            }
+          },
+          "labeled_full_feature_pattern_diagnostic": {
+            "unique_patterns": 27,
+            "singleton_patterns": 15,
+            "conflicting_patterns": 8,
+            "rows_in_conflicting_patterns": 21,
+            "optimistic_in_sample_majority_accuracy": 0.8125,
+            "interpretation": "This is an optimistic descriptive ceiling within exact observed feature patterns, not a valid OOF estimate."
+          }
+        },
+        "MS": {
+          "available_internal_candidate_rows": 416,
+          "labeled_development_rows": 48,
+          "external_candidate_rows": 204,
+          "unique_candidate_patterns": {
+            "all_internal": 98,
+            "labeled_development": 33,
+            "external": 50
+          },
+          "external_exact_pattern_coverage": {
+            "by_all_internal_rows": 127,
+            "by_all_internal_fraction": 0.6225490196078431,
+            "by_labeled_development_rows": 62,
+            "by_labeled_development_fraction": 0.30392156862745096
+          },
+          "external_joint_range_support": {
+            "by_all_internal": {
+              "reference_rows": 416,
+              "evaluation_rows": 204,
+              "supported_rows": 177,
+              "supported_fraction": 0.8676470588235294,
+              "minimum": {
+                "top1_relevance_bucket": 2.0,
+                "relevance_margin_bucket": 1.0,
+                "token_cost_bucket": 1.0,
+                "retrieved_fraction": 0.5,
+                "minimum_relative_age_bucket": 1.0,
+                "maximum_relative_age_bucket": 3.0
+              },
+              "maximum": {
+                "top1_relevance_bucket": 5.0,
+                "relevance_margin_bucket": 5.0,
+                "token_cost_bucket": 2.0,
+                "retrieved_fraction": 1.0,
+                "minimum_relative_age_bucket": 4.0,
+                "maximum_relative_age_bucket": 5.0
+              }
+            },
+            "by_labeled_development": {
+              "reference_rows": 48,
+              "evaluation_rows": 204,
+              "supported_rows": 177,
+              "supported_fraction": 0.8676470588235294,
+              "minimum": {
+                "top1_relevance_bucket": 3.0,
+                "relevance_margin_bucket": 1.0,
+                "token_cost_bucket": 1.0,
+                "retrieved_fraction": 0.5,
+                "minimum_relative_age_bucket": 1.0,
+                "maximum_relative_age_bucket": 3.0
+              },
+              "maximum": {
+                "top1_relevance_bucket": 5.0,
+                "relevance_margin_bucket": 5.0,
+                "token_cost_bucket": 2.0,
+                "retrieved_fraction": 1.0,
+                "minimum_relative_age_bucket": 4.0,
+                "maximum_relative_age_bucket": 5.0
+              }
+            }
+          },
+          "labeled_full_feature_pattern_diagnostic": {
+            "unique_patterns": 44,
+            "singleton_patterns": 40,
+            "conflicting_patterns": 3,
+            "rows_in_conflicting_patterns": 6,
+            "optimistic_in_sample_majority_accuracy": 0.9375,
+            "interpretation": "This is an optimistic descriptive ceiling within exact observed feature patterns, not a valid OOF estimate."
+          }
+        },
+        "ME": {
+          "available_internal_candidate_rows": 416,
+          "labeled_development_rows": 48,
+          "external_candidate_rows": 204,
+          "unique_candidate_patterns": {
+            "all_internal": 88,
+            "labeled_development": 31,
+            "external": 39
+          },
+          "external_exact_pattern_coverage": {
+            "by_all_internal_rows": 99,
+            "by_all_internal_fraction": 0.4852941176470588,
+            "by_labeled_development_rows": 45,
+            "by_labeled_development_fraction": 0.22058823529411764
+          },
+          "external_joint_range_support": {
+            "by_all_internal": {
+              "reference_rows": 416,
+              "evaluation_rows": 204,
+              "supported_rows": 192,
+              "supported_fraction": 0.9411764705882353,
+              "minimum": {
+                "top1_relevance_bucket": 3.0,
+                "relevance_margin_bucket": 1.0,
+                "token_cost_bucket": 1.0,
+                "retrieved_fraction": 0.333333,
+                "minimum_relative_age_bucket": 1.0,
+                "maximum_relative_age_bucket": 3.0
+              },
+              "maximum": {
+                "top1_relevance_bucket": 5.0,
+                "relevance_margin_bucket": 5.0,
+                "token_cost_bucket": 4.0,
+                "retrieved_fraction": 1.0,
+                "minimum_relative_age_bucket": 4.0,
+                "maximum_relative_age_bucket": 5.0
+              }
+            },
+            "by_labeled_development": {
+              "reference_rows": 48,
+              "evaluation_rows": 204,
+              "supported_rows": 122,
+              "supported_fraction": 0.5980392156862745,
+              "minimum": {
+                "top1_relevance_bucket": 4.0,
+                "relevance_margin_bucket": 1.0,
+                "token_cost_bucket": 1.0,
+                "retrieved_fraction": 0.333333,
+                "minimum_relative_age_bucket": 2.0,
+                "maximum_relative_age_bucket": 3.0
+              },
+              "maximum": {
+                "top1_relevance_bucket": 5.0,
+                "relevance_margin_bucket": 5.0,
+                "token_cost_bucket": 4.0,
+                "retrieved_fraction": 1.0,
+                "minimum_relative_age_bucket": 4.0,
+                "maximum_relative_age_bucket": 5.0
+              }
+            }
+          },
+          "labeled_full_feature_pattern_diagnostic": {
+            "unique_patterns": 44,
+            "singleton_patterns": 40,
+            "conflicting_patterns": 1,
+            "rows_in_conflicting_patterns": 2,
+            "optimistic_in_sample_majority_accuracy": 0.9791666666666666,
+            "interpretation": "This is an optimistic descriptive ceiling within exact observed feature patterns, not a valid OOF estimate."
+          }
+        }
+      },
+      "interpretation": "The shared compiler passed on all 416 states, but the 48 labeled development rows per head did not preserve that coverage."
+    },
+    "mp_construct_mismatch": {
+      "historical_mp_ontology": "stable profile, preference, or boundary memory",
+      "state_item_records": 1248,
+      "unique_memory_ids": 156,
+      "unique_exact_texts": 72,
+      "normalized_template_count": 3,
+      "acknowledgement_before_suggestions_rate": 1.0,
+      "one_gentle_question_rate": 1.0,
+      "internal_profile_fields": [
+        "stable_preference_1",
+        "stable_preference_2",
+        "stable_preference_3"
+      ],
+      "external_profile_fields": [
+        "age",
+        "education",
+        "gender",
+        "job",
+        "location",
+        "name",
+        "nationality"
+      ],
+      "field_name_intersection": [],
+      "corrected_interpretation": "The two domains cover different valid MP subtypes under the project's broader historical MP ontology. The defect is subtype coverage and severe internal preference templating, not evidence that preference memory should be deleted or replaced by profile facts."
+    },
+    "ms_construct_and_current_session_mismatch": {
+      "ontology": {
+        "current_session_context": "Visible current-session dialogue and optional token-budget compaction; fixed across actions and not an MP/MS/ME resource.",
+        "MS_SESSION": "A bounded summary of one strictly completed prior session.",
+        "MS_PATTERN": "A cross-session pattern, recurring concern, or state evolution supported by at least two strictly prior sessions.",
+        "v1_5_scope": "MS_SESSION only",
+        "v2_reserved": "MS_PATTERN",
+        "action_decision": "Keep one MS bit and 16 total actions. If MS_PATTERN is later implemented, treat it as a typed candidate under the same bit unless simultaneous independent injection is required."
+      },
+      "implementation_findings": {
+        "current_ms_runtime": "One MemoryItem per completed prior session. Supplied summary is used when available; otherwise current code copies the last seeker message/current_user_text into MS.",
+        "cross_session_pattern_compiler_implemented": false,
+        "internal": {
+          "users": 52,
+          "current_states": 468,
+          "compiled_session_summaries": 468,
+          "supplied_session_summaries": 234,
+          "fallback_current_user_text": 234,
+          "fallback_rate": 0.5
+        },
+        "external": {
+          "users": 18,
+          "sessions": 401,
+          "nonempty_supplied_session_summaries": 401,
+          "supplied_summary_rate": 1.0,
+          "current_session_summary_runtime_policy": "always_empty"
+        },
+        "external_visible_current_session": [
+          {
+            "evaluation_seeker_turn": 3,
+            "prior_messages_before_current": 4,
+            "retained_by_current_runtime": 4,
+            "omitted_by_current_runtime": 0,
+            "current_session_summary_present": false
+          },
+          {
+            "evaluation_seeker_turn": 8,
+            "prior_messages_before_current": 14,
+            "retained_by_current_runtime": 8,
+            "omitted_by_current_runtime": 6,
+            "current_session_summary_present": false
+          }
+        ],
+        "old_ms_pair_lineage": {
+          "pairs": 64,
+          "selected_ms_items": 119,
+          "pairs_with_fallback_item": 59,
+          "pairs_with_only_supplied_summaries": 5,
+          "pairs_with_current_session_summary": 32,
+          "pairs_with_empty_current_session_summary": 32,
+          "pairs_clean_under_narrowed_v1_5_contract": 4
+        }
+      },
+      "severity_decision": {
+        "severity": "HIGH",
+        "confidence": "HIGH",
+        "why": [
+          "59 of 64 old MS contrasts inject at least one fallback utterance mislabeled as a summary.",
+          "Only four old MS contrasts combine supplied-only MS with an empty current-session summary.",
+          "Internal current-session summary presence and EvoEmo always-empty policy are not transport-equivalent.",
+          "At external evaluation turn 8, six earlier messages are omitted and no current-session summary compensates.",
+          "The implemented resource cannot support a claim about learned cross-session patterns."
+        ]
+      },
+      "interpretation": "The old 64 MS labels are diagnostic only. V1.5 must use MS_SESSION with supplied strictly-prior summaries and one shared complete-current-session visibility policy before D2 or retraining."
+    }
+  },
+  "label_quality_status": {
+    "supported": {
+      "schema_complete": true,
+      "within_annotator_reversed_position_agreement": 1.0,
+      "blind_position_profile": {
+        "all_presentations": {
+          "A": 121,
+          "B": 125,
+          "tie": 62
+        },
+        "primary_only": {
+          "A": 100,
+          "B": 107,
+          "tie": 49
+        }
+      },
+      "risk_wins_reviewed": 109
+    },
+    "not_measured": {
+      "independent_second_annotator": true,
+      "same_state_independent_generation_replicates": true,
+      "expected_component_benefit_probability": true
+    },
+    "protocol_gap": "The final plan required second review of all candidate positives and a stratified subset of nonpositives; the completed 256-pair quality packet used one annotator plus within-annotator position reversals.",
+    "interpretation": "The labels are usable as single-human realized-pair proxies, but data noise versus generator sampling cannot be separated without a bounded replication/inter-rater audit."
+  },
+  "model_family_evidence": {
+    "primary_status": "FOUR_COMPONENT_PRIMARY_LEARNING_GATE_NOT_PASSED",
+    "primary_development_ba": {
+      "RS": 0.6222846165213537,
+      "MP": 0.5026515151515152,
+      "MS": 0.4678254863589271,
+      "ME": 0.44520469836925536
+    },
+    "bge_status": "BGE_CHALLENGER_NOT_PROMOTED",
+    "bge_development_ba": {
+      "RS": 0.642308260676814,
+      "MP": 0.5253787878787879,
+      "MS": 0.5719465868539196,
+      "ME": 0.48152582962709545
+    },
+    "interpretation": "BGE-small does not rescue the current design. This rejects 'embedding absence is the main bottleneck'; it does not prove that every richer semantic model would fail."
+  },
+  "root_cause_assessment": [
+    {
+      "rank": 1,
+      "cause": "primary implementation does not match the frozen low-capacity state×candidate×background contract",
+      "severity": "critical",
+      "confidence": "high",
+      "type": "method implementation"
+    },
+    {
+      "rank": 2,
+      "cause": "labeled subset and available independent-user count do not support the intended formal transport/complexity claim",
+      "severity": "critical",
+      "confidence": "high",
+      "type": "data design and sampling"
+    },
+    {
+      "rank": 3,
+      "cause": "MP subtype coverage is disjoint: internal data contains highly templated support preferences while EvoEmo contains demographic/life profile facts",
+      "severity": "high",
+      "confidence": "high",
+      "type": "construct subtype coverage"
+    },
+    {
+      "rank": 4,
+      "cause": "MS treatment and state transport are construct-confounded: 59/64 old contrasts inject utterance fallback and internal versus EvoEmo current-session visibility differs",
+      "severity": "high",
+      "confidence": "high",
+      "type": "MS construct and state transport"
+    },
+    {
+      "rank": 5,
+      "cause": "single-generator-draw and single-annotator labels may be too noisy for individual state-level gating",
+      "severity": "high if confirmed",
+      "confidence": "unresolved",
+      "type": "measurement"
+    },
+    {
+      "rank": 6,
+      "cause": "BAAI representation is too weak",
+      "severity": "not established as primary",
+      "confidence": "low",
+      "type": "model family"
+    }
+  ],
+  "repair_order": [
+    {
+      "step": "D0",
+      "action": "Freeze the current fit as invalid for promotion but valid as a root-cause baseline; do not run paid external quality.",
+      "new_human_reviews": 0,
+      "new_api_calls": 0
+    },
+    {
+      "step": "D1",
+      "action": "Write a new outcome-blind feature/blueprint contract with at most five or six features, explicit background bits, typed MP preference/profile candidates, and only pre-injection state/candidate safety descriptors.",
+      "new_human_reviews": 0,
+      "new_api_calls": 0
+    },
+    {
+      "step": "D1b",
+      "action": "Freeze MS_SESSION as the only V1.5 MS subtype, forbid last-message fallback, align complete current-session visibility, downgrade all old MS pairs to diagnostic, and build eight fresh outcome-blind MS states.",
+      "new_human_reviews": 0,
+      "new_api_calls": 0
+    },
+    {
+      "step": "D2",
+      "action": "Before rebuilding all labels, run a bounded 32-state replication and independent-review audit: 24 eligible RS/MP/ME states receive two new pairs each, and eight fresh qualified MS states receive three pairs each.",
+      "human_review_plan": {
+        "primary_reviewer_new_pair_decisions": 72,
+        "second_reviewer_fixed_overlap_decisions": 32,
+        "total_decisions": 104
+      },
+      "new_api_calls": 144,
+      "gate": "majority direction reproducibility >=0.70, shared-pair inter-annotator agreement >=0.75, and uncertain <=0.10; otherwise do not train hard single-pair labels"
+    },
+    {
+      "step": "D3",
+      "action": "Only if D2 passes, add content-disjoint users and select coverage-aware contrasts before outcomes. Do not reuse consumed internal/external groups as confirmation.",
+      "new_human_reviews": "conditional",
+      "new_api_calls": "conditional"
+    }
+  ],
+  "claim_decision": {
+    "research_goal_changed": false,
+    "preserved_claim": "A low-capacity auditable pre-generation PM attempts to learn component-specific expected marginal-benefit gates and then applies separate risk and deterministic cost constraints.",
+    "current_evidence": "The claim is not yet supported, but the first failure is not a clean test of the claim because implementation, sampling, construct transport, and measurement gates were incomplete."
+  },
+  "lineage": {
+    "labels_sha256": "1a52463ca8856c6d269716a3ad926c09291b329e1307c6535dc8f3b59cb5b93b",
+    "memory_blueprint_sha256": "d620ed03004b042b355d357f00c9d82739ea2e3a65711d08d9b758edf702ab75",
+    "rs_blueprint_sha256": "5899966bfea121b72d64004111278ec1bbff318af422fb07b89408a7105ed71a",
+    "descriptors_sha256": "d4427b71a4b7dfb50fc71d96939442f28a635f0b1827a85c5f0a13a6e0249684",
+    "states_sha256": "af4bc8b7022a503c70cc6f2cbe1c41e4126bea2ad81370516d409f62250aae26",
+    "memory_backend_sha256": "d32165f0cc72da4ecf23c5fe6a4048195b8b4c6f8785cb3f2d426cb7d8c24875",
+    "primary_report_sha256": "15b985c876ee4d746b9fc46f045b8033233fc636b43ee2173c8e813b6eef6e0c",
+    "bge_report_sha256": "d2cded85c7fb325381bffc617e72945bb2993555b8e6d3fe9afe2f8a85a18916",
+    "quality_report_sha256": "a35e5cd5c0f2cbf8fb536030d36c94f8817ee6b4023dcd6dfc25315b8d48deeb",
+    "coverage_report_sha256": "277813a5268cf4852308e74abc793e9d2c4ef09f77d4ac8f447da71ba8e8eef2",
+    "transport_report_sha256": "76067c2e424c77ee221f43f5d3989bfc26a628aea5c9a24a4d494198632d5d9c",
+    "ms_construct_report_sha256": "61e7d7e2cee67c8f7bbae019b95e9f752cf205720af69a140ec172b67e08b42c"
+  }
+}

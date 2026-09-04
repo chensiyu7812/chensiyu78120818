@@ -1,0 +1,27 @@
+{
+  "protocol": "pm-v1.5-four-component-contrast-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_256_NEW_RESPONSE_CALLS",
+  "input_sha256": {
+    "outputs/pm_v1_5_four_component_contrast_blueprint_v1/blueprint_report.json": "70e48dae0eefa7a1b16885708adaabf6d939224a67d531a68b9be531f36de663",
+    "outputs/pm_v1_5_four_component_contrast_blueprint_v1/contrast_blueprint.jsonl": "d3351e557f7d047ec2fac98da52a4e890d6a0a5fb543dd0ca863b0b5024e2d2f",
+    "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/runtime_states.jsonl": "5ff31de14a5e3a0757f561958153a97f295eb04dd0a23febd19257c370d07ded",
+    "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/memory_backend.jsonl": "bf2173ffc42cac8da3560d8c356ee9304537e746b5e4c28cd046bd6dc5f8cd49",
+    "outputs/pm_v1_5_longitudinal_action_sweep_v8_19_2_continuation_v2_dry_run/action_outcomes.jsonl": "9b4eb540a9b2367ac1bf5dc2200ff2b9bcb6f3043e0335e1def2c7327ea9c695",
+    "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676",
+    "configs/pm_v1_5.yaml": "7aaa4ad296936e298d4beb16f9d1a9f5ca096e224d5e518da22b49682842a94b",
+    "configs/experiment.yaml": "35cc6c98d29ffcbeef00a61d58b36e33cf1789bd9568a301cab28d2d6429790e"
+  },
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "supporter_generation_treatment_sha256": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe",
+  "seed": 20260730,
+  "outputs": {
+    "call_plan.jsonl": "5cdc26601f0e355c06576f5b2cb7422e1f432c00d2fd85a97958e209d55b8667",
+    "response_arm_registry.jsonl": "d00844f0fde1f921fcbe3c323d7d4e847844a518101531cc73fb6f8ef3b9cc98",
+    "plan_report.json": "ac3499ab09acc185ffe77f4e820a83f9b6b1fa97bdb2e9187900bf9e069e5a02"
+  }
+}

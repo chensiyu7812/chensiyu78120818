@@ -1,0 +1,74 @@
+{
+  "protocol": "pm-v1.5-v5-fit-training-surface-freeze-v1",
+  "status": "FROZEN_BEFORE_HUMAN_FIT_OUTCOME_LABELS",
+  "date": "2026-08-04",
+  "scientific_unit": {
+    "state_candidate_units": 256,
+    "units_per_component": 64,
+    "counterfactual_groups": 128,
+    "counterfactual_groups_per_component": 32,
+    "generation_seeds_per_unit": 2,
+    "grouped_cv_rule": "both members of a counterfactual group must remain in the same fold",
+    "duplicate_seed_outcomes": "retained within state aggregation but never counted as independent states"
+  },
+  "feature_contract": {
+    "implementation": "src/metacom_pm/v1_5_final_candidate_contract.py",
+    "names_constant": "FINAL_FEATURE_NAMES",
+    "feature_count_per_component": "5-7",
+    "inputs": "only visible pre-action state, exact Rank-1 candidate, compiler metadata, retrieval descriptor, and current resource budget",
+    "forbidden": [
+      "construction intent or eligibility intent",
+      "human quality, risk, or functional-use annotations",
+      "ON/OFF response text",
+      "fallback or guard outcome",
+      "dataset or external split identity",
+      "raw state, user, candidate, memory, strategy, action, or condition identifier"
+    ]
+  },
+  "primary_model": {
+    "heads": ["MP", "MS", "ME", "RS"],
+    "estimator": "StandardScaler plus L2 LogisticRegression",
+    "solver": "liblinear",
+    "C": 0.3,
+    "class_weight": "balanced",
+    "threshold": 0.5,
+    "folds": 5,
+    "fold_seeds": [17, 29, 43, 71, 113],
+    "group_weight": "each counterfactual group has total training weight one before class balancing",
+    "direct_16_classification": false
+  },
+  "transparent_rule_baseline": {
+    "MP": "incremental and no scope conflict and either preference scope fit >= 0.5 or relevant current-owner profile fit >= 0.5",
+    "MS": "incremental, not resolved, goal fit >= 0.5, and a specific prior issue/distinction/outcome exists",
+    "ME": "incremental, goal fit >= 0.5, contains an action, and contains a result or mechanism",
+    "RS": "mode, goal, burden, boundary, and nonredundancy are each >= 0.5"
+  },
+  "hard_label": {
+    "positive": "across two frozen seeds, at least one ON material win, no OFF material win, no uncertain quality, and no material ON-arm grounding risk",
+    "nonpositive": "all other adjudicable outcomes, including ties because incremental prompt cost is nonzero",
+    "uncertain_sensitivity": "quality or risk uncertain is nonpositive in primary and excluded in sensitivity",
+    "functional_use": "secondary mechanism outcome only and never an ITT validity filter",
+    "fallback": "retained as assigned ON treatment outcome"
+  },
+  "promotion_gates": {
+    "grouped_oof_balanced_accuracy_min": 0.65,
+    "recall_min": 0.60,
+    "specificity_min": 0.60,
+    "brier_must_beat": ["prevalence-only", "frozen-transparent-rule"],
+    "predicted_on_fraction_min": 0.15,
+    "predicted_off_fraction_min": 0.15,
+    "independent_positive_groups_min": 8,
+    "independent_nonpositive_groups_min": 8,
+    "five_seed_balanced_accuracy_sd_max": 0.05,
+    "leave_semantic_family_out_balanced_accuracy_min": 0.60
+  },
+  "challenger": {
+    "model": "BAAI/bge-small-en-v1.5",
+    "role": "one frozen representation challenger, never label source",
+    "views": ["current-goal to candidate similarity", "full-visible-context to candidate similarity"],
+    "selection_feedback_to_primary": false,
+    "additional_embedding_or_prompt_search_allowed": false
+  },
+  "timing_disclosure": "The feature names and model family were already fixed in the final candidate contract and research plan before generation. This manifest materializes their exact rows, class weighting, fold seeds, and semantic grouping after response generation but before any FIT human outcome labels; it does not read generated responses or execution outcomes.",
+  "post_label_changes_allowed": false
+}

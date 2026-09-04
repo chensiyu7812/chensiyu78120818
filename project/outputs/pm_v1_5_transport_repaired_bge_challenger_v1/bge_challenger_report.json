@@ -1,0 +1,214 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-bge-small-challenger-v1",
+  "status": "BGE_CHALLENGER_NOT_PROMOTED",
+  "model": "BAAI/bge-small-en-v1.5",
+  "model_path": "/home/tokkio/.cache/huggingface/hub/models--BAAI--bge-small-en-v1.5/snapshots/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "candidate_semantics_only": true,
+  "raw_memory_text_not_used_as_logistic_feature": true,
+  "development_and_internal_user_groups_disjoint": true,
+  "external_results_used": false,
+  "C": 0.03,
+  "threshold": 0.5,
+  "head_reports": {
+    "RS": {
+      "feature_names": [
+        "candidate_state_bge_cosine",
+        "execution_profile_minimal",
+        "background_MP_on",
+        "background_MS_on",
+        "background_ME_on"
+      ],
+      "grouped_oof_metrics": {
+        "group_weighted_brier": 0.2293425564172956,
+        "group_weighted_prior_brier": 0.25018683165373184,
+        "group_weighted_brier_gain_vs_prevalence_prior": 0.020844275236436255,
+        "group_weighted_balanced_accuracy": 0.642308260676814,
+        "group_weighted_positive_recall": 0.4925373134328357,
+        "predicted_on": 19,
+        "predicted_off": 29,
+        "predicted_on_fraction": 0.3958333333333333,
+        "predicted_off_fraction": 0.6041666666666666
+      },
+      "balanced_accuracy_by_seed": [
+        0.5180286685384956,
+        0.6276784394857396,
+        0.6448943401802867,
+        0.5902172306782918,
+        0.6371361016698684
+      ],
+      "balanced_accuracy_seed_std": 0.05222838013967703,
+      "internal_test_metrics": {
+        "group_weighted_brier": 0.26006706419998415,
+        "group_weighted_prior_brier": 0.25649171705719326,
+        "group_weighted_brier_gain_vs_prevalence_prior": -0.0035753471427908967,
+        "group_weighted_balanced_accuracy": 0.3475274725274725,
+        "group_weighted_positive_recall": 0.23076923076923075,
+        "predicted_on": 7,
+        "predicted_off": 9,
+        "predicted_on_fraction": 0.4375,
+        "predicted_off_fraction": 0.5625
+      },
+      "promotion_checks": {
+        "balanced_accuracy_at_least_0_70": false,
+        "positive_recall_at_least_0_60": false,
+        "brier_beats_prevalence_prior": true,
+        "on_and_off_each_at_least_0_20": true,
+        "five_seed_ba_std_at_most_0_03": false,
+        "balanced_accuracy_beats_primary": true,
+        "brier_beats_primary": false
+      },
+      "promoted": false
+    },
+    "MP": {
+      "feature_names": [
+        "candidate_state_bge_cosine",
+        "source_catalog_bge_cosine",
+        "background_other_memory_count",
+        "background_strategy_on"
+      ],
+      "grouped_oof_metrics": {
+        "group_weighted_brier": 0.23893717410434656,
+        "group_weighted_prior_brier": 0.23890801698893815,
+        "group_weighted_brier_gain_vs_prevalence_prior": -2.915711540840693e-05,
+        "group_weighted_balanced_accuracy": 0.5253787878787879,
+        "group_weighted_positive_recall": 0.6416666666666668,
+        "predicted_on": 29,
+        "predicted_off": 19,
+        "predicted_on_fraction": 0.6041666666666666,
+        "predicted_off_fraction": 0.3958333333333333
+      },
+      "balanced_accuracy_by_seed": [
+        0.4799242424242424,
+        0.5859848484848484,
+        0.5412878787878788,
+        0.518560606060606,
+        0.49999999999999994
+      ],
+      "balanced_accuracy_seed_std": 0.04087365187764005,
+      "internal_test_metrics": {
+        "group_weighted_brier": 0.22239435320239548,
+        "group_weighted_prior_brier": 0.25787531926970014,
+        "group_weighted_brier_gain_vs_prevalence_prior": 0.035480966067304665,
+        "group_weighted_balanced_accuracy": 0.775,
+        "group_weighted_positive_recall": 0.7500000000000001,
+        "predicted_on": 8,
+        "predicted_off": 8,
+        "predicted_on_fraction": 0.5,
+        "predicted_off_fraction": 0.5
+      },
+      "promotion_checks": {
+        "balanced_accuracy_at_least_0_70": false,
+        "positive_recall_at_least_0_60": true,
+        "brier_beats_prevalence_prior": false,
+        "on_and_off_each_at_least_0_20": true,
+        "five_seed_ba_std_at_most_0_03": false,
+        "balanced_accuracy_beats_primary": true,
+        "brier_beats_primary": false
+      },
+      "promoted": false
+    },
+    "MS": {
+      "feature_names": [
+        "candidate_state_bge_cosine",
+        "source_catalog_bge_cosine",
+        "background_other_memory_count",
+        "background_strategy_on"
+      ],
+      "grouped_oof_metrics": {
+        "group_weighted_brier": 0.24594432828988153,
+        "group_weighted_prior_brier": 0.24781941759175088,
+        "group_weighted_brier_gain_vs_prevalence_prior": 0.0018750893018693593,
+        "group_weighted_balanced_accuracy": 0.5719465868539196,
+        "group_weighted_positive_recall": 0.3287671232876712,
+        "predicted_on": 12,
+        "predicted_off": 36,
+        "predicted_on_fraction": 0.25,
+        "predicted_off_fraction": 0.75
+      },
+      "balanced_accuracy_by_seed": [
+        0.5103027512374813,
+        0.508460918614021,
+        0.6088407965926097,
+        0.5513986416484402,
+        0.6130424772648786
+      ],
+      "balanced_accuracy_seed_std": 0.050956722014619524,
+      "internal_test_metrics": {
+        "group_weighted_brier": 0.22083088023150724,
+        "group_weighted_prior_brier": 0.24256974037247478,
+        "group_weighted_brier_gain_vs_prevalence_prior": 0.021738860140967542,
+        "group_weighted_balanced_accuracy": 0.6581196581196581,
+        "group_weighted_positive_recall": 0.4444444444444445,
+        "predicted_on": 4,
+        "predicted_off": 12,
+        "predicted_on_fraction": 0.25,
+        "predicted_off_fraction": 0.75
+      },
+      "promotion_checks": {
+        "balanced_accuracy_at_least_0_70": false,
+        "positive_recall_at_least_0_60": false,
+        "brier_beats_prevalence_prior": true,
+        "on_and_off_each_at_least_0_20": true,
+        "five_seed_ba_std_at_most_0_03": false,
+        "balanced_accuracy_beats_primary": true,
+        "brier_beats_primary": true
+      },
+      "promoted": false
+    },
+    "ME": {
+      "feature_names": [
+        "candidate_state_bge_cosine",
+        "source_catalog_bge_cosine",
+        "background_other_memory_count",
+        "background_strategy_on"
+      ],
+      "grouped_oof_metrics": {
+        "group_weighted_brier": 0.24614009366617992,
+        "group_weighted_prior_brier": 0.23492695701435498,
+        "group_weighted_brier_gain_vs_prevalence_prior": -0.01121313665182494,
+        "group_weighted_balanced_accuracy": 0.48152582962709545,
+        "group_weighted_positive_recall": 0.21621621621621623,
+        "predicted_on": 9,
+        "predicted_off": 39,
+        "predicted_on_fraction": 0.1875,
+        "predicted_off_fraction": 0.8125
+      },
+      "balanced_accuracy_by_seed": [
+        0.5752651385562778,
+        0.5794275287946175,
+        0.44942410765195584,
+        0.5229216558330483,
+        0.47901699167521955
+      ],
+      "balanced_accuracy_seed_std": 0.057549180521534286,
+      "internal_test_metrics": {
+        "group_weighted_brier": 0.23331515294209457,
+        "group_weighted_prior_brier": 0.2425435988902101,
+        "group_weighted_brier_gain_vs_prevalence_prior": 0.009228445948115532,
+        "group_weighted_balanced_accuracy": 0.6125541125541125,
+        "group_weighted_positive_recall": 0.2857142857142857,
+        "predicted_on": 2,
+        "predicted_off": 14,
+        "predicted_on_fraction": 0.125,
+        "predicted_off_fraction": 0.875
+      },
+      "promotion_checks": {
+        "balanced_accuracy_at_least_0_70": false,
+        "positive_recall_at_least_0_60": false,
+        "brier_beats_prevalence_prior": false,
+        "on_and_off_each_at_least_0_20": false,
+        "five_seed_ba_std_at_most_0_03": false,
+        "balanced_accuracy_beats_primary": true,
+        "brier_beats_primary": true
+      },
+      "promoted": false
+    }
+  },
+  "promoted_heads": [],
+  "claim_boundary": "This is a registered semantic challenger, not a new label source and not proof of correct memory retrieval.",
+  "lineage": {
+    "labels_sha256": "1a52463ca8856c6d269716a3ad926c09291b329e1307c6535dc8f3b59cb5b93b",
+    "primary_report_sha256": "15b985c876ee4d746b9fc46f045b8033233fc636b43ee2173c8e813b6eef6e0c",
+    "model_config_sha256": "094f8e891b932f2000c92cfc663bac4c62069f5d8af5b5278c4306aef3084750"
+  }
+}

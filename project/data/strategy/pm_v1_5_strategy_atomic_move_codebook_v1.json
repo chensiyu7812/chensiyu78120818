@@ -1,0 +1,197 @@
+{
+  "protocol": "pm-v1.5-esconv-bottom-up-atomic-move-codebook-v1",
+  "status": "FROZEN_FOR_G1_WEAK_BACKLABELING_NOT_A_FROZEN_STRATEGY_BANK",
+  "date": "2026-07-29",
+  "source_scope": {
+    "human_reviewed_tier1_items": 72,
+    "model_open_coded_items_used_for_phrase_discovery": 160,
+    "population_prevalence_inference_allowed": false,
+    "direct_PM_label_use_allowed": false
+  },
+  "unit": "one observable topic-agnostic support action; a response may receive multiple atomic moves",
+  "cross_cutting_execution_constraints": [
+    "ground every reflection in visible user words",
+    "use tentative language when interpretation is uncertain",
+    "ask at most one focused question per move",
+    "make guidance optional and easy to refuse",
+    "do not invent supporter lived experience",
+    "do not promise outcomes, confidentiality, or permanent availability",
+    "do not provide medical, legal, financial, clinical, DV, self-harm, or other high-stakes factual guidance",
+    "respect explicit listen-only, no-advice, one-step, and low-burden boundaries"
+  ],
+  "style_modifiers_not_atomic_moves": [
+    "warmth",
+    "brevity",
+    "gentle_humor",
+    "tentativeness",
+    "permission",
+    "low_burden_wording"
+  ],
+  "moves": [
+    {
+      "move_id": "AM01_invite_open_expression",
+      "name": "Invite open expression",
+      "definition": "Invite the user to state the concern, need, or dilemma in their own words without presupposing an answer.",
+      "source_evidence_ids": ["strategy_discovery_787bb33cfd71eb6e3953", "strategy_discovery_9a10d2e83abd90b12ea0"],
+      "counterexample_or_boundary_ids": [],
+      "behavior_regions": ["low_burden_exploration"],
+      "source_evidence_mode": "direct_human_agreement"
+    },
+    {
+      "move_id": "AM02_ask_one_focused_clarification",
+      "name": "Ask one focused clarification",
+      "definition": "Ask for one missing goal, contextual factor, timing detail, or concrete aspect needed to understand the current issue.",
+      "source_evidence_ids": ["strategy_discovery_67f818e38057a69989ca", "strategy_discovery_77ef1ae69f000f5247ed", "strategy_discovery_c793902facd7712b2ec8", "strategy_discovery_ee76bfea8a15967f995a"],
+      "counterexample_or_boundary_ids": [],
+      "behavior_regions": ["low_burden_exploration"],
+      "source_evidence_mode": "direct_human_agreement"
+    },
+    {
+      "move_id": "AM03_check_feeling_or_coping",
+      "name": "Check current feeling or coping",
+      "definition": "Ask one open, non-leading question about the user's current feeling, coping, or self-care.",
+      "source_evidence_ids": ["strategy_discovery_a493fd81a919319db8de", "strategy_discovery_d04e427d1adf433949c4", "strategy_discovery_f9620200b807ea634123"],
+      "counterexample_or_boundary_ids": [],
+      "behavior_regions": ["low_burden_exploration", "accurate_listening_and_understanding"],
+      "source_evidence_mode": "direct_human_agreement"
+    },
+    {
+      "move_id": "AM04_tentative_paraphrase_check",
+      "name": "Tentatively paraphrase and check",
+      "definition": "Restate the user's account or interpretation briefly and explicitly leave room for correction.",
+      "source_evidence_ids": ["strategy_discovery_8c7d9a630675321d58c0", "strategy_discovery_950b74deedddd3f0df61"],
+      "counterexample_or_boundary_ids": [],
+      "behavior_regions": ["accurate_listening_and_understanding"],
+      "source_evidence_mode": "direct_human_agreement"
+    },
+    {
+      "move_id": "AM05_grounded_validation",
+      "name": "Offer grounded validation",
+      "definition": "Acknowledge a directly supported feeling, difficulty, or tension without strengthening it into a diagnosis or unsupported motive.",
+      "source_evidence_ids": ["strategy_discovery_a652eb37d052c5379a31", "strategy_discovery_e7e8637627fcc4733518", "strategy_discovery_ee76bfea8a15967f995a"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_28100511a602627a4dcb"],
+      "behavior_regions": ["accurate_listening_and_understanding", "comfort_and_stabilization"],
+      "source_evidence_mode": "direct_human_agreement"
+    },
+    {
+      "move_id": "AM06_bounded_normalization",
+      "name": "Normalize without overgeneralizing",
+      "definition": "Frame the user's reaction as understandable or not unusual while preserving the user's specific context and avoiding unsupported universal claims.",
+      "source_evidence_ids": ["strategy_discovery_7eaeefa364d4fd0ef947", "strategy_discovery_e4381af74477bab47468", "strategy_discovery_e7e8637627fcc4733518"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_36f7e0b7b4cfcd8c07ca", "strategy_discovery_e6dadb9d0176f464cdeb"],
+      "behavior_regions": ["comfort_and_stabilization"],
+      "source_evidence_mode": "human_supported_move_with_source_text_recheck_required"
+    },
+    {
+      "move_id": "AM07_acknowledge_effort_strength_or_resource",
+      "name": "Acknowledge demonstrated effort, strength, or resource",
+      "definition": "Name an effort, coping resource, or strength already demonstrated in the visible dialogue without generic praise.",
+      "source_evidence_ids": ["strategy_discovery_416887f37638b624adcf", "strategy_discovery_c8fc85b9bdb1eb227153", "strategy_discovery_eb26a4d7d295e22cc4a0"],
+      "counterexample_or_boundary_ids": [],
+      "behavior_regions": ["comfort_and_stabilization", "welcomed_light_action_help"],
+      "source_evidence_mode": "direct_human_support"
+    },
+    {
+      "move_id": "AM08_repair_misunderstanding",
+      "name": "Repair a misunderstanding",
+      "definition": "Acknowledge and correct a mistaken reading, then update the response to the user's actual situation.",
+      "source_evidence_ids": ["strategy_discovery_87629d0a64862d80adb6"],
+      "counterexample_or_boundary_ids": [],
+      "behavior_regions": ["accurate_listening_and_understanding", "transition_and_boundary_management"],
+      "source_evidence_mode": "abstract_move_from_mixed_high_stakes_response_safe_source_needed"
+    },
+    {
+      "move_id": "AM09_offer_collaborative_structuring",
+      "name": "Offer collaborative problem structuring",
+      "definition": "Offer to organize or examine the problem together without taking control or presuming that advice is wanted.",
+      "source_evidence_ids": ["strategy_discovery_345a37a36c06c693f176"],
+      "counterexample_or_boundary_ids": [],
+      "behavior_regions": ["low_burden_exploration", "welcomed_light_action_help"],
+      "source_evidence_mode": "direct_human_agreement"
+    },
+    {
+      "move_id": "AM10_offer_one_optional_micro_step",
+      "name": "Offer one optional micro-step",
+      "definition": "Offer one concrete, low-risk, low-burden next step tied to the user's stated goal and make it easy to decline.",
+      "source_evidence_ids": ["strategy_discovery_3548abc6803edc75fb13", "strategy_discovery_749eca0f4b45755316e4"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_2eb79224180aa6aa534c", "strategy_discovery_a85f755e7ed6a27485f0"],
+      "behavior_regions": ["welcomed_light_action_help"],
+      "source_evidence_mode": "human_supported_move_execution_rewrite_and_safe_source_needed"
+    },
+    {
+      "move_id": "AM11_reinforce_user_generated_plan",
+      "name": "Reinforce a user-generated plan or coping step",
+      "definition": "Reflect why a plan or coping action already proposed by the user may fit their stated goal, without adding unsupported guarantees.",
+      "source_evidence_ids": ["strategy_discovery_c8fc85b9bdb1eb227153", "strategy_discovery_eb26a4d7d295e22cc4a0"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_742ad4853733f1539cbc"],
+      "behavior_regions": ["welcomed_light_action_help", "comfort_and_stabilization"],
+      "source_evidence_mode": "direct_human_support"
+    },
+    {
+      "move_id": "AM12_connect_to_trusted_support",
+      "name": "Explore trusted support",
+      "definition": "Invite consideration of a trusted person or appropriate general support channel without inventing availability or supplying unverified specialist facts.",
+      "source_evidence_ids": ["strategy_discovery_2e3347540d00ef9a2ce3"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_49eb42bdb481265b13be"],
+      "behavior_regions": ["welcomed_light_action_help"],
+      "source_evidence_mode": "human_supported_move_source_recheck_required"
+    },
+    {
+      "move_id": "AM13_offer_bounded_hope",
+      "name": "Offer bounded hope",
+      "definition": "Point to a plausible possibility or retained agency without promising an outcome or contradicting explicit evidence.",
+      "source_evidence_ids": ["strategy_discovery_a8324a87d95738ec255f"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_a65df8d601cf67f12969", "strategy_discovery_f97eb2d3424a333708fc"],
+      "behavior_regions": ["comfort_and_stabilization"],
+      "source_evidence_mode": "human_supported_move_source_recheck_required"
+    },
+    {
+      "move_id": "AM14_supportive_transition",
+      "name": "Offer a bounded conversational transition",
+      "definition": "Offer to continue, change focus, or close the current exchange while avoiding promises of permanent availability.",
+      "source_evidence_ids": ["strategy_discovery_2ab22f0a20a5926c42f5"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_55bf25863dcabdf6efda"],
+      "behavior_regions": ["transition_and_boundary_management"],
+      "source_evidence_mode": "direct_human_agreement"
+    },
+    {
+      "move_id": "AM15_explore_interpersonal_boundary",
+      "name": "Explore an interpersonal boundary",
+      "definition": "Help the user consider a specific limit or boundary without deciding the relationship for them or prescribing high-stakes action.",
+      "source_evidence_ids": ["strategy_discovery_75dd6d9b80b651889bfc"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_2eb79224180aa6aa534c", "strategy_discovery_a85f755e7ed6a27485f0"],
+      "behavior_regions": ["low_burden_exploration", "welcomed_light_action_help"],
+      "source_evidence_mode": "human_supported_move_source_recheck_required"
+    },
+    {
+      "move_id": "AM16_gentle_behavior_focused_challenge",
+      "name": "Gently challenge a behavior or inference",
+      "definition": "Invite examination of a specific behavior, inconsistency, or inference without labeling the person, shaming, or asserting hidden motives.",
+      "source_evidence_ids": [],
+      "counterexample_or_boundary_ids": ["strategy_discovery_28100511a602627a4dcb"],
+      "behavior_regions": ["low_burden_exploration"],
+      "source_evidence_mode": "abstract_only_safe_positive_sources_required_in_G1"
+    },
+    {
+      "move_id": "AM17_explain_brief_non_domain_rationale",
+      "name": "Give a brief non-domain rationale",
+      "definition": "Briefly explain why a general, low-risk support move may help, without relying on medical, legal, financial, clinical, or unverifiable factual claims.",
+      "source_evidence_ids": ["strategy_discovery_e4381af74477bab47468", "strategy_discovery_eb26a4d7d295e22cc4a0"],
+      "counterexample_or_boundary_ids": ["strategy_discovery_01a23f9bda17bc0a5046"],
+      "behavior_regions": ["welcomed_light_action_help"],
+      "source_evidence_mode": "abstract_only_safe_positive_sources_required_in_G1"
+    }
+  ],
+  "hard_excluded_patterns": [
+    "platform_or_crowdwork_mechanics",
+    "pure_phatic_exchange_or_off_topic_banter",
+    "personal_answer_or_biographical_disclosure_without_support_progress",
+    "supporter_lived_experience_as_persuasion",
+    "raw_external_factual_or_specialist_guidance",
+    "medical_legal_financial_clinical_DV_self_harm_or_other_high_stakes_guidance",
+    "person_labeling_shaming_or_values_imposition",
+    "unsupported_deterministic_prediction_or_false_hope",
+    "confidentiality_or_permanent_availability_overclaim"
+  ],
+  "g1_rule": "The codebook freezes meanings for weak backlabeling. It does not create cards. Every candidate card still needs full-train source counts, source-text hard-exclusion review, cross-topic coverage, and human card audit."
+}

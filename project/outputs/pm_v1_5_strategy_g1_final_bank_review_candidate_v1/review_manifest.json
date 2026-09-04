@@ -1,0 +1,15 @@
+{
+  "protocol": "pm-v1.5-strategy-g1-final-bank-human-review-v1",
+  "status": "READY_FOR_BOUNDED_OUTCOME_BLIND_HUMAN_REVIEW",
+  "candidate_card_count": 8,
+  "standard_gate_card_count": 6,
+  "narrow_exception_card_count": 2,
+  "fixed_source_examples_per_card": 5,
+  "fixed_source_example_count": 40,
+  "weak_labels_are_gold": false,
+  "problem_emotion_labels_or_values_visible_to_human": false,
+  "aggregate_problem_emotion_diversity_counts_visible_to_human": true,
+  "survey_quality_judge_or_external_outcomes_visible_to_human": false,
+  "raw_source_responses_exposed_to_generator": false,
+  "post_review_rule": "Only human-approved cards with no unresolved missed hard exclusion enter G2. Rejected cards are not replaced by new weak-source expansion."
+}

@@ -1,0 +1,76 @@
+{
+  "protocol": "pm-v1.5-staged-policy-architecture-v1",
+  "status": "SUPERSEDED_BY_STAGED_POLICY_ARCHITECTURE_V2",
+  "superseded_by": "data/pm_v1_5_contracts/staged_policy_architecture_v2.json",
+  "date": "2026-08-03",
+  "claim": "learned pre-injection four-component routing with deterministic evidence-bound execution and end-to-end quality-risk-cost validation",
+  "components": ["MP", "MS", "ME", "RS"],
+  "legal_action_count": 16,
+  "stages": [
+    {
+      "id": "OBSERVATION",
+      "question": "what is visibly true about the current state and exact candidate",
+      "outputs": [
+        "candidate_type_and_presence",
+        "owner_time_entity_validity",
+        "goal_function_fit",
+        "boundary_burden_compatibility",
+        "current_redundancy",
+        "specific_increment",
+        "cost"
+      ],
+      "primary": "deterministic_typed_and_preregistered_transparent_relation_scorers",
+      "if_learned": "separate_factor_estimator_trained_on_evidence_codes_with_cross_fitted_outputs_for_router_fit",
+      "bge_role": "frozen_relation_factor_challenger_only",
+      "may_output_final_on_off": false,
+      "may_read": ["visible_state", "exact_rank1_candidate", "frozen_catalog_metadata"],
+      "may_not_read": ["construction_intent", "human_final_on_off", "split_identity", "external_outcome", "generator_outcome"]
+    },
+    {
+      "id": "STEP1_ROUTING",
+      "question": "does this exact candidate have an ex ante safe nonredundant functional opportunity over context-only R0",
+      "model": "four_standardized_l2_logistic_heads",
+      "inputs": ["frozen_observation_outputs", "candidate_cost"],
+      "outputs": ["MP_bit", "MS_bit", "ME_bit", "RS_bit"],
+      "joint_selector": "deterministic_feasibility_and_budget_projection",
+      "is_learned": true,
+      "not_target": ["surface_applicability_only", "single_generation_winner", "post_outcome_quality"]
+    },
+    {
+      "id": "STEP2_EXECUTION",
+      "question": "how must each already-authorized exact resource be used",
+      "planner": "deterministic_resource_execution_plan",
+      "plan_fields": [
+        "component",
+        "candidate_identity",
+        "allowed_function",
+        "required_contribution",
+        "attribution_or_epistemic_mode",
+        "burden_cap",
+        "forbidden_inference",
+        "fallback"
+      ],
+      "generator": "fixed",
+      "is_learned": false,
+      "may_reopen_step1_on_off": false,
+      "qualification": ["exact_evidence_binding", "functional_use", "material_misuse", "fallback_adoptability"]
+    }
+  ],
+  "gold_separation": {
+    "observation_gold": "H1_evidence_codes",
+    "step1_gold": "H1_two_gate_final_decision",
+    "step2_gold": "H2_function_and_misuse_review",
+    "end_to_end_gold": "H3_blind_quality_risk_cost",
+    "one_layer_may_substitute_for_another": false
+  },
+  "final_repair_packet": {
+    "states": 96,
+    "splits": {
+      "REPAIR_FIT": 32,
+      "FRESH_CONFIRMATION": 32,
+      "SEALED_INTERNAL_TEST": 32
+    },
+    "independent_overlap_states": 24,
+    "old_h1_v2_256_role": "DEVELOPMENT_EVIDENCE_ONLY"
+  }
+}

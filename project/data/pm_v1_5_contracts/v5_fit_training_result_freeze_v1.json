@@ -1,0 +1,71 @@
+{
+  "protocol": "pm-v1.5-v5-fit-training-result-freeze-v1",
+  "status": "V5_FIT_COMPLETE_NO_HEAD_PROMOTED_CONFIRMATION_AND_EXTERNAL_LOCKED",
+  "date": "2026-08-04",
+  "estimand": "requested-component ITT quality-risk-cost worth-opening under the frozen V5 executor",
+  "evidence_provenance": {
+    "quality_and_risk_labels": "researcher-provided independent blind reviewer proxy evidence, not identified-human or expert gold",
+    "primary_items": 512,
+    "independent_overlap_items": 104,
+    "consolidated_disagreement_items": 61,
+    "quality_raw_agreement": 0.6442307692307693,
+    "quality_kappa": 0.4694609127257686,
+    "risk_raw_agreement": 0.8653846153846154,
+    "risk_kappa": 0.5091031692515171,
+    "functional_raw_agreement": 0.9038461538461539,
+    "functional_kappa": 0.8009950248756219
+  },
+  "final_state_labels": {
+    "MP": {"positive": 26, "nonpositive": 38},
+    "MS": {"positive": 53, "nonpositive": 11},
+    "ME": {"positive": 14, "nonpositive": 50},
+    "RS": {"positive": 12, "nonpositive": 52}
+  },
+  "transparent_primary": {
+    "MP": {"status": "NOT_LEARNED_ON_FROZEN_FIT", "mean_grouped_oof_ba": 0.5740890688259108, "leave_family_out_ba": 0.4625506072874494},
+    "MS": {"status": "NOT_LEARNED_ON_FROZEN_FIT", "mean_grouped_oof_ba": 0.8053173241852487, "leave_family_out_ba": 0.46226415094339623},
+    "ME": {"status": "NOT_LEARNED_ON_FROZEN_FIT", "mean_grouped_oof_ba": 0.5985714285714285, "leave_family_out_ba": 0.62},
+    "RS": {"status": "NOT_LEARNED_ON_FROZEN_FIT", "mean_grouped_oof_ba": 0.5019230769230769, "leave_family_out_ba": 0.3653846153846154}
+  },
+  "single_bge_challenger": {
+    "model": "BAAI/bge-small-en-v1.5",
+    "status": "CHALLENGER_PARTIAL_OR_NOT_LEARNED_ON_FROZEN_FIT",
+    "MP_mean_grouped_oof_ba": 0.537,
+    "MS_mean_grouped_oof_ba": 0.803,
+    "ME_mean_grouped_oof_ba": 0.587,
+    "RS_mean_grouped_oof_ba": 0.538,
+    "timing_limitation": "model and two views were predeclared, but exact serialization code was materialized after FIT labels; challenger cannot override the primary or authorize post-outcome method changes"
+  },
+  "reviewer_sensitivity": {
+    "variants": ["primary_only", "independent_overlap_substitution", "consolidated_adjudication"],
+    "head_promoted_under_any_variant": false,
+    "interpretation": "the terminal result is not caused by the concentrated adjudicator selecting one reviewer's labels"
+  },
+  "root_cause_boundary": {
+    "not_supported": [
+      "the adjudication file is expert or objective gold",
+      "BAAI is the primary bottleneck",
+      "the four resource concepts are intrinsically useless",
+      "Step1 jointly trains or controls Step2 response realization"
+    ],
+    "supported": [
+      "MP effect heterogeneity is not represented by the frozen preference/profile factors",
+      "MS has strong within-FIT classification signal but fails unseen semantic-family transport and unweighted calibration gates",
+      "ME labels are strongly affected by frozen attribution fallback and execution uptake that pre-action candidate features do not express",
+      "RS often functionally executes but incurs output-level atomic-boundary risk that candidate eligibility features cannot reliably predict"
+    ]
+  },
+  "anti_cycle_decision": {
+    "fresh_confirmation_authorized": false,
+    "sealed_or_external_authorized_for_model_selection": false,
+    "post_label_prompt_feature_threshold_or_sample_change_allowed": false,
+    "additional_small_review_packets_allowed": false,
+    "next_method_change_requires_new_version_and_fresh_fit_population": true
+  },
+  "artifact_sha256": {
+    "fit_report": "65833df7c2004955c59e63ed3f0467678e9598014623e4f925b8c6c9d4c35531",
+    "state_effect_labels": "1bb36361edf52f0a524858599f000ad6d7a11e7063c9ce523a75b44aa8b42595",
+    "bge_challenger_report": "37ca2193b35c5c74c352c127ae5af1da7bca56dfdd3f1ef6512928dc0fcd56a5",
+    "concentrated_adjudication_source": "6fbc9895b8fc128a4b9e36cd262950286a8f5f964401d291d0fde5e9dc2e47dc"
+  }
+}

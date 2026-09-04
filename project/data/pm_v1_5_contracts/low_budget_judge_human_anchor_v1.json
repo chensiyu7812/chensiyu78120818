@@ -1,0 +1,22 @@
+{
+  "protocol": "pm-v1.5-low-budget-judge-human-anchor-v1",
+  "status": "FROZEN_BEFORE_MODEL_RESULTS",
+  "annotation_role": "independent_researcher_anchor_not_automatic_gold",
+  "annotations": {
+    "expected_rows": 12,
+    "path": "data/pm_v1_5_contracts/low_budget_judge_human_annotations_v1.jsonl",
+    "sha256": "d925c7c9cf5101251cde573db9035c3aaac49050c749cd4ceaeacdae0f54ed2a"
+  },
+  "human_blind_packet": {
+    "expected_rows": 12,
+    "canonical_content_sha256": "08aebfe0d959ba4f8708dc1e3eb787636cba4a8798fdb3c9d0fd2b95693a0343",
+    "source_file_sha256": "bffedce86fb6ad756caffa6546d1ab178216d9580af373cbde09c237714ca521"
+  },
+  "decision_boundary": {
+    "may_be_used_as_training_labels": false,
+    "may_auto_promote_bulk_labeler": false,
+    "majority_vote_is_gold": false,
+    "requires_researcher_signoff": true
+  },
+  "binding_sha256": "d51a61224db2bdc7b6c84d67b0f8a8508839c251b6f1fe5ae33c7424e0399c69"
+}

@@ -1,0 +1,1935 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_claude_u000",
+  "content_author": "claude",
+  "superdomain_schedule_position": 1,
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "finance_housing",
+    "sleep_health_energy"
+  ],
+  "dialogue_language": "en",
+  "profile_history": [
+    {
+      "profile_item_id": "u000_pf_name_v1",
+      "field_type": "name",
+      "field_value": "Renata",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "salutation only; rarely decision-relevant"
+      ],
+      "item_id": "u000_pf_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I'm Renata"
+    },
+    {
+      "profile_item_id": "u000_pf_age_v1",
+      "field_type": "age",
+      "field_value": "34",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; career-change framing at most"
+      ],
+      "item_id": "u000_pf_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "thirty-four"
+    },
+    {
+      "profile_item_id": "u000_pf_gender_v1",
+      "field_type": "gender",
+      "field_value": "female",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; workplace-dynamics context at most"
+      ],
+      "item_id": "u000_pf_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "the only woman supervising"
+    },
+    {
+      "profile_item_id": "u000_pf_job_v1",
+      "field_type": "job",
+      "field_value": "retail floor supervisor at a homeware store",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 1,
+      "valid_until_session": 12,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "shift-work feasibility, scheduling and workload advice"
+      ],
+      "item_id": "u000_pf_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "six years running the floor at a homeware store"
+    },
+    {
+      "profile_item_id": "u000_pf_job_v2",
+      "field_type": "job",
+      "field_value": "junior project assistant, logistics team",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 13,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "u000_pf_job_v1",
+      "applicability_scope": [
+        "office-work feasibility, onboarding and workload advice"
+      ],
+      "item_id": "u000_pf_job_v2",
+      "subtype": "MP_PROFILE",
+      "item_role": "update",
+      "source_turn_ids": [
+        "s013_t01"
+      ],
+      "literal_source_span": "I start as a junior project assistant on their logistics team"
+    },
+    {
+      "profile_item_id": "u000_pf_edu_v1",
+      "field_type": "education",
+      "field_value": "secondary school; evening project management certificate program",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "study planning, credential and course logistics advice"
+      ],
+      "item_id": "u000_pf_edu_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "an evening project management certificate"
+    },
+    {
+      "profile_item_id": "u000_pf_nat_v1",
+      "field_type": "nationality",
+      "field_value": "Brazilian",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "language and regional-context relevance"
+      ],
+      "item_id": "u000_pf_nat_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I grew up here in Brazil"
+    },
+    {
+      "profile_item_id": "u000_pf_loc_v1",
+      "field_type": "location",
+      "field_value": "Campinas, Brazil",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 3,
+      "valid_until_session": 7,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "commute, local logistics and regional constraints"
+      ],
+      "item_id": "u000_pf_loc_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "back home to Campinas"
+    },
+    {
+      "profile_item_id": "u000_pf_loc_v2",
+      "field_type": "location",
+      "field_value": "Sao Paulo, Brazil",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 8,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "u000_pf_loc_v1",
+      "applicability_scope": [
+        "commute, local logistics and regional constraints"
+      ],
+      "item_id": "u000_pf_loc_v2",
+      "subtype": "MP_PROFILE",
+      "item_role": "update",
+      "source_turn_ids": [
+        "s008_t01"
+      ],
+      "literal_source_span": "I moved to Sao Paulo"
+    }
+  ],
+  "response_preference_history": [
+    {
+      "preference_item_id": "u000_pr_direct_v1",
+      "preference_type": "direct_answer_before_explanation",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 3,
+      "valid_until_session": 11,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "item_id": "u000_pr_direct_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s003_t05"
+      ],
+      "literal_source_span": "give me the answer straight away and the reasoning after",
+      "preference_text": "give me the answer straight away and the reasoning after"
+    },
+    {
+      "preference_item_id": "u000_pr_onesugg_v1",
+      "preference_type": "one_optional_suggestion",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 9,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u000_pr_onesugg_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s009_t05"
+      ],
+      "literal_source_span": "one at a time is plenty. Put it on the table and let me choose",
+      "preference_text": "one at a time is plenty. Put it on the table and let me choose"
+    },
+    {
+      "preference_item_id": "u000_pr_reflect_v1",
+      "preference_type": "reflection_before_question",
+      "owner_id": "p2r_formal_claude_u000",
+      "valid_from_session": 12,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": "u000_pr_direct_v1",
+      "item_id": "u000_pr_reflect_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s012_t05"
+      ],
+      "literal_source_span": "Say back what you heard from me, let me sit with it, and keep your questions for the end",
+      "preference_text": "Say back what you heard from me, let me sit with it, and keep your questions for the end"
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_02",
+      "name": "Fabio",
+      "relationship": "shift manager at the homeware store",
+      "valid_from_session": 2,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_03",
+      "name": "Carla",
+      "relationship": "classmate in the certificate course",
+      "valid_from_session": 5,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_04",
+      "name": "Marcos",
+      "relationship": "younger brother",
+      "valid_from_session": 6,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_05",
+      "name": "Helena",
+      "relationship": "former colleague now in logistics",
+      "valid_from_session": 8,
+      "valid_until_session": null
+    }
+  ],
+  "recurring_topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "certificate course, mocks and exam",
+      "session_indices": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        12,
+        14
+      ]
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "Sunday rota conflict with Fabio",
+      "session_indices": [
+        2,
+        4,
+        6,
+        10,
+        11
+      ]
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "job search and move into logistics",
+      "session_indices": [
+        8,
+        11,
+        12,
+        13,
+        15
+      ]
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "money, the move, and Marcos's loan",
+      "session_indices": [
+        6,
+        8,
+        10,
+        13,
+        15
+      ]
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "sleep and evening energy",
+      "session_indices": [
+        3,
+        7,
+        9
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "u000_evt_01",
+      "session_index": 1,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Enrolled in the evening project management certificate and attended the first class.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u000_evt_02",
+      "session_index": 2,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Raised the repeated Sunday rota swap with Fabio by the lockers; the conversation went nowhere.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u000_evt_03",
+      "session_index": 4,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Stockroom confrontation over disputed June Sunday claims, escalated by Fabio to the area manager.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u000_evt_04",
+      "session_index": 4,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Drafted the disagreement as a dates-and-facts email before talking, keeping the follow-up conversation level.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u000_evt_05",
+      "session_index": 5,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "First mock exam returned at fifty-one percent.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u000_evt_06",
+      "session_index": 6,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "description": "Marcos began asking daily to borrow money for a motorbike repair after a vague maybe.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u000_evt_07",
+      "session_index": 6,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Started moving rent and course fee into a separate account each payday morning; untouched for a month.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u000_evt_08",
+      "session_index": 7,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Moved study time to the hour before shifts, after which cost formulas began to stick.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u000_evt_09",
+      "session_index": 7,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Trialled melatonin for one week with no clear effect either way.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u000_evt_10",
+      "session_index": 8,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Relocated from Campinas to Sao Paulo, shortening the commute by an hour.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u000_evt_11",
+      "session_index": 8,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Worked with Helena to rename job-search terms, surfacing relevant coordinator postings.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u000_evt_12",
+      "session_index": 9,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Ran bus flashcard drills with Carla; second mock exam returned at seventy-three.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u000_evt_13",
+      "session_index": 9,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Began leaving the phone on the hallway shelf at night, restoring pre-midnight sleep.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u000_evt_14",
+      "session_index": 10,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Produced a photo of the posted rota when Fabio claimed an agreed swap; Sundays stayed protected afterwards.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u000_evt_15",
+      "session_index": 10,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "description": "Agreed a loan with Marcos on an exact amount and a return date, ending the daily asking.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u000_evt_16",
+      "session_index": 12,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Sat the certificate exam, beginning a six-week wait for results.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 14 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "Hi. I'm Renata, thirty-four, and after six years running the floor at a homeware store I've enrolled in an evening project management certificate. First class was Tuesday and I already feel behind everyone in the room."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "Starting something new after years in one lane takes nerve. What gave you that behind-everyone feeling so quickly?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "The syllabus lists cost curves and scheduling maths I haven't touched since secondary school. I read the same page three times on the bus home and none of it stuck."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "One rusty page on a late bus after a full shift is not a verdict on you. The first weeks are mostly about finding where the rust is."
+        }
+      ],
+      "summary": "Renata, thirty-four, starts an evening project management certificate after six years supervising a homeware store floor, and leaves her first class feeling behind everyone.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c001",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "name",
+          "field_value": "Renata",
+          "profile_item_id": "u000_pf_name_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "I'm Renata",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u000_c002",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "age",
+          "field_value": "34",
+          "profile_item_id": "u000_pf_age_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "thirty-four",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u000_c003",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "job",
+          "field_value": "retail floor supervisor at a homeware store",
+          "profile_item_id": "u000_pf_job_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "six years running the floor at a homeware store",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u000_c004",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "education",
+          "field_value": "secondary school; evening project management certificate program",
+          "profile_item_id": "u000_pf_edu_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "an evening project management certificate",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u000_evt_01"
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 13 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "My manager Fabio posted next week's rota with my Sunday off swapped away again, no warning. I'm the only woman supervising on our shift and somehow mine is always the schedule that moves."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "That is a pattern, not a one-off, and it keeps landing on the day that carries your course. What happened when you raised it?"
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "I did raise it, by the lockers, and he said everyone has to be flexible right now. The conversation went absolutely nowhere and my Sundays are still up for grabs."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "A flat line that closes the door without touching the pattern. No wonder it stings — Sunday is the one day your studying can breathe."
+        }
+      ],
+      "summary": "Fabio again swaps Renata's protected Sunday without warning; raising it by the lockers goes nowhere, leaving her one reliable study day permanently uncertain.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c005",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "gender",
+          "field_value": "female",
+          "profile_item_id": "u000_pf_gender_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "the only woman supervising",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u000_c006",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I did raise it, by the lockers, and he said everyone has to be flexible right now. The conversation went absolutely nowhere",
+          "action_span": "I did raise it, by the lockers",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I did raise it, by the lockers, and he said everyone has to be flexible right now. The conversation went absolutely nowhere"
+        }
+      ],
+      "event_ids": [
+        "u000_evt_02"
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 12 months ago",
+      "topic_thread_ids": [
+        "thread_01",
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "Classes run twice a week now and I get back home to Campinas past eleven. I grew up here in Brazil thinking of myself as a good student, and now I fall asleep face down on the workbook."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "Getting in past eleven twice a week would flatten anyone. The dozing says more about the timetable than about the student."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "Here's the thing I keep noticing: anything I read after ten at night is simply gone by morning. Tuesday's quiz proved it — the only section I passed was the one I'd gone over at lunch."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "That is a genuinely useful find — the lunch review survived and the late pages didn't. Your memory is telling you when it clocks off."
+        },
+        {
+          "turn_id": "s003_t05",
+          "role": "user",
+          "text": "Probably. One request for these chats: give me the answer straight away and the reasoning after. At this hour my head has no patience for a build-up."
+        },
+        {
+          "turn_id": "s003_t06",
+          "role": "assistant",
+          "text": "Understood — answer first, reasoning second, from here on."
+        }
+      ],
+      "summary": "Late trips home to Campinas leave Renata asleep on her workbook; she notices material read after ten at night vanishes while lunchtime review sticks, and asks for answers before reasoning.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c007",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "location",
+          "field_value": "Campinas, Brazil",
+          "profile_item_id": "u000_pf_loc_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "back home to Campinas",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u000_c008",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "nationality",
+          "field_value": "Brazilian",
+          "profile_item_id": "u000_pf_nat_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "I grew up here in Brazil",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u000_c009",
+          "subtype": "MS_SESSION",
+          "ms_function": "specific_observation",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s003_t03"
+          ],
+          "literal_source_span": "anything I read after ten at night is simply gone by morning",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        },
+        {
+          "candidate_id": "u000_c010",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "direct_answer_before_explanation",
+          "preference_item_id": "u000_pr_direct_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s003_t05"
+          ],
+          "literal_source_span": "give me the answer straight away and the reasoning after",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": []
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 11 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "Fabio and I had it out in the stockroom. He insists I asked to work Sundays back in June, which I never did, and now he has told the area manager I'm refusing shifts. That is not what happened."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "Two versions of June are now on record, and his version reached the area manager first. That is a horrible position to argue from."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "Exactly. So before answering him I typed the whole disagreement into an email draft first, just dates and facts, and when we finally talked I stayed level and, mostly, so did he."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "Writing it cold before speaking kept the heat out of the room. Even a mostly-calm round is new ground for the two of you."
+        }
+      ],
+      "summary": "A stockroom clash over disputed June Sundays reaches the area manager; drafting the facts as an email before speaking keeps the follow-up conversation with Fabio level.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c011",
+          "subtype": "MS_SESSION",
+          "ms_function": "conflict_record",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "He insists I asked to work Sundays back in June, which I never did",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "conflicting"
+        },
+        {
+          "candidate_id": "u000_c012",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "before answering him I typed the whole disagreement into an email draft first, just dates and facts, and when we finally talked I stayed level and, mostly, so did he",
+          "action_span": "typed the whole disagreement into an email draft first, just dates and facts",
+          "result_span": "when we finally talked I stayed level and, mostly, so did he",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "before answering him I typed the whole disagreement into an email draft first, just dates and facts, and when we finally talked I stayed level and, mostly, so did he",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u000_evt_03",
+        "u000_evt_04"
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 10 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "My first mock exam came back at fifty-one percent. Carla from my course failed hers too, so at least the bus home had company, but the real exam is in seven months and fifty-one will not cut it."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "Fifty-one with a full-time job and night classes is a floor, not a ceiling. Seven months is real runway."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "It has to be, because my whole plan is to pass the certificate in one sitting and be out of retail within the year. That is the sentence I keep taped to the fridge."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "A one-sitting pass and a career exit inside a year — that fridge note is doing a lot of steering. Worth lining the study plan up against it."
+        },
+        {
+          "turn_id": "s005_t05",
+          "role": "user",
+          "text": "And one more thing that scares me: the exam is only offered twice a year in my state, so failing means waiting for the spring sitting."
+        },
+        {
+          "turn_id": "s005_t06",
+          "role": "assistant",
+          "text": "So every attempt carries half a year of weight. That explains the fear better than the fifty-one does."
+        }
+      ],
+      "summary": "A fifty-one percent first mock alarms Renata; she restates her taped-to-the-fridge goal of passing in one sitting and leaving retail within a year, with only two sittings offered annually.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c013",
+          "subtype": "MS_SESSION",
+          "ms_function": "old_goal",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "pass the certificate in one sitting and be out of retail within the year",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u000_c014",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s005_t05"
+          ],
+          "literal_source_span": "the exam is only offered twice a year in my state",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "the exam is only offered twice a year in my state"
+        }
+      ],
+      "event_ids": [
+        "u000_evt_05"
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 9 months ago",
+      "topic_thread_ids": [
+        "thread_02",
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_04",
+        "entity_02"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "Payday evaporated in a weekend again, and my younger brother Marcos has started asking to borrow money for his motorbike repair. I said maybe, which apparently means ask me daily."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "A maybe bought you a daily collection call, and the payday pattern was squeezing you before he even joined the queue."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "Which is why I tried something. The morning my wages land I now move the rent and the course fee into a separate account before anything else, and for the whole month I didn't touch that money once."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "Answer first: keep that exact move. The reasoning: it turns a hundred small daily decisions into one decision made on payday morning."
+        },
+        {
+          "turn_id": "s006_t05",
+          "role": "user",
+          "text": "Work is its own loop — Fabio shifted my Sunday yet again, and the whole schedule question is still sitting there unfinished. At least I've stopped arguing about it in the corridor."
+        },
+        {
+          "turn_id": "s006_t06",
+          "role": "assistant",
+          "text": "One front steadied by the account, one still open on the rota. Not arguing in corridors is its own kind of progress."
+        }
+      ],
+      "summary": "Marcos pushes daily for a motorbike loan after a vague maybe; moving rent and course fee into a separate account each payday protects the essentials, while the rota question stays open.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c015",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s006_t03"
+          ],
+          "literal_source_span": "The morning my wages land I now move the rent and the course fee into a separate account before anything else, and for the whole month I didn't touch that money once",
+          "action_span": "move the rent and the course fee into a separate account before anything else",
+          "result_span": "for the whole month I didn't touch that money once",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "The morning my wages land I now move the rent and the course fee into a separate account before anything else, and for the whole month I didn't touch that money once",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u000_c016",
+          "subtype": "MS_SESSION",
+          "ms_function": "unfinished_thread",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s006_t05"
+          ],
+          "literal_source_span": "the whole schedule question is still sitting there unfinished",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "unresolved"
+        }
+      ],
+      "event_ids": [
+        "u000_evt_06",
+        "u000_evt_07"
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 8 months ago",
+      "topic_thread_ids": [
+        "thread_01",
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "Progress report: I flipped my studying to the hour before my shift instead of after class, and the difference is real — the cost formulas finally stay with me into the next day."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "Answer: lock that hour in. Reasoning: it puts your hardest material into your freshest window, which your quiz results already argued for."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "Nights are still rough though. I gave melatonin a week and honestly cannot tell whether it changed a single thing."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "An honest cannot-tell after one week is a fair reading — seven nights of self-report is thin evidence in either direction."
+        },
+        {
+          "turn_id": "s007_t05",
+          "role": "user",
+          "text": "I've also worked out that my tiredness splits in two: the body kind from closing shifts, and the buzzing kind before quizzes. Sleep repairs the first; nothing I've tried touches the second yet."
+        },
+        {
+          "turn_id": "s007_t06",
+          "role": "assistant",
+          "text": "Naming the two kinds matters. They will want different tools, and so far you've only been treating one of them."
+        }
+      ],
+      "summary": "Studying in the hour before her shift makes cost formulas stick; a week of melatonin proves inconclusive, and Renata separates bodily shift fatigue from pre-quiz buzzing.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c017",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s007_t01"
+          ],
+          "literal_source_span": "I flipped my studying to the hour before my shift instead of after class, and the difference is real — the cost formulas finally stay with me into the next day",
+          "action_span": "flipped my studying to the hour before my shift instead of after class",
+          "result_span": "the cost formulas finally stay with me into the next day",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I flipped my studying to the hour before my shift instead of after class, and the difference is real — the cost formulas finally stay with me into the next day",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u000_c018",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "I gave melatonin a week and honestly cannot tell whether it changed a single thing",
+          "action_span": "gave melatonin a week",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I gave melatonin a week and honestly cannot tell whether it changed a single thing"
+        },
+        {
+          "candidate_id": "u000_c019",
+          "subtype": "MS_SESSION",
+          "ms_function": "pressure_distinction",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s007_t05"
+          ],
+          "literal_source_span": "the body kind from closing shifts, and the buzzing kind before quizzes",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u000_evt_08",
+        "u000_evt_09"
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 7 months ago",
+      "topic_thread_ids": [
+        "thread_03",
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05",
+        "entity_04"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "Big change since we last spoke: I moved to Sao Paulo to be nearer the course centre and the jobs I actually want. The rent is uglier, the commute is an hour shorter."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "You traded money for time and for proximity to the life you're building. Uglier rent, but the move points the right way."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "It already paid off once. I asked Helena, an old colleague who went into logistics, to sit with me and rename what I was searching for, and postings I actually want finally started appearing."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "Answer: keep Helena close through this. Reasoning: she fixed your search vocabulary in one sitting, and the titles were the wall."
+        },
+        {
+          "turn_id": "s008_t05",
+          "role": "user",
+          "text": "The move also cleaned out my cushion completely, and Marcos still says he'll start paying me back this month. Nothing has arrived so far."
+        },
+        {
+          "turn_id": "s008_t06",
+          "role": "assistant",
+          "text": "So the buffer is gone right as his promise stays a promise. That is worth watching closely rather than hoping quietly."
+        }
+      ],
+      "summary": "Renata relocates to Sao Paulo for a shorter commute and better prospects; renaming her searches with Helena surfaces real postings, while Marcos's repayment promise stays unmet.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c020",
+          "subtype": "MP_PROFILE",
+          "is_update": true,
+          "field_type": "location",
+          "field_value": "Sao Paulo, Brazil",
+          "profile_item_id": "u000_pf_loc_v2",
+          "supersedes_item_id": "u000_pf_loc_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "I moved to Sao Paulo",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u000_c021",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s008_t03"
+          ],
+          "literal_source_span": "I asked Helena, an old colleague who went into logistics, to sit with me and rename what I was searching for, and postings I actually want finally started appearing",
+          "action_span": "asked Helena, an old colleague who went into logistics, to sit with me and rename what I was searching for",
+          "result_span": "postings I actually want finally started appearing",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I asked Helena, an old colleague who went into logistics, to sit with me and rename what I was searching for, and postings I actually want finally started appearing",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u000_c022",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s008_t05"
+          ],
+          "literal_source_span": "Marcos still says he'll start paying me back this month. Nothing has arrived so far",
+          "action_span": "says he'll start paying me back this month",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_04"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "Marcos still says he'll start paying me back this month. Nothing has arrived so far"
+        }
+      ],
+      "event_ids": [
+        "u000_evt_10",
+        "u000_evt_11"
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 6 months ago",
+      "topic_thread_ids": [
+        "thread_01",
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "Two wins. Carla and I have been drilling each other with question cards on the bus into class, and my second mock came back at seventy-three. The bus is the only slot Carla has — she's raising her boy alone — so we make every ride count."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "Fifty-one to seventy-three is not luck; that is the bus cards and the pre-shift hour compounding. Well earned, both of you."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "Second win: I banished my phone to the hallway shelf at night, and most nights this month I was asleep before midnight, which hasn't happened since the course began."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "Answer: the shelf stays. Reasoning: it removed the one object that kept outbidding sleep, and midnight is yours again."
+        },
+        {
+          "turn_id": "s009_t05",
+          "role": "user",
+          "text": "Small ask for these conversations: if you have suggestions for me, one at a time is plenty. Put it on the table and let me choose."
+        },
+        {
+          "turn_id": "s009_t06",
+          "role": "assistant",
+          "text": "One at a time, offered rather than pushed. Done."
+        }
+      ],
+      "summary": "Bus flashcard drills with Carla lift the second mock to seventy-three, and exiling the phone to a hallway shelf restores sleep before midnight most nights.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c023",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s009_t01"
+          ],
+          "literal_source_span": "Carla and I have been drilling each other with question cards on the bus into class, and my second mock came back at seventy-three",
+          "action_span": "drilling each other with question cards on the bus into class",
+          "result_span": "my second mock came back at seventy-three",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "Carla and I have been drilling each other with question cards on the bus into class, and my second mock came back at seventy-three",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u000_c024",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s009_t01"
+          ],
+          "literal_source_span": "she's raising her boy alone",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "entity_03"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "she's raising her boy alone"
+        },
+        {
+          "candidate_id": "u000_c025",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "I banished my phone to the hallway shelf at night, and most nights this month I was asleep before midnight",
+          "action_span": "banished my phone to the hallway shelf at night",
+          "result_span": "most nights this month I was asleep before midnight",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I banished my phone to the hallway shelf at night, and most nights this month I was asleep before midnight",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u000_c026",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "one_optional_suggestion",
+          "preference_item_id": "u000_pr_onesugg_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s009_t05"
+          ],
+          "literal_source_span": "one at a time is plenty. Put it on the table and let me choose",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u000_evt_12",
+        "u000_evt_13"
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 5 months ago",
+      "topic_thread_ids": [
+        "thread_02",
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_04"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "The rota saga finally broke my way. A while back I quietly started photographing the schedule the moment it goes up on the board. Last week Fabio swore I had agreed to swap, I opened the photo without a word, and he went quiet. My Sundays have stayed mine since."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "You replaced your word-against-his with a timestamp, and the argument ended itself — quietly, completely, and without a raised voice."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "Marcos also came back about the bike money. This time I named the exact amount I could spare and the date I need it back, and he actually stopped pushing."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "Answer: use that formula with him every time — one number, one date. Reasoning: vagueness invited the daily asking; precision closed it."
+        }
+      ],
+      "summary": "Photographing each posted rota gives Renata proof when Fabio claims an agreed swap, ending the Sunday disputes; naming an exact amount and return date stops Marcos pushing.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c027",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "A while back I quietly started photographing the schedule the moment it goes up on the board. Last week Fabio swore I had agreed to swap, I opened the photo without a word, and he went quiet. My Sundays have stayed mine since.",
+          "action_span": "quietly started photographing the schedule the moment it goes up on the board",
+          "result_span": "My Sundays have stayed mine since",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "A while back I quietly started photographing the schedule the moment it goes up on the board. Last week Fabio swore I had agreed to swap, I opened the photo without a word, and he went quiet. My Sundays have stayed mine since.",
+          "me_tier": "natural_coverage_challenge"
+        },
+        {
+          "candidate_id": "u000_c028",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s010_t03"
+          ],
+          "literal_source_span": "I named the exact amount I could spare and the date I need it back, and he actually stopped pushing",
+          "action_span": "named the exact amount I could spare and the date I need it back",
+          "result_span": "he actually stopped pushing",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_04"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I named the exact amount I could spare and the date I need it back, and he actually stopped pushing",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u000_evt_14",
+        "u000_evt_15"
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 4 months ago",
+      "topic_thread_ids": [
+        "thread_02",
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "For the record, the schedule war at the store is genuinely over, so today I want to talk interviews. I have my first one on Thursday, for a project assistant role at a logistics firm."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "From rota fights to a first interview in the field you retrained for — that is the arc from your fridge note. What worries you most about Thursday?"
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "Freezing. So last night I ran my answers out loud alone in the kitchen with a timer going, and the salary question finally comes out of my mouth without the long freeze."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "Answer: do one more timed kitchen run the night before. Reasoning: the freeze faded once your ears heard the words, not just your head."
+        },
+        {
+          "turn_id": "s011_t05",
+          "role": "user",
+          "text": "It also helps that leaving feels less like betrayal now — the chain is closing two branches next year and everyone on the floor knows it."
+        },
+        {
+          "turn_id": "s011_t06",
+          "role": "assistant",
+          "text": "So the ship was already turning toward shore. Choosing your own exit beats waiting for theirs."
+        }
+      ],
+      "summary": "With the rota conflict settled, Renata prepares her first project assistant interview; timed kitchen rehearsals cure the salary-question freeze, and branch closure news eases her guilt about leaving.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c029",
+          "subtype": "MS_SESSION",
+          "ms_function": "resolved_thread",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s011_t01"
+          ],
+          "literal_source_span": "the schedule war at the store is genuinely over",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        },
+        {
+          "candidate_id": "u000_c030",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "last night I ran my answers out loud alone in the kitchen with a timer going, and the salary question finally comes out of my mouth without the long freeze",
+          "action_span": "ran my answers out loud alone in the kitchen with a timer going",
+          "result_span": "the salary question finally comes out of my mouth without the long freeze",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "last night I ran my answers out loud alone in the kitchen with a timer going, and the salary question finally comes out of my mouth without the long freeze",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u000_c031",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s011_t05"
+          ],
+          "literal_source_span": "the chain is closing two branches next year",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "the chain is closing two branches next year"
+        }
+      ],
+      "event_ids": []
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 3 months ago",
+      "topic_thread_ids": [
+        "thread_01",
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "I sat the certificate exam on Saturday. Results take six weeks, and my brain has decided to replay question forty on a loop."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "Six weeks of not-knowing, with question forty on repeat — that sounds like the buzzing kind of tired you once named, back for a visit."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "While I wait I sent applications to two logistics coordinator postings. No replies yet, and refreshing my inbox is turning into a hobby I don't recommend."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "A sat exam and two live applications — everything now sits in other people's hands, which is the hardest room to wait in."
+        },
+        {
+          "turn_id": "s012_t05",
+          "role": "user",
+          "text": "A different request from before: don't hand me the answer first anymore. Say back what you heard from me, let me sit with it, and keep your questions for the end."
+        },
+        {
+          "turn_id": "s012_t06",
+          "role": "assistant",
+          "text": "Then here is what I heard: the exam is done, two applications are out, and the waiting itself is the current weight. My questions can wait."
+        }
+      ],
+      "summary": "Renata sits the certificate exam and faces a six-week wait, sends two coordinator applications that draw no reply, and asks for reflection before questions instead of immediate answers.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c032",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "I sat the certificate exam on Saturday. Results take six weeks",
+          "action_span": "sat the certificate exam on Saturday",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I sat the certificate exam on Saturday. Results take six weeks"
+        },
+        {
+          "candidate_id": "u000_c033",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s012_t03"
+          ],
+          "literal_source_span": "I sent applications to two logistics coordinator postings. No replies yet",
+          "action_span": "sent applications to two logistics coordinator postings",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I sent applications to two logistics coordinator postings. No replies yet"
+        },
+        {
+          "candidate_id": "u000_c034",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "reflection_before_question",
+          "preference_item_id": "u000_pr_reflect_v1",
+          "supersedes_item_id": "u000_pr_direct_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s012_t05"
+          ],
+          "literal_source_span": "Say back what you heard from me, let me sit with it, and keep your questions for the end",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u000_evt_16"
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 2 months ago",
+      "topic_thread_ids": [
+        "thread_03",
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "Helena's company called me back. I start as a junior project assistant on their logistics team the first Monday of next month. Seven years of shop floors, and I typed my resignation with hands shaking in the good way."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "What I heard: the retraining worked, the door opened, and even your hands knew this was the big one. Congratulations feels too small."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "Before the offer, I'd asked Helena to grill me in a pretend interview over coffee. She caught me opening every answer with an apology, and in the real one I led with what I had done instead."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "What I'm hearing there: the rehearsal didn't just polish answers, it changed your opening stance from sorry to capable."
+        },
+        {
+          "turn_id": "s013_t05",
+          "role": "user",
+          "text": "Money-wise nothing new to report — the usual circular family conversation, no numbers, no decisions. I'll deal with it after the first payslip."
+        },
+        {
+          "turn_id": "s013_t06",
+          "role": "assistant",
+          "text": "So the money talk stays a circle for now, parked until real wages arrive. That sounds deliberate rather than avoidant."
+        }
+      ],
+      "summary": "A job offer arrives from Helena's logistics company; an earlier pretend interview over coffee had fixed Renata's apologetic openings, while family money talk stays circular and undecided.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c035",
+          "subtype": "MP_PROFILE",
+          "is_update": true,
+          "field_type": "job",
+          "field_value": "junior project assistant, logistics team",
+          "profile_item_id": "u000_pf_job_v2",
+          "supersedes_item_id": "u000_pf_job_v1",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "I start as a junior project assistant on their logistics team",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u000_c036",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s013_t03"
+          ],
+          "literal_source_span": "I'd asked Helena to grill me in a pretend interview over coffee. She caught me opening every answer with an apology, and in the real one I led with what I had done instead.",
+          "action_span": "asked Helena to grill me in a pretend interview over coffee",
+          "result_span": "in the real one I led with what I had done instead",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I'd asked Helena to grill me in a pretend interview over coffee. She caught me opening every answer with an apology, and in the real one I led with what I had done instead.",
+          "me_tier": "natural_coverage_challenge"
+        },
+        {
+          "candidate_id": "u000_c037",
+          "subtype": "MS_SESSION",
+          "ms_function": "topic_only_no_content",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s013_t05"
+          ],
+          "literal_source_span": "the usual circular family conversation, no numbers, no decisions",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "conflicting"
+        }
+      ],
+      "event_ids": []
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 5 weeks ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "The envelope came. I passed — sixty-eight percent, certificate in hand — and I cried in the building's mailroom like a completely normal person."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "What I heard: one sitting, one pass, and tears that took months to earn. The fridge note can come down now."
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "Carla's result landed the same week. She missed by two points and is retaking in the spring sitting, so the bus cards continue, hers now."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "So you crossed the line and turned straight around to pace her lap. The bus study club survives its first graduate."
+        },
+        {
+          "turn_id": "s014_t05",
+          "role": "user",
+          "text": "I keep thinking about my father, who drove long-haul trucks for thirty years. In our house a deadline was practically a religion, and passing feels strangely like settling a family debt."
+        },
+        {
+          "turn_id": "s014_t06",
+          "role": "assistant",
+          "text": "What I'm hearing: this pass belongs partly to a kitchen table years ago, and the debt language says how heavy it has been to carry."
+        }
+      ],
+      "summary": "Renata passes the exam at sixty-eight percent; Carla misses by two points and will retake in spring, and thoughts turn to a deadline-driven trucker father.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u000_c038",
+          "subtype": "MS_SESSION",
+          "ms_function": "wrong_person_distractor",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s014_t03"
+          ],
+          "literal_source_span": "She missed by two points and is retaking in the spring sitting",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "entity_03"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u000_c039",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u000",
+          "source_turn_ids": [
+            "s014_t05"
+          ],
+          "literal_source_span": "my father, who drove long-haul trucks for thirty years",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "my father, who drove long-haul trucks for thirty years"
+        }
+      ],
+      "event_ids": []
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 2 weeks ago",
+      "topic_thread_ids": [
+        "thread_03",
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "Three weeks into the logistics job now. It's spreadsheets, phone calls and chasing suppliers, and I like it more than I'm prepared to admit out loud."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "What I heard: the new work already fits, enough that saying so out loud feels risky. Caution after a big change makes sense."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "Also, Marcos transferred back the first half of the loan without being reminded. I'm choosing to read that as character development — his and mine."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "Hearing that: the one-number-one-date deal is holding on its own, and you're letting it count for you both. A calm place to pause."
+        }
+      ],
+      "summary": "Three weeks into the logistics role Renata quietly loves the work, and Marcos returns half the loan unprompted under their agreed one-number-one-date terms.",
+      "typed_candidates": [],
+      "event_ids": []
+    }
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "certificate course, mocks and exam"
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "Sunday rota conflict with Fabio"
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "job search and move into logistics"
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "money, the move, and Marcos's loan"
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "sleep and evening energy"
+    }
+  ]
+}

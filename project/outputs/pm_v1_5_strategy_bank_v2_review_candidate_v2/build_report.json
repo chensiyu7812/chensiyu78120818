@@ -1,0 +1,49 @@
+{
+  "protocol": "pm-v1.5-strategy-bank-v2-build-report-v1",
+  "status": "CANDIDATE_BUILT_AWAITING_LLM_WEAK_AND_HUMAN_AUDIT",
+  "raw_card_count": 11590,
+  "raw_source_dialogue_count": 823,
+  "packet_source_dialogue_count": 75,
+  "packet_source_excluded_raw_card_count": 1094,
+  "no_prior_seeker_turn_excluded_raw_card_count": 413,
+  "normalized_duplicate_group_count": 234,
+  "rows_in_normalized_duplicate_groups": 1089,
+  "exclusion_counts": {
+    "closing_only": 66,
+    "domain_specific_claim": 43,
+    "family_not_in_first_paper_technique_pool": 3456,
+    "greeting_only": 45,
+    "no_prior_seeker_turn": 413,
+    "platform_or_survey_meta": 47,
+    "redundant_normalized_response": 168,
+    "support_need_packet_source": 1094
+  },
+  "candidate_card_count": 5,
+  "candidate_families": [
+    "Question",
+    "Restatement or Paraphrasing",
+    "Reflection of feelings",
+    "Affirmation and Reassurance",
+    "Providing Suggestions"
+  ],
+  "candidate_lineage_row_count": 6391,
+  "candidate_source_dialogue_count": 748,
+  "candidate_packet_source_overlap_count": 0,
+  "candidate_raw_examples_exposed_to_generator": false,
+  "candidate_quality_status": "RULE_FILTERED_PENDING_LLM_WEAK_AND_HUMAN_AUDIT",
+  "candidate_eligible_for_formal_rs": false,
+  "source_lineage": {
+    "raw_strategy_bank_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e",
+    "esconv_sha256": "aa0556c5b330562ba009c1cd5137486bfa2a7255f33225a6524cd58f7efdd9af",
+    "split_manifest_sha256": "0199fbe1cad5f42aacfd2ba52a92bc6530dfcb33a82bb7bb7e81e5abb6e63e63",
+    "support_need_lineage_sha256": "1c21a157806d73f3b681d42b7f5228f8259e9a52e34d2c6264ffa85cbe3adc05"
+  },
+  "cards_sha256": "8e5d321e35ea796f9773639d4586857c6b728929c99a9d2a48e7b3473ba190c7",
+  "lineage_sha256": "c8db88a2aa6afa8f8229092392ab4fbcfa24c67f821e252369aee7c5419c6fe1",
+  "human_review_packet_sha256": "ad1671c3682b1bd749a83e473552a6f1e0ae9ed70f1f496505b6ef2be755f6eb",
+  "human_annotation_template_sha256": "1922d230f926356097f9292c1988f2c70e9fae918fb4b9e5624ada1a2c42202a",
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "api_calls_made": 0,
+  "report_sha256": "f2c6c72324f532e0b4af9ac2988d315a4a785fd61b76036ccec3f80292e3e6ad"
+}

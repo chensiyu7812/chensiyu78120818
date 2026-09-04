@@ -1,0 +1,110 @@
+{
+  "protocol": "pm-v1.5-v3-observation-factor-orthogonal-dataset-v1",
+  "frozen_date": "2026-08-03",
+  "objective": "separate factor learnability from balanced composite Eligibility confirmation",
+  "why_two_tracks_are_required": "With four independent 50/50 factor bits, the all-pass conjunction has prevalence 1/16; factor orthogonality and 50/50 final Eligibility cannot hold in one small dataset without inducing correlations.",
+  "factor_applicability": {
+    "MP": {
+      "owner_time_entity_valid": "LEARNED",
+      "goal_function_fit": "LEARNED",
+      "boundary_burden_compatible": "LEARNED",
+      "specific_increment": "LEARNED"
+    },
+    "MS": {
+      "owner_time_entity_valid": "LEARNED",
+      "goal_function_fit": "LEARNED",
+      "boundary_burden_compatible": "LEARNED",
+      "specific_increment": "LEARNED"
+    },
+    "ME": {
+      "owner_time_entity_valid": "LEARNED",
+      "goal_function_fit": "LEARNED",
+      "boundary_burden_compatible": "LEARNED",
+      "specific_increment": "LEARNED"
+    },
+    "RS": {
+      "owner_time_entity_valid": "DETERMINISTIC_TRUE_NOT_A_LEARNING_TARGET",
+      "goal_function_fit": "LEARNED",
+      "boundary_burden_compatible": "LEARNED",
+      "specific_increment": "LEARNED"
+    }
+  },
+  "tracks": {
+    "FACTOR_FIT": {
+      "states": 64,
+      "per_component": 16,
+      "memory_component_design": "one complete 2^4 factorial for MP, MS, and ME",
+      "rs_design": "two repetitions of the complete 2^3 factorial; owner/time is deterministic true",
+      "each_learned_factor_component_cell": {"positive": 8, "negative": 8},
+      "final_eligibility_prevalence_is_not_a_gate": true,
+      "uses": ["factor model grouped OOF", "candidate selection", "final factor model fit"],
+      "forbidden_uses": ["Step1 worth_opening", "composite Eligibility prevalence claim"]
+    },
+    "ELIGIBILITY_CONFIRMATION": {
+      "states": 32,
+      "per_component": 8,
+      "per_component_final_eligibility": {"eligible": 4, "ineligible": 4},
+      "negative_design": "single-fault and selected double-fault states rotate across every learned factor",
+      "uses": ["one-shot confirmation of the composed Eligibility mask"],
+      "forbidden_uses": ["factor model training", "threshold selection", "candidate selection"]
+    }
+  },
+  "total_primary_review_states": 96,
+  "independent_overlap_states": 24,
+  "single_versioned_review_packet": true,
+  "blueprint_result": {
+    "status": "PASS_PRIVATE_STRUCTURE_ONLY",
+    "protocol": "pm-v1.5-v3-observation-factor-orthogonal-blueprint-v1",
+    "rows": 96,
+    "unique_decision_surfaces": 96,
+    "pairwise_phi_absolute_max": 0.0,
+    "sha256": "5e76557f8048a04e44cd6ac3d7b2bd0fa49acdd2fd1e9ad16d6c9c6fd2717fe7",
+    "visible_state_realization_passed": true,
+    "visible_state_sha256": "c636bae4044a7b82bb651dde0da7a6f9044469f8aaf5e3043544516ed3d84f20",
+    "exact_rank1_passed": true,
+    "candidate_rows_sha256": "1f4367a80fefcba985e9ae93f188dcf80416aa878062b30669d93da14ba54f1f",
+    "text_nuisance_probe_passed": true,
+    "semantic_surface_family_train_count": 4,
+    "semantic_surface_family_confirmation_unseen_count": 4,
+    "human_review_allowed": true,
+    "review_packet": "outputs/pm_v1_5_v3_observation_review_candidate_v1/human_review.html",
+    "independent_overlap_packet": "outputs/pm_v1_5_v3_observation_review_candidate_v1/independent_overlap_review.html"
+  },
+  "construction": {
+    "method": "outcome-blind deterministic compiler from a private orthogonal matrix",
+    "actual_rank1_required": true,
+    "construction_intent_is_model_input": false,
+    "construction_intent_is_reviewer_input": false,
+    "construction_intent_is_gold": false,
+    "responses_generated": false,
+    "external_text_or_outcome_read": false
+  },
+  "pre_review_static_gates": {
+    "unique_decision_surfaces": 96,
+    "cross_track_duplicate_decision_surfaces": 0,
+    "exact_rank1_binding_rate": 1.0,
+    "subtype_and_function_binding_rate": 1.0,
+    "factor_fit_cell_shape_exact": true,
+    "factor_fit_pairwise_phi_absolute_max": 0.05,
+    "topic_scale_prefix_nuisance_probe_balanced_accuracy_max_exclusive": 0.65,
+    "length_nuisance_probe_balanced_accuracy_max_exclusive": 0.65,
+    "each_learned_factor_has_cross_topic_counterfactuals": true,
+    "each_learned_factor_has_cross_scale_counterfactuals": true,
+    "each_learned_factor_has_both_length_directions": true,
+    "private_bit_or_logic_family_exposed_to_model_or_reviewer": false
+  },
+  "post_review_gates": {
+    "final_factor_labels_must_preserve_each_learned_cell_min_positive": 6,
+    "final_factor_labels_must_preserve_each_learned_cell_min_negative": 6,
+    "overlap_raw_agreement_min": 0.80,
+    "overlap_cohen_kappa_min": 0.60,
+    "uncertain_is_not_forced_to_binary": true
+  },
+  "stop_rules": [
+    "Do not render or request review until every pre-review static gate passes.",
+    "Do not repair changed decision surfaces by copying old labels.",
+    "Do not use ELIGIBILITY_CONFIRMATION to select a model or threshold.",
+    "Do not create follow-up 10/16/24-item packets; repair the single dataset version before review.",
+    "Do not run BGE-M3, Qwen3, H-Step2, response generation, or external evaluation before this dataset and Observation qualification pass."
+  ]
+}

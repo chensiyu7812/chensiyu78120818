@@ -1,0 +1,80 @@
+{
+  "protocol": "pm-v1.5-final-execution-plan-v5-itt",
+  "status": "ACTIVE_S2_FIT_EXECUTION_COMPLETE_SINGLE_FULL_OUTCOME_PANEL_READY",
+  "date": "2026-08-03",
+  "supersedes_for_future_execution": "data/pm_v1_5_contracts/final_execution_plan_v4.json",
+  "preserves_all_prior_results_without_reinterpretation": true,
+  "architecture": "data/pm_v1_5_contracts/staged_policy_architecture_v4.json",
+  "method_registry": "data/pm_v1_5_contracts/method_version_registry_v1.json",
+  "estimand": "post-candidate pre-injection expected ITT net value of requesting each resource component under one frozen real Step2 executor",
+  "next_steps": [
+    "V5-S0 implement and test the deterministic typed resource adapter, deterministic context-only fallback, and ITT row validator with zero API",
+    "V5-S1 freeze executor identity, generator identity, candidate stack, feature schema, split groups, seeds, outcome rubric, and the complete FIT call plan before generation",
+    "V5-S2 execute the complete internal FIT panel once; collect quality, named risk, cost, fallback, and functional-use fields in the same panel",
+    "V5-S3 derive ITT labels without conditioning on realized use and train four factorized value heads once; retain the existing opportunity layer as mask/input",
+    "V5-S4 consume one untouched grouped confirmation once; no second confirmation and no post-result repair",
+    "V5-S5 freeze all learned and fixed baselines, run sealed internal ablations and all 16-action diagnostics",
+    "V5-S6 run ESConv and EvoEmo with the same executor and no feedback, then report full, bounded, or not-learned outcomes"
+  ],
+  "pre_fit_human_step2_gate_required": false,
+  "pre_fit_machine_invariants_required": true,
+  "fit_generation_scientifically_ready": true,
+  "formal_training_authorized_now": "ONLY_AFTER_PRIMARY_AND_INDEPENDENT_OVERLAP_PANEL_EXPORTS_ARE_COMPLETE",
+  "api_calls_authorized_now": 0,
+  "fit_generation_plan": "outputs/pm_v1_5_v5_itt_fit_plan_v2/freeze_manifest.json",
+  "fit_generation_execution": "outputs/pm_v1_5_v5_itt_fit_execution_v2/execution_summary.json",
+  "fit_generation_result": {
+    "planned_calls": 1024,
+    "completed_calls": 1024,
+    "invalid_itt_rows": 0,
+    "fallback_calls": 60,
+    "ordered_outcomes_sha256": "792089191c389246fa3346ae2b3a9d7cacdfe8d5c4efc1fc0be2b390c05fc8ae"
+  },
+  "fit_statistical_unit_correction": {
+    "state_candidate_units": 256,
+    "counterfactual_groups": 128,
+    "units_per_component": 64,
+    "groups_per_component": 32,
+    "grouped_cv": "both units in one counterfactual group remain in the same fold",
+    "api_rerun_required": false
+  },
+  "single_fit_outcome_panel": "outputs/pm_v1_5_v5_single_full_fit_outcome_review_v1/manifest.json",
+  "fit_training_surface": "outputs/pm_v1_5_v5_fit_training_surface_v1/freeze_report.json",
+  "fit_training_contract": "data/pm_v1_5_contracts/v5_fit_training_surface_freeze_v1.json",
+  "fit_aggregation_and_training_entry": "scripts/v1_5/26a_aggregate_and_train_v5_fit_v1_5.py",
+  "guard_and_human_outcome_boundary": "data/pm_v1_5_contracts/v5_guard_and_human_outcome_boundary_v1.json",
+  "fit_generation_command": "PYTHONNOUSERSITE=1 PYTHONPATH=src /home/tokkio/snap/metacom_v33_pm_v1_5_repair/.venv-pm-v1-5/bin/python scripts/v1_5/25zx_run_v5_itt_fit_generation_v1_5.py --plan-dir outputs/pm_v1_5_v5_itt_fit_plan_v2 --out-dir outputs/pm_v1_5_v5_itt_fit_execution_v2 --run",
+  "training_unlock": "The frozen complete FIT panel must finish and receive the single preregistered outcome review; no pre-FIT human Step2 promotion result is required",
+  "invalid_itt_rows": [
+    "assignment_mismatch",
+    "wrong_resource_or_owner_bound",
+    "requested_resource_not_presented_to_executor",
+    "missing_final_response_or_usage",
+    "executor_or_generator_identity_changed_after_assignment"
+  ],
+  "valid_itt_outcomes_not_excluded": [
+    "component_not_functionally_used",
+    "guard_or_fallback_triggered",
+    "response_quality_tie_or_loss",
+    "material_interaction_or_grounding_risk",
+    "attribution_or_temporal_misuse"
+  ],
+  "frozen_step1_gates": {
+    "grouped_oof_balanced_accuracy_min": 0.65,
+    "recall_min": 0.60,
+    "specificity_min": 0.60,
+    "brier_beats_prevalence_and_transparent_rule": true,
+    "on_and_off_each_at_least_independent_groups": 8
+  },
+  "forbidden": [
+    "require a new small Step2 human packet before FIT",
+    "condition Step1 labels on realized component use",
+    "turn generator nonuse or fallback into unknown",
+    "use generator self-reported use or reason as gold",
+    "change executor from FIT, confirmation, sealed, or external outcomes",
+    "reuse external content as training memory",
+    "directly train a 16-class model",
+    "claim latent or clinical user-need understanding"
+  ],
+  "external_lockbox_read": false
+}

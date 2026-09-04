@@ -1,0 +1,206 @@
+{
+  "protocol": "pm-v1.5-train-only-response-mechanism-uptake-pilot-v1",
+  "status": "READY_ZERO_API_DESIGN",
+  "scope": "longitudinal_train_only",
+  "purpose": "diagnose retrieval dilution and generator resource uptake; this pilot does not qualify LLM judges or authorize PM training",
+  "seed": 9187,
+  "states_per_regime": 2,
+  "regimes": [
+    "profile_needed",
+    "summary_needed",
+    "event_needed",
+    "multi_source_needed",
+    "memory_harmful",
+    "strategy_helpful",
+    "strategy_harmful"
+  ],
+  "arms": {
+    "frozen_current_control": {
+      "new_api_calls": 0,
+      "retrieval": "frozen MP=2, MS=2, ME=3, strategy=3",
+      "prompt": "frozen current prompt",
+      "source": "existing attested longitudinal sweep outcome"
+    },
+    "top1_evidence_surface_same_prompt": {
+      "new_api_calls_per_state": 1,
+      "retrieval": "unchanged frozen retrievers followed by deterministic post-retrieval max-one-per-source evidence filtering",
+      "prompt_surface": "MP<=1, MS<=1, ME<=1, strategy<=1",
+      "prompt": "frozen current prompt"
+    }
+  },
+  "selected_states": [
+    {
+      "state_id": "state_9fb01f59a4c6da32f1baa88f",
+      "card_id": "card_99d59490605a957ebd31c2d1",
+      "user_id": "pmv2_train_u008",
+      "semantic_family": "conflict_repair",
+      "regime": "profile_needed",
+      "target_action_id": "MP+R0",
+      "needed_memory_sources": [
+        "MP"
+      ]
+    },
+    {
+      "state_id": "state_45f23885424ca03191d3e8ed",
+      "card_id": "card_7961151c30b5bae0de095770",
+      "user_id": "pmv2_train_u006",
+      "semantic_family": "uncertain_future",
+      "regime": "profile_needed",
+      "target_action_id": "MP+R0",
+      "needed_memory_sources": [
+        "MP"
+      ]
+    },
+    {
+      "state_id": "state_188626bb7dfbff883347cc53",
+      "card_id": "card_019130c05b59ba95f781412a",
+      "user_id": "pmv2_train_u021",
+      "semantic_family": "health_routine_stress",
+      "regime": "summary_needed",
+      "target_action_id": "MS+R0",
+      "needed_memory_sources": [
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_31a4d2ac90e8f32e73292f59",
+      "card_id": "card_b6751a360774f9d7184b73df",
+      "user_id": "pmv2_train_u009",
+      "semantic_family": "parenting_pressure",
+      "regime": "summary_needed",
+      "target_action_id": "MS+R0",
+      "needed_memory_sources": [
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_ce3af10c46831a30606d9408",
+      "card_id": "card_16c28c03daed8776561985d2",
+      "user_id": "pmv2_train_u017",
+      "semantic_family": "family_expectations",
+      "regime": "event_needed",
+      "target_action_id": "ME+R0",
+      "needed_memory_sources": [
+        "ME"
+      ]
+    },
+    {
+      "state_id": "state_d5425f23859013ab42012a28",
+      "card_id": "card_d2856dc1ade9f1fad3335a6e",
+      "user_id": "pmv2_train_u001",
+      "semantic_family": "workload_burnout",
+      "regime": "event_needed",
+      "target_action_id": "ME+R0",
+      "needed_memory_sources": [
+        "ME"
+      ]
+    },
+    {
+      "state_id": "state_23505de3e30cc5f91f173353",
+      "card_id": "card_2ab4b1aeda746ad6adb297c5",
+      "user_id": "pmv2_train_u011",
+      "semantic_family": "health_routine_stress",
+      "regime": "multi_source_needed",
+      "target_action_id": "MPMSME+R0",
+      "needed_memory_sources": [
+        "MP",
+        "MS",
+        "ME"
+      ]
+    },
+    {
+      "state_id": "state_5b4e97df93b63f37b5d9daf1",
+      "card_id": "card_29be8a3d15a182c2ec6772c9",
+      "user_id": "pmv2_train_u020",
+      "semantic_family": "caregiving_stress",
+      "regime": "multi_source_needed",
+      "target_action_id": "MPMSME+R0",
+      "needed_memory_sources": [
+        "MP",
+        "MS",
+        "ME"
+      ]
+    },
+    {
+      "state_id": "state_dc04cb0c55f77f8c73d31ca2",
+      "card_id": "card_9448e6fecaf80af40328dc20",
+      "user_id": "pmv2_train_u010",
+      "semantic_family": "caregiving_stress",
+      "regime": "memory_harmful",
+      "target_action_id": "MPMSME+R0",
+      "needed_memory_sources": []
+    },
+    {
+      "state_id": "state_864109754c21ed318294aa88",
+      "card_id": "card_4526e4124a9472110fd3f710",
+      "user_id": "pmv2_train_u024",
+      "semantic_family": "workload_burnout",
+      "regime": "memory_harmful",
+      "target_action_id": "MPMSME+R0",
+      "needed_memory_sources": []
+    },
+    {
+      "state_id": "state_ebdff6ffd8bf09723bad1cb6",
+      "card_id": "card_7b992826a08d294d861c0c1d",
+      "user_id": "pmv2_train_u003",
+      "semantic_family": "caregiving_stress",
+      "regime": "strategy_helpful",
+      "target_action_id": "M0+RS",
+      "needed_memory_sources": []
+    },
+    {
+      "state_id": "state_eb4da35de8c37834663cc7e1",
+      "card_id": "card_902bbddfc926e2e0a74e917f",
+      "user_id": "pmv2_train_u007",
+      "semantic_family": "motivation_loss",
+      "regime": "strategy_helpful",
+      "target_action_id": "M0+RS",
+      "needed_memory_sources": []
+    },
+    {
+      "state_id": "state_f3cc52285f3f4287c1c019e5",
+      "card_id": "card_671509eed0c8454ea21e3b59",
+      "user_id": "pmv2_train_u005",
+      "semantic_family": "parenting_pressure",
+      "regime": "strategy_harmful",
+      "target_action_id": "M0+RS",
+      "needed_memory_sources": []
+    },
+    {
+      "state_id": "state_a4c233e9eac460c4ac096c9b",
+      "card_id": "card_4d93f5e0633a37e5a0cc4229",
+      "user_id": "pmv2_train_u002",
+      "semantic_family": "career_change",
+      "regime": "strategy_harmful",
+      "target_action_id": "M0+RS",
+      "needed_memory_sources": []
+    }
+  ],
+  "selected_state_ids_sha256": "397a4b3ac15f038ec37e3845440e85b6e2aa6ecee94e6fbb903e4a66d1e4a8bd",
+  "source_lineage": {
+    "states_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+    "states_sha256": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+    "evaluator_contexts_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/evaluator_contexts.jsonl",
+    "evaluator_contexts_sha256": "31f30eeba5ca33bdf6e8e0d0dab7270b8a8c4a620873fa5a017dc74b9478641b"
+  },
+  "planned_new_logical_calls": 14,
+  "evaluation": {
+    "api_judges": "forbidden",
+    "primary_diagnostics": [
+      "paired selected-resource/response BGE cosine delta versus frozen control",
+      "paired lexical resource-uptake delta versus frozen control",
+      "helpful-minus-harmful uptake separation",
+      "exact-copy and unsupported-detail guardrails"
+    ],
+    "cluster_unit": "user_id",
+    "interpretation": "This is a report-only causal mechanism diagnostic. It may localize retrieval dilution but cannot qualify judges, create action labels, select a PM, or authorize training."
+  },
+  "stop_rules": [
+    "do not change thresholds, states, arms, prompt, or retrieval after outcomes",
+    "do not read calibration or internal-test",
+    "do not call final external judges",
+    "do not promote the mechanism on uptake diagnostics alone"
+  ],
+  "training_labels_created": false,
+  "contract_sha256": "e500c4d4cb18fe5f99ec29cab0e784694e5991f954728857c63ca5ce368fe093"
+}

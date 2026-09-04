@@ -1,0 +1,46 @@
+{
+  "protocol": "pm-v1.5-v5.2-locked-executor-repair-v1",
+  "status": "FROZEN_BEFORE_V5_2_FIT_GENERATION",
+  "research_target": "learn component opening value under a backend-locked executor, not under free-form memory paraphrase",
+  "version_boundary": {
+    "v5_1": "retained as failed-executor diagnostic evidence",
+    "v5_2": "new executor, new FIT outcomes, new value-head training and new confirmation identity"
+  },
+  "step1_contract": {
+    "inputs": [
+      "visible current dialogue",
+      "outcome-blind candidate descriptors",
+      "structured owner/time/availability facts"
+    ],
+    "outputs": "four component bits forming one of the existing 16 legal actions",
+    "does_not_do": [
+      "write the response",
+      "paraphrase a memory",
+      "predict one stochastic generation winner"
+    ]
+  },
+  "step2_contract": {
+    "MP_PREFERENCE": "generator-visible response-format constraint",
+    "MP_PROFILE": "backend-locked literal current constraint clause",
+    "MS": "backend-locked literal earlier-session clause with explicit past/current separation",
+    "ME": "backend-locked literal local action-result span with optional non-predictive transfer wording",
+    "RS": "one generator-visible atomic support-move instruction",
+    "M0_R0": "valid resource-free action whose generator may naturally answer the visible current request; it is not weakened to a generic acknowledgement"
+  },
+  "hard_boundaries": [
+    "MS and ME source text is never exposed to the free-form generator",
+    "memory provenance is checked structurally, never inferred from words such as before or earlier",
+    "ME requires a local first-person action and explicit observed result; broad topic narratives are absent",
+    "EvoEmo external evaluation does not claim ME coverage when its catalog lacks atomic outcomes",
+    "no V5.1 external response, judge result or human outcome is used to tune V5.2",
+    "same visible state with different candidates shares one semantic group in every grouped evaluation"
+  ],
+  "execution_sequence": [
+    "static compiler and binding preflight",
+    "full 256-state paired FIT generation",
+    "one complete outcome panel",
+    "grouped training and one fresh internal confirmation",
+    "ESConv RS evaluation and EvoEmo MP/MS repaired replication",
+    "quality, grounding-risk and cost evaluation"
+  ]
+}

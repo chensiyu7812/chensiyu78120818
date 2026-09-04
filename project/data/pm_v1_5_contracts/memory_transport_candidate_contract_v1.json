@@ -1,0 +1,289 @@
+{
+  "protocol": "pm-v1.5-memory-transport-candidate-contract-v1",
+  "status": "MIMIC_GATE_PASS_ALL_REPAIRED_FOUR_COMPONENT_GENERATION_COMPLETE",
+  "date": "2026-07-30",
+  "core_distinction": {
+    "strategy_rag": "RS is a global static technique bank, so the exact catalog and runtime stack must be identical across development and external evaluation.",
+    "personal_memory": "MP/MS/ME are user- and time-specific functions of prior history. Exact item text must differ across users; invariance applies to the construction semantics, retrieval, candidate description, injection, and evaluation contracts rather than to one shared catalog."
+  },
+  "formal_runtime": {
+    "catalog": "B_c(u,t) = C_c(H_u,<t)",
+    "candidate": "r_c = Retriever_c(visible_state, B_c)",
+    "descriptor": "z_c = Descriptor_c(visible_state, r_c)",
+    "policy": "g_c = P(material marginal benefit | visible_state, z_c, other-component background)",
+    "decision_timing": "post-candidate-discovery, pre-injection, pre-generation",
+    "off_meaning": "Candidate discovery may occur locally, but no candidate from component c is injected into the generator."
+  },
+  "same_across_internal_and_external": [
+    "MP/MS/ME source definitions",
+    "causal rule that only prior history may enter memory",
+    "MemoryItem wire schema and time semantics",
+    "query builder",
+    "retriever implementation, score, tie break, score floor, and top-k",
+    "evidence filter and hard exclusions",
+    "candidate descriptor extractor",
+    "injection prompt compiler and generator",
+    "quality, material-risk, and cost definitions"
+  ],
+  "allowed_to_change_naturally": [
+    "user-specific memory text",
+    "number and age of prior memories",
+    "topic and language surface",
+    "which candidate is retrieved",
+    "external feature distribution, subject to declared support and OOD handling"
+  ],
+  "candidate_descriptor": {
+    "primary_transparent": [
+      "component source",
+      "candidate present after retrieval and filtering",
+      "retrieved item count",
+      "incremental injected tokens",
+      "minimum, median, and maximum session-relative age buckets; absolute age remains audit-only",
+      "top-1 relevance and top-1 versus top-2 score margin",
+      "candidate redundancy with visible context",
+      "visible-input hard-exclusion flags",
+      "top-k capacity fraction",
+      "other-component background bits"
+    ],
+    "optional_challenger": [
+      "BGE-small candidate-state similarity",
+      "BGE-small source-catalog similarity"
+    ],
+    "diagnostic_only": [
+      "full catalog count",
+      "full catalog tokens",
+      "raw session index",
+      "dataset or split identity"
+    ],
+    "forbidden": [
+      "opaque memory ID as a predictive feature",
+      "raw memory text as a predictive feature",
+      "raw external dataset identity or split",
+      "future turns, related-session annotations, reference responses, judge outcomes, or needed_memory_sources",
+      "external quality or risk outcome",
+      "hidden evaluator stale, conflict, sensitive, or utility labels"
+    ]
+  },
+  "shared_physical_store_rule": {
+    "allowed_for_deployment": true,
+    "mandatory_filter_before_similarity": "(user_id == current_user_id) AND (created_session < current_session)",
+    "scientific_effect": "A shared physical database with strict namespaces remains logically separate per-user catalogs and does not itself provide external-generalization evidence.",
+    "without_namespace": "FORBIDDEN_WRONG_PERSON_MEMORY_AND_DATA_CONTAMINATION"
+  },
+  "current_transport_audit": {
+    "artifact": "outputs/pm_v1_5_memory_transport_contract_audit_v1/memory_transport_audit.json",
+    "internal_records": 468,
+    "external_users": 18,
+    "internal_catalog_count_per_source": 2,
+    "evoemo_median_catalog_counts": {
+      "MP": 7,
+      "MS": 22,
+      "ME": 68
+    },
+    "internal_median_item_tokens": {
+      "MP": 34,
+      "MS": 41,
+      "ME": 37
+    },
+    "evoemo_median_item_tokens": {
+      "MP": 5,
+      "MS": 41,
+      "ME": 102
+    },
+    "internal_median_estimated_top_k_tokens": {
+      "MP": 68,
+      "MS": 84,
+      "ME": 73
+    },
+    "evoemo_median_estimated_top_k_tokens": {
+      "MP": 10,
+      "MS": 80.9,
+      "ME": 274.34
+    },
+    "same_memory_construction_algorithm": false,
+    "severity": "HIGH_FOR_STRONG_EXTERNAL_GENERALIZATION_CLAIM"
+  },
+  "final_shared_runtime_repair": {
+    "compiler_protocol": "pm-v1.5-shared-all-causal-prior-history-memory-compiler-v2",
+    "history_policy": "Every internal and external state compiles all legitimate causal prior sessions for that same user. Internal histories naturally contain at most eight prior sessions; EvoEmo histories naturally contain 13 to 33.",
+    "catalog_medians_at_maximum_internal_history_and_external_runtime": {
+      "internal": {
+        "MP": 3,
+        "MS": 8,
+        "ME": 9
+      },
+      "evoemo": {
+        "MP": 7,
+        "MS": 22,
+        "ME": 68
+      }
+    },
+    "scale_stable_model_features": [
+      "retrieved fraction relative to frozen Top-k",
+      "bucketed incremental token cost",
+      "minimum, median, and maximum age divided by current session index",
+      "bucketed lexical relevance and Top-1 versus Top-2 margin",
+      "saturated Top-k capacity fraction"
+    ],
+    "raw_catalog_count_is_model_feature": false,
+    "outcome_blind_joint_candidate_support": {
+      "MP": 1.0,
+      "MS": 0.8676470588235294,
+      "ME": 0.8921568627450981
+    },
+    "minimum_support_gate_per_source": 0.8,
+    "all_sources_pass": true,
+    "existing_generation_prompt_recomputation": {
+      "memory_arms": "384/384",
+      "repaired_rs_arms": "128/128",
+      "total": "512/512",
+      "new_api_calls_required": 0
+    },
+    "synthetic_large_catalog_stitching": "FORBIDDEN_AS_FORMAL_TRAINING_DATA_WHEN_IT_MIXES_UNRELATED_USERS_OR_INCOHERENT_EVENTS",
+    "remaining_limitation": "Candidate-feature support does not prove that lexical Top-k retrieval remains semantically correct when external ME selects three items from a median catalog of 68 rather than nine. Diagnose retrieval only after the PM and thresholds are frozen."
+  },
+  "effect_data_status": {
+    "existing_256_contrasts_remain_usable": "DIAGNOSTIC_ONLY_NOT_FORMAL_ALL_FOUR_COMPONENTS_REBUILT",
+    "scope": "The old 192 memory pairs use legacy two-item-per-source catalogs. In addition, 56 of the old 64 RS pairs were generated under those legacy memory backgrounds. Mixing old RS with repaired MP/MS/ME would therefore violate the one-stack treatment invariant. All old pairs are retained only as diagnostics; the formal 256-pair packet is rebuilt as 64 RS plus 192 memory pairs on the same repaired backend.",
+    "not_proven": [
+      "that the current retriever selects the correct memory from large natural catalogs",
+      "that a source-only PM can distinguish useful from harmful candidates within RS, MP, MS, or ME",
+      "that the learned PM transports without abstention to all EvoEmo states"
+    ],
+    "no_regeneration_required_for_candidate_aware_training": false,
+    "reason": "A limited candidate-conditional claim could reuse them, but the selected strong repair recompiles synthetic histories with the same memory builder used externally; formal MP/MS/ME pairs must therefore use candidates from that repaired compiler."
+  },
+  "selected_internal_repair": {
+    "name": "evo_style_synthetic_longitudinal_recompile",
+    "external_content_used": false,
+    "construction": [
+      "Order each existing synthetic user's nine cases by session_index.",
+      "Represent only the three existing user-specific stable preferences as atomic basic_info fields.",
+      "Keep the two globally identical compiler boundaries as system rules rather than misrepresenting them as personal memory.",
+      "Represent each earlier case as one prior session with its visible dialogue and an extractive session summary.",
+      "Call the exact same build_evo_memory compiler used by EvoEmo to create MP, MS, and ME.",
+      "Use all and only causal prior sessions for each current state, then run the same query, retriever, filter, top-k, descriptor, and injection stack."
+    ],
+    "zero_api_feasibility": {
+      "eligible_states": 416,
+      "median_catalog_counts": {
+        "MP": 3,
+        "MS": 4.5,
+        "ME": 5
+      },
+      "minimum_and_maximum_catalog_counts": {
+        "MP": [3, 3],
+        "MS": [1, 8],
+        "ME": [1, 14]
+      }
+    },
+    "formal_backend": {
+      "artifact": "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/report.json",
+      "status": "READY_FOR_OUTCOME_BLIND_192_MEMORY_CONTRAST_BLUEPRINT",
+      "states_by_split": {
+        "train": 192,
+        "calibration": 96,
+        "internal_test": 128
+      },
+      "nonempty_retrieval_states_per_source": {
+        "MP": 416,
+        "MS": 416,
+        "ME": 416
+      },
+      "actual_item_retriever": "lexical_score_not_BGE_cosine",
+      "memory_top_k": {
+        "MP": 2,
+        "MS": 2,
+        "ME": 3
+      },
+      "external_file_or_content_or_outcome_used": false
+    },
+    "replacement_blueprint": {
+      "artifact": "outputs/pm_v1_5_transport_repaired_memory_contrast_blueprint_v1/blueprint_report.json",
+      "status": "READY_192_MEMORY_PAIRS_ZERO_API_RETAIN_64_RS",
+      "status_interpretation": "Historical artifact status; its retain-64-RS clause is superseded by repaired_rs_generation below.",
+      "new_memory_pairs": 192,
+      "retained_formal_rs_pairs": 0,
+      "new_repaired_rs_pairs": 64,
+      "replacement_total_pairs": 256,
+      "new_response_calls_required": 512
+    },
+    "generation_plan": {
+      "artifact": "outputs/pm_v1_5_transport_repaired_memory_generation_v1/plan_report.json",
+      "status": "FROZEN_AUTHORIZED_BY_EQUIVALENCE_GATE",
+      "runner": "scripts/v1_5/24bs_run_transport_repaired_memory_generation_v1_5.py",
+      "api_calls_made": 384,
+      "completed_calls": 384,
+      "resumable": true,
+      "estimated_generation_cost_usd_upper_bound": 0.103761,
+      "equivalence_gate": {
+        "artifact": "outputs/pm_v1_5_evo_mimic_equivalence_audit_v1/equivalence_audit.json",
+        "status": "MIMIC_AND_CANDIDATE_SUPPORT_GATE_PASS",
+        "exact_mechanism_passes": 13,
+        "exact_mechanism_total": 13,
+        "failed_layers": [],
+        "candidate_support_by_source": {
+          "MP": 1.0,
+          "MS": 0.8676470588235294,
+          "ME": 0.8921568627450981
+        },
+        "runtime_history_policy": "all_causal_prior_sessions",
+        "existing_generated_prompt_hashes_recomputed": "512/512"
+      }
+    },
+    "repaired_rs_generation": {
+      "blueprint_artifact": "outputs/pm_v1_5_transport_repaired_rs_contrast_blueprint_v1/blueprint_report.json",
+      "blueprint_status": "READY_64_RS_PAIRS_ON_TRANSPORT_REPAIRED_STACK",
+      "generation_plan_artifact": "outputs/pm_v1_5_transport_repaired_rs_generation_v1/plan_report.json",
+      "execution_artifact": "outputs/pm_v1_5_transport_repaired_rs_generation_v1_execution/generation_summary.json",
+      "new_rs_pairs": 64,
+      "new_response_calls_required": 128,
+      "completed_calls": 128,
+      "status": "COMPLETE",
+      "reason": "Fifty-six old RS pairs contained legacy memory backgrounds; rebuilding all 64 avoids mixing resource mechanisms within the four-head training packet."
+    },
+    "final_blind_packet": {
+      "artifact": "outputs/pm_v1_5_transport_repaired_four_component_blind_v1/manifest.json",
+      "status": "READY_FOR_ONE_FINAL_BOUNDED_BLIND_QUALITY_REVIEW",
+      "unique_contrasts": 256,
+      "component_counts": {
+        "RS": 64,
+        "MP": 64,
+        "MS": 64,
+        "ME": 64
+      },
+      "review_presentations": 308,
+      "legacy_component_pairs_included": false
+    }
+  },
+  "ood_and_transport_gate": {
+    "fit_support_only_on_train_and_calibration": true,
+    "external_outcomes_may_not_set_support_thresholds": true,
+    "outside_support_action": "component off with OOD/abstain reason",
+    "prepaid_generation_mimic_gate": {
+      "exact_executable_layers_required": "13/13",
+      "exact_internal_external_memory_text_overlap_required": 0,
+      "candidate_support_population": "external candidates that are present after the shared retriever; absent candidates close deterministically and do not enter the learned head",
+      "joint_primary_descriptor_within_internal_train_calibration_absolute_range_minimum_per_source": 0.8,
+      "external_quality_risk_or_reference_outcomes_allowed": false,
+      "failure_action": "do not generate or train; repair the shared mechanism or internal development support and rerun the outcome-blind audit"
+    },
+    "report": [
+      "external in-support coverage by component",
+      "open rate within in-support states",
+      "OOD abstention rate",
+      "unweighted end-to-end external quality, risk, and cost",
+      "in-support secondary analysis without using it for model selection"
+    ]
+  },
+  "claim_boundary": {
+    "allowed_if_internal_gates_pass": "The PM learned a candidate-conditional component gate on held-out synthetic users under the frozen stack.",
+    "allowed_if_external_transport_passes": "The frozen gate showed limited development-informed transport to EvoEmo within its measured feature support.",
+    "not_allowed": [
+      "PM learned to retrieve the correct memory item",
+      "PM generalizes to arbitrary memory stores",
+      "EvoEmo is a pristine untouched confirmatory test"
+    ],
+    "future_pristine_requirement": "A new untouched longitudinal corpus or prospective deployment dataset frozen before inspecting its catalog or outcomes."
+  }
+}

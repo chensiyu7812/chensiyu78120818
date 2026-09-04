@@ -1,0 +1,189 @@
+{
+  "protocol": "pm-v1.5-train-only-role-decomposed-judge-qualification-v1",
+  "status": "AWAITING_PRE_API_HUMAN_ANCHOR",
+  "scope": "fresh_dual_domain_train_only_measurement_qualification",
+  "pair_counts": {
+    "longitudinal": 12,
+    "esconv_auxiliary": 12,
+    "total": 24,
+    "human_anchor": 12
+  },
+  "roles": {
+    "quality": {
+      "estimand": "blind_pairwise_overall_and_support_quality",
+      "order_variants": [
+        0,
+        1
+      ],
+      "evidence_or_risk_outputs_forbidden": true
+    },
+    "evidence_risk": {
+      "estimand": "pointwise_action_applicable_evidence_risk_findings",
+      "compiler_declares_applicable_dimensions": true,
+      "exact_response_and_evidence_excerpts_required": true,
+      "abstention_value": "insufficient_evidence"
+    },
+    "cost": {
+      "estimand": "deterministic_observed_resource_cost",
+      "llm_judgment_forbidden": true
+    }
+  },
+  "candidate_roles": {
+    "quality": [
+      "anthropic_claude_haiku_4_5",
+      "google_gemini_2_5_flash",
+      "openai_gpt_5_mini"
+    ],
+    "evidence_risk": [
+      "anthropic_claude_haiku_4_5",
+      "google_gemini_2_5_flash",
+      "openai_gpt_5_mini"
+    ]
+  },
+  "pre_outcome_criteria": {
+    "schema_valid_rate": 1.0,
+    "minimum_quality_ab_ba_consistency_each_field": 0.8,
+    "minimum_quality_informative_rate": 0.5,
+    "audit_applicability_exact_rate": 1.0,
+    "minimum_audit_exact_excerpt_validity": 0.95,
+    "maximum_audit_abstention_rate": 0.5,
+    "human_anchor_role": "independent_descriptive_reference_requiring_researcher_signoff",
+    "role_specific_promotion": true,
+    "majority_vote_is_gold": false
+  },
+  "decision_boundary": {
+    "qualification_only": true,
+    "creates_training_labels": false,
+    "old_packet_results_may_not_tune_this_protocol": true,
+    "human_anchor_must_be_frozen_before_api_calls": true,
+    "calibration_internal_test_external_outcomes_forbidden": true,
+    "quality_and_risk_may_not_be_collapsed_to_one_llm_score": true,
+    "failed_role_must_abstain_from_bulk_label_generation": true,
+    "pm_core_training_objective_not_changed_by_this_stage": true
+  },
+  "schemas": {
+    "quality_protocol": "pm-v1.5-blind-support-quality-pairwise-v1",
+    "quality_sha256": "77072d1797d6e7610fb89ceaf8ed3cc206b91d646eb31fd70365f5e58ca994e6",
+    "audit_protocol": "pm-v1.5-pointwise-evidence-risk-audit-v1",
+    "audit_sha256": "70942572e22e4b6e56f0ad11b1778214b4b02150f63bfdf3a48c5e28497a7e3d"
+  },
+  "endpoint_contract": {
+    "protocol": "pm-v1.5-role-decomposed-judge-endpoints-v1",
+    "candidates": {
+      "anthropic_claude_haiku_4_5": {
+        "anthropic_strict_tool_use": true,
+        "api_key_env": "ANTHROPIC_API_KEY",
+        "base_url": "https://api.anthropic.com",
+        "family": "anthropic_claude_haiku_4_5",
+        "input_usd_per_million_tokens": 1.0,
+        "model": "claude-haiku-4-5-20251001",
+        "output_usd_per_million_tokens": 5.0,
+        "supports_strict_json_schema": true,
+        "transport": "anthropic_messages"
+      },
+      "google_gemini_2_5_flash": {
+        "api_key_env": "GEMINI_API_KEY",
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "family": "google_gemini_2_5_flash",
+        "gemini_thinking_budget": 0,
+        "input_usd_per_million_tokens": 0.3,
+        "model": "gemini-2.5-flash",
+        "output_usd_per_million_tokens": 2.5,
+        "supports_strict_json_schema": true,
+        "transport": "gemini_generate_content"
+      },
+      "openai_gpt_5_mini": {
+        "api_key_env": "OPENAI_API_KEY",
+        "base_url": "https://api.openai.com/v1",
+        "family": "openai_gpt_5_mini",
+        "input_usd_per_million_tokens": 0.25,
+        "max_output_tokens_parameter": "max_completion_tokens",
+        "model": "gpt-5-mini-2025-08-07",
+        "openai_reasoning_effort": "minimal",
+        "output_usd_per_million_tokens": 2.0,
+        "supports_strict_json_schema": true,
+        "temperature_mode": "omit",
+        "transport": "openai_chat_completions"
+      }
+    },
+    "request_contract": {
+      "audit_max_output_tokens": 1800,
+      "client_internal_retries": 1,
+      "input_token_safety_factor_by_transport": {
+        "anthropic_messages": 2.25,
+        "gemini_generate_content": 1.5,
+        "openai_chat_completions": 1.5
+      },
+      "maximum_physical_attempts_per_logical_call": 2,
+      "quality_max_output_tokens": 700,
+      "seed": 13091,
+      "temperature": 0.0
+    },
+    "file_sha256": "5e1fec4d7370734652460f7858a980566a0282c247408e9f484b0d602550e49f",
+    "content_sha256": "348e888b6db767502a3b4a9decbf4cc3350a4220d82f3ecfb36ed37660047c8b"
+  },
+  "source_lineage": {
+    "longitudinal": {
+      "states": {
+        "path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+        "rows": 216,
+        "consumed_bytes_sha256": "08de1595595864e4ce8bd613e1eec0aee96d9a07e29a0ba0eaecdb78cfbcda6a",
+        "canonical_content_sha256": "c5bf2cb26787d55519f598f15869171ff526610ddca2382c6a94b59c7b618e10"
+      },
+      "evaluator_contexts": {
+        "path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/evaluator_contexts.jsonl",
+        "rows": 216,
+        "consumed_bytes_sha256": "65ef8f0fd508bc25477839165cc8e24cd863836971c02a3220971b132c6bf17b",
+        "canonical_content_sha256": "3a98c75fa84acd02901ff6a5cec986a564ba8c615e1ff59b8df9deee9260d996"
+      },
+      "action_outcomes": {
+        "path": "outputs/pm_v1_5_longitudinal_action_sweep_v8_19_2_continuation_v2_dry_run/action_outcomes.jsonl",
+        "rows": 3456,
+        "consumed_bytes_sha256": "cf711fd3469af9b1082ac37c00e651e5d911c9a12289a01e867c51880f100c25",
+        "canonical_content_sha256": "99d9fb229e67774d575d2dcaf946513d3f35ca2d3f39e03e4848aa769889d187"
+      },
+      "prior_packet_exclusion": {
+        "path": "outputs/pm_v1_5_low_budget_judge_qualification_v2_full_schema_v3_packet/qualification_pairs.jsonl",
+        "rows": 12,
+        "file_sha256": "77f283bdd68d46720f3bd5f386a70943df2dad6f22eb7909fe5cc48dd95adee2",
+        "canonical_content_sha256": "55aeaf43f623857be098a1a7c6af2b9467517e6601d57184b6ff235c5be02374"
+      },
+      "excluded_state_ids_sha256": "eb57de8b6223e4698e7741b35531e7128d92315561c3c030e22d133373bf88b4",
+      "excluded_user_ids_sha256": "4ba63067909e39fa6dbac7c8c647114f005b1f7f9cfd07941682b1def3421683"
+    },
+    "esconv_auxiliary": {
+      "states": {
+        "path": "data/esconv_auxiliary_v1_5/train/pm_v2_states.jsonl",
+        "rows": 318,
+        "file_sha256": "b0194963ab004ebbabf977c7a964b2e4c070220708590d1deeadc01da43dc6d3",
+        "canonical_content_sha256": "3d8fae4afb43d966d6992be891e6753ca937f033bd967323c5dc991531be7d4c"
+      },
+      "runtime_states": {
+        "path": "data/esconv_auxiliary_v1_5/train/runtime_states.jsonl",
+        "rows": 318,
+        "file_sha256": "f4525a9ecad78078441b708a4367c7965f2c754b99a88f064790d587c1b06d3d",
+        "canonical_content_sha256": "8cf8cb597da53e1a89116e0233323adc98b6325961e3ae8400c1542d402aeb07"
+      },
+      "action_outcomes": {
+        "path": "outputs/esconv_auxiliary_generation_v1_5_full_train/action_outcomes.jsonl",
+        "rows": 636,
+        "file_sha256": "83e5d7dccb567955388053e3550f29bf5b952dde8443eddee94028eb9dedd057",
+        "canonical_content_sha256": "dbbbc976f184ca0a346f18991872fb1357c5fe80ef6aca1b673fd76b7e57d9be"
+      },
+      "prior_packet_exclusion": {
+        "path": "outputs/esconv_auxiliary_pairwise_pilot_v1_5_prep_schema_fix_candidate/selection.jsonl",
+        "rows": 24,
+        "file_sha256": "28b2e28a8ebf1f1037c9a20763715b662b103b85c9648151133edfabd29d3bb2",
+        "canonical_content_sha256": "433e8e7cfb431f8b4ba64cde5e2efdb2e9d6c80a220499feb9e6c0e5416dc8f1"
+      },
+      "excluded_state_ids_sha256": "b10e89c6c589e504f8ce5b691a07281bc2a21fb029fb5dc7a26625abe303f7a3",
+      "protected_evaluation_fields_opened": false
+    },
+    "selected_pairs_sha256": "0c0eedb2929b808e606f6eb31410f213b1aa8a860a0ecc62d40a821504be06f0",
+    "quality_items_sha256": "d582a46cd52b54ecf1b9c30b10f9730d326e54688cecb3e4d60603ea9bb920d5",
+    "audit_items_sha256": "c3c925e5e9d2271b982d218208457175e6aba25cbe584fc5eff12d992542093a",
+    "human_packet_sha256": "8324bc374ebae7ea5afd282227bcaa598b7e2b21f5df8279dbdcb37e7076b7a3",
+    "human_mapping_sha256": "ad9fd2e4a0efee79b13c2ba19a34d8e0b666f9e254c1112c41435a438195ca9f"
+  },
+  "contract_sha256": "e633291d43dda205b7f05163733c5c2337208df4e01e938345518184bf50d5e3"
+}

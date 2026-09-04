@@ -1,0 +1,4 @@
+{"component": "MP", "decision": "INVALID / rebuild", "majority_constant_accuracy": 0.9790575916230366, "off": 187, "on": 4, "on_rate": 0.020942408376963352, "present": 191}
+{"component": "MS", "decision": "diagnostic only", "majority_constant_accuracy": 0.5587044534412956, "off": 138, "on": 109, "on_rate": 0.44129554655870445, "present": 247}
+{"component": "ME", "decision": "diagnostic only", "majority_constant_accuracy": 0.6680161943319838, "off": 165, "on": 82, "on_rate": 0.3319838056680162, "present": 247}
+{"component": "RS", "decision": "INVALID / rebuild", "majority_constant_accuracy": 0.9453125, "off": 7, "on": 121, "on_rate": 0.9453125, "present": 128}

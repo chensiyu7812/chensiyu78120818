@@ -1,0 +1,220 @@
+{
+  "protocol": "pm-v1.5-strategy-card-evoemo-turn-overlap-audit-v2",
+  "status": "GENERIC_FINDINGS_ONLY",
+  "strategy_bank_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/strategy/strategy_cards_v1_5.jsonl",
+  "strategy_bank_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e",
+  "evoemo_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/external/evo_emo.json",
+  "evoemo_sha256": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420",
+  "n_cards_checked": 11590,
+  "n_evoemo_turns_checked": 8596,
+  "jaccard_threshold": 0.85,
+  "min_turn_tokens": 8,
+  "n_findings": 12,
+  "n_deterministic_source_findings": 0,
+  "findings": [
+    {
+      "strategy_id": "strat_3852a85203743bf78260",
+      "source_dialogue_id": "esconv_0159",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p8",
+          "session_id": "esc1082",
+          "turn_idx": 4,
+          "role": "supporter",
+          "content": "is there anything I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_5d3f8e746152b893523e",
+      "source_dialogue_id": "esconv_0185",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p9",
+          "session_id": "esc539",
+          "turn_idx": 4,
+          "role": "supporter",
+          "content": "I'm doing well. How can I help you today?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_d3c0a2df60a35b4857fc",
+      "source_dialogue_id": "esconv_0235",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_d95214b9a968fdc3398e",
+      "source_dialogue_id": "esconv_0605",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_175a9361985b000ce906",
+      "source_dialogue_id": "esconv_0621",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p13",
+          "session_id": "esc785",
+          "turn_idx": 2,
+          "role": "supporter",
+          "content": "Hi there.  How can I help you today?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_573b6572a431069a61f3",
+      "source_dialogue_id": "esconv_0679",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_c85d78668cc27d063862",
+      "source_dialogue_id": "esconv_0692",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p13",
+          "session_id": "esc785",
+          "turn_idx": 2,
+          "role": "supporter",
+          "content": "Hi there.  How can I help you today?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_18b4427c5a3b88728f96",
+      "source_dialogue_id": "esconv_0697",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_fb568c838dfa2c296a49",
+      "source_dialogue_id": "esconv_0704",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_d76e8d8777d906af6f78",
+      "source_dialogue_id": "esconv_0867",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_d4588d319ffcb5ad1da8",
+      "source_dialogue_id": "esconv_0929",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p16",
+          "session_id": "esc371",
+          "turn_idx": 33,
+          "role": "supporter",
+          "content": "Is there anything else I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    },
+    {
+      "strategy_id": "strat_5f0be9db15f43f667503",
+      "source_dialogue_id": "esconv_0948",
+      "field": "example_response",
+      "match_type": "exact",
+      "similarity": 1.0,
+      "matched_turns": [
+        {
+          "user_id": "p8",
+          "session_id": "esc1082",
+          "turn_idx": 4,
+          "role": "supporter",
+          "content": "is there anything I can help you with?"
+        }
+      ],
+      "deterministic_source_matches": []
+    }
+  ]
+}

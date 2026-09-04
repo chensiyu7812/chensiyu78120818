@@ -1,0 +1,64 @@
+{
+  "protocol": "pm-v1.5-d2-measurement-failure-soft-target-recovery-v1",
+  "status": "FROZEN_AFTER_D2_STRICT_GATE_FAILURE_BEFORE_ANY_D3_OUTCOME",
+  "date": "2026-07-31",
+  "source_analysis": "outputs/pm_v1_5_d2_measurement_review_analysis_v1/analysis.json",
+  "input_validity": {
+    "primary_rows": 72,
+    "independent_overlap_rows": 32,
+    "both_inputs_valid": true,
+    "annotator_ids_disjoint": true
+  },
+  "frozen_gate_result": {
+    "state_three_way_reproduction": 0.9375,
+    "state_three_way_min": 0.7,
+    "uncertain_fraction": 0.0,
+    "uncertain_max": 0.1,
+    "inter_rater_exact_three_way": 0.65625,
+    "inter_rater_exact_three_way_min": 0.75,
+    "formal_D2_passed": false,
+    "binary_on_off_agreement_diagnostic": 0.8125,
+    "binary_diagnostic_is_not_a_retroactive_gate_substitute": true
+  },
+  "scientific_interpretation": [
+    "Independent generator realizations reproduce the state-level three-way direction well enough for the frozen within-state gate.",
+    "Independent reviewers do not reproduce the exact material-better versus tie threshold well enough for a single-pair hard-label contract.",
+    "The failure is component-specific: RS exact agreement is 1.0 while ME exact agreement is 0.375.",
+    "The result does not show that resources never help and does not isolate the semantic encoder as the primary bottleneck."
+  ],
+  "prohibited": [
+    "declaring the original D2 gate passed by replacing its exact three-way metric with a posthoc binary metric",
+    "editing or adjudicating isolated disagreements after unblinding to cross the threshold",
+    "creating canonical single-realization hard effect labels from this measurement design",
+    "using the D2 outcomes to choose seeds, samples, feature definitions, RAG cards, memory contents, or external-test cases",
+    "starting an open-ended encoder or hyperparameter race on these 32 states"
+  ],
+  "bounded_zero_new_human_recovery": {
+    "additional_D2_human_review_required": false,
+    "purpose": "Test whether a soft expected-benefit target has a learnable directional relationship with the already frozen transparent candidate-aware features before authorizing D3 expansion.",
+    "pair_score": {
+      "treatment_materially_better": 1.0,
+      "control_materially_better": 0.0,
+      "materially_equivalent": 0.0,
+      "uncertain": null
+    },
+    "same_pair_multiple_reviewers": "Average reviewer scores within the same generated pair; reviewers are repeated measurements, not independent generator outcomes.",
+    "state_soft_target": "Average the available independent generated-pair scores within each state after within-pair reviewer averaging.",
+    "scope": "Diagnostic only: eight states per component cannot promote a final PM.",
+    "required_reporting": [
+      "strict three-way D2 failure remains the primary measurement result",
+      "soft-target diagnostic is labeled as a pre-D3 recovery analysis",
+      "results are reported by component and user group",
+      "no external outcomes are consumed"
+    ]
+  },
+  "packet_repairs_before_any_D3": [
+    "canonicalize decisive_criterion enum names in manifest, HTML, blank annotations, and analyzer",
+    "reject visibly truncated or broken dialogue turns before freezing a packet",
+    "retain empty current_session_summary because complete current-session dialogue is the frozen baseline and resource evidence remains hidden from blind reviewers"
+  ],
+  "decision_after_zero_cost_diagnostic": {
+    "no_direction": "Narrow V1.5 to audited resource-effect measurement and routing feasibility; do not expand data or change encoder.",
+    "direction_present": "Freeze a bounded D3 repeated-outcome protocol before any generation, with outcome-blind state selection, user-group splits, a predefined judge calibration and minimal human audit, atomic risk review, and deterministic cost gates."
+  }
+}

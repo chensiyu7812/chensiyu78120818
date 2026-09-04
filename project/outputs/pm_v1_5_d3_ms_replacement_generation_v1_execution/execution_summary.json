@@ -1,0 +1,10 @@
+{
+  "protocol": "pm-v1.5-d3-ms-replacement-generation-execution-v1",
+  "status": "COMPLETE",
+  "planned_calls": 80,
+  "completed_calls": 80,
+  "completed_now": 80,
+  "remaining_calls": 0,
+  "resumable": true,
+  "plan_freeze_manifest_sha256": "9e705746dabbd4d3ddb18026762d5d34418e9d6a52043a99d7b1806e74e4d611"
+}

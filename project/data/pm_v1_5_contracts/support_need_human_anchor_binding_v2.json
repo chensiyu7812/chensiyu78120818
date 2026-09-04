@@ -1,0 +1,60 @@
+{
+  "protocol": "pm-v1.5-support-need-human-anchor-normalization-v2",
+  "status": "COMPLETE_SEMANTICALLY_SEPARATED_HUMAN_ANCHORS",
+  "input_binding_sha256": "ffd1d23e441c95f23c0329c1a1b64c33b84aa1967f3f2fc0c30fd9314b4cbbce",
+  "packet_contract_sha256": "18e3adeca29ff9f47eb9832bc3113ab5ab10a1fa0b7fd82ecefb216bd4fe169f",
+  "human_annotation_file_sha256": "7253f6b3e09d26e4d74ece4a69b76f97be81ebf9a44eb9efd1598afb5064b260",
+  "human_annotation_content_sha256": "4026a8282f656dd64fe733865039dd08b5a39a85c97ef1793caa6e2f06d4eb50",
+  "normalized_rows_sha256": "c43a372598fb563150e05dfb2bd9db20657e8c4ac1f6e217179b1451a8da3745",
+  "annotation_count": 24,
+  "abstain_count": 1,
+  "explicit_boundary_positive_counts": {
+    "advice_rejected": 0,
+    "advice_requested": 0,
+    "one_small_step_requested": 0,
+    "listen_first_requested": 0,
+    "question_or_task_burden_limit": 0
+  },
+  "contextual_human_boundary_judgment_counts": {
+    "advice_rejected": {
+      "false": 10,
+      "true": 1,
+      "unknown": 13
+    },
+    "advice_requested": {
+      "true": 6,
+      "unknown": 18
+    },
+    "one_small_step_requested": {
+      "false": 3,
+      "unknown": 21
+    },
+    "listen_first_requested": {
+      "false": 3,
+      "true": 1,
+      "unknown": 20
+    },
+    "question_or_task_burden_limit": {
+      "false": 1,
+      "true": 14,
+      "unknown": 9
+    }
+  },
+  "human_recommended_low_interaction_burden_counts": {
+    "false": 1,
+    "true": 14,
+    "unknown": 9
+  },
+  "legacy_field_interpretation": {
+    "question_or_task_burden_limit": "human_recommended_low_interaction_burden",
+    "reason": "completed notes use the field mainly as a contextual response-burden recommendation, not solely as an explicit user quote",
+    "raw_annotation_preserved": true,
+    "reannotation_required": false
+  },
+  "automatic_gold_label": false,
+  "pm_action_gold": false,
+  "api_calls_made": 0,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "normalization_binding_sha256": "451a364d4d4bc8dca4ff87998641a981bb0b7f79a16b1e2c7c5ce5e37acf8973"
+}

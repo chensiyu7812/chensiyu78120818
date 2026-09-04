@@ -1,0 +1,149 @@
+{
+  "protocol": "pm-v1.5-train-only-strict-pairwise-judge-bakeoff-v1",
+  "status": "READY_FOR_ZERO_API_DRY_RUN",
+  "scope": "longitudinal_train_only_pairwise_measurement_qualification",
+  "candidate_keys": [
+    "anthropic_claude_haiku_4_5",
+    "google_gemini_2_5_flash",
+    "openai_gpt_5_mini"
+  ],
+  "pair_count": 12,
+  "order_variants": [
+    0,
+    1
+  ],
+  "calls_per_candidate": 24,
+  "planned_new_logical_calls": 72,
+  "measurement_contract": {
+    "pairwise_only": true,
+    "combined_vs_split_not_repeated": true,
+    "same_ordered_items_for_every_candidate": true,
+    "preference_fields_are_scientific_outputs": true,
+    "reasons_are_required_audit_text": true,
+    "arbitrary_reason_character_ceiling_is_not_a_scientific_gate": true,
+    "total_output_tokens_remain_bounded": true,
+    "provider_enforced_schema_required": true
+  },
+  "decision_boundary": {
+    "qualification_only": true,
+    "creates_training_labels": false,
+    "majority_vote_is_gold": false,
+    "human_anchor_is_not_automatic_gold": true,
+    "gpt_anchor_is_not_automatic_gold": true,
+    "calibration_internal_test_external_outcomes_forbidden": true,
+    "one_candidate_may_be_promoted_only_after_researcher_signoff": true,
+    "unresolved_items_must_abstain_not_receive_synthetic_labels": true
+  },
+  "pre_outcome_criteria": {
+    "required_schema_valid_rate": 1.0,
+    "minimum_ab_ba_order_consistency": 0.8,
+    "minimum_pairwise_informative_rate": 0.5,
+    "minimum_gpt_anchor_direction_agreement_secondary": 0.7,
+    "human_anchor_review": "descriptive by confidence and dimension; no automatic promotion threshold and no post-outcome threshold tuning",
+    "failure_disposition": "candidate not promoted; no prompt/schema repair after outcome"
+  },
+  "response_schema": {
+    "class": "StrictBakeoffPairwiseOutput",
+    "sha256": "9c3c833d384dd49e1cf7700612334a6ad31645e88e5d2861907dd94336f4c5ab"
+  },
+  "endpoint_contract": {
+    "protocol": "pm-v1.5-strict-pairwise-judge-bakeoff-endpoints-v1",
+    "candidates": {
+      "anthropic_claude_haiku_4_5": {
+        "anthropic_strict_tool_use": true,
+        "api_key_env": "ANTHROPIC_API_KEY",
+        "base_url": "https://api.anthropic.com",
+        "family": "anthropic_claude_haiku_4_5",
+        "input_usd_per_million_tokens": 1.0,
+        "model": "claude-haiku-4-5-20251001",
+        "output_usd_per_million_tokens": 5.0,
+        "supports_strict_json_schema": true,
+        "transport": "anthropic_messages"
+      },
+      "google_gemini_2_5_flash": {
+        "api_key_env": "GEMINI_API_KEY",
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "family": "google_gemini_2_5_flash",
+        "gemini_thinking_budget": 0,
+        "input_usd_per_million_tokens": 0.3,
+        "model": "gemini-2.5-flash",
+        "output_usd_per_million_tokens": 2.5,
+        "supports_strict_json_schema": true,
+        "transport": "gemini_generate_content"
+      },
+      "openai_gpt_5_mini": {
+        "api_key_env": "OPENAI_API_KEY",
+        "base_url": "https://api.openai.com/v1",
+        "family": "openai_gpt_5_mini",
+        "input_usd_per_million_tokens": 0.25,
+        "max_output_tokens_parameter": "max_completion_tokens",
+        "model": "gpt-5-mini-2025-08-07",
+        "openai_reasoning_effort": "minimal",
+        "output_usd_per_million_tokens": 2.0,
+        "provider_max_output_tokens": 1400,
+        "supports_strict_json_schema": true,
+        "temperature_mode": "omit",
+        "transport": "openai_chat_completions"
+      }
+    },
+    "request_contract": {
+      "client_internal_retries": 1,
+      "input_token_safety_factor": 1.5,
+      "maximum_physical_attempts_per_logical_call": 2,
+      "pairwise_max_output_tokens": 700,
+      "seed": 12091,
+      "temperature": 0.0
+    },
+    "file_sha256": "5bfaa85f3d96784dc088a37fc275e43e7b3ae1f140018eb82ae13d3c59db46be",
+    "content_sha256": "f0279b2df4e403b24aeb425f9d118a2109ad3686e086413a22e5c8fd6e7c02a4"
+  },
+  "packet_files": {
+    "source_packet_directory": "outputs/pm_v1_5_low_budget_judge_qualification_v2_full_schema_v3_packet",
+    "qualification_pairs": {
+      "rows": 12,
+      "sha256": "77f283bdd68d46720f3bd5f386a70943df2dad6f22eb7909fe5cc48dd95adee2",
+      "canonical_content_sha256": "55aeaf43f623857be098a1a7c6af2b9467517e6601d57184b6ff235c5be02374"
+    },
+    "ordered_pairwise_prompts": {
+      "rows": 24,
+      "sha256": "819ac693d291d7c53ec9d01bd1924bab3f8d8341054f5ea94ba05fbe42177ab6",
+      "canonical_content_sha256": "7056627d8b5966f9e778235f2e15cbd65a8decf5216a32dfd1a4103b50c2abf7"
+    },
+    "human_blind_packet": {
+      "rows": 12,
+      "sha256": "bffedce86fb6ad756caffa6546d1ab178216d9580af373cbde09c237714ca521",
+      "canonical_content_sha256": "08aebfe0d959ba4f8708dc1e3eb787636cba4a8798fdb3c9d0fd2b95693a0343"
+    }
+  },
+  "human_anchor": {
+    "protocol": "pm-v1.5-low-budget-judge-human-anchor-v1",
+    "status": "FROZEN_BEFORE_MODEL_RESULTS",
+    "annotation_role": "independent_researcher_anchor_not_automatic_gold",
+    "binding_path": "data/pm_v1_5_contracts/low_budget_judge_human_anchor_v1.json",
+    "binding_file_sha256": "43c479c92fb3c963048358e543d0832f2377b048e86a8c812d70e51f1468d64a",
+    "binding_sha256": "d51a61224db2bdc7b6c84d67b0f8a8508839c251b6f1fe5ae33c7424e0399c69",
+    "annotations_path": "data/pm_v1_5_contracts/low_budget_judge_human_annotations_v1.jsonl",
+    "annotations_file_sha256": "d925c7c9cf5101251cde573db9035c3aaac49050c749cd4ceaeacdae0f54ed2a",
+    "annotations": 12,
+    "human_blind_packet_canonical_content_sha256": "08aebfe0d959ba4f8708dc1e3eb787636cba4a8798fdb3c9d0fd2b95693a0343",
+    "human_blind_packet_file_sha256": "bffedce86fb6ad756caffa6546d1ab178216d9580af373cbde09c237714ca521",
+    "automatic_gold": false,
+    "may_auto_promote_bulk_labeler": false,
+    "requires_researcher_signoff": true
+  },
+  "gpt_anchor": {
+    "protocol": "pm-v1.5-existing-gpt56-pairwise-anchor-binding-v1",
+    "role": "secondary_high_quality_anchor_not_gold_not_bulk_labeler",
+    "source_directory": "outputs/pm_v1_5_low_budget_judge_qualification_v2_full_schema_qualification_candidate",
+    "qualification_results_sha256": "8801df6a5dfd2981549fbcdc4b18a04d9f4af899a14fb63d2aaa2d70f99f085b",
+    "physical_attempt_ledger_sha256": "b6c7f22d10fbb54aca44742c5b3d69ce6f679b0338e45be38daa108a70cc8b98",
+    "cost_estimate_sha256": "f27260455455887201fefa7c3f61c0a22cf6fe75f4bbae714a92ebc17f94ff76",
+    "selected_calls": 16,
+    "selected_call_keys_sha256": "9aeecdcf65be43a6d0686a827ba1625bd394520812f6fa478ed990147c6bf896",
+    "selected_results_sha256": "3925142a6ba18c519349ec31d69c9c2c596729b832e50a114fbe4b6849beea5a"
+  },
+  "api_clients_created": 0,
+  "api_calls_made": 0,
+  "training_labels_created": false,
+  "contract_sha256": "059789897061740b5faaa4b5f18b06a5e0d1cd4c3f8d54a7899ca6beb03d06a5"
+}

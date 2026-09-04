@@ -1,0 +1,86 @@
+{
+  "protocol": "pm-v1.5-v3-observation-factor-bakeoff-v1",
+  "frozen_date": "2026-08-03",
+  "role": "ELIGIBILITY_FACTOR_SUPERVISION_NOT_STEP1_WORTH_OPENING",
+  "reference": "outputs/pm_v1_5_v3_h_eligibility_reference_v3/eligibility_reference.jsonl",
+  "reference_sha256": "640024ab7549fe257922cfd6c3c989ffb4233d58f9e8516e210018e8bfba1a35",
+  "factors": [
+    "owner_time_entity_valid",
+    "goal_function_fit",
+    "boundary_burden_compatible",
+    "specific_increment"
+  ],
+  "candidates": [
+    {
+      "id": "transparent_v1",
+      "learned": false,
+      "description": "Frozen visible-input transparent factor scores at threshold 0.5"
+    },
+    {
+      "id": "lexical_logistic_v1",
+      "learned": true,
+      "description": "Word 1-2 gram TF-IDF plus transparent scores and schema one-hot; L2 logistic"
+    },
+    {
+      "id": "bge_small_hybrid_v1",
+      "learned": true,
+      "description": "Frozen local BAAI/bge-small-en-v1.5 relation embeddings plus transparent scores and schema one-hot; fold-local PCA and L2 logistic"
+    }
+  ],
+  "shared_model": {
+    "one_binary_head_per_factor": true,
+    "component_effect_heads_trained_here": false,
+    "direct_eligibility_classifier": false,
+    "direct_16_action_classifier": false,
+    "logistic_c": 0.3,
+    "class_weight": "balanced",
+    "decision_threshold": 0.5,
+    "lexical_max_features": 256,
+    "bge_pca_components": 8,
+    "embedding_pooling": "normalized_cls",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "embedding_local_files_only": true
+  },
+  "validation": {
+    "group_field": "counterfactual_group_id",
+    "stratified_group_folds": 5,
+    "seeds": [17, 29, 43, 71, 113],
+    "average_oof_probability_across_seeds": true,
+    "leave_semantic_family_out_field": "logic_pair",
+    "all_preprocessing_fit_inside_training_fold": true,
+    "minimal_counterfactual_pairs_never_cross_folds": true
+  },
+  "gates": {
+    "each_factor_balanced_accuracy_min": 0.7,
+    "each_factor_recall_min": 0.6,
+    "each_factor_specificity_min": 0.6,
+    "each_factor_minimal_counterfactual_direction_min": 0.75,
+    "each_factor_leave_semantic_family_out_balanced_accuracy_min": 0.6,
+    "five_seed_balanced_accuracy_sd_max": 0.05,
+    "nuisance_probe_balanced_accuracy_max_exclusive": 0.65
+  },
+  "selection": {
+    "order_if_all_gates_pass": ["transparent_v1", "lexical_logistic_v1", "bge_small_hybrid_v1"],
+    "prefer_simpler_candidate": true,
+    "no_hyperparameter_search": true,
+    "no_threshold_tuning": true,
+    "bge_m3_and_qwen3_not_tested_in_v1_5_primary_bakeoff": true
+  },
+  "forbidden_inputs": [
+    "state_id",
+    "user_id",
+    "topic_family",
+    "logic_family",
+    "logic_pair",
+    "construction_intent",
+    "human_final_eligibility",
+    "response_text",
+    "response_quality",
+    "risk_outcome",
+    "cost_outcome",
+    "ESConv_test_or_validation",
+    "EvoEmo_p7_p18"
+  ],
+  "failure_rule": "If no candidate passes all gates, do not fit or freeze a final Observation model and do not start Step1 or H-Step2. Report the unsupported factors without adding scattered review packets.",
+  "external_lockbox_read": false
+}

@@ -1,0 +1,190 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PM V1.5 V3 Observation 资格赛报告",
+    "description": "透明规则、lexical logistic 与 BGE-small hybrid 的分组资格赛及数据捷径审计。",
+    "generatedAt": "2026-08-03T16:00:00+09:00",
+    "filters": [],
+    "cards": [],
+    "charts": [
+      {
+        "id": "factor_ba_chart",
+        "title": "Observation 候选的 grouped OOF balanced accuracy",
+        "subtitle": "n=128；柱形仅显示全局 BA，反事实与未见语义族门须结合下表读取。",
+        "type": "bar",
+        "dataset": "factor_performance",
+        "sourceId": "performance_source",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {"field": "factor", "type": "nominal", "label": "资格因子"},
+          "y": {"field": "balanced_accuracy", "type": "quantitative", "label": "Balanced accuracy"},
+          "color": {"field": "candidate", "type": "nominal", "label": "候选"},
+          "tooltip": [
+            {"field": "counterfactual_direction", "type": "quantitative", "label": "反事实方向率", "format": "percent"},
+            {"field": "leave_family_ba", "type": "quantitative", "label": "Leave-family-out BA", "format": "percent"}
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "performance_table",
+        "title": "候选 × 因子资格结果",
+        "subtitle": "PASS 要求同时满足全局分类、反事实方向、未见语义族与稳定性门。",
+        "dataset": "factor_performance",
+        "sourceId": "performance_source",
+        "defaultSort": {"field": "candidate", "direction": "asc"},
+        "columns": [
+          {"field": "candidate", "label": "候选", "type": "text"},
+          {"field": "factor", "label": "因子", "type": "text"},
+          {"field": "balanced_accuracy", "label": "BA", "format": "percent"},
+          {"field": "recall", "label": "Recall", "format": "percent"},
+          {"field": "specificity", "label": "Specificity", "format": "percent"},
+          {"field": "counterfactual_direction", "label": "反事实方向", "format": "percent"},
+          {"field": "leave_family_ba", "label": "Leave-family BA", "format": "percent"},
+          {"field": "status", "label": "结果", "type": "text"}
+        ]
+      },
+      {
+        "id": "nuisance_table",
+        "title": "仅使用 nuisance 的标签可预测性",
+        "subtitle": "topic、scale、component、文本长度等非语义目标特征；冻结上限为 BA < 0.65。",
+        "dataset": "nuisance",
+        "sourceId": "nuisance_source",
+        "defaultSort": {"field": "balanced_accuracy", "direction": "desc"},
+        "columns": [
+          {"field": "factor", "label": "因子", "type": "text"},
+          {"field": "balanced_accuracy", "label": "Nuisance BA", "format": "percent"},
+          {"field": "threshold", "label": "上限", "format": "percent"},
+          {"field": "status", "label": "结果", "type": "text"}
+        ]
+      }
+    ],
+    "sources": [
+      {"id": "qualification_report", "label": "Observation qualification report", "path": "qualification_report.json"},
+      {"id": "performance_source", "label": "Candidate performance projection", "path": "qualification_report.json"},
+      {"id": "nuisance_source", "label": "Nuisance probe projection", "path": "qualification_report.json"}
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# PM V1.5 V3 Observation 资格赛报告"},
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "qualification_report",
+        "body": "## 结论：没有 Observation 候选达到可冻结标准\n\n在预冻结的128项、64个counterfactual groups上，transparent、lexical logistic和BAAI/bge-small hybrid均未同时通过四个factor的分类、最小反事实、leave-semantic-family-out和数据捷径门。最终 `selected_candidate=null`，没有拟合正式Observation，也未授权Step 1训练或H-Step2。\n\nBAAI带来了局部真实提升，但没有解决训练数据的因子混杂：仅用topic、history scale、component和文本长度即可高精度预测标签。当前正确动作是重建设计矩阵，不是换更大模型或调阈值。"
+      },
+      {
+        "id": "model_finding",
+        "type": "markdown",
+        "sourceId": "performance_source",
+        "body": "## BGE-small 提高了局部识别，但未证明跨语义族可用\n\nBGE将goal/function全局BA提高到0.800、boundary/burden提高到0.774；boundary和increment的反事实方向也分别达到0.762和0.775。然而goal方向只有0.708，boundary与increment的leave-family-out BA只有0.479和0.490。换言之，它能学当前模板中的部分关系，但没有稳定迁移到未见语义条件。"
+      },
+      {"id": "chart", "type": "chart", "chartId": "factor_ba_chart"},
+      {"id": "performance_table_block", "type": "table", "tableId": "performance_table"},
+      {
+        "id": "data_finding",
+        "type": "markdown",
+        "sourceId": "nuisance_source",
+        "body": "## 上游数据捷径足以使任何内部高分失去解释力\n\n四个factor的nuisance-only grouped OOF BA为0.875、0.771、0.897和0.714，全部超过0.65上限。进一步诊断显示topic单独即可预测owner，而当前消息长度强烈预测boundary。旧数据只平衡最终eligible/off，没有让四个独立门在component、topic、scale和长度上正交。"
+      },
+      {"id": "nuisance_table_block", "type": "table", "tableId": "nuisance_table"},
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## 本次测量的是候选资格语义，不是PM收益或generator能力\n\n每条单位是一个受控内部state、一个目标component及其actual Rank-1 candidate。四个监督目标为owner/time、goal/function、boundary/burden和specific nonredundant increment。它们来自冻结的reviewer-proxy Eligibility reference，不是Step 1 `worth_opening`；本轮没有回复、质量、风险、成本或外部lockbox输入。"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "sourceId": "qualification_report",
+        "body": "## 方法固定后一次运行，没有模型或阈值搜索\n\n三种候选使用相同reference。learned候选采用五个seed的StratifiedGroupKFold，counterfactual group整组留在同一fold；另做leave-logic-pair-out。所有TF-IDF、PCA和标准化只在train fold拟合，logistic固定C=0.3、阈值0.5。BGE-small使用本地缓存、normalized CLS；正式环境GPU因CUDA build/driver不兼容而回退CPU Transformers。"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## 限制：这批结果不能外推为BAAI或有限PM的能力上限\n\n数据只有128条受控synthetic reviewer-proxy记录，且存在已证实的nuisance关联。BGE失败可能同时包含模型容量不足和训练题不可识别，不能拆成单一原因。报告因此只支持“当前候选与当前数据合同不能冻结”，不支持“embedding无用”“PM不能学习”或“所有外部场景都失败”。"
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## 下一步：拆开factor学习与最终mask确认\n\n四个独立50/50 factor的全过率只有1/16，因此不能在同一小数据集里同时追求因子正交和最终Eligibility 50/50。新合同使用64条FACTOR_FIT：MP/MS/ME各完整2^4，RS只对三个可学习门做2^3；另用32条ELIGIBILITY_CONFIRMATION，在模型冻结后一次确认最终mask。两轨合成一个96项主包和24项overlap。\n\n在任何模型或人评前，必须先通过actual Rank-1、因子格子、topic/scale/prefix/length nuisance以及跨topic/scale/反长度对照静态门；此前不再测试BGE-M3、Qwen、阈值或H-Step2。"
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## 后续需要验证的问题\n\n- 正交化后，透明规则是否已足够，还是BGE-small仍有可复现增益？\n- 未见topic与未见用户能否通过，而不要求V1.5泛化到未定义的新语义族？\n- 合格Observation进入H-Step2后，generator能否真正、无误用地消费四类资源？"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-03T16:00:00+09:00",
+    "status": "ready",
+    "datasets": {
+      "factor_performance": [
+        {"candidate": "transparent", "factor": "owner", "balanced_accuracy": 0.8483709273, "recall": 0.9824561404, "specificity": 0.7142857143, "counterfactual_direction": 0.7142857143, "leave_family_ba": 0.8483709273, "status": "FAIL"},
+        {"candidate": "transparent", "factor": "goal", "balanced_accuracy": 0.75, "recall": 1.0, "specificity": 0.5, "counterfactual_direction": 0.5, "leave_family_ba": 0.75, "status": "FAIL"},
+        {"candidate": "transparent", "factor": "boundary", "balanced_accuracy": 0.5816644415, "recall": 0.9252336449, "specificity": 0.2380952381, "counterfactual_direction": 0.1904761905, "leave_family_ba": 0.5816644415, "status": "FAIL"},
+        {"candidate": "transparent", "factor": "increment", "balanced_accuracy": 0.7147727273, "recall": 0.7045454545, "specificity": 0.725, "counterfactual_direction": 0.475, "leave_family_ba": 0.7147727273, "status": "FAIL"},
+        {"candidate": "lexical", "factor": "owner", "balanced_accuracy": 0.9868421053, "recall": 0.9736842105, "specificity": 1.0, "counterfactual_direction": 1.0, "leave_family_ba": 0.8264411028, "status": "PASS"},
+        {"candidate": "lexical", "factor": "goal", "balanced_accuracy": 0.75, "recall": 1.0, "specificity": 0.5, "counterfactual_direction": 1.0, "leave_family_ba": 0.7125, "status": "FAIL"},
+        {"candidate": "lexical", "factor": "boundary", "balanced_accuracy": 0.7131731197, "recall": 0.6168224299, "specificity": 0.8095238095, "counterfactual_direction": 0.9523809524, "leave_family_ba": 0.5226969292, "status": "FAIL"},
+        {"candidate": "lexical", "factor": "increment", "balanced_accuracy": 0.6875, "recall": 0.75, "specificity": 0.625, "counterfactual_direction": 0.9, "leave_family_ba": 0.5363636364, "status": "FAIL"},
+        {"candidate": "BGE-small hybrid", "factor": "owner", "balanced_accuracy": 0.9561403509, "recall": 0.9122807018, "specificity": 1.0, "counterfactual_direction": 0.9285714286, "leave_family_ba": 0.813283208, "status": "PASS"},
+        {"candidate": "BGE-small hybrid", "factor": "goal", "balanced_accuracy": 0.8, "recall": 0.85, "specificity": 0.75, "counterfactual_direction": 0.7083333333, "leave_family_ba": 0.75625, "status": "FAIL"},
+        {"candidate": "BGE-small hybrid", "factor": "boundary", "balanced_accuracy": 0.7743658211, "recall": 0.691588785, "specificity": 0.8571428571, "counterfactual_direction": 0.7619047619, "leave_family_ba": 0.479305741, "status": "FAIL"},
+        {"candidate": "BGE-small hybrid", "factor": "increment", "balanced_accuracy": 0.725, "recall": 0.75, "specificity": 0.7, "counterfactual_direction": 0.775, "leave_family_ba": 0.4897727273, "status": "FAIL"}
+      ],
+      "nuisance": [
+        {"factor": "owner", "balanced_accuracy": 0.8753132832, "threshold": 0.65, "status": "FAIL"},
+        {"factor": "goal", "balanced_accuracy": 0.7708333333, "threshold": 0.65, "status": "FAIL"},
+        {"factor": "boundary", "balanced_accuracy": 0.8967512239, "threshold": 0.65, "status": "FAIL"},
+        {"factor": "increment", "balanced_accuracy": 0.7136363636, "threshold": 0.65, "status": "FAIL"}
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "qualification_report",
+      "label": "Observation qualification report",
+      "path": "qualification_report.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('qualification_report.json')",
+        "description": "Loads the complete frozen bakeoff report.",
+        "executed_at": "2026-08-03T16:00:00+09:00",
+        "filters": ["128 frozen Eligibility rows", "no response outcomes", "no external lockbox"]
+      }
+    },
+    {
+      "id": "performance_source",
+      "label": "Candidate performance projection",
+      "path": "qualification_report.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM (VALUES ('transparent','owner',0.8483709273,0.9824561404,0.7142857143,0.7142857143,0.8483709273,'FAIL'),('transparent','goal',0.75,1.0,0.5,0.5,0.75,'FAIL'),('transparent','boundary',0.5816644415,0.9252336449,0.2380952381,0.1904761905,0.5816644415,'FAIL'),('transparent','increment',0.7147727273,0.7045454545,0.725,0.475,0.7147727273,'FAIL'),('lexical','owner',0.9868421053,0.9736842105,1.0,1.0,0.8264411028,'PASS'),('lexical','goal',0.75,1.0,0.5,1.0,0.7125,'FAIL'),('lexical','boundary',0.7131731197,0.6168224299,0.8095238095,0.9523809524,0.5226969292,'FAIL'),('lexical','increment',0.6875,0.75,0.625,0.9,0.5363636364,'FAIL'),('BGE-small hybrid','owner',0.9561403509,0.9122807018,1.0,0.9285714286,0.813283208,'PASS'),('BGE-small hybrid','goal',0.8,0.85,0.75,0.7083333333,0.75625,'FAIL'),('BGE-small hybrid','boundary',0.7743658211,0.691588785,0.8571428571,0.7619047619,0.479305741,'FAIL'),('BGE-small hybrid','increment',0.725,0.75,0.7,0.775,0.4897727273,'FAIL')) AS t(candidate,factor,balanced_accuracy,recall,specificity,counterfactual_direction,leave_family_ba,status)",
+        "description": "Projects all 12 candidate-by-factor qualification rows from qualification_report.json.",
+        "executed_at": "2026-08-03T16:00:00+09:00",
+        "filters": ["three frozen candidates", "four audited factors", "grouped OOF"]
+      }
+    },
+    {
+      "id": "nuisance_source",
+      "label": "Nuisance probe projection",
+      "path": "qualification_report.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM (VALUES ('owner',0.8753132832,0.65,'FAIL'),('goal',0.7708333333,0.65,'FAIL'),('boundary',0.8967512239,0.65,'FAIL'),('increment',0.7136363636,0.65,'FAIL')) AS t(factor,balanced_accuracy,threshold,status)",
+        "description": "Projects four nuisance-only grouped OOF diagnostics from qualification_report.json.",
+        "executed_at": "2026-08-03T16:00:00+09:00",
+        "filters": ["topic", "history scale", "component", "prefix", "text length"]
+      }
+    }
+  ]
+}

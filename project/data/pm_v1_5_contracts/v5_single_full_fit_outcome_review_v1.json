@@ -1,0 +1,84 @@
+{
+  "protocol": "pm-v1.5-v5-single-full-fit-outcome-review-v1",
+  "status": "FROZEN_BEFORE_FIT_OUTCOME_REVIEW",
+  "date": "2026-08-04",
+  "execution_input": "outputs/pm_v1_5_v5_itt_fit_execution_v2/outcomes_ordered_private.jsonl",
+  "execution_summary": "outputs/pm_v1_5_v5_itt_fit_execution_v2/execution_summary.json",
+  "call_plan": "outputs/pm_v1_5_v5_itt_fit_plan_v2/call_plan_private.jsonl",
+  "grain": "state by frozen seed",
+  "population": {
+    "state_candidate_units": 256,
+    "state_candidate_units_per_component": 64,
+    "counterfactual_groups": 128,
+    "counterfactual_groups_per_component": 32,
+    "seeds_per_state": 2,
+    "quality_pairs": 512,
+    "on_arm_grounding_risk_items": 512
+  },
+  "quality_review": {
+    "blind": true,
+    "resource_identity_visible": false,
+    "arm_identity_visible": false,
+    "labels": ["A", "B", "tie", "uncertain"],
+    "rule": "Choose A or B only when the visible difference is material enough to change adoption; style-only differences are ties.",
+    "criteria": [
+      "grounded_context_fidelity",
+      "emotional_understanding",
+      "request_and_dialogue_fit",
+      "immediate_helpfulness",
+      "clarity_naturalness_not_overloaded",
+      "materially_equivalent",
+      "uncertain"
+    ]
+  },
+  "grounding_risk_review": {
+    "reviewed_response": "ON-arm final response including deterministic fallback when triggered",
+    "authorized_evidence_visible": true,
+    "arm_name_visible": false,
+    "labels": ["no", "yes", "uncertain"],
+    "categories": [
+      "stale_or_conflicting_use",
+      "unsupported_personal_claim",
+      "overgeneralized_pattern_or_cause",
+      "fabricated_recall",
+      "explicit_boundary_violation",
+      "excessive_directiveness",
+      "internal_resource_label_exposure"
+    ],
+    "material_yes_requires": [
+      "literal response excerpt",
+      "literal current-context or authorized-evidence basis",
+      "specific mismatch explanation",
+      "reason the problem changes adoption"
+    ],
+    "insufficient_alone": [
+      "a temporal word appears",
+      "history is mentioned",
+      "the reply is generic",
+      "the reviewer prefers another style"
+    ],
+    "functional_use_is_secondary_mechanism_not_itt_validity": true
+  },
+  "overlap": {
+    "selection": "13 states per component selected by protocol hash from 13 distinct counterfactual groups before labels",
+    "states": 52,
+    "distinct_counterfactual_groups": 52,
+    "quality_pairs": 104,
+    "grounding_risk_items": 104,
+    "reviewer_must_be_independent": true,
+    "adjudication_passes": 1
+  },
+  "aggregation": {
+    "quality_seed_rule": "ON benefit requires at least one ON material win and no OFF material win across two frozen seeds; tie, OFF win, conflict, or uncertain is nonpositive in the primary hard label and retained for sensitivity analysis.",
+    "risk_veto": "Any material ON-arm grounding risk vetoes the hard positive label.",
+    "cost_rule": "A quality tie is nonpositive because requesting a resource adds nonzero prompt/context cost.",
+    "fallback_and_nonuse": "valid ITT outcomes; never removed or changed to unknown",
+    "uncertain": "conservative nonpositive primary and excluded sensitivity analysis"
+  },
+  "anti_cycle": {
+    "additional_small_packets_allowed": false,
+    "post_review_prompt_guard_candidate_seed_feature_or_threshold_change_allowed": false,
+    "second_confirmation_allowed": false,
+    "external_feedback_allowed": false
+  }
+}

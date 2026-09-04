@@ -1,0 +1,72 @@
+{
+  "protocol": "pm-v1.5-d3-ms-retrieval-replacement-contract-v1",
+  "date": "2026-08-01",
+  "status": "GENERATION_COMPLETE_BLIND_REVIEW_READY",
+  "scope": "Replace only the invalid original D3 MS 32 primary plus 8 repeat pairs.",
+  "preserve_without_regeneration": [
+    "original D3 RS 40 pairs",
+    "original D3 MP 40 pairs",
+    "original D3 ME 40 pairs"
+  ],
+  "exclude_from_formal_training": [
+    "original D3 MS 40 pairs"
+  ],
+  "root_cause": "The original shared context query included supporter-authored nonredundancy metacues, allowing the experimental manipulation to steer MS lexical retrieval toward unrelated generic summaries.",
+  "shared_internal_external_query_contract": {
+    "protocol": "pm-v1.5-source-specific-memory-query-contract-v1",
+    "MP": "full visible current-session context",
+    "MS": "seeker-authored visible context only",
+    "ME": "full visible current-session context",
+    "decision_timing": "after concrete candidate discovery and before injection or generation"
+  },
+  "replacement_design": {
+    "new_content_disjoint_users": 32,
+    "primary_pairs": 32,
+    "outcome_blind_repeats": 8,
+    "total_pairs": 40,
+    "response_calls": 80,
+    "one_bit_difference": "MS only",
+    "backgrounds": "all eight MP x ME x RS combinations, four users each",
+    "runtime_actions_preserved": 16,
+    "model_features": [
+      "candidate_state_match_score",
+      "candidate_grounding_or_nonredundancy_score",
+      "background_MP_on",
+      "background_ME_on",
+      "background_RS_on"
+    ]
+  },
+  "objective_pre_generation_gates": {
+    "top2_present_states": "32/32",
+    "all_top2_relevant_states": "32/32",
+    "selected_item_precision": 1.0,
+    "correct_owner_states": "32/32",
+    "strictly_prior_states": "32/32",
+    "supporter_query_invariance": "32/32",
+    "supporter_selection_invariance": "32/32",
+    "ESConv_exact_text_overlap": 0,
+    "EvoEmo_exact_text_overlap": 0
+  },
+  "measurement_boundary": {
+    "retrieval_qualification": "Objective construction-grounded audit; no psychological quality rating required.",
+    "component_effect": "One blinded same-state response-quality decision remains necessary because correct retrieval does not establish beneficial injection.",
+    "risk": "Only MS-on material wins receive the minimal interaction-and-grounding risk screen.",
+    "cost": "Use exact incremental token accounting after the quality and risk gates."
+  },
+  "merge_rule": "Formal D3 equals original RS/MP/ME 120 pairs plus replacement MS 40 pairs; never append both old and replacement MS.",
+  "stop_rules": [
+    "Do not change RS, MP, ME, the strategy bank, generator, or prompt compiler in this repair.",
+    "Do not use external outcomes, existing D3 response outcomes, or human labels to construct or select the replacement states.",
+    "Do not tune BGE, Qwen, thresholds, seeds, or regularization on the replacement outcomes.",
+    "If the replacement MS head fails the frozen grouped-OOF gate, report failure instead of adding another data wave in V1.5."
+  ],
+  "artifacts": {
+    "blueprint_report": "outputs/pm_v1_5_d3_ms_replacement_step0_v1/preflight_report.json",
+    "retrieval_audit": "outputs/pm_v1_5_d3_ms_replacement_step0_v1/retrieval_qualification_audit.jsonl",
+    "generation_plan": "outputs/pm_v1_5_d3_ms_replacement_generation_v1/generation_plan_report.json",
+    "generation_status": "COMPLETE_80_OF_80",
+    "blind_review": "outputs/pm_v1_5_d3_ms_replacement_blind_v1/human_blind_review.html",
+    "blind_review_status": "READY_FOR_SINGLE_BOUNDED_40_PAIR_MS_REPLACEMENT_QUALITY_REVIEW",
+    "exactly_identical_response_pairs": 2
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "protocol": "pm-v1.5-strategy-g2-controlled-retrieval-v1",
+  "status": "CONTROL_SUITE_COMPLETE_REAL_G2_QUALIFICATION_NOT_STARTED",
+  "bank_card_count": 6,
+  "synthetic_positive_cases": 42,
+  "synthetic_boundary_or_negative_controls": 12,
+  "eligibility_expected_set_passes": 54,
+  "eligibility_expected_set_denominator": 54,
+  "lexical_positive_top1_passes": 30,
+  "bge_positive_top1_passes": 25,
+  "positive_denominator": 42,
+  "lexical_control_top1_passes": 12,
+  "bge_control_top1_passes": 12,
+  "control_denominator": 12,
+  "per_move": {
+    "AM01_invite_open_expression": {
+      "cases": 7,
+      "lexical_top1_passes": 6,
+      "bge_top1_passes": 4
+    },
+    "AM02_ask_one_focused_clarification": {
+      "cases": 7,
+      "lexical_top1_passes": 4,
+      "bge_top1_passes": 6
+    },
+    "AM04_tentative_paraphrase_check": {
+      "cases": 7,
+      "lexical_top1_passes": 1,
+      "bge_top1_passes": 0
+    },
+    "AM05_grounded_validation": {
+      "cases": 7,
+      "lexical_top1_passes": 6,
+      "bge_top1_passes": 7
+    },
+    "AM10_offer_one_optional_micro_step": {
+      "cases": 7,
+      "lexical_top1_passes": 7,
+      "bge_top1_passes": 4
+    },
+    "AM14_supportive_transition": {
+      "cases": 7,
+      "lexical_top1_passes": 6,
+      "bge_top1_passes": 4
+    }
+  },
+  "bge_model": "BAAI/bge-small-en-v1.5",
+  "bge_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "bge_pooling": "cls",
+  "bge_normalized": true,
+  "bge_score": "normalized_dot_product_equal_to_cosine",
+  "lexical_score": "existing_term_frequency_cosine",
+  "query_includes_expected_move_id": false,
+  "external_or_test_outcomes_used": false,
+  "synthetic_cases_count_toward_real_qualification_n": false,
+  "promotion_authorized": false,
+  "next_gate": "Build real ESConv-train, Bank-source-disjoint query states and run the same frozen eligibility/ranking stack; do not request additional G1 human review."
+}

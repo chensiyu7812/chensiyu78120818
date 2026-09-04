@@ -1,0 +1,51 @@
+{
+  "protocol": "pm-v1.5-longitudinal-response-mechanism-uptake-freeze-v1",
+  "status": "MECHANISM_SIGNAL_NOT_ESTABLISHED_REPORT_ONLY",
+  "decision": "NO_GO_FOR_TOP1_EVIDENCE_SURFACE_AS_LONGITUDINAL_SUPERVISION_RESCUE",
+  "frozen_at_utc": "2026-07-24T01:48:00Z",
+  "pilot_cost_estimate_sha256": "75047456de55301f138db5de8e094320065197d1ee8cf3f06f79780a464eaf4c",
+  "pilot_call_plan_sha256": "1b3b0407cc76206fe64ca327f558ffb5234f1bf7009d0baedb9d7a5283075c33",
+  "pilot_outcomes_sha256": "d1df0350ec475e5367530fd8c6e01e96b3683c2aca5b881f61892d9e4e093a7c",
+  "pilot_artifact_attestation_sha256": "cb24889ce7b27dbfeefc4d8c81298f694ca7fbb196d7fad91ae2b8d4df50ed8b",
+  "uptake_measurement_contract_sha256": "d280fdfd1b1e724c457b230447c6e31d5423cb5765093c631dc2a261b460b3ed",
+  "uptake_report_sha256": "e70946b1747185b28b22ef1875a9eba91648b3825622e057cae59d9b4b77292c",
+  "uptake_artifact_attestation_sha256": "8e3e5f4e0606d21539b9b3066d25394e9dcd9d27a71d1a78bf33910409b8d3f9",
+  "real_execution": {
+    "new_logical_calls": 14,
+    "new_physical_attempts": 14,
+    "failed_physical_attempts": 0,
+    "actual_input_tokens": 4747,
+    "actual_output_tokens": 662,
+    "actual_proxy_cost_usd": 0.00110925,
+    "budget_ceiling_usd": 0.0151926
+  },
+  "predeclared_primary_result": {
+    "helpful_pairs": 10,
+    "helpful_mean_target_evidence_bge_cosine_delta": -0.006040896891902204,
+    "helpful_positive_pairs": 3,
+    "required_helpful_positive_pairs": 6,
+    "harmful_pairs": 4,
+    "harmful_mean_target_evidence_bge_cosine_delta": 0.010581861702141065,
+    "harmful_negative_pairs": 2,
+    "required_harmful_negative_pairs": 3
+  },
+  "localization": {
+    "helpful_memory_target_selection": "all single-source cases selected 1/1 annotated helpful item and both multi-source cases selected 3/3; unstable response uptake therefore cannot be attributed mainly to missing the annotated target",
+    "memory_harmful_direction": "2/2 pairs had the expected negative BGE delta",
+    "strategy_harmful_direction": "0/2 pairs had the expected negative BGE delta; reducing the surface to a single strategy can concentrate rather than remove exposure to that strategy",
+    "overall": "a uniform top-1 post-retrieval evidence-surface restriction did not establish the preregistered bidirectional mechanism signal"
+  },
+  "api_judges_used": false,
+  "training_labels_created": false,
+  "pm_training_authorized": false,
+  "internal_test_opened": false,
+  "forbidden_followups": [
+    "change the frozen uptake threshold or primary metric using these outcomes",
+    "create longitudinal action labels from this report",
+    "authorize learned PM training from the unsupported longitudinal supervision",
+    "claim that top-1 evidence filtering improves response quality",
+    "open longitudinal internal-test to rescue the result"
+  ],
+  "allowed_interpretation": "report-only root-cause evidence and a disclosed limitation; future work may separately redesign item selection, strategy-card construction, generator evidence-use training, and measurement using new preregistered data",
+  "contract_sha256": "884494273ccfea637fb4f03ef42bfd14e9c6136dacf94f92add6ce90791afbc1"
+}

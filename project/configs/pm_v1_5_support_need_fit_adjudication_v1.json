@@ -1,0 +1,312 @@
+{
+  "protocol": "pm-v1.5-support-need-fit-adjudication-decisions-v1",
+  "packet_contract_sha256": "8de38c9b6506b5ddcf45ed47967c344896f4ff216aa35e0e2eb830beb173cfd0",
+  "expected_source_file_sha256": {
+    "rater_a": "d4b253c183435d8cbc32aad9c438a1899eb1ed6b5b41035254a9a4c475874bfb",
+    "rater_b": "3258660b582c2a966bec845b677d6dfd788b0c56ea62cecd15bd5ec6573388f1"
+  },
+  "policy": {
+    "grain": "one_adjudicated_target_per_blind_dialogue_state",
+    "source_reviews_do_not_create_additional_independent_groups": true,
+    "final_scalar_and_goal_values_must_come_from_at_least_one_source_review": true,
+    "final_explicit_evidence_must_be_a_subset_of_source_review_evidence": true,
+    "specific_option_infeasibility_or_rejection_is_not_global_advice_rejection": true,
+    "model_predictions_or_outcomes_used_for_adjudication": false
+  },
+  "adjudications": [
+    {
+      "blind_item_id": "need_d0e3ac665c40f97fb7d6",
+      "adjudication_rationale": "The user has just disclosed the feared job outcome and its emotional effect. Acknowledgment and containment should precede another question; the disagreement is retained in provenance and confidence is reduced.",
+      "final_annotation": {
+        "blind_item_id": "need_d0e3ac665c40f97fb7d6",
+        "support_mode": "comfort_reassure",
+        "goals": ["be_heard", "stabilize"],
+        "dialogue_phase": "comforting",
+        "nonclinical_urgency": "elevated",
+        "recommended_response_burden": "minimal_presence",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 3,
+        "notes": "先承接求职恐惧及低落感，不立即追加问题；depressed 只作可见自述，不作临床判断。"
+      }
+    },
+    {
+      "blind_item_id": "need_209128e3d840584e051a",
+      "adjudication_rationale": "The current turn explicitly asks for help with feeling depressed and rejects only reconciliation/contact with the former partner. The scoped rejection is removed rather than promoted into a global advice-rejection boundary.",
+      "final_annotation": {
+        "blind_item_id": "need_209128e3d840584e051a",
+        "support_mode": "light_guidance",
+        "goals": ["stabilize", "act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "elevated",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [
+          {
+            "boundary_type": "advice_requested",
+            "exact_user_quote": "no. are not telling me how i can get my depression away"
+          }
+        ],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "尊重不联系前任的范围性边界，并给一个低负担、非临床的情绪照顾方向。"
+      }
+    },
+    {
+      "blind_item_id": "need_009a354b652ecca5357b",
+      "adjudication_rationale": "The location answer does not yet identify the specific pandemic fear or impact. One focused clarification serves make-sense without adding be-heard as a separate current goal.",
+      "final_annotation": {
+        "blind_item_id": "need_009a354b652ecca5357b",
+        "support_mode": "explore",
+        "goals": ["make_sense"],
+        "dialogue_phase": "exploration",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "地点回答之后仍需一个聚焦问题澄清具体担忧；尚无请求建议或规划的证据。"
+      }
+    },
+    {
+      "blind_item_id": "need_a9cf37d1e8c9b024f75b",
+      "adjudication_rationale": "The user is intentionally closing with good news. Earlier refusals concern two specific living arrangements and are not encoded as a global refusal of advice.",
+      "final_annotation": {
+        "blind_item_id": "need_a9cf37d1e8c9b024f75b",
+        "support_mode": "listen",
+        "goals": ["be_heard"],
+        "dialogue_phase": "comforting",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "minimal_presence",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "共同见证好消息并收尾，不再展开问题或方案；具体居住方案不可行不等于拒绝所有建议。"
+      }
+    },
+    {
+      "blind_item_id": "need_573f6719da29f81454c7",
+      "adjudication_rationale": "Both reviews agree that the user explicitly invited a suggestion and is checking a nutrition assumption. Keep the response to one cautious clarification rather than a broad plan.",
+      "final_annotation": {
+        "blind_item_id": "need_573f6719da29f81454c7",
+        "support_mode": "light_guidance",
+        "goals": ["make_sense", "act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [
+          {
+            "boundary_type": "advice_requested",
+            "exact_user_quote": "Oh that is a good idea what do you suggest?"
+          }
+        ],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "用户明确索要做法并追问蛋白质假设；只给谨慎、低负担的澄清，避免个体化医疗或营养断言。"
+      }
+    },
+    {
+      "blind_item_id": "need_00b6912f10baacd0bb1a",
+      "adjudication_rationale": "The user has generated a constructive reframe and is future-oriented. The next response should affirm it, while the dialogue phase is action rather than continued exploration.",
+      "final_annotation": {
+        "blind_item_id": "need_00b6912f10baacd0bb1a",
+        "support_mode": "comfort_reassure",
+        "goals": ["stabilize", "act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "minimal_presence",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "肯定用户自己形成的进展重构，不再加新问题或任务；当前已呈现行动取向。"
+      }
+    },
+    {
+      "blind_item_id": "need_475f28cb0865b41e5771",
+      "adjudication_rationale": "The user asks for one final piece of advice about standing up to bullies and mentions possible physical escalation. The one-piece request supports both a small-step and response-burden boundary.",
+      "final_annotation": {
+        "blind_item_id": "need_475f28cb0865b41e5771",
+        "support_mode": "light_guidance",
+        "goals": ["decide", "act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "elevated",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [
+          {
+            "boundary_type": "advice_requested",
+            "exact_user_quote": "I would want to know how I can stand up to these bullies."
+          },
+          {
+            "boundary_type": "one_small_step_requested",
+            "exact_user_quote": "I do. One more piece of advice before we part ways. I have my fiance for support."
+          },
+          {
+            "boundary_type": "question_or_task_burden_limit",
+            "exact_user_quote": "I do. One more piece of advice before we part ways. I have my fiance for support."
+          }
+        ],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "只给一条以安全为先的行动建议，避免鼓励直接对峙；用户明确限制为临别前一条建议。"
+      }
+    },
+    {
+      "blind_item_id": "need_cd0ea102ee1b738c4dae",
+      "adjudication_rationale": "The user explicitly asks for another form of help. Doubting that parents can help rejects one route, not advice globally, so only the request evidence is retained.",
+      "final_annotation": {
+        "blind_item_id": "need_cd0ea102ee1b738c4dae",
+        "support_mode": "light_guidance",
+        "goals": ["stabilize", "act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "elevated",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [
+          {
+            "boundary_type": "advice_requested",
+            "exact_user_quote": "Are there anything else that can help?"
+          }
+        ],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "提供一个可当场尝试、可拒绝的替代应对步骤；否定与父母沟通不等于拒绝建议。"
+      }
+    },
+    {
+      "blind_item_id": "need_99d43870caa66cf525d4",
+      "adjudication_rationale": "The user rules out Uber on feasibility grounds and shows interest in grocery pickup. This supports a focused decision/action step but not a global advice-rejection boundary or elevated urgency.",
+      "final_annotation": {
+        "blind_item_id": "need_99d43870caa66cf525d4",
+        "support_mode": "light_guidance",
+        "goals": ["decide", "act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 3,
+        "notes": "顺着 grocery pickup 给一个可行性核查步骤；车辆限制是选项不可行，不是拒绝建议。"
+      }
+    },
+    {
+      "blind_item_id": "need_4b677073a6d68b23c14f",
+      "adjudication_rationale": "Both reviews agree that the user has a clear application goal and two execution problems. A small multi-step scaffold is appropriate, while one explicit tips request is sufficient evidence.",
+      "final_annotation": {
+        "blind_item_id": "need_4b677073a6d68b23c14f",
+        "support_mode": "structured_planning",
+        "goals": ["act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "multi_step_ok",
+        "active_explicit_boundary_evidence": [
+          {
+            "boundary_type": "advice_requested",
+            "exact_user_quote": "Any tips for writing the personal statement?"
+          }
+        ],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "围绕启动和保持进度共同拆成少量步骤；不把同义请求重复计作多条边界证据。"
+      }
+    },
+    {
+      "blind_item_id": "need_2328a1801c3912c428e8",
+      "adjudication_rationale": "The current state describes a concerning loss-of-control drinking pattern but does not establish current severe intoxication or an immediate event. Elevated urgency preserves priority without converting the pattern into an acute crisis label.",
+      "final_annotation": {
+        "blind_item_id": "need_2328a1801c3912c428e8",
+        "support_mode": "explore",
+        "goals": ["make_sense", "stabilize"],
+        "dialogue_phase": "exploration",
+        "nonclinical_urgency": "elevated",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "用一个非评判性问题澄清当前饮酒模式并保持低负担；失控饮酒提高优先级，但本条不作 acute 或临床诊断。"
+      }
+    },
+    {
+      "blind_item_id": "need_6a4b7ceebd6df41de94c",
+      "adjudication_rationale": "The bedtime-routine answer is sufficient for one optional experiment. Use the light-guidance/action posture from review B, while retaining review A's routine urgency and make-sense/act goals because no severe impairment is visible.",
+      "final_annotation": {
+        "blind_item_id": "need_6a4b7ceebd6df41de94c",
+        "support_mode": "light_guidance",
+        "goals": ["make_sense", "act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 3,
+        "notes": "已有足够睡前习惯信息，可给一个可选的小实验；不扩展成医疗判断或多步骤睡眠方案。"
+      }
+    },
+    {
+      "blind_item_id": "need_f73e62580211d1dea1a5",
+      "adjudication_rationale": "Both reviews identify a closing gratitude turn. Brief presence is sufficient and no new question or task should reopen the exchange.",
+      "final_annotation": {
+        "blind_item_id": "need_f73e62580211d1dea1a5",
+        "support_mode": "listen",
+        "goals": ["be_heard"],
+        "dialogue_phase": "comforting",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "minimal_presence",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "简短承接致谢并收尾，不追加问题、建议或任务。"
+      }
+    },
+    {
+      "blind_item_id": "need_5bdd1529b3e976928109",
+      "adjudication_rationale": "The user is comparing social-connection routes but has not requested a multi-step plan. Light guidance is preferred over structured planning, while decide/act goals retain the active comparison.",
+      "final_annotation": {
+        "blind_item_id": "need_5bdd1529b3e976928109",
+        "support_mode": "light_guidance",
+        "goals": ["decide", "act"],
+        "dialogue_phase": "action",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "multi_step_ok",
+        "active_explicit_boundary_evidence": [
+          {
+            "boundary_type": "advice_requested",
+            "exact_user_quote": "How about local groups? How do I find someone with like minds?"
+          }
+        ],
+        "abstain": false,
+        "confidence": 3,
+        "notes": "用户在比较连接渠道，但未明确请求多步骤计划；给聚焦建议并保留安全与情绪承接。"
+      }
+    },
+    {
+      "blind_item_id": "need_b0f763fb2728090f62c5",
+      "adjudication_rationale": "The user is beginning to describe exclusion and needs acknowledgment plus one focused clarification. The earlier visibility check is not treated as an explicit listen-first boundary, and no acute pace is indicated.",
+      "final_annotation": {
+        "blind_item_id": "need_b0f763fb2728090f62c5",
+        "support_mode": "explore",
+        "goals": ["be_heard", "make_sense"],
+        "dialogue_phase": "exploration",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "one_focus",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "先承接受排斥的受伤感，再用一个聚焦问题澄清影响；确认系统是否看到输入不等于只想被倾听。"
+      }
+    },
+    {
+      "blind_item_id": "need_296ab34b9b50c655f382",
+      "adjudication_rationale": "The user is closing after recognizing personal standards and rediscovering interests. A grounded affirmation of progress is more specific than generic listening, with no further task.",
+      "final_annotation": {
+        "blind_item_id": "need_296ab34b9b50c655f382",
+        "support_mode": "comfort_reassure",
+        "goals": ["be_heard", "stabilize"],
+        "dialogue_phase": "comforting",
+        "nonclinical_urgency": "routine",
+        "recommended_response_burden": "minimal_presence",
+        "active_explicit_boundary_evidence": [],
+        "abstain": false,
+        "confidence": 4,
+        "notes": "具体肯定用户自己形成的标准与重新发现的兴趣，然后收尾；不再追加规划。"
+      }
+    }
+  ]
+}

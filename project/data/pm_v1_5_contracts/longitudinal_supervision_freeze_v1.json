@@ -1,0 +1,50 @@
+{
+  "protocol": "pm-v1.5-longitudinal-supervision-freeze-v1",
+  "status": "LONGITUDINAL_SUPERVISION_NOT_SUPPORTED",
+  "scope": "train_calibration",
+  "matrix": {
+    "states": 324,
+    "actions": 16,
+    "judge_families": 2,
+    "raw_judge_rows": 10368,
+    "state_action_rows": 5184
+  },
+  "source_lineage": {
+    "pm_v2_config_sha256": "d45aab7fa6490b084c596c724020ca762642b973ad5c9608b871c5881ccf37fa",
+    "states_sha256": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+    "evaluator_contexts_sha256": "31f30eeba5ca33bdf6e8e0d0dab7270b8a8c4a620873fa5a017dc74b9478641b",
+    "action_outcomes_sha256": "9b4eb540a9b2367ac1bf5dc2200ff2b9bcb6f3043e0335e1def2c7327ea9c695",
+    "raw_judge_results_sha256": "c5deed2c531635cf50874f8a8270c083d6dfbabbd01826326d9fd91329c5c44e",
+    "root_cause_report_sha256": "fd8e9ddfc270e4d594dd28aaab0e38781419eccd8ae5aadde4c429c23d811876",
+    "formal_reaggregation_summary_sha256": "7a289d6d32d1600fe5c3a700b436022224fa2f815c5aa181d93dc0dc0f3c7b56",
+    "formal_reaggregation_attestation_sha256": "e51fdffe9ed4f70c6b98ad003c1d2670dbb1c3b1d2b2117cbaf3dab39ec80081"
+  },
+  "confirmed_findings": {
+    "composite_support_exact_match_rates_were_not_failures": true,
+    "raw_family_quality_gate": "FAIL",
+    "aggregated_label_quality_gate": "FAIL",
+    "preregistered_label_value_feasibility": "FAIL",
+    "failed_label_value_checks": [
+      "maximum_oracle_action_share",
+      "rs_oracle_share",
+      "strategy_helpful_separation",
+      "memory_helpful_separation",
+      "memory_harmful_separation"
+    ],
+    "family_oracle_action_exact_agreement_rate": 0.2716049382716049,
+    "deepseek_selected_minus_gemini_best_fixed": -0.013817977594183906,
+    "gemini_selected_minus_deepseek_best_fixed": -0.009855679324388578
+  },
+  "frozen_consequences": {
+    "training_labels_created": false,
+    "pm_training_authorized": false,
+    "longitudinal_internal_test_authorized": false,
+    "threshold_or_prompt_retuning_on_current_results_forbidden": true,
+    "current_paid_results_retained_as_diagnostic_evidence": true
+  },
+  "next_allowed_step": {
+    "stage": "train_only_response_mechanism_uptake_pilot",
+    "purpose": "separate retrieval dilution and generator uptake from judge reliability",
+    "cannot_authorize_training_by_itself": true
+  }
+}

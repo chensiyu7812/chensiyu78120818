@@ -1,0 +1,12 @@
+{
+  "protocol": "pm-v1.5-strategy-g2-real-qualification-v1",
+  "status": "FROZEN_FOR_G3",
+  "bank_path": "outputs/pm_v1_5_strategy_g1_final_bank_v1/strategy_cards_g1_runtime.jsonl",
+  "eligibility": "observable explicit-cue rules in this script",
+  "ranker": "lexical",
+  "score_floor": 0.05,
+  "top_k": 1,
+  "no_eligible_or_below_floor": "abstain; RS opportunity false",
+  "raw_source_responses_available": false,
+  "bge_not_promoted_reason": "Did not achieve the preregistered >=0.10 absolute gain on the non-gold native-family proxy with no material coverage loss."
+}

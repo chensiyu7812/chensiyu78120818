@@ -1,0 +1,167 @@
+{
+  "protocol": "pm-v1.5-d3-step0-blueprint-v1",
+  "status": "PASS_READY_TO_PREPARE_320_FROZEN_RESPONSE_CALLS",
+  "api_calls_made": 0,
+  "human_labels_read": false,
+  "external_outcomes_read": false,
+  "users": 32,
+  "state_contrasts": 128,
+  "primary_pairs": 128,
+  "repeat_pairs": 32,
+  "total_pairs": 160,
+  "planned_response_calls": 320,
+  "background_counts": {
+    "RS": {
+      "M0+R0": 4,
+      "ME+R0": 4,
+      "MP+R0": 4,
+      "MPE+R0": 4,
+      "MPMS+R0": 4,
+      "MPMSME+R0": 4,
+      "MS+R0": 4,
+      "MSE+R0": 4
+    },
+    "MP": {
+      "M0+R0": 4,
+      "M0+RS": 4,
+      "ME+R0": 4,
+      "ME+RS": 4,
+      "MS+R0": 4,
+      "MS+RS": 4,
+      "MSE+R0": 4,
+      "MSE+RS": 4
+    },
+    "MS": {
+      "M0+R0": 4,
+      "M0+RS": 4,
+      "ME+R0": 4,
+      "ME+RS": 4,
+      "MP+R0": 4,
+      "MP+RS": 4,
+      "MPE+R0": 4,
+      "MPE+RS": 4
+    },
+    "ME": {
+      "M0+R0": 4,
+      "M0+RS": 4,
+      "MP+R0": 4,
+      "MP+RS": 4,
+      "MPMS+R0": 4,
+      "MPMS+RS": 4,
+      "MS+R0": 4,
+      "MS+RS": 4
+    }
+  },
+  "feature_counts": {
+    "RS": 5,
+    "MP": 6,
+    "MS": 5,
+    "ME": 5
+  },
+  "grounding_values": {
+    "RS": [
+      0.83333333,
+      1.0
+    ],
+    "MP": [
+      0.83333333,
+      1.0
+    ],
+    "MS": [
+      0.83333333,
+      1.0
+    ],
+    "ME": [
+      0.83333333,
+      1.0
+    ]
+  },
+  "candidate_strata_counts": {
+    "RS": {
+      "higher_match|higher_grounding": 8,
+      "higher_match|lower_grounding": 8,
+      "lower_match|higher_grounding": 8,
+      "lower_match|lower_grounding": 8
+    },
+    "MP": {
+      "higher_match|higher_grounding": 5,
+      "higher_match|lower_grounding": 11,
+      "lower_match|higher_grounding": 11,
+      "lower_match|lower_grounding": 5
+    },
+    "MS": {
+      "higher_match|higher_grounding": 6,
+      "higher_match|lower_grounding": 10,
+      "lower_match|higher_grounding": 10,
+      "lower_match|lower_grounding": 6
+    },
+    "ME": {
+      "higher_match|higher_grounding": 6,
+      "higher_match|lower_grounding": 10,
+      "lower_match|higher_grounding": 10,
+      "lower_match|lower_grounding": 6
+    }
+  },
+  "match_ranges": {
+    "RS": {
+      "min": 0.09830918,
+      "max": 0.32112133
+    },
+    "MP": {
+      "min": 0.043183351708753044,
+      "max": 0.3304135690539768
+    },
+    "MS": {
+      "min": 0.10640706634484358,
+      "max": 0.272266385058665
+    },
+    "ME": {
+      "min": 0.12849851324064707,
+      "max": 0.27874733666903023
+    }
+  },
+  "content_disjoint_audit": {
+    "audit_after_construction_only": true,
+    "external_content_used_for_generation_or_selection": false,
+    "generated_distinct_strings": 200,
+    "exact_normalized_overlap_counts": {
+      "ESConv": 0,
+      "EvoEmo": 0
+    },
+    "pass": true
+  },
+  "checks": {
+    "32_new_users": true,
+    "128_one_bit_contrasts": true,
+    "all_16_runtime_actions_available": true,
+    "backgrounds_exactly_four_each": true,
+    "mp_subtypes_16_16": true,
+    "mp_preference_families_at_least_8": true,
+    "ms_all_supplied_prior": true,
+    "current_summary_empty": true,
+    "formal_pairs_have_no_hard_off": true,
+    "32_hard_controls_fail_closed": true,
+    "feature_capacity_at_most_6": true,
+    "no_forbidden_feature_names": true,
+    "features_numeric_only": true,
+    "match_varies_each_head": true,
+    "grounding_varies_each_head": true,
+    "match_grounding_axes_crossed": true,
+    "32_outcome_blind_repeats": true,
+    "160_pairs_320_calls": true,
+    "no_outcome_fields_populated": true,
+    "content_disjoint_exact_audit": true
+  },
+  "files": {
+    "synthetic_users.jsonl": "99912173ac018309b1fb78a4d971b51db785fccaa3d7aede762cce926a6b645c",
+    "runtime_states.jsonl": "af88ca58acc5656decb574ee94ee90673dd973eff4d60b3120d009a32717f444",
+    "memory_backend.jsonl": "5a948bddc20434e4bcca9c9453cf7350eacf1195935f94a2b13db91d373c22aa",
+    "memory_item_metadata.jsonl": "d154c4ed925182c9ffe57e258d2215a5da1b40eba1cf2018aa96040e5198133c",
+    "d3_contrast_blueprint.jsonl": "d5bcb1a97e119daea85b801912c80e45bb024d15c1ed3fa438d93c05759e4826",
+    "d3_primary_pairs.jsonl": "d3a30c50aa5790f665b161a06d30c3dcf5a9541c1c10f5dd278fa7cf4c3a5ec8",
+    "d3_repeat_pairs.jsonl": "a1febd6292c75dc29765ef6f98497914c3b477bb2d8a34e559e4f09a2fd46b2e",
+    "hard_gate_controls.jsonl": "6ada3a4234c57c86bb56b94750fe2577f5fb0fa3ce562e826786f931e955ad1a",
+    "user_shape_audit.jsonl": "8e9e67561df6fd20e3b9dc391b59d3ae36f254c6079feb03e51222805079d514"
+  },
+  "blueprint_semantic_sha256": "e919beee143d3faec80e9ecd040dab5596fb6fc86345ab62f8aa5ffac443f7fd"
+}

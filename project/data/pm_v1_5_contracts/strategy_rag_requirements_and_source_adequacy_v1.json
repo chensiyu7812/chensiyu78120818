@@ -1,0 +1,119 @@
+{
+  "protocol": "pm-v1.5-strategy-rag-requirements-and-source-adequacy-v1",
+  "status": "REQUIREMENTS_FROZEN_SOURCE_VOLUME_PASS_TWO_PASS_OPEN_CODING_COMPLETE_HUMAN_CORE_PENDING",
+  "research_estimand": "Whether a small pre-retrieval default-off PM can learn when enabling one fixed Strategy Guidance resource produces material immediate-response benefit without unacceptable interaction-and-grounding risk and with lower unnecessary resource cost.",
+  "resource_definition": {
+    "name": "Strategy Guidance RAG",
+    "retrieves": "one atomic support move with observable use conditions, prohibitions, burden, risk constraints, retrieval text and generator guidance",
+    "does_not_retrieve": [
+      "private raw ESConv dialogue examples",
+      "user personal memory",
+      "medical legal financial or clinical factual advice",
+      "a topic-specific answer template"
+    ],
+    "shared_across": [
+      "train",
+      "calibration",
+      "internal",
+      "ESConv",
+      "EvoEmo_ES_MemEval_derived"
+    ]
+  },
+  "minimum_behavioral_regions": [
+    "listening_and_accurate_understanding",
+    "low_burden_exploration",
+    "comfort_and_stabilization",
+    "user_welcomed_light_action_help",
+    "transition_permission_and_boundary_management"
+  ],
+  "card_contract": {
+    "required_fields": [
+      "support_move",
+      "when_to_use",
+      "when_not_to_use",
+      "compatible_phase_goal_and_burden",
+      "risk_flags",
+      "retrieval_text",
+      "prompt_guidance",
+      "train_only_source_support"
+    ],
+    "topic_only_variants_forbidden": true,
+    "raw_source_response_in_generator_prompt_forbidden": true,
+    "minimum_independent_source_dialogues": 20,
+    "minimum_problem_types": 3,
+    "minimum_emotion_types": 3,
+    "maximum_single_problem_type_share": 0.6,
+    "synthetic_paraphrases_count_as_independent_sources": false
+  },
+  "bank_qualification": {
+    "minimum_distinct_cards_per_behavioral_region": 2,
+    "hard_total_card_quota": null,
+    "stopping_rule": "Stop when no additional atomic move passes source support, distinctness, reusability and risk-boundary review."
+  },
+  "retrieval_contract": {
+    "stage_1": "transparent explicit-boundary safety burden and eligibility filtering",
+    "stage_2": "one frozen lexical or BGE ranker selected on the same bank-disjoint train/calibration audit",
+    "default_injection": "Top-1 atomic move",
+    "no_safe_eligible_or_below_floor": "R0",
+    "PM_sees_card_text_before_action": false,
+    "minimum_positive_opportunity_audit_states": 40,
+    "minimum_top1_relevant_safe_boundary_fit_rate": 0.8,
+    "maximum_material_boundary_violations_on_explicit_controls": 0,
+    "topk_rule": "Top-2 or Top-3 may be calibrated only on the same frozen catalog and ranking with Top-1 as a strict prefix."
+  },
+  "treatment_and_learning_gate": {
+    "same_state_generator_base_prompt_decoding_seed_and_output_limit": true,
+    "minimum_independent_positive_open_groups": 8,
+    "minimum_independent_nonpositive_off_groups": 8,
+    "unknown_or_unexecuted_rows_used_for_fit": false,
+    "grouped_OOF_required": true,
+    "must_beat_constant_prior": true,
+    "quality_risk_and_cost_combined_into_one_score": false
+  },
+  "external_roles": {
+    "ESConv": "single-session memory-unavailable R0 versus RS transfer",
+    "EvoEmo_ES_MemEval_derived": "longitudinal memory-available transfer using the exact same Strategy Guidance Bank; MP MS and ME provide separate memory content",
+    "external_text_or_outcome_used_to_author_or_tune_cards": false
+  },
+  "current_ESConv_train_evidence": {
+    "split": "custom_reproducible_70_15_15_dialogue_split",
+    "nonoverlap_train_dialogues": 875,
+    "raw_bank_source_dialogues_after_existing_seed_exclusion": 823,
+    "source_dialogues_after_support_need_exclusion_and_cleaning": 748,
+    "clean_supporter_turns": 9148,
+    "validation_or_test_rows_used": 0,
+    "external_outcomes_used": 0,
+    "native_label_turn_range_after_cleaning": [
+      562,
+      1632
+    ],
+    "native_label_dialogue_range_after_cleaning": [
+      371,
+      654
+    ],
+    "top_five_problem_type_row_share": 0.973,
+    "top_three_emotion_row_share": 0.767,
+    "source_volume_judgment": "PASS_FOR_COMPACT_TOPIC_AGNOSTIC_STRATEGY_GUIDANCE_BANK",
+    "semantic_taxonomy_judgment": "PENDING_LABEL_BLIND_OPEN_CODING_AND_FULL_SOURCE_SUPPORT_MAPPING",
+    "not_supported": [
+      "topic-specific expert advice bank",
+      "clinical or high-stakes information bank",
+      "claim of comprehensive emotional-support scenario coverage",
+      "a precommitted 50-card or 80-to-100-card quota"
+    ]
+  },
+  "insufficient_source_fallback_order": [
+    "merge overly fine moves",
+    "narrow the supported RS claim and fail closed elsewhere",
+    "increase outcome-blind open coding within eligible ESConv train only",
+    "add independently sourced and explicitly disclosed public technique material then refreeze the entire shared Bank",
+    "use synthetic paraphrases only for retrieval robustness and never as independent provenance or utility evidence"
+  ],
+  "forbidden_repairs": [
+    "use ESConv validation or test to fill card gaps",
+    "use EvoEmo text or outcomes to tailor cards",
+    "use a different Strategy Bank per external domain",
+    "create topic-only variants to reach a card quota"
+  ],
+  "current_decision": "ESConv train is sufficient in volume for the required compact V1.5 Strategy Guidance RAG, but adequacy is conditional on inductive action coding, card-level source gates, retrieval qualification and clean-pair uptake."
+}

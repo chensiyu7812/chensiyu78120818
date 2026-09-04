@@ -1,0 +1,150 @@
+{
+  "protocol": "pm-v1.5-train-only-oracle-memory-multisource-decomposition-v1",
+  "stage": "longitudinal_oracle_memory_multisource_decomposition_pilot",
+  "status": "READY_ZERO_API_DESIGN",
+  "scope": "longitudinal_train_only_report_only",
+  "purpose": "localize the three failed multi-source uptake cases by varying only whether MP, MS, or ME is exposed",
+  "states": [
+    {
+      "state_id": "state_0519cd320e176ba0b1dd4f4d",
+      "card_id": "card_563665bd246fe10bded63aa6",
+      "user_id": "pmv2_train_u006",
+      "semantic_family": "uncertain_future",
+      "existing_control_arm": "frozen_m0_r0_control",
+      "existing_all_sources_arm": "oracle_helpful_memory_same_prompt",
+      "existing_control_action_id": "M0+R0",
+      "existing_all_sources_action_id": "MPMSME+R0",
+      "single_source_arms": [
+        {
+          "source": "ME",
+          "action_id": "ME+R0",
+          "target_memory_id": "mem_bdb5135c83d8b1cca7eef0ab"
+        },
+        {
+          "source": "MP",
+          "action_id": "MP+R0",
+          "target_memory_id": "mem_2e31b050c7eec4a9d0405d07"
+        },
+        {
+          "source": "MS",
+          "action_id": "MS+R0",
+          "target_memory_id": "mem_e9a2b650c4d524696eb19c91"
+        }
+      ]
+    },
+    {
+      "state_id": "state_71b56581ab20cfe5b7d1d3d2",
+      "card_id": "card_6d4680894957f35b7e1b66d2",
+      "user_id": "pmv2_train_u001",
+      "semantic_family": "family_expectations",
+      "existing_control_arm": "frozen_m0_r0_control",
+      "existing_all_sources_arm": "oracle_helpful_memory_same_prompt",
+      "existing_control_action_id": "M0+R0",
+      "existing_all_sources_action_id": "MPMSME+R0",
+      "single_source_arms": [
+        {
+          "source": "ME",
+          "action_id": "ME+R0",
+          "target_memory_id": "mem_efe5deb0e531e88452f338a0"
+        },
+        {
+          "source": "MP",
+          "action_id": "MP+R0",
+          "target_memory_id": "mem_758bfe89ce03d55166818dc0"
+        },
+        {
+          "source": "MS",
+          "action_id": "MS+R0",
+          "target_memory_id": "mem_1434ff8588d5d559ea15331c"
+        }
+      ]
+    },
+    {
+      "state_id": "state_bc82bc6cccc6196e91f8f1c4",
+      "card_id": "card_9f2a935bb52bff355fb5abaf",
+      "user_id": "pmv2_train_u004",
+      "semantic_family": "life_stage_transition",
+      "existing_control_arm": "frozen_m0_r0_control",
+      "existing_all_sources_arm": "oracle_helpful_memory_same_prompt",
+      "existing_control_action_id": "M0+R0",
+      "existing_all_sources_action_id": "MPMSME+R0",
+      "single_source_arms": [
+        {
+          "source": "ME",
+          "action_id": "ME+R0",
+          "target_memory_id": "mem_dc665f3b4b54e44abeda2dad"
+        },
+        {
+          "source": "MP",
+          "action_id": "MP+R0",
+          "target_memory_id": "mem_2440421cb3acc04963be6053"
+        },
+        {
+          "source": "MS",
+          "action_id": "MS+R0",
+          "target_memory_id": "mem_322fc1e06bb854e8ead575da"
+        }
+      ]
+    }
+  ],
+  "planned_new_logical_calls": 9,
+  "reused_zero_api_outcomes": {
+    "M0+R0": 3,
+    "MPMSME+R0": 3
+  },
+  "frozen_factors": [
+    "state",
+    "visible dialogue",
+    "generator endpoint/model",
+    "system prompt",
+    "temperature",
+    "seed",
+    "R0 strategy mode",
+    "output cap"
+  ],
+  "only_manipulated_factor": "one exposed oracle memory source",
+  "analysis": {
+    "per_state_contrasts": [
+      "MP-only minus M0",
+      "MS-only minus M0",
+      "ME-only minus M0",
+      "all-three minus best-single-source"
+    ],
+    "primary_measurement": "target-evidence uptake using the already frozen BGE analysis",
+    "response_quality_requires_separate_blinded_measurement": true,
+    "training_labels_created": false,
+    "frozen_interference_classification": {
+      "per_state_clear_interference": "at least one single-source arm has positive source-aligned BGE delta versus M0 and at least two single-source arms outperform all-three on the same source reference",
+      "supported_report_only": "clear interference in at least 2 of 3 states",
+      "no_single_source_uptake": "zero states contain a positive source-aligned single-source delta",
+      "otherwise": "source-specific-or-inconclusive-report-only"
+    }
+  },
+  "stop_rules": [
+    "do not read calibration or internal-test",
+    "do not change prompt, generator, state, seed, or source items",
+    "do not tune a source combination after observing the nine outcomes",
+    "do not create training labels or authorize PM training",
+    "do not treat evaluator-selected oracle evidence as deployable retrieval"
+  ],
+  "source_lineage": {
+    "oracle_contract_path": "data/pm_v1_5_contracts/longitudinal_oracle_memory_upper_bound_pilot_v1.json",
+    "oracle_contract_file_sha256": "157aadc51ce75262124b9deebbb89cb3c7ab9c05d132f9562ac2623f4533db2a",
+    "oracle_contract_sha256": "5f86d5aadf3d82991ab0125b7155d06822e94652bc1238a2607eb970944a3598",
+    "oracle_freeze_path": "data/pm_v1_5_contracts/longitudinal_oracle_memory_uptake_freeze_v1.json",
+    "oracle_freeze_sha256": "a1ec9c73bfa1db40f8b9b8c8fbfb6c64d8624bfd5e0a7d691ee01049358d1594",
+    "oracle_backend_path": "data/pm_v1_5_contracts/longitudinal_oracle_memory_upper_bound_backend_v1.jsonl",
+    "oracle_backend_sha256": "ae4257bec103cacaaf612f7be9d97a2a668dabc30443ad40bee3bbd20bec2a59",
+    "oracle_runtime_path": "data/pm_v1_5_contracts/longitudinal_oracle_memory_upper_bound_runtime_v1.jsonl",
+    "oracle_runtime_sha256": "3f7794a7981da00ee0c6eadce143f43c813d489d172ecc2f96e05e1ba5b57636",
+    "oracle_outcomes_path": "outputs/pm_v1_5_longitudinal_oracle_memory_upper_bound_pilot_v1_execution_candidate/pilot_outcomes.jsonl",
+    "oracle_outcomes_sha256": "1b2fb20ecacc4dc3a494f206588e7380443a521db417a63e80819cca8e05b61b",
+    "oracle_artifact_attestation_path": "outputs/pm_v1_5_longitudinal_oracle_memory_upper_bound_pilot_v1_execution_candidate/artifact_attestation.json",
+    "oracle_artifact_attestation_sha256": "de0a2c0960b0249033ec744db2a2f664f60fa3f91f2dcf587a9755377b4caede",
+    "preparation_code_sha256": "87d3545aff33fe63adb79fb7436ce5949ed9969ab5cf0f1ca4922fa45e56e5af",
+    "preparation_runner_sha256": "a8f6de0ba091a1c80682158212f9a3eb8c9aa89ca57d19e2f82fab68200233d8"
+  },
+  "api_calls_made_while_preparing_contract": 0,
+  "training_labels_created": false,
+  "contract_sha256": "eb2b1cfe5e285fa79aa7a88d28cfb1fa001838de9b96f6bdae6368dfb2ed6756"
+}

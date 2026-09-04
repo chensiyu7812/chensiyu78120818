@@ -1,0 +1,79 @@
+{
+  "protocol": "pm-v1.5-strategy-g2-real-qualification-v1",
+  "status": "AMENDED_DENOMINATOR_IMPLEMENTATION_BEFORE_PROMOTION",
+  "intended_use": "Qualify the frozen six-card Strategy Guidance stack for G3 clean-treatment generation, not prove response-quality benefit.",
+  "source": {
+    "universe": "ESConv custom train, objectively cleaned supporter-turn universe",
+    "validation_test_evoemo_rows": 0,
+    "primary_strict_holdout": "dialogues absent from every G1 candidate, weak-label, source-screen, and final-card lineage file",
+    "sensitivity_holdout": "dialogues absent from the 280 accepted formative weak-source dialogues",
+    "grain": "one pre-response visible dialogue state; dialogue is the independent group"
+  },
+  "runtime_contract": {
+    "cards": 6,
+    "eligibility_before_ranking": true,
+    "maximum_injected_cards": 1,
+    "raw_source_responses_available": false,
+    "active_high_stakes": "ordinary Strategy Guidance off; upstream safety flow",
+    "explicit_stop": "AM14 acknowledge-and-close only",
+    "advice_permission": "AM10 is ineligible without an explicit request for advice or action help",
+    "question_repetition": "AM01 and AM02 are ineligible when the visible answer is already present or a question is being repeated",
+    "no_explicit_opportunity": "abstain and keep RS off"
+  },
+  "ranker_candidates": {
+    "lexical": {
+      "score": "term-frequency cosine",
+      "score_floor": 0.05
+    },
+    "bge": {
+      "model": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "pooling": "CLS",
+      "normalized": true,
+      "score": "normalized dot product, equal to cosine",
+      "score_floor": 0.65
+    }
+  },
+  "ranker_promotion_rule": {
+    "primary_proxy": "agreement with a coarse compatible family derived from the audit-only next ESConv native strategy label",
+    "proxy_is_gold": false,
+    "bge_minimum_absolute_improvement_over_lexical": 0.1,
+    "bge_maximum_allowed_coverage_loss": 0.05,
+    "boundary_regressions_allowed": 0,
+    "if_bge_does_not_pass": "freeze lexical",
+    "native_proxy_may_select_ranker_but_cannot_prove_card_utility": true
+  },
+  "qualification_gates": {
+    "strict_holdout_minimum_independent_dialogues": 30,
+    "g1_lineage_overlap_allowed": 0,
+    "hard_boundary_violations_allowed": 0,
+    "maximum_injected_cards": 1,
+    "strict_holdout_minimum_dialogue_activation_rate": 0.05,
+    "strict_holdout_maximum_dialogue_activation_rate": 0.95,
+    "minimum_distinct_cards_activated_across_primary_or_sensitivity": 5,
+    "runtime_card_text_contains_raw_source_response": false
+  },
+  "not_claimed": [
+    "native ESConv strategy is an atomic-move gold label",
+    "an eligible or retrieved card improves the generated response",
+    "the six-card stack covers every ESConv or EvoEmo support need",
+    "ordinary Strategy Guidance handles clinical or acute safety cases",
+    "BGE similarity estimates Strategy Guidance utility"
+  ],
+  "anti_leakage": [
+    "query uses only dialogue content visible before the target supporter response",
+    "target supporter response is never placed in the query or runtime card",
+    "next native strategy label is audit-only and never enters eligibility or ranking features",
+    "validation, test, EvoEmo, generated response, judge, reward, and PM action are not read",
+    "all overlap and uncertainty denominators are reported at dialogue-group grain"
+  ],
+  "denominator_amendment": {
+    "original_text": "strict_holdout_minimum_activation_rate",
+    "initial_implementation": "incorrectly applied the 0.05 lower bound to supporter-turn states",
+    "initial_observed_turn_activation_rate": 0.032663,
+    "corrected_implementation": "apply the lower and upper activation bounds to independent dialogue groups, as required by the preregistered source grain; continue reporting turn-level coverage descriptively",
+    "retrieval_rules_or_scores_changed": false,
+    "holdout_membership_changed": false,
+    "reason": "Longer dialogues contribute more turns but are not additional independent coverage units. The contract already states that dialogue is the independent group."
+  }
+}

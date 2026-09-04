@@ -1,0 +1,398 @@
+{
+  "protocol": "pm-v1.5-merged-ood-audit-v1",
+  "input_hashes": {
+    "pm_v1_5_config_sha256": "3cf32f3fb43bd89a92025f0527012c9a149fba978d79d5400cb1a0663f199758",
+    "synthetic_states_sha256": "b0bac45e5fe1e3ff3244b8bd3b1b12af162e78a2a79ef4bacb05de98119f162d",
+    "esconv_auxiliary_train_sha256": "b0194963ab004ebbabf977c7a964b2e4c070220708590d1deeadc01da43dc6d3",
+    "esconv_auxiliary_calibration_sha256": "c32a54835748f927323fbd22683ec67bdde83263fcddc7e2d493abd93ce9a32f",
+    "esconv_test_states_sha256": "4d65caa491af8d96b0f733991929259994ef2a6c68813d1919606091fbae0ae8",
+    "evoemo_sha256": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420",
+    "fixed_tracks_sha256": "8f6a5c799c6c3cf07d1ae864d23567a26c98e607bc3d5ceab92bd47c5ab755bd"
+  },
+  "ood_calibration_settings": {
+    "semantic_false_positive_quantile": 0.99,
+    "metadata_false_positive_quantile": 0.99,
+    "maximum_joint_in_distribution_fallback_rate": 0.05,
+    "minimum_semantic_challenge_detection_rate": 0.8,
+    "minimum_metadata_challenge_detection_rate": 0.95
+  },
+  "baseline_synthetic_only": {
+    "n_train": 216,
+    "n_calibration": 108,
+    "calibration_report": {
+      "status": "PASS",
+      "protocol": "pm-v2-ood-calibration-v1",
+      "calibration_state_count": 108,
+      "semantic_ood_threshold": 0.2770624412997328,
+      "metadata_ood_threshold": 0.00340909091009091,
+      "joint_in_distribution_fallback_rate": 0.018518518518518517,
+      "semantic_challenge_detection_rate": 1.0,
+      "metadata_challenge_detection_rate": 1.0,
+      "checks": {
+        "joint_in_distribution_fallback_rate": true,
+        "semantic_challenge_detection_rate": true,
+        "metadata_challenge_detection_rate": true
+      },
+      "threshold_settings": {
+        "semantic_false_positive_quantile": 0.99,
+        "metadata_false_positive_quantile": 0.99,
+        "maximum_joint_in_distribution_fallback_rate": 0.05,
+        "minimum_semantic_challenge_detection_rate": 0.8,
+        "minimum_metadata_challenge_detection_rate": 0.95
+      },
+      "challenge_scope": "deterministic_semantic_domain_shift_and_metadata_range_attack",
+      "claim_boundary": "challenge detection is a plumbing gate, not real-world OOD coverage"
+    },
+    "esconv_test": {
+      "domain": "esconv_test",
+      "n_states": 2112,
+      "n_severe_semantic_ood": 170,
+      "n_severe_metadata_ood": 2112,
+      "n_severe_either": 2112,
+      "severe_rate": 1.0,
+      "severe_semantic_rate": 0.08049242424242424,
+      "severe_metadata_rate": 1.0,
+      "mean_metadata_ood_contribution_by_category": {
+        "other_metadata": 7.775900056288788,
+        "catalog_tail_drift": 4.592849521972982,
+        "age_staleness_drift": 1.0777562665675942,
+        "strategy_drift": 0.06568673713993023
+      },
+      "top_metadata_dimensions_by_mean_contribution": [
+        {
+          "dimension": "MP.available",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "MP.count_ratio",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "MP.representation_valid",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "MS.available",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "MS.count_ratio",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "MS.representation_valid",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "ME.available",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "ME.representation_valid",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "ME.count_ratio",
+          "mean_contribution": 0.6666666666666763
+        },
+        {
+          "dimension": "MS.expected_tokens_frac",
+          "mean_contribution": 0.6617551112653097
+        }
+      ]
+    },
+    "evoemo_single_turn_preflight": {
+      "domain": "evoemo_single_turn_preflight",
+      "n_states": 34,
+      "n_severe_semantic_ood": 34,
+      "n_severe_metadata_ood": 34,
+      "n_severe_either": 34,
+      "severe_rate": 1.0,
+      "severe_semantic_rate": 1.0,
+      "severe_metadata_rate": 1.0,
+      "mean_metadata_ood_contribution_by_category": {
+        "strategy_drift": 10.995068394179434,
+        "age_staleness_drift": 3.28596620768329,
+        "catalog_tail_drift": 0.7718288332428688,
+        "other_metadata": 0.0003779061248902384
+      },
+      "top_metadata_dimensions_by_mean_contribution": [
+        {
+          "dimension": "strategy.representation_valid",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "strategy.expected_tokens_frac",
+          "mean_contribution": 0.8917106463537143
+        },
+        {
+          "dimension": "strategy.family.information",
+          "mean_contribution": 0.7864035944398288
+        },
+        {
+          "dimension": "strategy.family.suggestion",
+          "mean_contribution": 0.7860239042990154
+        },
+        {
+          "dimension": "strategy.family.question",
+          "mean_contribution": 0.7854618489882127
+        },
+        {
+          "dimension": "strategy.family.affirmation_reassurance",
+          "mean_contribution": 0.7852404462781947
+        },
+        {
+          "dimension": "strategy.family.restatement",
+          "mean_contribution": 0.7849484135894008
+        },
+        {
+          "dimension": "strategy.family.self_disclosure",
+          "mean_contribution": 0.7839029402105835
+        },
+        {
+          "dimension": "strategy.family.reflection",
+          "mean_contribution": 0.7836146835158321
+        },
+        {
+          "dimension": "strategy.family.other",
+          "mean_contribution": 0.7826370944061661
+        }
+      ],
+      "coverage": {
+        "n_users": 18,
+        "n_scenarios": 34,
+        "n_states": 34
+      },
+      "formal_result": false
+    }
+  },
+  "merged_synthetic_plus_esconv_auxiliary": {
+    "n_train": 534,
+    "n_calibration": 278,
+    "calibration_report": {
+      "status": "PASS",
+      "protocol": "pm-v2-ood-calibration-v1",
+      "calibration_state_count": 278,
+      "semantic_ood_threshold": 0.30885473469412306,
+      "metadata_ood_threshold": 0.0033986295230411414,
+      "joint_in_distribution_fallback_rate": 0.014388489208633094,
+      "semantic_challenge_detection_rate": 1.0,
+      "metadata_challenge_detection_rate": 1.0,
+      "checks": {
+        "joint_in_distribution_fallback_rate": true,
+        "semantic_challenge_detection_rate": true,
+        "metadata_challenge_detection_rate": true
+      },
+      "threshold_settings": {
+        "semantic_false_positive_quantile": 0.99,
+        "metadata_false_positive_quantile": 0.99,
+        "maximum_joint_in_distribution_fallback_rate": 0.05,
+        "minimum_semantic_challenge_detection_rate": 0.8,
+        "minimum_metadata_challenge_detection_rate": 0.95
+      },
+      "challenge_scope": "deterministic_semantic_domain_shift_and_metadata_range_attack",
+      "claim_boundary": "challenge detection is a plumbing gate, not real-world OOD coverage"
+    },
+    "esconv_test": {
+      "domain": "esconv_test",
+      "n_states": 2112,
+      "n_severe_semantic_ood": 50,
+      "n_severe_metadata_ood": 13,
+      "n_severe_either": 58,
+      "severe_rate": 0.027462121212121212,
+      "severe_semantic_rate": 0.023674242424242424,
+      "severe_metadata_rate": 0.00615530303030303,
+      "mean_metadata_ood_contribution_by_category": {
+        "strategy_drift": 0.003079522608352608,
+        "age_staleness_drift": 0.0,
+        "other_metadata": 0.0,
+        "catalog_tail_drift": 0.0
+      },
+      "top_metadata_dimensions_by_mean_contribution": [
+        {
+          "dimension": "strategy.advice_readiness.listen_only",
+          "mean_contribution": 0.00042672183854885576
+        },
+        {
+          "dimension": "strategy.advice_readiness.explore_first",
+          "mean_contribution": 0.00034356435243995415
+        },
+        {
+          "dimension": "strategy.family.question",
+          "mean_contribution": 0.00028565908677842105
+        },
+        {
+          "dimension": "strategy.family.information",
+          "mean_contribution": 0.0002839600862042553
+        },
+        {
+          "dimension": "strategy.family.suggestion",
+          "mean_contribution": 0.0002504409014848219
+        },
+        {
+          "dimension": "strategy.family.self_disclosure",
+          "mean_contribution": 0.0002446618533751716
+        },
+        {
+          "dimension": "strategy.advice_readiness.light_suggestion",
+          "mean_contribution": 0.0002222299656085634
+        },
+        {
+          "dimension": "strategy.family.restatement",
+          "mean_contribution": 0.00021574147713102082
+        },
+        {
+          "dimension": "strategy.family.reflection",
+          "mean_contribution": 0.0001984280653664202
+        },
+        {
+          "dimension": "strategy.family.affirmation_reassurance",
+          "mean_contribution": 0.0001951912589187018
+        }
+      ]
+    },
+    "evoemo_single_turn_preflight": {
+      "domain": "evoemo_single_turn_preflight",
+      "n_states": 34,
+      "n_severe_semantic_ood": 34,
+      "n_severe_metadata_ood": 34,
+      "n_severe_either": 34,
+      "severe_rate": 1.0,
+      "severe_semantic_rate": 1.0,
+      "severe_metadata_rate": 1.0,
+      "mean_metadata_ood_contribution_by_category": {
+        "strategy_drift": 10.433210097037293,
+        "age_staleness_drift": 3.5876972592919856,
+        "catalog_tail_drift": 0.5227139811607738,
+        "other_metadata": 0.0
+      },
+      "top_metadata_dimensions_by_mean_contribution": [
+        {
+          "dimension": "strategy.representation_valid",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "strategy.expected_tokens_frac",
+          "mean_contribution": 0.8917106463537143
+        },
+        {
+          "dimension": "strategy.family.question",
+          "mean_contribution": 0.7855681015014743
+        },
+        {
+          "dimension": "strategy.family.restatement",
+          "mean_contribution": 0.7800024407699935
+        },
+        {
+          "dimension": "strategy.family.information",
+          "mean_contribution": 0.7788134250341586
+        },
+        {
+          "dimension": "strategy.family.self_disclosure",
+          "mean_contribution": 0.7778305418824029
+        },
+        {
+          "dimension": "strategy.family.suggestion",
+          "mean_contribution": 0.776359994648133
+        },
+        {
+          "dimension": "strategy.family.affirmation_reassurance",
+          "mean_contribution": 0.7756808035439883
+        },
+        {
+          "dimension": "strategy.family.other",
+          "mean_contribution": 0.7754439415218135
+        },
+        {
+          "dimension": "strategy.family.reflection",
+          "mean_contribution": 0.7744029329656076
+        }
+      ],
+      "coverage": {
+        "n_users": 18,
+        "n_scenarios": 34,
+        "n_states": 34
+      },
+      "formal_result": false
+    },
+    "evoemo_formal_turn_states": {
+      "domain": "evoemo_formal_turn_states",
+      "n_states": 10,
+      "n_severe_semantic_ood": 0,
+      "n_severe_metadata_ood": 10,
+      "n_severe_either": 10,
+      "severe_rate": 1.0,
+      "severe_semantic_rate": 0.0,
+      "severe_metadata_rate": 1.0,
+      "mean_metadata_ood_contribution_by_category": {
+        "strategy_drift": 10.433210097037293,
+        "age_staleness_drift": 3.663944143895425,
+        "catalog_tail_drift": 0.5208200140131669,
+        "other_metadata": 0.07032392370446902
+      },
+      "top_metadata_dimensions_by_mean_contribution": [
+        {
+          "dimension": "strategy.representation_valid",
+          "mean_contribution": 1.0
+        },
+        {
+          "dimension": "strategy.expected_tokens_frac",
+          "mean_contribution": 0.8917106463537137
+        },
+        {
+          "dimension": "strategy.family.question",
+          "mean_contribution": 0.7855681015014737
+        },
+        {
+          "dimension": "strategy.family.restatement",
+          "mean_contribution": 0.7800024407699933
+        },
+        {
+          "dimension": "strategy.family.information",
+          "mean_contribution": 0.7788134250341586
+        },
+        {
+          "dimension": "strategy.family.self_disclosure",
+          "mean_contribution": 0.7778305418824034
+        },
+        {
+          "dimension": "strategy.family.suggestion",
+          "mean_contribution": 0.7763599946481335
+        },
+        {
+          "dimension": "strategy.family.affirmation_reassurance",
+          "mean_contribution": 0.7756808035439884
+        },
+        {
+          "dimension": "strategy.family.other",
+          "mean_contribution": 0.7754439415218134
+        },
+        {
+          "dimension": "strategy.family.reflection",
+          "mean_contribution": 0.774402932965608
+        }
+      ],
+      "coverage": {
+        "n_total_scenarios": 34,
+        "n_scenarios_with_at_least_one_complete_track": 2,
+        "n_complete_tracks_found": 5,
+        "turn_indices": [
+          3,
+          8
+        ],
+        "n_formal_turn_states": 10,
+        "expected_formal_turn_states_at_full_coverage": 68
+      },
+      "formal_result": false,
+      "note": "formal_result is only True once every scenario has a complete fixed seeker track; partial coverage is reported honestly, not extrapolated."
+    }
+  },
+  "conclusion": {
+    "esconv_test_severe_rate_baseline": 1.0,
+    "esconv_test_severe_rate_merged": 0.027462121212121212,
+    "evoemo_single_turn_severe_rate_baseline": 1.0,
+    "evoemo_single_turn_severe_rate_merged": 1.0,
+    "evoemo_formal_turn_severe_rate_merged": 1.0,
+    "evoemo_formal_turn_coverage_note": "2/34 scenarios covered by real fixed seeker tracks; NOT the full formal 68-state audit until all scenarios have complete tracks"
+  }
+}

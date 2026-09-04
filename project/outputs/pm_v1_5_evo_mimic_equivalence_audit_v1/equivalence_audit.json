@@ -1,0 +1,942 @@
+{
+  "protocol": "pm-v1.5-evo-mimic-equivalence-audit-v1",
+  "status": "MIMIC_AND_CANDIDATE_SUPPORT_GATE_PASS",
+  "api_calls_made": 0,
+  "human_or_judge_outcomes_read": false,
+  "external_reference_answers_read": false,
+  "external_content_used_for_training": false,
+  "definition": {
+    "exact_equivalence": "The same executable compiler, temporal rule, query, retriever, candidate descriptor, PM timing, filter, injection compiler, and generator treatment.",
+    "distribution_similarity": "Outcome-blind overlap of input and candidate-feature distributions. It cannot be made 100% without copying the external test content and invalidating generalization."
+  },
+  "exact_mechanism_checks": [
+    {
+      "layer": "MemoryItem schema and MP/MS/ME ontology",
+      "status": "PASS",
+      "evidence": "Both domains instantiate the same MemoryItem model and MemorySource enum."
+    },
+    {
+      "layer": "memory compiler implementation",
+      "status": "PASS",
+      "evidence": "pm-v1.5-shared-all-causal-prior-history-memory-compiler-v2:ec4768cb3b52932a11838196c45e41868b85d321716e18e26e6c6d8961c6c6cb"
+    },
+    {
+      "layer": "causal prior-history rule",
+      "status": "PASS",
+      "evidence": "Internal items are strictly older than the current session; EvoEmo build_evo_memory reads dialog_history only."
+    },
+    {
+      "layer": "query builder",
+      "status": "PASS",
+      "evidence": "fed848dc7348c2c2965cf47ed1db042cfe79bbb337315f34a46177ebad854b6d"
+    },
+    {
+      "layer": "memory retriever score, threshold, tie-break and Top-k",
+      "status": "PASS",
+      "evidence": "8b3da55e28dd0a26f0cee4a8deb3cec02abe16aca8fb5d6fafd6ed7001b84a06"
+    },
+    {
+      "layer": "evidence filter",
+      "status": "PASS",
+      "evidence": "disabled on both V1.5 internal and EvoEmo paths"
+    },
+    {
+      "layer": "R0 memory injection prompt compiler",
+      "status": "PASS",
+      "evidence": "192/192 frozen calls exactly recompute through generation_messages"
+    },
+    {
+      "layer": "RS-background injection prompt compiler",
+      "status": "PASS",
+      "evidence": "192/192 frozen V4 calls exactly recompute through generation_messages"
+    },
+    {
+      "layer": "candidate descriptor extractor",
+      "status": "PASS",
+      "evidence": "pm-v1.5-shared-memory-candidate-discovery-v1"
+    },
+    {
+      "layer": "PM decision timing",
+      "status": "PASS",
+      "evidence": "72251b68ea51b080016afb7919e296aeda4cb8c970c5084bd61e6763afa61895"
+    },
+    {
+      "layer": "generator identity and treatment",
+      "status": "PASS",
+      "evidence": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe"
+    },
+    {
+      "layer": "content disjointness",
+      "status": "PASS",
+      "evidence": "exact normalized memory-text overlap=0"
+    },
+    {
+      "layer": "timestamp surface normalization",
+      "status": "PASS",
+      "evidence": "generation_messages renders created_session only as relative session age and ignores raw timestamp strings."
+    }
+  ],
+  "exact_mechanism_passes": 13,
+  "exact_mechanism_total": 13,
+  "failed_exact_layers": [],
+  "generation_reuse_checks": {
+    "memory_plan_prompt_hash_matches": 384,
+    "memory_plan_prompt_hash_total": 384,
+    "repaired_rs_plan_prompt_hash_matches": 128,
+    "repaired_rs_plan_prompt_hash_total": 128,
+    "total_existing_generated_arms_reusable": 512,
+    "total_existing_generated_arms": 512,
+    "all_prompt_hashes_match": true,
+    "generator_identity_matches": true
+  },
+  "failed_generation_reuse_checks": [],
+  "candidate_support_gate": {
+    "population": "external candidates present after the shared retriever; candidate-absent states close deterministically",
+    "minimum_joint_primary_descriptor_support_per_source": 0.8,
+    "observed_support_by_source": {
+      "MP": 1.0,
+      "MS": 0.8676470588235294,
+      "ME": 0.8921568627450981
+    },
+    "failed_sources": []
+  },
+  "content_profiles": {
+    "repaired_internal": {
+      "users": 52,
+      "sessions": 416,
+      "profile_fields_per_user": {
+        "n": 52,
+        "min": 3.0,
+        "p05": 3.0,
+        "median": 3.0,
+        "p95": 3.0,
+        "max": 3.0,
+        "mean": 3.0
+      },
+      "profile_field_names": [
+        "stable_preference_1",
+        "stable_preference_2",
+        "stable_preference_3"
+      ],
+      "session_summary_present_rate": 1.0,
+      "summary_tokens": {
+        "n": 416,
+        "min": 12.0,
+        "p05": 16.75,
+        "median": 31.0,
+        "p95": 60.0,
+        "max": 64.0,
+        "mean": 33.87259615384615
+      },
+      "dialogue_turns_per_session": {
+        "n": 416,
+        "min": 3.0,
+        "p05": 3.0,
+        "median": 7.0,
+        "p95": 9.0,
+        "max": 9.0,
+        "mean": 6.225961538461538
+      },
+      "seeker_turns_per_session": {
+        "n": 416,
+        "min": 2.0,
+        "p05": 2.0,
+        "median": 4.0,
+        "p95": 5.0,
+        "max": 5.0,
+        "mean": 3.612980769230769
+      },
+      "timestamp_format_counts": {
+        "calendar_or_other": 416
+      },
+      "catalog_count_per_user": {
+        "MP": {
+          "n": 52,
+          "min": 3.0,
+          "p05": 3.0,
+          "median": 3.0,
+          "p95": 3.0,
+          "max": 3.0,
+          "mean": 3.0
+        },
+        "MS": {
+          "n": 52,
+          "min": 8.0,
+          "p05": 8.0,
+          "median": 8.0,
+          "p95": 8.0,
+          "max": 8.0,
+          "mean": 8.0
+        },
+        "ME": {
+          "n": 52,
+          "min": 8.0,
+          "p05": 8.0,
+          "median": 9.0,
+          "p95": 11.449999999999996,
+          "max": 14.0,
+          "mean": 8.98076923076923
+        }
+      },
+      "item_tokens": {
+        "MP": {
+          "n": 156,
+          "min": 31.0,
+          "p05": 31.0,
+          "median": 34.0,
+          "p95": 38.0,
+          "max": 38.0,
+          "mean": 34.3974358974359
+        },
+        "MS": {
+          "n": 416,
+          "min": 12.0,
+          "p05": 16.75,
+          "median": 31.0,
+          "p95": 60.0,
+          "max": 64.0,
+          "mean": 33.87259615384615
+        },
+        "ME": {
+          "n": 467,
+          "min": 19.0,
+          "p05": 38.0,
+          "median": 76.0,
+          "p95": 113.69999999999999,
+          "max": 120.0,
+          "mean": 76.01070663811564
+        }
+      }
+    },
+    "evoemo_external": {
+      "users": 18,
+      "sessions": 401,
+      "profile_fields_per_user": {
+        "n": 18,
+        "min": 7.0,
+        "p05": 7.0,
+        "median": 7.0,
+        "p95": 7.0,
+        "max": 7.0,
+        "mean": 7.0
+      },
+      "profile_field_names": [
+        "age",
+        "education",
+        "gender",
+        "job",
+        "location",
+        "name",
+        "nationality"
+      ],
+      "session_summary_present_rate": 1.0,
+      "summary_tokens": {
+        "n": 401,
+        "min": 21.0,
+        "p05": 26.0,
+        "median": 41.0,
+        "p95": 52.0,
+        "max": 61.0,
+        "mean": 40.25935162094763
+      },
+      "dialogue_turns_per_session": {
+        "n": 401,
+        "min": 13.0,
+        "p05": 19.0,
+        "median": 22.0,
+        "p95": 30.0,
+        "max": 45.0,
+        "mean": 23.361596009975063
+      },
+      "seeker_turns_per_session": {
+        "n": 401,
+        "min": 6.0,
+        "p05": 9.0,
+        "median": 11.0,
+        "p95": 15.0,
+        "max": 28.0,
+        "mean": 11.693266832917706
+      },
+      "timestamp_format_counts": {
+        "calendar_or_other": 401
+      },
+      "catalog_count_per_user": {
+        "MP": {
+          "n": 18,
+          "min": 7.0,
+          "p05": 7.0,
+          "median": 7.0,
+          "p95": 7.0,
+          "max": 7.0,
+          "mean": 7.0
+        },
+        "MS": {
+          "n": 18,
+          "min": 13.0,
+          "p05": 13.850000000000001,
+          "median": 22.0,
+          "p95": 32.15,
+          "max": 33.0,
+          "mean": 22.27777777777778
+        },
+        "ME": {
+          "n": 18,
+          "min": 37.0,
+          "p05": 39.55,
+          "median": 68.0,
+          "p95": 101.35,
+          "max": 109.0,
+          "mean": 67.5
+        }
+      },
+      "item_tokens": {
+        "MP": {
+          "n": 126,
+          "min": 2.0,
+          "p05": 2.0,
+          "median": 5.0,
+          "p95": 9.75,
+          "max": 14.0,
+          "mean": 5.0396825396825395
+        },
+        "MS": {
+          "n": 401,
+          "min": 21.0,
+          "p05": 26.0,
+          "median": 41.0,
+          "p95": 52.0,
+          "max": 61.0,
+          "mean": 40.25935162094763
+        },
+        "ME": {
+          "n": 1215,
+          "min": 3.0,
+          "p05": 26.0,
+          "median": 102.0,
+          "p95": 119.0,
+          "max": 120.0,
+          "mean": 92.10617283950617
+        }
+      }
+    },
+    "exact_memory_text_overlap": 0
+  },
+  "semantic_input_gaps": {
+    "profile_field_name_overlap": [],
+    "synthetic_summary_fallback_to_current_user_text_rate": 0.5,
+    "external_empty_summary_rate": 0.0,
+    "runtime_history_policy": "all_causal_prior_sessions",
+    "internal_maximum_prior_sessions": 8,
+    "external_prior_session_range": [
+      13,
+      33
+    ],
+    "runtime_summary_present_rate": {
+      "internal": 1.0,
+      "external": 1.0
+    },
+    "interpretation": [
+      "Internal MP represents support preferences while EvoEmo MP represents demographic/profile facts; sharing the same basic_info wire field does not make the semantic task identical.",
+      "Half of raw internal sessions lack a supplied summary, but the shared deterministic fallback gives both runtime catalogs complete MS coverage.",
+      "Both runtime paths compile every causal prior session. Raw catalog count is diagnostic-only; the PM uses session-relative age and bounded candidate features so natural history length is not a dataset-identity shortcut."
+    ]
+  },
+  "candidate_descriptor_comparison": {
+    "MP": {
+      "internal_support_rows": 288,
+      "external_rows": 204,
+      "external_present_candidate_rows": 114,
+      "candidate_present_rate": {
+        "internal": 1.0,
+        "external": 0.5588235294117647
+      },
+      "fields": {
+        "retrieved_fraction": {
+          "internal": {
+            "n": 288,
+            "min": 0.5,
+            "p05": 1.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "max": 1.0,
+            "mean": 0.9982638888888888
+          },
+          "external": {
+            "n": 204,
+            "min": 0.0,
+            "p05": 0.0,
+            "median": 0.5,
+            "p95": 1.0,
+            "max": 1.0,
+            "mean": 0.3946078431372549
+          },
+          "external_outside_internal_min_max_rate": 0.4411764705882353,
+          "external_outside_internal_p05_p95_rate": 0.7696078431372549
+        },
+        "token_cost_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "max": 2.0,
+            "mean": 1.9930555555555556
+          },
+          "external": {
+            "n": 204,
+            "min": 0.0,
+            "p05": 0.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "max": 1.0,
+            "mean": 0.5588235294117647
+          },
+          "external_outside_internal_min_max_rate": 0.4411764705882353,
+          "external_outside_internal_p05_p95_rate": 1.0
+        },
+        "minimum_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 5.0,
+            "p05": 5.0,
+            "median": 5.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 5.0
+          },
+          "external": {
+            "n": 204,
+            "min": 0.0,
+            "p05": 0.0,
+            "median": 5.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 2.7941176470588234
+          },
+          "external_outside_internal_min_max_rate": 0.4411764705882353,
+          "external_outside_internal_p05_p95_rate": 0.4411764705882353
+        },
+        "median_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 5.0,
+            "p05": 5.0,
+            "median": 5.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 5.0
+          },
+          "external": {
+            "n": 204,
+            "min": 0.0,
+            "p05": 0.0,
+            "median": 5.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 2.7941176470588234
+          },
+          "external_outside_internal_min_max_rate": 0.4411764705882353,
+          "external_outside_internal_p05_p95_rate": 0.4411764705882353
+        },
+        "maximum_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 5.0,
+            "p05": 5.0,
+            "median": 5.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 5.0
+          },
+          "external": {
+            "n": 204,
+            "min": 0.0,
+            "p05": 0.0,
+            "median": 5.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 2.7941176470588234
+          },
+          "external_outside_internal_min_max_rate": 0.4411764705882353,
+          "external_outside_internal_p05_p95_rate": 0.4411764705882353
+        },
+        "top1_relevance_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 3.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 2.8993055555555554
+          },
+          "external": {
+            "n": 204,
+            "min": 0.0,
+            "p05": 0.0,
+            "median": 1.0,
+            "p95": 2.0,
+            "max": 3.0,
+            "mean": 0.8480392156862745
+          },
+          "external_outside_internal_min_max_rate": 0.4411764705882353,
+          "external_outside_internal_p05_p95_rate": 0.75
+        },
+        "relevance_margin_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 3.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 2.545138888888889
+          },
+          "external": {
+            "n": 204,
+            "min": 0.0,
+            "p05": 0.0,
+            "median": 1.0,
+            "p95": 3.0,
+            "max": 3.0,
+            "mean": 1.196078431372549
+          },
+          "external_outside_internal_min_max_rate": 0.4411764705882353,
+          "external_outside_internal_p05_p95_rate": 0.4411764705882353
+        },
+        "catalog_capacity_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 4.0,
+            "p05": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 4.0
+          },
+          "external": {
+            "n": 204,
+            "min": 0.0,
+            "p05": 0.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 2.235294117647059
+          },
+          "external_outside_internal_min_max_rate": 0.4411764705882353,
+          "external_outside_internal_p05_p95_rate": 0.4411764705882353
+        }
+      },
+      "all_primary_fields_within_internal_min_max_rate": 1.0
+    },
+    "MS": {
+      "internal_support_rows": 288,
+      "external_rows": 204,
+      "external_present_candidate_rows": 204,
+      "candidate_present_rate": {
+        "internal": 1.0,
+        "external": 1.0
+      },
+      "fields": {
+        "retrieved_fraction": {
+          "internal": {
+            "n": 288,
+            "min": 0.5,
+            "p05": 0.5,
+            "median": 1.0,
+            "p95": 1.0,
+            "max": 1.0,
+            "mean": 0.9375
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "max": 1.0,
+            "mean": 1.0
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        },
+        "token_cost_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "max": 2.0,
+            "mean": 1.5277777777777777
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 2.0,
+            "p95": 2.0,
+            "max": 2.0,
+            "mean": 1.9607843137254901
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        },
+        "minimum_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 3.0,
+            "p95": 3.6499999999999773,
+            "max": 4.0,
+            "mean": 2.8090277777777777
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 2.0,
+            "p95": 3.0,
+            "max": 4.0,
+            "mean": 1.9068627450980393
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.47549019607843135
+        },
+        "median_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 2.0,
+            "p05": 3.0,
+            "median": 3.0,
+            "p95": 4.0,
+            "max": 5.0,
+            "mean": 3.3715277777777777
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 3.0,
+            "p95": 4.0,
+            "max": 5.0,
+            "mean": 2.9411764705882355
+          },
+          "external_outside_internal_min_max_rate": 0.049019607843137254,
+          "external_outside_internal_p05_p95_rate": 0.27941176470588236
+        },
+        "maximum_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 3.0,
+            "p05": 3.0,
+            "median": 4.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 3.9166666666666665
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 4.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 3.642156862745098
+          },
+          "external_outside_internal_min_max_rate": 0.1323529411764706,
+          "external_outside_internal_p05_p95_rate": 0.1323529411764706
+        },
+        "top1_relevance_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 2.0,
+            "p05": 3.0,
+            "median": 4.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 4.09375
+          },
+          "external": {
+            "n": 204,
+            "min": 3.0,
+            "p05": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "max": 5.0,
+            "mean": 3.9901960784313726
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        },
+        "relevance_margin_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 3.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 3.1354166666666665
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 2.0,
+            "p95": 3.0,
+            "max": 4.0,
+            "mean": 1.9607843137254901
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.23039215686274508
+        },
+        "catalog_capacity_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 2.0,
+            "p05": 2.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 3.75
+          },
+          "external": {
+            "n": 204,
+            "min": 4.0,
+            "p05": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 4.0
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        }
+      },
+      "all_primary_fields_within_internal_min_max_rate": 0.8676470588235294
+    },
+    "ME": {
+      "internal_support_rows": 288,
+      "external_rows": 204,
+      "external_present_candidate_rows": 204,
+      "candidate_present_rate": {
+        "internal": 1.0,
+        "external": 1.0
+      },
+      "fields": {
+        "retrieved_fraction": {
+          "internal": {
+            "n": 288,
+            "min": 0.333333,
+            "p05": 0.333333,
+            "median": 1.0,
+            "p95": 1.0,
+            "max": 1.0,
+            "mean": 0.8854166631944445
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 1.0,
+            "p95": 1.0,
+            "max": 1.0,
+            "mean": 1.0
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        },
+        "token_cost_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 3.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 3.0520833333333335
+          },
+          "external": {
+            "n": 204,
+            "min": 4.0,
+            "p05": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 4.0
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        },
+        "minimum_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 2.0,
+            "median": 3.0,
+            "p95": 3.0,
+            "max": 4.0,
+            "mean": 2.611111111111111
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 2.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 2.0245098039215685
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.5392156862745098
+        },
+        "median_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 2.0,
+            "p05": 3.0,
+            "median": 3.0,
+            "p95": 4.0,
+            "max": 5.0,
+            "mean": 3.3125
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 3.0,
+            "p95": 4.0,
+            "max": 5.0,
+            "mean": 3.0294117647058822
+          },
+          "external_outside_internal_min_max_rate": 0.08333333333333333,
+          "external_outside_internal_p05_p95_rate": 0.31862745098039214
+        },
+        "maximum_relative_age_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 3.0,
+            "p05": 3.0,
+            "median": 4.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 4.190972222222222
+          },
+          "external": {
+            "n": 204,
+            "min": 2.0,
+            "p05": 2.0,
+            "median": 4.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 3.8529411764705883
+          },
+          "external_outside_internal_min_max_rate": 0.058823529411764705,
+          "external_outside_internal_p05_p95_rate": 0.058823529411764705
+        },
+        "top1_relevance_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 3.0,
+            "p05": 4.0,
+            "median": 5.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 4.746527777777778
+          },
+          "external": {
+            "n": 204,
+            "min": 4.0,
+            "p05": 4.0,
+            "median": 5.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 4.936274509803922
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        },
+        "relevance_margin_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 3.0,
+            "p95": 5.0,
+            "max": 5.0,
+            "mean": 2.8993055555555554
+          },
+          "external": {
+            "n": 204,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 2.0,
+            "p95": 3.0,
+            "max": 3.0,
+            "mean": 1.8235294117647058
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        },
+        "catalog_capacity_bucket": {
+          "internal": {
+            "n": 288,
+            "min": 1.0,
+            "p05": 1.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 3.4305555555555554
+          },
+          "external": {
+            "n": 204,
+            "min": 4.0,
+            "p05": 4.0,
+            "median": 4.0,
+            "p95": 4.0,
+            "max": 4.0,
+            "mean": 4.0
+          },
+          "external_outside_internal_min_max_rate": 0.0,
+          "external_outside_internal_p05_p95_rate": 0.0
+        }
+      },
+      "all_primary_fields_within_internal_min_max_rate": 0.8921568627450981
+    }
+  },
+  "external_descriptor_states": 204,
+  "external_descriptor_rows": 612,
+  "internal_support_descriptor_rows": 864,
+  "completed_repairs": [
+    "Shared candidate-discovery and descriptor function is called by internal construction and EvoEmo runtime.",
+    "EvoEmo PM decision is post-candidate-discovery and pre-injection; raw IDs, text, dataset identity, and outcomes are excluded.",
+    "Internal and external RS backgrounds share the V4 strategy-card injection compiler.",
+    "Memory time labels use the same relative-session representation.",
+    "Backend, 192-pair blueprint, and 384-call plan were rebuilt after the mechanism change."
+  ],
+  "claim_boundary": {
+    "can_be_100_percent": "executable mechanism equivalence",
+    "cannot_be_100_percent_without_leakage": "content, topic, history length, catalog size, and candidate feature distributions",
+    "required_external_reporting": "outcome-free in-support coverage plus full unweighted quality/risk/cost after the model and thresholds are frozen"
+  },
+  "inputs": {
+    "bundles": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_bundles.jsonl",
+    "bundles_sha256": "63708d5ad2ff71582d096aafd2f59a6e2a69a7ec9858d55122424a332738af04",
+    "internal_backend_report": "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/report.json",
+    "internal_backend_report_sha256": "25be31daadfd5ae8573d958abac111939d360702ada2d0a81a9557f8a6f2e6c8",
+    "generation_plan": "outputs/pm_v1_5_transport_repaired_memory_generation_v1/plan_report.json",
+    "generation_plan_sha256": "d7f61a5842a8d0088cdfa7dffe00916112908c20a75b30dce21af8e6aefd4202",
+    "repaired_rs_generation_plan": "outputs/pm_v1_5_transport_repaired_rs_generation_v1/plan_report.json",
+    "repaired_rs_generation_plan_sha256": "3b0d2445f389201d7c9cdf9fcc426ac1947111d2a26fa6eab3e9a930564ee8c1",
+    "repaired_rs_generation_identity_matches": true,
+    "evoemo": "data/external/evo_emo.json",
+    "evoemo_sha256": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420",
+    "fixed_tracks": "outputs/evoemo_fixed_tracks_v1_5_v3_formal_fresh_candidate/fixed_seeker_tracks.jsonl",
+    "fixed_tracks_sha256": "9b6d7df3bf8b2088c12a738a1b89cd7564b5de6bfc4777641f3ed5fd31b3003c",
+    "pm_config": "configs/pm_v1_5.yaml",
+    "pm_config_sha256": "7aaa4ad296936e298d4beb16f9d1a9f5ca096e224d5e518da22b49682842a94b"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "protocol": "pm-v1.5-d2-measurement-blueprint-v1",
+  "status": "FROZEN_READY_FOR_144_D2_RESPONSE_CALLS",
+  "blueprint_sha256": "43dd8f8534fb10306764ffb0a96b6342dd73b452aca8157e4c0a89361346a8bb",
+  "report_sha256": "fea11694cf7b75cb2db34e6365792d23fc1b9d2f38de128255b7a96ef477a658"
+}

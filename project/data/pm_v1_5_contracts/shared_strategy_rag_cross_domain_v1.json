@@ -1,0 +1,136 @@
+{
+  "protocol": "pm-v1.5-shared-strategy-rag-cross-domain-v1",
+  "status": "ACTIVE_PRE_FREEZE_INDUCTIVE_TAXONOMY_AUDIT",
+  "research_question": "Can one pre-retrieval PM learn when a fixed Strategy resource is materially useful under quality-risk-cost constraints and transfer that decision across single-session and longitudinal observable states?",
+  "main_study_identity": {
+    "must_be_identical_across": [
+      "train",
+      "calibration",
+      "internal",
+      "ESConv",
+      "EvoEmo_ES_MemEval_derived"
+    ],
+    "frozen_fields": [
+      "strategy_card_catalog_and_card_content",
+      "eligibility_safety_boundary_burden_filters",
+      "query_builder_and_query_views",
+      "retriever_model_snapshot_and_runtime",
+      "similarity_function_score_floor_and_ranking",
+      "injection_cardinality_and_tie_breaking",
+      "prompt_compiler_and_generator",
+      "decoding_seed_and_cost_accounting"
+    ],
+    "allowed_environment_differences": [
+      "visible dialogue state",
+      "memory source availability",
+      "legal action mask",
+      "the cards returned by the same frozen retrieval function for different queries"
+    ],
+    "forbidden_main_study_differences": [
+      "domain-specific Strategy Bank",
+      "domain identifier as a PM feature",
+      "external-test-derived card authoring or filtering",
+      "domain-specific retriever Top-k threshold or prompt",
+      "external response judge or gold outcome used to tune the bank PM or thresholds"
+    ]
+  },
+  "candidate_bank_structural_profile": {
+    "catalog": "data/strategy/pm_v1_5_strategy_bank_v3_core_taxonomy_v1.jsonl",
+    "candidate_cards": 50,
+    "families": {
+      "Question": 10,
+      "Restatement or Paraphrasing": 10,
+      "Reflection of feelings": 10,
+      "Affirmation and Reassurance": 10,
+      "Providing Suggestions": 10
+    },
+    "support_modes": {
+      "listen": 29,
+      "comfort_reassure": 16,
+      "explore": 28,
+      "light_guidance": 20,
+      "structured_planning": 4
+    },
+    "dialogue_phases": {
+      "exploration": 27,
+      "comforting": 29,
+      "action": 29
+    },
+    "goals": {
+      "be_heard": 18,
+      "make_sense": 23,
+      "stabilize": 17,
+      "decide": 14,
+      "act": 21
+    },
+    "directive_burden": {
+      "none": 30,
+      "light": 20
+    },
+    "interpretation": "Top-down safe-technique reference only; not a clustering result, not a data-induced taxonomy, and not yet empirical proof of adequate ESConv or EvoEmo retrieval coverage.",
+    "taxonomy_evidence_status": "PENDING_LABEL_BLIND_OPEN_CODING_AND_ALIGNMENT_WITH_THE_TRAIN_ONLY_EIGHT_LABEL_SOURCE_UNIVERSE",
+    "known_narrow_area": "structured_planning has four compatible cards and no structured-burden card; V1.5 therefore limits RS to at most one support move per turn.",
+    "deliberately_out_of_scope_families": [
+      "Self-disclosure",
+      "Information",
+      "Others"
+    ]
+  },
+  "domain_roles": {
+    "ESConv": {
+      "memory_availability": "MP MS and ME structurally unavailable",
+      "legal_actions": [
+        "M0+R0",
+        "M0+RS"
+      ],
+      "tests": "selective Strategy use and immediate response quality"
+    },
+    "EvoEmo_ES_MemEval_derived": {
+      "memory_availability": "longitudinal memory sources may be available",
+      "strategy_bank": "the exact same frozen Strategy catalog and retrieval stack as ESConv",
+      "tests": "joint source allocation; Strategy cards do not substitute for MP MS or ME content"
+    }
+  },
+  "coverage_definition": {
+    "required": [
+      "reusable support-move and decision-boundary coverage",
+      "support mode phase goal burden and risk opportunity coverage",
+      "positive material-benefit tie and harm contrasts",
+      "memory unavailable and available backgrounds"
+    ],
+    "not_required": [
+      "matching every external topic emotion or wording pattern",
+      "reproducing all eight raw ESConv strategy labels",
+      "using EvoEmo text outcomes or gold annotations to author cards"
+    ]
+  },
+  "pre_freeze_gates": [
+    {
+      "gate": "intrinsic_card_review",
+      "pass": "Every surviving card is approved or corrected and no unresolved safety or boundary defect remains."
+    },
+    {
+      "gate": "structural_scope",
+      "pass": "All declared modes phases and goals have eligible support moves and structured planning remains explicitly bounded to one move per turn."
+    },
+    {
+      "gate": "outcome_blind_retrieval_sanity",
+      "pass": "On train/calibration states only, eligible-set and Top-k review reports relevant safe retrieval, wrong-family retrieval, no-eligible behavior and critical boundary failures without using response outcomes."
+    },
+    {
+      "gate": "clean_pair_mechanism",
+      "pass": "Frozen R0 versus RS clean pairs contain auditable material-benefit, tie and harm cases under the same response mechanism."
+    }
+  ],
+  "PM_target_rule": [
+    "no qualified resource opportunity => R0",
+    "invalid or unexecuted treatment => unknown during training and R0 at inference",
+    "no sufficient probability of material response-quality benefit => R0",
+    "risk constraint failure => R0",
+    "cost budget failure => R0",
+    "all gates pass => RS",
+    "tie => R0"
+  ],
+  "post_freeze_rule": "External outcome-free diagnostics and final outcomes may be reported but may not be used to add cards or retune retrieval or PM. Any such change creates a new study identity.",
+  "separate_future_ablation": "A domain-adapted Strategy Bank may be studied only as an explicitly named secondary resource-adaptation experiment and cannot support the main shared-PM cross-domain generalization claim."
+}

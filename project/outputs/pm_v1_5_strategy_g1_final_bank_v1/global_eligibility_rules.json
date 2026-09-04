@@ -1,0 +1,33 @@
+{
+  "protocol": "pm-v1.5-strategy-g1-dual-human-bank-freeze-v1",
+  "apply_before_ranking": true,
+  "rules": [
+    {
+      "rule_id": "active_high_stakes_override",
+      "if": "visible dialogue contains an active self-harm, violence, abuse, or acute crisis cue not yet handled",
+      "effect": "ordinary strategy Bank ineligible; use upstream safety flow before any ordinary support move"
+    },
+    {
+      "rule_id": "explicit_stop_boundary",
+      "if": "user explicitly asks to stop, close, or end",
+      "effect": "only AM14 acknowledge-and-close variant eligible; never ask whether the user wants to continue"
+    },
+    {
+      "rule_id": "advice_permission",
+      "if": "advice or action help is not explicitly welcomed",
+      "effect": "AM10 ineligible"
+    },
+    {
+      "rule_id": "question_repetition",
+      "if": "an open invitation or clarification was already asked without an intervening user response, or the answer is already visible",
+      "effect": "AM01 and AM02 ineligible"
+    },
+    {
+      "rule_id": "single_card_cap",
+      "if": "more than one card remains eligible",
+      "effect": "rank eligible cards and inject Top-1 only"
+    }
+  ],
+  "raw_source_responses_available_to_runtime": false,
+  "source_example_labels_used_as_PM_or_permission_gold": false
+}

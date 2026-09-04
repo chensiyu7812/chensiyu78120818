@@ -1,15 +1,30 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Any, Mapping, Sequence
+from copy import deepcopy
+from datetime import date
 import json
+import math
+import re
 import time
 
-import numpy as np
-from sklearn.feature_extraction.text import HashingVectorizer
-
-from .api import Endpoint, OpenAICompatibleClient, request_log
+from .api import (
+    Endpoint,
+    OpenAICompatibleClient,
+    chat_request_payload,
+    make_client,
+    request_log,
+    require_reported_usage,
+)
 from .artifacts import create_artifact_attestation, require_artifact_attestation
+from .attempt_ledger import PersistentAttemptLedger
+from .bounded_retry import (
+    DEFAULT_BACKOFF_SECONDS,
+    TERMINAL_DISPOSITION,
+    execute_with_bounded_retry,
+    failure_metadata,
+)
 from .contracts import (
     CostRecord,
     DialogueTurn,
@@ -25,6 +40,7 @@ from .io import (
     append_jsonl,
     canonical_json,
     ensure_run_manifest,
+    index_jsonl_unique,
     iter_jsonl,
     load_done_keys,
     read_json,
@@ -33,11 +49,25 @@ from .io import (
     stable_hex,
     utc_now,
     write_json,
+    write_jsonl,
+)
+from .fixed_seeker_contract import (
+    FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3,
+    FixedSeekerGenerationContract,
 )
 from .policies import FixedPolicy, LearnedPMPolicy, RuleConfig, StrongRulePolicy
 from .prompts import OFFICIAL_ESMEM_SYSTEM, SELECTIVE_ESMEM_SYSTEM, generation_messages
 from .retrieval import MemoryRetriever, StrategyRetriever, context_query
 from .text import estimate_tokens, lexical_score, normalize_space
+from .pm_v1_5_semantic import (
+    UNIFIED_SEMANTIC_QUERY_PROTOCOL,
+    SemanticTextEncoder,
+    prepare_visible_semantic_state,
+    semantic_centroid,
+    semantic_query_similarity,
+    semantic_vector_similarity,
+    visible_dialogue_state_text,
+)
 from .training import PMModel
 
 
@@ -51,6 +81,177 @@ _NEUTRAL_TRACK_PROBES = (
     "What kind of support would feel most useful right now?",
 )
 
+FIXED_SEEKER_V22_STAGE = "evoemo_fixed_seeker_tracks_v22"
+FIXED_SEEKER_V22_DRY_RUN_PROTOCOL = "pm-v2.2-fixed-seeker-dry-run-v1"
+FIXED_SEEKER_V22_LOGICAL_CALL_PROTOCOL = "pm-v2.2-fixed-seeker-logical-call-v1"
+FIXED_SEEKER_V23_STAGE = "evoemo_fixed_seeker_tracks_v23_bounded_surface"
+FIXED_SEEKER_V23_DRY_RUN_PROTOCOL = (
+    "pm-v2.2-fixed-seeker-bounded-surface-dry-run-v1"
+)
+FIXED_SEEKER_V23_LOGICAL_CALL_PROTOCOL = (
+    "pm-v2.2-fixed-seeker-bounded-surface-logical-call-v1"
+)
+FIXED_SEEKER_COST_PLANNING_PROTOCOL = (
+    "pm-v2.2-fixed-seeker-cost-planning-v1"
+)
+FIXED_SEEKER_INPUT_BOUND_FORMULA = (
+    "ceil(input_token_safety_factor * "
+    "(static_request_tokens_with_empty_prior_seeker_content + "
+    "prior_turn_count * max_output_tokens))"
+)
+
+
+def _fixed_seeker_protocols(
+    contract: FixedSeekerGenerationContract,
+) -> tuple[str, str, str]:
+    if contract.version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3:
+        return (
+            FIXED_SEEKER_V23_STAGE,
+            FIXED_SEEKER_V23_DRY_RUN_PROTOCOL,
+            FIXED_SEEKER_V23_LOGICAL_CALL_PROTOCOL,
+        )
+    return (
+        FIXED_SEEKER_V22_STAGE,
+        FIXED_SEEKER_V22_DRY_RUN_PROTOCOL,
+        FIXED_SEEKER_V22_LOGICAL_CALL_PROTOCOL,
+    )
+
+
+def fixed_seeker_cost_planning_contract(
+    raw: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Validate and normalize the frozen positive-price seeker cost contract."""
+
+    data = dict(raw)
+    expected_keys = {
+        "protocol",
+        "pricing_usd_per_mtok",
+        "input_token_safety_factor",
+        "fail_on_reported_input_overrun",
+    }
+    normalized_keys = expected_keys | {"per_call_input_bound_formula"}
+    if frozenset(data) not in {
+        frozenset(expected_keys),
+        frozenset(normalized_keys),
+    }:
+        raise ValueError(
+            "fixed_seeker_cost_planning keys differ from the frozen contract"
+        )
+    if (
+        "per_call_input_bound_formula" in data
+        and data["per_call_input_bound_formula"]
+        != FIXED_SEEKER_INPUT_BOUND_FORMULA
+    ):
+        raise ValueError("fixed-seeker input-bound formula changed")
+    if data["protocol"] != FIXED_SEEKER_COST_PLANNING_PROTOCOL:
+        raise ValueError("unsupported fixed-seeker cost-planning protocol")
+    prices_raw = data["pricing_usd_per_mtok"]
+    if not isinstance(prices_raw, Mapping) or set(prices_raw) != {
+        "input",
+        "output",
+    }:
+        raise ValueError("fixed-seeker pricing must contain input and output")
+    prices = {
+        "input": float(prices_raw["input"]),
+        "output": float(prices_raw["output"]),
+    }
+    if prices != {"input": 0.15, "output": 0.60}:
+        raise ValueError(
+            "fixed-seeker pricing must equal the frozen positive 0.15/0.60 proxy"
+        )
+    safety_factor = float(data["input_token_safety_factor"])
+    if not math.isfinite(safety_factor) or safety_factor != 1.50:
+        raise ValueError("fixed-seeker input-token safety factor must equal 1.50")
+    if data["fail_on_reported_input_overrun"] is not True:
+        raise ValueError("fixed-seeker reported input-token overrun must fail closed")
+    return {
+        "protocol": FIXED_SEEKER_COST_PLANNING_PROTOCOL,
+        "pricing_usd_per_mtok": prices,
+        "input_token_safety_factor": safety_factor,
+        "fail_on_reported_input_overrun": True,
+        "per_call_input_bound_formula": FIXED_SEEKER_INPUT_BOUND_FORMULA,
+    }
+
+
+def normalize_evoemo_chronology(
+    data: Sequence[Mapping[str, Any]],
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Validate IDs/references and freeze timestamp-based session ordering."""
+
+    normalized = deepcopy(list(data))
+    reordered_users = []
+    reordered_sessions = 0
+    related_references = 0
+    for user in normalized:
+        user_id = str(user.get("id") or "")
+        if not user_id:
+            raise RuntimeError("EvoEmo user has no stable ID")
+        sessions = list(user.get("dialog_history") or [])
+        ids = [str(row.get("id") or "") for row in sessions]
+        if "" in ids or len(ids) != len(set(ids)):
+            raise RuntimeError(f"EvoEmo session IDs are missing/duplicated: {user_id}")
+        decorated = []
+        for original_index, session in enumerate(sessions):
+            raw_timestamp = str(session.get("timestamp") or "")
+            try:
+                parsed = date.fromisoformat(raw_timestamp)
+            except ValueError as exc:
+                raise RuntimeError(
+                    f"EvoEmo timestamp is not ISO-8601: {user_id}/{ids[original_index]}"
+                ) from exc
+            decorated.append((parsed, original_index, session))
+        ordered = [row for _, _, row in sorted(decorated, key=lambda item: (item[0], item[1]))]
+        ordered_ids = [str(row["id"]) for row in ordered]
+        if ordered_ids != ids:
+            reordered_users.append(user_id)
+            reordered_sessions += sum(
+                left != right for left, right in zip(ids, ordered_ids, strict=True)
+            )
+        user["dialog_history"] = ordered
+        session_ids = set(ordered_ids)
+        topic_indices = []
+        for topic in user.get("subsequent_topics") or []:
+            topic_index = topic.get("idx")
+            if isinstance(topic_index, bool) or not isinstance(topic_index, int):
+                raise RuntimeError(f"EvoEmo topic idx is invalid: {user_id}")
+            topic_indices.append(topic_index)
+            related = [str(value) for value in topic.get("related_sessions") or []]
+            missing = sorted(set(related) - session_ids)
+            if missing:
+                raise RuntimeError(
+                    f"EvoEmo related_sessions reference missing IDs: {user_id}: {missing}"
+                )
+            related_references += len(related)
+        if len(topic_indices) != len(set(topic_indices)):
+            raise RuntimeError(f"EvoEmo topic idx is duplicated: {user_id}")
+    report = {
+        "protocol": "pm-v1.5-evoemo-chronology-audit-v1",
+        "status": (
+            "PASS_WITH_FROZEN_TIMESTAMP_NORMALIZATION"
+            if reordered_users
+            else "PASS_ALREADY_MONOTONIC"
+        ),
+        "ordering_rule": "ascending_iso_date_then_original_position_for_ties",
+        "users": len(normalized),
+        "sessions": sum(len(row.get("dialog_history") or []) for row in normalized),
+        "topics": sum(len(row.get("subsequent_topics") or []) for row in normalized),
+        "reordered_users": sorted(reordered_users),
+        "reordered_user_count": len(reordered_users),
+        "reordered_session_positions": reordered_sessions,
+        "related_session_references_checked": related_references,
+        "topic_temporal_contract": (
+            "subsequent_topics_are_defined_after_the_complete_timestamp_sorted_history; "
+            "the source has no topic timestamp, so no stronger timestamp claim is made"
+        ),
+    }
+    return normalized, report
+
+
+def evoemo_chronology_audit(path: str | Path) -> dict[str, Any]:
+    raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    _, report = normalize_evoemo_chronology(raw)
+    return report
+
 
 def load_evoemo(path: str | Path) -> list[dict[str, Any]]:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
@@ -62,11 +263,239 @@ def load_evoemo(path: str | Path) -> list[dict[str, Any]]:
         raise ValueError(
             f"unexpected EvoEmo statistics: sessions={total_sessions}, topics={total_topics}"
         )
-    return data
+    normalized, _ = normalize_evoemo_chronology(data)
+    return normalized
 
 
 def _opaque_memory_id(user_id: str, source: str, key: str) -> str:
     return f"mem_{stable_hex('evo', user_id, source, key, n=20)}"
+
+
+EVO_MEMORY_PROTOCOL = "pm-v1.5-evo-memory-episode-chunked-v3"
+# EVO_MEMORY_EPISODE_MAX_TOKENS is a genuine hard cap on every emitted
+# chunk, with NO exception: a turn that itself exceeds the cap is split
+# (see _split_oversized_text) rather than left over-cap.
+# EVO_MEMORY_EPISODE_TARGET_MIN_TOKENS is a reporting/diagnostic target
+# only -- it has never gated anything since the chunker's hard-cap fix
+# (it would otherwise let a not-yet-at-minimum chunk absorb turns past the
+# cap). A short trailing chunk at the end of a session (nothing left to
+# merge with under the cap) is expected and left under the target. Frozen
+# from the length/support diagnostics reported in this project's own
+# memory-catalog review (median training ME item ~37 tokens; prior
+# external ME was ~280 tokens from concatenating a whole session) -- never
+# adjusted against any judged or outcome-bearing result. This range is a
+# first-pass target, not proof that 60-120 tokens is the "right" support
+# match for the ~37-token training distribution; the two remain visibly
+# different and should be reported as such, not described as "comparable."
+EVO_MEMORY_EPISODE_TARGET_MIN_TOKENS = 60
+EVO_MEMORY_EPISODE_MAX_TOKENS = 120
+
+_SENTENCE_BOUNDARY_RE = re.compile(r"(?<=[.!?])\s+")
+
+
+def _split_oversized_text(text: str, max_tokens: int) -> list[str]:
+    """Split one over-cap piece of text into ordered, non-overlapping,
+    lossless pieces each within max_tokens.
+
+    Tries deterministic sentence boundaries first; falls back to
+    word-boundary greedy packing for a single sentence still over cap;
+    falls back further to a raw bounded character span for a single word
+    still over cap (pathological, but must still never lose or truncate
+    content silently). ``text`` is assumed already normalize_space-d
+    (collapsed to single spaces between tokens), so joining the returned
+    pieces with a single space exactly reconstructs the input -- this is
+    exercised directly by
+    test_chunk_session_episodes_splits_an_oversized_turn_losslessly.
+    """
+    if estimate_tokens(text) <= max_tokens:
+        return [text]
+
+    sentences = [s for s in _SENTENCE_BOUNDARY_RE.split(text) if s]
+    if len(sentences) > 1:
+        pieces: list[str] = []
+        for sentence in sentences:
+            pieces.extend(_split_oversized_text(sentence, max_tokens))
+        return pieces
+
+    words = text.split(" ")
+    if len(words) > 1:
+        packed: list[str] = []
+        current: list[str] = []
+        for word in words:
+            candidate = " ".join([*current, word]) if current else word
+            if current and estimate_tokens(candidate) > max_tokens:
+                packed.append(" ".join(current))
+                current = []
+            current.append(word)
+        if current:
+            packed.append(" ".join(current))
+        pieces = []
+        for piece in packed:
+            pieces.extend(_split_oversized_text(piece, max_tokens))
+        return pieces
+
+    # A single word (no internal spaces) still over cap: the only
+    # remaining lossless option is a raw, bounded character span. Every
+    # character of the word appears in exactly one span, in order.
+    char_limit = max_tokens * 4
+    return [text[i : i + char_limit] for i in range(0, len(text), char_limit)]
+
+
+def _chunk_session_episodes(
+    turns: Sequence[tuple[int, str]],
+    *,
+    max_tokens: int = EVO_MEMORY_EPISODE_MAX_TOKENS,
+) -> list[tuple[int, int, str, int | None]]:
+    """Greedily group one session's seeker turns, in original dialogue
+    order, into non-overlapping episode chunks, hard-capped at
+    max_tokens with NO exception (a turn that itself exceeds the cap is
+    split via _split_oversized_text, never left over-cap).
+    EVO_MEMORY_EPISODE_TARGET_MIN_TOKENS is a target used only in
+    prose/reporting, never enforced here as a gate.
+
+    max_tokens defaults to the frozen production value
+    (EVO_MEMORY_EPISODE_MAX_TOKENS) but is a parameter specifically so a
+    no-API sensitivity check can recompile the real catalog under
+    alternative caps without duplicating this logic. Only the frozen
+    default is ever used by build_evo_memory itself.
+
+    Deterministic and content-only: boundaries depend solely on turn order
+    and length, never on any evaluator-only signal (related sessions,
+    future topics, observations, reference answers). Never merges across
+    sessions. Returns (first_turn_index, last_turn_index, chunk_text,
+    span_index) quadruples: span_index is None for a normal chunk (one or
+    more whole turns), or an integer 0, 1, 2, ... identifying one lossless
+    piece of a single oversized turn that had to be split -- callers use
+    this to build a stable, auditable, and always-unique id.
+
+    The would-be joined text's token count is recomputed on every turn
+    (not tracked as a running sum of per-turn estimates): estimate_tokens
+    is a character-count heuristic (ceil(len(text) / 4)), so summing
+    per-turn estimates is not exactly additive across a join (separator
+    characters and independent per-turn rounding can shift the total by a
+    token or two) -- a real off-by-a-few-tokens gap against the cap was
+    found this way on the real EvoEmo corpus and would otherwise recur.
+    """
+    chunks: list[tuple[int, int, str]] = []
+    current_indices: list[int] = []
+    current_texts: list[str] = []
+    for turn_index, text in turns:
+        if current_texts:
+            candidate_tokens = estimate_tokens(" ".join([*current_texts, text]))
+            if candidate_tokens > max_tokens:
+                chunks.append(
+                    (current_indices[0], current_indices[-1], " ".join(current_texts))
+                )
+                current_indices = []
+                current_texts = []
+        current_indices.append(turn_index)
+        current_texts.append(text)
+    if current_texts:
+        chunks.append(
+            (current_indices[0], current_indices[-1], " ".join(current_texts))
+        )
+
+    # The packing loop above only ever leaves a chunk over-cap when it is a
+    # single, isolated turn (start == end): as soon as a second turn would
+    # be added to an already-over-cap accumulation, the check above closes
+    # it first. Expand any such chunk into lossless, non-overlapping,
+    # uniquely-identified sub-spans; every other chunk passes through
+    # unchanged with span_index=None.
+    expanded: list[tuple[int, int, str, int | None]] = []
+    for start, end, text in chunks:
+        if estimate_tokens(text) <= max_tokens:
+            expanded.append((start, end, text, None))
+            continue
+        for span_index, piece in enumerate(_split_oversized_text(text, max_tokens)):
+            expanded.append((start, end, piece, span_index))
+    return expanded
+
+
+# Explicit, human-readable tags for every algorithmic component that
+# affects build_evo_memory's exact output. Each is a separately versioned
+# string (bump the specific tag that changed, not just EVO_MEMORY_PROTOCOL
+# as a whole) so evo_memory_builder_contract_hash changes whenever any of
+# them does, and a diff of the hashed dict shows exactly what changed.
+EVO_MEMORY_CHUNKING_ALGORITHM_TAG = "greedy_bin_pack_then_split_oversized_v1"
+EVO_MEMORY_LONG_TURN_SPLIT_PROTOCOL_TAG = (
+    "sentence_boundary_then_word_boundary_then_bounded_char_span_v1"
+)
+EVO_MEMORY_ID_SCHEME_TAG = "{session_id}_turns_{start}_{end}[_span{i}]_v1"
+EVO_MEMORY_NORMALIZATION_TAG = "normalize_space_single_space_collapse_v1"
+EVO_MEMORY_TOKEN_ESTIMATOR_PROTOCOL_TAG = (
+    "ceil_len_over_4_character_count_heuristic_v1"
+)
+
+
+def evo_memory_builder_contract_hash() -> str:
+    return sha256_text(
+        canonical_json(
+            {
+                "protocol": EVO_MEMORY_PROTOCOL,
+                "chunking_algorithm": EVO_MEMORY_CHUNKING_ALGORITHM_TAG,
+                "long_turn_split_protocol": EVO_MEMORY_LONG_TURN_SPLIT_PROTOCOL_TAG,
+                "id_scheme": EVO_MEMORY_ID_SCHEME_TAG,
+                "normalization": EVO_MEMORY_NORMALIZATION_TAG,
+                "token_estimator_protocol": EVO_MEMORY_TOKEN_ESTIMATOR_PROTOCOL_TAG,
+                "episode_target_min_tokens": EVO_MEMORY_EPISODE_TARGET_MIN_TOKENS,
+                "episode_max_tokens": EVO_MEMORY_EPISODE_MAX_TOKENS,
+            }
+        )
+    )
+
+
+def evo_memory_catalog_digest(user: dict[str, Any]) -> dict[str, Any]:
+    """Per-user fingerprint of build_evo_memory's exact output, for binding
+    into freeze/manifest/attestation checks so a change to the builder or
+    its frozen thresholds is never silently inherited by a downstream
+    artifact computed under the old shape.
+    """
+    items, _ = build_evo_memory(user)
+    rows = [item.model_dump(mode="json") for item in items]
+    return {
+        "protocol": EVO_MEMORY_PROTOCOL,
+        "builder_contract_sha256": evo_memory_builder_contract_hash(),
+        "user_id": str(user["id"]),
+        "item_count": len(rows),
+        "catalog_sha256": sha256_text(canonical_json(rows)),
+    }
+
+
+def evo_memory_global_catalog_digest(users: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    """Deterministic global fingerprint: per-user rows are sorted by
+    user_id (never by input iteration order, which callers should not be
+    required to keep stable) and each binds user_id/item_count/hash
+    together, not a bare hash keyed loosely by user_id.
+    """
+    per_user = sorted(
+        (evo_memory_catalog_digest(user) for user in users),
+        key=lambda row: row["user_id"],
+    )
+    return {
+        "protocol": EVO_MEMORY_PROTOCOL,
+        "builder_contract_sha256": evo_memory_builder_contract_hash(),
+        "user_count": len(per_user),
+        "per_user": [
+            {
+                "user_id": row["user_id"],
+                "item_count": row["item_count"],
+                "catalog_sha256": row["catalog_sha256"],
+            }
+            for row in per_user
+        ],
+        "global_catalog_sha256": sha256_text(
+            canonical_json(
+                [
+                    {
+                        "user_id": row["user_id"],
+                        "item_count": row["item_count"],
+                        "catalog_sha256": row["catalog_sha256"],
+                    }
+                    for row in per_user
+                ]
+            )
+        ),
+    }
 
 
 def build_evo_memory(user: dict[str, Any]) -> tuple[list[MemoryItem], list[dict[str, Any]]]:
@@ -75,6 +504,12 @@ def build_evo_memory(user: dict[str, Any]) -> tuple[list[MemoryItem], list[dict[
     Event timelines, observation annotations, related-session labels, QA
     evidence, reference answers and future topics are evaluator-only and never
     enter the policy/generator view.
+
+    ME items are session-internal episode chunks (see
+    _chunk_session_episodes), not one item per whole session: concatenating
+    every seeker turn in a session into a single item produced ME items far
+    longer (median ~280 tokens) than the training-time compiler's ME items
+    (median ~37 tokens), a train/deploy representation mismatch.
     """
     user_id = str(user["id"])
     items: list[MemoryItem] = []
@@ -106,18 +541,24 @@ def build_evo_memory(user: dict[str, Any]) -> tuple[list[MemoryItem], list[dict[
                 timestamp=timestamp or None,
                 text=summary,
             ))
-        seeker_turns = [
-            normalize_space(turn.get("content") or "")
-            for turn in (session.get("dialogue") or [])
+        dialogue = session.get("dialogue") or []
+        seeker_turns_with_index = [
+            (turn_index, normalize_space(turn.get("content") or ""))
+            for turn_index, turn in enumerate(dialogue)
             if turn.get("role") == "seeker" and normalize_space(turn.get("content") or "")
         ]
-        if seeker_turns:
+        for start_index, end_index, chunk_text, span_index in _chunk_session_episodes(
+            seeker_turns_with_index
+        ):
+            id_key = f"{session_id}_turns_{start_index}_{end_index}"
+            if span_index is not None:
+                id_key = f"{id_key}_span{span_index}"
             items.append(MemoryItem(
-                memory_id=_opaque_memory_id(user_id, "ME", session_id),
+                memory_id=_opaque_memory_id(user_id, "ME", id_key),
                 source=MemorySource.ME,
                 created_session=index,
                 timestamp=timestamp or None,
-                text=" ".join(seeker_turns),
+                text=chunk_text,
             ))
         dialogue_text = "\n".join(
             f"{turn.get('role')}: {normalize_space(turn.get('content') or '')}"
@@ -176,28 +617,50 @@ def evaluator_context(user: dict[str, Any], topic: dict[str, Any]) -> dict[str, 
     }
 
 
-def _catalog(items: Sequence[MemoryItem], source: MemorySource, session_index: int) -> SourceCatalog:
+def _catalog(
+    items: Sequence[MemoryItem],
+    source: MemorySource,
+    session_index: int,
+    *,
+    query_text: str = "",
+    semantic_encoder: SemanticTextEncoder | None = None,
+    semantic_query_vector: Sequence[float] | None = None,
+    semantic_source_centroid: Sequence[float] | None = None,
+) -> SourceCatalog:
     selected = [x for x in items if x.source is source]
-    hashvec = HashingVectorizer(
-        n_features=64,
-        alternate_sign=False,
-        norm="l2",
-        lowercase=True,
-        ngram_range=(1, 2),
+    # Imported lazily so the legacy EvoEmo module and PM-v2 data adapter share one
+    # deployable source-catalog contract without introducing an import cycle.
+    from .pm_v2_data import build_deployable_catalog_statistics
+
+    statistics = build_deployable_catalog_statistics(
+        texts=[item.text for item in selected],
+        created_sessions=[item.created_session for item in selected],
+        session_index=session_index,
     )
-    if selected:
-        fp = hashvec.transform(["\n".join(x.text for x in selected)]).toarray()[0]
-        ages = [session_index - x.created_session for x in selected]
-    else:
-        fp = np.zeros(64)
-        ages = []
+    semantic_similarity = 0.0
+    semantic_valid = False
+    if semantic_encoder is not None and selected:
+        centroid = tuple(semantic_source_centroid) if semantic_source_centroid is not None else semantic_centroid(
+            semantic_encoder, [item.text for item in selected]
+        )
+        if semantic_query_vector is None:
+            semantic_similarity = semantic_query_similarity(
+                semantic_encoder, query_text, centroid
+            )
+        else:
+            semantic_similarity = semantic_vector_similarity(
+                semantic_query_vector, centroid
+            )
+        semantic_valid = True
     return SourceCatalog(
-        available=bool(selected),
-        count=len(selected),
-        min_age_sessions=min(ages) if ages else None,
-        max_age_sessions=max(ages) if ages else None,
-        estimated_tokens=sum(estimate_tokens(x.text) for x in selected),
-        catalog_fingerprint=[round(float(x), 8) for x in fp],
+        available=bool(statistics["available"]),
+        count=int(statistics["count"]),
+        min_age_sessions=statistics["min_age_sessions"],
+        max_age_sessions=statistics["max_age_sessions"],
+        estimated_tokens=int(statistics["estimated_tokens"]),
+        catalog_fingerprint=list(statistics["catalog_fingerprint"]),
+        semantic_query_similarity=semantic_similarity,
+        semantic_representation_valid=semantic_valid,
     )
 
 
@@ -212,6 +675,10 @@ def make_evo_runtime_state(
     *,
     track_id: str | None = None,
     fixed_open_loop: bool = False,
+    semantic_encoder: SemanticTextEncoder | None = None,
+    semantic_source_centroids: Mapping[
+        MemorySource, Sequence[float]
+    ] | None = None,
 ) -> RuntimeState:
     session_index = max((x.created_session for x in items), default=0) + 1
     # The literal condition label is excluded.  The runtime state ID still
@@ -227,15 +694,6 @@ def make_evo_runtime_state(
         for row in conversation if row.get("role") == "seeker"
     ]
     exogenous_state_id = f"state_{stable_hex('evo-exogenous-state', user['id'], topic['idx'], track_id or '', turn_index, exogenous_history, current_user_text, n=20)}"
-    inventory = {source: _catalog(items, source, session_index) for source in MemorySource}
-    available = {src for src, cat in inventory.items() if cat.available}
-    from .contracts import ACTION_MEMORY_MAP, canonical_action_id
-    allowed = sorted(
-        canonical_action_id(sources, strategy)
-        for sources in ACTION_MEMORY_MAP.values()
-        if sources <= available
-        for strategy in StrategyMode
-    )
     prior = list(conversation)
     if (
         prior
@@ -251,6 +709,76 @@ def make_evo_runtime_state(
         )
         for row in prior[-8:]
     ]
+    prepared_semantic_state = (
+        prepare_visible_semantic_state(
+            semantic_encoder,
+            current_user_text=current_user_text,
+            current_session_history=history,
+            current_session_summary="",
+        )
+        if semantic_encoder is not None
+        else None
+    )
+    semantic_query_text = (
+        prepared_semantic_state.query_text
+        if prepared_semantic_state is not None
+        else visible_dialogue_state_text(
+            current_user_text=current_user_text,
+            current_session_history=history,
+            current_session_summary="",
+        )
+    )
+    semantic_query_vector = (
+        prepared_semantic_state.state_query_vector
+        if prepared_semantic_state is not None
+        else None
+    )
+    inventory = {
+        source: _catalog(
+            items,
+            source,
+            session_index,
+            query_text=semantic_query_text,
+            semantic_encoder=semantic_encoder,
+            semantic_query_vector=semantic_query_vector,
+            semantic_source_centroid=(
+                semantic_source_centroids.get(source)
+                if semantic_source_centroids is not None
+                else None
+            ),
+        )
+        for source in MemorySource
+    }
+    available = {src for src, cat in inventory.items() if cat.available}
+    from .contracts import ACTION_MEMORY_MAP, canonical_action_id
+    allowed = sorted(
+        canonical_action_id(sources, strategy)
+        for sources in ACTION_MEMORY_MAP.values()
+        if sources <= available
+        for strategy in StrategyMode
+    )
+    runtime_provenance = {
+        "topic_index": int(topic["idx"]),
+        "turn_index": int(turn_index),
+        "track_id": track_id,
+        "condition_label_not_present_in_pm_state": True,
+        "runtime_state_includes_prior_treatment_history": not fixed_open_loop,
+        "fixed_open_loop_context": fixed_open_loop,
+        "fixed_context_sha256": transcript_hash if fixed_open_loop else None,
+        "exogenous_state_id": exogenous_state_id,
+    }
+    if prepared_semantic_state is not None:
+        runtime_provenance.update(
+            {
+                "semantic_query_protocol": UNIFIED_SEMANTIC_QUERY_PROTOCOL,
+                "semantic_query_sha256": (
+                    prepared_semantic_state.semantic_query_sha256
+                ),
+                "semantic_query_vector_sha256": (
+                    prepared_semantic_state.semantic_query_vector_sha256
+                ),
+            }
+        )
     return RuntimeState(
         state_id=state_id,
         card_id=card_id,
@@ -263,18 +791,7 @@ def make_evo_runtime_state(
         session_index=session_index,
         inventory=inventory,
         allowed_actions=allowed,
-        provenance={
-            "topic_index": int(topic["idx"]),
-            "turn_index": int(turn_index),
-            "track_id": track_id,
-            "condition_label_not_present_in_pm_state": True,
-            "runtime_state_includes_prior_treatment_history": not fixed_open_loop,
-            "fixed_open_loop_context": fixed_open_loop,
-            "fixed_context_sha256": (
-                transcript_hash if fixed_open_loop else None
-            ),
-            "exogenous_state_id": exogenous_state_id,
-        },
+        provenance=runtime_provenance,
     )
 
 
@@ -370,11 +887,12 @@ def build_fixed_seeker_tracks(
     overwrite: bool = False,
     study_freeze_sha256: str | None = None,
 ) -> dict[str, Any]:
-    """Generate policy-independent seeker tracks for causal fixed-input tests.
+    """Generate legacy policy-independent tracks for historical reproduction.
 
-    The track is elicited by a deterministic, generic supporter scaffold. It is
-    then replayed unchanged to every policy. This removes the divergent-world
-    confound; interactive simulations remain a separate secondary analysis.
+    This pre-V2.2 path retains the historical 60-token provider cap and retry
+    behavior. New PM-v2 runs must use :func:`build_fixed_seeker_tracks_v22`,
+    whose treatment, dry-run acceptance, finish gate, and physical-attempt
+    ledger are frozen explicitly.
     """
     users = load_evoemo(evoemo_path)
     out_dir = Path(out_dir)
@@ -496,6 +1014,1275 @@ def build_fixed_seeker_tracks(
             "seeds": [int(x) for x in seeds],
         },
         expected={"tracks": expected, "turns_per_track": max_turns},
+        study_freeze_sha256=study_freeze_sha256,
+    )
+    return summary
+
+
+def _fixed_seeker_v22_scenarios(
+    evoemo_path: str | Path, *, max_scenarios: int | None
+) -> list[tuple[dict[str, Any], dict[str, Any]]]:
+    scenarios = [
+        (user, topic)
+        for user in load_evoemo(evoemo_path)
+        for topic in (user.get("subsequent_topics") or [])
+    ]
+    if max_scenarios is not None:
+        if max_scenarios < 1:
+            raise ValueError("max_scenarios must be positive when provided")
+        scenarios = scenarios[: int(max_scenarios)]
+    return scenarios
+
+
+def plan_fixed_seeker_tracks_v22(
+    evoemo_path: str | Path,
+    *,
+    seeker_endpoint: Endpoint,
+    contract: FixedSeekerGenerationContract,
+    cost_planning: Mapping[str, Any],
+    simulator_id: str,
+    max_api_calls: int,
+    max_estimated_usd: float,
+    max_input_tokens_per_call: int,
+    max_turns: int = 10,
+    seeds: Sequence[int] = (101,),
+    max_scenarios: int | None = None,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Build a deterministic, no-client call plan and exact output budget.
+
+    Later prompts contain earlier generated seeker turns, so their provider
+    request hashes cannot honestly be predicted before generation.  The dry
+    run instead freezes every logical coordinate, endpoint/treatment identity,
+    one-attempt bound, and exact maximum output-token budget.  Each actual
+    prompt hash is fsynced by the attempt ledger immediately before its HTTP
+    request.
+    """
+
+    stage, dry_run_protocol, logical_call_protocol = _fixed_seeker_protocols(
+        contract
+    )
+    if max_turns < 1:
+        raise ValueError("fixed-seeker max_turns must be positive")
+    normalized_seeds = [int(value) for value in seeds]
+    if not normalized_seeds or len(normalized_seeds) != len(set(normalized_seeds)):
+        raise ValueError("fixed-seeker seeds must be non-empty and unique")
+    if not str(simulator_id).strip():
+        raise ValueError("fixed-seeker simulator_id must be non-empty")
+    normalized_cost_planning = fixed_seeker_cost_planning_contract(cost_planning)
+    if int(max_api_calls) < 1 or int(max_input_tokens_per_call) < 1:
+        raise ValueError("fixed-seeker API and input-token caps must be positive")
+    if not math.isfinite(float(max_estimated_usd)) or float(
+        max_estimated_usd
+    ) <= 0.0:
+        raise ValueError("fixed-seeker max_estimated_usd must be finite and positive")
+    prices = normalized_cost_planning["pricing_usd_per_mtok"]
+    safety_factor = float(
+        normalized_cost_planning["input_token_safety_factor"]
+    )
+    cost_planning_sha256 = sha256_text(
+        canonical_json(normalized_cost_planning)
+    )
+
+    evoemo_sha256 = sha256_file(evoemo_path)
+    scaffold_sha256 = sha256_text(
+        canonical_json([NEUTRAL_INITIAL_GREETING, *_NEUTRAL_TRACK_PROBES])
+    )
+    bound = contract.bind_endpoint(contract.seeker_endpoint, seeker_endpoint)
+    bound_payload = bound.payload()
+    bound_sha256 = bound.digest()
+    rows: list[dict[str, Any]] = []
+    scenarios = _fixed_seeker_v22_scenarios(
+        evoemo_path, max_scenarios=max_scenarios
+    )
+    for user, topic in scenarios:
+        system_prompt = contract.render_system_prompt(
+            evaluator_context(user, topic)
+        )
+        private_scenario_sha256 = sha256_text(
+            canonical_json(evaluator_context(user, topic))
+        )
+        for seed in normalized_seeds:
+            for turn_index in range(1, int(max_turns) + 1):
+                record_ids = {
+                    "user_id": str(user["id"]),
+                    "topic_index": int(topic["idx"]),
+                    "seed": int(seed),
+                    "simulator_id": str(simulator_id),
+                    "turn_index": int(turn_index),
+                }
+                static_conversation: list[dict[str, str]] = [
+                    {"role": "supporter", "content": NEUTRAL_INITIAL_GREETING}
+                ]
+                for prior_index in range(turn_index - 1):
+                    # Historical seeker text is unknown at dry-run time. Its
+                    # provider-token contribution is added separately using
+                    # the exact 300-token completion ceiling.
+                    static_conversation.append(
+                        {"role": "seeker", "content": ""}
+                    )
+                    static_conversation.append(
+                        {
+                            "role": "supporter",
+                            "content": _NEUTRAL_TRACK_PROBES[
+                                prior_index % len(_NEUTRAL_TRACK_PROBES)
+                            ],
+                        }
+                    )
+                static_messages = _fixed_seeker_v22_messages(
+                    system_prompt, static_conversation
+                )
+                static_request_payload = chat_request_payload(
+                    seeker_endpoint,
+                    static_messages,
+                    temperature=contract.temperature,
+                    max_tokens=contract.max_output_tokens,
+                    seed=int(seed) + int(turn_index),
+                    response_schema=None,
+                )
+                static_request_tokens = estimate_tokens(
+                    canonical_json(static_request_payload)
+                )
+                history_completion_token_cap = (
+                    (int(turn_index) - 1) * contract.max_output_tokens
+                )
+                maximum_input_tokens = int(
+                    math.ceil(
+                        safety_factor
+                        * (
+                            static_request_tokens
+                            + history_completion_token_cap
+                        )
+                    )
+                )
+                # Worst case: every physical attempt up to the retry budget is
+                # a real, separately-billed call before one finally succeeds
+                # or the logical call is abandoned (same convention as
+                # v1_5_run_automated_semantic_review.py's call-plan rows).
+                maximum_cost_usd = (
+                    contract.maximum_physical_attempts_per_logical_call
+                    * (
+                        maximum_input_tokens / 1_000_000 * prices["input"]
+                        + contract.max_output_tokens
+                        / 1_000_000
+                        * prices["output"]
+                    )
+                )
+                call_identity = {
+                    "protocol": logical_call_protocol,
+                    "record_ids": record_ids,
+                    "evoemo_sha256": evoemo_sha256,
+                    "private_scenario_sha256": private_scenario_sha256,
+                    "scaffold_sha256": scaffold_sha256,
+                    "fixed_seeker_generation_contract": bound_payload,
+                    "fixed_seeker_generation_contract_sha256": bound_sha256,
+                    "fixed_seeker_cost_planning": normalized_cost_planning,
+                    "fixed_seeker_cost_planning_sha256": (
+                        cost_planning_sha256
+                    ),
+                    "maximum_input_tokens": maximum_input_tokens,
+                    "turn_seed": int(seed) + int(turn_index),
+                }
+                rows.append(
+                    {
+                        **record_ids,
+                        "turn_seed": int(seed) + int(turn_index),
+                        "static_request_tokens_with_empty_prior_seeker_content": (
+                            static_request_tokens
+                        ),
+                        "history_completion_token_cap": (
+                            history_completion_token_cap
+                        ),
+                        "maximum_input_tokens": maximum_input_tokens,
+                        "maximum_output_tokens": contract.max_output_tokens,
+                        "maximum_cost_usd": maximum_cost_usd,
+                        "maximum_physical_attempts": (
+                            contract.maximum_physical_attempts_per_logical_call
+                        ),
+                        "fixed_seeker_generation_contract": bound_payload,
+                        "fixed_seeker_generation_contract_sha256": bound_sha256,
+                        "fixed_seeker_cost_planning_sha256": (
+                            cost_planning_sha256
+                        ),
+                        "logical_call_key": sha256_text(
+                            canonical_json(call_identity)
+                        ),
+                    }
+                )
+    logical_keys = [str(row["logical_call_key"]) for row in rows]
+    if len(logical_keys) != len(set(logical_keys)):
+        raise RuntimeError("fixed-seeker V2.2 call plan contains duplicate keys")
+    call_plan_sha256 = sha256_text(canonical_json(rows))
+    maximum_input_tokens = [
+        int(row["maximum_input_tokens"]) for row in rows
+    ]
+    attempts_per_call = int(contract.maximum_physical_attempts_per_logical_call)
+    # Aggregate totals reflect the worst case (every attempt up to the retry
+    # budget is billed); the per-call max_input_tokens_per_call budget-gate
+    # check below stays per-attempt, not multiplied.
+    maximum_total_input_tokens = sum(maximum_input_tokens) * attempts_per_call
+    maximum_total_output_tokens = (
+        len(rows) * contract.max_output_tokens * attempts_per_call
+    )
+    maximum_estimated_cost_usd = sum(
+        float(row["maximum_cost_usd"]) for row in rows
+    )
+    budget_limits = {
+        "max_api_calls": int(max_api_calls),
+        "max_estimated_usd": float(max_estimated_usd),
+        "max_input_tokens_per_call": int(max_input_tokens_per_call),
+    }
+    maximum_physical_api_attempts = len(rows) * attempts_per_call
+    budget_checks = {
+        "api_calls": maximum_physical_api_attempts <= int(max_api_calls),
+        "estimated_cost_usd": maximum_estimated_cost_usd
+        <= float(max_estimated_usd),
+        "max_input_tokens_per_call": max(maximum_input_tokens, default=0)
+        <= int(max_input_tokens_per_call),
+    }
+    budget_gate = {
+        "status": "PASS" if all(budget_checks.values()) else "FAIL",
+        "checks": budget_checks,
+        "limits": budget_limits,
+    }
+    estimate_payload = {
+        "protocol": dry_run_protocol,
+        "stage": stage,
+        "evoemo_sha256": evoemo_sha256,
+        "scaffold_sha256": scaffold_sha256,
+        "simulator_id": str(simulator_id),
+        "max_turns": int(max_turns),
+        "seeds": normalized_seeds,
+        "max_scenarios": max_scenarios,
+        "scenario_count": len(scenarios),
+        "expected_tracks": len(scenarios) * len(normalized_seeds),
+        "maximum_physical_api_attempts": maximum_physical_api_attempts,
+        "maximum_input_tokens_per_call": max(
+            maximum_input_tokens, default=0
+        ),
+        "maximum_total_input_tokens": maximum_total_input_tokens,
+        "maximum_output_tokens_per_call": contract.max_output_tokens,
+        "maximum_total_output_tokens": maximum_total_output_tokens,
+        "maximum_estimated_usd": maximum_estimated_cost_usd,
+        "maximum_physical_attempts_per_logical_call": (
+            contract.maximum_physical_attempts_per_logical_call
+        ),
+        "call_plan_sha256": call_plan_sha256,
+        "fixed_seeker_generation_contract": bound_payload,
+        "fixed_seeker_generation_contract_sha256": bound_sha256,
+        "fixed_seeker_cost_planning": normalized_cost_planning,
+        "fixed_seeker_cost_planning_sha256": cost_planning_sha256,
+        "budget_limits": budget_limits,
+        "budget_gate": budget_gate,
+        "cost_scope": "conservative sequential input/output/USD upper bound",
+    }
+    estimate = {
+        **estimate_payload,
+        "dry_run_acceptance_sha256": sha256_text(
+            canonical_json(estimate_payload)
+        ),
+    }
+    return estimate, rows
+
+
+def persist_fixed_seeker_tracks_v22_dry_run(
+    out_dir: str | Path,
+    estimate: Mapping[str, Any],
+    call_plan: Sequence[Mapping[str, Any]],
+    *,
+    overwrite: bool = False,
+) -> str:
+    """Persist or validate the exact no-API plan without creating a client."""
+
+    out_dir = Path(out_dir)
+    estimate_path = out_dir / "cost_estimate.json"
+    plan_path = out_dir / "call_plan.jsonl"
+    ledger_path = out_dir / "physical_attempt_ledger.jsonl"
+    if overwrite and ledger_path.is_file() and ledger_path.stat().st_size > 0:
+        raise RuntimeError(
+            "fixed-seeker V2.2 refuses to overwrite a dry run after any physical "
+            "attempt was reserved"
+        )
+    normalized_estimate = dict(estimate)
+    normalized_plan = [dict(row) for row in call_plan]
+    if estimate_path.is_file() or plan_path.is_file():
+        if not estimate_path.is_file() or not plan_path.is_file():
+            raise RuntimeError("fixed-seeker dry-run bundle is partial")
+        existing_estimate = read_json(estimate_path)
+        existing_plan = list(iter_jsonl(plan_path))
+        if (
+            existing_estimate == normalized_estimate
+            and existing_plan == normalized_plan
+        ):
+            return "VALIDATED_EXISTING"
+        if not overwrite:
+            raise RuntimeError(
+                "fixed-seeker dry-run differs from the saved plan; use a new "
+                "output directory or explicit --overwrite before any attempt"
+            )
+    out_dir.mkdir(parents=True, exist_ok=True)
+    write_json(estimate_path, normalized_estimate)
+    write_jsonl(plan_path, normalized_plan)
+    return "WRITTEN"
+
+
+def require_fixed_seeker_tracks_v22_dry_run(
+    out_dir: str | Path,
+    estimate: Mapping[str, Any],
+    call_plan: Sequence[Mapping[str, Any]],
+    *,
+    accepted_dry_run_sha256: str,
+) -> None:
+    """Fail closed unless the caller accepts this exact saved dry-run hash."""
+
+    out_dir = Path(out_dir)
+    estimate_path = out_dir / "cost_estimate.json"
+    plan_path = out_dir / "call_plan.jsonl"
+    if not estimate_path.is_file() or not plan_path.is_file():
+        raise RuntimeError(
+            "fixed-seeker API mode requires a completed matching --dry-run"
+        )
+    saved_estimate = read_json(estimate_path)
+    saved_plan = list(iter_jsonl(plan_path))
+    if saved_estimate != dict(estimate) or saved_plan != [
+        dict(row) for row in call_plan
+    ]:
+        raise RuntimeError(
+            "saved fixed-seeker dry run is stale; run --dry-run again"
+        )
+    expected_hash = str(estimate.get("dry_run_acceptance_sha256") or "")
+    if not expected_hash or accepted_dry_run_sha256 != expected_hash:
+        raise RuntimeError(
+            "--accepted-dry-run-sha256 must exactly equal the current fixed-seeker "
+            f"dry-run hash: {expected_hash}"
+        )
+    if (estimate.get("budget_gate") or {}).get("status") != "PASS":
+        raise RuntimeError("fixed-seeker accepted dry-run budget gate did not PASS")
+
+
+def _fixed_seeker_reported_usage(
+    usage: Mapping[str, Any] | None,
+    *,
+    plan_row: Mapping[str, Any],
+) -> tuple[dict[str, int] | None, str | None]:
+    """Apply the accepted per-call input/output token upper bounds."""
+
+    try:
+        normalized = require_reported_usage(
+            usage, stage="PM-v2.2 fixed-seeker generation"
+        )
+    except RuntimeError as exc:
+        return None, str(exc)
+    if normalized["prompt_tokens"] > int(plan_row["maximum_input_tokens"]):
+        return normalized, (
+            "fixed-seeker reported prompt_tokens exceed the accepted conservative "
+            f"bound: reported={normalized['prompt_tokens']}, "
+            f"bound={plan_row['maximum_input_tokens']}"
+        )
+    if normalized["completion_tokens"] > int(
+        plan_row["maximum_output_tokens"]
+    ):
+        return normalized, (
+            "fixed-seeker reported completion_tokens exceed the accepted output "
+            f"bound: reported={normalized['completion_tokens']}, "
+            f"bound={plan_row['maximum_output_tokens']}"
+        )
+    return normalized, None
+
+
+def _fixed_seeker_v22_messages(
+    system_prompt: str, conversation: Sequence[Mapping[str, str]]
+) -> list[dict[str, str]]:
+    if not conversation or conversation[-1].get("role") != "supporter":
+        raise ValueError(
+            "fixed-seeker generation requires a transcript ending in a "
+            "supporter turn"
+        )
+    return [
+        {"role": "system", "content": system_prompt},
+        *[
+            {
+                "role": (
+                    "assistant" if row["role"] == "seeker" else "user"
+                ),
+                "content": str(row["content"]),
+            }
+            for row in conversation
+        ],
+    ]
+
+
+def _load_fixed_seeker_carry_forward_state(
+    *,
+    carry_forward_dir: Path | None,
+    call_plan: list[dict[str, Any]],
+    contract: FixedSeekerGenerationContract,
+    stage: str,
+) -> dict[str, Any]:
+    """Read-only: find which of this run's own call-plan rows already
+    succeeded, with a complete parsed seeker turn, in a prior v2-identity
+    run's ledger.
+
+    Mirrors ``_load_carry_forward_state`` in
+    ``scripts/v1_5_run_automated_semantic_review.py``. Refuses unless the
+    prior directory's call_plan.jsonl is byte-identical to the plan this run
+    just freshly computed for itself. Never touches the prior directory's own
+    ledger file; only reads it. This is for continuing the SAME v2 contract
+    after a transport crash -- carrying content across a v1->v2 contract
+    change is deliberately not supported (max_output_tokens, retry budget,
+    and everything else in the frozen contract must match exactly, so a
+    contract change always starts a fresh, fully-repaid ledger).
+    """
+
+    if carry_forward_dir is None:
+        return {
+            "carry_forward_source_directory": None,
+            "carry_forward_source_ledger_sha256": None,
+            "carried_call_keys": set(),
+            "carried_terminal_rows": {},
+        }
+    old_call_plan_path = carry_forward_dir / "call_plan.jsonl"
+    old_ledger_path = carry_forward_dir / "physical_attempt_ledger.jsonl"
+    if not old_call_plan_path.is_file() or not old_ledger_path.is_file():
+        raise RuntimeError(
+            "fixed-seeker carry-forward source directory lacks a call plan "
+            "or ledger"
+        )
+    if list(iter_jsonl(old_call_plan_path)) != call_plan:
+        raise RuntimeError(
+            "fixed-seeker carry-forward source call plan differs from this "
+            "run's own freshly-computed plan -- refusing to trust its "
+            "ledger's call keys (this includes any contract change, e.g. "
+            "v1->v2)"
+        )
+    expected_calls = {
+        str(row["logical_call_key"]): int(row["maximum_physical_attempts"])
+        for row in call_plan
+    }
+    old_ledger = PersistentAttemptLedger(
+        old_ledger_path,
+        stage=stage,
+        expected_calls=expected_calls,
+        # Read-only inspection of history; the real runtime cap is enforced
+        # separately, by this run's own ledger, once seeded.
+        maximum_total_attempts=10**9,
+    )
+    carried_call_keys: set[str] = set()
+    carried_terminal_rows: dict[str, dict] = {}
+    for row in call_plan:
+        call_key = str(row["logical_call_key"])
+        if not old_ledger.succeeded(call_key):
+            continue
+        terminal = old_ledger.terminal_row(call_key)
+        result = (terminal or {}).get("result")
+        selected_surface = None
+        surface_error = "missing result"
+        if isinstance(result, dict):
+            selected_surface, surface_error = contract.select_surface(
+                str(result.get("seeker_message") or ""),
+                normalized_finish_reason=result.get(
+                    "normalized_finish_reason"
+                ),
+                provider_finish_reason=result.get("provider_finish_reason"),
+            )
+        if selected_surface is None or surface_error is not None:
+            raise RuntimeError(
+                "fixed-seeker carry-forward source lacks a contract-valid "
+                f"successful seeker turn for {call_key}"
+            )
+        carried_call_keys.add(call_key)
+        carried_terminal_rows[call_key] = terminal
+    return {
+        "carry_forward_source_directory": str(carry_forward_dir),
+        "carry_forward_source_ledger_sha256": sha256_file(old_ledger_path),
+        "carried_call_keys": carried_call_keys,
+        "carried_terminal_rows": carried_terminal_rows,
+    }
+
+
+def build_fixed_seeker_tracks_v22(
+    evoemo_path: str | Path,
+    out_dir: str | Path,
+    *,
+    seeker_endpoint: Endpoint,
+    contract: FixedSeekerGenerationContract,
+    cost_planning: Mapping[str, Any],
+    simulator_id: str,
+    accepted_dry_run_sha256: str,
+    max_api_calls: int,
+    max_estimated_usd: float,
+    max_input_tokens_per_call: int,
+    max_turns: int = 10,
+    seeds: Sequence[int] = (101,),
+    max_scenarios: int | None = None,
+    carry_forward_tracks_dir: str | Path | None = None,
+    transport_backoff_seconds: tuple[float, ...] = DEFAULT_BACKOFF_SECONDS,
+    overwrite: bool = False,
+    study_freeze_sha256: str | None = None,
+) -> dict[str, Any]:
+    """Generate PM-v2.2 fixed tracks under an accepted, fail-closed plan.
+
+    This is deliberately separate from :func:`build_fixed_seeker_tracks`, which
+    remains the legacy 60-output-token path for historical reproduction only.
+    """
+
+    stage, _dry_run_protocol, _logical_call_protocol = _fixed_seeker_protocols(
+        contract
+    )
+    estimate, call_plan = plan_fixed_seeker_tracks_v22(
+        evoemo_path,
+        seeker_endpoint=seeker_endpoint,
+        contract=contract,
+        cost_planning=cost_planning,
+        simulator_id=simulator_id,
+        max_api_calls=max_api_calls,
+        max_estimated_usd=max_estimated_usd,
+        max_input_tokens_per_call=max_input_tokens_per_call,
+        max_turns=max_turns,
+        seeds=seeds,
+        max_scenarios=max_scenarios,
+    )
+    out_dir = Path(out_dir)
+    require_fixed_seeker_tracks_v22_dry_run(
+        out_dir,
+        estimate,
+        call_plan,
+        accepted_dry_run_sha256=accepted_dry_run_sha256,
+    )
+
+    tracks_path = out_dir / "fixed_seeker_tracks.jsonl"
+    raw_path = out_dir / "raw_seeker_calls.jsonl"
+    ledger_path = out_dir / "physical_attempt_ledger.jsonl"
+    summary_path = out_dir / "summary.json"
+    manifest_path = out_dir / "run_manifest.json"
+    attestation_path = out_dir / "artifact_attestation.json"
+    if overwrite:
+        if ledger_path.is_file() and ledger_path.stat().st_size > 0:
+            raise RuntimeError(
+                "fixed-seeker V2.2 refuses --overwrite after a physical attempt "
+                "was reserved"
+            )
+        for path in (
+            tracks_path,
+            raw_path,
+            ledger_path,
+            summary_path,
+            manifest_path,
+            attestation_path,
+        ):
+            if path.exists():
+                path.unlink()
+
+    bound = contract.bind_endpoint(contract.seeker_endpoint, seeker_endpoint)
+    bound_payload = bound.payload()
+    bound_sha256 = bound.digest()
+    normalized_cost_planning = fixed_seeker_cost_planning_contract(
+        cost_planning
+    )
+    cost_planning_sha256 = sha256_text(
+        canonical_json(normalized_cost_planning)
+    )
+    scaffold_sha256 = str(estimate["scaffold_sha256"])
+    ensure_run_manifest(
+        manifest_path,
+        {
+            "stage": stage,
+            "evoemo_sha256": str(estimate["evoemo_sha256"]),
+            "simulator_id": simulator_id,
+            "max_turns": int(max_turns),
+            "seeds": [int(value) for value in seeds],
+            "max_scenarios": max_scenarios,
+            "scaffold_sha256": scaffold_sha256,
+            "dry_run_acceptance_sha256": str(
+                estimate["dry_run_acceptance_sha256"]
+            ),
+            "call_plan_sha256": str(estimate["call_plan_sha256"]),
+            "fixed_seeker_generation_contract": bound_payload,
+            "fixed_seeker_generation_contract_sha256": bound_sha256,
+            "fixed_seeker_cost_planning": normalized_cost_planning,
+            "fixed_seeker_cost_planning_sha256": cost_planning_sha256,
+            "planned_budget_gate": estimate["budget_gate"],
+            "study_freeze_sha256": study_freeze_sha256,
+        },
+    )
+    expected_calls = {
+        str(row["logical_call_key"]): int(row["maximum_physical_attempts"])
+        for row in call_plan
+    }
+    carry_forward_dir = (
+        Path(carry_forward_tracks_dir)
+        if carry_forward_tracks_dir is not None
+        else None
+    )
+    carry_forward = _load_fixed_seeker_carry_forward_state(
+        carry_forward_dir=carry_forward_dir,
+        call_plan=call_plan,
+        contract=contract,
+        stage=stage,
+    )
+    carried_call_keys = carry_forward["carried_call_keys"]
+    ledger = PersistentAttemptLedger(
+        ledger_path,
+        stage=stage,
+        expected_calls=expected_calls,
+        maximum_total_attempts=sum(expected_calls.values()),
+    )
+    for row in call_plan:
+        call_key = str(row["logical_call_key"])
+        if call_key not in carried_call_keys or ledger.succeeded(call_key):
+            continue
+        terminal = carry_forward["carried_terminal_rows"][call_key]
+        reservation = ledger.reserve(
+            call_key,
+            record_ids={
+                "user_id": str(row["user_id"]),
+                "topic_index": int(row["topic_index"]),
+                "seed": int(row["seed"]),
+                "simulator_id": str(row["simulator_id"]),
+                "turn_index": int(row["turn_index"]),
+                "track_generation": True,
+                "logical_call_key": call_key,
+                "fixed_seeker_generation_contract_sha256": bound_sha256,
+                "fixed_seeker_cost_planning_sha256": cost_planning_sha256,
+                "maximum_input_tokens": int(row["maximum_input_tokens"]),
+                "maximum_output_tokens": int(row["maximum_output_tokens"]),
+                "dry_run_acceptance_sha256": accepted_dry_run_sha256,
+            },
+            prompt_sha256=str(terminal.get("prompt_sha256")),
+        )
+        ledger.finish(
+            reservation,
+            succeeded=True,
+            request_hash=terminal.get("request_hash"),
+            usage=terminal.get("usage"),
+            error=None,
+            result=terminal.get("result"),
+            metadata={
+                "carried_forward": True,
+                "carried_forward_source_directory": carry_forward[
+                    "carry_forward_source_directory"
+                ],
+                "carried_forward_source_ledger_sha256": carry_forward[
+                    "carry_forward_source_ledger_sha256"
+                ],
+            },
+        )
+    plan_index = {
+        (
+            str(row["user_id"]),
+            int(row["topic_index"]),
+            int(row["seed"]),
+            str(row["simulator_id"]),
+            int(row["turn_index"]),
+        ): dict(row)
+        for row in call_plan
+    }
+    existing_tracks = (
+        index_jsonl_unique(
+            tracks_path, ("user_id", "topic_index", "seed", "simulator_id")
+        )
+        if tracks_path.is_file()
+        else {}
+    )
+    expected_track_keys = {
+        (key[0], key[1], key[2], key[3]) for key in plan_index
+    }
+    unexpected_tracks = sorted(set(existing_tracks) - expected_track_keys)
+    if unexpected_tracks:
+        raise RuntimeError(
+            f"fixed-seeker output contains unplanned tracks: {unexpected_tracks[:3]}"
+        )
+
+    client = None
+    failures: list[dict[str, Any]] = []
+    scenarios = _fixed_seeker_v22_scenarios(
+        evoemo_path, max_scenarios=max_scenarios
+    )
+    work_units = [
+        (user, topic, int(seed))
+        for user, topic in scenarios
+        for seed in seeds
+    ]
+    try:
+        for user, topic, seed in work_units:
+            track_key = _track_key(
+                str(user["id"]), int(topic["idx"]), seed, simulator_id
+            )
+            if track_key in existing_tracks:
+                existing = existing_tracks[track_key]
+                if (
+                    existing.get("fixed_seeker_generation_contract")
+                    != bound_payload
+                    or existing.get(
+                        "fixed_seeker_generation_contract_sha256"
+                    )
+                    != bound_sha256
+                    or existing.get("fixed_seeker_cost_planning")
+                    != normalized_cost_planning
+                    or existing.get("fixed_seeker_cost_planning_sha256")
+                    != cost_planning_sha256
+                    or len(existing.get("seeker_turns") or []) != max_turns
+                ):
+                    raise RuntimeError(
+                        f"existing fixed-seeker V2.2 track is stale: {track_key}"
+                    )
+                for turn_index in range(1, max_turns + 1):
+                    plan_row = plan_index[(*track_key, turn_index)]
+                    logical_key = str(plan_row["logical_call_key"])
+                    terminal = ledger.terminal_row(logical_key)
+                    result_payload = dict((terminal or {}).get("result") or {})
+                    selected_surface, surface_error = contract.select_surface(
+                        str(result_payload.get("seeker_message") or ""),
+                        normalized_finish_reason=result_payload.get(
+                            "normalized_finish_reason"
+                        ),
+                        provider_finish_reason=result_payload.get(
+                            "provider_finish_reason"
+                        ),
+                    )
+                    _, usage_error = _fixed_seeker_reported_usage(
+                        (terminal or {}).get("usage"), plan_row=plan_row
+                    )
+                    if (
+                        not ledger.succeeded(logical_key)
+                        or terminal is None
+                        or selected_surface is None
+                        or surface_error is not None
+                        or usage_error is not None
+                    ):
+                        raise RuntimeError(
+                            "persisted fixed track lacks a matching successful "
+                            f"attempt: {track_key}, turn={turn_index}"
+                        )
+                continue
+
+            conversation: list[dict[str, str]] = [
+                {"role": "supporter", "content": NEUTRAL_INITIAL_GREETING}
+            ]
+            seeker_turns: list[str] = []
+            turn_provenance: list[dict[str, Any]] = []
+            try:
+                system_prompt = contract.render_system_prompt(
+                    evaluator_context(user, topic)
+                )
+                for turn_index in range(1, max_turns + 1):
+                    plan_row = plan_index[(*track_key, turn_index)]
+                    logical_key = str(plan_row["logical_call_key"])
+                    terminal = ledger.terminal_row(logical_key)
+                    if ledger.succeeded(logical_key):
+                        result_payload = dict((terminal or {}).get("result") or {})
+                        reported_usage, usage_error = _fixed_seeker_reported_usage(
+                            (terminal or {}).get("usage"), plan_row=plan_row
+                        )
+                        selected_surface, surface_error = contract.select_surface(
+                            str(result_payload.get("seeker_message") or ""),
+                            normalized_finish_reason=result_payload.get(
+                                "normalized_finish_reason"
+                            ),
+                            provider_finish_reason=result_payload.get(
+                                "provider_finish_reason"
+                            ),
+                        )
+                        message = selected_surface.text if selected_surface else ""
+                        if (
+                            not message
+                            or surface_error is not None
+                            or usage_error is not None
+                        ):
+                            raise RuntimeError(
+                                "successful fixed-seeker ledger result is invalid: "
+                                f"{logical_key}"
+                            )
+                        provider_finish_reason = result_payload.get(
+                            "provider_finish_reason"
+                        )
+                        normalized_finish_reason = result_payload.get(
+                            "normalized_finish_reason"
+                        )
+                        request_hash = terminal.get("request_hash")
+                    else:
+                        messages = _fixed_seeker_v22_messages(
+                            system_prompt, conversation
+                        )
+                        prompt_hash = sha256_text(canonical_json(messages))
+                        record_ids = {
+                            "user_id": str(user["id"]),
+                            "topic_index": int(topic["idx"]),
+                            "seed": seed,
+                            "simulator_id": simulator_id,
+                            "turn_index": turn_index,
+                            "track_generation": True,
+                            "logical_call_key": logical_key,
+                            "fixed_seeker_generation_contract_sha256": (
+                                bound_sha256
+                            ),
+                            "fixed_seeker_cost_planning_sha256": (
+                                cost_planning_sha256
+                            ),
+                            "maximum_input_tokens": int(
+                                plan_row["maximum_input_tokens"]
+                            ),
+                            "maximum_output_tokens": int(
+                                plan_row["maximum_output_tokens"]
+                            ),
+                            "dry_run_acceptance_sha256": accepted_dry_run_sha256,
+                        }
+                        if client is None:
+                            client = make_client(seeker_endpoint)
+
+                        def call_fn(messages=messages, plan_row=plan_row):
+                            return client.chat(
+                                messages,
+                                temperature=contract.temperature,
+                                max_tokens=contract.max_output_tokens,
+                                seed=int(plan_row["turn_seed"]),
+                                response_schema=None,
+                                retries=1,
+                            )
+
+                        # execute_with_bounded_retry retries only persisted
+                        # transient transport failures (408/429/5xx/network
+                        # timeout) up to the contract's physical-attempt
+                        # budget, ledgering every failed attempt itself (see
+                        # bounded_retry.py, reused here unmodified). Our own
+                        # content gate below (finish reason, empty text,
+                        # usage accounting) still fails closed on its first
+                        # attempt, never retried.
+                        reservation, result, _ = execute_with_bounded_retry(
+                            ledger,
+                            logical_key,
+                            record_ids=record_ids,
+                            prompt_sha256=prompt_hash,
+                            call_fn=call_fn,
+                            backoff_seconds=transport_backoff_seconds,
+                        )
+                        selected_surface, surface_error = contract.select_surface(
+                            result.text,
+                            normalized_finish_reason=(
+                                result.normalized_finish_reason
+                            ),
+                            provider_finish_reason=result.provider_finish_reason,
+                        )
+                        reported_usage, accounting_error = (
+                            _fixed_seeker_reported_usage(
+                                result.usage, plan_row=plan_row
+                            )
+                        )
+                        message = selected_surface.text if selected_surface else ""
+                        gate_error = surface_error or accounting_error
+                        result_payload = {
+                            "seeker_message": message,
+                            "surface_selection": (
+                                selected_surface.metadata()
+                                if selected_surface is not None
+                                else None
+                            ),
+                            "provider_output_sha256": sha256_text(result.text),
+                            "provider_finish_reason": (
+                                result.provider_finish_reason
+                            ),
+                            "normalized_finish_reason": (
+                                result.normalized_finish_reason
+                            ),
+                            "fixed_seeker_generation_contract": bound_payload,
+                            "fixed_seeker_generation_contract_sha256": (
+                                bound_sha256
+                            ),
+                            "fixed_seeker_cost_planning_sha256": (
+                                cost_planning_sha256
+                            ),
+                            "reported_usage": reported_usage,
+                            "observed_cost_usd": (
+                                (
+                                    reported_usage["prompt_tokens"]
+                                    * normalized_cost_planning[
+                                        "pricing_usd_per_mtok"
+                                    ]["input"]
+                                    + reported_usage["completion_tokens"]
+                                    * normalized_cost_planning[
+                                        "pricing_usd_per_mtok"
+                                    ]["output"]
+                                )
+                                / 1_000_000
+                                if reported_usage is not None
+                                else None
+                            ),
+                        }
+                        append_jsonl(
+                            raw_path,
+                            request_log(
+                                stage=stage,
+                                endpoint=seeker_endpoint,
+                                messages=messages,
+                                result=result,
+                                parsed=None,
+                                error=gate_error,
+                                prompt_hash=prompt_hash,
+                                record_ids=record_ids,
+                            ),
+                        )
+                        if gate_error:
+                            # The physical attempt itself succeeded; only our
+                            # own content gate rejected it. Never retried --
+                            # a deterministic content problem, not a
+                            # transient one. TERMINAL_DISPOSITION makes this
+                            # permanent across process restarts too, via
+                            # bounded_retry.py's own call_retry_blocker.
+                            ledger.finish(
+                                reservation,
+                                succeeded=False,
+                                request_hash=result.request_hash,
+                                usage=result.usage,
+                                error=gate_error,
+                                result=result_payload,
+                                metadata=failure_metadata(
+                                    retry_class="stage_postcondition_failure",
+                                    retry_disposition=TERMINAL_DISPOSITION,
+                                ),
+                            )
+                            raise RuntimeError(gate_error)
+                        ledger.finish(
+                            reservation,
+                            succeeded=True,
+                            request_hash=result.request_hash,
+                            usage=result.usage,
+                            error=None,
+                            result=result_payload,
+                        )
+                        provider_finish_reason = result.provider_finish_reason
+                        normalized_finish_reason = (
+                            result.normalized_finish_reason
+                        )
+                        request_hash = result.request_hash
+
+                    seeker_turns.append(message)
+                    turn_provenance.append(
+                        {
+                            "turn_index": turn_index,
+                            "logical_call_key": logical_key,
+                            "request_hash": request_hash,
+                            "provider_finish_reason": provider_finish_reason,
+                            "normalized_finish_reason": (
+                                normalized_finish_reason
+                            ),
+                            "reported_usage": reported_usage,
+                            "observed_cost_usd": (
+                                (
+                                    reported_usage["prompt_tokens"]
+                                    * normalized_cost_planning[
+                                        "pricing_usd_per_mtok"
+                                    ]["input"]
+                                    + reported_usage["completion_tokens"]
+                                    * normalized_cost_planning[
+                                        "pricing_usd_per_mtok"
+                                    ]["output"]
+                                )
+                                / 1_000_000
+                                if reported_usage is not None
+                                else None
+                            ),
+                            "fixed_seeker_generation_contract": bound_payload,
+                            "fixed_seeker_generation_contract_sha256": (
+                                bound_sha256
+                            ),
+                            "fixed_seeker_cost_planning_sha256": (
+                                cost_planning_sha256
+                            ),
+                        }
+                    )
+                    conversation.append({"role": "seeker", "content": message})
+                    if turn_index < max_turns:
+                        probe = _NEUTRAL_TRACK_PROBES[
+                            (turn_index - 1) % len(_NEUTRAL_TRACK_PROBES)
+                        ]
+                        conversation.append(
+                            {"role": "supporter", "content": probe}
+                        )
+
+                track_id = (
+                    "track_"
+                    + stable_hex(
+                        user["id"],
+                        topic["idx"],
+                        seed,
+                        simulator_id,
+                        bound_sha256,
+                        canonical_json(seeker_turns),
+                        n=20,
+                    )
+                )
+                append_jsonl(
+                    tracks_path,
+                    {
+                        "track_id": track_id,
+                        "user_id": str(user["id"]),
+                        "topic_index": int(topic["idx"]),
+                        "seed": seed,
+                        "simulator_id": simulator_id,
+                        "seeker_model": seeker_endpoint.model,
+                        "seeker_family": seeker_endpoint.family,
+                        "initial_greeting": NEUTRAL_INITIAL_GREETING,
+                        "seeker_turns": seeker_turns,
+                        "turn_provenance": turn_provenance,
+                        "elicitation_scaffold": (
+                            contract.elicitation_scaffold_protocol
+                        ),
+                        "causal_use": "replayed unchanged to all policies",
+                        "fixed_seeker_generation_contract": bound_payload,
+                        "fixed_seeker_generation_contract_sha256": (
+                            bound_sha256
+                        ),
+                        "fixed_seeker_cost_planning": (
+                            normalized_cost_planning
+                        ),
+                        "fixed_seeker_cost_planning_sha256": (
+                            cost_planning_sha256
+                        ),
+                        "dry_run_acceptance_sha256": (
+                            accepted_dry_run_sha256
+                        ),
+                    },
+                )
+            except Exception as exc:
+                failures.append(
+                    {
+                        "user_id": str(user["id"]),
+                        "topic_index": int(topic["idx"]),
+                        "seed": seed,
+                        "simulator_id": simulator_id,
+                        "error": f"{type(exc).__name__}: {exc}",
+                    }
+                )
+                break
+    finally:
+        if client is not None:
+            client.close()
+
+    completed = (
+        len(
+            index_jsonl_unique(
+                tracks_path,
+                ("user_id", "topic_index", "seed", "simulator_id"),
+            )
+        )
+        if tracks_path.is_file()
+        else 0
+    )
+    expected_tracks = int(estimate["expected_tracks"])
+    normalized_finish_reason_counts = {
+        reason: 0
+        for reason in ("complete", "length", "tool_call", "content_filter", "unknown")
+    }
+    selected_surface_word_counts: list[int] = []
+    selected_surface_prefix_count = 0
+    selected_surface_metadata_complete = True
+    for call_key in expected_calls:
+        terminal = ledger.terminal_row(call_key)
+        if terminal is None:
+            continue
+        result_payload = dict(terminal.get("result") or {})
+        reason = str(result_payload.get("normalized_finish_reason", "unknown"))
+        normalized_finish_reason_counts[reason] = (
+            normalized_finish_reason_counts.get(reason, 0) + 1
+        )
+        if ledger.succeeded(call_key):
+            surface_row = result_payload.get("surface_selection")
+            if isinstance(surface_row, Mapping):
+                selected_surface_word_counts.append(
+                    int(surface_row.get("selected_word_count") or 0)
+                )
+                selected_surface_prefix_count += int(
+                    surface_row.get("prefix_selected") is True
+                )
+            elif contract.version == FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3:
+                selected_surface_metadata_complete = False
+    observed_usage = {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+    }
+    observed_prompt_tokens_per_call: list[int] = []
+    observed_completion_tokens_per_call: list[int] = []
+    usage_accounting_complete = True
+    for plan_row in call_plan:
+        terminal = ledger.terminal_row(str(plan_row["logical_call_key"]))
+        if terminal is None:
+            continue
+        normalized_usage, usage_error = _fixed_seeker_reported_usage(
+            terminal.get("usage"), plan_row=plan_row
+        )
+        if usage_error is not None or normalized_usage is None:
+            usage_accounting_complete = False
+            continue
+        for key in observed_usage:
+            observed_usage[key] += int(normalized_usage[key])
+        observed_prompt_tokens_per_call.append(
+            int(normalized_usage["prompt_tokens"])
+        )
+        observed_completion_tokens_per_call.append(
+            int(normalized_usage["completion_tokens"])
+        )
+    observed_cost_usd = (
+        observed_usage["prompt_tokens"]
+        * normalized_cost_planning["pricing_usd_per_mtok"]["input"]
+        + observed_usage["completion_tokens"]
+        * normalized_cost_planning["pricing_usd_per_mtok"]["output"]
+    ) / 1_000_000
+    observed_budget_checks = {
+        "planned_budget_gate_passed": estimate["budget_gate"]["status"]
+        == "PASS",
+        "physical_attempts": ledger.started_attempts <= int(max_api_calls),
+        # One reported-usage entry per LOGICAL call's terminal row, not per
+        # physical attempt -- retries can make started_attempts exceed
+        # len(expected_calls) even when every logical call is fully
+        # accounted for.
+        "reported_usage_complete": usage_accounting_complete
+        and len(observed_prompt_tokens_per_call) == len(expected_calls),
+        "observed_cost_usd": observed_cost_usd
+        <= float(max_estimated_usd),
+        "observed_cost_within_planned_upper_bound": observed_cost_usd
+        <= float(estimate["maximum_estimated_usd"]),
+        "max_reported_input_tokens_per_call": max(
+            observed_prompt_tokens_per_call, default=0
+        )
+        <= int(max_input_tokens_per_call),
+        "max_reported_completion_tokens_per_call": max(
+            observed_completion_tokens_per_call, default=0
+        )
+        <= int(contract.max_output_tokens),
+    }
+    observed_budget_gate = {
+        "status": (
+            "PASS" if all(observed_budget_checks.values()) else "FAIL"
+        ),
+        "checks": observed_budget_checks,
+        "limits": dict(estimate["budget_limits"]),
+        "reported_usage": observed_usage,
+        "observed_cost_usd": observed_cost_usd,
+        "max_reported_input_tokens_per_call": max(
+            observed_prompt_tokens_per_call, default=0
+        ),
+        "max_reported_completion_tokens_per_call": max(
+            observed_completion_tokens_per_call, default=0
+        ),
+    }
+    status = (
+        "COMPLETE"
+        if completed == expected_tracks
+        and not failures
+        # Retries mean started_attempts can now exceed len(expected_calls)
+        # even on full success; completeness is whether every logical call
+        # has a SUCCEEDED terminal row, not the physical attempt count.
+        and all(ledger.succeeded(key) for key in expected_calls)
+        and (
+            contract.version != FIXED_SEEKER_GENERATION_CONTRACT_VERSION_V3
+            or (
+                selected_surface_metadata_complete
+                and max(selected_surface_word_counts, default=0)
+                <= int(contract.response_instruction_word_limit or 0)
+            )
+        )
+        and observed_budget_gate["status"] == "PASS"
+        else "INCOMPLETE"
+    )
+    summary = {
+        "status": status,
+        "stage": stage,
+        "simulator_id": simulator_id,
+        "seeker_model": seeker_endpoint.model,
+        "seeker_family": seeker_endpoint.family,
+        "expected_tracks": expected_tracks,
+        "completed_tracks": completed,
+        "max_turns": max_turns,
+        "expected_logical_calls": len(expected_calls),
+        "started_physical_attempts": ledger.started_attempts,
+        "successful_logical_calls": sum(
+            int(ledger.succeeded(key)) for key in expected_calls
+        ),
+        "normalized_finish_reason_counts": normalized_finish_reason_counts,
+        "provider_length_finish_count": normalized_finish_reason_counts.get(
+            "length", 0
+        ),
+        "completion_truncated_count": normalized_finish_reason_counts.get(
+            "length", 0
+        ),
+        "surface_selection": {
+            "protocol": contract.surface_selection_protocol,
+            "metadata_complete": selected_surface_metadata_complete,
+            "prefix_selected_count": selected_surface_prefix_count,
+            "maximum_selected_word_count": max(
+                selected_surface_word_counts, default=0
+            ),
+            "mid_sentence_truncation_count": 0,
+        },
+        "failures": failures,
+        "dry_run_acceptance_sha256": accepted_dry_run_sha256,
+        "call_plan_sha256": str(estimate["call_plan_sha256"]),
+        "fixed_seeker_generation_contract": bound_payload,
+        "fixed_seeker_generation_contract_sha256": bound_sha256,
+        "fixed_seeker_cost_planning": normalized_cost_planning,
+        "fixed_seeker_cost_planning_sha256": cost_planning_sha256,
+        "planned_budget_gate": estimate["budget_gate"],
+        "observed_budget_gate": observed_budget_gate,
+        "interpretation": (
+            "fixed-input causal track; later seeker turns do not react to "
+            "evaluated policy replies"
+        ),
+    }
+    write_json(summary_path, summary)
+    if status != "COMPLETE":
+        raise RuntimeError(
+            "fixed seeker generation incomplete; at least one logical "
+            "call exhausted its transport-retry budget or was rejected by "
+            "the content gate -- continue via --carry-forward-tracks-dir "
+            "under a fresh identity rather than retrying this exact plan"
+        )
+    create_artifact_attestation(
+        attestation_path,
+        stage=stage,
+        inputs={
+            "evoemo": evoemo_path,
+            "run_manifest": manifest_path,
+            "cost_estimate": out_dir / "cost_estimate.json",
+            "call_plan": out_dir / "call_plan.jsonl",
+        },
+        outputs={
+            "tracks": (tracks_path, True),
+            "raw_calls": (raw_path, True),
+            "physical_attempt_ledger": (ledger_path, True),
+            "summary": (summary_path, False),
+        },
+        parameters={
+            "simulator_id": simulator_id,
+            "max_turns": max_turns,
+            "seeds": [int(value) for value in seeds],
+            "dry_run_acceptance_sha256": accepted_dry_run_sha256,
+            "call_plan_sha256": str(estimate["call_plan_sha256"]),
+            "fixed_seeker_generation_contract": bound_payload,
+            "fixed_seeker_generation_contract_sha256": bound_sha256,
+            "fixed_seeker_cost_planning": normalized_cost_planning,
+            "fixed_seeker_cost_planning_sha256": cost_planning_sha256,
+            "planned_budget_gate": estimate["budget_gate"],
+            "observed_budget_gate": observed_budget_gate,
+        },
+        expected={
+            "tracks": expected_tracks,
+            "turns_per_track": max_turns,
+            "logical_calls": len(expected_calls),
+            "accepted_normalized_finish_reasons": list(
+                contract.accepted_normalized_finish_reasons
+            ),
+            "provider_length_finish_count": normalized_finish_reason_counts.get(
+                "length", 0
+            ),
+            "completion_truncated_count": normalized_finish_reason_counts.get(
+                "length", 0
+            ),
+            "surface_selection": summary["surface_selection"],
+            "planned_budget_gate_status": "PASS",
+            "observed_budget_gate_status": "PASS",
+            "planned_budget_gate": estimate["budget_gate"],
+            "observed_budget_gate": observed_budget_gate,
+        },
         study_freeze_sha256=study_freeze_sha256,
     )
     return summary

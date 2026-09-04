@@ -1,0 +1,55 @@
+{
+  "protocol": "pm-v1.5-llm-weak-supervision-v1",
+  "status": "LLM_WEAK_SUPERVISION_NOT_GOLD",
+  "scope": {
+    "longitudinal_synthetic": [
+      "train",
+      "calibration"
+    ],
+    "esconv_auxiliary": [
+      "train",
+      "calibration"
+    ]
+  },
+  "scientific_role": "Train a supervised pre-item-retrieval source router under explicitly noisy, judge-conditioned weak supervision; do not estimate human-optimal actions.",
+  "automatic_gold_label_claimed": false,
+  "human_anchors_used_as_automatic_gold": false,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "judge_aggregation": {
+    "estimand": "per-dimension median across the two frozen development judge families",
+    "judge_families": [
+      "deepseek_official",
+      "google_gemini"
+    ],
+    "rows_filtered_by_label_reliable": false,
+    "dimension_mad_retained": true,
+    "dimension_mad_training_weight": "1/(1+(MAD/0.75)^2)",
+    "risk_action_applicability_mask_retained": true
+  },
+  "training_objective": {
+    "response_heads": "separate weak response-dimension heads",
+    "risk_heads": "separate weak risk-dimension heads with action-applicability zero weights",
+    "cost": "deterministic observed token and retrieval-call inputs; never judged",
+    "single_scalar_llm_utility": false,
+    "equal_top_level_domain_weight_required": true
+  },
+  "known_limitations": [
+    "Both original absolute-label instruments failed their preregistered automatic-gold qualification gates.",
+    "Judge-family disagreement, saturation and low directional transfer are retained as measurement noise, not tuned away.",
+    "Seven ESConv auxiliary response judgments were recovered offline only after removing a non-scientific rationale character cap; their recovery lineage remains explicit.",
+    "The labels support judge-conditioned learnability claims only, not human-optimal routing or real-world clinical benefit."
+  ],
+  "source_lineage": {
+    "pm_v1_5_config_sha256": "d45aab7fa6490b084c596c724020ca762642b973ad5c9608b871c5881ccf37fa",
+    "longitudinal_states_sha256": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+    "longitudinal_outcomes_sha256": "9b4eb540a9b2367ac1bf5dc2200ff2b9bcb6f3043e0335e1def2c7327ea9c695",
+    "longitudinal_raw_judges_sha256": "c5deed2c531635cf50874f8a8270c083d6dfbabbd01826326d9fd91329c5c44e",
+    "auxiliary_train_states_sha256": "b0194963ab004ebbabf977c7a964b2e4c070220708590d1deeadc01da43dc6d3",
+    "auxiliary_train_outcomes_sha256": "83e5d7dccb567955388053e3550f29bf5b952dde8443eddee94028eb9dedd057",
+    "auxiliary_recovered_labels_sha256": "b427d0f44fd6901b027e4f5e7e5dc54780702cfe58a5295a12bced5c198d0a07",
+    "longitudinal_supervision_freeze_sha256": "9f1f4126b12ef960d638df9bbd205fc015f2e72cfe7ed87b8044a2c5226a56c7",
+    "esconv_auxiliary_absolute_instrument_freeze_sha256": "21d3ebd1b30964b4b03af4135cb3cb2f91379cc7dd01250a9629504be1bb97c1"
+  },
+  "contract_sha256": "4b62d40ead88e2e2c9eb15853162576dd28f4a38b8b0e1464719b94aef8053ab"
+}

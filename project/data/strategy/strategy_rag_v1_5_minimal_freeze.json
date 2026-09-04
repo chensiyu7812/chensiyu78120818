@@ -1,0 +1,59 @@
+{
+  "protocol": "pm-v1.5-qualified-strategy-rag-freeze-v1",
+  "status": "FROZEN_AND_QUALIFIED_FOR_G3_CLEAN_TREATMENT",
+  "scope": "Minimal topic-agnostic Strategy Guidance opportunity and Top-1 retrieval; response benefit is not yet established.",
+  "bank": {
+    "relative_path": "data/strategy/strategy_cards_v1_5_minimal.jsonl",
+    "sha256": "04c3af44d54ae9875cd817364ff46e90aa954e0bee81b295af279b1b38964d24",
+    "card_count": 6,
+    "move_ids": [
+      "AM01_invite_open_expression",
+      "AM02_ask_one_focused_clarification",
+      "AM04_tentative_paraphrase_check",
+      "AM05_grounded_validation",
+      "AM10_offer_one_optional_micro_step",
+      "AM14_supportive_transition"
+    ],
+    "raw_source_responses_available": false,
+    "formative_source_examples_are_gold": false
+  },
+  "retrieval": {
+    "runtime_protocol": "pm-v1.5-qualified-minimal-strategy-rag-runtime-v1",
+    "runtime_relative_path": "src/metacom_pm/v1_5_strategy_rag_runtime.py",
+    "runtime_sha256": "edfcddee3a827dd71f06913905ca23cd1809d7b7050eceb1acd305e800309052",
+    "eligibility_before_ranking": true,
+    "ranker": "term_frequency_cosine",
+    "score_floor": 0.05,
+    "top_k": 1,
+    "no_eligible_or_below_floor": "abstain_and_keep_RS_off",
+    "bge_promoted": false
+  },
+  "prompt_compiler": {
+    "relative_path": "src/metacom_pm/prompts.py",
+    "sha256": "6bb05f030fe2a514ce731f543cfc201a6af0411ef8dca55d2a1cfc063a684594",
+    "strategy_guidance_only": true,
+    "source_example_text_injected": false,
+    "maximum_strategy_cards": 1,
+    "generator_must_compose_new_wording": true
+  },
+  "qualification_evidence": {
+    "g1_report": "outputs/pm_v1_5_strategy_g1_final_bank_v1/g1_dual_human_freeze_report.json",
+    "g1_report_sha256": "1ae1e0abad3f134675acd65fb0afb12cfe9f0c67871e69c49f356254f23e91d1",
+    "synthetic_control_report": "outputs/pm_v1_5_strategy_g2_controlled_retrieval_v1/controlled_report.json",
+    "synthetic_control_report_sha256": "33b49862ca0d5c38c08fe20d97c67e0da3bc4be459887b40d566022302721923",
+    "real_report": "outputs/pm_v1_5_strategy_g2_real_qualification_v1/real_qualification_report.json",
+    "real_report_sha256": "baf0edc2d80ab7faa11dea09d4f29e2ea1c0aabfd48d2063d4160840bb6c84c1",
+    "real_results": "outputs/pm_v1_5_strategy_g2_real_qualification_v1/real_query_results.jsonl",
+    "real_results_sha256": "50669bcf88c093ca258ce721a8f711bbb5ed371451a0d6866bb460a644a820b9",
+    "preregistration": "data/pm_v1_5_contracts/strategy_g2_real_qualification_v1.json",
+    "preregistration_sha256": "591e44f2c9a841a82529dced7bcec048605d3ba294dbac9c8ec741ab31e4664d"
+  },
+  "same_stack_requirement": "This exact bank, eligibility implementation, lexical ranker, score floor, Top-1 cap, and prompt compiler must be reused in G3 development, ESConv evaluation, and EvoEmo evaluation.",
+  "not_claimed": [
+    "Strategy Guidance improves response quality",
+    "the next ESConv native strategy is a gold card label",
+    "the catalog covers clinical or specialist guidance",
+    "BGE similarity estimates component utility"
+  ],
+  "next_gate": "Build RS R0-vs-RS clean treatment pairs and verify retrieval realization, generator uptake, quality, risk, and cost."
+}

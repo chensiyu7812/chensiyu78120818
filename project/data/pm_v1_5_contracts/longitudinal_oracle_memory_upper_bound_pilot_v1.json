@@ -1,0 +1,404 @@
+{
+  "protocol": "pm-v1.5-train-only-oracle-memory-uptake-upper-bound-pilot-v1",
+  "status": "READY_ZERO_API_DESIGN",
+  "scope": "longitudinal_train_only",
+  "purpose": "separate retrieval failure from generator resource-uptake failure by exposing only evaluator-annotated memory items",
+  "seed": 27191,
+  "regime_counts": {
+    "profile_needed": 3,
+    "summary_needed": 3,
+    "event_needed": 3,
+    "multi_source_needed": 3,
+    "memory_harmful": 6
+  },
+  "arms": {
+    "frozen_m0_r0_control": {
+      "new_api_calls": 0,
+      "action_id": "M0+R0",
+      "source": "existing attested longitudinal sweep outcome"
+    },
+    "oracle_helpful_memory_same_prompt": {
+      "new_api_calls_per_eligible_state": 1,
+      "evidence": "all and only item_utility=helpful memories",
+      "retrieval_score_gate": "bypassed for diagnostic upper bound",
+      "prompt_and_generator": "frozen and unchanged"
+    },
+    "oracle_harmful_memory_same_prompt": {
+      "new_api_calls_per_eligible_state": 1,
+      "evidence": "all and only item_utility=harmful memories",
+      "retrieval_score_gate": "bypassed for diagnostic upper bound",
+      "prompt_and_generator": "frozen and unchanged"
+    }
+  },
+  "selected_states": [
+    {
+      "state_id": "state_536bbabb9f57d44749079b3b",
+      "card_id": "card_ed3b661ea8c69fd14af649f9",
+      "user_id": "pmv2_train_u015",
+      "semantic_family": "career_change",
+      "regime": "profile_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MP+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_a581303a0965ef8e9d907924"
+      ],
+      "target_memory_sources": [
+        "MP"
+      ]
+    },
+    {
+      "state_id": "state_69e2e39b58000eaab006ecfe",
+      "card_id": "card_d997b5495db864a3b14e9eb0",
+      "user_id": "pmv2_train_u023",
+      "semantic_family": "motivation_loss",
+      "regime": "profile_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MP+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_d5ce3955d7fb21c4787c09bc"
+      ],
+      "target_memory_sources": [
+        "MP"
+      ]
+    },
+    {
+      "state_id": "state_a07fcb71cdd490117ac411ec",
+      "card_id": "card_794451a8741b4b5b4253bab3",
+      "user_id": "pmv2_train_u013",
+      "semantic_family": "caregiving_stress",
+      "regime": "profile_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MP+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_eac27ae007fe17b689da39dd"
+      ],
+      "target_memory_sources": [
+        "MP"
+      ]
+    },
+    {
+      "state_id": "state_9272bace01e6b25a445c1edf",
+      "card_id": "card_587959cc7f9adcae76d062b9",
+      "user_id": "pmv2_train_u018",
+      "semantic_family": "conflict_repair",
+      "regime": "summary_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MS+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_ad57811aeb8a0140039e150b"
+      ],
+      "target_memory_sources": [
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_6715ec51ccb15d97b94167be",
+      "card_id": "card_7bab8731ed145ba1b3deffca",
+      "user_id": "pmv2_train_u012",
+      "semantic_family": "career_change",
+      "regime": "summary_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MS+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_ef1818022d541040011100e3"
+      ],
+      "target_memory_sources": [
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_25238724dd0825c31690b5f1",
+      "card_id": "card_31554453965900835c8a9f18",
+      "user_id": "pmv2_train_u014",
+      "semantic_family": "conflict_repair",
+      "regime": "summary_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MS+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_9bb2012cc3a4aeac0c4b8399"
+      ],
+      "target_memory_sources": [
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_750e9662aa2b10898eca537b",
+      "card_id": "card_8520ac5ef2faff1c2959c3ce",
+      "user_id": "pmv2_train_u019",
+      "semantic_family": "parenting_pressure",
+      "regime": "event_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "ME+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_08d4274db259c4417758e529"
+      ],
+      "target_memory_sources": [
+        "ME"
+      ]
+    },
+    {
+      "state_id": "state_6a4a7076d6a6b828efd4cf06",
+      "card_id": "card_63971f9143746d42d2b5c4d6",
+      "user_id": "pmv2_train_u016",
+      "semantic_family": "friendship_distance",
+      "regime": "event_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "ME+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_024a215077bc3d45de018838"
+      ],
+      "target_memory_sources": [
+        "ME"
+      ]
+    },
+    {
+      "state_id": "state_671bad2ea9b374d28d3d259b",
+      "card_id": "card_411459a5346ee2b4fc97fc55",
+      "user_id": "pmv2_train_u022",
+      "semantic_family": "career_change",
+      "regime": "event_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "ME+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_854d99ff1a19f30c317b0a1d"
+      ],
+      "target_memory_sources": [
+        "ME"
+      ]
+    },
+    {
+      "state_id": "state_bc82bc6cccc6196e91f8f1c4",
+      "card_id": "card_9f2a935bb52bff355fb5abaf",
+      "user_id": "pmv2_train_u004",
+      "semantic_family": "life_stage_transition",
+      "regime": "multi_source_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_dc665f3b4b54e44abeda2dad",
+        "mem_2440421cb3acc04963be6053",
+        "mem_322fc1e06bb854e8ead575da"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_71b56581ab20cfe5b7d1d3d2",
+      "card_id": "card_6d4680894957f35b7e1b66d2",
+      "user_id": "pmv2_train_u001",
+      "semantic_family": "family_expectations",
+      "regime": "multi_source_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_efe5deb0e531e88452f338a0",
+        "mem_758bfe89ce03d55166818dc0",
+        "mem_1434ff8588d5d559ea15331c"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_0519cd320e176ba0b1dd4f4d",
+      "card_id": "card_563665bd246fe10bded63aa6",
+      "user_id": "pmv2_train_u006",
+      "semantic_family": "uncertain_future",
+      "regime": "multi_source_needed",
+      "treatment_arm": "oracle_helpful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "helpful",
+      "target_memory_ids": [
+        "mem_bdb5135c83d8b1cca7eef0ab",
+        "mem_2e31b050c7eec4a9d0405d07",
+        "mem_e9a2b650c4d524696eb19c91"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_71a6cca2847d097d9fc6a915",
+      "card_id": "card_34f4694a5f37f23dd5755f5f",
+      "user_id": "pmv2_train_u007",
+      "semantic_family": "family_expectations",
+      "regime": "memory_harmful",
+      "treatment_arm": "oracle_harmful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "harmful",
+      "target_memory_ids": [
+        "mem_86193b5c1aae3f71c94d9360",
+        "mem_4ddfba03e4e9c990ae27e4e5",
+        "mem_16bb8f8e6616acc831dc2870"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_0e7316a316aa67eb88b1c3f6",
+      "card_id": "card_019f0b8f6677762fc43fc56d",
+      "user_id": "pmv2_train_u020",
+      "semantic_family": "uncertain_future",
+      "regime": "memory_harmful",
+      "treatment_arm": "oracle_harmful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "harmful",
+      "target_memory_ids": [
+        "mem_78fa09c5aec3021df938de04",
+        "mem_59813e17015a95c8f3153478",
+        "mem_5039e0197b85b88554f2bbee"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_009e55d9ea2ccd42b7a0f3e2",
+      "card_id": "card_7105dd7a9c46d12671ae53a2",
+      "user_id": "pmv2_train_u017",
+      "semantic_family": "belonging_and_isolation",
+      "regime": "memory_harmful",
+      "treatment_arm": "oracle_harmful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "harmful",
+      "target_memory_ids": [
+        "mem_806592c21135a9a32c6f65c1",
+        "mem_7d65a2caccccc5971d467604",
+        "mem_42f54a7ee3d125296a18435a"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_e887249f62802b1ad454d7a7",
+      "card_id": "card_fe893ecdfdfe21bf3c2db702",
+      "user_id": "pmv2_train_u021",
+      "semantic_family": "health_routine_stress",
+      "regime": "memory_harmful",
+      "treatment_arm": "oracle_harmful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "harmful",
+      "target_memory_ids": [
+        "mem_b1129527519a1834692a51db",
+        "mem_1905dcb9dac540795420d94b",
+        "mem_24315458b2ea5b19053f5c53"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_3a0f91e7a9b94521b835bce7",
+      "card_id": "card_730fef0c4fc5834af721676b",
+      "user_id": "pmv2_train_u005",
+      "semantic_family": "belonging_and_isolation",
+      "regime": "memory_harmful",
+      "treatment_arm": "oracle_harmful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "harmful",
+      "target_memory_ids": [
+        "mem_d9df6f8003e775816cdf9bad",
+        "mem_d51f2c9becd62d234fe3c38c",
+        "mem_e2ac296e5dd6b1ff3c85a09a"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    },
+    {
+      "state_id": "state_ceb53e3a092755abb51ac8fc",
+      "card_id": "card_b5c922d6ba0966e4f049aec0",
+      "user_id": "pmv2_train_u011",
+      "semantic_family": "workload_burnout",
+      "regime": "memory_harmful",
+      "treatment_arm": "oracle_harmful_memory_same_prompt",
+      "target_action_id": "MPMSME+R0",
+      "target_item_utility": "harmful",
+      "target_memory_ids": [
+        "mem_9d86853630975edf50f3310b",
+        "mem_d803d03cc32e578a98801a34",
+        "mem_1888207e83525350a86d8be3"
+      ],
+      "target_memory_sources": [
+        "ME",
+        "MP",
+        "MS"
+      ]
+    }
+  ],
+  "selected_state_ids_sha256": "3b4d16d226eaaadec1e4b0c4ec110812197d2118ddfd67f50b12a0744c6af5e2",
+  "source_lineage": {
+    "states_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+    "states_sha256": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+    "runtime_source_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/runtime_states.jsonl",
+    "runtime_source_sha256": "5ff31de14a5e3a0757f561958153a97f295eb04dd0a23febd19257c370d07ded",
+    "evaluator_contexts_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/evaluator_contexts.jsonl",
+    "evaluator_contexts_sha256": "31f30eeba5ca33bdf6e8e0d0dab7270b8a8c4a620873fa5a017dc74b9478641b",
+    "backend_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/memory_backend.jsonl",
+    "backend_sha256": "bf2173ffc42cac8da3560d8c356ee9304537e746b5e4c28cd046bd6dc5f8cd49",
+    "excluded_prior_contract_path": "data/pm_v1_5_contracts/longitudinal_response_mechanism_pilot_v1.json",
+    "excluded_prior_contract_sha256": "f6c71c6d2aae949ce33652598a4e1e0e870a1eafedc8a0ed01318f65618c015e",
+    "oracle_runtime_path": "data/pm_v1_5_contracts/longitudinal_oracle_memory_upper_bound_runtime_v1.jsonl",
+    "oracle_runtime_sha256": "3f7794a7981da00ee0c6eadce143f43c813d489d172ecc2f96e05e1ba5b57636",
+    "oracle_backend_path": "data/pm_v1_5_contracts/longitudinal_oracle_memory_upper_bound_backend_v1.jsonl",
+    "oracle_backend_sha256": "ae4257bec103cacaaf612f7be9d97a2a668dabc30443ad40bee3bbd20bec2a59"
+  },
+  "planned_new_logical_calls": 18,
+  "evaluation": {
+    "api_judges": "forbidden",
+    "primary_helpful_rule": {
+      "pairs": 12,
+      "mean_target_evidence_bge_cosine_delta": ">0",
+      "positive_pairs": ">=8"
+    },
+    "harmful_selectivity_guardrail": {
+      "pairs": 6,
+      "mean_target_evidence_bge_cosine_delta": "<=0",
+      "nonpositive_pairs": ">=4"
+    },
+    "cluster_unit": "user_id",
+    "interpretation": "Report-only mechanism upper bound. Passing establishes memory-uptake capacity under oracle evidence, not response quality, deployable routing, judge validity, or PM training labels."
+  },
+  "strategy_scope": "excluded because evaluator truth specifies strategy use/skip but does not identify an item-level helpful strategy card",
+  "stop_rules": [
+    "do not change states, arms, thresholds, prompt, generator, or seed after outcomes",
+    "do not read calibration or internal-test",
+    "do not call API judges or create action labels",
+    "do not use evaluator annotations in a deployable PM or external test",
+    "if helpful uptake is not established, localize the blocker to generator/prompt integration",
+    "if helpful uptake is established, test response quality only with a separately preregistered small validation"
+  ],
+  "api_judges_used": false,
+  "training_labels_created": false,
+  "contract_sha256": "5f86d5aadf3d82991ab0125b7155d06822e94652bc1238a2607eb970944a3598"
+}

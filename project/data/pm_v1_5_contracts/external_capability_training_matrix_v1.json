@@ -1,0 +1,207 @@
+{
+  "protocol": "pm-v1.5-external-capability-training-matrix-v1",
+  "status": "FROZEN_BEFORE_FORMAL_EFFECT_DATA_GENERATION",
+  "date": "2026-08-03",
+  "purpose": "reverse-design content-disjoint internal effect data from the constructs that ESConv and EvoEmo can actually test, while adding explicitly internal-only capability tests",
+  "same_stack_required": true,
+  "external_content_in_internal_data": false,
+  "unit": "one_target_component_state_per_independent_user",
+  "history_scales": {
+    "labels": ["SMALL", "MEDIUM", "LARGE", "EVOEMO_LIKE_LARGE"],
+    "source_specific_catalog_targets": {
+      "MP": {"SMALL": 2, "MEDIUM": 4, "LARGE": 7, "EVOEMO_LIKE_LARGE": 10},
+      "MS": {"SMALL": 4, "MEDIUM": 10, "LARGE": 22, "EVOEMO_LIKE_LARGE": 34},
+      "ME": {"SMALL": 5, "MEDIUM": 16, "LARGE": 40, "EVOEMO_LIKE_LARGE": 68},
+      "RS": {"SMALL": 80, "MEDIUM": 80, "LARGE": 80, "EVOEMO_LIKE_LARGE": 80}
+    },
+    "interpretation": "the same scale label maps to source-appropriate catalog sizes; it is not a shared raw count",
+    "rule": "scale_label_is_balanced_within_component_benefit_enrichment_and_split_and_never_defines_gold"
+  },
+  "splits_per_component": {
+    "ELIGIBILITY_AUDIT": {
+      "states": 32,
+      "eligible_states": 16,
+      "ineligible_states": 16,
+      "generates_responses": false,
+      "surface_and_user_overlap_with_other_splits": 0
+    },
+    "EFFECT_FIT": {
+      "states": 64,
+      "states_per_logic_family": 8,
+      "states_per_history_scale": 16,
+      "surface_and_user_overlap_with_other_splits": 0
+    },
+    "FRESH_CONFIRMATION": {
+      "states": 32,
+      "states_per_logic_family": 4,
+      "states_per_history_scale": 8,
+      "surface_and_user_overlap_with_other_splits": 0
+    },
+    "SEALED_INTERNAL_TEST": {
+      "states": 32,
+      "states_per_logic_family": 4,
+      "states_per_history_scale": 8,
+      "surface_and_user_overlap_with_other_splits": 0
+    }
+  },
+  "components": {
+    "MP": {
+      "subtypes": ["MP_PREFERENCE", "MP_PROFILE"],
+      "ESConv": {"claim": "NOT_MEASURABLE", "expected_runtime": "OFF_WHEN_NO_PRIVATE_PROFILE"},
+      "EvoEmo": {"claim": "MP_PROFILE_ONLY", "examples": ["role", "stable_routine", "non_sensitive_practical_constraint"]},
+      "internal_only": ["MP_PREFERENCE", "opposite_preference_counterfactual", "preference_echo_and_conflict"],
+      "observable_factors": [
+        "subtype",
+        "same_owner",
+        "stable_or_current",
+        "explicit_current_goal",
+        "currently_redundant",
+        "candidate_changes_response_form_or_practical_feasibility",
+        "token_cost"
+      ],
+      "step2_required_function": "preference visibly changes response form or profile adds a relevant fact absent from current context",
+      "eligibility_audit_families": [
+        {"id": "MP_ELIGIBLE_PREFERENCE", "eligibility_intent": "ELIGIBLE"},
+        {"id": "MP_ELIGIBLE_PROFILE", "eligibility_intent": "ELIGIBLE"},
+        {"id": "MP_CURRENT_ECHO", "eligibility_intent": "INELIGIBLE"},
+        {"id": "MP_CURRENT_CONFLICT", "eligibility_intent": "INELIGIBLE"},
+        {"id": "MP_IRRELEVANT_PROFILE", "eligibility_intent": "INELIGIBLE"},
+        {"id": "MP_WRONG_OWNER_OR_STALE", "eligibility_intent": "INELIGIBLE"}
+      ],
+      "effect_logic_families": [
+        {"id": "MP_PREFERENCE_FORMAT_DECISIVE", "benefit_enrichment": "HIGH"},
+        {"id": "MP_PREFERENCE_BURDEN_DECISIVE", "benefit_enrichment": "HIGH"},
+        {"id": "MP_PROFILE_CONSTRAINT_CHANGES_RESPONSE", "benefit_enrichment": "HIGH"},
+        {"id": "MP_PROFILE_CONTEXT_PREVENTS_GENERIC_REPLY", "benefit_enrichment": "HIGH"},
+        {"id": "MP_PREFERENCE_MINOR_REFINEMENT", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "MP_PROFILE_WEAKLY_RELEVANT", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "MP_CONTEXT_ALREADY_SUFFICIENT_WITH_SMALL_INCREMENT", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "MP_HIGH_TOKEN_COST_FOR_MINOR_PERSONALIZATION", "benefit_enrichment": "LOW_OR_NEUTRAL"}
+      ]
+    },
+    "MS": {
+      "subtypes": ["MS_SESSION"],
+      "ESConv": {"claim": "NOT_MEASURABLE", "expected_runtime": "OFF_WHEN_NO_PRIOR_USER_SESSION"},
+      "EvoEmo": {"claim": "MEASURABLE", "examples": ["prior_session_goal", "prior_distinction", "unfinished_thread", "factual_recall"]},
+      "internal_only": ["resolved_marker_counterfactual", "current_session_echo", "wrong_goal_same_topic"],
+      "observable_factors": [
+        "strictly_prior_session",
+        "same_owner",
+        "prior_goal_or_distinction_specificity",
+        "resolved_or_stale",
+        "explicit_current_goal",
+        "currently_redundant",
+        "token_cost"
+      ],
+      "step2_required_function": "tentatively carry forward one exact prior-session goal, distinction, or unfinished thread that changes the current response",
+      "eligibility_audit_families": [
+        {"id": "MS_ELIGIBLE_PRIOR_DISTINCTION", "eligibility_intent": "ELIGIBLE"},
+        {"id": "MS_ELIGIBLE_PRIOR_GOAL", "eligibility_intent": "ELIGIBLE"},
+        {"id": "MS_CURRENT_SESSION_ECHO", "eligibility_intent": "INELIGIBLE"},
+        {"id": "MS_TOPIC_ONLY_GENERIC", "eligibility_intent": "INELIGIBLE"},
+        {"id": "MS_RESOLVED_OR_STALE", "eligibility_intent": "INELIGIBLE"},
+        {"id": "MS_WRONG_OWNER_OR_GOAL", "eligibility_intent": "INELIGIBLE"}
+      ],
+      "effect_logic_families": [
+        {"id": "MS_PRIOR_GOAL_DIRECTLY_CONTINUES", "benefit_enrichment": "HIGH"},
+        {"id": "MS_PRIOR_DISTINCTION_ANSWERS_CURRENT", "benefit_enrichment": "HIGH"},
+        {"id": "MS_UNFINISHED_THREAD_DIRECTLY_REQUESTED", "benefit_enrichment": "HIGH"},
+        {"id": "MS_EXPLICIT_FACT_RECALL", "benefit_enrichment": "HIGH"},
+        {"id": "MS_SAFE_CONTINUITY_BUT_SELF_CONTAINED_CURRENT", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "MS_RELEVANT_DETAIL_WITH_WEAK_DECISION_VALUE", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "MS_BROAD_PRIOR_GOAL_MINOR_INCREMENT", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "MS_HIGH_TOKEN_COST_FOR_SMALL_CONTINUITY_GAIN", "benefit_enrichment": "LOW_OR_NEUTRAL"}
+      ]
+    },
+    "ME": {
+      "subtypes": ["ME_REUSABLE_OUTCOME", "ME_CONTEXT_EVENT", "ME_UNRESOLVED_EVENT"],
+      "ESConv": {"claim": "NOT_MEASURABLE", "expected_runtime": "OFF_WHEN_NO_PRIOR_USER_EVENT"},
+      "EvoEmo": {"claim": "ME_REUSABLE_OUTCOME_MEASURABLE_WHEN_PRESENT", "nonclaim": "arbitrary_past_event_is_not_reusable_outcome"},
+      "internal_only": ["subtype_by_current_goal_four_grid", "wrong_owner", "same_topic_without_outcome"],
+      "observable_factors": [
+        "same_owner",
+        "strictly_past",
+        "past_action_or_choice",
+        "observable_result_or_mechanism",
+        "explicit_current_goal",
+        "current_goal_allows_action_option",
+        "currently_redundant_or_conflicting",
+        "token_cost"
+      ],
+      "step2_required_function": "present one exact past action-result or mechanism as a limited and checkable option, preserving provenance",
+      "eligibility_audit_families": [
+        {"id": "ME_ELIGIBLE_REUSABLE_OUTCOME", "eligibility_intent": "ELIGIBLE"},
+        {"id": "ME_ELIGIBLE_REUSABLE_MECHANISM", "eligibility_intent": "ELIGIBLE"},
+        {"id": "ME_CONTEXT_EVENT_NO_OUTCOME", "eligibility_intent": "INELIGIBLE"},
+        {"id": "ME_UNRESOLVED_EVENT", "eligibility_intent": "INELIGIBLE"},
+        {"id": "ME_VALID_OUTCOME_WRONG_CURRENT_GOAL", "eligibility_intent": "INELIGIBLE"},
+        {"id": "ME_WRONG_OWNER_REDUNDANT_OR_STALE", "eligibility_intent": "INELIGIBLE"}
+      ],
+      "effect_logic_families": [
+        {"id": "ME_SUCCESS_RESULT_ACTION_READY", "benefit_enrichment": "HIGH"},
+        {"id": "ME_MECHANISM_PREVENTS_REPEAT", "benefit_enrichment": "HIGH"},
+        {"id": "ME_FAILURE_RESULT_AVOIDS_KNOWN_FAILURE", "benefit_enrichment": "HIGH"},
+        {"id": "ME_REVERSIBLE_PRIOR_EXPERIMENT_DIRECTLY_INVITED", "benefit_enrichment": "HIGH"},
+        {"id": "ME_VALID_RESULT_BUT_OBVIOUS_BASE_STEP", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "ME_VALID_RESULT_WITH_CHANGED_NONCONFLICTING_CONTEXT", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "ME_VALID_RESULT_AMONG_MANY_EQUIVALENT_OPTIONS", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "ME_HIGH_TOKEN_COST_FOR_WEAK_PERSONALIZATION", "benefit_enrichment": "LOW_OR_NEUTRAL"}
+      ]
+    },
+    "RS": {
+      "subtypes": ["RS_ATOMIC_MOVE"],
+      "ESConv": {"claim": "PRIMARY_MEASURABLE", "bank": "ESConv_train_only_80_card_v4"},
+      "EvoEmo": {"claim": "SECONDARY_MEASURABLE_WITH_SAME_BANK"},
+      "internal_only": ["same_family_on_off_counterfactual", "joint_burden_conflict", "all_16_actions"],
+      "observable_factors": [
+        "atomic_move_family",
+        "explicit_current_goal",
+        "when_to_use_match",
+        "when_not_to_use_or_boundary_conflict",
+        "same_move_already_executed",
+        "specific_increment_over_current_context",
+        "burden",
+        "token_cost"
+      ],
+      "step2_required_function": "execute the exact card atomic move without card-external factual advice or burden overflow",
+      "eligibility_audit_families": [
+        {"id": "RS_ELIGIBLE_ATOMIC_MOVE", "eligibility_intent": "ELIGIBLE"},
+        {"id": "RS_ELIGIBLE_LOW_BURDEN_MOVE", "eligibility_intent": "ELIGIBLE"},
+        {"id": "RS_CURRENT_REQUEST_ALREADY_SPECIFIES_MOVE", "eligibility_intent": "INELIGIBLE"},
+        {"id": "RS_SAME_MOVE_ALREADY_EXECUTED", "eligibility_intent": "INELIGIBLE"},
+        {"id": "RS_GREETING_STOP_OR_LISTEN_ONLY", "eligibility_intent": "INELIGIBLE"},
+        {"id": "RS_WRONG_FAMILY_BURDEN_OR_HIGH_STAKES", "eligibility_intent": "INELIGIBLE"}
+      ],
+      "effect_logic_families": [
+        {"id": "RS_FOCUSED_QUESTION_ADDS_NEEDED_AXIS", "benefit_enrichment": "HIGH"},
+        {"id": "RS_TENTATIVE_PARAPHRASE_REPAIRS_AMBIGUITY", "benefit_enrichment": "HIGH"},
+        {"id": "RS_REFLECTION_ADDS_EVIDENCE_BOUND_EMOTION", "benefit_enrichment": "HIGH"},
+        {"id": "RS_REVERSIBLE_SUGGESTION_DIRECTLY_REQUESTED", "benefit_enrichment": "HIGH"},
+        {"id": "RS_SAFE_MINOR_STRUCTURE_BASE_LLM_LIKELY_KNOWS", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "RS_BROAD_SUPPORT_CARD_WITH_SMALL_INCREMENT", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "RS_LOW_STAKES_OPTIONAL_TECHNIQUE", "benefit_enrichment": "LOW_OR_NEUTRAL"},
+        {"id": "RS_HIGH_TOKEN_COST_FOR_SIMPLE_MOVE", "benefit_enrichment": "LOW_OR_NEUTRAL"}
+      ]
+    }
+  },
+  "construction_hypothesis_policy": {
+    "may_balance_blueprint": true,
+    "is_eligibility_gold": false,
+    "is_worth_opening_gold": false,
+    "purpose": "eligibility intent only balances the qualification audit; effect enrichment only samples plausible high versus low benefit conditions and never supplies worth-opening gold"
+  },
+  "anti_shortcut_checks": [
+    "topic_cannot_predict_component_or_hypothesis",
+    "history_scale_cannot_predict_component_or_hypothesis",
+    "candidate_subtype_alone_cannot_predict_worth_opening",
+    "explicit_invitation_alone_cannot_predict_ME",
+    "strategy_family_alone_cannot_predict_RS",
+    "current_preference_phrase_alone_cannot_predict_MP",
+    "same_template_or_counterfactual_group_never_crosses_split"
+  ],
+  "external_reporting": {
+    "minimum_independent_candidate_present_in_support_states_per_component": 20,
+    "report": ["all_state", "candidate_present", "in_support", "OOD", "subtype", "history_scale", "user_cluster_interval"],
+    "missing_external_construct": "DATASET_COVERAGE_LIMITATION_NOT_ASSUMED_SUCCESS_OR_FAILURE"
+  }
+}

@@ -1,0 +1,1670 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-entity-and-template-grounding-repair-v2",
+  "status": "MACHINE_PASS_BATCH_AND_SEMANTIC_REVIEW_PENDING",
+  "output_is_formal_tracked_intake": true,
+  "users": 11,
+  "repaired_users": 10,
+  "contract": "data/pm_v1_5_contracts/v5_3_complete_training_data_generation_v1.json",
+  "contract_sha256": "8c44d2905fb6bd40ad52eff118c0e5b23c482fb983d8d657abe23a1125b92d55",
+  "validator": "scripts/v1_5/82l_validate_formal_longitudinal_user_v1_5.py",
+  "validator_sha256": "b22f73a4cd0ef35e30bc37cd97e61f0be17df5cf5b766a1da37ffb0f231fdd26",
+  "source_inputs": [
+    {
+      "user_id": "p2r_formal_claude_u000",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_longitudinal_user_validation_v1/canonical_users/p2r_formal_claude_u000.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_claude_u000.json",
+      "sha256": "de9eb5cc13de8d6108561fe9aee0fb1abd83c2264ee48b96aca4d80ecf474ab5"
+    },
+    {
+      "user_id": "p2r_formal_claude_u001",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/canonical_users/p2r_formal_claude_u001.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_claude_u001.json",
+      "sha256": "85629fee532ffb50c98e2a73fd7ee695d21539e5c14970983509fc58d36099b2"
+    },
+    {
+      "user_id": "p2r_formal_claude_u002",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/canonical_users/p2r_formal_claude_u002.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_claude_u002.json",
+      "sha256": "b194afe6f8b294c9d2780e59441c63c5e514a63931eeaf7c23d57e5b378069c3"
+    },
+    {
+      "user_id": "p2r_formal_claude_u003",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/canonical_users/p2r_formal_claude_u003.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_claude_u003.json",
+      "sha256": "7a354ba91956ceff40478c6620ca05d948d52f46fe29242cc77a181a0c2fe631"
+    },
+    {
+      "user_id": "p2r_formal_claude_u004",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/canonical_users/p2r_formal_claude_u004.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_claude_u004.json",
+      "sha256": "3451e08b87a47c613e990b36ee59a95917fb8750f6f41c7c167f4a8a80d4dade"
+    },
+    {
+      "user_id": "p2r_formal_gpt_u000",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_longitudinal_user_validation_v1/canonical_users/p2r_formal_gpt_u000.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_gpt_u000.json",
+      "sha256": "7495280f22af78eccc41ba8b25b7d07819564bc421a155e9f95bfc8e7da16de8"
+    },
+    {
+      "user_id": "p2r_formal_gpt_u001",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_gpt_u001_u005_validation_v1/canonical_users/p2r_formal_gpt_u001.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_gpt_u001.json",
+      "sha256": "59520d14e645e51ef2d13c455988ad88217d1b6091b2fbd5fa8fa48e82adc2dc"
+    },
+    {
+      "user_id": "p2r_formal_gpt_u002",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_gpt_u001_u005_validation_v1/canonical_users/p2r_formal_gpt_u002.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_gpt_u002.json",
+      "sha256": "31f0b21ef7ca918e67885fe21ae473df32db4a609b9f6e68c1b64b928c54d899"
+    },
+    {
+      "user_id": "p2r_formal_gpt_u003",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_gpt_u001_u005_validation_v1/canonical_users/p2r_formal_gpt_u003.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_gpt_u003.json",
+      "sha256": "3637be13f5c5f5039f69d7365bb64e99414af0ea6304319a8a81b119c51dcdd4"
+    },
+    {
+      "user_id": "p2r_formal_gpt_u004",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_gpt_u001_u005_validation_v1/canonical_users/p2r_formal_gpt_u004.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_gpt_u004.json",
+      "sha256": "613cad40f55bd96876b6e8399542a3159fa0c5e9b04c0b2da4cfc6fc73d8f4c6"
+    },
+    {
+      "user_id": "p2r_formal_gpt_u005",
+      "original_ignored_path": "outputs/pm_v1_5_v5_3_formal_gpt_u001_u005_validation_v1/canonical_users/p2r_formal_gpt_u005.json",
+      "archived_path": "data/pm_v1_5_v5_3_formal_longitudinal_catalog_intake_v1/pre_repair_audit_sources/p2r_formal_gpt_u005.json",
+      "sha256": "0d94d6e7af507066256ce8c725b5e192d4d14d9058a3ca1aac760c390ec17e02"
+    }
+  ],
+  "actions_by_user": {
+    "p2r_formal_claude_u000": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_02",
+        "old_name": "Fabio",
+        "new_name": "Fabio",
+        "old_valid_from_session": 2,
+        "new_valid_from_session": 2,
+        "visible_name_or_role_sessions": [
+          2,
+          4,
+          6,
+          10
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_03",
+        "old_name": "Carla",
+        "new_name": "Carla",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          9,
+          14
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_04",
+        "old_name": "Marcos",
+        "new_name": "Marcos",
+        "old_valid_from_session": 6,
+        "new_valid_from_session": 6,
+        "visible_name_or_role_sessions": [
+          6,
+          8,
+          10,
+          15
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_05",
+        "old_name": "Helena",
+        "new_name": "Helena",
+        "old_valid_from_session": 8,
+        "new_valid_from_session": 8,
+        "visible_name_or_role_sessions": [
+          8,
+          13
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      }
+    ],
+    "p2r_formal_gpt_u000": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_elena",
+        "old_name": "Elena Park",
+        "new_name": "Elena Park",
+        "old_valid_from_session": 1,
+        "new_valid_from_session": 1,
+        "visible_name_or_role_sessions": [
+          1,
+          3,
+          6
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_10"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_jonah",
+        "old_name": "Jonah Reed",
+        "new_name": "Jonah Reed",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 7,
+        "visible_name_or_role_sessions": [
+          7,
+          13
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_10"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_camila",
+        "old_name": "Camila Ortiz",
+        "new_name": "Camila Ortiz",
+        "old_valid_from_session": 4,
+        "new_valid_from_session": 4,
+        "visible_name_or_role_sessions": [
+          4,
+          6,
+          10,
+          13
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_10"
+        ]
+      }
+    ],
+    "p2r_formal_gpt_u001": [
+      {
+        "kind": "cross_user_template_surface_repair",
+        "old": "My goal is to finish the certificate without using every day off as study recovery.",
+        "new": "I want to complete the certificate while still leaving some days off for actual rest.",
+        "occurrence_count": 3
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_amina",
+        "old_name": "Amina Shah",
+        "new_name": "Amina Shah",
+        "old_valid_from_session": 1,
+        "new_valid_from_session": 1,
+        "visible_name_or_role_sessions": [
+          1,
+          3,
+          4,
+          7,
+          14
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_13"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_fraser",
+        "old_name": "Fraser Bell",
+        "new_name": "Fraser Bell",
+        "old_valid_from_session": 2,
+        "new_valid_from_session": 4,
+        "visible_name_or_role_sessions": [
+          4,
+          12,
+          16
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_13"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_jules",
+        "old_name": "Jules Warren",
+        "new_name": "Jules Warren",
+        "old_valid_from_session": 3,
+        "new_valid_from_session": 6,
+        "visible_name_or_role_sessions": [
+          6,
+          8
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_13"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_mateo",
+        "old_name": "Mateo Moreno",
+        "new_name": "Mateo Moreno",
+        "old_valid_from_session": 4,
+        "new_valid_from_session": 9,
+        "visible_name_or_role_sessions": [
+          9,
+          11,
+          16
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_13"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_nikhil",
+        "old_name": "Nikhil Rao",
+        "new_name": "Nikhil Rao",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 2,
+        "visible_name_or_role_sessions": [
+          2,
+          5,
+          11,
+          12
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_13"
+        ]
+      }
+    ],
+    "p2r_formal_gpt_u002": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_sofia",
+        "old_name": "Sofia Martins",
+        "new_name": "Sofia Martins",
+        "old_valid_from_session": 1,
+        "new_valid_from_session": 3,
+        "visible_name_or_role_sessions": [
+          3,
+          5,
+          10,
+          15,
+          21
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_15"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_bram",
+        "old_name": "Bram de Wit",
+        "new_name": "Bram de Wit",
+        "old_valid_from_session": 1,
+        "new_valid_from_session": 1,
+        "visible_name_or_role_sessions": [
+          1,
+          3,
+          4,
+          12,
+          21
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_15"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_henk",
+        "old_name": "Henk Visser",
+        "new_name": "Henk Visser",
+        "old_valid_from_session": 2,
+        "new_valid_from_session": 2,
+        "visible_name_or_role_sessions": [
+          2,
+          6,
+          14,
+          20
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_15"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_elise",
+        "old_name": "Elise van Dijk",
+        "new_name": "Elise van Dijk",
+        "old_valid_from_session": 4,
+        "new_valid_from_session": 7,
+        "visible_name_or_role_sessions": [
+          7,
+          11,
+          15
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_15"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_chidi",
+        "old_name": "Chidi Okafor",
+        "new_name": "Dad",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          13,
+          16
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_15"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_kofi",
+        "old_name": "Kofi Mensah",
+        "new_name": "Kofi Mensah",
+        "old_valid_from_session": 7,
+        "new_valid_from_session": 16,
+        "visible_name_or_role_sessions": [
+          16,
+          17
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_15"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_lotte",
+        "old_name": "Lotte Smit",
+        "new_name": "Lotte Smit",
+        "old_valid_from_session": 9,
+        "new_valid_from_session": 9,
+        "visible_name_or_role_sessions": [
+          9,
+          12,
+          18
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_15"
+        ]
+      }
+    ],
+    "p2r_formal_gpt_u003": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_mori",
+        "old_name": "Takumi Mori",
+        "new_name": "Takumi Mori",
+        "old_valid_from_session": 1,
+        "new_valid_from_session": 3,
+        "visible_name_or_role_sessions": [
+          3,
+          4,
+          12,
+          25
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_aya",
+        "old_name": "Aya Fujimoto",
+        "new_name": "Aya Fujimoto",
+        "old_valid_from_session": 2,
+        "new_valid_from_session": 4,
+        "visible_name_or_role_sessions": [
+          4,
+          12,
+          18
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_ren",
+        "old_name": "Ren Kagawa",
+        "new_name": "Ren Kagawa",
+        "old_valid_from_session": 3,
+        "new_valid_from_session": 8,
+        "visible_name_or_role_sessions": [
+          8,
+          11,
+          23
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_keiko",
+        "old_name": "Keiko Sato",
+        "new_name": "Mum",
+        "old_valid_from_session": 4,
+        "new_valid_from_session": 8,
+        "visible_name_or_role_sessions": [
+          8,
+          9,
+          15,
+          18,
+          20,
+          23
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_masaru",
+        "old_name": "Masaru Sato",
+        "new_name": "Dad",
+        "old_valid_from_session": 4,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          12,
+          15,
+          20
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_ishida",
+        "old_name": "Professor Naomi Ishida",
+        "new_name": "Professor Naomi Ishida",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 6,
+        "visible_name_or_role_sessions": [
+          6,
+          17,
+          24
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_lian",
+        "old_name": "Lian Zhou",
+        "new_name": "Lian Zhou",
+        "old_valid_from_session": 7,
+        "new_valid_from_session": 7,
+        "visible_name_or_role_sessions": [
+          7,
+          10,
+          21
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_sora",
+        "old_name": "Sora Nishimura",
+        "new_name": "Sora Nishimura",
+        "old_valid_from_session": 9,
+        "new_valid_from_session": 13,
+        "visible_name_or_role_sessions": [
+          13,
+          19
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_okabe",
+        "old_name": "Yuki Okabe",
+        "new_name": "Yuki Okabe",
+        "old_valid_from_session": 14,
+        "new_valid_from_session": 14,
+        "visible_name_or_role_sessions": [
+          14
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_18"
+        ]
+      }
+    ],
+    "p2r_formal_gpt_u004": [
+      {
+        "kind": "cross_user_template_surface_repair",
+        "old": "My goal is to finish the certificate without treating every warehouse emergency as more important than class.",
+        "new": "I want to complete the certificate without letting each warehouse emergency outrank class.",
+        "occurrence_count": 3
+      },
+      {
+        "kind": "cross_user_template_surface_repair",
+        "old": "but I haven't decided what I will do when Mélanie asks me to stay on a class night.",
+        "new": "and I still need to decide how to respond when Mélanie asks me to stay on a class night.",
+        "occurrence_count": 3
+      },
+      {
+        "kind": "cross_user_template_surface_repair",
+        "old": "give me the direct answer first and explain after",
+        "new": "start with a direct answer, then give the explanation",
+        "occurrence_count": 3
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_melanie",
+        "old_name": "Mélanie Roy",
+        "new_name": "Mélanie Roy",
+        "old_valid_from_session": 1,
+        "new_valid_from_session": 1,
+        "visible_name_or_role_sessions": [
+          1,
+          4,
+          12,
+          19,
+          27,
+          30
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_jules",
+        "old_name": "Jules Tremblay",
+        "new_name": "Jules Tremblay",
+        "old_valid_from_session": 2,
+        "new_valid_from_session": 4,
+        "visible_name_or_role_sessions": [
+          4,
+          12
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_salma",
+        "old_name": "Salma Haddad",
+        "new_name": "Salma Haddad",
+        "old_valid_from_session": 1,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          8,
+          10,
+          15,
+          26
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_yara",
+        "old_name": "Yara Haddad",
+        "new_name": "Yara Haddad",
+        "old_valid_from_session": 3,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          8,
+          10,
+          18
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_tareq",
+        "old_name": "Tareq Haddad",
+        "new_name": "Tareq Haddad",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          13,
+          15,
+          20
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_huda",
+        "old_name": "Huda Haddad",
+        "new_name": "Mum",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          13,
+          15,
+          26
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_karim",
+        "old_name": "Karim Mansour",
+        "new_name": "Karim Mansour",
+        "old_valid_from_session": 6,
+        "new_valid_from_session": 7,
+        "visible_name_or_role_sessions": [
+          7,
+          11,
+          17
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_benoit",
+        "old_name": "Benoît Caron",
+        "new_name": "Benoît Caron",
+        "old_valid_from_session": 2,
+        "new_valid_from_session": 2,
+        "visible_name_or_role_sessions": [
+          2,
+          6,
+          9,
+          22,
+          25,
+          29
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_claire",
+        "old_name": "Claire Nguyen",
+        "new_name": "Claire Nguyen",
+        "old_valid_from_session": 7,
+        "new_valid_from_session": 9,
+        "visible_name_or_role_sessions": [
+          9,
+          16,
+          24
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_luc",
+        "old_name": "Luc Beaulieu",
+        "new_name": "Luc Beaulieu",
+        "old_valid_from_session": 12,
+        "new_valid_from_session": 14,
+        "visible_name_or_role_sessions": [
+          14,
+          23,
+          30
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_samir",
+        "old_name": "Samir Rahal",
+        "new_name": "Samir Rahal",
+        "old_valid_from_session": 8,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          8,
+          18
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_nadia",
+        "old_name": "Nadia Bouchard",
+        "new_name": "Nadia Bouchard",
+        "old_valid_from_session": 10,
+        "new_valid_from_session": 21,
+        "visible_name_or_role_sessions": [
+          21
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_victor",
+        "old_name": "Victor Chen",
+        "new_name": "Victor Chen",
+        "old_valid_from_session": 23,
+        "new_valid_from_session": 25,
+        "visible_name_or_role_sessions": [
+          25,
+          28
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_20"
+        ]
+      }
+    ],
+    "p2r_formal_gpt_u005": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_evan",
+        "old_name": "Evan Doyle",
+        "new_name": "Evan Doyle",
+        "old_valid_from_session": 1,
+        "new_valid_from_session": 1,
+        "visible_name_or_role_sessions": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          10,
+          12,
+          13
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_10"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_tessa",
+        "old_name": "Tessa Byrne",
+        "new_name": "Tessa Byrne",
+        "old_valid_from_session": 2,
+        "new_valid_from_session": 3,
+        "visible_name_or_role_sessions": [
+          3,
+          9,
+          12
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_10"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_meera",
+        "old_name": "Meera Nair",
+        "new_name": "Meera Nair",
+        "old_valid_from_session": 3,
+        "new_valid_from_session": 4,
+        "visible_name_or_role_sessions": [
+          4,
+          8,
+          12
+        ],
+        "removed_noncanonical_fields": [
+          "status_after_session_10"
+        ]
+      }
+    ],
+    "p2r_formal_claude_u001": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_02",
+        "old_name": "Bulent",
+        "new_name": "Bulent",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          11,
+          15
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_03",
+        "old_name": "Kaya",
+        "new_name": "father",
+        "old_valid_from_session": 3,
+        "new_valid_from_session": 3,
+        "visible_name_or_role_sessions": [
+          3,
+          11,
+          16,
+          18
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_04",
+        "old_name": "Deniz",
+        "new_name": "Deniz",
+        "old_valid_from_session": 3,
+        "new_valid_from_session": 3,
+        "visible_name_or_role_sessions": [
+          3,
+          7,
+          11,
+          16
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_05",
+        "old_name": "Selin",
+        "new_name": "Selin",
+        "old_valid_from_session": 10,
+        "new_valid_from_session": 10,
+        "visible_name_or_role_sessions": [
+          10,
+          16,
+          19
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_06",
+        "old_name": "Kerem",
+        "new_name": "Kerem",
+        "old_valid_from_session": 6,
+        "new_valid_from_session": 6,
+        "visible_name_or_role_sessions": [
+          6,
+          13,
+          18
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_07",
+        "old_name": "Emre",
+        "new_name": "Emre",
+        "old_valid_from_session": 6,
+        "new_valid_from_session": 6,
+        "visible_name_or_role_sessions": [
+          6,
+          9,
+          14,
+          17
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      }
+    ],
+    "p2r_formal_claude_u002": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_02",
+        "old_name": "Lorna",
+        "new_name": "mother",
+        "old_valid_from_session": 3,
+        "new_valid_from_session": 3,
+        "visible_name_or_role_sessions": [
+          3,
+          11,
+          20
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_03",
+        "old_name": "Jomar",
+        "new_name": "Jomar",
+        "old_valid_from_session": 11,
+        "new_valid_from_session": 11,
+        "visible_name_or_role_sessions": [
+          11,
+          16,
+          22
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_04",
+        "old_name": "Wei Ling",
+        "new_name": "Wei Ling",
+        "old_valid_from_session": 10,
+        "new_valid_from_session": 10,
+        "visible_name_or_role_sessions": [
+          10,
+          14
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_05",
+        "old_name": "Priya",
+        "new_name": "Priya",
+        "old_valid_from_session": 4,
+        "new_valid_from_session": 4,
+        "visible_name_or_role_sessions": [
+          4,
+          12,
+          19
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_06",
+        "old_name": "Teresa",
+        "new_name": "Teresa",
+        "old_valid_from_session": 15,
+        "new_valid_from_session": 15,
+        "visible_name_or_role_sessions": [
+          15,
+          23
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_07",
+        "old_name": "Daniel",
+        "new_name": "Daniel",
+        "old_valid_from_session": 22,
+        "new_valid_from_session": 22,
+        "visible_name_or_role_sessions": [
+          22
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_08",
+        "old_name": "Ms Ong",
+        "new_name": "Ms Ong",
+        "old_valid_from_session": 13,
+        "new_valid_from_session": 13,
+        "visible_name_or_role_sessions": [
+          13,
+          21
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_09",
+        "old_name": "Belen",
+        "new_name": "Belen",
+        "old_valid_from_session": 7,
+        "new_valid_from_session": 7,
+        "visible_name_or_role_sessions": [
+          7,
+          11,
+          16,
+          22
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      }
+    ],
+    "p2r_formal_claude_u003": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_02",
+        "old_name": "Zenon",
+        "new_name": "Zenon",
+        "old_valid_from_session": 7,
+        "new_valid_from_session": 7,
+        "visible_name_or_role_sessions": [
+          7,
+          13,
+          19,
+          24
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_03",
+        "old_name": "Kamil",
+        "new_name": "Kamil",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          11,
+          17,
+          23,
+          27
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_04",
+        "old_name": "Halina",
+        "new_name": "Halina",
+        "old_valid_from_session": 5,
+        "new_valid_from_session": 5,
+        "visible_name_or_role_sessions": [
+          5,
+          9
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_05",
+        "old_name": "Marek",
+        "new_name": "Marek",
+        "old_valid_from_session": 10,
+        "new_valid_from_session": 10,
+        "visible_name_or_role_sessions": [
+          10,
+          22
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_06",
+        "old_name": "Iwona",
+        "new_name": "Iwona",
+        "old_valid_from_session": 10,
+        "new_valid_from_session": 10,
+        "visible_name_or_role_sessions": [
+          10,
+          14
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_07",
+        "old_name": "Dorota",
+        "new_name": "Dorota",
+        "old_valid_from_session": 4,
+        "new_valid_from_session": 4,
+        "visible_name_or_role_sessions": [
+          4,
+          12
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_08",
+        "old_name": "Slawek",
+        "new_name": "Slawek",
+        "old_valid_from_session": 13,
+        "new_valid_from_session": 24,
+        "visible_name_or_role_sessions": [
+          24,
+          27
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_09",
+        "old_name": "Ewa",
+        "new_name": "Ewa",
+        "old_valid_from_session": 15,
+        "new_valid_from_session": 15,
+        "visible_name_or_role_sessions": [
+          15
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_10",
+        "old_name": "Jacek",
+        "new_name": "Jacek",
+        "old_valid_from_session": 18,
+        "new_valid_from_session": 18,
+        "visible_name_or_role_sessions": [
+          18,
+          26
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_11",
+        "old_name": "Bogdan",
+        "new_name": "Bogdan",
+        "old_valid_from_session": 14,
+        "new_valid_from_session": 14,
+        "visible_name_or_role_sessions": [
+          14
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_12",
+        "old_name": "Piotr",
+        "new_name": "Piotr",
+        "old_valid_from_session": 16,
+        "new_valid_from_session": 16,
+        "visible_name_or_role_sessions": [
+          16,
+          26
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "event_session_and_description_grounding",
+        "event_id": "u003_evt_14",
+        "before": {
+          "event_id": "u003_evt_14",
+          "session_index": 13,
+          "thread_id": "thread_06",
+          "entity_ids": [
+            "self"
+          ],
+          "description": "Slawek brought the mill's old fire-station motorcycle into the garage as a joint project.",
+          "topic_thread_ids": [
+            "thread_06"
+          ]
+        },
+        "after": {
+          "event_id": "u003_evt_14",
+          "session_index": 24,
+          "thread_id": "thread_06",
+          "entity_ids": [
+            "self",
+            "entity_08"
+          ],
+          "description": "The motorcycle came out of the mill's old fire station when it was cleared in the nineties.",
+          "topic_thread_ids": [
+            "thread_06"
+          ]
+        }
+      }
+    ],
+    "p2r_formal_claude_u004": [
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_02",
+        "old_name": "Hasegawa",
+        "new_name": "Hasegawa",
+        "old_valid_from_session": 2,
+        "new_valid_from_session": 2,
+        "visible_name_or_role_sessions": [
+          2,
+          3,
+          7,
+          11,
+          27
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_03",
+        "old_name": "Kayo",
+        "new_name": "mother",
+        "old_valid_from_session": 4,
+        "new_valid_from_session": 4,
+        "visible_name_or_role_sessions": [
+          4,
+          8,
+          15,
+          24,
+          31
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_04",
+        "old_name": "Yuka",
+        "new_name": "Yuka",
+        "old_valid_from_session": 23,
+        "new_valid_from_session": 23,
+        "visible_name_or_role_sessions": [
+          23,
+          31
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_05",
+        "old_name": "Sanada",
+        "new_name": "Sanada",
+        "old_valid_from_session": 3,
+        "new_valid_from_session": 3,
+        "visible_name_or_role_sessions": [
+          3,
+          6,
+          10,
+          14
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_06",
+        "old_name": "Doi",
+        "new_name": "Doi",
+        "old_valid_from_session": 14,
+        "new_valid_from_session": 14,
+        "visible_name_or_role_sessions": [
+          14,
+          18
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_07",
+        "old_name": "Rina",
+        "new_name": "Rina",
+        "old_valid_from_session": 11,
+        "new_valid_from_session": 11,
+        "visible_name_or_role_sessions": [
+          11,
+          12
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_08",
+        "old_name": "Keiji",
+        "new_name": "Keiji",
+        "old_valid_from_session": 20,
+        "new_valid_from_session": 20,
+        "visible_name_or_role_sessions": [
+          20
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_09",
+        "old_name": "Sae",
+        "new_name": "Sae",
+        "old_valid_from_session": 20,
+        "new_valid_from_session": 28,
+        "visible_name_or_role_sessions": [
+          28,
+          32
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_10",
+        "old_name": "Takumi",
+        "new_name": "Takumi",
+        "old_valid_from_session": 21,
+        "new_valid_from_session": 21,
+        "visible_name_or_role_sessions": [
+          21,
+          33
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_11",
+        "old_name": "Obara",
+        "new_name": "Obara",
+        "old_valid_from_session": 16,
+        "new_valid_from_session": 16,
+        "visible_name_or_role_sessions": [
+          16,
+          30
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_12",
+        "old_name": "Nao",
+        "new_name": "Nao",
+        "old_valid_from_session": 25,
+        "new_valid_from_session": 25,
+        "visible_name_or_role_sessions": [
+          25,
+          27
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_13",
+        "old_name": "Chizuko",
+        "new_name": "Chizuko",
+        "old_valid_from_session": 31,
+        "new_valid_from_session": 24,
+        "visible_name_or_role_sessions": [
+          24,
+          31
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_14",
+        "old_name": "Fujii",
+        "new_name": "Fujii",
+        "old_valid_from_session": 17,
+        "new_valid_from_session": 17,
+        "visible_name_or_role_sessions": [
+          17
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_15",
+        "old_name": "Haru",
+        "new_name": "Haru",
+        "old_valid_from_session": 31,
+        "new_valid_from_session": 31,
+        "visible_name_or_role_sessions": [
+          31
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      },
+      {
+        "kind": "relationship_grounding",
+        "entity_id": "entity_16",
+        "old_name": "Emi",
+        "new_name": "Emi",
+        "old_valid_from_session": 22,
+        "new_valid_from_session": 22,
+        "visible_name_or_role_sessions": [
+          22
+        ],
+        "removed_noncanonical_fields": [
+          "first_mentioned_session",
+          "note",
+          "relation"
+        ]
+      }
+    ]
+  },
+  "validation_summary": {
+    "p2r_formal_claude_u000": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_claude_u001": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_claude_u002": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_claude_u003": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_claude_u004": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_gpt_u000": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_gpt_u001": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_gpt_u002": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_gpt_u003": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_gpt_u004": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    },
+    "p2r_formal_gpt_u005": {
+      "status": "SINGLE_USER_CONTENT_MACHINE_PASS_LEGACY_COMPILER_DIAGNOSTIC_AND_BATCH_REVIEW_PENDING",
+      "hard_issue_count": 0,
+      "typed_span_core_valid": 8,
+      "legacy_core_valid": 0,
+      "legacy_invalid_pass": 0
+    }
+  }
+}

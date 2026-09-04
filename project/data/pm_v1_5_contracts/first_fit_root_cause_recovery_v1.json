@@ -1,0 +1,283 @@
+{
+  "protocol": "pm-v1.5-first-four-component-fit-root-cause-recovery-v1",
+  "status": "FROZEN_BEFORE_ANY_NEW_RECOVERY_OUTCOMES",
+  "date": "2026-07-31",
+  "supersedes_for_recovery_only": [
+    "the feature sets and sample-selection procedure used by pm-v1.5-transport-repaired-four-component-pm-fit-v1",
+    "any interpretation that the first four-head fit cleanly falsified the PM research claim",
+    "any proposal to select a larger encoder before measurement and data-design qualification"
+  ],
+  "preserved_research_claim": "Under one fixed resource, retrieval, filtering, prompt, generator, and evaluation stack, a low-capacity auditable pre-generation PM can learn component-specific expected marginal-benefit gates for MP, MS, ME, and RS, followed by separate atomic risk guards and deterministic cost constraints.",
+  "claim_boundaries": [
+    "The PM predicts protocol-specific expected marginal response benefit, not an individual causal treatment effect.",
+    "The PM does not select a specific card or memory item; the fixed retriever and filter do that before the gate.",
+    "The PM does not diagnose clinical need and does not provide high-stakes factual guidance.",
+    "The V1.5 claim covers only the frozen Bank, memory ontology, retriever, prompt compiler, and generator.",
+    "External quality, risk, and PM outcomes are confirmation-only and cannot be used for threshold, feature, Bank, sample, or model selection. Outcome-free schema and candidate-descriptor inspection makes EvoEmo a development-informed external domain rather than an untouched zero-shot benchmark."
+  ],
+  "root_cause_decision": {
+    "confirmed_primary": [
+      "The implemented feature sets exceeded the frozen effective-group capacity rule in all four heads.",
+      "The memory heads collapsed the identity of the fixed background action into a count plus an RS bit.",
+      "The labeled development subset did not preserve the intended external candidate-covariate coverage.",
+      "The internal MP construct was templated stable interaction preference while external EvoEmo MP was demographic and life profile.",
+      "The old MS treatment was not a qualified prior-session-summary construct: 59 of 64 MS contrasts injected at least one last-utterance fallback, and the internal versus EvoEmo current-session visibility policies were not equivalent."
+    ],
+    "unresolved": [
+      "Whether one realized generator pair gives a reproducible expected-benefit label.",
+      "Whether a second independent reviewer reproduces the three-way material-quality decision.",
+      "Whether a richer semantic encoder adds value after the measurement and feature contracts are repaired."
+    ],
+    "not_supported_as_primary": [
+      "BAAI/bge-small-en-v1.5 is the main reason the PM did not learn.",
+      "The four resources have no conditional benefit.",
+      "The full 16-action research question is impossible."
+    ]
+  },
+  "step1_decision_contract": {
+    "timing": "after fixed candidate discovery and hard eligibility filtering, before resource injection and response generation",
+    "hard_off_before_learning": [
+      "resource unavailable",
+      "no candidate survives source-specific eligibility and hard exclusions",
+      "explicit user boundary forbids the candidate action",
+      "candidate is wrong-person, conflicting, stale-request, or unsafe under the frozen source-specific rules"
+    ],
+    "learned_output": "P(material quality benefit from adding this component under the visible state, qualified candidate summary, and exact fixed background action)",
+    "post_probability_order": [
+      "atomic risk guard",
+      "frozen probability threshold",
+      "deterministic token or monetary budget",
+      "lowest-cost tie break among eligible actions"
+    ],
+    "step2": "The frozen generator receives only the components selected by Step 1 and produces the response; Step 2 outcomes and judge scores are never Step 1 features."
+  },
+  "outcome_blind_primary_features": {
+    "feature_count_by_head": {
+      "RS": 5,
+      "MP": 6,
+      "MS": 5,
+      "ME": 5
+    },
+    "common_shape": [
+      "candidate_state_match_score",
+      "candidate_grounding_or_nonredundancy_score",
+      "background_other_component_1_on",
+      "background_other_component_2_on",
+      "background_other_component_3_on"
+    ],
+    "RS": {
+      "candidate_state_match_score": "Frozen post-filter ranker score for the selected strategy card.",
+      "candidate_grounding_or_nonredundancy_score": "Fraction of card-required observable cues satisfied after permission, burden, closing, and hard-exclusion rules.",
+      "background_bits": [
+        "MP_on",
+        "MS_on",
+        "ME_on"
+      ]
+    },
+    "MP": {
+      "candidate_state_match_score": "Frozen relevance between current state and the qualified stable-profile or stable-preference candidate.",
+      "candidate_grounding_or_nonredundancy_score": "Frozen score for stability, direct response relevance, non-sensitivity, and not-already-stated status after hard exclusions.",
+      "candidate_subtype_feature": "candidate_is_preference; profile is the reference category.",
+      "background_bits": [
+        "MS_on",
+        "ME_on",
+        "RS_on"
+      ]
+    },
+    "MS": {
+      "candidate_state_match_score": "Frozen relevance between current state and the qualified prior-session summary.",
+      "candidate_grounding_or_nonredundancy_score": "Frozen continuity value after current-window coverage, conflict, and obsolescence checks.",
+      "background_bits": [
+        "MP_on",
+        "ME_on",
+        "RS_on"
+      ]
+    },
+    "ME": {
+      "candidate_state_match_score": "Frozen relevance between current state and the qualified event-memory candidate.",
+      "candidate_grounding_or_nonredundancy_score": "Frozen temporal-grounding value after wrong-person, conflict, stale-request, and current-window redundancy checks.",
+      "background_bits": [
+        "MP_on",
+        "MS_on",
+        "RS_on"
+      ]
+    },
+    "forbidden": [
+      "dataset identity",
+      "user or candidate ID",
+      "gold action",
+      "generated response text",
+      "quality or risk judgment",
+      "future turn or external outcome",
+      "native strategy label from the source dataset",
+      "component-specific template token"
+    ],
+    "capacity_rule": "Primary feature count must be no greater than floor(number of independent development users / 5)."
+  },
+  "MP_shared_ontology": {
+    "definition": "Stable user information that can directly and non-stereotypically change the current supportive response.",
+    "subtypes": [
+      "MP_PREFERENCE",
+      "MP_PROFILE"
+    ],
+    "correction": "The internal and EvoEmo sources cover different valid MP subtypes under the project's historical profile/preference/boundary ontology. This is a subtype coverage defect, not a reason to delete preference memory.",
+    "preference_layers": [
+      "A current-turn explicit boundary is always obeyed from visible context and is not counted as MP retrieval benefit.",
+      "An explicit active nonconflicting hard durable preference is compiled into a bounded deterministic preference contract outside the optional MP bit.",
+      "A soft context-dependent support preference enters the typed MP candidate pool and is gated like a profile candidate."
+    ],
+    "preference_families": [
+      "listen_or_acknowledge_before_advice",
+      "ask_permission_before_suggestions",
+      "one_question_or_one_task_at_a_time",
+      "brief_concise_vs_more_elaborated_support",
+      "reflection_before_further_exploration",
+      "options_and_choice_vs_directives",
+      "direct_gentle_or_neutral_tone",
+      "permission_to_reference_prior_sessions_or_sensitive_topics"
+    ],
+    "positive_requirements": [
+      "belongs to the current user",
+      "stable rather than a turn-specific request",
+      "directly relevant to the current response",
+      "not already explicit in the visible current window",
+      "safe to use without stereotyping or exposing sensitive information"
+    ],
+    "matched_negative_controls": [
+      "irrelevant stable profile",
+      "sensitive identity with no explicit present relevance",
+      "turn-specific preference represented as stable",
+      "wrong-person profile",
+      "already-visible profile fact"
+    ],
+    "external_policy": "Use the same ontology, compiler, candidate summary, hard gates, and PM features for internal and EvoEmo users; replace only each user's private memory contents."
+  },
+  "MS_shared_ontology": {
+    "current_session_context": "Visible current-session dialogue is a fixed baseline input, not an MP/MS/ME resource action. For the bounded ten-turn V1.5 experiment, both internal and EvoEmo states expose the complete current-session dialogue and no separate current-session summary.",
+    "MS_SESSION": "A bounded summary of exactly one strictly completed prior session. This is the only V1.5 MS subtype.",
+    "MS_PATTERN": "A cross-session pattern or state-evolution abstraction supported by at least two prior sessions. No qualified compiler currently exists, so this subtype is reserved for V2.",
+    "action_space": "Keep one MS bit and the original 16 actions. A future typed MS catalog may share this bit unless simultaneous independent injection becomes a research requirement.",
+    "hard_exclusions": [
+      "last-user-message or current-user-text fallback represented as a session summary",
+      "current-session or future-session information",
+      "conflict with a visible current update",
+      "information already fully visible in current-session context",
+      "wrong-person or unsupported inference"
+    ],
+    "old_pair_policy": "All 64 old MS contrasts are diagnostic only. The four rows that happen to satisfy the narrowed contract cannot be selected after outcome inspection."
+  },
+  "D1b_ms_and_current_session_repair": {
+    "status": "REQUIRED_BEFORE_D2_OR_RETRAINING",
+    "api_calls": 0,
+    "human_decisions": 0,
+    "requirements": [
+      "freeze MS_SESSION as the only V1.5 MS subtype",
+      "forbid last-message fallback in formal MS compilation",
+      "use one current-session visibility policy across internal and EvoEmo",
+      "retain the complete current dialogue for the bounded ten-turn experiment",
+      "downgrade all 64 old MS pairs to diagnostic evidence",
+      "construct eight fresh outcome-blind MS states with supplied prior-session summaries"
+    ]
+  },
+  "D2_measurement_qualification": {
+    "purpose": "After the MS construct and current-session repair, decide whether a realized-pair label is a stable expected-benefit proxy before rebuilding or expanding training data.",
+    "states": 32,
+    "states_per_component": 8,
+    "sampling": "RS, MP, and ME use 24 eligible existing states, four prior on-benefit and four prior nonpositive per component where possible, stratified by background and candidate-score range. MS uses eight fresh outcome-blind states with qualified supplied prior-session summaries and no fallback.",
+    "existing_RS_MP_ME_states": 24,
+    "fresh_MS_states": 8,
+    "new_independent_pairs_per_existing_state": 2,
+    "new_independent_pairs_per_fresh_MS_state": 3,
+    "new_response_api_calls": 144,
+    "primary_reviewer_new_pair_decisions": 72,
+    "second_reviewer_fixed_overlap_decisions": 32,
+    "total_human_decisions": 104,
+    "blind_labels": [
+      "component_on_materially_better",
+      "component_off_materially_better",
+      "materially_equivalent",
+      "uncertain"
+    ],
+    "gates": {
+      "states_with_two_of_three_matching_non_uncertain_directions_min": 0.7,
+      "shared_pair_exact_inter_reviewer_agreement_min": 0.75,
+      "uncertain_fraction_max": 0.1
+    },
+    "pass_consequence": "Use majority-of-three direction for all 32 audited states: one historical plus two new pairs for eligible RS/MP/ME states, and three entirely fresh pairs for MS. Then qualify one blinded primary-review pair per newly generated D3 contrast as the V1.5 noisy training proxy; report D2 reproduction as measured reliability rather than deterministic state-level truth.",
+    "fail_consequence": "Single-pair hard labels are forbidden. Use repeated Bernoulli outcomes or a soft expected-effect target, or narrow the V1.5 claim to resource capacity plus routing feasibility."
+  },
+  "D3_coverage_rebuild_if_D2_passes": {
+    "existing_artifact_role": "development and diagnosis only",
+    "new_content_disjoint_development_users_min": 32,
+    "new_contrasts_per_user": 4,
+    "one_contrast_per_component_per_user": true,
+    "new_contrasts": 128,
+    "new_response_api_calls": 256,
+    "primary_human_pair_decisions": 128,
+    "MS_data_requirements": {
+      "subtype": "MS_SESSION only",
+      "supplied_prior_session_summary_rate": 1.0,
+      "last_message_fallback_rate": 0.0,
+      "same_current_session_visibility_policy_required": true
+    },
+    "MP_subtype_allocation": {
+      "MP_PREFERENCE": {
+        "independent_users": 16,
+        "on_benefit": 8,
+        "nonpositive": 8,
+        "preference_families_min": 8
+      },
+      "MP_PROFILE": {
+        "independent_users": 16,
+        "on_benefit": 8,
+        "nonpositive": 8
+      }
+    },
+    "selection_before_outcomes": true,
+    "selection_dimensions": [
+      "component",
+      "positive versus nonpositive blueprint",
+      "exact fixed background action",
+      "candidate match score",
+      "grounding or nonredundancy score",
+      "resource count",
+      "age",
+      "token cost",
+      "ESConv-like versus longitudinal-like state"
+    ],
+    "anti_shortcut_gate": "No single metadata, background bit, lexical token, topic, or template family may reach grouped development balanced accuracy 0.70.",
+    "formal_confirmation": "Only after grouped OOF and calibration gates pass, create a fresh user-disjoint internal confirmation set. It must report MP_PREFERENCE and MP_PROFILE separately and include at least eight mixed-catalog competition groups. The already inspected internal test and ESConv panels remain diagnostic."
+  },
+  "model_and_loss": {
+    "primary": "four independent L2-regularized logistic regression heads",
+    "loss": "group-weighted binary cross entropy plus L2; each user has equal total weight",
+    "grouping": "user-disjoint grouped OOF",
+    "threshold_and_calibration": "development OOF and calibration only",
+    "BAAI_policy": "BGE-small may supply one frozen candidate-state match scalar or run as a challenger only after D2 and coverage qualification; it cannot define labels or hard safety decisions.",
+    "larger_encoder_policy": "Do not compare Qwen, larger BGE, or NLI models until the repaired transparent primary has been evaluated. Any later encoder comparison uses the same groups, labels, features budget, and frozen confirmation set."
+  },
+  "promotion_gate": {
+    "per_head_internal_balanced_accuracy_min": 0.7,
+    "per_head_positive_recall_min": 0.6,
+    "brier_must_beat_group_prevalence_prior": true,
+    "predicted_on_and_off_each_min_fraction": 0.2,
+    "five_seed_balanced_accuracy_std_max": 0.03,
+    "macro_balanced_accuracy_target": 0.8,
+    "failed_head_policy": "Report the failed head without deleting the component or changing the claim after seeing confirmation outcomes."
+  },
+  "external_integrity": {
+    "ESConv": "Use fresh unused dialogues for repaired RS confirmation; the previously inspected 40-state panel is development evidence only.",
+    "EvoEmo": "Outcome-free schema and descriptor-support inspection is allowed only to establish transport feasibility, so EvoEmo is reported as development-informed external rather than untouched zero-shot. No quality/risk outcome-aware selection or threshold tuning is allowed. Each real user receives only that user's memory content through the same compiler and retriever. EvoEmo validates MP_PROFILE where relevant, MS_SESSION, and ME; it does not validate MP_PREFERENCE, MS_PATTERN, or very-long single-session compaction.",
+    "internal_complement": "The controlled internal superdomain supplies the primary evidence for MP_PREFERENCE, preference misuse, subtype competition, profile relevance and nonuse, MS_SESSION under qualified summaries, and all 16 actions. Aggregate and subtype/domain-conditioned results are reported.",
+    "same_stack_required": true,
+    "external_content_may_replace_internal_private_memory": true,
+    "external_schema_or_feature_definition_may_change": false
+  },
+  "stop_rules": [
+    "Do not run D2, retrain, or paid external response-quality evaluation before D1b and the repaired internal gates pass.",
+    "Do not expand the Strategy Bank or reopen RAG card review to solve a PM feature or label problem.",
+    "Do not lower the 0.70 per-head gate after seeing repaired outcomes.",
+    "Do not use external outcomes, dataset identity, or source-native labels in features or selection.",
+    "Do not declare BAAI failure or success from the confounded first fit."
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "protocol": "pm-v1.5-staged-policy-architecture-v4-itt",
+  "status": "S0_S1_PASS_S2_FIT_COMPLETE_SINGLE_FULL_OUTCOME_PANEL_READY",
+  "date": "2026-08-03",
+  "supersedes_for_future_execution": "data/pm_v1_5_contracts/staged_policy_architecture_v3.json",
+  "research_claim": "A bounded and auditable four-component policy manager learns conservative requested-action value under one frozen real executor, then balances immediate response quality, interaction-and-grounding risk, and generator/context cost against fixed baselines.",
+  "training_separation": {
+    "step1_and_step2_jointly_trained": false,
+    "shared_gradients_or_parameters": false,
+    "step2_human_semantic_pass_is_step1_training_license": false,
+    "only_connection": "Step2 is the frozen environment that produces outcomes for Step1 ITT value estimation."
+  },
+  "step0_objective_hard_gates": {
+    "deny_only_backend_provable_invalidity": [
+      "candidate_absent",
+      "resource_id_or_version_invalid",
+      "wrong_owner",
+      "inactive_or_future_resource",
+      "explicit_machine_readable_boundary_conflict"
+    ],
+    "unknown_semantics_are_off_gold": false
+  },
+  "step1": {
+    "decision_time": "post_candidate_discovery_pre_injection_pre_generation",
+    "heads": ["MP", "MS", "ME", "RS"],
+    "direct_16_classification": false,
+    "layer_a_opportunity": {
+      "target": "outcome_blind_candidate_opportunity_and_permission",
+      "step2_outcome_required": false,
+      "reuse_existing_qualified_assets": true,
+      "role": "mask_or_input_not_final_qrc_value"
+    },
+    "layer_b_itt_value": {
+      "target": "expected_net_value_of_requesting_one_component_under_the_frozen_real_executor",
+      "treatment": "requested_component_bit",
+      "not_treatment": ["realized_component_bit", "generator_self_reported_use", "human_functional_use"],
+      "learner": "standardized_group_weighted_l2_logistic_or_soft_value_head",
+      "primary_features": "five_to_seven_pre_action_transparent_features_per_component",
+      "bge_role": "one_frozen_challenger_after_primary",
+      "invalid_row": "mechanical_assignment_or_binding_failure_only",
+      "valid_negative_or_risk_outcome": [
+        "generator_ignored_resource",
+        "semantic_nonuse",
+        "guarded_or_context_only_fallback",
+        "material_misuse",
+        "quality_tie_or_loss"
+      ]
+    },
+    "joint_selector": {
+      "legal_actions": 16,
+      "default": "M0+R0",
+      "rule": "Apply objective gates, then opportunity support, expected ITT value, named risk constraints, and token budget; project four requested bits to one feasible action."
+    }
+  },
+  "step2": {
+    "trained_in_v1_5": false,
+    "architecture": "deterministic_typed_resource_adapter_plus_frozen_response_only_generator",
+    "generator_selects_or_reopens_components": false,
+    "generator_outputs_audit_spans_or_free_reasons": false,
+    "runtime_binds": [
+      "resource_id",
+      "owner_id",
+      "time_scope",
+      "source_type",
+      "allowed_claims",
+      "forbidden_claims",
+      "attribution_mode",
+      "support_move_limit"
+    ],
+    "fallback": "deterministic_context_only_response_without_any_history_claim",
+    "pre_fit_requirement": "machine invariants and regression tests only",
+    "human_functional_use_and_misuse": "secondary_mechanism_analysis_from_the_same_full_outcome_panel_not_a_training_gate"
+  },
+  "itt_experiment_row": {
+    "grain": "state_candidate_unit_by_component_by_frozen_seed_nested_in_counterfactual_group",
+    "fit_shape": "256 state-candidate units in 128 two-unit counterfactual groups; grouped CV never splits a group",
+    "required_pre_action_fields": [
+      "group_id",
+      "state_id",
+      "component",
+      "requested_action_id",
+      "candidate_id",
+      "candidate_version",
+      "executor_version",
+      "generator_version",
+      "seed"
+    ],
+    "mechanical_validity": [
+      "assignment_matches_requested_action",
+      "requested_candidate_bound_to_same_user_and_version",
+      "requested_resource_surface_entered_frozen_executor",
+      "one_observed_final_response_and_cost_record",
+      "no_post_assignment_method_change"
+    ],
+    "forbidden_exclusion_rules": [
+      "exclude_because_generator_ignored_resource",
+      "exclude_because_human_said_not_functional",
+      "exclude_because_fallback_was_used",
+      "exclude_because_response_lost_or_tied",
+      "exclude_because_material_misuse_occurred"
+    ]
+  },
+  "evaluation": {
+    "step1_learning_gates": {
+      "grouped_oof_balanced_accuracy_min": 0.65,
+      "recall_min": 0.60,
+      "specificity_min": 0.60,
+      "brier_must_beat_prevalence_and_transparent_rule": true,
+      "both_decisions_required": true
+    },
+    "step2_mechanism_metrics": [
+      "typed_binding_rate",
+      "functional_use_rate",
+      "material_misuse_rate",
+      "fallback_rate",
+      "attribution_error_rate"
+    ],
+    "system_primary": [
+      "quality_noninferiority_to_fixed_high_and_always_off",
+      "no_increase_in_named_interaction_and_grounding_material_risk",
+      "generator_input_token_and_injected_item_reduction_vs_fixed_high"
+    ]
+  },
+  "anti_cycle_rules": [
+    "No 10-to-32 item Step2 semantic promotion packet before FIT.",
+    "Known architectural defects may be repaired once before executor freeze using only already consumed evidence.",
+    "After the executor and FIT plan are frozen, adherence, quality, risk, confirmation, sealed, and external outcomes cannot change prompts, features, thresholds, samples, or labels.",
+    "A future executor or generator version requires a new PM training version rather than relabeling the old environment."
+  ]
+}

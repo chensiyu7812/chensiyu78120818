@@ -1,0 +1,10 @@
+{
+  "protocol": "pm-v1.5-d3-generation-execution-v1",
+  "status": "COMPLETE",
+  "planned_calls": 320,
+  "completed_calls": 320,
+  "completed_now": 320,
+  "remaining_calls": 0,
+  "resumable": true,
+  "plan_freeze_manifest_sha256": "733a9da66e1e59631dee81a7a0281f72ef0d06b8ad9651fe8fb30c0ea3f7e5e3"
+}

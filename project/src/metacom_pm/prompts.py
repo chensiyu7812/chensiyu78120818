@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import json
+from types import MappingProxyType
 from typing import Any, Mapping, Sequence
 
 from .contracts import MemoryItem, RuntimeState, StrategyCard
+from .v1_5_strategy_rag_runtime import compile_strategy_guidance
 
 
 BASE_SUPPORTER_SYSTEM = """You are an emotional-support conversation assistant.
@@ -27,6 +29,27 @@ Use supplied past information only when it clearly helps the current user.
 Do not force a memory reference merely to demonstrate recall. Ignore irrelevant,
 outdated, or awkwardly intrusive information, and never invent personal facts.
 Keep the reply concise, natural, and emotionally supportive."""
+
+
+SUPPORTER_SYSTEM_PROMPTS: Mapping[str, str] = MappingProxyType(
+    {
+        "base_supporter_v1": BASE_SUPPORTER_SYSTEM,
+        "official_esmem_v1": OFFICIAL_ESMEM_SYSTEM,
+        "selective_esmem_v1": SELECTIVE_ESMEM_SYSTEM,
+    }
+)
+
+
+def resolve_supporter_system_prompt(prompt_id: str) -> str:
+    """Resolve an allowlisted supporter prompt by its frozen semantic ID."""
+
+    try:
+        return SUPPORTER_SYSTEM_PROMPTS[prompt_id]
+    except KeyError as exc:
+        allowed = ", ".join(sorted(SUPPORTER_SYSTEM_PROMPTS))
+        raise ValueError(
+            f"unknown supporter system prompt {prompt_id!r}; allowed: {allowed}"
+        ) from exc
 
 
 def common_context(state: RuntimeState) -> str:
@@ -53,7 +76,7 @@ def common_context(state: RuntimeState) -> str:
 def generation_messages(
     state: RuntimeState,
     memories: Sequence[MemoryItem],
-    strategies: Sequence[StrategyCard],
+    strategies: Sequence[StrategyCard | dict[str, Any]],
     *,
     system_prompt: str = BASE_SUPPORTER_SYSTEM,
 ) -> list[dict[str, str]]:
@@ -61,24 +84,177 @@ def generation_messages(
     if memories:
         memory_lines = []
         for item in memories:
-            when = item.timestamp or f"session {item.created_session}"
+            age = int(state.session_index) - int(item.created_session)
+            if age <= 0:
+                raise ValueError(
+                    "generator memory must come from a prior session"
+                )
+            when = (
+                "1 session ago"
+                if age == 1
+                else f"{age} sessions ago"
+            )
             memory_lines.append(f"- [{item.source.value}; {when}] {item.text}")
         sections.append(
             "Potentially useful past information. Use selectively:\n"
             + "\n".join(memory_lines)
         )
     if strategies:
-        strategy_lines = []
-        for card in strategies:
-            strategy_lines.append(
-                f"- {card.guidance_text}\n  Example style (adapt, do not copy): "
-                f"{card.example_response}"
+        sections.append(compile_strategy_guidance(strategies))
+    sections.append("Write only the counselor's next response.")
+    return [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": "\n\n".join(sections)},
+    ]
+
+
+RESOURCE_MATCHED_GENERATION_PROTOCOL = (
+    "pm-v1.5-generator-resource-use-alignment-v1"
+)
+RESOURCE_MATCHED_GENERATION_PROTOCOL_V2 = (
+    "pm-v1.5-generator-resource-use-alignment-v2-temporal-grounding"
+)
+
+
+def resource_matched_generation_messages(
+    state: RuntimeState,
+    memories: Sequence[MemoryItem],
+    strategies: Sequence[StrategyCard | dict[str, Any]],
+    *,
+    system_prompt: str = BASE_SUPPORTER_SYSTEM,
+) -> list[dict[str, str]]:
+    """Compile source-specific use instructions for a future frozen run.
+
+    The legacy ``generation_messages`` surface remains unchanged so completed
+    experiments stay reproducible.  This additive compiler makes the expected
+    contribution of each selected source explicit without forcing the model to
+    mention memory or use every retrieved item.
+    """
+
+    sections = [common_context(state)]
+    if memories:
+        memory_lines: list[str] = []
+        present_sources = {item.source.value for item in memories}
+        for item in memories:
+            age = int(state.session_index) - int(item.created_session)
+            if age <= 0:
+                raise ValueError(
+                    "generator memory must come from a prior session"
+                )
+            when = "1 session ago" if age == 1 else f"{age} sessions ago"
+            memory_lines.append(f"- [{item.source.value}; {when}] {item.text}")
+        source_contracts: list[str] = []
+        if "MP" in present_sources:
+            source_contracts.append(
+                "MP: use an active preference as a response-style or pacing "
+                "constraint; use a profile fact only when it directly clarifies "
+                "the current request. Usually apply it without announcing it. "
+                "The current user message overrides stored preference or profile."
+            )
+        if "MS" in present_sources:
+            source_contracts.append(
+                "MS: use a completed prior-session summary only when it provides "
+                "useful continuity that is not already visible. Do not repeat it "
+                "merely to prove recall."
+            )
+        if "ME" in present_sources:
+            source_contracts.append(
+                "ME: use a prior event or outcome only when that exact evidence "
+                "helps the present exchange. Do not turn one event into an "
+                "always/never pattern or a causal claim."
             )
         sections.append(
-            "Potential emotional-support guidance. Use only when fitting:\n"
-            + "\n".join(strategy_lines)
+            "Selected past information. It is optional evidence, not content "
+            "that must be mentioned. Use the smallest subset that materially "
+            "helps; ignore the rest:\n"
+            + "\n".join(memory_lines)
+            + "\n\nSource-specific use contract:\n- "
+            + "\n- ".join(source_contracts)
         )
-    sections.append("Write only the counselor's next response.")
+    if strategies:
+        sections.append(compile_strategy_guidance(strategies))
+    sections.append(
+        "Before writing, silently check: (1) every personal or historical "
+        "claim is supported by current text or selected evidence; (2) any "
+        "selected resource used has a discernible function in this reply; "
+        "(3) unused resources are not mentioned; and (4) the current request "
+        "and boundaries take priority. Write only the counselor's next response."
+    )
+    return [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": "\n\n".join(sections)},
+    ]
+
+
+def resource_matched_generation_messages_v2(
+    state: RuntimeState,
+    memories: Sequence[MemoryItem],
+    strategies: Sequence[StrategyCard | dict[str, Any]],
+    *,
+    system_prompt: str = BASE_SUPPORTER_SYSTEM,
+) -> list[dict[str, str]]:
+    """Compile the single post-human-check Step2 prompt repair.
+
+    V1 remains untouched for completed experiments.  V2 tightens only resource
+    execution: prior evidence is attributed and checked rather than silently
+    promoted to a current fact, and redundant resources are ignored.
+    """
+
+    sections = [common_context(state)]
+    if memories:
+        memory_lines: list[str] = []
+        present_sources = {item.source.value for item in memories}
+        for item in memories:
+            age = int(state.session_index) - int(item.created_session)
+            if age <= 0:
+                raise ValueError("generator memory must come from a prior session")
+            when = "1 session ago" if age == 1 else f"{age} sessions ago"
+            memory_lines.append(f"- [{item.source.value}; {when}] {item.text}")
+        contracts: list[str] = []
+        if "MP" in present_sources:
+            contracts.append(
+                "MP: apply an active preference behaviorally. Use a profile fact "
+                "only if it adds current-relevant information not already stated "
+                "in the visible exchange; otherwise ignore it as redundant. Never "
+                "expose a profile fact merely to prove personalization."
+            )
+        if "MS" in present_sources:
+            contracts.append(
+                "MS: a prior-session summary says what was true then, not what is "
+                "necessarily true now. Use it for continuity by attributing it to "
+                "the earlier conversation and, when current recurrence is not "
+                "explicitly confirmed, check tentatively whether it still fits. "
+                "Do not assert an old cause or circumstance as current fact."
+            )
+        if "ME" in present_sources:
+            contracts.append(
+                "ME: a prior event or outcome supplies one past example, not a "
+                "current fact or general rule. If useful, make its past provenance "
+                "natural and visible (for example, 'last time ... helped; would "
+                "that fit today?'). Never presuppose that an old task, cause, or "
+                "constraint exists now unless the current message confirms it."
+            )
+        sections.append(
+            "Selected past information. It is optional evidence. Use the smallest "
+            "nonredundant subset that materially helps; ignore the rest:\n"
+            + "\n".join(memory_lines)
+            + "\n\nSource-specific temporal-grounding contract:\n- "
+            + "\n- ".join(contracts)
+        )
+    if strategies:
+        sections.append(compile_strategy_guidance(strategies))
+    sections.append(
+        "Before writing, silently check: (1) a past fact has not been converted "
+        "into an unqualified current fact or cause; (2) profile information is "
+        "not already fully supplied by the current exchange; (3) a used resource "
+        "has a discernible function beyond vague words such as 'similar' or "
+        "generic advice; (4) an ignored resource has a literal mismatch, conflict, "
+        "or redundancy reason rather than an invented boundary; and (5) the "
+        "current request has priority. Do not write 'not just X' or refer to 'the' "
+        "old task/cause unless current text independently establishes it. Write "
+        "only the counselor's concise next response, with at most one question OR "
+        "one suggestion, not both or a list."
+    )
     return [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": "\n\n".join(sections)},

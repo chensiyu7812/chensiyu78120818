@@ -1,0 +1,40 @@
+{
+  "protocol": "pm-v1.5-support-need-human-packet-binding-v1",
+  "status": "PREPARED_TRAIN_ONLY_OUTCOME_BLIND_AWAITING_HUMAN_ANNOTATION",
+  "output_directory": "outputs/pm_v1_5_support_need_packet_v3_lineage_candidate",
+  "packet_contract_sha256": "18e3adeca29ff9f47eb9832bc3113ab5ab10a1fa0b7fd82ecefb216bd4fe169f",
+  "files": {
+    "qualification_contract.json": "bf99ae0a12232f3b63f35bfe2383da370f76ee7eac1235f66b99d81e6fb10cd8",
+    "support_need_packet.jsonl": "dde4f0c015730b44b94191731aeb7ef812539da4beb19c66a0105161e139d087",
+    "human_blind_packet.jsonl": "04273cba744d8381089cfc00f30ec3367a1e342c59553801cb5d1f244a2807bb",
+    "human_annotation_template.jsonl": "05ff36ec58dfe7c9b372d04cc7f25e6932f87de977b49a022d860f769d897325",
+    "private_lineage.jsonl": "1c21a157806d73f3b681d42b7f5228f8259e9a52e34d2c6264ffa85cbe3adc05",
+    "human_blind_review.html": "aaafe200106ddbeb39ebfceeebea7fdf6b64f5527f642c362347cea214bfbc1c"
+  },
+  "packet_size": 75,
+  "human_anchor_size": 24,
+  "unique_dialogues": 75,
+  "position_counts": {
+    "early": 25,
+    "middle": 25,
+    "late": 25
+  },
+  "human_anchor_position_counts": {
+    "early": 8,
+    "middle": 8,
+    "late": 8
+  },
+  "problem_type_count": 13,
+  "emotion_type_count": 8,
+  "current_raw_bank_source_dialogue_overlap_count": 75,
+  "current_raw_bank_card_overlap_count": 1094,
+  "required_bank_v2_source_dialogue_overlap_count": 0,
+  "required_bank_v2_card_overlap_count": 0,
+  "target_supporter_responses_used": false,
+  "target_strategy_annotations_used": false,
+  "survey_outcomes_used": false,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "api_calls_made": 0,
+  "automatic_gold_label": false
+}

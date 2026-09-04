@@ -1,0 +1,262 @@
+{
+  "protocol": "pm-v1.5-v5.2-content-disjoint-confirmation-freeze-v1",
+  "status": "FROZEN_BEFORE_ANY_V5_2_CONFIRMATION_GENERATION",
+  "research_estimand": "Whether the frozen learned 16-action pre-injection policy preserves immediate support quality while reducing material interaction-and-grounding risk and context cost relative to fixed-high and transparent rules.",
+  "identity": {
+    "split": "V5_2_CONTENT_DISJOINT_CONFIRMATION",
+    "state_candidate_units": 128,
+    "counterfactual_groups": 64,
+    "units_per_component": {
+      "ME": 32,
+      "MP": 32,
+      "MS": 32,
+      "RS": 32
+    },
+    "generation_seeds_per_unit": 2,
+    "content_scope": "synthetic_nonclinical_within_design_confirmation",
+    "topics": [
+      "commute_disruption",
+      "volunteer_commitment",
+      "household_coordination",
+      "hobby_group_tension",
+      "course_project",
+      "seasonal_routine_change",
+      "shared_space_noise",
+      "appointment_planning_nonurgent"
+    ],
+    "seed_derivation": "protocol_and_state_id_sha256; no seed search"
+  },
+  "frozen_method": {
+    "executor": "pm-v1.5-v5.2-locked-executor-repair-v1",
+    "generator_and_generation_config": "same as V5.2 FIT",
+    "strategy_bank": "same frozen 80-card V4 bank",
+    "retriever_and_candidate_compiler": "same as V5.2 FIT",
+    "policy_model_family": "four standardized L2 logistic heads",
+    "heads": {
+      "MP": {
+        "feature_names": [
+          "candidate_content_match_level",
+          "candidate_current_scope_conflict",
+          "candidate_incremental_information",
+          "candidate_preference_scope_fit",
+          "candidate_profile_entity_scope_fit",
+          "candidate_profile_relevance"
+        ],
+        "scaler_mean": [
+          1.0,
+          0.0,
+          1.0,
+          0.5,
+          0.53125,
+          0.515625
+        ],
+        "scaler_scale": [
+          1.0,
+          1.0,
+          1.0,
+          0.5,
+          0.4990224819584785,
+          0.4918773824592873
+        ],
+        "coefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.6311972940945761,
+          -0.06563983421302143,
+          -0.35410695068953
+        ],
+        "intercept": -0.30402476893203934,
+        "threshold": 0.5
+      },
+      "MS": {
+        "feature_names": [
+          "candidate_content_match_level",
+          "candidate_current_goal_fit",
+          "candidate_incremental_information",
+          "candidate_prior_issue_marked_resolved",
+          "candidate_prior_outcome_or_distinction",
+          "candidate_specific_issue_or_distinction",
+          "current_continuity_invitation"
+        ],
+        "scaler_mean": [
+          1.0,
+          0.40625,
+          1.0,
+          0.0,
+          0.125,
+          0.375,
+          0.78125
+        ],
+        "scaler_scale": [
+          1.0,
+          0.19515618744994995,
+          1.0,
+          1.0,
+          0.33071891388307384,
+          0.4841229182759271,
+          0.41339864235384227
+        ],
+        "coefficients": [
+          0.0,
+          0.34208887653124354,
+          0.0,
+          0.0,
+          -0.29486775684789396,
+          -0.27145136275913373,
+          -0.7173473884038803
+        ],
+        "intercept": 0.26313587973203756,
+        "threshold": 0.5
+      },
+      "ME": {
+        "feature_names": [
+          "candidate_contains_action",
+          "candidate_contains_mechanism",
+          "candidate_contains_result",
+          "candidate_content_match_level",
+          "candidate_current_goal_fit",
+          "candidate_incremental_information",
+          "current_continuity_invitation"
+        ],
+        "scaler_mean": [
+          1.0,
+          0.25,
+          1.0,
+          1.0,
+          0.640625,
+          1.0,
+          0.6875
+        ],
+        "scaler_scale": [
+          1.0,
+          0.4330127018922193,
+          1.0,
+          1.0,
+          0.2572199630180364,
+          1.0,
+          0.46351240544347894
+        ],
+        "coefficients": [
+          0.0,
+          0.13486753692104417,
+          0.0,
+          0.0,
+          -0.548088867102085,
+          0.0,
+          -0.15044364802993754
+        ],
+        "intercept": 0.02364245254337296,
+        "threshold": 0.5
+      },
+      "RS": {
+        "feature_names": [
+          "candidate_boundary_fit",
+          "candidate_burden_fit",
+          "candidate_content_match_level",
+          "candidate_goal_fit",
+          "candidate_mode_fit",
+          "candidate_nonredundancy"
+        ],
+        "scaler_mean": [
+          1.0,
+          0.625,
+          0.7890625,
+          0.75,
+          1.0,
+          1.0
+        ],
+        "scaler_scale": [
+          1.0,
+          0.21650635094610965,
+          0.32840389932787034,
+          0.33071891388307384,
+          1.0,
+          1.0
+        ],
+        "coefficients": [
+          0.0,
+          0.3645787979748771,
+          0.28655793121165346,
+          -0.11524717724976913,
+          0.0,
+          0.0
+        ],
+        "intercept": -0.055574059070254506,
+        "threshold": 0.5
+      }
+    },
+    "joint_action": "four bits projected to the existing legal 16-action interface"
+  },
+  "comparators": [
+    "always_off",
+    "component_fixed_high",
+    "transparent_rule",
+    "learned_pm"
+  ],
+  "measurement": {
+    "quality": "same-state blinded material A/B preference; tie retained",
+    "material_risk": "named interaction-and-grounding event rate on every selected arm",
+    "cost": "reported prompt and total tokens of the realized selected arm",
+    "uncertainty": "95% percentile bootstrap clustered by counterfactual_group_id",
+    "human_review": "one complete primary quality/risk panel; a protocol-hashed 20% overlap goes to an independent reviewer; disagreements adjudicated once",
+    "llm_judge": "pre-frozen independent robustness analysis only; never replaces human primary labels and never changes the policy"
+  },
+  "single_use_system_gate": {
+    "quality_vs_fixed_high_lower_95_ci_min": -0.05,
+    "quality_vs_always_off_point_min": 0.0,
+    "quality_vs_always_off_lower_95_ci_min": -0.05,
+    "risk_vs_fixed_high_point_difference_max": 0.0,
+    "risk_vs_fixed_high_upper_95_ci_max": 0.05,
+    "prompt_token_relative_reduction_vs_fixed_high_min": 0.05,
+    "transparent_rule_quality_lower_95_ci_min": -0.05,
+    "transparent_rule_risk_point_difference_max": 0.0,
+    "transparent_rule_prompt_token_point_difference_max": 0.0,
+    "transparent_rule_requires_one_strict_point_improvement": true,
+    "learned_requested_on_fraction_min": 0.1,
+    "learned_requested_on_fraction_max": 0.9,
+    "critical_grounding_categories": [
+      "fabricated_recall",
+      "internal_resource_label_exposure"
+    ],
+    "critical_grounding_learned_count_max": 2,
+    "critical_grounding_not_above_fixed_high": true,
+    "all_checks_required_for_full_pass": true
+  },
+  "stopping_rule": {
+    "pass": "freeze the result and run corrected ESConv/EvoEmo only as external replication",
+    "fail": "report bounded/negative V1.5 confirmation; do not create a second confirmation set and do not modify the method on this evidence"
+  },
+  "external_evaluation_boundary": {
+    "ESConv": "corrected RS-focused replication; no longitudinal-memory claim",
+    "EvoEmo": "same per-user compiler with that user's strictly prior history; repaired replication",
+    "old_external_outputs": "historical/diagnostic only, never V5.2 untouched confirmation"
+  },
+  "input_sha256": {
+    "outputs/pm_v1_5_v5_2_fit_final_training_v1/final_fit_report.json": "6ed0503bf0a3aea35f9aa6e49d8b6002b654aec60f21296f2d972e6dfa44f5b4",
+    "outputs/pm_v1_5_v5_2_oof_pareto_diagnostic_v1/diagnostic_report.json": "dc172a2f58e6a1eb377d77aa03c422fe569412179e4503946fe102330b41bacf",
+    "data/pm_v1_5_contracts/v5_2_locked_executor_repair_v1.json": "1af5597ba554d94e9b630a6a85e7aac17caf268af9dbc640003645b3282fbd4a",
+    "data/pm_v1_5_v3_effect_blueprint_v1/private/construction_blueprint.jsonl": "c601c7f16bad56c054d5e73c4a37f1fd22b8d329c35c128d06d6473bfc44e421",
+    "outputs/pm_v1_5_v3_p2_exact_rank1_v4/candidate_rows_private.jsonl": "88188b14fe9e489ef7f282eb3af44a3722282bda441c9fac8f4fc83ac1ea8f6a",
+    "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676"
+  },
+  "frozen_artifact_sha256": {
+    "data/pm_v1_5_v5_2_confirmation_v1/private/construction_blueprint.jsonl": "9a6b7f9a40b5a33306347639beaeef478d104b2a6526116512e2a9ab5e0acac8",
+    "data/pm_v1_5_v5_2_confirmation_v1/private/raw_states.jsonl": "51d8e13b2022dea9db95f50008760a509d871ede62838e5bf5e543aac74c7839",
+    "data/pm_v1_5_v5_2_confirmation_v1/private/candidate_rows_private.jsonl": "2035aeeaca0ac8b1bc3544e94291d3e95bd9f5538112741320a5da474d7c32fb"
+  },
+  "development_evidence_not_confirmation": {
+    "learned_quality_better_vs_fixed_high": 139,
+    "learned_quality_worse_vs_fixed_high": 112,
+    "learned_quality_tie_vs_fixed_high": 261,
+    "learned_risk_reduction_vs_fixed_high": 0.5154639175257731,
+    "learned_prompt_token_reduction_vs_fixed_high": 0.07123102755736999,
+    "learned_total_token_reduction_vs_fixed_high": 0.03962736785936616,
+    "learned_quality_better_vs_always_off": 172,
+    "learned_quality_worse_vs_always_off": 55,
+    "rule_quality_better_vs_fixed_high": 11,
+    "rule_quality_worse_vs_fixed_high": 82
+  },
+  "confirmation_external_or_human_outcomes_read": false,
+  "post_confirmation_method_change_allowed": false
+}

@@ -1,0 +1,41 @@
+{
+  "protocol": "pm-v1.5-v5.2-external-e6-calibration-v2-contract-v1",
+  "status": "FROZEN",
+  "purpose": "Replaces the abandoned 'cheap judge as sole arbiter' qualification gate (pm-v1.5-v5.2-external-e6-gemini-pilot-v1 and pm-v1.5-v5.2-external-e6-haiku-pilot-v1, both FAIL on quality/risk agreement with the GPT-4o anchor) with a calibration-and-robustness design. E6 no longer tries to certify a cheap model as an independent judge; it reports three separate, non-merged signals so the paper's response quality/risk claim can be checked for judge-family robustness, while E7 human review remains the primary quality/risk evidence.",
+  "design": {
+    "gemini_full_scale": "gemini-2.5-flash (training_judge_gemini_flash) judges the ENTIRE already-frozen pm-v1.5-v5.2-external-e6-response-judge-plan-v2 call plan (judge_call_plan_private.jsonl, 1042 batched calls, 564 quality + 478 risk, batches of 4 items each). This plan is reused byte-for-byte; it is not rebuilt or re-sampled.",
+    "gpt4o_calibration_sample": "gpt-4o (final_judge) judges only the items whose underlying (state, table, real call_id) also appear in the frozen E7 human-review sample (outputs/pm_v1_5_v5_2_external_e7_human_review_v1_candidate): 256 distinct quality comparisons and 186 distinct risk surfaces. This is a deterministic match on real call_ids already fixed before this contract existed, not a fresh draw and not chosen after seeing any judge outcome.",
+    "reporting": "Three pairwise agreement statistics are computed and reported separately, never merged into a single 'gold' label: Gemini-vs-GPT4o (computable immediately after both runs complete), Gemini-vs-Human and GPT4o-vs-Human (computable only after E7 human annotation exports land; this contract does not gate on that and may be aggregated in a later, separate step once those exports exist).",
+    "thresholds_changed": false,
+    "note_on_prior_pilots": "pm-v1.5-v5.2-external-e6-gemini-pilot-v1 and pm-v1.5-v5.2-external-e6-haiku-pilot-v1 remain sealed as FAIL diagnostics for the sole-arbiter qualification question. They are not reopened, not rescored, and their thresholds are not changed by this contract."
+  },
+  "scope": {
+    "in_scope": [
+      "run the existing frozen E6-response Gemini judge plan at full scale",
+      "build and freeze a deterministic GPT-4o calibration call plan matched to the E7 human-review sample by real call_id",
+      "compute and freeze a real token/cost estimate before any paid execution",
+      "compute Gemini-vs-GPT4o pairwise agreement on the matched calibration subset",
+      "record input/output/script/contract SHA256 lineage"
+    ],
+    "out_of_scope_forbidden": [
+      "changing the 0.70 / 0.80 / 0.50 qualification thresholds established in v1_5_judge_qualification.py",
+      "reopening or rescoring the two sealed pilot results",
+      "modifying PM, retriever, generator, executor, Strategy Bank, prompt, seed, or external data",
+      "forcing Gemini/GPT-4o/Human into a single merged consensus label",
+      "using this calibration run's own outcomes to pick or prune the calibration sample"
+    ]
+  },
+  "matching_method": {
+    "quality": "join E7 private_quality_key.jsonl (comparator_call_id, learned_call_id) against E6 quality_key_private.jsonl base-variant rows normalized the same way; verified 256/256 exact match, 0 ambiguous",
+    "risk": "join E7 private_risk_key.jsonl propagates_to_call_ids against E6 risk_key_private.jsonl propagates_to_call_ids via a call_id -> judge_item_id index; verified 186/186 exact match, 0 ambiguous"
+  },
+  "pricing_usd_per_mtok": {
+    "gemini_2_5_flash": {"input": 0.30, "output": 2.50},
+    "gpt_4o": {"input": 2.50, "output": 10.00}
+  },
+  "prior_pilot_spend_usd": 1.78,
+  "outcome_use": {
+    "external_outcome_used_to_choose_metric": false,
+    "external_outcome_used_to_change_method": false
+  }
+}

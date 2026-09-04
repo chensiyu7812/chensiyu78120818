@@ -1,0 +1,33 @@
+{
+  "protocol": "pm-v1.5-strategy-bank-v2-candidate-binding-v2",
+  "status": "CANDIDATE_BUILT_AWAITING_LLM_WEAK_AND_HUMAN_AUDIT",
+  "output_directory": "outputs/pm_v1_5_strategy_bank_v2_review_candidate_v2",
+  "build_report_sha256": "f2c6c72324f532e0b4af9ac2988d315a4a785fd61b76036ccec3f80292e3e6ad",
+  "files": {
+    "build_report.json": "6fcfc0f95da1c69f639fc34eb330464e28f4c1d021e4f196cbcbb212d876b0ec",
+    "strategy_cards_v2_candidate.jsonl": "139670cf839181bbd286f03444f801b1bf1feeb324d15702f2ca8d288fe1b079",
+    "strategy_bank_v2_lineage.jsonl": "218301b3306c256cf758c00237018109c3741d9ca24190ec72ba7565a43224af",
+    "human_review_packet.jsonl": "e2fc6e32d53a4f1cd633e016665ded6659986063bb09e2e78c615c33e8886c43",
+    "human_annotation_template.jsonl": "acbf88fab7bff73fb59a60d96644d560990f5592a1bf2262142d1ecbe700f362",
+    "human_review.html": "605a438b1920342fdcecee69ba5131f7015aaaf1f32e3371dcfea486bf599530"
+  },
+  "supersedes": "data/pm_v1_5_contracts/strategy_bank_v2_candidate_v1.json",
+  "supersession_reason": "exclude every raw supporter card without a prior visible seeker turn before deriving technique provenance",
+  "technique_text_changed_from_v1": false,
+  "human_review_may_be_migrated_only_by_exact_technique_content": true,
+  "raw_strategy_bank_sha256": "9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e",
+  "support_need_lineage_sha256": "1c21a157806d73f3b681d42b7f5228f8259e9a52e34d2c6264ffa85cbe3adc05",
+  "raw_card_count": 11590,
+  "packet_source_excluded_raw_card_count": 1094,
+  "no_prior_seeker_turn_excluded_raw_card_count": 413,
+  "candidate_card_count": 5,
+  "candidate_lineage_row_count": 6391,
+  "candidate_source_dialogue_count": 748,
+  "candidate_packet_source_overlap_count": 0,
+  "candidate_raw_examples_exposed_to_generator": false,
+  "candidate_quality_status": "RULE_FILTERED_PENDING_LLM_WEAK_AND_HUMAN_AUDIT",
+  "candidate_eligible_for_formal_rs": false,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "api_calls_made": 0
+}

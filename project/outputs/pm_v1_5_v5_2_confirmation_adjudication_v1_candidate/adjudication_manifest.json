@@ -1,0 +1,76 @@
+{
+  "protocol": "pm-v1.5-v5.2-confirmation-overlap-adjudication-v1",
+  "status": "READY_FOR_SINGLE_CONCENTRATED_CONFIRMATION_ADJUDICATION",
+  "review_data_quality": {
+    "primary_quality_rows": 255,
+    "overlap_quality_rows": 52,
+    "primary_risk_rows": 423,
+    "overlap_risk_rows": 86,
+    "missing_or_extra_ids": 0,
+    "uncertain": 0,
+    "overlap_script_duplicate_json_keys": {
+      "quality": [],
+      "risk": [],
+      "impact": "none"
+    }
+  },
+  "quality_reliability": {
+    "n": 52,
+    "agreement_count": 37,
+    "agreement_rate": 0.7115384615384616,
+    "chance_expected_agreement": 0.4349112426035503,
+    "cohen_kappa": 0.48952879581151837,
+    "disagreements": 15,
+    "direct_a_b_reversals": 7,
+    "primary_distribution_on_overlap": {
+      "A": 22,
+      "B": 30
+    },
+    "independent_distribution": {
+      "A": 18,
+      "tie": 8,
+      "B": 26
+    }
+  },
+  "risk_reliability": {
+    "n": 86,
+    "agreement_count": 76,
+    "agreement_rate": 0.8837209302325582,
+    "chance_expected_agreement": 0.7598702001081665,
+    "cohen_kappa": 0.5157657657657659,
+    "yes_no_disagreements": 10,
+    "category_disagreements_when_both_yes": 3,
+    "adjudication_union": 13,
+    "primary_distribution_on_overlap": {
+      "no": 74,
+      "yes": 12
+    },
+    "independent_distribution": {
+      "no": 74,
+      "yes": 12
+    }
+  },
+  "adjudication": {
+    "quality_items": 15,
+    "risk_items": 13,
+    "prior_labels_visible_to_adjudicator": false,
+    "only_one_adjudication_allowed": true
+  },
+  "blinding_limitation": {
+    "independent_reviewer_was_design_aware": true,
+    "resource_arm_often_inferable_from_source_attribution_text": true,
+    "learned_policy_selection_remained_private": true,
+    "disposition": "retain as a different-reviewer overlap sensitivity analysis, disclose as sighted/design-aware, and do not rewrite or regenerate frozen responses"
+  },
+  "template_findings_disposition": {
+    "volunteer_role_or_topic_reversal": "real frozen response-level quality/risk outcome; retain, do not delete as invalid data",
+    "low_information_prompt_families": "retain ties and report family diagnostics; do not remove after seeing outcomes"
+  },
+  "input_sha256": {
+    "quality_primary": "4d9b0048cb116b89fcca7c27f66fc62293efe45a362c58c2816a408b1bb6415d",
+    "quality_overlap_script": "0ab46f305257be327789894b994b1dba45924224344a18076bbc7db53726fcd1",
+    "risk_primary": "1e4df163ed16e125c50452a26e5d4c9c8b0a79a8f5135ff6ea2adbc2b8d6feb2",
+    "risk_overlap_script": "8d3b59d2234750bde8ea778fccd7d9fbe2ea717a7018a903e8a97c1a8bced4f9",
+    "frozen_review_manifest": "0b3b44f2e5fefe8b81b4a9584ac27923c86a10d42558e468735e39e33b0b70f7"
+  }
+}

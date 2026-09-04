@@ -1,5 +1,11 @@
 # MetaCom V3.3 GitHub/GPT Review Package 2026-06-28
 
+> **Current PM-v1.5 review:** start with
+> [`README_PM_V1_5_REVIEW_ZH.md`](README_PM_V1_5_REVIEW_ZH.md). The historical
+> `pm-v1.5-supplemental` label meant a no-retraining PM-v1 diagnostic; the
+> current conference-track PM-v1.5 is a separate retrained fast-track design.
+> Do not mix their claims or results.
+
 This package is for external code/science audit before final ESConv/EvoEmo evaluation. It contains current V3.3 code, tests, docs, internal development data/labels, PM CV checkpoints, validation selections, confirmatory-ready ESConv/EvoEmo inputs, generated ESConv action outcomes, fixed EvoEmo seeker tracks, and audit reports.
 
 Important boundary:

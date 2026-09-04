@@ -1,0 +1,439 @@
+{
+  "protocol": "pm-v1.5-v3-observation-nli-recovery-execution-v1",
+  "status": "FAIL_FIT_CONFIRMATION_NOT_CONSUMED",
+  "candidate": "deberta_nli_fixed_hypotheses_v1",
+  "fit_rows": 64,
+  "confirmation_rows": 32,
+  "fit_pass": false,
+  "fit_factor_reports": {
+    "owner_time_entity_valid": {
+      "n": 48,
+      "positive": 24,
+      "negative": 24,
+      "tp": 21,
+      "tn": 8,
+      "fp": 16,
+      "fn": 3,
+      "recall": 0.875,
+      "specificity": 0.3333333333333333,
+      "balanced_accuracy": 0.6041666666666666,
+      "minimal_counterfactual_direction": {
+        "n": 24,
+        "correct": 16,
+        "rate": 0.6666666666666666
+      },
+      "semantic_family_metrics": {
+        "semantic_surface_0": {
+          "n": 12,
+          "positive": 6,
+          "negative": 6,
+          "tp": 4,
+          "tn": 4,
+          "fp": 2,
+          "fn": 2,
+          "recall": 0.6666666666666666,
+          "specificity": 0.6666666666666666,
+          "balanced_accuracy": 0.6666666666666666
+        },
+        "semantic_surface_1": {
+          "n": 12,
+          "positive": 6,
+          "negative": 6,
+          "tp": 5,
+          "tn": 0,
+          "fp": 6,
+          "fn": 1,
+          "recall": 0.8333333333333334,
+          "specificity": 0.0,
+          "balanced_accuracy": 0.4166666666666667
+        },
+        "semantic_surface_2": {
+          "n": 12,
+          "positive": 6,
+          "negative": 6,
+          "tp": 6,
+          "tn": 2,
+          "fp": 4,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.3333333333333333,
+          "balanced_accuracy": 0.6666666666666666
+        },
+        "semantic_surface_3": {
+          "n": 12,
+          "positive": 6,
+          "negative": 6,
+          "tp": 6,
+          "tn": 2,
+          "fp": 4,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.3333333333333333,
+          "balanced_accuracy": 0.6666666666666666
+        }
+      },
+      "worst_semantic_family_balanced_accuracy": 0.4166666666666667,
+      "status": "FAIL"
+    },
+    "goal_function_fit": {
+      "n": 64,
+      "positive": 32,
+      "negative": 32,
+      "tp": 19,
+      "tn": 24,
+      "fp": 8,
+      "fn": 13,
+      "recall": 0.59375,
+      "specificity": 0.75,
+      "balanced_accuracy": 0.671875,
+      "minimal_counterfactual_direction": {
+        "n": 32,
+        "correct": 22,
+        "rate": 0.6875
+      },
+      "semantic_family_metrics": {
+        "semantic_surface_0": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 3,
+          "tn": 8,
+          "fp": 0,
+          "fn": 5,
+          "recall": 0.375,
+          "specificity": 1.0,
+          "balanced_accuracy": 0.6875
+        },
+        "semantic_surface_1": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 5,
+          "tn": 3,
+          "fp": 5,
+          "fn": 3,
+          "recall": 0.625,
+          "specificity": 0.375,
+          "balanced_accuracy": 0.5
+        },
+        "semantic_surface_2": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 5,
+          "tn": 6,
+          "fp": 2,
+          "fn": 3,
+          "recall": 0.625,
+          "specificity": 0.75,
+          "balanced_accuracy": 0.6875
+        },
+        "semantic_surface_3": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 6,
+          "tn": 7,
+          "fp": 1,
+          "fn": 2,
+          "recall": 0.75,
+          "specificity": 0.875,
+          "balanced_accuracy": 0.8125
+        }
+      },
+      "worst_semantic_family_balanced_accuracy": 0.5,
+      "status": "FAIL"
+    },
+    "boundary_burden_compatible": {
+      "n": 64,
+      "positive": 32,
+      "negative": 32,
+      "tp": 31,
+      "tn": 8,
+      "fp": 24,
+      "fn": 1,
+      "recall": 0.96875,
+      "specificity": 0.25,
+      "balanced_accuracy": 0.609375,
+      "minimal_counterfactual_direction": {
+        "n": 32,
+        "correct": 26,
+        "rate": 0.8125
+      },
+      "semantic_family_metrics": {
+        "semantic_surface_0": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 8,
+          "tn": 3,
+          "fp": 5,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.375,
+          "balanced_accuracy": 0.6875
+        },
+        "semantic_surface_1": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 8,
+          "tn": 0,
+          "fp": 8,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.0,
+          "balanced_accuracy": 0.5
+        },
+        "semantic_surface_2": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 7,
+          "tn": 4,
+          "fp": 4,
+          "fn": 1,
+          "recall": 0.875,
+          "specificity": 0.5,
+          "balanced_accuracy": 0.6875
+        },
+        "semantic_surface_3": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 8,
+          "tn": 1,
+          "fp": 7,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.125,
+          "balanced_accuracy": 0.5625
+        }
+      },
+      "worst_semantic_family_balanced_accuracy": 0.5,
+      "status": "FAIL"
+    },
+    "specific_increment": {
+      "n": 64,
+      "positive": 32,
+      "negative": 32,
+      "tp": 32,
+      "tn": 13,
+      "fp": 19,
+      "fn": 0,
+      "recall": 1.0,
+      "specificity": 0.40625,
+      "balanced_accuracy": 0.703125,
+      "minimal_counterfactual_direction": {
+        "n": 32,
+        "correct": 29,
+        "rate": 0.90625
+      },
+      "semantic_family_metrics": {
+        "semantic_surface_0": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 8,
+          "tn": 1,
+          "fp": 7,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.125,
+          "balanced_accuracy": 0.5625
+        },
+        "semantic_surface_1": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 8,
+          "tn": 2,
+          "fp": 6,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.25,
+          "balanced_accuracy": 0.625
+        },
+        "semantic_surface_2": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 8,
+          "tn": 5,
+          "fp": 3,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.625,
+          "balanced_accuracy": 0.8125
+        },
+        "semantic_surface_3": {
+          "n": 16,
+          "positive": 8,
+          "negative": 8,
+          "tp": 8,
+          "tn": 5,
+          "fp": 3,
+          "fn": 0,
+          "recall": 1.0,
+          "specificity": 0.625,
+          "balanced_accuracy": 0.8125
+        }
+      },
+      "worst_semantic_family_balanced_accuracy": 0.5625,
+      "status": "FAIL"
+    }
+  },
+  "raw_surface_nuisance_probe": {
+    "owner_time_entity_valid": {
+      "n": 48,
+      "positive": 24,
+      "negative": 24,
+      "tp": 24,
+      "tn": 0,
+      "fp": 24,
+      "fn": 0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "balanced_accuracy": 0.5,
+      "five_seed_balanced_accuracy": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "five_seed_balanced_accuracy_sd": 0.0
+    },
+    "goal_function_fit": {
+      "n": 64,
+      "positive": 32,
+      "negative": 32,
+      "tp": 32,
+      "tn": 0,
+      "fp": 32,
+      "fn": 0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "balanced_accuracy": 0.5,
+      "five_seed_balanced_accuracy": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "five_seed_balanced_accuracy_sd": 0.0
+    },
+    "boundary_burden_compatible": {
+      "n": 64,
+      "positive": 32,
+      "negative": 32,
+      "tp": 32,
+      "tn": 0,
+      "fp": 32,
+      "fn": 0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "balanced_accuracy": 0.5,
+      "five_seed_balanced_accuracy": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "five_seed_balanced_accuracy_sd": 0.0
+    },
+    "specific_increment": {
+      "n": 64,
+      "positive": 32,
+      "negative": 32,
+      "tp": 32,
+      "tn": 0,
+      "fp": 32,
+      "fn": 0,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "balanced_accuracy": 0.5,
+      "five_seed_balanced_accuracy": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "five_seed_balanced_accuracy_sd": 0.0
+    }
+  },
+  "raw_surface_nuisance_probe_pass": true,
+  "one_shot_confirmation": null,
+  "step1_training_authorized": false,
+  "step2_qualification_authorized": false,
+  "response_or_outcome_read": false,
+  "external_lockbox_read": false,
+  "confirmation_read_before_fit_decision": false,
+  "model_runs": {
+    "fit_owner_time_entity_valid": {
+      "device": "cpu",
+      "pairs": 96,
+      "max_length": 384,
+      "label2id": {
+        "contradiction": 0,
+        "entailment": 1,
+        "neutral": 2
+      }
+    },
+    "fit_goal_function_fit": {
+      "device": "cpu",
+      "pairs": 128,
+      "max_length": 384,
+      "label2id": {
+        "contradiction": 0,
+        "entailment": 1,
+        "neutral": 2
+      }
+    },
+    "fit_boundary_burden_compatible": {
+      "device": "cpu",
+      "pairs": 128,
+      "max_length": 384,
+      "label2id": {
+        "contradiction": 0,
+        "entailment": 1,
+        "neutral": 2
+      }
+    },
+    "fit_specific_increment": {
+      "device": "cpu",
+      "pairs": 128,
+      "max_length": 384,
+      "label2id": {
+        "contradiction": 0,
+        "entailment": 1,
+        "neutral": 2
+      }
+    }
+  },
+  "frozen_input_hashes": {
+    "reference_sha256": "e1d368c4a8f2576515d8e685531050822416d384b5379c7edb0a18400757dc6a",
+    "candidate_rows_sha256": "be0f5eff9d4cb2b170b43d4bdb26a9ce4bec2cf720594094daf26f6b435d9d14",
+    "blueprint_sha256": "5e76557f8048a04e44cd6ac3d7b2bd0fa49acdd2fd1e9ad16d6c9c6fd2717fe7",
+    "prior_failed_bakeoff_sha256": "6d327509b0344a2c53818ce5d2836a4101b8cc6ab1a2d2da2aefb197569c54ea"
+  },
+  "frozen_model_hashes": {
+    "config_sha256": "897e756eb59d3183adb505952e7910e7cbc7750a43f3b3747a96b688d2b02a47",
+    "model_sha256": "d8148c6d49e0a7925134294c56326c71fe0ab1dc390e37355e00c7efbb488afa",
+    "tokenizer_sha256": "5124ef2ead1a10a717703bc436de7f353da76d6340e4587719b42b1693707964"
+  },
+  "contract_sha256": "2e157796e9cabfa01cbb8a25592548d328d885bb87bfe2ae95090d700bf47a21",
+  "fit_predictions_sha256": "bcce838889aa19a115e6667680045f498d8f78a8dbbfd9f1a348976154d95517",
+  "confirmation_predictions_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "component_counts": {
+    "MP": 24,
+    "MS": 24,
+    "ME": 24,
+    "RS": 24
+  },
+  "python_executable": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/.venv-pm-v1-5/bin/python",
+  "python_version": "3.13.2"
+}

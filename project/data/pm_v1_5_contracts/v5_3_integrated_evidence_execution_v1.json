@@ -1,0 +1,221 @@
+{
+  "protocol": "pm-v1.5-v5.3-integrated-evidence-execution-and-confirmation-v1",
+  "status": "PROPOSED_P1_IN_PROGRESS",
+  "last_aligned_date": "2026-08-07",
+  "supersedes_for_future_runs": [
+    "pm-v1.5-v5.2-backend-locked-clause-append-executor"
+  ],
+  "preserve_v5_2_outputs": true,
+  "research_claim": "A low-capacity auditable four-component policy manager can reduce unnecessary resource injection and generation cost without materially degrading immediate support quality or increasing interaction-and-grounding risk.",
+  "v5_2_corrected_diagnosis": {
+    "memory_wrapper_origin": "deterministic_backend_renderer_not_generator_echo",
+    "generator_saw_ms_me_literal_evidence": false,
+    "locked_clause_exact_presence_was_guard_enforced": true,
+    "evoemo_risk_overlap_wrapper_rows": {"numerator": 11, "evoemo_denominator": 25},
+    "evoemo_primary_risk_wrapper_rows": {"numerator": 53, "evoemo_denominator": 124},
+    "evoemo_ms_learned_on": {"numerator": 135, "response_state_denominator": 138},
+    "evoemo_vs_always_off_primary_model_panel": {
+      "comparisons": 48,
+      "learned_actions_containing_ms": 46,
+      "ms_containing_wins": 1,
+      "ms_containing_losses": 45,
+      "annotator_type": "llm",
+      "annotator_id": "Primary_ChatGPT",
+      "interpretation": "strong_architecture_and_routing_diagnostic_not_human_gold"
+    },
+    "does_not_prove_all_quality_losses_are_renderer_caused": true
+  },
+  "action_space": {
+    "components": ["MP", "MS", "ME", "RS"],
+    "legal_actions": 16,
+    "m0_r0_is_legal": true,
+    "direct_16_class_training": false
+  },
+  "retrieval": {
+    "candidate_discovery": "source-specific top-k",
+    "execution_materialization": "exact rank-1 only per enabled component",
+    "preserve_topk_descriptors": true,
+    "same_user_only": true,
+    "strictly_past_memory_only": true,
+    "external_outcomes_may_change_ranking": false
+  },
+  "step1": {
+    "estimand": "requested-component ITT value under the frozen V5.3 executor",
+    "hard_denials": [
+      "candidate_absent",
+      "wrong_owner",
+      "inactive_or_superseded_version",
+      "explicit_conflict",
+      "explicit_current_boundary_denial",
+      "resource_definition_incomplete"
+    ],
+    "primary_model": "source-specific L2 logistic value heads",
+    "group_weighting": "equal counterfactual-group weight",
+    "class_weight": null,
+    "required_features": [
+      "goal_function_fit",
+      "contribution_slot_available",
+      "specific_increment",
+      "current_redundancy",
+      "candidate_age",
+      "retrieval_margin",
+      "incremental_input_tokens",
+      "component_specific_response_act_fit",
+      "action_readiness_three_state"
+    ],
+    "required_interactions": [
+      "goal_function_fit_x_contribution_slot_available",
+      "specific_increment_x_current_redundancy",
+      "past_action_result_x_current_action_readiness",
+      "continuity_request_x_specific_prior_observation",
+      "card_precondition_x_nonredundancy_x_burden_fit"
+    ],
+    "bge_role": "one frozen challenger only"
+  },
+  "step2": {
+    "architecture": "typed response program plus evidence-aware whole-response generation",
+    "generator_sees_authorized_evidence": true,
+    "final_response_is_primary_plus_appended_clauses": false,
+    "required_plan_fields": [
+      "current_goal",
+      "allowed_response_acts",
+      "evidence_id",
+      "owner_id",
+      "source_type",
+      "source_time",
+      "literal_evidence",
+      "required_contribution",
+      "epistemic_mode",
+      "forbidden_inferences",
+      "atomic_move_budget",
+      "visible_style_constraints"
+    ],
+    "user_visible_internal_labels_allowed": false,
+    "generator_self_reported_trace_may_invalidate_m0_r0": false,
+    "m0_r0_used_evidence_ids_normalized_to_empty": true,
+    "raw_generator_trace_retained_for_telemetry": true,
+    "second_free_llm_fallback_allowed": false,
+    "fallback": "deterministic context-only M0 response retained as ITT outcome"
+  },
+  "stagewise_accountability": {
+    "required_before_new_api_generation": true,
+    "ledger_name": "stagewise_accountability_ledger",
+    "typed_schema_implementation": "src/metacom_pm/v1_5_v5_3_accountability.py",
+    "schema_freeze_status": "COMPLETE_ZERO_API_PRE_OUTCOME_SCHEMA_FREEZE",
+    "formal_runner_wiring_pending": true,
+    "row_identity_fields": ["state_id", "policy_condition", "seed_label"],
+    "required_layers": ["retrieval", "eligibility", "pm_step1", "step2_execution", "end_to_end"],
+    "required_fields": [
+      "row_id", "state_id", "user_id", "semantic_family", "counterfactual_group_id",
+      "policy_condition", "seed_label", "lifecycle_stage",
+      "candidate_ids_topk", "exact_rank1_id", "candidate_owner_id", "candidate_version",
+      "retrieval_fit_label", "eligibility_owner_time", "eligibility_goal_function",
+      "eligibility_boundary_burden", "eligibility_specific_increment",
+      "pm_probability", "pm_threshold", "pm_decision", "pm_correct",
+      "requested_action", "realized_action",
+      "generator_received_evidence_ids", "generator_reported_used_evidence_ids",
+      "normalized_used_evidence_ids", "used_evidence_ids", "required_evidence_use",
+      "functional_contribution", "grounding_fidelity", "atomic_move_compliance",
+      "execution_valid", "scaffold_exposure", "fallback_reason",
+      "quality_outcome", "risk_outcome", "prompt_tokens", "total_tokens",
+      "primary_failure_owner", "secondary_failure_owner"
+    ],
+    "required_metrics": [
+      "retrieval_top1_fit_rate", "pm_hard_gate_violation_rate",
+      "pm_value_selection_balanced_accuracy", "requested_realized_exact_match_rate",
+      "required_evidence_use_rate", "functional_contribution_rate",
+      "grounding_fidelity_rate", "scaffold_exposure_rate", "fallback_rate"
+    ],
+    "required_conditional_analysis": "quality_risk_cost_by_retrieval_fit_x_pm_correct_x_execution_valid",
+    "generator_self_trace_is_gold": false,
+    "generator_self_trace_role": "telemetry_only"
+  },
+  "generator_selection": {
+    "pre_outcome_compatibility_bakeoff": true,
+    "development_cases_only": true,
+    "maximum_candidates": 2,
+    "new_fit_or_confirmation_quality_may_select_generator": false,
+    "minimum_schema_completion": 1.0,
+    "minimum_evidence_binding": 1.0,
+    "minimum_atomic_move_compliance": 0.95,
+    "minimum_required_contribution_automatic_rate": 0.9,
+    "maximum_internal_label_exposures": 0,
+    "maximum_unauthorized_names_or_numbers": 0
+  },
+  "data": {
+    "hard_minimum_group_counts_are_binding": false,
+    "sample_size_freeze_rule": "all unique qualified user/family/counterfactual groups after external-support, shortcut, split and feature-identifiability audit",
+    "constructed_opportunity_strata_are_outcome_labels": false,
+    "feature_matrix_variation_and_identifiability_required": true,
+    "fit_confirmation_sealed_user_and_family_disjoint": true,
+    "near_duplicate_template_variants_increase_independent_n": false,
+    "narrow_noninferiority_claim_requires_achievable_cluster_precision": true,
+    "insufficient_precision_action": "report actual estimate and wide interval or narrow claim; never clone near-duplicate groups",
+    "power_simulation_before_generation": true,
+    "split_keys": ["synthetic_user", "semantic_family", "counterfactual_group"],
+    "external_text_copying_allowed": false,
+    "external_subtype_prevalence_is_training_target": false,
+    "old_internal_rows_may_be_relabelled_in_place": false,
+    "me_positive_candidate_must_compile_and_bind_rank1": true,
+    "me_action_readiness_values": ["INVITES_ACTION", "DECLINES_ACTION", "UNKNOWN"],
+    "me_unknown_action_readiness_is_negative_gold": false,
+    "me_action_readiness_fresh_qualification_required": true,
+    "candidate_subtype_may_override_goal_relevance": false,
+    "new_outcome_based_sample_expansion_allowed": false
+  },
+  "baselines": {
+    "main": [
+      "always_off",
+      "fixed_high_eligible",
+      "transparent_rule",
+      "learned_pm_full",
+      "cost_matched_fixed",
+      "cost_and_on_rate_matched_random"
+    ],
+    "same_candidate_retrieval_executor_generator_seed_and_evaluator": true,
+    "legacy_v1_0_main_only_if_exact_current_stack_replay": true,
+    "raw_session_top4_and_all_raw": "evoemo_secondary_only",
+    "cost_match_uses_test_outcomes": false,
+    "alias_physical_calls_deduplicated": true
+  },
+  "evaluation": {
+    "quality_primary": "cluster-level NetWin",
+    "quality_noninferiority_margin": -0.05,
+    "confidence_interval": "95% cluster bootstrap",
+    "risk_noninferiority_margin": 0.05,
+    "minimum_input_token_reduction_vs_fixed_high": 0.1,
+    "critical_event_unit": "independent state, clustered by user where applicable",
+    "maximum_critical_fabricated_recall_wrong_owner_or_explicit_boundary_events": 0,
+    "quality_panel_shows_same_verified_prior_context_to_both_arms": true,
+    "risk_panel_shows_authorized_evidence": true,
+    "annotator_type_must_be_truthful": true,
+    "llm_annotation_may_be_called_human": false,
+    "formal_semantic_evaluation_waves": ["single_fit", "single_fresh_confirmation", "single_combined_external_replication"],
+    "per_wave_review_design": "one_primary_plus_prefrozen_20_percent_independent_overlap_plus_one_central_adjudication",
+    "small_iterative_repair_packets_allowed": false,
+    "quality_or_risk_outcomes_may_change_prompt_threshold_sample_or_review_instructions": false,
+    "mechanical_invalidity_may_trigger_versioned_affected_unit_rerun": true,
+    "mechanical_invalidity_only": [
+      "assignment_mismatch", "wrong_resource_binding", "wrong_owner_or_version_binding",
+      "missing_output_or_usage", "identity_or_hash_drift", "blind_ab_surface_miswiring"
+    ]
+  },
+  "external_evidence": {
+    "esconv": "same-stack corrected RS replication",
+    "evoemo": "same-stack longitudinal-memory repaired replication; not pristine lockbox",
+    "es_memeval": "QA retrieval and answer diagnostic; not response QRC",
+    "fresh_external_longitudinal_claim_requires_new_untouched_users_or_dataset": true
+  },
+  "one_way_phases": [
+    "P0_V5_2_CLOSEOUT_AND_EXPOSURE_AUDIT",
+    "P1_V5_3_EXECUTOR_AND_COMPATIBILITY_FREEZE",
+    "P2_DATA_BASELINE_METRIC_AND_POWER_FREEZE",
+    "P3_SINGLE_FIT_REVIEW_AND_TRAINING",
+    "P4_SINGLE_CONFIRMATION_AND_SEALED_INTERNAL",
+    "P5_EXTERNAL_REPLICATION_AND_REPORTING"
+  ],
+  "post_fit_method_change_allowed": false,
+  "post_confirmation_second_confirmation_allowed": false,
+  "scientific_pass_guaranteed": false,
+  "workflow_closure_and_attribution_guaranteed_by_contract": true
+}

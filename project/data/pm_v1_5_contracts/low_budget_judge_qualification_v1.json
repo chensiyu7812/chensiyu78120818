@@ -1,0 +1,111 @@
+{
+  "protocol": "pm-v1.5-train-only-low-budget-judge-qualification-v1",
+  "status": "READY_FOR_ZERO_API_DRY_RUN",
+  "scope": "longitudinal_train_only_measurement_qualification",
+  "pairwise_state_count": 12,
+  "split_equivalence_state_count": 9,
+  "gpt_anchor_state_count": 8,
+  "regime_sample_counts": {
+    "profile_needed": 2,
+    "summary_needed": 1,
+    "event_needed": 1,
+    "multi_source_needed": 2,
+    "memory_harmful": 2,
+    "strategy_helpful": 1,
+    "strategy_harmful": 1,
+    "context_only": 1,
+    "ambiguous": 1
+  },
+  "pairwise_order_variants": [0, 1],
+  "conditions": {
+    "qwen_nonthinking_pairwise": 24,
+    "qwen_thinking_pairwise": 24,
+    "qwen_nonthinking_combined": 9,
+    "qwen_nonthinking_split_quality": 9,
+    "qwen_nonthinking_split_risk": 9,
+    "gpt_high_quality_pairwise_anchor": 16
+  },
+  "planned_logical_calls": 91,
+  "blinding": {
+    "judge_action_ids_hidden": true,
+    "judge_regime_hidden": true,
+    "judge_proxy_expected_direction_hidden": true,
+    "human_action_ids_hidden": true,
+    "human_model_identity_hidden": true,
+    "memory_and_strategy_identifiers_hidden": true,
+    "balanced_ab_ba_for_model_pairwise": true
+  },
+  "decision_boundary": {
+    "qualification_only": true,
+    "creates_training_labels": false,
+    "majority_vote_is_gold": false,
+    "calibration_internal_test_external_outcomes_forbidden": true,
+    "thresholds_must_be_frozen_before_results": true,
+    "nonthinking_vs_thinking_compared_on_identical_items": true,
+    "combined_vs_split_is_measurement_equivalence_not_model_selection": true,
+    "gpt_is_a_small_anchor_not_a_bulk_labeler": true
+  },
+  "pre_outcome_qualification_thresholds": {
+    "minimum_pairwise_informative_rate": 0.5,
+    "minimum_ab_ba_order_consistency": 0.8,
+    "minimum_qwen_mode_direction_agreement": 0.7,
+    "minimum_qwen_gpt_anchor_direction_agreement": 0.7,
+    "maximum_combined_vs_split_dimension_mae": 0.5,
+    "minimum_combined_vs_split_within_half_point_rate": 0.8,
+    "human_anchor_is_required_before_promoting_a_bulk_labeler": true,
+    "failure_disposition": "NOT_SUPPORTED; no threshold tuning and no bulk relabeling"
+  },
+  "response_schema_sha256": {
+    "pairwise": "46b44380f882725ce44b621d8263fe5fc6868fd2055badda616ab141a53e2709",
+    "combined": "b26db1fbf67c3cd7c5c7d7da7d2333947c0b8e88af24bb58f586742ac24d597e"
+  },
+  "endpoint_contract": {
+    "protocol": "pm-v1.5-low-budget-judge-endpoints-v1",
+    "qwen": {
+      "api_key_env": "DASHSCOPE_API_KEY",
+      "base_url": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+      "family": "qwen3_7_max",
+      "input_usd_per_million_tokens": 2.5,
+      "model": "qwen3.7-max-2026-06-08",
+      "output_usd_per_million_tokens": 7.5,
+      "supports_strict_json_schema": false,
+      "transport": "openai_chat_completions"
+    },
+    "gpt_anchor": {
+      "api_key_env": "OPENAI_API_KEY",
+      "base_url": "https://api.openai.com/v1",
+      "family": "openai_gpt_5_6",
+      "input_usd_per_million_tokens": 5.0,
+      "model": "gpt-5.6",
+      "output_usd_per_million_tokens": 30.0,
+      "supports_strict_json_schema": true,
+      "transport": "openai_chat_completions"
+    },
+    "request_contract": {
+      "client_internal_retries": 1,
+      "maximum_physical_attempts_per_logical_call": 2,
+      "seed": 9051,
+      "temperature": 0.0
+    },
+    "file_sha256": "11996255536e8866f8642b81359b30c8373b8728d8844b55136e26bc02d593e0",
+    "content_sha256": "c7867ce62335c942785e0652223176f1d9a08ec77ef7df4e75f8f9f014f4fa15"
+  },
+  "source_lineage": {
+    "states_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+    "states_sha256": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+    "evaluator_contexts_path": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/evaluator_contexts.jsonl",
+    "evaluator_contexts_sha256": "31f30eeba5ca33bdf6e8e0d0dab7270b8a8c4a620873fa5a017dc74b9478641b",
+    "action_outcomes_path": "outputs/pm_v1_5_longitudinal_action_sweep_v8_19_2_continuation_v2_dry_run/action_outcomes.jsonl",
+    "action_outcomes_sha256": "9b4eb540a9b2367ac1bf5dc2200ff2b9bcb6f3043e0335e1def2c7327ea9c695",
+    "train_state_count": 216,
+    "train_outcome_count": 3456,
+    "selected_pairs_sha256": "55aeaf43f623857be098a1a7c6af2b9467517e6601d57184b6ff235c5be02374",
+    "ordered_pairwise_sha256": "7056627d8b5966f9e778235f2e15cbd65a8decf5216a32dfd1a4103b50c2abf7",
+    "split_equivalence_sha256": "f60495eb1fec3fd7ab0d690e8720dc05c555029b794ee1f312bb066de827cb58",
+    "human_blind_packet_sha256": "08aebfe0d959ba4f8708dc1e3eb787636cba4a8798fdb3c9d0fd2b95693a0343",
+    "gpt_anchor_pair_ids_sha256": "ac69000ae12d4547aacebecb3d4b24bfa809605222fd1d017c91fb3fd975d3fa"
+  },
+  "api_calls_made_while_preparing": 0,
+  "training_labels_created": false,
+  "contract_sha256": "bb456f5ffd9d7738612f9cf45bbe6e14293a5c784a13856d85d664f6de71b362"
+}

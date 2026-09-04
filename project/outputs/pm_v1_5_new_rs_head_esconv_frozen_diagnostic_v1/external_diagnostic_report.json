@@ -1,0 +1,50 @@
+{
+  "protocol": "pm-v1.5-new-rs-head-esconv-frozen-panel-diagnostic-v1",
+  "status": "COMPLETE_POSTHOC_DESCRIPTIVE_EXTERNAL_DIAGNOSTIC",
+  "formal_external_promotion_allowed": false,
+  "reason": "The source RS head failed its registered grouped-OOF learning gate; this historically used ESConv panel is diagnostic only.",
+  "panel_role": "family-balanced frozen 40-dialogue panel, not an unweighted natural ESConv population",
+  "quality_labels_are_provisional_before_rs_win_risk_review": true,
+  "pair_count": 40,
+  "quality_target_counts": {
+    "0": 24,
+    "1": 16
+  },
+  "development_feature_support": {
+    "in_support": 31,
+    "out_of_support": 9,
+    "in_support_fraction": 0.775
+  },
+  "classification_against_quality_plus_lower_cost_tie_target": {
+    "accuracy": 0.5,
+    "balanced_accuracy": 0.4583333333333333,
+    "positive_recall": 0.25,
+    "negative_recall": 0.6666666666666666,
+    "brier": 0.2983136034728483,
+    "predicted_on": 12,
+    "predicted_off": 28
+  },
+  "frozen_development_group_weighted_prevalence_prior": 0.3988095238095238,
+  "prior_brier": 0.2400014172335601,
+  "selected_response_quality": {
+    "selected_material_loser": 16,
+    "selected_material_winner": 17,
+    "selected_quality_tie": 7
+  },
+  "token_cost": {
+    "selected_total_tokens": 16718,
+    "always_off_total_tokens": 15229,
+    "always_on_total_tokens": 20163,
+    "incremental_vs_always_off": 1489,
+    "saved_vs_always_on": 3445
+  },
+  "source_model_gate_passed": false,
+  "claim_boundary": "This cannot rescue or promote a head that failed development. It also does not include final material-risk adjudication for the 16 ESConv RS quality wins.",
+  "lineage": {
+    "model_sha256": "0fed459356cf519f033a6e0715a38969cbb714a6112475f8db15e4618ddb154e",
+    "training_report_sha256": "15b985c876ee4d746b9fc46f045b8033233fc636b43ee2173c8e813b6eef6e0c",
+    "selected_states_sha256": "3304d7618da5d257b9ec7e9ef488c7bb8e194f826300708ab72b4233b818e4b4",
+    "quality_decisions_sha256": "8ea6478851832c04aa6d6bd1c6b98ff742942f68e2c0468b9f4fe752ee456723",
+    "generation_outcomes_sha256": "335d13d220de159b9d8cfb675bae709fb196c5955ce379178663445145b679d5"
+  }
+}

@@ -1,0 +1,441 @@
+{
+  "protocol": "pm-v1.5-context-grounding-repair-recompile-verification-v1",
+  "original_out_dir": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/data/pm_v1_5_formal_v8_18_duplicate_repair_candidate",
+  "original_bundles_sha256": "7e9d6157d856fff850f8c59a2b8aadf07c4c5ae9221a90f654120cc239c4621d",
+  "classification_sha256": "a20a1003e02cccd42a9dedb720073a73172e0228e4638d2a5bbdc1f69d6b9af5",
+  "repair_overlays_path": "outputs/pm_v1_5_context_grounding_repair_v8_19_1_manual_micro_repair/repair_overlays.jsonl",
+  "repair_overlays_sha256": "5b5eb640a898cb64df1fd7bb22d9fff77f3d86b9949932c455aea673e1971b0e",
+  "output_file_sha256s": {
+    "pm_v2_states.jsonl": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+    "pm_v2_bundles.jsonl": "63708d5ad2ff71582d096aafd2f59a6e2a69a7ec9858d55122424a332738af04",
+    "evaluator_contexts.jsonl": "31f30eeba5ca33bdf6e8e0d0dab7270b8a8c4a620873fa5a017dc74b9478641b",
+    "memory_backend.jsonl": "bf2173ffc42cac8da3560d8c356ee9304537e746b5e4c28cd046bd6dc5f8cd49",
+    "runtime_states.jsonl": "5ff31de14a5e3a0757f561958153a97f295eb04dd0a23febd19257c370d07ded",
+    "pm_v2_data_report.json": "1a52774aa68aa859952f1aa611ec836e3ad8e181eae2239ab2dabe992ec5afd9"
+  },
+  "memory_backend_byte_identical_to_original": true,
+  "total_states": 468,
+  "repaired_state_count": 25,
+  "untouched_state_count": 443,
+  "unexpectedly_changed_untouched_states": {},
+  "unexpectedly_unchanged_repaired_states": [],
+  "repaired_state_diffs": {
+    "state_032737f91e3c332227f04942": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_062b3dd61638973f95199d76": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_08e30ce683cf9f4c39de1285": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_0de3c6bb0a398654dc42506c": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_1d327ed7b58f3b13298b968c": {
+      "pm_v2_states": [
+        "current_session_summary",
+        "inventory.ME.query_similarity_mean",
+        "inventory.MP.query_similarity_mean",
+        "inventory.MS.query_similarity_mean",
+        "provenance.semantic_observation.observation_sha256",
+        "provenance.semantic_observation.state_embedding_query_sha256",
+        "provenance.semantic_observation.state_embedding_query_vector_sha256",
+        "provenance.semantic_observation.step0_semantic_query_sha256",
+        "provenance.semantic_observation.step0_semantic_query_vector_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.final_visible_state_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.original_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.retained_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.encoded_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.input_sha256",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.original_token_count",
+        "provenance.semantic_observation.visible_input_sha256",
+        "step0_observation.memory_sources.ME.query_to_source_similarity",
+        "step0_observation.memory_sources.MP.query_to_source_similarity",
+        "step0_observation.memory_sources.MS.query_to_source_similarity",
+        "step0_observation.strategy.family_similarities.affirmation_reassurance",
+        "step0_observation.strategy.family_similarities.information",
+        "step0_observation.strategy.family_similarities.other",
+        "step0_observation.strategy.family_similarities.question",
+        "step0_observation.strategy.family_similarities.reflection",
+        "step0_observation.strategy.family_similarities.restatement",
+        "step0_observation.strategy.family_similarities.self_disclosure",
+        "step0_observation.strategy.family_similarities.suggestion",
+        "text_embedding"
+      ],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_229ac5282840176cd2d42f08": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_2d57df7d6a8860dc7d272fad": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_2f53029ca559732208f75da1": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_37567dabda9bf490aa94c75e": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_440ba01981217717423d30e6": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_44550214bf7c9fa22284a731": {
+      "pm_v2_states": [
+        "current_session_history",
+        "inventory.ME.query_similarity_mean",
+        "inventory.MP.query_similarity_mean",
+        "inventory.MS.query_similarity_mean",
+        "provenance.semantic_observation.observation_sha256",
+        "provenance.semantic_observation.state_embedding_query_sha256",
+        "provenance.semantic_observation.state_embedding_query_vector_sha256",
+        "provenance.semantic_observation.step0_semantic_query_sha256",
+        "provenance.semantic_observation.step0_semantic_query_vector_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.final_visible_state_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.original_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.retained_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.encoded_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.input_sha256",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.original_token_count",
+        "provenance.semantic_observation.visible_input_sha256",
+        "step0_observation.memory_sources.ME.query_to_source_similarity",
+        "step0_observation.memory_sources.MP.query_to_source_similarity",
+        "step0_observation.memory_sources.MS.query_to_source_similarity",
+        "step0_observation.strategy.family_similarities.affirmation_reassurance",
+        "step0_observation.strategy.family_similarities.information",
+        "step0_observation.strategy.family_similarities.other",
+        "step0_observation.strategy.family_similarities.question",
+        "step0_observation.strategy.family_similarities.reflection",
+        "step0_observation.strategy.family_similarities.restatement",
+        "step0_observation.strategy.family_similarities.self_disclosure",
+        "step0_observation.strategy.family_similarities.suggestion",
+        "text_embedding"
+      ],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_481fdb962d3774c3e0d720bb": {
+      "pm_v2_states": [
+        "current_session_history",
+        "current_session_summary",
+        "inventory.ME.query_similarity_mean",
+        "inventory.MP.query_similarity_mean",
+        "inventory.MS.query_similarity_mean",
+        "provenance.semantic_observation.observation_sha256",
+        "provenance.semantic_observation.state_embedding_query_sha256",
+        "provenance.semantic_observation.state_embedding_query_vector_sha256",
+        "provenance.semantic_observation.step0_semantic_query_sha256",
+        "provenance.semantic_observation.step0_semantic_query_vector_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.final_visible_state_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.original_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.retained_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.encoded_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.input_sha256",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.original_token_count",
+        "provenance.semantic_observation.visible_input_sha256",
+        "step0_observation.memory_sources.ME.query_to_source_similarity",
+        "step0_observation.memory_sources.MP.query_to_source_similarity",
+        "step0_observation.memory_sources.MS.query_to_source_similarity",
+        "step0_observation.strategy.family_similarities.affirmation_reassurance",
+        "step0_observation.strategy.family_similarities.information",
+        "step0_observation.strategy.family_similarities.other",
+        "step0_observation.strategy.family_similarities.question",
+        "step0_observation.strategy.family_similarities.reflection",
+        "step0_observation.strategy.family_similarities.restatement",
+        "step0_observation.strategy.family_similarities.self_disclosure",
+        "step0_observation.strategy.family_similarities.suggestion",
+        "text_embedding"
+      ],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_5fa4b10230cf5c78c9e96519": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_7d1e36f110bdacbd2a0545f2": {
+      "pm_v2_states": [
+        "current_session_history",
+        "inventory.ME.query_similarity_mean",
+        "inventory.MP.query_similarity_mean",
+        "inventory.MS.query_similarity_mean",
+        "provenance.semantic_observation.observation_sha256",
+        "provenance.semantic_observation.state_embedding_query_sha256",
+        "provenance.semantic_observation.state_embedding_query_vector_sha256",
+        "provenance.semantic_observation.step0_semantic_query_sha256",
+        "provenance.semantic_observation.step0_semantic_query_vector_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.input_sha256",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.input_sha256",
+        "provenance.semantic_observation.visible_input_sha256",
+        "step0_observation.memory_sources.ME.query_to_source_similarity",
+        "step0_observation.memory_sources.MP.query_to_source_similarity",
+        "step0_observation.memory_sources.MS.query_to_source_similarity",
+        "step0_observation.strategy.family_similarities.affirmation_reassurance",
+        "step0_observation.strategy.family_similarities.information",
+        "step0_observation.strategy.family_similarities.other",
+        "step0_observation.strategy.family_similarities.question",
+        "step0_observation.strategy.family_similarities.reflection",
+        "step0_observation.strategy.family_similarities.restatement",
+        "step0_observation.strategy.family_similarities.self_disclosure",
+        "step0_observation.strategy.family_similarities.suggestion",
+        "text_embedding"
+      ],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_8ce4e8be2e8bb4ed6b097b7b": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_9272bace01e6b25a445c1edf": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_97b8cc3ac30a4dd174215018": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_9e0c7dd3b2e6081857a7d19f": {
+      "pm_v2_states": [
+        "current_session_history",
+        "current_session_summary",
+        "inventory.ME.query_similarity_mean",
+        "inventory.MP.query_similarity_mean",
+        "inventory.MS.query_similarity_mean",
+        "provenance.semantic_observation.observation_sha256",
+        "provenance.semantic_observation.state_embedding_query_sha256",
+        "provenance.semantic_observation.state_embedding_query_vector_sha256",
+        "provenance.semantic_observation.step0_semantic_query_sha256",
+        "provenance.semantic_observation.step0_semantic_query_vector_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.final_visible_state_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.original_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.retained_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.encoded_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.input_sha256",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.original_token_count",
+        "provenance.semantic_observation.visible_input_sha256",
+        "step0_observation.memory_sources.ME.query_to_source_similarity",
+        "step0_observation.memory_sources.MP.query_to_source_similarity",
+        "step0_observation.memory_sources.MS.query_to_source_similarity",
+        "step0_observation.strategy.family_similarities.affirmation_reassurance",
+        "step0_observation.strategy.family_similarities.information",
+        "step0_observation.strategy.family_similarities.other",
+        "step0_observation.strategy.family_similarities.question",
+        "step0_observation.strategy.family_similarities.reflection",
+        "step0_observation.strategy.family_similarities.restatement",
+        "step0_observation.strategy.family_similarities.self_disclosure",
+        "step0_observation.strategy.family_similarities.suggestion",
+        "text_embedding"
+      ],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_b574cfd6ddd34e7c3c235f1f": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_ba1e526156d1cf3810fa8e98": {
+      "pm_v2_states": [
+        "current_session_history",
+        "inventory.ME.query_similarity_mean",
+        "inventory.MP.query_similarity_mean",
+        "inventory.MS.query_similarity_mean",
+        "provenance.semantic_observation.observation_sha256",
+        "provenance.semantic_observation.state_embedding_query_sha256",
+        "provenance.semantic_observation.state_embedding_query_vector_sha256",
+        "provenance.semantic_observation.step0_semantic_query_sha256",
+        "provenance.semantic_observation.step0_semantic_query_vector_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.final_visible_state_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.original_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.retained_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.encoded_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.input_sha256",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.original_token_count",
+        "provenance.semantic_observation.visible_input_sha256",
+        "step0_observation.memory_sources.ME.query_to_source_similarity",
+        "step0_observation.memory_sources.MP.query_to_source_similarity",
+        "step0_observation.memory_sources.MS.query_to_source_similarity",
+        "step0_observation.strategy.family_similarities.affirmation_reassurance",
+        "step0_observation.strategy.family_similarities.information",
+        "step0_observation.strategy.family_similarities.other",
+        "step0_observation.strategy.family_similarities.question",
+        "step0_observation.strategy.family_similarities.reflection",
+        "step0_observation.strategy.family_similarities.restatement",
+        "step0_observation.strategy.family_similarities.self_disclosure",
+        "step0_observation.strategy.family_similarities.suggestion",
+        "text_embedding"
+      ],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_cc61795d74545cd50a41e264": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_d0eee004b44a562c57a0e6c6": {
+      "pm_v2_states": [
+        "current_session_history",
+        "current_session_summary",
+        "inventory.ME.query_similarity_mean",
+        "inventory.MP.query_similarity_mean",
+        "inventory.MS.query_similarity_mean",
+        "provenance.semantic_observation.observation_sha256",
+        "provenance.semantic_observation.state_embedding_query_sha256",
+        "provenance.semantic_observation.state_embedding_query_vector_sha256",
+        "provenance.semantic_observation.step0_semantic_query_sha256",
+        "provenance.semantic_observation.step0_semantic_query_vector_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.final_visible_state_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.recent_dialogue.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.original_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.retained_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.encoded_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.input_sha256",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.original_token_count",
+        "provenance.semantic_observation.visible_input_sha256",
+        "step0_observation.memory_sources.ME.query_to_source_similarity",
+        "step0_observation.memory_sources.MP.query_to_source_similarity",
+        "step0_observation.memory_sources.MS.query_to_source_similarity",
+        "step0_observation.strategy.family_similarities.affirmation_reassurance",
+        "step0_observation.strategy.family_similarities.information",
+        "step0_observation.strategy.family_similarities.other",
+        "step0_observation.strategy.family_similarities.question",
+        "step0_observation.strategy.family_similarities.reflection",
+        "step0_observation.strategy.family_similarities.restatement",
+        "step0_observation.strategy.family_similarities.self_disclosure",
+        "step0_observation.strategy.family_similarities.suggestion",
+        "text_embedding"
+      ],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_d49035f92c3e658eabbb65b4": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_df5f52854a6eaae0e0a229bb": {
+      "pm_v2_states": [
+        "current_session_summary",
+        "inventory.ME.query_similarity_mean",
+        "inventory.MP.query_similarity_mean",
+        "inventory.MS.query_similarity_mean",
+        "provenance.semantic_observation.observation_sha256",
+        "provenance.semantic_observation.state_embedding_query_sha256",
+        "provenance.semantic_observation.state_embedding_query_vector_sha256",
+        "provenance.semantic_observation.step0_semantic_query_sha256",
+        "provenance.semantic_observation.step0_semantic_query_vector_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.final_visible_state_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.input_sha256",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.original_token_count",
+        "provenance.semantic_observation.tokenization.section_allocation.sections.session_summary.retained_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.encoded_token_count",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.input_sha256",
+        "provenance.semantic_observation.tokenization.views.visible_dialogue_state.original_token_count",
+        "provenance.semantic_observation.visible_input_sha256",
+        "step0_observation.memory_sources.ME.query_to_source_similarity",
+        "step0_observation.memory_sources.MP.query_to_source_similarity",
+        "step0_observation.memory_sources.MS.query_to_source_similarity",
+        "step0_observation.strategy.family_similarities.affirmation_reassurance",
+        "step0_observation.strategy.family_similarities.information",
+        "step0_observation.strategy.family_similarities.other",
+        "step0_observation.strategy.family_similarities.question",
+        "step0_observation.strategy.family_similarities.reflection",
+        "step0_observation.strategy.family_similarities.restatement",
+        "step0_observation.strategy.family_similarities.self_disclosure",
+        "step0_observation.strategy.family_similarities.suggestion",
+        "text_embedding"
+      ],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    },
+    "state_eb4da35de8c37834663cc7e1": {
+      "pm_v2_states": [],
+      "evaluator_contexts": [
+        "authorized_user_context",
+        "context_payload_sha256"
+      ]
+    }
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,30 @@
+{
+  "protocol": "pm-v1.5b-resource-application-human-functional-check-v1-secondary-sensitivity-summary",
+  "status": "SUMMARY_ONLY_NO_ITEM_LEVEL_ROWS_PROVIDED",
+  "items": 32,
+  "adjudicable": 32,
+  "functional_execution_yes": 24,
+  "functional_execution_no": 8,
+  "material_misuse_yes": 6,
+  "fallback_displayed": 2,
+  "fallback_usable": 2,
+  "by_component": {
+    "MP": {"items": 8, "functional_execution_yes": 5, "material_misuse_yes": 0},
+    "MS": {"items": 8, "functional_execution_yes": 4, "material_misuse_yes": 3},
+    "ME": {"items": 8, "functional_execution_yes": 8, "material_misuse_yes": 1},
+    "RS": {"items": 8, "functional_execution_yes": 7, "material_misuse_yes": 2}
+  },
+  "stable_diagnostic_findings": {
+    "fabricated_recall_items": 2,
+    "fabricated_recall_review_id_suffixes": ["abef0aa9", "a3b86721"],
+    "attribution_required_items": 16,
+    "correct_attribution": 12,
+    "missing_attribution": 2,
+    "incorrect_fabricated_attribution": 2,
+    "ms_is_only_component_below_six_of_eight_on_both_function_and_misuse": true
+  },
+  "limitations": [
+    "No complete item-level JSONL was supplied for this second review.",
+    "It is valid for aggregate sensitivity ranges and named stable diagnostics, not item-level IAA or majority adjudication."
+  ]
+}

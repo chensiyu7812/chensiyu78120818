@@ -1,0 +1,198 @@
+{
+  "protocol": "pm-v1.5-learnable-transfer-training-data-v2",
+  "status": "DESIGN_FROZEN_BEFORE_NEW_GENERATION",
+  "trigger": {
+    "root_cause_report": "outputs/pm_v1_5_training_data_root_cause_audit_v1.json",
+    "failed_candidate_status": "NOT_SUPPORTED_FOR_INTERNAL_TEST_CONSUMPTION",
+    "primary_failures": [
+      "positive memory treatments mixed helpful and nonhelpful evidence",
+      "multi-source evidence interference",
+      "sixteen-way noisy absolute argmax targets",
+      "EvoEmo formal observable states are metadata OOD"
+    ]
+  },
+  "scientific_target": {
+    "estimand": "whether one supervised pre-item-retrieval router can jointly learn when to enable Strategy and which available memory sources to call under a conservative quality-risk-cost tradeoff",
+    "not_claimed": [
+      "human-optimal routing",
+      "clinical benefit or safety",
+      "item-level understanding before retrieval",
+      "pristine external generalization",
+      "autonomous understanding of user needs"
+    ]
+  },
+  "unified_router_definition": {
+    "one_PM_checkpoint": true,
+    "one_shared_feature_builder_and_component_heads": true,
+    "full_conceptual_action_space": "memory subset M0/MP/MS/ME/MPMS/MPME/MSME/MPMSME crossed with R0/RS",
+    "legal_action_mask": "source availability removes impossible actions before selection",
+    "ESConv_is_not_a_separate_policy": "it is the boundary case in which MP/MS/ME are structurally unavailable and the same PM chooses between M0+R0 and M0+RS",
+    "EvoEmo_is_not_a_separate_policy": "it is the multi-session region of the same state-action function with memory available",
+    "domain_identifier_as_router_feature_forbidden": true,
+    "separate_domain_metrics_are_for_evaluation_and_weighting_not_separate_capabilities": true
+  },
+  "mechanism_invariants": {
+    "same_generator_model_prompt_and_seed_within_each_contrast": true,
+    "same_state_builder_strategy_bank_retriever_and_query_builder_across_train_internal_and_external": true,
+    "router_observes_no_raw_memory_or_strategy_text_before_action": true,
+    "only_selected_sources_are_retrieved_after_action": true,
+    "cost_is_deterministic_not_llm_judged": true,
+    "hybrid_retrieval_is_not_adopted": true
+  },
+  "capability_matrix": {
+    "abstention_M0": {
+      "positive_support": "states where every resource is irrelevant or harmful",
+      "required_contrast": "M0 control versus one-resource placebo or harm treatment"
+    },
+    "MP_profile": {
+      "positive_support": "one annotated helpful profile item and no other selected item",
+      "negative_support": "matched irrelevant placebo and harmful profile item"
+    },
+    "MS_summary": {
+      "positive_support": "one annotated helpful session-summary item and no other selected item",
+      "negative_support": "matched irrelevant placebo and harmful summary item"
+    },
+    "ME_event": {
+      "positive_support": "one annotated helpful event item and no other selected item",
+      "negative_support": "matched irrelevant placebo and harmful event item"
+    },
+    "RS_strategy": {
+      "positive_support": "one relevant strategy card versus R0 under the same prompt across both memory-unavailable and memory-available backgrounds",
+      "negative_support": "R0 versus one mismatched or harmful strategy card",
+      "gold_strategy_boundary": "ESConv gold strategy may be a silver relevance labeling function but never response-quality gold"
+    },
+    "multi_source": {
+      "training_rule": "compose only source treatments that individually passed uptake and include explicit source-source and source-by-RS interaction contrasts",
+      "default_when_interaction_is_unidentified": "conservative interaction penalty and abstention",
+      "all_three_bundle_as_independent_evidence_forbidden": true
+    }
+  },
+  "clean_contrast_contract": {
+    "control": "same state with M0 or R0 as appropriate",
+    "helpful_treatment": "exactly one evaluator-annotated helpful item from the target source",
+    "irrelevant_placebo": "exactly one matched irrelevant item kept separate from harmful evidence",
+    "harm_treatment": "exactly one evaluator-annotated harmful item",
+    "positive_treatment_may_not_mix_irrelevant_or_harmful_items": true,
+    "selected_item_identity_is_evaluator_only_and_not_a_router_input": true,
+    "required_pre_scale_checks": [
+      "selected evidence composition is exact",
+      "generator uptake is positive for helpful treatment",
+      "generator uptake is nonpositive or safely ignored for harmful and irrelevant treatments",
+      "response differences are large enough to be judged above the frozen practical margin",
+      "no prompt token budget seed retriever or generator drift within a contrast"
+    ]
+  },
+  "external_transfer_support": {
+    "ESConv": {
+      "scientific_role": "single-session boundary-condition test of the same PM's selective Strategy use and immediate response quality",
+      "training_source": "bank-disjoint ESConv train dialogues only",
+      "observable_shapes_required": {
+        "memory_sources": "MP/MS/ME structurally unavailable",
+        "legal_actions": [
+          "M0+R0",
+          "M0+RS"
+        ],
+        "history_windows": [
+          2,
+          4,
+          6,
+          8
+        ],
+        "current_session_summary": "absent",
+        "strategy_bank_and_query_builder": "identical to external"
+      },
+      "test_gold_response_strategy_or_outcome_may_not_be_read": true,
+      "claim_boundary": "does not test memory or longitudinal personalization"
+    },
+    "EvoEmo_ES_MemEval_derived": {
+      "scientific_role": "development-informed multi-session test of the same PM's joint memory-source and Strategy allocation",
+      "training_support_source": "outcome-free operational envelope and synthetic metadata augmentation never external response or judge outcome",
+      "observable_shapes_required": {
+        "summary_absent_and_present": true,
+        "history_windows": [
+          2,
+          4,
+          6,
+          8
+        ],
+        "all_memory_availability_patterns": true,
+        "catalog_count_bins_include_zero_below_topk_at_topk_and_above_topk": true,
+        "age_bins_cover_recent_medium_and_long_staleness": true,
+        "age_span_bins_cover_single_session_and_multi_session_ranges": true,
+        "expected_retrieval_token_bins_cover_low_medium_and_high_budgets": true,
+        "query_similarity_bins_cover_low_ambiguous_and_high": true,
+        "strategy_catalog": "same frozen external Strategy Bank"
+      },
+      "raw_external_text_topic_related_session_and_outcome_copying_forbidden": true,
+      "external_observable_range_use_must_be_disclosed": "development-informed rather than pristine external evaluation",
+      "official_ES_MemEval_claim_forbidden_unless_official_protocol_is_executed": true
+    },
+    "pre_freeze_support_gate": {
+      "maximum_severe_ood_rate_per_external_domain": 0.1,
+      "ESConv_and_EvoEmo_must_pass_separately": true,
+      "scores_or_outcomes_may_not_be_used_to_repair_support": true
+    }
+  },
+  "weak_supervision": {
+    "quality": "blinded within-state pairwise preference with judge family retained separately",
+    "evidence_handling": "claim-to-visible-evidence audit with exact quote and abstention",
+    "risk": "action-applicable explicit flags; N/A is not zero",
+    "structural_need_and_harm": "high-precision silver labeling functions not response-quality gold",
+    "judge_disagreement": "retain as uncertainty or abstain; majority vote is not gold",
+    "human_anchor": "small train-only descriptive calibration and adjudication sample not bulk gold",
+    "existing_absolute_labels": "noisy auxiliary lineage only never the primary target"
+  },
+  "small_sample_learning": {
+    "stage_1": "shared regularized source-need and strategy-need heads from pre-retrieval observables across both domains",
+    "stage_2": "shared regularized realized-benefit residual heads from clean paired effects with a small frozen set of source-source and source-by-RS interactions",
+    "components": [
+      "MP",
+      "MS",
+      "ME",
+      "RS"
+    ],
+    "grouping": "user or dialogue grouped cross-validation and bootstrap",
+    "domain_weighting": "equal top-level domain then group then state then contrast for statistical balance only; no domain-specific policy or domain feature",
+    "multi_source_interaction": "explicit shrinkage toward nonpositive interaction unless supported",
+    "uncertain_action": "M0+R0",
+    "direct_sixteen_way_absolute_argmax_forbidden": true
+  },
+  "pretraining_gates": {
+    "gate_1_surface_and_lineage": "all deterministic corpus leakage mechanism and selected-item checks pass",
+    "gate_2_clean_treatment": "zero helpful-plus-nonhelpful contamination in positive clean contrasts",
+    "gate_3_mechanism_uptake": "pre-registered small pilot shows helpful uptake and harmful or placebo suppression",
+    "gate_4_measurement": "human-anchor and judge labeling functions have reportable reliability; unsupported rows abstain",
+    "gate_5_train_only_learnability": "group-held-out component prediction beats M0-only and structural-rule baselines by frozen margin",
+    "gate_6_external_input_support": "ESConv and EvoEmo observable-state severe OOD each at or below 0.10",
+    "full_generation_or_fit_before_all_gates_forbidden": true
+  },
+  "split_discipline": {
+    "train": "construct contrasts fit weak label model and component models",
+    "calibration": "one frozen threshold and viability evaluation after train-only design is fixed",
+    "internal_test": "sealed until candidate and thresholds are frozen; consumed once",
+    "external": "observable support may be checked without outcomes; response and judge outcomes remain sealed until study freeze",
+    "if_calibration_not_supported": "freeze NOT_SUPPORTED and do not open internal or external outcomes"
+  },
+  "reuse_and_regeneration": {
+    "reuse": [
+      "repaired V8.19.2 states and deterministic lineage",
+      "Strategy Bank and lexical retriever",
+      "existing outcomes as noisy diagnostics and cost provenance",
+      "existing judge rows as separate weak labeling functions",
+      "fixed-seeker V3 bundle"
+    ],
+    "must_regenerate": [
+      "clean single-item helpful placebo and harm response contrasts",
+      "supported multi-source interaction contrasts",
+      "outcome-free external-shape metadata augmentation",
+      "a small mechanism-matched human anchor packet after new responses exist"
+    ],
+    "existing_internal_and_external_outcomes_remain_sealed": true
+  },
+  "stopping_rule": {
+    "failure_of_any_pretraining_gate": "stop before scale-up and report the failed capability",
+    "threshold_prompt_judge_or_sample_iterations_until_pass_forbidden": true,
+    "success_is_not_guaranteed": "the contract guarantees that an unlearnable treatment is not scaled not that a learned PM must pass"
+  },
+  "contract_sha256": "fc3c5a9c0835e6514612baa3c4d13d4353a4873e2a7ae329275b24aa5ee56699"
+}

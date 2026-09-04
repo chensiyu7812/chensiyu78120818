@@ -1,0 +1,73 @@
+{
+  "protocol": "pm-v1.5-frozen-memory-heads-evoemo-support-diagnostic-v1",
+  "status": "COMPLETE_OUTCOME_BLIND_DIAGNOSTIC_ONLY",
+  "formal_external_promotion_allowed": false,
+  "source_model_gate_passed": false,
+  "external_state_count": 204,
+  "external_user_count": 18,
+  "component_reports": {
+    "MP": {
+      "state_count": 204,
+      "candidate_present": 114,
+      "candidate_absent": 90,
+      "candidate_present_fraction": 0.5588235294117647,
+      "candidate_in_development_support": 0,
+      "candidate_out_of_development_support": 114,
+      "candidate_support_fraction": 0.0,
+      "predicted_on": 0,
+      "predicted_off_with_candidate": 0,
+      "predicted_on_fraction_of_all_states": 0.0,
+      "predicted_on_fraction_of_supported_candidates": null,
+      "mean_probability_on_supported_candidates": null,
+      "selected_incremental_tokens": 0,
+      "always_on_when_available_incremental_tokens": 1414,
+      "tokens_saved_vs_always_on_when_available": 1414,
+      "response_quality_evaluated": false
+    },
+    "MS": {
+      "state_count": 204,
+      "candidate_present": 204,
+      "candidate_absent": 0,
+      "candidate_present_fraction": 1.0,
+      "candidate_in_development_support": 177,
+      "candidate_out_of_development_support": 27,
+      "candidate_support_fraction": 0.8676470588235294,
+      "predicted_on": 28,
+      "predicted_off_with_candidate": 149,
+      "predicted_on_fraction_of_all_states": 0.13725490196078433,
+      "predicted_on_fraction_of_supported_candidates": 0.15819209039548024,
+      "mean_probability_on_supported_candidates": 0.37172028446435296,
+      "selected_incremental_tokens": 2372,
+      "always_on_when_available_incremental_tokens": 18307,
+      "tokens_saved_vs_always_on_when_available": 15935,
+      "response_quality_evaluated": false
+    },
+    "ME": {
+      "state_count": 204,
+      "candidate_present": 204,
+      "candidate_absent": 0,
+      "candidate_present_fraction": 1.0,
+      "candidate_in_development_support": 122,
+      "candidate_out_of_development_support": 82,
+      "candidate_support_fraction": 0.5980392156862745,
+      "predicted_on": 0,
+      "predicted_off_with_candidate": 122,
+      "predicted_on_fraction_of_all_states": 0.0,
+      "predicted_on_fraction_of_supported_candidates": 0.0,
+      "mean_probability_on_supported_candidates": 0.2259521682725988,
+      "selected_incremental_tokens": 0,
+      "always_on_when_available_incremental_tokens": 65375,
+      "tokens_saved_vs_always_on_when_available": 65375,
+      "response_quality_evaluated": false
+    }
+  },
+  "quality_or_risk_outcome_used": false,
+  "api_calls": 0,
+  "claim_boundary": "This measures candidate availability, development-range support, frozen action rates, and token exposure only. It cannot establish external quality, risk, utility, or rescue a head that failed development grouped-OOF.",
+  "lineage": {
+    "model_sha256": "0fed459356cf519f033a6e0715a38969cbb714a6112475f8db15e4618ddb154e",
+    "training_report_sha256": "15b985c876ee4d746b9fc46f045b8033233fc636b43ee2173c8e813b6eef6e0c",
+    "external_descriptors_sha256": "1eecdb3b8f048971f5039ca13cd14315fd98f910055fc6e272cdfced8048b715",
+    "predictions_sha256": "a2ffd572dc8c9cf19e3ad5089aca88255591f4464e3be0302aeaebecbd4a67a0"
+  }
+}

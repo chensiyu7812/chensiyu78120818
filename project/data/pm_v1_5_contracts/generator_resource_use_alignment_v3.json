@@ -1,0 +1,78 @@
+{
+  "protocol": "pm-v1.5-generator-resource-use-alignment-v3",
+  "status": "ONE_REPAIR_CONSUMED_FUNCTIONAL_EXECUTION_GATE_FAILED_ROBUSTLY",
+  "constructs": {
+    "adjudicable": "The visible context, full selected resource, declaration, and response are sufficient to make a reliable judgment.",
+    "declaration_matches_response": "The declared use or ignore action is observable in the response. This is trace fidelity, not decision quality.",
+    "resource_decision_appropriate": "Using or ignoring the supplied resource is justified by current relevance, nonredundancy, boundary, and temporal status.",
+    "functional_execution": "When use is declared, the resource makes a discernible source-specific contribution rather than a topical or vague surface mention.",
+    "material_misuse": "Resource use creates an unsupported personal claim, stale/conflicting current assertion, overgeneralized cause or pattern, explicit boundary violation, or excessive directiveness sufficient to block adoption."
+  },
+  "dual_review_reconciliation": {
+    "reviewer_1": {"declaration_supported": "9/10", "functional": "9/10", "material_misuse": "2/10"},
+    "reviewer_2": {"declaration_supported": "8 yes, 1 no, 1 uncertain", "functional": "7 yes, 2 no, 1 uncertain", "material_misuse": "1/10"},
+    "shared_decision": "FAIL_GENERATOR_EXECUTION_GATE",
+    "reason": "Reviewer 1 exceeds the pre-frozen misuse maximum; reviewer 2 falls below the pre-frozen functional threshold. Averaging cannot turn either failed qualification into a pass.",
+    "stable_findings": [
+      "A prior-session work-shift explanation was promoted to an unsupported current cause.",
+      "A profile already repeated in the current turn is not an adjudicable test of profile use.",
+      "Vague continuity wording does not establish functional resource use.",
+      "Generator concise_decision_reason can invent visible cues and is audit telemetry only, never training gold."
+    ],
+    "threshold_disagreement": "One event-memory response promoted an old external-dependency task to the current situation; reviewers agreed on the failure mode but differed on whether it crossed the material threshold."
+  },
+  "repair_boundary": {
+    "allowed": ["Step2 prompt wording", "execution trace schema", "human measurement instrument"],
+    "forbidden": ["PM labels", "retrieval gold", "resource bank", "memory compiler", "external ESConv or EvoEmo outcomes"],
+    "fresh_recheck": "10 response-, judge-, risk-, and external-outcome-blind development states",
+    "scope_limit": "The fresh set contains positive resource opportunities and therefore checks use execution and misuse; it does not independently qualify the ignore path."
+  },
+  "fresh_recheck_gate": {
+    "adjudicable": "at least 8/10; non-adjudicable items are reported and excluded rather than forced",
+    "declaration_matches_response": "at least 80% of adjudicable items",
+    "resource_decision_appropriate": "at least 80% of adjudicable items",
+    "functional_execution_on_declared_use": "at least 80% of adjudicable declared-use items",
+    "material_misuse": "at most 1 adjudicable item",
+    "uncertain": "non-pass for the corresponding criterion",
+    "failure_action": "Report Step2 generator limitation; do not modify PM learning labels or external tests."
+  },
+  "fresh_recheck_result": {
+    "formal_importable_review": {
+      "adjudicable": "10/10",
+      "declaration_matches_response": "9/10",
+      "resource_decision_appropriate": "10/10",
+      "functional_execution": "7/10",
+      "material_misuse": "1/10",
+      "qualification": "FAIL_FUNCTIONAL_EXECUTION_BELOW_0.80",
+      "report": "outputs/pm_v1_5_repaired_resource_execution_human_check_v1/qualification_report.json"
+    },
+    "independent_summary_sensitivity": {
+      "adjudicable": "10/10",
+      "declaration_matches_response": "8/10",
+      "resource_decision_appropriate": "10/10",
+      "functional_execution": "5/10",
+      "material_misuse": "0/10",
+      "machine_importable_row_level_file": false,
+      "use": "threshold sensitivity only, not a second 10-row dataset"
+    },
+    "robust_conclusion": "Both reviewers pass adjudicability, decision appropriateness, and the frozen misuse maximum; both fail functional execution. The Step2 failure is therefore robust to the observed annotation threshold difference.",
+    "stable_failure_modes": [
+      "The resource is declared or mentioned but does not alter the operative suggestion or question.",
+      "A strategy is topically approximated but its defining mechanism is not executed.",
+      "Relevant session distinctions are omitted even when they directly answer the current request."
+    ],
+    "threshold_sensitive_items": [
+      "Implicit use of a prior-session distinction without naming its decisive concept.",
+      "Whether an open collaborative question is distinguishable execution of an MP preference or merely ordinary response behavior.",
+      "Whether one unhedged reuse of an earlier external-dependency explanation crosses the material-misuse threshold."
+    ],
+    "further_prompt_repair_allowed": false,
+    "further_human_execution_review_required": false
+  },
+  "scientific_separation": {
+    "step1": "PM predicts source-level opportunity before resource injection.",
+    "retrieval": "The fixed source-specific retriever selects a concrete candidate and may abstain.",
+    "step2": "The generator decides whether and how to realize the supplied candidate without upgrading old evidence into current fact.",
+    "outcome": "Frozen same-state quality, interaction-and-grounding risk, and cost comparisons evaluate the whole system; outcome judgments are not fed back into external-test training."
+  }
+}

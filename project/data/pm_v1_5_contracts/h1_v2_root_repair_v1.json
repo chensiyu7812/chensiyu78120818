@@ -1,0 +1,113 @@
+{
+  "protocol": "pm-v1.5-h1-v2-root-repair-v1",
+  "status": "ACTIVE_STAGED_ARCHITECTURE_REPAIR",
+  "date": "2026-08-03",
+  "estimand_unchanged": "ex_ante incremental exact-candidate resource opportunity, validated downstream by Step2 execution and H3 quality-risk-cost",
+  "legal_action_count_unchanged": 16,
+  "components_removed": [],
+  "training_authorized": false,
+  "architecture_contract": "data/pm_v1_5_contracts/staged_policy_architecture_v1.json",
+  "primary_annotation_role": "DEVELOPMENT_EVIDENCE",
+  "current_fresh_and_sealed_role": "INVALID_FOR_CONFIRMATORY_USE",
+  "audit": "outputs/pm_v1_5_final_h1_v2_annotation_audit_v1/audit_report.json",
+  "root_failures": [
+    "40 decision-surface duplicate groups affect 80 cross-split states",
+    "MS candidate-present always-OFF accuracy is 0.7373",
+    "ME current-message invitation cue balanced accuracy is approximately 0.8900",
+    "MP_PREFERENCE has 0 ON and 72 OFF examples",
+    "RS family-only retrospective balanced accuracy is approximately 0.848",
+    "MP incrementality and RS nonredundancy transparent factors do not encode the human evidence codes",
+    "row-level secondary overlap annotations are missing, so IAA cannot be computed"
+  ],
+  "required_factor_contract": {
+    "MP": [
+      "candidate_subtype",
+      "same_preference_or_fact_already_explicit_currently",
+      "functional_profile_relevance_to_current_task",
+      "entity_scope_fit",
+      "boundary_conflict",
+      "incremental_token_cost"
+    ],
+    "MS": [
+      "current_goal_is_factual_recall",
+      "candidate_distinction_answers_current_goal",
+      "candidate_currently_redundant",
+      "resolved_or_stale_conflict",
+      "entity_scope_fit",
+      "incremental_token_cost"
+    ],
+    "ME": [
+      "typed_reusable_outcome",
+      "contains_action_and_result_or_mechanism",
+      "candidate_current_goal_fit",
+      "candidate_currently_redundant",
+      "entity_scope_fit",
+      "boundary_conflict",
+      "incremental_token_cost"
+    ],
+    "RS": [
+      "strategy_family",
+      "prior_same_move_visible",
+      "explicit_nonrepeat_or_listen_boundary",
+      "full_execution_profile_hard_exclusion",
+      "candidate_goal_fit",
+      "candidate_burden_fit",
+      "incremental_token_cost"
+    ]
+  },
+  "repair_set_requirements": [
+    "replace every cross-split decision-surface duplicate copy",
+    "candidate-present majority constant accuracy below 0.70 per component and split",
+    "MP_PREFERENCE contains both ON and OFF within each qualification split",
+    "RS Question, Restatement, Providing Suggestions, and Reflection each contain ON and OFF across qualification data",
+    "ME invitation cue crossed with valid and invalid exact candidates in all four cells",
+    "MS contains nonredundant positive distinctions and outcomes as well as same-topic wrong-goal and redundant negatives",
+    "new confirmation and sealed states frozen before fitting",
+    "zero external outcome or lockbox reads"
+  ],
+  "human_work_policy": {
+    "do_not_repeat_primary_256": true,
+    "import_existing_secondary_64_before_new_review": false,
+    "existing_secondary_64_role": "OPTIONAL_OLD_CODEBOOK_IAA_DIAGNOSTIC",
+    "only_adjudicate_overlap_disagreements": true,
+    "one_final_repair_packet_only": true,
+    "final_repair_states": 96,
+    "repair_fit_states": 32,
+    "fresh_confirmation_states": 32,
+    "sealed_internal_test_states": 32,
+    "new_independent_overlap_states": 24,
+    "freeze_before_any_new_human_label": true
+  },
+  "stage_separation": {
+    "semantic_observation": "qualified_separately_against_evidence_codes",
+    "step1": "four_learned_router_heads",
+    "step2": "deterministic_execution_planner_not_a_second_router",
+    "end_to_end": "H3_quality_risk_cost",
+    "cross_fitting_required_if_any_observation_factor_is_learned": true
+  },
+  "h1r_evidence_code_repair": {
+    "deprecated_ambiguous_code": "WRONG_ENTITY_OR_GOAL",
+    "replacement_codes": [
+      "WRONG_OWNER_OR_ENTITY",
+      "TIME_STALE_OR_CONFLICTING",
+      "WRONG_GOAL_OR_FUNCTION"
+    ],
+    "unchanged_factor_codes": [
+      "OWNER_AND_TIME_VALID",
+      "CURRENT_GOAL_FIT",
+      "SAFE_AND_BOUNDARY_COMPATIBLE",
+      "BOUNDARY_OR_BURDEN_CONFLICT",
+      "CURRENTLY_REDUNDANT",
+      "SPECIFIC_FUNCTIONAL_INCREMENT",
+      "GENERIC_OR_NO_INCREMENT"
+    ],
+    "reason": "entity/time validity and goal/function fit must be independently auditable"
+  },
+  "model_policy": {
+    "primary": "four standardized L2 logistic heads",
+    "bge_or_other_embedding": "challenger only after transparent data and feature gates pass",
+    "direct_16_classification": false,
+    "external_results_may_select_or_repair_model": false
+  },
+  "next_step": "implement and statically qualify observation factors, then freeze the single 96-state orthogonal repair matrix and its 24-state independent overlap before human labeling"
+}

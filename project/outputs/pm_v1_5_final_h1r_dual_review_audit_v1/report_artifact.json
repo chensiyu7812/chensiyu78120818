@@ -1,0 +1,271 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PM V1.5 H1R 双评审计：失败发生在训练之前",
+    "description": "H1R候选语义gold、独立overlap一致性、标签形状与责任分层审计。",
+    "generatedAt": "2026-08-03T13:00:00+09:00",
+    "sources": [
+      {
+        "id": "h1r_audit",
+        "label": "H1R dual-review data-quality audit",
+        "path": "outputs/pm_v1_5_final_h1r_dual_review_audit_v1/audit_report.json",
+        "query": {
+          "language": "python",
+          "query": "python scripts/v1_5/25t_audit_final_h1r_reviews_v1_5.py --primary PRIMARY.jsonl --secondary SECONDARY.jsonl",
+          "sql": "SELECT * FROM read_json_auto('outputs/pm_v1_5_final_h1r_dual_review_audit_v1/audit_report.json')",
+          "description": "验证两份导出的协议、ID、枚举和双门派生，按96个component overlap pair计算预裁决IAA，并按split审核主审标签形状。",
+          "metric_definitions": [
+            "raw agreement = two reviewers with identical derived ON/OFF/ABSTAIN divided by 96 overlap component pairs",
+            "Cohen kappa uses the three derived decision categories and each reviewer's observed marginal distribution",
+            "majority constant accuracy = largest ON/OFF/ABSTAIN class count divided by 32 states within a component and split"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "raw_agreement",
+        "dataset": "headline",
+        "sourceId": "h1r_audit",
+        "description": "96个预冻结overlap组件裁决。",
+        "metrics": [{"label": "总体一致率", "field": "raw_agreement", "format": "percent"}]
+      },
+      {
+        "id": "kappa",
+        "dataset": "headline",
+        "sourceId": "h1r_audit",
+        "description": "冻结门为0.60；实际略低于门槛。",
+        "metrics": [{"label": "Cohen κ", "field": "kappa", "format": "number"}]
+      },
+      {
+        "id": "disagreements",
+        "dataset": "headline",
+        "sourceId": "h1r_audit",
+        "description": "其中10项集中于ME当前目标匹配。",
+        "metrics": [{"label": "分歧裁决", "field": "disagreements", "format": "number"}]
+      },
+      {
+        "id": "schema_errors",
+        "dataset": "headline",
+        "sourceId": "h1r_audit",
+        "description": "两份文件结构、协议和ID均有效。",
+        "metrics": [{"label": "Schema错误", "field": "schema_errors", "format": "number"}]
+      }
+    ],
+    "charts": [
+      {
+        "id": "component_agreement",
+        "title": "四组件预裁决一致率",
+        "subtitle": "每组件24个独立overlap裁决；冻结最低线为70%。",
+        "intent": "comparison",
+        "question": "哪个组件的语义判定不可操作？",
+        "rationale": "四个离散组件与单一门槛适合直接并列条形比较；ME的缺口一眼可见。",
+        "type": "bar",
+        "dataset": "component_agreement",
+        "sourceId": "h1r_audit",
+        "encodings": {
+          "x": {"field": "component", "type": "nominal", "label": "组件"},
+          "y": {"fields": ["raw_agreement", "frozen_minimum"], "type": "quantitative", "format": "percent", "label": "一致率"}
+        },
+        "valueFormat": "percent",
+        "yAxisTitle": "一致率",
+        "layout": "full",
+        "maxRows": 4
+      },
+      {
+        "id": "label_shape",
+        "title": "主审标签在各split的ON/OFF形状",
+        "subtitle": "每行32个state；冻结规则要求多数常数准确率严格低于70%。",
+        "intent": "composition",
+        "question": "哪些component/split可被恒关策略轻易替代？",
+        "rationale": "12行堆叠条形能同时展示每个component/split的实际标签构成和退化位置。",
+        "type": "horizontalStackedBar",
+        "dataset": "label_shape",
+        "sourceId": "h1r_audit",
+        "encodings": {
+          "x": {"field": "component_split", "type": "nominal", "label": "组件 / split"},
+          "y": {"fields": ["off", "on"], "type": "quantitative", "label": "状态数"}
+        },
+        "valueFormat": "number",
+        "xAxisTitle": "状态数",
+        "layout": "full",
+        "maxRows": 12
+      }
+    ],
+    "tables": [
+      {
+        "id": "iaa_detail",
+        "title": "一致性与分歧位置",
+        "subtitle": "Subtype四组件均100%一致；ME分歧发生在当前目标与增量门。",
+        "dataset": "iaa_detail",
+        "sourceId": "h1r_audit",
+        "defaultSort": {"field": "component", "direction": "asc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "component", "label": "组件", "type": "text"},
+          {"field": "raw_agreement", "label": "Decision一致", "format": "percent"},
+          {"field": "kappa", "label": "κ", "format": "number"},
+          {"field": "gate1_agreement", "label": "门1一致", "format": "percent"},
+          {"field": "gate2_agreement", "label": "门2一致", "format": "percent"},
+          {"field": "subtype_agreement", "label": "Subtype一致", "format": "percent"},
+          {"field": "disagreements", "label": "分歧数", "format": "number"}
+        ]
+      },
+      {
+        "id": "responsibility",
+        "title": "当前证据能归责到哪一层",
+        "subtitle": "H1R只审核回复前候选语义；没有运行PM预测或生成回复。",
+        "dataset": "responsibility",
+        "sourceId": "h1r_audit",
+        "defaultSort": {"field": "order", "direction": "asc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "order", "label": "顺序", "format": "number"},
+          {"field": "layer", "label": "层级", "type": "text"},
+          {"field": "assessed", "label": "本轮是否评测", "type": "text"},
+          {"field": "finding", "label": "本轮结论", "type": "text"}
+        ]
+      },
+      {
+        "id": "observation_diag",
+        "title": "Observation对未裁决主审的诊断分数",
+        "subtitle": "这些分数不能资格化factor；ME高分与低IAA并存，提示构念同源。",
+        "dataset": "observation_diag",
+        "sourceId": "h1r_audit",
+        "defaultSort": {"field": "component", "direction": "asc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "component", "label": "组件", "type": "text"},
+          {"field": "balanced_accuracy", "label": "BA", "format": "percent"},
+          {"field": "recall", "label": "Recall", "format": "percent"},
+          {"field": "specificity", "label": "Specificity", "format": "percent"},
+          {"field": "interpretation", "label": "解释", "type": "text"}
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# H1R 不能冻结成训练 gold；失败尚未发生在 PM 或 generator"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "body": "## 技术结论\n\n两份文件都完整可靠，但H1R没有通过冻结门：总体一致率83.3%过线，κ=0.576未达到0.60；ME一致率只有58.3%。同时MP在三个split、MS在FRESH/SEALED都可被≥70%的恒关策略替代。当前正确状态是`HOLD_DO_NOT_FREEZE_GOLD_OR_TRAIN`。这证明的是candidate-state构造和ME双门操作化仍有问题；此时没有PM预测、没有Step2、没有回复，因此不能把失败归给PM开错或generator不会使用。",
+        "sourceId": "h1r_audit"
+      },
+      {"id": "headline_metrics", "type": "metric-strip", "cardIds": ["raw_agreement", "kappa", "disagreements", "schema_errors"]},
+      {
+        "id": "me_finding",
+        "type": "markdown",
+        "body": "## ME的分歧不是资源类型，而是“现在是否该用”\n\n四组件subtype一致率均为100%，说明两位评审都能识别候选是什么。ME的10个方向分歧却全部为主审ON、副审OFF：主审把对象正确的可复用结果直接判为当前有增量；副审进一步检查用户此刻要的是倾听、复述、事实回忆、一个问题还是行动选项。冻结estimand要求后者，因此primary ME出现系统性构念合并，不能直接作为gold。",
+        "sourceId": "h1r_audit"
+      },
+      {"id": "agreement_chart", "type": "chart", "chartId": "component_agreement"},
+      {"id": "iaa_table", "type": "table", "tableId": "iaa_detail"},
+      {
+        "id": "shape_finding",
+        "type": "markdown",
+        "body": "## 实际gold形状没有达到“能证明学习”的要求\n\nMP主审只有25 ON / 71 OFF，三个split恒关准确率分别为75.0%、71.9%、75.0%；MP_PREFERENCE更是0 ON / 48 OFF，因为候选偏好被当前消息直接重复或冲突。MS在FRESH与SEALED也分别达到71.9%和75.0%恒关。静态construction bit虽然平衡，但人工语义gold不平衡；这正是construction intent不能当gold的实证。",
+        "sourceId": "h1r_audit"
+      },
+      {"id": "label_chart", "type": "chart", "chartId": "label_shape"},
+      {
+        "id": "observation_finding",
+        "type": "markdown",
+        "body": "## 高Observation分数反而暴露了构念同源\n\n五因子合取对未裁决主审ME达到96.7% BA，但独立ME一致率只有58.3%。这不是模型已经理解ME，而是主审与透明规则共同把reusable subtype近似当成current-goal fit。RS的同一诊断只有68.4% BA，直接低于冻结因子门。由于gold本身未资格化，四个数字都只能定位问题，不能晋级Observation或进入Step 1。",
+        "sourceId": "h1r_audit"
+      },
+      {"id": "observation_table", "type": "table", "tableId": "observation_diag"},
+      {
+        "id": "scope_definitions",
+        "type": "markdown",
+        "body": "## 本轮测量对象与门槛\n\n分析粒度是一个独立state中的一个exact Rank-1 component candidate。门1判断对象/时间/目标/边界是否适用，门2判断相对R0是否存在具体、非冗余增量；双yes为ON，任一no为OFF。IAA只使用预冻结24-state overlap中的96个候选，且永远按裁决前标签报告。多数常数门按每component×split的32个state计算。"
+      },
+      {
+        "id": "responsibility_finding",
+        "type": "markdown",
+        "body": "## 责任定位必须停在训练之前\n\n本轮唯一可归责层是语义候选/gold资格：MP preference正例没有被构造出来，ME候选与当前回复目标没有正交配对，少数RS卡仍存在动作正确但burden档位冲突。检索器在这个受控包里故意返回真负例以训练OFF，因此“不该注入”不自动等于检索失败。只有PM拟合后预测错才是Step 1模型错误；只有资源被正确开启后生成器未绑定、空转或误用才是Step 2错误。"
+      },
+      {"id": "responsibility_table", "type": "table", "tableId": "responsibility"},
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## 裁决不能把本批救成正式资格集\n\n16处分歧仍可用于完善development codebook，但裁决不会改变预裁决κ；MP三个split的标签形状也不可能靠这两个MP overlap分歧降到70%以下。因此不应追加第三人投票或只挑副审/主审有利结果，也不应在这批数据上换BAAI、调logistic或先跑generator。"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 下一步是研究范围决定，不是继续跑训练\n\n若坚持完整四head learned-PM主张，需要版本化的新资格实验：全新用户与surface、非回声MP_PREFERENCE正例、ME candidate-validity×current-goal四格、MS每split平衡，并冻结新的confirmation/sealed。现有H1R只能进入development/root-cause evidence。若不愿承担这部分数据成本，V1.5必须把完整learned四head结论报告为未支持；不能手动关闭失败组件后仍声称16动作已经学会。"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 需要拍板的问题\n\n唯一实质选择是：继续保留“完整四资源learned Step 1”作为论文必要主张，并支付一轮真正全新的资格数据成本；还是把V1.5定位为资源语义、风险与执行责任分层的负向/方法学结果。二者都比在当前H1R上强训后宣称及格更站得住。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-03T13:00:00+09:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {"raw_agreement": 0.8333333333333334, "kappa": 0.5755733628074055, "disagreements": 16, "schema_errors": 0}
+      ],
+      "component_agreement": [
+        {"component": "MP", "raw_agreement": 0.9166666666666666, "frozen_minimum": 0.70},
+        {"component": "MS", "raw_agreement": 0.9583333333333334, "frozen_minimum": 0.70},
+        {"component": "ME", "raw_agreement": 0.5833333333333334, "frozen_minimum": 0.70},
+        {"component": "RS", "raw_agreement": 0.875, "frozen_minimum": 0.70}
+      ],
+      "iaa_detail": [
+        {"component": "ME", "raw_agreement": 0.5833333333333334, "kappa": 0.1666666666666667, "gate1_agreement": 0.2916666666666667, "gate2_agreement": 0.5833333333333334, "subtype_agreement": 1.0, "disagreements": 10},
+        {"component": "MP", "raw_agreement": 0.9166666666666666, "kappa": 0.70, "gate1_agreement": 0.9583333333333334, "gate2_agreement": 0.9166666666666666, "subtype_agreement": 1.0, "disagreements": 2},
+        {"component": "MS", "raw_agreement": 0.9583333333333334, "kappa": 0.8823529411764707, "gate1_agreement": 0.9166666666666666, "gate2_agreement": 0.9583333333333334, "subtype_agreement": 1.0, "disagreements": 1},
+        {"component": "RS", "raw_agreement": 0.875, "kappa": 0.7303370786516854, "gate1_agreement": 0.875, "gate2_agreement": 0.9166666666666666, "subtype_agreement": 1.0, "disagreements": 3}
+      ],
+      "label_shape": [
+        {"component_split": "ME / FIT", "off": 17, "on": 15},
+        {"component_split": "ME / FRESH", "off": 17, "on": 15},
+        {"component_split": "ME / SEALED", "off": 17, "on": 15},
+        {"component_split": "MP / FIT", "off": 24, "on": 8},
+        {"component_split": "MP / FRESH", "off": 23, "on": 9},
+        {"component_split": "MP / SEALED", "off": 24, "on": 8},
+        {"component_split": "MS / FIT", "off": 17, "on": 15},
+        {"component_split": "MS / FRESH", "off": 23, "on": 9},
+        {"component_split": "MS / SEALED", "off": 24, "on": 8},
+        {"component_split": "RS / FIT", "off": 19, "on": 13},
+        {"component_split": "RS / FRESH", "off": 18, "on": 14},
+        {"component_split": "RS / SEALED", "off": 18, "on": 14}
+      ],
+      "responsibility": [
+        {"order": 1, "layer": "Candidate / H1 gold", "assessed": "是", "finding": "FAIL：ME构念分歧、MP/MS标签形状失败"},
+        {"order": 2, "layer": "Retriever natural fit", "assessed": "否", "finding": "受控hard negatives不等于自然检索错误"},
+        {"order": 3, "layer": "Observation factors", "assessed": "待gold", "finding": "不能在未冻结gold时资格化"},
+        {"order": 4, "layer": "Step 1 PM model", "assessed": "否", "finding": "尚未训练，不能归责"},
+        {"order": 5, "layer": "Step 2 generator", "assessed": "否", "finding": "未生成回复，不能归责"},
+        {"order": 6, "layer": "End-to-end Q/R/C", "assessed": "否", "finding": "未运行"}
+      ],
+      "observation_diag": [
+        {"component": "ME", "balanced_accuracy": 0.9666666666666667, "recall": 0.9333333333333333, "specificity": 1.0, "interpretation": "不可晋级：与低ME IAA并存，构念同源"},
+        {"component": "MP", "balanced_accuracy": 0.9577464788732395, "recall": 1.0, "specificity": 0.9154929577464789, "interpretation": "不可晋级：MP标签形状门失败"},
+        {"component": "MS", "balanced_accuracy": 0.8125, "recall": 0.625, "specificity": 1.0, "interpretation": "不可晋级：FRESH/SEALED标签形状失败"},
+        {"component": "RS", "balanced_accuracy": 0.6842572062084258, "recall": 0.8048780487804879, "specificity": 0.5636363636363636, "interpretation": "未达到冻结0.70 factor门"}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "h1r_audit",
+      "label": "H1R dual-review data-quality audit",
+      "path": "outputs/pm_v1_5_final_h1r_dual_review_audit_v1/audit_report.json"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "protocol": "pm-v1.5-support-need-human-anchor-learnability-binding-v1",
+  "status": "INSUFFICIENT_EVIDENCE_FOR_FORMAL_FIVE_WAY_MODE_FIT",
+  "output_file": "outputs/pm_v1_5_support_need_anchor_learnability_v1/report.json",
+  "output_file_sha256": "4d37cddf9ad220f766e33f58cccde367e7b7380100472494a27e53a26fe0976d",
+  "report_sha256": "5bfc449a7c2228fa14a652ebfb1e6429466d8e6e1f7a772b1e0e9a5b36ec0841",
+  "human_annotation_file_sha256": "7253f6b3e09d26e4d74ece4a69b76f97be81ebf9a44eb9efd1598afb5064b260",
+  "normalized_anchors_file_sha256": "911369eaba0f91db655d5176186031184fd9dd1628aa5d079d6d6178dcee8144",
+  "normalization_binding_file_sha256": "1c044b614806a91e0a61a782874457ffd1566103b71b93ee514a4dfd7c12a027",
+  "non_abstaining_anchor_count": 23,
+  "independent_dialogue_groups": 23,
+  "support_mode_class_counts": {
+    "listen": 5,
+    "explore": 4,
+    "comfort_reassure": 7,
+    "light_guidance": 5,
+    "structured_planning": 2
+  },
+  "support_mode_oof_prior_soft_log_loss": 1.7473312280706708,
+  "support_mode_best_view": "lexical_hash",
+  "support_mode_best_soft_log_loss": 1.617618859685495,
+  "support_mode_best_accuracy": 0.2323232323232323,
+  "support_mode_nonzero_recall_class_count": 1,
+  "support_mode_class_count": 5,
+  "flat_five_way_support_mode_ready_for_formal_fit": false,
+  "baai_outperformed_transparent_lexical_for_support_mode": false,
+  "formal_fit_authorized": false,
+  "automatic_gold_labels_created": false,
+  "api_calls_made": 0,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false
+}

@@ -1,0 +1,15 @@
+{
+  "protocol": "pm-v1.5-d2-measurement-generation-execution-v1",
+  "status": "READY_FOR_EXECUTION",
+  "planned_calls": 144,
+  "completed_calls": 0,
+  "remaining_calls": 144,
+  "lineage_ok": true,
+  "existing_outputs_ok": true,
+  "api_key_environment_variable": "NVIDIA_API_KEY",
+  "api_key_present": true,
+  "estimated_input_tokens_remaining": 83117,
+  "max_output_tokens_upper_bound_remaining": 43200,
+  "run_requested": true,
+  "api_calls_made": 0
+}

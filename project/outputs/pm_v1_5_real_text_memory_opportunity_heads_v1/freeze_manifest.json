@@ -1,0 +1,15 @@
+{
+  "protocol": "pm-v1.5-real-text-memory-opportunity-head-fit-v1",
+  "status": "PASS_THREE_MEMORY_HEADS_PROMOTED",
+  "fit_report_sha256": "a51f6dc6507d1415bbe744e48e8b393eebc1edb7ab97961939332d0f872a8c39",
+  "fit_rows_sha256": "5a9a20c13bd170609060d5507265f38a44cbe0506e69927fd0e7a2afb5f5d862",
+  "confirmation_rows_sha256": "2c5604ea2076ead3179f891d41000d205c33fa32f8eee301df2775248bb8aea0",
+  "models": {
+    "MP": "b083b3bd08b0e2fc3f7a757d93732a5a9c238aed6eadc46de10d92a9d144f9f8",
+    "MS": "da9cedc5fa3e701a3dfc16b03c4c4d482613ed0ca98d72e02d0569b2bf760dae",
+    "ME": "62c67cf41ac2f2a6bcc34e59c3a81895261de297d7a2f0eae8836fadb0c714f1"
+  },
+  "fresh_v2_confirmation_used_for_feature_threshold_or_hyperparameter_selection": false,
+  "fresh_v2_confirmation_reusable_after_this_run": false,
+  "external_outcome_used": false
+}

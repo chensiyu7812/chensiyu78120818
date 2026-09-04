@@ -1,5 +1,11 @@
 # MetaCom-PM：检索前情绪支持资源分配
 
+> 当前 PM-v1.5 唯一执行路线见
+> `docs/PM_V1_5_FINAL_RESEARCH_PLAN_ZH.md`，机器可读阶段与门槛见
+> `data/pm_v1_5_contracts/final_execution_plan_v2.json`。旧的 minimum/core-chain/reverse-
+> designed/canonical-freeze 文档只保留为历史证据，不再分别下达任务。当前旧 ESConv states
+> 含 corpus-level `situation` privileged input，不得进入新训练或最终评测。
+
 本包实现第一篇论文的冻结范围：**纯文本、固定生成器之外、监督式 pre-evidence Policy Manager**。PM 只在实际取回证据前选择 MP、MS、ME 与 ESConv Strategy RAG，不实现 POMDP、RL、distress、安全门控、多模态或记忆写回。
 
 ## 数据边界

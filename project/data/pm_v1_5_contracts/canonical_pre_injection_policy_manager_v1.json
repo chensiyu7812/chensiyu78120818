@@ -1,0 +1,114 @@
+{
+  "protocol": "pm-v1.5-canonical-pre-injection-policy-manager-v1",
+  "status": "ACTIVE_CANONICAL_METHOD_20260802",
+  "research_claim": "A low-capacity auditable pre-injection resource router learns conservative resource-opportunity decisions and, within measured support, reduces generator context cost relative to a fixed high-resource policy while preserving immediate support quality and not increasing explicit interaction-and-grounding risk.",
+  "claim_changed_from_original_policy_manager_goal": false,
+  "decision_stage": "post_candidate_discovery_pre_injection_pre_generation",
+  "step1_estimand": "outcome_blind_resource_opportunity",
+  "step1_forbidden_estimands": [
+    "single_stochastic_response_winner",
+    "latent_psychological_diagnosis",
+    "future_external_outcome"
+  ],
+  "heads": ["MP", "MS", "ME", "RS"],
+  "action_interface_size": 16,
+  "learner": {
+    "type": "standardized_l2_logistic_regression",
+    "C": 0.3,
+    "threshold": 0.5,
+    "loss": "binary_cross_entropy_plus_l2",
+    "direct_16_class_forbidden": true,
+    "deployment_probability_interpretation_forbidden": true
+  },
+  "runtime_order": [
+    "shared_candidate_discovery",
+    "deterministic_owner_time_conflict_redundancy_boundary_budget_gates",
+    "four_opportunity_heads",
+    "fail_closed_unpromoted_or_ood_bits",
+    "mechanical_16_action_compiler",
+    "source_matched_prompt",
+    "fixed_generator"
+  ],
+  "cost_claim": {
+    "primary": "generator_input_tokens_and_injected_items",
+    "retrieval_calls_saved": false,
+    "reason": "candidate discovery occurs before the PM decision"
+  },
+  "single_representation_repair": {
+    "status": "CONSUMED_NO_FURTHER_RETUNING",
+    "old": "raw_term_frequency_cosine",
+    "new": "distinct_content_word_overlap_level_0_0.5_1",
+    "v1_or_v2_confirmation_reused": false,
+    "v3_confirmation_used_once": true,
+    "internal_result": {
+      "MP": "NOT_PROMOTED_V3_SPECIFICITY_0.50",
+      "MS": "NOT_PROMOTED_V3_SPECIFICITY_0.50_AND_CONDITION_BA_0.604",
+      "ME": "PROMOTED"
+    },
+    "evoemo_head_eligible_in_support": {
+      "MP": 1.0,
+      "MS": 1.0,
+      "ME": 1.0
+    }
+  },
+  "current_component_status": {
+    "RS": "BASIC_DEVELOPMENT_INFORMED_OPPORTUNITY_PASS_RETRIEVAL_ABSTENTION_REQUIRED",
+    "ME": "PROMOTED_SCALE_STABLE_OPPORTUNITY_HEAD",
+    "MP": "NOT_PROMOTED_FAIL_CLOSED",
+    "MS": "NOT_PROMOTED_FAIL_CLOSED"
+  },
+  "runtime_variants": {
+    "learned_pm_full_four_head_frozen": {
+      "role": "ORIGINAL_FULL_CLAIM_TEST_EXPLORATORY_UNTIL_MP_MS_QUALIFY",
+      "enabled_heads": ["MP", "MS", "ME", "RS"],
+      "uses_frozen_unretuned_mp_ms": true,
+      "deployment_qualified": false,
+      "reason": "Preserves a direct test of the original four-resource PM claim instead of making failure disappear by masking unqualified heads."
+    },
+    "learned_pm_qualified_conservative": {
+      "role": "QUALIFIED_CONSERVATIVE_SENSITIVITY_AND_DEPLOYMENT_CANDIDATE",
+      "enabled_heads": ["ME", "RS"],
+      "forced_off_heads": ["MP", "MS"],
+      "deployment_qualified": "PARTIAL_RS_DEVELOPMENT_INFORMED_ME_PROMOTED",
+      "reason": "Separates the currently supported runtime from the full-claim test; forced-off does not mean that the MP/MS resources are intrinsically useless or permanently removed."
+    }
+  },
+  "generator_execution_status": {
+    "decision_appropriateness": "10/10 under both fresh reviewers",
+    "functional_execution_sensitivity_range": "5/10 to 7/10",
+    "material_misuse_sensitivity_range": "0/10 to 1/10",
+    "qualification": "FAILED_PRE_FROZEN_0.80_FUNCTIONAL_GATE",
+    "prompt_repair_budget": "CONSUMED_NO_FURTHER_RETUNING",
+    "implication": "Proceed only as a frozen system limitation and report treatment adherence; never rewrite Step1 labels from generator nonuse."
+  },
+  "comparators": [
+    "always_off",
+    "fixed_high_resource_after_hard_gates",
+    "transparent_rule",
+    "learned_pm_full_four_head_frozen",
+    "learned_pm_qualified_conservative",
+    "cost_matched_fixed_action_selected_on_internal_calibration_only"
+  ],
+  "secondary_v1_derived_comparators": [
+    "raw_session_top4_plus_strategy_current_stack",
+    "all_raw_sessions_plus_strategy_current_stack",
+    "single_component_mp_ms_me_rs_atomic_arms",
+    "historical_v1_learned_pm_system_reproduction_not_for_same_stack_attribution"
+  ],
+  "baseline_fairness_rules": [
+    "same_test_states_same_generator_same_prompt_family_same_current_strategy_bank_and_memory_compiler_for_primary_comparators",
+    "cost_matched_fixed_action_must_be_selected_and_frozen_without_external_quality_or_risk_outcomes",
+    "external_exhaustive_16_action_search_must_not_select_a_best_fixed_baseline",
+    "historical_v1_scores_must_not_be_numerically_merged_with_v1_5_scores",
+    "historical_v1_system_reproduction_is_secondary_unless_an_exact_current_stack_action_projection_is preregistered"
+  ],
+  "primary_metric_order": [
+    "grouped_oof_opportunity_brier_gain",
+    "blind_quality_noninferiority",
+    "four_atomic_interaction_grounding_risk_guardrails",
+    "generator_input_token_reduction_vs_fixed_high"
+  ],
+  "no_more_large_human_review": true,
+  "remaining_human_check_items": 0,
+  "external_outcome_retuning_forbidden": true
+}

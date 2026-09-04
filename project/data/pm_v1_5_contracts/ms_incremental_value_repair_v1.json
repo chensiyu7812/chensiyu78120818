@@ -1,0 +1,104 @@
+{
+  "protocol": "pm-v1.5-ms-incremental-value-repair-v1",
+  "status": "FROZEN_OUTCOME_BLIND_REPAIR_AUTHORIZED",
+  "scientific_question": "Can PM learn when a correct strictly-prior session summary is an eligible, nonredundant and currently usable resource opportunity, while downstream system evaluation separately measures realized quality, risk and cost?",
+  "prior_ms_result": {
+    "disposition": "DIAGNOSTIC_VALID_FOR_OLD_TREATMENT_NOT_FINAL_MS_DESIGN",
+    "independent_states": 32,
+    "final_state_targets": {
+      "0.0": 31,
+      "0.5": 1,
+      "1.0": 0
+    },
+    "retrieval_qualification": "PASS",
+    "incremental_value_manipulation": "ABSENT",
+    "learned_head_qualification": "FAIL"
+  },
+  "repair_boundary": {
+    "new_content_disjoint_users": 32,
+    "primary_pairs": 32,
+    "outcome_blind_repeat_pairs": 8,
+    "total_pairs": 40,
+    "planned_calls": 80,
+    "one_bit_contrast": "same state, seed, background and generator; treatment adds MS only",
+    "runtime_actions_retained": 16,
+    "same_internal_external_stack": [
+      "MS_SESSION ontology",
+      "strictly-prior supplied-summary compiler",
+      "seeker-only query",
+      "same Top-2 retriever",
+      "same hard filters",
+      "post-candidate PM timing",
+      "same selective-use prompt",
+      "same generator"
+    ]
+  },
+  "design_cells": {
+    "useful_nonredundant_prior_outcome": 16,
+    "relevant_but_no_incremental_value": 16,
+    "post_background_routing_targets": {
+      "on": 13,
+      "off": 19,
+      "reason_for_three_additional_off": "the enabled ME background already contains the selected MS result, so MS adds no action-level information"
+    },
+    "current_request_cells": {
+      "put_into_words_no_advice": 8,
+      "small_optional_suggestion": 8,
+      "priority_exploration": 8,
+      "understand_current_difference": 8
+    },
+    "backgrounds": "all eight MP/ME/RS backgrounds exactly four states each, with two high-alignment and two low-alignment states per background",
+    "topics": "eight content-disjoint everyday support themes; every theme crosses all four request cells and both alignment directions"
+  },
+  "candidate_rules": {
+    "positive_opportunity_candidate": "same-user, strictly-prior, current-topic relevant summary containing a prior response, outcome, distinction or coping result that is absent from current seeker-visible text",
+    "nonpositive_candidate": "same-user, strictly-prior and relevant, but either exactly restates seeker-visible content or contains no prior result that can answer the present request",
+    "cross_resource_redundancy": "an otherwise useful MS candidate is off when an already-enabled resource contains the same evidence",
+    "hard_exclusions_not_generated": [
+      "wrong user",
+      "future memory",
+      "explicitly conflicting or rejected evidence",
+      "stale embedded request",
+      "source-ineligible summary"
+    ]
+  },
+  "pm_features": {
+    "candidate_state_match_score": "transparent pre-outcome retrieval score",
+    "candidate_incremental_alignment_score": "transparent opportunity rubric target used for controlled qualification; it must not also be supplied as an input to a learned model",
+    "background_MP_on": "explicit bit",
+    "background_ME_on": "explicit bit",
+    "background_RS_on": "explicit bit",
+    "feature_count": 5,
+    "forbidden": [
+      "user id",
+      "topic/template id",
+      "design-cell name",
+      "expected direction",
+      "response text",
+      "human or judge outcome",
+      "dataset/domain identity"
+    ]
+  },
+  "measurement": {
+    "step1_target": "outcome-blind opportunity/permission label from candidate validity, nonredundancy, prior response-or-outcome content, and current continuity usability",
+    "retrieval_and_execution": "audited independently from the PM target",
+    "quality": "optional bounded A/B/tie/uncertain system-effect validation using a material adoption threshold",
+    "risk": "interaction-and-grounding risk is evaluated on resource-bearing outputs and reported with an explicit denominator",
+    "state_target": "single stochastic A/B quality preference is not a Step 1 label",
+    "not_hard_gold": true,
+    "measurement_layers_contract": "resource_routing_measurement_layers_v1.json"
+  },
+  "minimum_train_support": {
+    "independent_positive_opportunity_states": 8,
+    "independent_nonpositive_opportunity_states": 8,
+    "unknown_rate_max": 0.1
+  },
+  "promotion_gate": {
+    "user_grouped_oof_balanced_accuracy_min": 0.65,
+    "brier_must_beat_prevalence_prior": true,
+    "both_on_and_off_predictions_required": true,
+    "five_seed_prediction_stability_required": true,
+    "no_hyperparameter_or_encoder_search_on_same_states": true
+  },
+  "stopping_rule": "If the frozen opportunity-routing OOF gate fails, report MS routing as not learned for V1.5. If routing passes but aggregate treatment effect does not, report correct routing without demonstrated system benefit. Do not relabel ties, force memory mention, search seeds, or keep regenerating until positive."
+}

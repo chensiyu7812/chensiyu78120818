@@ -1,0 +1,153 @@
+{
+  "protocol": "pm-v1.5-strategy-g2-real-qualification-v1",
+  "status": "RAG_QUALIFIED_FOR_G3_CLEAN_TREATMENT",
+  "qualification_scope": "Safe, bounded Strategy Guidance opportunity and Top-1 retrieval for G3; response benefit remains unproven until clean treatment.",
+  "universe": {
+    "clean_train_states": 9148,
+    "clean_train_dialogues": 748,
+    "g1_all_lineage_dialogues": 709,
+    "g1_accepted_formative_source_dialogues": 280,
+    "primary_strict_holdout_dialogues": 39,
+    "sensitivity_holdout_dialogues": 468,
+    "validation_test_evoemo_rows": 0
+  },
+  "primary_strict": {
+    "subset": "primary_strict_all_g1_lineage_disjoint",
+    "states": 398,
+    "independent_dialogues": 39,
+    "eligible_states": 13,
+    "eligibility_activation_rate": 0.032663,
+    "dialogues_with_any_eligible_state": 10,
+    "dialogue_activation_rate": 0.25641,
+    "active_high_stakes_states": 0,
+    "explicit_stop_states": 1,
+    "listen_only_states": 0,
+    "lexical": {
+      "selected_states": 13,
+      "coverage_of_all_states": 0.032663,
+      "score_floor_abstentions": 0,
+      "distinct_cards_selected": [
+        "AM01_invite_open_expression",
+        "AM04_tentative_paraphrase_check",
+        "AM05_grounded_validation",
+        "AM10_offer_one_optional_micro_step",
+        "AM14_supportive_transition"
+      ],
+      "native_family_proxy_evaluable_states": 13,
+      "native_family_proxy_compatible": 3,
+      "native_family_proxy_agreement": 0.230769
+    },
+    "bge": {
+      "selected_states": 5,
+      "coverage_of_all_states": 0.012563,
+      "score_floor_abstentions": 8,
+      "distinct_cards_selected": [
+        "AM04_tentative_paraphrase_check"
+      ],
+      "native_family_proxy_evaluable_states": 5,
+      "native_family_proxy_compatible": 0,
+      "native_family_proxy_agreement": 0.0
+    }
+  },
+  "sensitivity": {
+    "subset": "sensitivity_accepted_source_disjoint",
+    "states": 5553,
+    "independent_dialogues": 468,
+    "eligible_states": 331,
+    "eligibility_activation_rate": 0.059607,
+    "dialogues_with_any_eligible_state": 199,
+    "dialogue_activation_rate": 0.425214,
+    "active_high_stakes_states": 24,
+    "explicit_stop_states": 13,
+    "listen_only_states": 0,
+    "lexical": {
+      "selected_states": 322,
+      "coverage_of_all_states": 0.057987,
+      "score_floor_abstentions": 9,
+      "distinct_cards_selected": [
+        "AM01_invite_open_expression",
+        "AM02_ask_one_focused_clarification",
+        "AM04_tentative_paraphrase_check",
+        "AM05_grounded_validation",
+        "AM10_offer_one_optional_micro_step",
+        "AM14_supportive_transition"
+      ],
+      "native_family_proxy_evaluable_states": 271,
+      "native_family_proxy_compatible": 81,
+      "native_family_proxy_agreement": 0.298893
+    },
+    "bge": {
+      "selected_states": 173,
+      "coverage_of_all_states": 0.031154,
+      "score_floor_abstentions": 158,
+      "distinct_cards_selected": [
+        "AM01_invite_open_expression",
+        "AM02_ask_one_focused_clarification",
+        "AM04_tentative_paraphrase_check",
+        "AM05_grounded_validation",
+        "AM10_offer_one_optional_micro_step",
+        "AM14_supportive_transition"
+      ],
+      "native_family_proxy_evaluable_states": 148,
+      "native_family_proxy_compatible": 50,
+      "native_family_proxy_agreement": 0.337838
+    }
+  },
+  "ranker_decision": {
+    "selected": "lexical",
+    "bge_promoted": false,
+    "bge_required_absolute_proxy_gain": 0.1,
+    "observed_bge_minus_lexical_proxy_agreement": -0.230769,
+    "proxy_is_gold": false,
+    "lexical_score": "term-frequency cosine",
+    "lexical_score_floor": 0.05,
+    "bge_score": "normalized dot product equal to cosine",
+    "bge_score_floor": 0.65,
+    "bge_model": "BAAI/bge-small-en-v1.5",
+    "bge_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+  },
+  "boundary_violations": {
+    "primary_strict": {
+      "lexical": [],
+      "bge": []
+    },
+    "sensitivity": {
+      "lexical": [],
+      "bge": []
+    }
+  },
+  "qualification_checks": {
+    "strict_holdout_at_least_30_dialogues": true,
+    "strict_holdout_has_zero_g1_lineage_overlap": true,
+    "selected_ranker_has_zero_boundary_violations": true,
+    "top1_cap_is_enforced": true,
+    "strict_dialogue_activation_rate_at_least_5_percent": true,
+    "strict_dialogue_activation_rate_below_95_percent": true,
+    "at_least_five_cards_activate": true,
+    "runtime_bank_has_no_raw_source_response": true
+  },
+  "denominator_audit": {
+    "independent_unit": "dialogue",
+    "qualification_uses_dialogue_activation_rate": true,
+    "turn_state_activation_rate_reported_descriptively": true,
+    "initial_turn_grain_implementation_result": {
+      "status": "FAILED_ONLY_THE_ARBITRARY_5_PERCENT_TURN_GATE",
+      "observed_turn_activation_rate": 0.032663,
+      "retrieval_rules_or_scores_changed_after_observation": false
+    },
+    "amendment_reason": "The preregistered source contract states dialogue is the independent group; longer dialogues must not count as more independent coverage."
+  },
+  "selected_distinct_cards": [
+    "AM01_invite_open_expression",
+    "AM02_ask_one_focused_clarification",
+    "AM04_tentative_paraphrase_check",
+    "AM05_grounded_validation",
+    "AM10_offer_one_optional_micro_step",
+    "AM14_supportive_transition"
+  ],
+  "promotion_authorized_for_g3": true,
+  "formal_response_quality_benefit_proven": false,
+  "human_review_required_before_g3": false,
+  "external_or_test_outcomes_used": false,
+  "next_gate": "Freeze the selected ranker, Top-1 compiler, prompt compiler, and six-card catalog; then generate RS clean treatment pairs in G3."
+}

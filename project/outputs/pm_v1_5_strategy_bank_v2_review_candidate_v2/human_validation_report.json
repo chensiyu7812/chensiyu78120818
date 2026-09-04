@@ -1,0 +1,16 @@
+{
+  "protocol": "pm-v1.5-strategy-bank-v2-human-review-binding-v1",
+  "status": "HUMAN_REVIEW_PASS_PENDING_LLM_WEAK_AUDIT",
+  "build_report_sha256": "f2c6c72324f532e0b4af9ac2988d315a4a785fd61b76036ccec3f80292e3e6ad",
+  "human_review_packet_sha256": "ad1671c3682b1bd749a83e473552a6f1e0ae9ed70f1f496505b6ef2be755f6eb",
+  "human_annotation_file_sha256": "66e560737563713e8f984d0ee00eb4d517eb6dc07fee088afa94f9c4b81b4ebd",
+  "human_annotation_content_sha256": "75a66a059a1b2c41fc35ce60bf2ac263e3fd5ef78be2ef0a5d8283d4332e6dc4",
+  "review_count": 5,
+  "approved_count": 5,
+  "formal_rs_promoted": false,
+  "llm_weak_audit_complete": false,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false,
+  "api_calls_made": 0,
+  "binding_sha256": "b4c9c5adf714fcd00118bcbb64d8bcdf86ea37ffd8ce300816c9975e9cd6c35f"
+}

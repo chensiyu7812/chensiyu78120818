@@ -1,0 +1,13 @@
+{
+  "approval_identity": "782b5dafb58643b96082593c89b50228d703e8c1e2dc25d92ce40b65a0eba122",
+  "artifact_attestation_sha256": "7a61e4b9a09fe41ffc8f8e515963ec8b908927dd0b231515de9f7ed5a9d40838",
+  "binding_sha256": "07c051295f1866f9bc5c04e919b276502cc7cda43b871ee453ffe8a3e5a43f1b",
+  "call_plan_sha256": "55ab08e622bbb20d2cbf9fd9a3cc88211aa17b35942fc50d66334fc262f3208b",
+  "expected_logical_calls": 1020,
+  "expected_tracks": 102,
+  "fixed_seeker_tracks_sha256": "9b6d7df3bf8b2088c12a738a1b89cd7564b5de6bfc4777641f3ed5fd31b3003c",
+  "output_directory": "outputs/evoemo_fixed_tracks_v1_5_v3_formal_fresh_candidate",
+  "protocol": "pm-v1.5-fixed-seeker-v3-formal-bundle-binding-v1",
+  "sidecar_sha256": "8386e31e996a6621f293fb813812bf3882dd4eaf4bb337bd7fde7b536d4b8b21",
+  "stage": "evoemo_fixed_seeker_tracks_v23_bounded_surface"
+}

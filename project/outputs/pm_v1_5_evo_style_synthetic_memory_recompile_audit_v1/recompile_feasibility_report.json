@@ -1,0 +1,126 @@
+{
+  "protocol": "pm-v1.5-evo-style-synthetic-memory-recompile-audit-v1",
+  "status": "FEASIBLE_WITHOUT_EXTERNAL_CONTENT_OR_OUTCOMES",
+  "synthetic_users": 52,
+  "eligible_longitudinal_states": 416,
+  "states_per_user": {
+    "n": 52,
+    "min": 8.0,
+    "median": 8.0,
+    "max": 8.0,
+    "mean": 8.0
+  },
+  "memory_builder_protocol": "pm-v1.5-evo-memory-episode-chunked-v3",
+  "memory_builder_contract_sha256": "ec4768cb3b52932a11838196c45e41868b85d321716e18e26e6c6d8961c6c6cb",
+  "transport_adapter_protocol": "pm-v1.5-content-disjoint-evo-style-synthetic-memory-adapter-v1",
+  "profiles": {
+    "MP": {
+      "catalog_count": {
+        "n": 416,
+        "min": 3.0,
+        "median": 3.0,
+        "max": 3.0,
+        "mean": 3.0
+      },
+      "item_tokens": {
+        "n": 1248,
+        "min": 31.0,
+        "median": 34.0,
+        "max": 38.0,
+        "mean": 34.3974358974359
+      },
+      "catalog_tokens": {
+        "n": 416,
+        "min": 98.0,
+        "median": 104.0,
+        "max": 107.0,
+        "mean": 103.1923076923077
+      },
+      "top_k_capacity_fraction": {
+        "n": 416,
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0,
+        "mean": 1.0
+      }
+    },
+    "MS": {
+      "catalog_count": {
+        "n": 416,
+        "min": 1.0,
+        "median": 4.5,
+        "max": 8.0,
+        "mean": 4.5
+      },
+      "item_tokens": {
+        "n": 1872,
+        "min": 12.0,
+        "median": 31.0,
+        "max": 91.0,
+        "mean": 34.07211538461539
+      },
+      "catalog_tokens": {
+        "n": 416,
+        "min": 16.0,
+        "median": 152.0,
+        "max": 417.0,
+        "mean": 153.32451923076923
+      },
+      "top_k_capacity_fraction": {
+        "n": 416,
+        "min": 0.5,
+        "median": 1.0,
+        "max": 1.0,
+        "mean": 0.9375
+      }
+    },
+    "ME": {
+      "catalog_count": {
+        "n": 416,
+        "min": 1.0,
+        "median": 5.0,
+        "max": 14.0,
+        "mean": 5.0360576923076925
+      },
+      "item_tokens": {
+        "n": 2095,
+        "min": 19.0,
+        "median": 76.0,
+        "max": 120.0,
+        "mean": 76.15560859188544
+      },
+      "catalog_tokens": {
+        "n": 416,
+        "min": 31.0,
+        "median": 368.0,
+        "max": 1179.0,
+        "mean": 383.52403846153845
+      },
+      "top_k_capacity_fraction": {
+        "n": 416,
+        "min": 0.3333333333333333,
+        "median": 1.0,
+        "max": 1.0,
+        "mean": 0.8862179487179488
+      }
+    }
+  },
+  "checks": {
+    "external_file_read": false,
+    "external_content_used": false,
+    "external_outcome_used": false,
+    "same_builder_function_as_evoemo": true,
+    "strictly_prior_sessions_only": true,
+    "at_least_256_eligible_states": true,
+    "all_sources_have_top_k_competition_somewhere": true
+  },
+  "adapter": {
+    "basic_info": "the bundle's existing stable_preferences, preserved as separate atomic fields without invented values; the two globally constant compiler boundaries remain system rules rather than being misrepresented as personal memory",
+    "MS": "prior case session_summary, with current_user_text as transparent extractive fallback when summary is empty",
+    "ME": "prior case seeker turns passed through the exact Evo episode chunker"
+  },
+  "input": {
+    "bundles": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_bundles.jsonl",
+    "bundles_sha256": "63708d5ad2ff71582d096aafd2f59a6e2a69a7ec9858d55122424a332738af04"
+  }
+}

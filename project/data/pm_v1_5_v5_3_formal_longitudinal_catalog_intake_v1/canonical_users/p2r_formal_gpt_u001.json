@@ -1,0 +1,1739 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_gpt_u001",
+  "content_author": "chatgpt_pro",
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "finance_housing",
+    "family_caregiving",
+    "relocation_cultural_adaptation"
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01_gis_certificate",
+      "label": "evening GIS certificate pacing, assessments, and study confidence"
+    },
+    {
+      "thread_id": "thread_02_museum_rota",
+      "label": "museum shift changes, workload boundaries, and supervisor communication"
+    },
+    {
+      "thread_id": "thread_03_digital_collections_role",
+      "label": "moving from visitor services toward digital collections and community engagement work"
+    },
+    {
+      "thread_id": "thread_04_flat_and_commute",
+      "label": "flat costs, commuting time, and whether to relocate closer to work"
+    },
+    {
+      "thread_id": "thread_05_brother_boundary",
+      "label": "supporting a younger brother without taking over his decisions"
+    },
+    {
+      "thread_id": "thread_06_public_speaking",
+      "label": "confidence speaking in meetings, tours, and job interviews"
+    }
+  ],
+  "profile_history": [
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_profile_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "job",
+      "field_value": "visitor services officer at a city museum",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I work as a visitor services officer at a city museum",
+      "valid_from_session": 1,
+      "valid_until_session": 13,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "workplace_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_profile_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "name",
+      "field_value": "Leah Moreno",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "Leah Moreno",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "addressing_or_disambiguating_user_identity"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_profile_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "age",
+      "field_value": "28",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I'm 28",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "age_relevant_feasibility_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_profile_nationality_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "nationality",
+      "field_value": "Spanish",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I'm Spanish",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "country_specific_process_or_language_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_profile_location_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "location",
+      "field_value": "Glasgow, Scotland",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I live in Glasgow, Scotland",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "local_logistics",
+        "commute",
+        "housing",
+        "location_specific_feasibility"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_profile_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "gender",
+      "field_value": "woman",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I'm a woman",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "gender_relevant_context_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_profile_education_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "education",
+      "field_value": "BA in archaeology",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I did a BA in archaeology",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "education_or_training_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_profile_job_v2",
+      "subtype": "MP_PROFILE",
+      "item_role": "update",
+      "field_type": "job",
+      "field_value": "community engagement and digital collections coordinator at the museum",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s014_t01"
+      ],
+      "literal_source_span": "My job is now community engagement and digital collections coordinator at the museum",
+      "valid_from_session": 14,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "p2r_formal_gpt_u001_mp_profile_job_v1",
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "workplace_context"
+      ]
+    }
+  ],
+  "response_preference_history": [
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_preference_optional_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "one_optional_suggestion",
+      "preference_text": "If you suggest anything tonight, one small option is enough; a list makes me feel as if I have five new assignments.",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "If you suggest anything tonight, one small option is enough; a list makes me feel as if I have five new assignments.",
+      "valid_from_session": 2,
+      "valid_until_session": 9,
+      "version": 1,
+      "active": false,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_preference_choices_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "choices_rather_than_commands",
+      "preference_text": "When there are several ways forward, I do better if you lay them out as options I can choose among rather than telling me what I should do.",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s005_t03"
+      ],
+      "literal_source_span": "When there are several ways forward, I do better if you lay them out as options I can choose among rather than telling me what I should do.",
+      "valid_from_session": 5,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u001_mp_preference_concise_v2",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "concise_factual_answer",
+      "preference_text": "when I'm asking what to do next, give me the short answer first and then the reason. One optional suggestion used to help, but lately I spend too much time wondering whether I picked the 'right' suggestion.",
+      "owner_id": "p2r_formal_gpt_u001",
+      "source_turn_ids": [
+        "s010_t01"
+      ],
+      "literal_source_span": "when I'm asking what to do next, give me the short answer first and then the reason. One optional suggestion used to help, but lately I spend too much time wondering whether I picked the 'right' suggestion.",
+      "valid_from_session": 10,
+      "valid_until_session": null,
+      "version": 2,
+      "active": true,
+      "supersedes_item_id": "p2r_formal_gpt_u001_mp_preference_optional_v1"
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_amina",
+      "name": "Amina Shah",
+      "relationship": "visitor-services supervisor at the museum",
+      "valid_from_session": 1,
+      "valid_until_session": 13
+    },
+    {
+      "entity_id": "entity_fraser",
+      "name": "Fraser Bell",
+      "relationship": "museum colleague who often swaps late shifts with Leah",
+      "valid_from_session": 4,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_jules",
+      "name": "Jules Warren",
+      "relationship": "tutor in Leah’s evening GIS certificate",
+      "valid_from_session": 6,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_mateo",
+      "name": "Mateo Moreno",
+      "relationship": "younger brother living in another city",
+      "valid_from_session": 9,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_nikhil",
+      "name": "Nikhil Rao",
+      "relationship": "partner who shares Leah’s flat",
+      "valid_from_session": 2,
+      "valid_until_session": null
+    }
+  ],
+  "events": [
+    {
+      "event_id": "event_01",
+      "session_index": 1,
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_02_museum_rota"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Leah starts an evening GIS certificate while a temporary exhibition makes her museum rota unusually unstable."
+    },
+    {
+      "event_id": "event_02",
+      "session_index": 2,
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_04_flat_and_commute"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nikhil"
+      ],
+      "resolution_status": "mixed",
+      "description": "Leah tests whether short study blocks on the train can make the course fit around her commute."
+    },
+    {
+      "event_id": "event_03",
+      "session_index": 3,
+      "topic_thread_ids": [
+        "thread_02_museum_rota",
+        "thread_03_digital_collections_role"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "mixed",
+      "description": "Amina asks Leah to cover extra front-desk hours while a digital cataloguing project catches Leah’s attention."
+    },
+    {
+      "event_id": "event_04",
+      "session_index": 4,
+      "topic_thread_ids": [
+        "thread_02_museum_rota",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina",
+        "entity_fraser"
+      ],
+      "resolution_status": "resolved",
+      "description": "Leah negotiates a clearer notice rule for late-shift swaps and feels less trapped by the rota."
+    },
+    {
+      "event_id": "event_05",
+      "session_index": 5,
+      "topic_thread_ids": [
+        "thread_04_flat_and_commute",
+        "thread_01_gis_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nikhil"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Rising rent pushes Leah and Nikhil to compare moving with keeping the long commute."
+    },
+    {
+      "event_id": "event_06",
+      "session_index": 6,
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_03_digital_collections_role"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jules"
+      ],
+      "resolution_status": "mixed",
+      "description": "A map-design exercise gives Leah a concrete study method while she begins an internal digital-project application."
+    },
+    {
+      "event_id": "event_07",
+      "session_index": 7,
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Leah is invited to present a small visitor-data idea but keeps postponing preparation for the internal role."
+    },
+    {
+      "event_id": "event_08",
+      "session_index": 8,
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jules"
+      ],
+      "resolution_status": "resolved",
+      "description": "A low-pressure rehearsal before class helps Leah speak through a technical explanation without memorizing it."
+    },
+    {
+      "event_id": "event_09",
+      "session_index": 9,
+      "topic_thread_ids": [
+        "thread_05_brother_boundary",
+        "thread_02_museum_rota"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mateo"
+      ],
+      "resolution_status": "mixed",
+      "description": "Mateo asks Leah to review several job applications during a week when her own shifts are stretched thin."
+    },
+    {
+      "event_id": "event_10",
+      "session_index": 10,
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "mixed",
+      "description": "Leah submits the internal application after changing how she asks for decision help and prepares for screening questions."
+    },
+    {
+      "event_id": "event_11",
+      "session_index": 11,
+      "topic_thread_ids": [
+        "thread_05_brother_boundary",
+        "thread_04_flat_and_commute"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mateo",
+        "entity_nikhil"
+      ],
+      "resolution_status": "conflicting",
+      "description": "Mateo’s changing plans and a possible flat move leave Leah unsure which family and housing commitments are actually hers to solve."
+    },
+    {
+      "event_id": "event_12",
+      "session_index": 12,
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_fraser"
+      ],
+      "resolution_status": "resolved",
+      "description": "Leah rehearses interview examples with Fraser and notices that concrete stories are easier than polished speeches."
+    },
+    {
+      "event_id": "event_13",
+      "session_index": 12,
+      "topic_thread_ids": [
+        "thread_04_flat_and_commute"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nikhil"
+      ],
+      "resolution_status": "mixed",
+      "description": "On the same weekend, Leah and Nikhil test an alternative bus-and-train route from a cheaper neighborhood."
+    },
+    {
+      "event_id": "event_14",
+      "session_index": 13,
+      "topic_thread_ids": [
+        "thread_04_flat_and_commute",
+        "thread_01_gis_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nikhil"
+      ],
+      "resolution_status": "resolved",
+      "description": "A timed trial commute makes the cheaper neighborhood look workable without sacrificing Leah’s evening class."
+    },
+    {
+      "event_id": "event_15",
+      "session_index": 14,
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_02_museum_rota"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "resolved",
+      "description": "Leah transfers into a community engagement and digital collections coordinator role at the same museum."
+    },
+    {
+      "event_id": "event_16",
+      "session_index": 15,
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "mixed",
+      "description": "Leah experiments with a visual cue sheet for her first cross-team meeting in the new role."
+    },
+    {
+      "event_id": "event_17",
+      "session_index": 16,
+      "topic_thread_ids": [
+        "thread_05_brother_boundary",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mateo",
+        "entity_fraser"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Leah worries that Fraser’s easy speaking style is making her judge herself while Mateo asks for another round of career advice."
+    },
+    {
+      "event_id": "event_18",
+      "session_index": 17,
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_02_museum_rota",
+        "thread_03_digital_collections_role"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jules"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Near the end of the course, Leah separates what she still needs for the final map project from what merely resembles old work stress."
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 14 months ago",
+      "event_ids": [
+        "event_01"
+      ],
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_02_museum_rota"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Leah Moreno, I'm 28, and I work as a visitor services officer at a city museum. I signed up for an evening GIS certificate because I want to move toward work that uses more research and less constant front-desk coverage. The new exhibition opens next week, though, and Amina has already changed my late shift twice."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "You have a clear reason for taking the course, but the schedule around it is already moving. What would make the first month feel possible rather than like a test of endurance?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "I want to complete the certificate while still leaving some days off for actual rest. I paid the deposit and chose my first module, but I haven't decided what I will protect when the rota changes again."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "That leaves one practical question unresolved: which part of your week is protected even when work gets noisy. You can hold that question without solving the whole course tonight."
+        }
+      ],
+      "summary": "Leah starts an evening GIS certificate during a museum exhibition rush and identifies schedule protection, rather than academic ability, as the first unresolved problem.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_ms_001",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "I want to complete the certificate while still leaving some days off for actual rest.",
+          "candidate_text": "I want to complete the certificate while still leaving some days off for actual rest.",
+          "topic_thread": "thread_01_gis_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "prior_goal"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_unresolved_001",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "I paid the deposit and chose my first module, but I haven't decided what I will protect when the rota changes again.",
+          "candidate_text": "I paid the deposit and chose my first module, but I haven't decided what I will protect when the rota changes again.",
+          "topic_thread": "thread_01_gis_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I paid the deposit and chose my first module",
+          "result_span": null
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_context_001",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "The new exhibition opens next week, though, and Amina has already changed my late shift twice.",
+          "candidate_text": "The new exhibition opens next week, though, and Amina has already changed my late shift twice.",
+          "topic_thread": "thread_02_museum_rota",
+          "entity_ids": [
+            "self",
+            "entity_amina"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 13 months ago",
+      "event_ids": [
+        "event_02"
+      ],
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_04_flat_and_commute"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nikhil"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I'm Spanish and I live in Glasgow, Scotland. Nikhil and I are on the south side, so the museum commute is long enough that I usually treat it as dead time. If you suggest anything tonight, one small option is enough; a list makes me feel as if I have five new assignments."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "One option only: you could test whether a tiny piece of the commute is usable, without turning the whole journey into study time."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "I downloaded one course reading before I left home and opened it only after I got a seat on the train. I finished the short section before my stop, and arriving home with that piece already done made the evening feel much lighter."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "That is useful evidence because the benefit was not squeezing in maximum work; it was reducing the amount waiting for you after the commute."
+        }
+      ],
+      "summary": "Leah tries a single reading block during her train commute and finds that finishing a small section before arriving home reduces evening study pressure.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_core_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I downloaded one course reading before I left home and opened it only after I got a seat on the train. I finished the short section before my stop, and arriving home with that piece already done made the evening feel much lighter.",
+          "candidate_text": "I downloaded one course reading before I left home and opened it only after I got a seat on the train. I finished the short section before my stop, and arriving home with that piece already done made the evening feel much lighter.",
+          "topic_thread": "thread_01_gis_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I downloaded one course reading before I left home and opened it only after I got a seat on the train.",
+          "result_span": "I finished the short section before my stop, and arriving home with that piece already done made the evening feel much lighter."
+        }
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 12 months ago",
+      "event_ids": [
+        "event_03"
+      ],
+      "topic_thread_ids": [
+        "thread_02_museum_rota",
+        "thread_03_digital_collections_role"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I'm a woman, and I did a BA in archaeology before I moved into museum visitor work. Amina offered me extra front-desk hours this month, but what is actually bothering me is not the number of hours; it is that they land on the afternoons when the collections team lets staff shadow their cataloguing project."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "So the pressure is not simply 'too much work.' The extra hours are crowding out the part of work that could tell you whether a different role fits."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "Exactly. I can handle a busy week better than I can handle feeling as if I'm quietly giving up the only route I have found toward digital collections."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "That distinction matters. It gives you something specific to discuss with Amina instead of presenting the issue as general overload."
+        }
+      ],
+      "summary": "Leah distinguishes ordinary workload from losing access to digital-collections shadowing, clarifying why the same number of work hours can feel very different.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_ms_002",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "what is actually bothering me is not the number of hours; it is that they land on the afternoons when the collections team lets staff shadow their cataloguing project.",
+          "candidate_text": "what is actually bothering me is not the number of hours; it is that they land on the afternoons when the collections team lets staff shadow their cataloguing project.",
+          "topic_thread": "thread_02_museum_rota",
+          "entity_ids": [
+            "self",
+            "entity_amina"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "pressure_distinction"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_context_002",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "I did a BA in archaeology before I moved into museum visitor work.",
+          "candidate_text": "I did a BA in archaeology before I moved into museum visitor work.",
+          "topic_thread": "thread_03_digital_collections_role",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 11 months ago",
+      "event_ids": [
+        "event_04"
+      ],
+      "topic_thread_ids": [
+        "thread_02_museum_rota",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina",
+        "entity_fraser"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "I finally spoke to Amina about the shift changes. I asked if swaps inside forty-eight hours could be voluntary unless there was an emergency, and I copied the proposed rule into the rota chat so Fraser could see the same wording. She agreed to try it for a month, and I stopped checking my phone every evening for a surprise shift."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "You made the request concrete enough to test, and the result showed up in your attention as well as the schedule. How did it feel to say it that directly?"
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "My voice shook, but I didn't over-explain. That part surprised me more than her saying yes."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "Then the outcome is not only the rota rule; you also learned that a short, specific request can survive some nervousness."
+        }
+      ],
+      "summary": "Leah asks for a forty-eight-hour shift-change boundary, gains a one-month trial, and notices that a concise request can work even when she feels visibly nervous.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_core_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "I asked if swaps inside forty-eight hours could be voluntary unless there was an emergency, and I copied the proposed rule into the rota chat so Fraser could see the same wording. She agreed to try it for a month, and I stopped checking my phone every evening for a surprise shift.",
+          "candidate_text": "I asked if swaps inside forty-eight hours could be voluntary unless there was an emergency, and I copied the proposed rule into the rota chat so Fraser could see the same wording. She agreed to try it for a month, and I stopped checking my phone every evening for a surprise shift.",
+          "topic_thread": "thread_02_museum_rota",
+          "entity_ids": [
+            "self",
+            "entity_amina",
+            "entity_fraser"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I asked if swaps inside forty-eight hours could be voluntary unless there was an emergency, and I copied the proposed rule into the rota chat so Fraser could see the same wording.",
+          "result_span": "She agreed to try it for a month, and I stopped checking my phone every evening for a surprise shift."
+        }
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 10 months ago",
+      "event_ids": [
+        "event_05"
+      ],
+      "topic_thread_ids": [
+        "thread_04_flat_and_commute",
+        "thread_01_gis_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nikhil"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "Our landlord is raising the rent in spring, and Nikhil has started looking at places farther west. The thing I keep remembering is that on class nights I already get home close to ten; adding another transfer could make the course much harder to keep up with."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "The housing choice is tied to a routine you have already learned is fragile on class nights. What information would make the tradeoff less abstract?"
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "When there are several ways forward, I do better if you lay them out as options I can choose among rather than telling me what I should do. We have bookmarked three flats, but we haven't travelled from any of them to the museum or the college at the actual times I would commute."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "Then the missing piece is not another opinion about moving. It is first-hand timing from the candidate neighborhoods."
+        }
+      ],
+      "summary": "A rent increase makes Leah consider moving with Nikhil, while her existing late class commute becomes a specific constraint that has not yet been tested.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_ms_003",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s005_t01"
+          ],
+          "literal_source_span": "on class nights I already get home close to ten; adding another transfer could make the course much harder to keep up with.",
+          "candidate_text": "on class nights I already get home close to ten; adding another transfer could make the course much harder to keep up with.",
+          "topic_thread": "thread_04_flat_and_commute",
+          "entity_ids": [
+            "self",
+            "entity_nikhil"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "specific_old_observation"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_unresolved_002",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "We have bookmarked three flats, but we haven't travelled from any of them to the museum or the college at the actual times I would commute.",
+          "candidate_text": "We have bookmarked three flats, but we haven't travelled from any of them to the museum or the college at the actual times I would commute.",
+          "topic_thread": "thread_04_flat_and_commute",
+          "entity_ids": [
+            "self",
+            "entity_nikhil"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "We have bookmarked three flats",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 9 months ago",
+      "event_ids": [
+        "event_06"
+      ],
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_03_digital_collections_role"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jules"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "Jules returned my first map exercise with a lot of comments, and my first reaction was that I had chosen the wrong course. I reopened the file and fixed only the labels he had marked before touching anything else. The map became readable in one pass, and seeing one category improve made the rest of the feedback feel finite."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "You reduced a page of feedback to one visible layer and got immediate evidence that the work was repairable."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "That helped enough that I drafted the first paragraph of an application for the museum's digital collections project, but I haven't sent it to anyone yet."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "So one learning task moved from overwhelm to evidence, while the career step is still waiting for an external move."
+        }
+      ],
+      "summary": "Leah repairs one layer of a criticized GIS assignment and uses the regained confidence to draft, but not yet submit, an internal digital-project application.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_core_003",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s006_t01"
+          ],
+          "literal_source_span": "I reopened the file and fixed only the labels he had marked before touching anything else. The map became readable in one pass, and seeing one category improve made the rest of the feedback feel finite.",
+          "candidate_text": "I reopened the file and fixed only the labels he had marked before touching anything else. The map became readable in one pass, and seeing one category improve made the rest of the feedback feel finite.",
+          "topic_thread": "thread_01_gis_certificate",
+          "entity_ids": [
+            "self",
+            "entity_jules"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I reopened the file and fixed only the labels he had marked before touching anything else.",
+          "result_span": "The map became readable in one pass, and seeing one category improve made the rest of the feedback feel finite."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_unresolved_003",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s006_t03"
+          ],
+          "literal_source_span": "I drafted the first paragraph of an application for the museum's digital collections project, but I haven't sent it to anyone yet.",
+          "candidate_text": "I drafted the first paragraph of an application for the museum's digital collections project, but I haven't sent it to anyone yet.",
+          "topic_thread": "thread_03_digital_collections_role",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I drafted the first paragraph of an application for the museum's digital collections project",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 8 months ago",
+      "event_ids": [
+        "event_07"
+      ],
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "Amina asked me to give a five-minute update on visitor-flow data at the staff meeting. I know the numbers, but I keep opening the slide deck and changing the first sentence instead of practicing the explanation."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "That sounds less like missing knowledge and more like getting stuck at the point where the work becomes visible to other people."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "Yes. The unfinished thing is not the slides; it is saying the idea out loud while other departments are listening."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "That is a much narrower thread to return to than 'be more confident at work.'"
+        }
+      ],
+      "summary": "Leah recognizes that her delayed staff update is not a slide-design problem but an unfinished task of explaining familiar material aloud to colleagues.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_ms_004",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "The unfinished thing is not the slides; it is saying the idea out loud while other departments are listening.",
+          "candidate_text": "The unfinished thing is not the slides; it is saying the idea out loud while other departments are listening.",
+          "topic_thread": "thread_06_public_speaking",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "unfinished_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 7 months ago",
+      "event_ids": [
+        "event_08"
+      ],
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jules"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "Before class I stood by the kitchen counter with the map open on my laptop and talked through it as if Jules had just asked me what changed. No script, no mirror, just the kettle clicking behind me. When I had to explain it in class later, the words came in roughly the same order and I didn't freeze searching for a perfect opening."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "That rehearsal was almost deliberately ordinary, which may be why it transferred: you practiced the act of explaining rather than performing confidence."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "I still sounded nervous, but I could keep going. That feels more useful than trying to sound polished."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "You now have a concrete example of nervousness and functioning existing at the same time."
+        }
+      ],
+      "summary": "An informal kitchen rehearsal helps Leah explain a GIS map in class without a memorized script, shifting her target from sounding polished to continuing while nervous.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_challenge_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "Before class I stood by the kitchen counter with the map open on my laptop and talked through it as if Jules had just asked me what changed. No script, no mirror, just the kettle clicking behind me. When I had to explain it in class later, the words came in roughly the same order and I didn't freeze searching for a perfect opening.",
+          "candidate_text": "Before class I stood by the kitchen counter with the map open on my laptop and talked through it as if Jules had just asked me what changed. No script, no mirror, just the kettle clicking behind me. When I had to explain it in class later, the words came in roughly the same order and I didn't freeze searching for a perfect opening.",
+          "topic_thread": "thread_06_public_speaking",
+          "entity_ids": [
+            "self",
+            "entity_jules"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "Before class I stood by the kitchen counter with the map open on my laptop and talked through it as if Jules had just asked me what changed.",
+          "result_span": "When I had to explain it in class later, the words came in roughly the same order and I didn't freeze searching for a perfect opening."
+        }
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 6 months ago",
+      "event_ids": [
+        "event_09"
+      ],
+      "topic_thread_ids": [
+        "thread_05_brother_boundary",
+        "thread_02_museum_rota"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mateo"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "Mateo sent me four job postings and asked which one he should choose. I was already covering a Saturday shift, and I could feel myself starting to rewrite his applications in my head. I told him I could read one draft and ask questions, but I wouldn't choose the job for him. He sent one draft instead of four links, and our call stayed under half an hour."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "You changed the form of help without withdrawing from him. The boundary also changed the amount of material coming at you."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "It was a relief not to become his second job-search manager. He actually sounded more decisive by the end of the call."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "That gives you evidence that less takeover did not mean less support."
+        }
+      ],
+      "summary": "Leah limits her help with Mateo to reviewing one draft rather than choosing among jobs, reducing her burden while leaving him more ownership of the decision.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_core_004",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s009_t01"
+          ],
+          "literal_source_span": "I told him I could read one draft and ask questions, but I wouldn't choose the job for him. He sent one draft instead of four links, and our call stayed under half an hour.",
+          "candidate_text": "I told him I could read one draft and ask questions, but I wouldn't choose the job for him. He sent one draft instead of four links, and our call stayed under half an hour.",
+          "topic_thread": "thread_05_brother_boundary",
+          "entity_ids": [
+            "self",
+            "entity_mateo"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I told him I could read one draft and ask questions, but I wouldn't choose the job for him.",
+          "result_span": "He sent one draft instead of four links, and our call stayed under half an hour."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_ms_005",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "It was a relief not to become his second job-search manager.",
+          "candidate_text": "It was a relief not to become his second job-search manager.",
+          "topic_thread": "thread_05_brother_boundary",
+          "entity_ids": [
+            "self",
+            "entity_mateo"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "resolved_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 5 months ago",
+      "event_ids": [
+        "event_10"
+      ],
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "I submitted the digital collections application this morning. Also, I want to change something about how we talk through choices: when I'm asking what to do next, give me the short answer first and then the reason. One optional suggestion used to help, but lately I spend too much time wondering whether I picked the 'right' suggestion."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "Understood. Short answer first: prepare two concrete examples for the screening call. The reason is that you already know the project; the interview challenge has been making your experience visible."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "I wrote one line for each example—what happened, what I did, what changed. That gave me two stories I can actually remember, instead of a page of interview phrases."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "Good. You compressed preparation around evidence you already own, rather than adding more language to memorize."
+        }
+      ],
+      "summary": "Leah submits her internal application, updates her response-format preference, and turns two work experiences into compact interview stories she can remember without scripting.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_core_005",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s010_t03"
+          ],
+          "literal_source_span": "I wrote one line for each example—what happened, what I did, what changed. That gave me two stories I can actually remember, instead of a page of interview phrases.",
+          "candidate_text": "I wrote one line for each example—what happened, what I did, what changed. That gave me two stories I can actually remember, instead of a page of interview phrases.",
+          "topic_thread": "thread_06_public_speaking",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I wrote one line for each example—what happened, what I did, what changed.",
+          "result_span": "That gave me two stories I can actually remember, instead of a page of interview phrases."
+        }
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 4 months ago",
+      "event_ids": [
+        "event_11"
+      ],
+      "topic_thread_ids": [
+        "thread_05_brother_boundary",
+        "thread_04_flat_and_commute"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mateo",
+        "entity_nikhil"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "Mateo first said he wanted to stay in hospitality, then two weeks later said he might train as an electrician. Nikhil is also asking whether we should renew our lease, and I notice I keep treating both decisions as deadlines I personally have to settle."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "Two different people are making uncertain choices, and your mind is converting their uncertainty into assignments for you."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "The confusing part is that Mateo works evening restaurant shifts, so I know some training schedules would be awkward, but I don't actually know which program he wants. I also don't know our final rent figure yet."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "That leaves real information gaps in both threads. Filling them in for other people would create certainty on paper, not necessarily in reality."
+        }
+      ],
+      "summary": "Leah notices that Mateo’s changing career ideas and an unresolved lease decision are separate uncertainties she has been treating as personal obligations to solve.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_ms_006",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s011_t01"
+          ],
+          "literal_source_span": "Mateo first said he wanted to stay in hospitality, then two weeks later said he might train as an electrician.",
+          "candidate_text": "Mateo first said he wanted to stay in hospitality, then two weeks later said he might train as an electrician.",
+          "topic_thread": "thread_05_brother_boundary",
+          "entity_ids": [
+            "self",
+            "entity_mateo"
+          ],
+          "resolution_status": "conflicting",
+          "memory_function": "conflict_record"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_context_003",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "Mateo works evening restaurant shifts",
+          "candidate_text": "Mateo works evening restaurant shifts",
+          "topic_thread": "thread_05_brother_boundary",
+          "entity_ids": [
+            "entity_mateo"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 3 months ago",
+      "event_ids": [
+        "event_12",
+        "event_13"
+      ],
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_06_public_speaking",
+        "thread_04_flat_and_commute"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_fraser",
+        "entity_nikhil"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "The screening interview is next week. Fraser offered to listen to my examples, and Nikhil wants to use Saturday to test the commute from one of the cheaper neighborhoods."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "Those are both useful, but they serve different uncertainties. Which one has a fixed deadline first?"
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "I asked Fraser to interrupt me after ninety seconds if an answer was still wandering. We practiced four questions, and every answer got shorter on the second try without losing the actual example."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "That is a strong rehearsal result: the constraint changed the shape of the answer without asking you to sound less like yourself."
+        },
+        {
+          "turn_id": "s012_t05",
+          "role": "user",
+          "text": "I still haven't decided whether to mention that I want fewer public-facing shifts if they ask why I'm applying."
+        },
+        {
+          "turn_id": "s012_t06",
+          "role": "assistant",
+          "text": "Then keep that as an open interview-content decision rather than blending it into the speaking practice that already helped."
+        }
+      ],
+      "summary": "Leah rehearses timed interview answers with Fraser and gets more concise on second attempts, while one question about explaining her career motive remains unresolved.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_core_006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s012_t03"
+          ],
+          "literal_source_span": "I asked Fraser to interrupt me after ninety seconds if an answer was still wandering. We practiced four questions, and every answer got shorter on the second try without losing the actual example.",
+          "candidate_text": "I asked Fraser to interrupt me after ninety seconds if an answer was still wandering. We practiced four questions, and every answer got shorter on the second try without losing the actual example.",
+          "topic_thread": "thread_06_public_speaking",
+          "entity_ids": [
+            "self",
+            "entity_fraser"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I asked Fraser to interrupt me after ninety seconds if an answer was still wandering.",
+          "result_span": "We practiced four questions, and every answer got shorter on the second try without losing the actual example."
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_unresolved_004",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s012_t05"
+          ],
+          "literal_source_span": "I still haven't decided whether to mention that I want fewer public-facing shifts if they ask why I'm applying.",
+          "candidate_text": "I still haven't decided whether to mention that I want fewer public-facing shifts if they ask why I'm applying.",
+          "topic_thread": "thread_03_digital_collections_role",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 10 weeks ago",
+      "event_ids": [
+        "event_14"
+      ],
+      "topic_thread_ids": [
+        "thread_04_flat_and_commute",
+        "thread_01_gis_certificate"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_nikhil"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "We finally did the commute test from the west-side flat at the times I would actually travel. We left at 7:20 in the morning and again after my Thursday class; the evening trip was only twelve minutes longer than my current one, so the cheaper rent no longer feels like it automatically costs me the course."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "You replaced an imagined worst case with a measured tradeoff. Twelve extra minutes may still matter, but it is very different from an unknown extra journey."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "We haven't signed anything, but now the housing discussion feels like a choice instead of a threat to everything else."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "That is a resolved information question even though the final housing decision is still open."
+        }
+      ],
+      "summary": "A real-time commute trial shows Leah that a cheaper neighborhood adds only twelve minutes after class, resolving one major uncertainty in the housing decision.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_core_007",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "We finally did the commute test from the west-side flat at the times I would actually travel. We left at 7:20 in the morning and again after my Thursday class; the evening trip was only twelve minutes longer than my current one, so the cheaper rent no longer feels like it automatically costs me the course.",
+          "candidate_text": "We finally did the commute test from the west-side flat at the times I would actually travel. We left at 7:20 in the morning and again after my Thursday class; the evening trip was only twelve minutes longer than my current one, so the cheaper rent no longer feels like it automatically costs me the course.",
+          "topic_thread": "thread_04_flat_and_commute",
+          "entity_ids": [
+            "self",
+            "entity_nikhil"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "We finally did the commute test from the west-side flat at the times I would actually travel.",
+          "result_span": "the evening trip was only twelve minutes longer than my current one, so the cheaper rent no longer feels like it automatically costs me the course."
+        }
+      ]
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 8 weeks ago",
+      "event_ids": [
+        "event_15"
+      ],
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_02_museum_rota"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_amina"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "I got the internal role. My job is now community engagement and digital collections coordinator at the museum, so Amina isn't the person setting my daily rota anymore. The new team has more project work, but the first week also came with messages from four people about the same exhibition database."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "Congratulations, and the new problem sounds different from the old rota problem: less shift volatility, more overlapping project communication."
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "I made one shared note with the open database questions and linked everyone to it instead of answering four separate threads. By Friday, two duplicated questions had disappeared and I could see which issue still needed an owner."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "That created a common surface for the work rather than making you the human copy-and-paste layer."
+        }
+      ],
+      "summary": "Leah moves into a digital collections role and uses one shared issue note to reduce duplicated project messages during her first week on the new team.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_core_008",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s014_t03"
+          ],
+          "literal_source_span": "I made one shared note with the open database questions and linked everyone to it instead of answering four separate threads. By Friday, two duplicated questions had disappeared and I could see which issue still needed an owner.",
+          "candidate_text": "I made one shared note with the open database questions and linked everyone to it instead of answering four separate threads. By Friday, two duplicated questions had disappeared and I could see which issue still needed an owner.",
+          "topic_thread": "thread_03_digital_collections_role",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I made one shared note with the open database questions and linked everyone to it instead of answering four separate threads.",
+          "result_span": "By Friday, two duplicated questions had disappeared and I could see which issue still needed an owner."
+        }
+      ]
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 6 weeks ago",
+      "event_ids": [
+        "event_16"
+      ],
+      "topic_thread_ids": [
+        "thread_03_digital_collections_role",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "My first cross-team meeting in the new role was today. On a sticky note I drew a tiny triangle: decision at the top, evidence on one corner, question on the other. I kept glancing at it when the conversation wandered. Somehow that scrap of paper was enough to get me back to the point twice, and I left without the usual replay of every sentence I had said."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "That cue did not script your words; it gave you a route back when the meeting spread sideways."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "I like that it was visual. A paragraph would have turned into something else I had to perform correctly."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "That difference is worth preserving when you think about future speaking situations."
+        }
+      ],
+      "summary": "A three-part visual cue helps Leah return to her point during a cross-team meeting and reduces the post-meeting rumination she usually experiences after speaking.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_reusable_challenge_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s015_t01"
+          ],
+          "literal_source_span": "On a sticky note I drew a tiny triangle: decision at the top, evidence on one corner, question on the other. I kept glancing at it when the conversation wandered. Somehow that scrap of paper was enough to get me back to the point twice, and I left without the usual replay of every sentence I had said.",
+          "candidate_text": "On a sticky note I drew a tiny triangle: decision at the top, evidence on one corner, question on the other. I kept glancing at it when the conversation wandered. Somehow that scrap of paper was enough to get me back to the point twice, and I left without the usual replay of every sentence I had said.",
+          "topic_thread": "thread_06_public_speaking",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "On a sticky note I drew a tiny triangle: decision at the top, evidence on one corner, question on the other.",
+          "result_span": "Somehow that scrap of paper was enough to get me back to the point twice, and I left without the usual replay of every sentence I had said."
+        }
+      ]
+    },
+    {
+      "session_index": 16,
+      "relative_time": "about 3 weeks ago",
+      "event_ids": [
+        "event_17"
+      ],
+      "topic_thread_ids": [
+        "thread_05_brother_boundary",
+        "thread_06_public_speaking"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mateo",
+        "entity_fraser"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s016_t01",
+          "role": "user",
+          "text": "Fraser gave a public tour yesterday and made questions look effortless. I caught myself thinking I should copy his style for the community presentation next month, even though his job and mine are different. Mateo also wants me to look at electrician courses again, but he still hasn't chosen whether he actually wants to leave hospitality."
+        },
+        {
+          "turn_id": "s016_t02",
+          "role": "assistant",
+          "text": "There are two tempting shortcuts here: borrowing Fraser's speaking identity, and deciding Mateo's direction before he has decided it himself."
+        },
+        {
+          "turn_id": "s016_t03",
+          "role": "user",
+          "text": "For the presentation, I have a date on the calendar but no first rehearsal. For Mateo, I told him to send me the one course he is most serious about, and nothing has come yet."
+        },
+        {
+          "turn_id": "s016_t04",
+          "role": "assistant",
+          "text": "Both threads are still open, but for different reasons: one needs your first action, while the other is waiting on his choice."
+        }
+      ],
+      "summary": "Leah separates an unstarted community-presentation rehearsal from Mateo’s still-uncertain training choice, while resisting the urge to imitate Fraser’s unrelated speaking style.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_ms_007",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s016_t01"
+          ],
+          "literal_source_span": "I caught myself thinking I should copy his style for the community presentation next month, even though his job and mine are different.",
+          "candidate_text": "I caught myself thinking I should copy his style for the community presentation next month, even though his job and mine are different.",
+          "topic_thread": "thread_06_public_speaking",
+          "entity_ids": [
+            "self",
+            "entity_fraser"
+          ],
+          "resolution_status": "stale_or_wrong_entity",
+          "memory_function": "wrong_person_distractor"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_unresolved_005",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s016_t03"
+          ],
+          "literal_source_span": "For the presentation, I have a date on the calendar but no first rehearsal.",
+          "candidate_text": "For the presentation, I have a date on the calendar but no first rehearsal.",
+          "topic_thread": "thread_06_public_speaking",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 17,
+      "relative_time": "this week",
+      "event_ids": [
+        "event_18"
+      ],
+      "topic_thread_ids": [
+        "thread_01_gis_certificate",
+        "thread_02_museum_rota",
+        "thread_03_digital_collections_role"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_jules"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s017_t01",
+          "role": "user",
+          "text": "The final GIS map project is due in three weeks. Everyone keeps saying this is the stressful part of the certificate, but that sentence alone doesn't tell me what I am stuck on. My old front-desk rota isn't the issue now; the new team actually protects my Thursday class."
+        },
+        {
+          "turn_id": "s017_t02",
+          "role": "assistant",
+          "text": "You are deliberately separating a generic 'final project is stressful' story from the current obstacle. What is specific enough to name?"
+        },
+        {
+          "turn_id": "s017_t03",
+          "role": "user",
+          "text": "I have the data cleaned and the map layers working. The part I haven't settled is how much explanation belongs beside the map, because I keep writing an essay when the assignment asks for a short interpretation."
+        },
+        {
+          "turn_id": "s017_t04",
+          "role": "assistant",
+          "text": "That is a concrete current thread: not whether you can finish the map, but how to stop the written interpretation from expanding beyond the brief."
+        }
+      ],
+      "summary": "Leah rejects a generic final-project stress story and identifies the current obstacle as controlling the length of interpretation beside an otherwise functioning GIS map.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u001_ms_008",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s017_t01"
+          ],
+          "literal_source_span": "Everyone keeps saying this is the stressful part of the certificate, but that sentence alone doesn't tell me what I am stuck on.",
+          "candidate_text": "Everyone keeps saying this is the stressful part of the certificate, but that sentence alone doesn't tell me what I am stuck on.",
+          "topic_thread": "thread_01_gis_certificate",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "not_specific",
+          "memory_function": "same_topic_no_specific_content"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u001_me_context_004",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u001",
+          "source_turn_ids": [
+            "s017_t01"
+          ],
+          "literal_source_span": "the new team actually protects my Thursday class.",
+          "candidate_text": "the new team actually protects my Thursday class.",
+          "topic_thread": "thread_02_museum_rota",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    }
+  ]
+}

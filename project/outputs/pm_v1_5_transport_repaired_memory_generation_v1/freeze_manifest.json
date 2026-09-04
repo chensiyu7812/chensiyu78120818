@@ -1,0 +1,26 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-memory-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_384_NEW_RESPONSE_CALLS",
+  "input_sha256": {
+    "outputs/pm_v1_5_transport_repaired_memory_contrast_blueprint_v1/blueprint_report.json": "1525dff838baf7764bd8d18f1674a2ff470a4fc768165b14b5d5ecc60dd5b07d",
+    "outputs/pm_v1_5_transport_repaired_memory_contrast_blueprint_v1/memory_contrast_blueprint.jsonl": "d620ed03004b042b355d357f00c9d82739ea2e3a65711d08d9b758edf702ab75",
+    "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/runtime_states.jsonl": "c013fe0439aff844452e3e58bd91703b781db75f3a90cd33b9518116c1d7efeb",
+    "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/memory_backend.jsonl": "d32165f0cc72da4ecf23c5fe6a4048195b8b4c6f8785cb3f2d426cb7d8c24875",
+    "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676",
+    "configs/pm_v1_5.yaml": "7aaa4ad296936e298d4beb16f9d1a9f5ca096e224d5e518da22b49682842a94b",
+    "configs/experiment.yaml": "35cc6c98d29ffcbeef00a61d58b36e33cf1789bd9568a301cab28d2d6429790e"
+  },
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "supporter_generation_treatment_sha256": "33305222d5df9c2f03ea1c14ffe59cea7513b620003f59b6d68481db2a77febe",
+  "seed": 20260730,
+  "outputs": {
+    "call_plan.jsonl": "a115cb3e6d66d6bcde3ed0ba40197fa9e1ba2f542417d413a9aa52d04a731fc0",
+    "response_arm_registry.jsonl": "ce8a2649fa6e3209e3284cc8925a31ba25491fdbebbceaa48c09aad09f216f18",
+    "plan_report.json": "d7f61a5842a8d0088cdfa7dffe00916112908c20a75b30dce21af8e6aefd4202"
+  }
+}

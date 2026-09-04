@@ -1,0 +1,113 @@
+{
+  "protocol": "pm-v1.5-resource-routing-measurement-layers-v1",
+  "status": "FROZEN_CONSTRUCT_SEPARATION",
+  "research_target": "Learn auditable pre-generation resource routing, then evaluate retrieval, execution, grounded use, and aggregate quality-risk-cost as separate constructs.",
+  "causal_order": [
+    "candidate_discovery_and_item_ranking_without_injection",
+    "step1_component_routing",
+    "selected_item_hard_validation",
+    "prompt_injection",
+    "fixed_generator_selective_use",
+    "system_outcome_evaluation"
+  ],
+  "step1_pm": {
+    "decision": "For each of MP, MS, ME, and RS, decide whether a qualified resource opportunity exists and the component may be enabled under the current state and cost budget.",
+    "positive_definition": [
+      "a candidate exists",
+      "the candidate belongs to the allowed source and user",
+      "the candidate is strictly prior where temporal order applies",
+      "the candidate is relevant to the current request",
+      "the candidate adds information or guidance not already supplied by visible context or an enabled resource",
+      "no hard boundary, conflict, staleness, or source-eligibility exclusion applies",
+      "the incremental token cost is within the frozen budget"
+    ],
+    "negative_definition": "Any failed hard condition, or a merely topical but redundant candidate, is off; ambiguous cases abstain/off.",
+    "not_the_target": [
+      "the identity of the final retrieved item",
+      "whether one stochastic generated reply wins a subjective A/B comparison",
+      "whether the generator must quote or mention the resource"
+    ],
+    "allowed_inputs": [
+      "current and recent visible dialogue",
+      "explicit user boundaries",
+      "candidate availability and outcome-blind descriptor",
+      "other-component background bits",
+      "incremental token-cost estimate"
+    ],
+    "forbidden_inputs": [
+      "generated response",
+      "quality or risk judgment",
+      "future dialogue",
+      "gold action",
+      "dataset identity",
+      "user, topic, template, memory, or card identifier"
+    ],
+    "primary_metrics": [
+      "user-grouped balanced accuracy",
+      "positive recall",
+      "Brier score versus prevalence prior",
+      "on and off decision coverage",
+      "abstention coverage-risk",
+      "cost-weighted false-on and false-off rates"
+    ]
+  },
+  "retrieval": {
+    "question": "Conditional on a component being eligible, did the frozen retriever return the correct user's safe and incrementally relevant item?",
+    "metrics": [
+      "owner accuracy",
+      "strictly-prior accuracy",
+      "hard-exclusion escape rate",
+      "Top-1 and Top-k topical fit",
+      "Top-1 and Top-k incremental-utility fit",
+      "abstention correctness when no qualified item exists"
+    ],
+    "independent_from_pm": true
+  },
+  "execution": {
+    "question": "Did the runtime execute exactly the selected action and inject only the selected items?",
+    "metrics": [
+      "action-to-source consistency",
+      "selected-id-to-prompt consistency",
+      "control contamination rate",
+      "treatment omission rate",
+      "realized token and monetary cost"
+    ],
+    "expected_determinism": true
+  },
+  "grounded_use": {
+    "question": "Did the fixed generator use useful evidence accurately, or appropriately ignore evidence that was unnecessary?",
+    "acceptable_outcomes": [
+      "grounded_use_that_materially_helps",
+      "grounded_use_without_material_quality_change",
+      "appropriate_nonuse_when_the_resource_is_not_needed"
+    ],
+    "failures": [
+      "unsupported_or_conflicting_personal_claim",
+      "stale_request_carryover",
+      "wrong-user_evidence",
+      "forced_or_awkward_memory_mention",
+      "systematic_nonuse_of_candidates_designed_to_add_currently_usable_information"
+    ],
+    "note": "Resource mention alone is neither a success nor a requirement. Grounding and functional contribution are reviewed separately."
+  },
+  "system_outcome": {
+    "question": "Does the learned routing policy improve the aggregate quality-risk-cost tradeoff relative to frozen baselines?",
+    "measurement": "Same-state paired or policy-level evaluation with win/tie/loss, interaction-and-grounding material risk, token/cost, uncertainty intervals, and user-level aggregation.",
+    "role": "external validation and component/policy promotion evidence",
+    "not_role": "single-pair hard gold for Step 1",
+    "reporting_rule": "A routing decision may be correct even when one A/B comparison ties; however a component that is systematically unused or never improves aggregate outcomes cannot support a claim of system benefit."
+  },
+  "step2": {
+    "learned_in_v1_5": false,
+    "definition": "The frozen retriever ranks a concrete candidate before Step 1 but does not inject it; PM sees only its outcome-blind descriptor. After Step 1, hard filters, prompt compiler, and fixed generator execute the action. V1.5 separately audits their correctness and effect; it does not claim that PM learned item selection or response writing."
+  },
+  "claim_boundary": {
+    "supported_if_gates_pass": "PM learned a transparent resource-opportunity routing task and the frozen resource pipeline achieved the separately reported quality-risk-cost behavior.",
+    "not_supported": [
+      "PM predicts the winner of every stochastic generation pair",
+      "retrieval correctness guarantees quality improvement",
+      "resource applicability is identical to realized utility",
+      "PM learned to retrieve the exact item or write the final response"
+    ]
+  }
+}

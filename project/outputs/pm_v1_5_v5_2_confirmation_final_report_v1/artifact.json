@@ -1,0 +1,971 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "title": "PM V1.5 V5.2 最终确认：学到了有意义的取舍，但完整系统门未通过",
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PM V1.5 V5.2 最终确认：学到了有意义的取舍，但完整系统门未通过"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "analysis",
+        "body": "## 技术摘要：应报告为 bounded / negative confirmation，而不是继续调到通过\n\n冻结的一次性内容独立确认**未通过完整系统门**。失败只有两项：相对fixed-high的质量非劣下界为**-10.9%**，低于预设-5%；learned PM发生**4次**critical fabricated recall，高于上限2。\n\n这不是PM没有学会。相对transparent rule，learned PM质量净差**+17.2%**、risk差**-4.3%**、每回复少**12.484**个prompt tokens；相对always-off质量**+27.3%**。相对fixed-high，质量点估计仍为**+3.1%**，risk下降**6.2%**，prompt减少**7.2%**，但不确定性和critical risk阻止完整主张成立。"
+      },
+      {
+        "id": "policy_finding",
+        "type": "markdown",
+        "sourceId": "policy",
+        "body": "## Learned PM形成了非退化的质量—风险—成本折中\n\nlearned PM在256个seed-level决策中开启130次（50.8%），既不是全开也不是全关。它获得四套策略中最高的相对always-off质量均值，同时把fixed-high的material-risk率从21.9%降到15.6%，并把平均prompt从236.2降到219.2 tokens。代价是仍高于always-off的3.5%风险率；因此论文主张必须是平衡与选择，而不是绝对安全。"
+      },
+      {
+        "id": "quality_chart_block",
+        "type": "chart",
+        "chartId": "policy_quality",
+        "layout": "full"
+      },
+      {
+        "id": "quality_chart_note",
+        "type": "markdown",
+        "body": "图中的质量值以同一状态的always-off回复为零点；正值代表策略选择的回复更常实质胜出。Learned PM高于三个基线的点估计，但与fixed-high的64组cluster bootstrap区间仍跨过预注册非劣界，因此只能称方向积极，不能称已证实非劣。"
+      },
+      {
+        "id": "risk_chart_block",
+        "type": "chart",
+        "chartId": "policy_risk",
+        "layout": "full"
+      },
+      {
+        "id": "risk_chart_note",
+        "type": "markdown",
+        "body": "风险是interaction-and-grounding material-risk proxy，不是临床安全率。Learned PM显著低于fixed-high，但仍选择了4条critical fabricated recall；低平均风险不能抵消预冻结的严重事件上限。"
+      },
+      {
+        "id": "policy_table_block",
+        "type": "table",
+        "tableId": "policy_outcomes",
+        "layout": "full"
+      },
+      {
+        "id": "baseline_contrasts",
+        "type": "markdown",
+        "sourceId": "comparison",
+        "body": "## 相比透明规则已经及格；相比全开仍缺稳定的质量证据\n\nLearned PM相对transparent rule在质量、risk和prompt cost三个点估计上同时改善，且质量95%区间下界为+3.9%。相对fixed-high则是一个更难的结论：67胜、59负、130平或同臂，点估计略好，但MS漏开使部分反事实组出现系统性质量损失，区间下界降至-10.9%。"
+      },
+      {
+        "id": "comparison_chart_block",
+        "type": "chart",
+        "chartId": "learned_differences",
+        "layout": "full"
+      },
+      {
+        "id": "comparison_table_block",
+        "type": "table",
+        "tableId": "learned_comparisons",
+        "layout": "full"
+      },
+      {
+        "id": "gate_finding",
+        "type": "markdown",
+        "sourceId": "gates",
+        "body": "## 预冻结系统门有11项通过、2项失败\n\n通过项覆盖非退化活动、always-off质量、transparent-rule三指标、fixed-high风险和成本。失败项不能用其他外测或事后阈值补救：fixed-high质量非劣下界和critical grounding事件上限是生成与人评前已经写死的门。"
+      },
+      {
+        "id": "gate_table_block",
+        "type": "table",
+        "tableId": "gate_results",
+        "layout": "full"
+      },
+      {
+        "id": "component_finding",
+        "type": "markdown",
+        "sourceId": "components",
+        "body": "## 失败不是四个组件轮流随机坏：MS漏开与RS执行失真是两个不同责任层\n\nMS的ON回复在本确认中常带来质量收益，但Step1过度保守，关闭了fixed-high会赢的状态；这是路由泛化问题。RS则相反：Step1和人工规则都允许同一张卡，Step2却把‘用户已识别或愿意考虑的可信联系人’自由补成不存在的Sarah；这是card-executor交互和候选资格问题。ME保持低风险与正质量，是当前最稳定的记忆组件；MP仍缺可区分增量。"
+      },
+      {
+        "id": "component_table_block",
+        "type": "table",
+        "tableId": "component_diagnostics",
+        "layout": "full"
+      },
+      {
+        "id": "critical_finding",
+        "type": "markdown",
+        "sourceId": "critical",
+        "body": "## 四次critical事件来自两个状态、一个RS卡片和两个seed\n\n四条回复都虚构用户过去提到过Sarah，而可见对话和授权资源均没有该人物；卡片本身还明确禁止在没有证据时假设具体联系人。Learned PM、fixed-high和transparent rule都开启了这张卡，所以这既是冻结Step2的真实失败，也说明Step1没有表达或学到该执行风险。"
+      },
+      {
+        "id": "critical_table_block",
+        "type": "table",
+        "tableId": "critical_cases",
+        "layout": "full"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "sourceId": "contract",
+        "body": "## 范围、分析单位与指标定义\n\n确认集含128个state × exact Rank-1 candidate单位、64个二元counterfactual group、四组件各32个单位；每状态两个固定seed，ON/OFF同seed配对。策略在已生成的同一对回复间选臂，不各自重新生成。质量得分为ON相对OFF的material A/B/tie方向；risk只覆盖预定义interaction-and-grounding事件；cost取策略实际选中回复的API token usage。95%区间对64个counterfactual group做50,000次percentile cluster bootstrap。"
+      },
+      {
+        "id": "label_robustness",
+        "type": "markdown",
+        "sourceId": "label_resolution",
+        "body": "## 第三裁决含5处构念修正，但结论对修正不敏感\n\n三条质量裁决把盲页未展示的授权历史误当成虚构；两条risk裁决把自然的来源说明误标为内部标签泄漏。最终只做列举式构念修正，没有新评审、没有改回复或策略。使用未修正的primary-only标签重放时，系统仍因同样两项门失败；因此正式结论不依赖这5处处理。"
+      },
+      {
+        "id": "sensitivity_table_block",
+        "type": "table",
+        "tableId": "label_sensitivity",
+        "layout": "full"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## 限制与可支持的论文表述\n\n本结果是内容独立的合成内部确认，不是ESConv/EvoEmo untouched external lockbox；后两者已在旧版本暴露，只能作post-hoc repaired replication。来源说明使资源臂有时可被评审者识别，因此只能称A/B位置盲化、策略选择盲化，不能声称完全treatment-blind。风险指标也不是临床安全评价。当前可支持的主张是：低容量、可审计的PM学到了优于透明规则的保守资源取舍，并呈现相对全开的风险/成本优势；不能主张完整系统已经通过预注册确认。"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 推荐下一步：停止内部调试循环，转入结果写作和隔离的未来修复\n\n1. 将V5.2作为最终bounded/negative confirmation写入论文，不建立第二确认集。\n2. 保留ESConv/EvoEmo仅作同一冻结系统的探索性或修复后replication，不用于救活本门。\n3. 把MS漏开定义为Step1未来改进，把Sarah事件定义为RS card-executor安全缺陷；任何修复必须升新版本并使用新考卷，不能回写V5.2。\n4. 论文主比较保留always-off、fixed-high、transparent-rule和learned PM；V1.0只作历史方法基线，不与冻结V5.2的独立确认统计混在同一主门里。"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 后续研究问题\n\n- 若新版本显式建模candidate × executor风险，能否在不牺牲MS收益的情况下消除RS严重事件？\n- 在真正未暴露的纵向外部数据上，ME的低风险正收益能否复现？\n- 更强语义表示是否只改善goal/function泛化，还是会增加不可审计捷径？"
+      }
+    ],
+    "charts": [
+      {
+        "id": "policy_quality",
+        "title": "四种策略的质量均值（相对always-off）",
+        "subtitle": "256个seed-level策略选择；正值代表更常选择实质更好的回复。",
+        "type": "bar",
+        "dataset": "policy_outcomes",
+        "sourceId": "policy",
+        "encodings": {
+          "x": {
+            "field": "policy",
+            "type": "nominal",
+            "label": "策略"
+          },
+          "y": {
+            "field": "quality_mean_vs_off",
+            "type": "quantitative",
+            "label": "质量均值",
+            "format": "percent"
+          }
+        },
+        "valueFormat": "percent",
+        "layout": "full"
+      },
+      {
+        "id": "policy_risk",
+        "title": "四种策略的material-risk率",
+        "subtitle": "interaction-and-grounding proxy；分母为每策略选中的256条回复。",
+        "type": "bar",
+        "dataset": "policy_outcomes",
+        "sourceId": "policy",
+        "encodings": {
+          "x": {
+            "field": "policy",
+            "type": "nominal",
+            "label": "策略"
+          },
+          "y": {
+            "field": "material_risk_rate",
+            "type": "quantitative",
+            "label": "Risk率",
+            "format": "percent"
+          }
+        },
+        "valueFormat": "percent",
+        "layout": "full"
+      },
+      {
+        "id": "learned_differences",
+        "title": "Learned PM相对三个基线的质量与risk差",
+        "subtitle": "差值单位为比例点；risk负值更好，quality正值更好。",
+        "type": "bar",
+        "dataset": "comparison_chart",
+        "sourceId": "comparison_chart",
+        "encodings": {
+          "x": {
+            "field": "baseline",
+            "type": "nominal",
+            "label": "比较基线"
+          },
+          "y": {
+            "field": "difference",
+            "type": "quantitative",
+            "label": "差值",
+            "format": "percent"
+          },
+          "color": {
+            "field": "metric",
+            "type": "nominal",
+            "label": "指标"
+          }
+        },
+        "valueFormat": "percent",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "policy_outcomes",
+        "title": "冻结四策略的完整结果",
+        "subtitle": "质量以always-off为零点；risk与token均取策略实际选择的回复。",
+        "dataset": "policy_outcomes",
+        "sourceId": "policy",
+        "defaultSort": {
+          "field": "policy",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "policy",
+            "label": "策略",
+            "type": "text"
+          },
+          {
+            "field": "selected_on_fraction",
+            "label": "ON率",
+            "format": "percent"
+          },
+          {
+            "field": "quality_mean_vs_off",
+            "label": "质量vs off",
+            "format": "percent"
+          },
+          {
+            "field": "material_risk_rate",
+            "label": "Risk率",
+            "format": "percent"
+          },
+          {
+            "field": "mean_prompt_tokens",
+            "label": "Prompt tokens",
+            "format": "number"
+          },
+          {
+            "field": "critical_grounding_events",
+            "label": "Critical事件",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "learned_comparisons",
+        "title": "Learned PM相对基线的成对差异",
+        "subtitle": "质量与risk区间按64个反事实组聚类bootstrap；token为均值差。",
+        "dataset": "learned_comparisons",
+        "sourceId": "comparison",
+        "defaultSort": {
+          "field": "baseline",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "baseline",
+            "label": "基线",
+            "type": "text"
+          },
+          {
+            "field": "quality_difference",
+            "label": "质量差",
+            "format": "percent"
+          },
+          {
+            "field": "quality_ci_low",
+            "label": "质量CI下界",
+            "format": "percent"
+          },
+          {
+            "field": "quality_ci_high",
+            "label": "质量CI上界",
+            "format": "percent"
+          },
+          {
+            "field": "risk_rate_difference",
+            "label": "Risk差",
+            "format": "percent"
+          },
+          {
+            "field": "prompt_token_difference",
+            "label": "Prompt差",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "gate_results",
+        "title": "一次性V5.2系统门",
+        "subtitle": "所有门均在确认回复和人评结果产生前冻结。",
+        "dataset": "gate_results",
+        "sourceId": "gates",
+        "defaultSort": {
+          "field": "result",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "gate",
+            "label": "门",
+            "type": "text"
+          },
+          {
+            "field": "value",
+            "label": "实际值",
+            "type": "text"
+          },
+          {
+            "field": "threshold",
+            "label": "阈值",
+            "type": "text"
+          },
+          {
+            "field": "result",
+            "label": "结果",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "component_diagnostics",
+        "title": "四组件诊断（不作为单独晋级门）",
+        "subtitle": "每组件64个seed-level行；用于责任定位，不重新训练head。",
+        "dataset": "component_diagnostics",
+        "sourceId": "components",
+        "defaultSort": {
+          "field": "component",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "component",
+            "label": "组件",
+            "type": "text"
+          },
+          {
+            "field": "learned_on_fraction",
+            "label": "Learned ON率",
+            "format": "percent"
+          },
+          {
+            "field": "quality_mean_vs_off",
+            "label": "质量vs off",
+            "format": "percent"
+          },
+          {
+            "field": "learned_risk_rate",
+            "label": "Learned risk",
+            "format": "percent"
+          },
+          {
+            "field": "fixed_high_risk_rate",
+            "label": "Fixed risk",
+            "format": "percent"
+          },
+          {
+            "field": "interpretation",
+            "label": "解释",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "critical_cases",
+        "title": "Critical fabricated-recall根因",
+        "subtitle": "四个seed-level事件来自两个状态和同一RS卡。",
+        "dataset": "critical_cases",
+        "sourceId": "critical",
+        "defaultSort": {
+          "field": "component",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "component",
+            "label": "组件",
+            "type": "text"
+          },
+          {
+            "field": "states",
+            "label": "状态",
+            "format": "number"
+          },
+          {
+            "field": "seed_level_events",
+            "label": "事件",
+            "format": "number"
+          },
+          {
+            "field": "card",
+            "label": "卡片",
+            "type": "text"
+          },
+          {
+            "field": "observed_failure",
+            "label": "观察到的失败",
+            "type": "text"
+          },
+          {
+            "field": "responsibility",
+            "label": "责任层",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "label_sensitivity",
+        "title": "构念修正敏感性",
+        "subtitle": "修正后与primary-only重放均因相同两项门失败。",
+        "dataset": "label_sensitivity",
+        "sourceId": "sensitivity",
+        "defaultSort": {
+          "field": "label_version",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "label_version",
+            "label": "标签版本",
+            "type": "text"
+          },
+          {
+            "field": "quality_vs_fixed_high",
+            "label": "质量差",
+            "format": "percent"
+          },
+          {
+            "field": "quality_ci_low",
+            "label": "CI下界",
+            "format": "percent"
+          },
+          {
+            "field": "critical_events",
+            "label": "Critical事件",
+            "format": "number"
+          },
+          {
+            "field": "result",
+            "label": "系统门",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "policy",
+        "label": "Frozen four-policy outcome summary",
+        "path": "report_source.sqlite",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT * FROM policy_outcomes ORDER BY policy_key;",
+          "description": "Frozen four-policy outcome summary",
+          "tables_used": [
+            "policy_outcomes"
+          ]
+        }
+      },
+      {
+        "id": "comparison",
+        "label": "Learned PM contrasts against frozen baselines",
+        "path": "report_source.sqlite",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT * FROM learned_comparisons ORDER BY baseline;",
+          "description": "Learned PM contrasts against frozen baselines",
+          "tables_used": [
+            "learned_comparisons"
+          ]
+        }
+      },
+      {
+        "id": "comparison_chart",
+        "label": "Quality and risk differences against frozen baselines",
+        "path": "report_source.sqlite",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT baseline, metric, difference FROM comparison_chart ORDER BY baseline, metric;",
+          "description": "Quality and risk differences against frozen baselines",
+          "tables_used": [
+            "comparison_chart"
+          ]
+        }
+      },
+      {
+        "id": "gates",
+        "label": "Pre-frozen V5.2 confirmation gates",
+        "path": "report_source.sqlite",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT gate, value, threshold, result FROM gate_results ORDER BY gate;",
+          "description": "Pre-frozen V5.2 confirmation gates",
+          "tables_used": [
+            "gate_results"
+          ]
+        }
+      },
+      {
+        "id": "components",
+        "label": "Per-component diagnostic outcomes",
+        "path": "report_source.sqlite",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT * FROM component_diagnostics ORDER BY component;",
+          "description": "Per-component diagnostic outcomes",
+          "tables_used": [
+            "component_diagnostics"
+          ]
+        }
+      },
+      {
+        "id": "critical",
+        "label": "Critical grounding root-cause audit",
+        "path": "report_source.sqlite",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT * FROM critical_cases;",
+          "description": "Critical grounding root-cause audit",
+          "tables_used": [
+            "critical_cases"
+          ]
+        }
+      },
+      {
+        "id": "sensitivity",
+        "label": "Label-resolution sensitivity analysis",
+        "path": "report_source.sqlite",
+        "query": {
+          "engine": "sqlite",
+          "language": "sql",
+          "sql": "SELECT * FROM label_sensitivity ORDER BY label_version;",
+          "description": "Label-resolution sensitivity analysis",
+          "tables_used": [
+            "label_sensitivity"
+          ]
+        }
+      },
+      {
+        "id": "analysis",
+        "label": "Frozen V5.2 confirmation analysis",
+        "path": "confirmation_analysis.json"
+      },
+      {
+        "id": "primary_sensitivity",
+        "label": "Primary-only label sensitivity replay",
+        "path": "primary_only_sensitivity.json"
+      },
+      {
+        "id": "label_resolution",
+        "label": "Final adjudication and construct-validity lineage",
+        "path": "label_resolution_manifest.json"
+      },
+      {
+        "id": "contract",
+        "label": "Pre-frozen V5.2 one-shot confirmation contract",
+        "path": "confirmation_contract.json"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "datasets": {
+      "policy_outcomes": [
+        {
+          "policy_key": "always_off",
+          "policy": "Always-off",
+          "selected_on_fraction": 0.0,
+          "quality_mean_vs_off": 0.0,
+          "material_risk_rate": 0.03515625,
+          "mean_prompt_tokens": 205.9375,
+          "mean_total_tokens": 243.1796875,
+          "critical_grounding_events": 0
+        },
+        {
+          "policy_key": "component_fixed_high",
+          "policy": "Fixed-high",
+          "selected_on_fraction": 1.0,
+          "quality_mean_vs_off": 0.2421875,
+          "material_risk_rate": 0.21875,
+          "mean_prompt_tokens": 236.171875,
+          "mean_total_tokens": 262.16796875,
+          "critical_grounding_events": 4
+        },
+        {
+          "policy_key": "transparent_rule",
+          "policy": "Transparent rule",
+          "selected_on_fraction": 0.828125,
+          "quality_mean_vs_off": 0.1015625,
+          "material_risk_rate": 0.19921875,
+          "mean_prompt_tokens": 231.703125,
+          "mean_total_tokens": 259.1328125,
+          "critical_grounding_events": 4
+        },
+        {
+          "policy_key": "learned_pm",
+          "policy": "Learned PM",
+          "selected_on_fraction": 0.5078125,
+          "quality_mean_vs_off": 0.2734375,
+          "material_risk_rate": 0.15625,
+          "mean_prompt_tokens": 219.21875,
+          "mean_total_tokens": 251.44140625,
+          "critical_grounding_events": 4
+        }
+      ],
+      "learned_comparisons": [
+        {
+          "baseline": "Fixed-high",
+          "quality_difference": 0.03125,
+          "quality_ci_low": -0.109375,
+          "quality_ci_high": 0.1796875,
+          "risk_rate_difference": -0.0625,
+          "risk_ci_low": -0.1171875,
+          "risk_ci_high": -0.015625,
+          "prompt_token_difference": -16.953125,
+          "quality_better": 67,
+          "quality_worse": 59,
+          "quality_tie_or_same": 130
+        },
+        {
+          "baseline": "Transparent rule",
+          "quality_difference": 0.171875,
+          "quality_ci_low": 0.0390625,
+          "quality_ci_high": 0.3046875,
+          "risk_rate_difference": -0.04296875,
+          "risk_ci_low": -0.09765625,
+          "risk_ci_high": 0.0078125,
+          "prompt_token_difference": -12.484375,
+          "quality_better": 95,
+          "quality_worse": 51,
+          "quality_tie_or_same": 110
+        },
+        {
+          "baseline": "Always-off",
+          "quality_difference": 0.2734375,
+          "quality_ci_low": 0.16015625,
+          "quality_ci_high": 0.38671875,
+          "risk_rate_difference": 0.12109375,
+          "risk_ci_low": 0.04296875,
+          "risk_ci_high": 0.203125,
+          "prompt_token_difference": 13.28125,
+          "quality_better": 97,
+          "quality_worse": 27,
+          "quality_tie_or_same": 132
+        }
+      ],
+      "comparison_chart": [
+        {
+          "baseline": "Fixed-high",
+          "metric": "Quality difference",
+          "difference": 0.03125
+        },
+        {
+          "baseline": "Fixed-high",
+          "metric": "Risk-rate difference",
+          "difference": -0.0625
+        },
+        {
+          "baseline": "Transparent rule",
+          "metric": "Quality difference",
+          "difference": 0.171875
+        },
+        {
+          "baseline": "Transparent rule",
+          "metric": "Risk-rate difference",
+          "difference": -0.04296875
+        },
+        {
+          "baseline": "Always-off",
+          "metric": "Quality difference",
+          "difference": 0.2734375
+        },
+        {
+          "baseline": "Always-off",
+          "metric": "Risk-rate difference",
+          "difference": 0.12109375
+        }
+      ],
+      "gate_results": [
+        {
+          "gate": "quality_vs_fixed_high_lower_ci",
+          "value": "-0.109375",
+          "threshold": "-0.05",
+          "result": "FAIL"
+        },
+        {
+          "gate": "quality_vs_always_off_point",
+          "value": "0.2734375",
+          "threshold": "0.0",
+          "result": "PASS"
+        },
+        {
+          "gate": "quality_vs_always_off_lower_ci",
+          "value": "0.16015625",
+          "threshold": "-0.05",
+          "result": "PASS"
+        },
+        {
+          "gate": "risk_vs_fixed_high_point",
+          "value": "-0.0625",
+          "threshold": "0.0",
+          "result": "PASS"
+        },
+        {
+          "gate": "risk_vs_fixed_high_upper_ci",
+          "value": "-0.015625",
+          "threshold": "0.05",
+          "result": "PASS"
+        },
+        {
+          "gate": "prompt_cost_reduction_vs_fixed_high",
+          "value": "0.07178299702282498",
+          "threshold": "0.05",
+          "result": "PASS"
+        },
+        {
+          "gate": "quality_vs_transparent_rule_lower_ci",
+          "value": "0.0390625",
+          "threshold": "-0.05",
+          "result": "PASS"
+        },
+        {
+          "gate": "risk_vs_transparent_rule_point",
+          "value": "-0.04296875",
+          "threshold": "0.0",
+          "result": "PASS"
+        },
+        {
+          "gate": "prompt_tokens_vs_transparent_rule_point",
+          "value": "-12.484375",
+          "threshold": "0.0",
+          "result": "PASS"
+        },
+        {
+          "gate": "strict_point_improvement_vs_transparent_rule",
+          "value": "true",
+          "threshold": "true",
+          "result": "PASS"
+        },
+        {
+          "gate": "nondegenerate_policy_activity",
+          "value": "0.5078125",
+          "threshold": "[0.1, 0.9]",
+          "result": "PASS"
+        },
+        {
+          "gate": "critical_grounding_count",
+          "value": "4",
+          "threshold": "2",
+          "result": "FAIL"
+        },
+        {
+          "gate": "critical_grounding_not_above_fixed_high",
+          "value": "[4, 4]",
+          "threshold": "\"learned<=fixed_high\"",
+          "result": "PASS"
+        }
+      ],
+      "component_diagnostics": [
+        {
+          "component": "MP",
+          "seed_rows": 64,
+          "learned_on_fraction": 0.5,
+          "quality_mean_vs_off": 0.03125,
+          "learned_risk_rate": 0.28125,
+          "fixed_high_risk_rate": 0.28125,
+          "interpretation": "开启率适中，但质量净增益接近零，且风险未低于全开。"
+        },
+        {
+          "component": "MS",
+          "seed_rows": 64,
+          "learned_on_fraction": 0.53125,
+          "quality_mean_vs_off": 0.53125,
+          "learned_risk_rate": 0.078125,
+          "fixed_high_risk_rate": 0.109375,
+          "interpretation": "ON回复质量常有收益；learned PM漏开造成相对fixed-high的主要质量损失。"
+        },
+        {
+          "component": "ME",
+          "seed_rows": 64,
+          "learned_on_fraction": 0.75,
+          "quality_mean_vs_off": 0.53125,
+          "learned_risk_rate": 0.046875,
+          "fixed_high_risk_rate": 0.03125,
+          "interpretation": "当前最稳定的记忆收益组件；风险低，且多数状态不因关闭受损。"
+        },
+        {
+          "component": "RS",
+          "seed_rows": 64,
+          "learned_on_fraction": 0.25,
+          "quality_mean_vs_off": 0.0,
+          "learned_risk_rate": 0.21875,
+          "fixed_high_risk_rate": 0.453125,
+          "interpretation": "路由显著降低全开风险，但同一‘可信联系人’卡产生4次虚构回忆。"
+        }
+      ],
+      "critical_cases": [
+        {
+          "component": "RS",
+          "states": 2,
+          "seed_level_events": 4,
+          "card": "Contact one trusted person",
+          "observed_failure": "回复虚构用户以前提到过名为 Sarah 的可信联系人或小组负责人。",
+          "responsibility": "Step2/card-executor interaction；learned、fixed-high和透明规则均开启，PM没有过滤该组合。"
+        }
+      ],
+      "label_sensitivity": [
+        {
+          "label_version": "Construct-valid final labels",
+          "quality_vs_fixed_high": 0.03125,
+          "quality_ci_low": -0.109375,
+          "critical_events": 4,
+          "result": "FAIL_SINGLE_USE_V5_2_SYSTEM_GATE"
+        },
+        {
+          "label_version": "Primary-only sensitivity",
+          "quality_vs_fixed_high": 0.0546875,
+          "quality_ci_low": -0.0859375,
+          "critical_events": 4,
+          "result": "FAIL_SINGLE_USE_V5_2_SYSTEM_GATE"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "policy",
+      "label": "Frozen four-policy outcome summary",
+      "path": "report_source.sqlite",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "sql": "SELECT * FROM policy_outcomes ORDER BY policy_key;",
+        "description": "Frozen four-policy outcome summary",
+        "tables_used": [
+          "policy_outcomes"
+        ]
+      }
+    },
+    {
+      "id": "comparison",
+      "label": "Learned PM contrasts against frozen baselines",
+      "path": "report_source.sqlite",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "sql": "SELECT * FROM learned_comparisons ORDER BY baseline;",
+        "description": "Learned PM contrasts against frozen baselines",
+        "tables_used": [
+          "learned_comparisons"
+        ]
+      }
+    },
+    {
+      "id": "comparison_chart",
+      "label": "Quality and risk differences against frozen baselines",
+      "path": "report_source.sqlite",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "sql": "SELECT baseline, metric, difference FROM comparison_chart ORDER BY baseline, metric;",
+        "description": "Quality and risk differences against frozen baselines",
+        "tables_used": [
+          "comparison_chart"
+        ]
+      }
+    },
+    {
+      "id": "gates",
+      "label": "Pre-frozen V5.2 confirmation gates",
+      "path": "report_source.sqlite",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "sql": "SELECT gate, value, threshold, result FROM gate_results ORDER BY gate;",
+        "description": "Pre-frozen V5.2 confirmation gates",
+        "tables_used": [
+          "gate_results"
+        ]
+      }
+    },
+    {
+      "id": "components",
+      "label": "Per-component diagnostic outcomes",
+      "path": "report_source.sqlite",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "sql": "SELECT * FROM component_diagnostics ORDER BY component;",
+        "description": "Per-component diagnostic outcomes",
+        "tables_used": [
+          "component_diagnostics"
+        ]
+      }
+    },
+    {
+      "id": "critical",
+      "label": "Critical grounding root-cause audit",
+      "path": "report_source.sqlite",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "sql": "SELECT * FROM critical_cases;",
+        "description": "Critical grounding root-cause audit",
+        "tables_used": [
+          "critical_cases"
+        ]
+      }
+    },
+    {
+      "id": "sensitivity",
+      "label": "Label-resolution sensitivity analysis",
+      "path": "report_source.sqlite",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "sql": "SELECT * FROM label_sensitivity ORDER BY label_version;",
+        "description": "Label-resolution sensitivity analysis",
+        "tables_used": [
+          "label_sensitivity"
+        ]
+      }
+    },
+    {
+      "id": "analysis",
+      "label": "Frozen V5.2 confirmation analysis",
+      "path": "confirmation_analysis.json"
+    },
+    {
+      "id": "primary_sensitivity",
+      "label": "Primary-only label sensitivity replay",
+      "path": "primary_only_sensitivity.json"
+    },
+    {
+      "id": "label_resolution",
+      "label": "Final adjudication and construct-validity lineage",
+      "path": "label_resolution_manifest.json"
+    },
+    {
+      "id": "contract",
+      "label": "Pre-frozen V5.2 one-shot confirmation contract",
+      "path": "confirmation_contract.json"
+    }
+  ],
+  "package_info": {
+    "generated_by": "scripts/v1_5/27q_build_v5_2_confirmation_final_report_v1_5.py",
+    "source_notes": "Audience=technical. Required structure mapped to technical summary, key findings, scope/definitions, methodology, robustness/limitations, next steps, and further questions. Chart map: policy quality and policy risk use separate categorical bars because the analytical questions differ and units should not share one axis; learned differences uses a grouped signed bar for quality versus risk-rate changes. Palette policies are single-root for single-series charts and hard two-root for the comparator chart. Exact gates, costs, components, critical cases, and sensitivity remain tables because audit lookup is the primary task."
+  }
+}

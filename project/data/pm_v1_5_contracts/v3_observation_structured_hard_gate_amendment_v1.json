@@ -1,0 +1,85 @@
+{
+  "protocol": "pm-v1.5-v3-observation-structured-hard-gate-amendment-v1",
+  "status": "FROZEN_AFTER_ONE_SHOT_CONFIRMATION_FAILURE",
+  "frozen_date": "2026-08-03",
+  "trigger": "The independently computed transparent Observation passed all four FACTOR_FIT gates but failed the one-shot unseen-surface confirmation specificity floor. Owner/time, boundary, and increment predictions defaulted ON; only goal/function generalized reliably.",
+  "evidence": {
+    "human_reference_sha256": "e1d368c4a8f2576515d8e685531050822416d384b5379c7edb0a18400757dc6a",
+    "primary_bakeoff_report_sha256": "6d327509b0344a2c53818ce5d2836a4101b8cc6ab1a2d2da2aefb197569c54ea",
+    "nli_recovery_report_sha256": "9eb6441b814f3411782c4371098142f460eca5557f23e0aa14485f73ebfcd311",
+    "fit_status": "PASS_ALL_FOUR_FACTORS",
+    "confirmation_status": "FAIL_FROZEN_SPECIFICITY_FLOOR",
+    "confirmation_composite_balanced_accuracy": 0.71875,
+    "confirmation_composite_recall": 0.9375,
+    "confirmation_composite_specificity": 0.5,
+    "confirmation_consumed_once": true
+  },
+  "scope_boundary": {
+    "observation_role": "pre-Step1 candidate qualification",
+    "eligibility_is_step1_gold": false,
+    "step1_role": "learn expected component marginal utility after eligibility and qualified execution",
+    "step2_role": "bind and apply only resources requested by the selected feasible action",
+    "generator_role": "produce the response under the realized action without inventing or upgrading memory evidence"
+  },
+  "structured_hard_gates": {
+    "owner_identity": {
+      "source": "backend user_id and candidate owner_id",
+      "operation": "exact equality",
+      "natural_language_inference_forbidden_when_metadata_available": true
+    },
+    "time_and_version_validity": {
+      "source": "candidate timestamps, supersedes links, active or withdrawn status, and current session time",
+      "operation": "deterministic validity rule",
+      "natural_language_inference_forbidden_when_metadata_available": true
+    },
+    "component_presence": {
+      "source": "actual Rank-1 candidate and retriever qualification record",
+      "operation": "absent or disqualified candidate forces component OFF"
+    }
+  },
+  "bounded_semantic_factors": {
+    "goal_function_fit": {
+      "status": "SUPPORTED_FOR_BOUNDED_V1_5_USE",
+      "evidence": "one-shot confirmation balanced accuracy 0.96 with specificity 1.0",
+      "inputs": [
+        "visible current state",
+        "candidate subtype and function",
+        "RS card-level when_to_use and when_not_to_use"
+      ]
+    },
+    "boundary_burden_compatible": {
+      "status": "THREE_WAY_ALLOW_DENY_UNKNOWN",
+      "explicit_current_turn_permission_or_refusal_has_priority": true,
+      "unknown_policy": "OFF"
+    },
+    "specific_increment": {
+      "status": "THREE_WAY_INCREMENT_REDUNDANT_UNKNOWN",
+      "exact current repetition is redundant": true,
+      "candidate-specific evidence is required for increment": true,
+      "unknown_policy": "OFF"
+    }
+  },
+  "decision_rule": "A component may reach Step1 only if structured owner/time/presence gates pass and every bounded semantic factor is positive. Any negative or unknown factor forces that component OFF before Step1.",
+  "runtime_invariants": {
+    "components_preserved": ["MP", "MS", "ME", "RS"],
+    "legal_actions_preserved": 16,
+    "default_action_preserved": "M0+R0",
+    "unknown_is_not_a_negative_training_label": true,
+    "unknown_is_runtime_off": true,
+    "coverage_and_abstention_reported_per_component_and_domain": true
+  },
+  "claim_effect": {
+    "primary_qrc_claim_changed": false,
+    "complex_free_text_user_need_understanding_claimed": false,
+    "natural_language_eligibility_claim_narrowed": true,
+    "full_four_component_step1_must_still_be_trained_and_evaluated": true
+  },
+  "validation_and_stop_rule": {
+    "consumed_confirmation_may_not_be_reused_for_model_or_rule_selection": true,
+    "no_more_embedding_or_nli_candidate_search_in_v1_5": true,
+    "no_new_scattered_human_observation_packets": true,
+    "next_evidence": "new versioned system-level qualification using backend metadata plus bounded semantic decisions, followed by the already planned H-Step2 and effect data only if it passes",
+    "external_esconv_or_evoemo_may_not_be_used_to_repair_or_select": true,
+    "failure_means": "report Observation coverage limitation; do not attribute the failure to Step1, Step2, retrieval, or generator"
+  }
+}

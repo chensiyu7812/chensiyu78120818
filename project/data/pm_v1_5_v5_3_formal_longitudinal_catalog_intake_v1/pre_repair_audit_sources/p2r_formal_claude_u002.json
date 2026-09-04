@@ -1,0 +1,2293 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_claude_u002",
+  "content_author": "claude",
+  "superdomain_schedule_position": 5,
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "moving_culture_solitude",
+    "finance_housing"
+  ],
+  "dialogue_language": "en",
+  "profile_history": [
+    {
+      "profile_item_id": "u002_pf_name_v1",
+      "field_type": "name",
+      "field_value": "Kristine",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "salutation only; rarely decision-relevant"
+      ],
+      "item_id": "u002_pf_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "My name is Kristine"
+    },
+    {
+      "profile_item_id": "u002_pf_age_v1",
+      "field_type": "age",
+      "field_value": "26",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; graduation-timing goal at most"
+      ],
+      "item_id": "u002_pf_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I'm twenty-six"
+    },
+    {
+      "profile_item_id": "u002_pf_gender_v1",
+      "field_type": "gender",
+      "field_value": "female",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "rarely decision-relevant; night-team composition context at most"
+      ],
+      "item_id": "u002_pf_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I am the only woman on the night team"
+    },
+    {
+      "profile_item_id": "u002_pf_job_v1",
+      "field_type": "job",
+      "field_value": "hotel front-desk supervisor, night shifts",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "shift timing, study-window feasibility, internal promotion cycles"
+      ],
+      "item_id": "u002_pf_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I supervise the front desk at a business hotel, nights mostly"
+    },
+    {
+      "profile_item_id": "u002_pf_edu_v1",
+      "field_type": "education",
+      "field_value": "online BSc hospitality management, in progress",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "module deadlines, capstone supervision, fee cycles"
+      ],
+      "item_id": "u002_pf_edu_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "an online hospitality management degree"
+    },
+    {
+      "profile_item_id": "u002_pf_nat_v1",
+      "field_type": "nationality",
+      "field_value": "Filipino",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "remittance obligations, language of services, distance from family"
+      ],
+      "item_id": "u002_pf_nat_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I'm Filipino"
+    },
+    {
+      "profile_item_id": "u002_pf_loc_v1",
+      "field_type": "location",
+      "field_value": "Singapore",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "housing options, transport, time-zone offset from family"
+      ],
+      "item_id": "u002_pf_loc_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I moved to Singapore three years ago"
+    }
+  ],
+  "response_preference_history": [
+    {
+      "preference_item_id": "u002_pr_onesugg_v1",
+      "preference_type": "one_optional_suggestion",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 5,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u002_pr_onesugg_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s005_t05"
+      ],
+      "literal_source_span": "one thing at a time please. Give me the one and let me decide",
+      "preference_text": "one thing at a time please. Give me the one and let me decide"
+    },
+    {
+      "preference_item_id": "u002_pr_direct_v1",
+      "preference_type": "direct_answer_before_explanation",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 12,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u002_pr_direct_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s012_t03"
+      ],
+      "literal_source_span": "when I ask you something, say the answer first and explain after",
+      "preference_text": "when I ask you something, say the answer first and explain after"
+    },
+    {
+      "preference_item_id": "u002_pr_choices_v1",
+      "preference_type": "choices_rather_than_commands",
+      "owner_id": "p2r_formal_claude_u002",
+      "valid_from_session": 19,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "item_id": "u002_pr_choices_v1",
+      "subtype": "MP_PREFERENCE",
+      "source_turn_ids": [
+        "s019_t03"
+      ],
+      "literal_source_span": "give me a couple of ways to go, not one instruction",
+      "preference_text": "give me a couple of ways to go, not one instruction"
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_02",
+      "name": "Lorna",
+      "relation": "mother, in Cebu",
+      "first_mentioned_session": 3,
+      "note": "kitchen roof repair; her account of where the money went differs from the aunt's",
+      "relationship": "mother, in Cebu",
+      "valid_from_session": 3,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_03",
+      "name": "Jomar",
+      "relation": "younger brother",
+      "first_mentioned_session": 11,
+      "note": "first in the family to sit a university entrance exam; slow to submit forms",
+      "relationship": "younger brother",
+      "valid_from_session": 11,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_04",
+      "name": "Wei Ling",
+      "relation": "duty manager and her direct supervisor",
+      "first_mentioned_session": 10,
+      "note": "controls the roster and the promotion cycle; only finishes conversations at the start of her shift",
+      "relationship": "duty manager and her direct supervisor",
+      "valid_from_session": 10,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_05",
+      "name": "Priya",
+      "relation": "flatmate sharing the room",
+      "first_mentioned_session": 4,
+      "note": "lamp and shower-slot friction, settled by trade; moved out later",
+      "relationship": "flatmate sharing the room",
+      "valid_from_session": 4,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_06",
+      "name": "Teresa",
+      "relation": "choir leader at the church",
+      "first_mentioned_session": 15,
+      "note": "kept asking her to cover the morning service that clashes with the roster",
+      "relationship": "choir leader at the church",
+      "valid_from_session": 15,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_07",
+      "name": "Daniel",
+      "relation": "colleague on night reception",
+      "first_mentioned_session": 22,
+      "note": "took the acting duty manager slot in June and walked her through his application",
+      "relationship": "colleague on night reception",
+      "valid_from_session": 22,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_08",
+      "name": "Ms Ong",
+      "relation": "capstone tutor on the degree",
+      "first_mentioned_session": 13,
+      "note": "her example project unlocked the brief; slow to answer topic-change emails",
+      "relationship": "capstone tutor on the degree",
+      "valid_from_session": 13,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_09",
+      "name": "Belen",
+      "relation": "aunt in Cebu handling the repair money",
+      "first_mentioned_session": 7,
+      "note": "receipt photos before each transfer; also the source of second-hand news about Jomar",
+      "relationship": "aunt in Cebu handling the repair money",
+      "valid_from_session": 7,
+      "valid_until_session": null
+    }
+  ],
+  "recurring_topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "online degree modules and capstone",
+      "session_indices": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21
+      ]
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "roster, night shifts and the duty manager post",
+      "session_indices": [
+        2,
+        6,
+        10,
+        14,
+        18,
+        22
+      ]
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "money home and the kitchen roof",
+      "session_indices": [
+        3,
+        7,
+        11,
+        16,
+        20
+      ]
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "shared room and finding her own space",
+      "session_indices": [
+        4,
+        8,
+        12,
+        19
+      ]
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "Sunday choir and belonging outside work",
+      "session_indices": [
+        6,
+        15,
+        23
+      ]
+    },
+    {
+      "thread_id": "thread_06",
+      "label": "Jomar's university application",
+      "session_indices": [
+        11,
+        16,
+        22
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "u002_evt_01",
+      "session_index": 1,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Paid the first instalment on the online hospitality management degree after four years behind a desk.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u002_evt_02",
+      "session_index": 2,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Moved her break from noon to the quiet fifteen minutes after the check-out rush.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u002_evt_03",
+      "session_index": 3,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Sent the first month of roof repair money to Cebu; no work started.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u002_evt_04",
+      "session_index": 4,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Bought a folding screen for her corner of the shared room, ending the lamp and shift-hour arguments.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u002_evt_05",
+      "session_index": 5,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Abandoned a single-deadline module around week four, matching the pattern she had just named.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u002_evt_06",
+      "session_index": 6,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "First Sunday at the church a colleague brought her to, where services run in three languages.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u002_evt_07",
+      "session_index": 7,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "description": "Set up receipt photographs from Auntie Belen before each further transfer; the figures matched that month.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u002_evt_08",
+      "session_index": 8,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Added her name to the housing agency list for a single room; no response followed.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u002_evt_09",
+      "session_index": 9,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Started doing module quizzes on the staff shuttle and finished a unit two weeks early.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u002_evt_10",
+      "session_index": 10,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "description": "Told Wei Ling she wanted consideration for the duty manager post and was told to wait for the next cycle.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u002_evt_11",
+      "session_index": 11,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_09"
+      ],
+      "description": "Received two conflicting accounts in one week of where the roof money went.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u002_evt_12",
+      "session_index": 12,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Traded first shower slot for late lamp use with Priya, ending the room dispute.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u002_evt_13",
+      "session_index": 13,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "description": "Built the capstone outline in one evening by working backwards from Ms Ong's example project.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u002_evt_14",
+      "session_index": 14,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "description": "Took fifteen minutes with Wei Ling at the start of her shift, the first conversation she finished.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u002_evt_15",
+      "session_index": 15,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "description": "Switched to the later choir practice that ends near her bus stop; Teresa began asking for morning cover.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    },
+    {
+      "event_id": "u002_evt_16",
+      "session_index": 16,
+      "thread_id": "thread_06",
+      "entity_ids": [
+        "self",
+        "entity_03"
+      ],
+      "description": "Paid Jomar's application fee in August; the form remained unsubmitted.",
+      "topic_thread_ids": [
+        "thread_06"
+      ]
+    },
+    {
+      "event_id": "u002_evt_17",
+      "session_index": 16,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "description": "Second-hand news from Auntie Belen that Jomar had accepted a trade school place instead.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u002_evt_18",
+      "session_index": 17,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "description": "Capstone proposal accepted without revisions.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u002_evt_19",
+      "session_index": 18,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self"
+      ],
+      "description": "Hotel announced that no internal promotions move between November and January.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u002_evt_20",
+      "session_index": 19,
+      "thread_id": "thread_04",
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "description": "Priya moved out, leaving the room shared with only one other person.",
+      "topic_thread_ids": [
+        "thread_04"
+      ]
+    },
+    {
+      "event_id": "u002_evt_21",
+      "session_index": 20,
+      "thread_id": "thread_03",
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "description": "Began taking family video calls standing at the stove while cooking.",
+      "topic_thread_ids": [
+        "thread_03"
+      ]
+    },
+    {
+      "event_id": "u002_evt_22",
+      "session_index": 21,
+      "thread_id": "thread_01",
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "description": "Two emails to Ms Ong about a capstone topic change went unanswered.",
+      "topic_thread_ids": [
+        "thread_01"
+      ]
+    },
+    {
+      "event_id": "u002_evt_23",
+      "session_index": 22,
+      "thread_id": "thread_02",
+      "entity_ids": [
+        "self",
+        "entity_07"
+      ],
+      "description": "Daniel took the acting duty manager slot in June and walked her through his whole application over coffee.",
+      "topic_thread_ids": [
+        "thread_02"
+      ]
+    },
+    {
+      "event_id": "u002_evt_24",
+      "session_index": 23,
+      "thread_id": "thread_05",
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "description": "Settled into the later service, leaving after the second language, with the morning requests stopped.",
+      "topic_thread_ids": [
+        "thread_05"
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 24 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "My name is Kristine, I'm twenty-six, and last week I paid the first instalment on an online hospitality management degree. Four years of standing behind a desk and I finally clicked enrol."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "Four years of thinking about it and one week of doing it. What made this the week?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "A guest asked whether I was the manager and I said no, and it landed differently than usual. I have been doing the manager's job on nights for two years without the word."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "The gap between the work and the title finally became audible in someone else's mouth. That's a very specific kind of push."
+        }
+      ],
+      "summary": "Kristine, twenty-six, enrols in an online hospitality degree after a guest's question exposes the gap between the night work she does and the title she lacks.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c001",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "name",
+          "field_value": "Kristine",
+          "profile_item_id": "u002_pf_name_v1",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "My name is Kristine",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u002_c002",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "age",
+          "field_value": "26",
+          "profile_item_id": "u002_pf_age_v1",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "I'm twenty-six",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u002_c003",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "education",
+          "field_value": "online BSc hospitality management, in progress",
+          "profile_item_id": "u002_pf_edu_v1",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "an online hospitality management degree",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u002_evt_01"
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 23 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I supervise the front desk at a business hotel, nights mostly, and I am the only woman on the night team. By four in the morning I am not a pleasant person to check in with."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "Nights strip the patience out of anyone, and you're doing it without a single person on the floor whose day looks like yours."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "One thing has helped already. I moved my break to the quiet fifteen minutes after the check-out rush instead of taking it at noon, and I stopped snapping at guests by the end of the shift."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "You put the rest where the pressure actually drops rather than where the clock says lunch. Small move, whole shift changed."
+        }
+      ],
+      "summary": "Kristine supervises night reception as the only woman on her team; shifting her break to just after the check-out rush stops her snapping at guests by shift's end.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c004",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "job",
+          "field_value": "hotel front-desk supervisor, night shifts",
+          "profile_item_id": "u002_pf_job_v1",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "I supervise the front desk at a business hotel, nights mostly",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u002_c005",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "gender",
+          "field_value": "female",
+          "profile_item_id": "u002_pf_gender_v1",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s002_t01"
+          ],
+          "literal_source_span": "I am the only woman on the night team",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u002_c006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I moved my break to the quiet fifteen minutes after the check-out rush instead of taking it at noon, and I stopped snapping at guests by the end of the shift",
+          "action_span": "moved my break to the quiet fifteen minutes after the check-out rush instead of taking it at noon",
+          "result_span": "I stopped snapping at guests by the end of the shift",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I moved my break to the quiet fifteen minutes after the check-out rush instead of taking it at noon, and I stopped snapping at guests by the end of the shift",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_02"
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 22 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I'm Filipino, I moved to Singapore three years ago, and I still live out of one room. Everything I earn here already has a name written on it back home."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "Earning in one place and spending in another, with the list made before the money arrives. That's a particular kind of tired."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "I sent the first month of roof money in February and nothing has started. Every time I ask, the answer is that they are waiting for the dry season."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "Money gone, roof unchanged, and a reason that can be repeated indefinitely. Hard to argue with weather from another country."
+        },
+        {
+          "turn_id": "s003_t05",
+          "role": "user",
+          "text": "That roof has leaked into the same corner of my mother's kitchen since the 2013 typhoon."
+        },
+        {
+          "turn_id": "s003_t06",
+          "role": "assistant",
+          "text": "Eleven years in the same corner. At that point the leak is practically furniture, and everyone has learned to step around it."
+        }
+      ],
+      "summary": "Three years into life in Singapore, Kristine's wages are spoken for before they arrive; the first roof transfer produces no work and the leak dates back to 2013.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c007",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "nationality",
+          "field_value": "Filipino",
+          "profile_item_id": "u002_pf_nat_v1",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "I'm Filipino",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u002_c008",
+          "subtype": "MP_PROFILE",
+          "is_update": false,
+          "field_type": "location",
+          "field_value": "Singapore",
+          "profile_item_id": "u002_pf_loc_v1",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "I moved to Singapore three years ago",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        },
+        {
+          "candidate_id": "u002_c009",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s003_t03"
+          ],
+          "literal_source_span": "I sent the first month of roof money in February and nothing has started",
+          "action_span": "sent the first month of roof money in February",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I sent the first month of roof money in February and nothing has started"
+        },
+        {
+          "candidate_id": "u002_c010",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s003_t05"
+          ],
+          "literal_source_span": "That roof has leaked into the same corner of my mother's kitchen since the 2013 typhoon",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "entity_02"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "That roof has leaked into the same corner of my mother's kitchen since the 2013 typhoon"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_03"
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 21 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "Four of us share one room in a flat in Geylang, all on different shifts. There is no hour of the day when somebody is not trying to sleep."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "So every ordinary act — a lamp, a bag, a phone call — becomes a negotiation with somebody's sleep. That wears down fast."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "I bought a folding screen for my corner, and the arguments about my lamp and my shift hours stopped within a week."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "A screen doesn't add a square metre, but it draws a line everyone can see. Cheapest peace treaty available."
+        },
+        {
+          "turn_id": "s004_t05",
+          "role": "user",
+          "text": "Priya has the bunk under mine and she is the one who minded the lamp most. We are fine now, but I still want a door of my own eventually."
+        },
+        {
+          "turn_id": "s004_t06",
+          "role": "assistant",
+          "text": "Fine now, with the bigger want left standing. Those two can sit together for a while."
+        }
+      ],
+      "summary": "Four flatmates on different shifts share one Geylang room; a folding screen ends the lamp and shift-hour arguments, though Kristine still wants a door of her own.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c011",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s004_t03"
+          ],
+          "literal_source_span": "I bought a folding screen for my corner, and the arguments about my lamp and my shift hours stopped within a week",
+          "action_span": "bought a folding screen for my corner",
+          "result_span": "the arguments about my lamp and my shift hours stopped within a week",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I bought a folding screen for my corner, and the arguments about my lamp and my shift hours stopped within a week",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_04"
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 20 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "I have spotted a pattern with these modules. The ones with a small task due every week I finish without thinking; the ones with a single deadline at the end I abandon around week four."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "So it isn't the difficulty that decides it, it's whether anything falls due while you're still interested."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "Which is annoying, because the two modules I actually chose for myself are both single-deadline ones. The weekly ones are the compulsory boring ones."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "The structure that carries you is attached to the material you don't care about. That's a genuinely irritating arrangement."
+        },
+        {
+          "turn_id": "s005_t05",
+          "role": "user",
+          "text": "If you have something for me to try, one thing at a time please. Give me the one and let me decide."
+        },
+        {
+          "turn_id": "s005_t06",
+          "role": "assistant",
+          "text": "One at a time, yours to take or leave."
+        }
+      ],
+      "summary": "Kristine notices she completes weekly-task modules automatically but abandons single-deadline ones by week four, and the modules she chose herself are all single-deadline.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c012",
+          "subtype": "MS_SESSION",
+          "ms_function": "specific_observation",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s005_t01"
+          ],
+          "literal_source_span": "The ones with a small task due every week I finish without thinking; the ones with a single deadline at the end I abandon around week four",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        },
+        {
+          "candidate_id": "u002_c013",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "one_optional_suggestion",
+          "preference_item_id": "u002_pr_onesugg_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s005_t05"
+          ],
+          "literal_source_span": "one thing at a time please. Give me the one and let me decide",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u002_evt_05"
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 19 months ago",
+      "topic_thread_ids": [
+        "thread_02",
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "The roster came out early this month and both of my study nights survived it. First time that has happened since I enrolled."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "Early and intact. Worth noticing which of those two you're more relieved about."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "A woman at work took me to her church on Sunday. They run the service in three languages, one after the other, and I stayed for all of it."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "Three services' worth of sitting still on your one free morning. Something there clearly held you."
+        }
+      ],
+      "summary": "An early roster leaves both study nights intact, and a colleague brings Kristine to a church whose Sunday service runs through three languages in turn.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c014",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s006_t03"
+          ],
+          "literal_source_span": "They run the service in three languages, one after the other",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "They run the service in three languages, one after the other"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_06"
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 18 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_09"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "Money at home has always been a mess of half-numbers. So I asked Auntie Belen to send me a photo of every receipt before I transfer the next part, and this month the figures finally matched."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "You made the next payment depend on the last one being visible. Nobody had to be accused of anything for that to work."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "She was insulted for about a day. Then she started sending photos of everything, including her own groceries, which I did not ask for."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "One day of offence, then enthusiastic over-compliance. That is a fairly gentle price for finally being able to see."
+        }
+      ],
+      "summary": "Requiring receipt photographs from Auntie Belen before each further transfer makes the roof figures match for the first time, after one day of offence.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c015",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s007_t01"
+          ],
+          "literal_source_span": "I asked Auntie Belen to send me a photo of every receipt before I transfer the next part, and this month the figures finally matched",
+          "action_span": "asked Auntie Belen to send me a photo of every receipt before I transfer the next part",
+          "result_span": "this month the figures finally matched",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_09"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I asked Auntie Belen to send me a photo of every receipt before I transfer the next part, and this month the figures finally matched",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_07"
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 17 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "I put my name on the housing agency's list for a single room two months ago and not one message has come back."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "Two months of silence tells you nothing about your place in the queue, which is its own small torture."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "And I keep going back and forth on whether I even want it. A room of my own costs the roof money. Those are the same dollars."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "So the waiting list and the kitchen in Cebu are competing for one wage. No wonder the wanting keeps flipping."
+        }
+      ],
+      "summary": "Two months on the housing list bring no reply, and Kristine keeps reversing on whether she wants the room at all since it costs the same dollars as the roof.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c016",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "I put my name on the housing agency's list for a single room two months ago and not one message has come back",
+          "action_span": "put my name on the housing agency's list for a single room two months ago",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I put my name on the housing agency's list for a single room two months ago and not one message has come back"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_08"
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 16 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "The whole point is still to graduate before I turn twenty-eight, so I never pay for the same module twice."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "A deadline with a price attached to missing it. That tends to concentrate things."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "So I started doing the module quizzes on my phone on the staff shuttle, and I finished the unit two weeks before the deadline for the first time."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "Twenty-five minutes twice a day that were already spent doing nothing. You didn't find time, you noticed it."
+        }
+      ],
+      "summary": "Kristine restates her goal of graduating before twenty-eight without repeating any module fee, and quizzes taken on the staff shuttle finish a unit two weeks early.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c017",
+          "subtype": "MS_SESSION",
+          "ms_function": "old_goal",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s009_t01"
+          ],
+          "literal_source_span": "graduate before I turn twenty-eight, so I never pay for the same module twice",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u002_c018",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "I started doing the module quizzes on my phone on the staff shuttle, and I finished the unit two weeks before the deadline for the first time",
+          "action_span": "doing the module quizzes on my phone on the staff shuttle",
+          "result_span": "I finished the unit two weeks before the deadline for the first time",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I started doing the module quizzes on my phone on the staff shuttle, and I finished the unit two weeks before the deadline for the first time",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_09"
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 15 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "I told Wei Ling I want to be considered for the duty manager post, and she said to wait for the next cycle. That was six weeks ago and nobody has mentioned it since."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "You said the thing out loud, which was the hard part, and then it went into a drawer marked next cycle."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "I cannot tell whether she meant wait or no. She is not unkind, she is just always leaving a room."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "Someone permanently mid-exit is very hard to get a real answer out of. The ambiguity may not even be aimed at you."
+        }
+      ],
+      "summary": "Kristine asks Wei Ling to be considered for the duty manager post, is told to wait for the next cycle, and hears nothing for six weeks.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c019",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s010_t01"
+          ],
+          "literal_source_span": "I told Wei Ling I want to be considered for the duty manager post, and she said to wait for the next cycle. That was six weeks ago and nobody has mentioned it since",
+          "action_span": "told Wei Ling I want to be considered for the duty manager post",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_04"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I told Wei Ling I want to be considered for the duty manager post, and she said to wait for the next cycle. That was six weeks ago and nobody has mentioned it since"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_10"
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 14 months ago",
+      "topic_thread_ids": [
+        "thread_03",
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_03",
+        "entity_09"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "My mother says the roof money went to the roof. Auntie Belen says half of it went to Jomar's entrance exam fees. Both of them told me this in the same week and neither knows I heard the other version."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "Two accounts, one wage, and you're the only person holding both halves of the story. That's a heavy position to be in from four hours away."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "Jomar would be the first person in our family to sit a university entrance exam at all."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "Which makes the fees hard to be angry about, even while the leak is still there. Those two facts don't cancel."
+        }
+      ],
+      "summary": "Kristine receives two conflicting accounts in one week of where the roof money went, complicated by her brother being the family's first university applicant.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c020",
+          "subtype": "MS_SESSION",
+          "ms_function": "conflict_record",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s011_t01"
+          ],
+          "literal_source_span": "My mother says the roof money went to the roof. Auntie Belen says half of it went to Jomar's entrance exam fees",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_02",
+            "entity_09"
+          ],
+          "resolution_status": "conflicting"
+        },
+        {
+          "candidate_id": "u002_c021",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s011_t03"
+          ],
+          "literal_source_span": "Jomar would be the first person in our family to sit a university entrance exam at all",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "entity_03"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "Jomar would be the first person in our family to sit a university entrance exam at all"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_11"
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 13 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "Room politics update: I offered Priya the first shower slot every morning in exchange for the desk lamp after ten at night, and neither of us has brought it up since."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "You found the thing she wanted more than the thing you wanted, and traded. Nobody had to be in the wrong."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "Also, when I ask you something, say the answer first and explain after. I read these on a break with four minutes left."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "Answer first, reasons after. Noted."
+        }
+      ],
+      "summary": "Trading the first morning shower slot for late-night lamp use settles the room dispute with Priya, and Kristine asks for answers before explanations.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c022",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "I offered Priya the first shower slot every morning in exchange for the desk lamp after ten at night, and neither of us has brought it up since",
+          "action_span": "offered Priya the first shower slot every morning in exchange for the desk lamp after ten at night",
+          "result_span": "neither of us has brought it up since",
+          "topic_thread": "thread_04",
+          "entity_ids": [
+            "self",
+            "entity_05"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I offered Priya the first shower slot every morning in exchange for the desk lamp after ten at night, and neither of us has brought it up since",
+          "me_tier": "executable_core"
+        },
+        {
+          "candidate_id": "u002_c023",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "direct_answer_before_explanation",
+          "preference_item_id": "u002_pr_direct_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s012_t03"
+          ],
+          "literal_source_span": "when I ask you something, say the answer first and explain after",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u002_evt_12"
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 12 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "The capstone brief made no sense to me for a month. In the end it was Ms Ong's own example project that broke it open — I laid its section order onto a blank page and worked backwards from there. The outline came together in one evening."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "Answer first: that's the method, keep it. The brief described a shape in words; her project showed you the shape itself."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "The topic is still wrong though. I chose staff turnover because it sounded serious, and I do not care about it even slightly."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "A good outline of the wrong question. Better found now than in month five of writing it."
+        }
+      ],
+      "summary": "A month of confusion over the capstone brief ends when Kristine works backwards from her tutor's example project, though the chosen topic still bores her.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c024",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "In the end it was Ms Ong's own example project that broke it open — I laid its section order onto a blank page and worked backwards from there. The outline came together in one evening.",
+          "action_span": "I laid its section order onto a blank page and worked backwards from there",
+          "result_span": "The outline came together in one evening.",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_08"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "In the end it was Ms Ong's own example project that broke it open — I laid its section order onto a blank page and worked backwards from there. The outline came together in one evening.",
+          "me_tier": "natural_coverage_challenge"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_13"
+      ]
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 11 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_04"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "Two kinds of tired, and I finally have words for them: a full lobby leaves me tired in the arms and legs, waiting for the roster to be posted leaves me tired behind the eyes. The second one follows me home."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "One empties you, the other keeps running in the background. Sleep only fixes one of them."
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "On the roster itself I got somewhere. I asked Wei Ling for fifteen minutes at the start of her shift instead of catching her at the end, and for once she stayed until the conversation was actually finished."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "Answer first: always the start of her shift from now on. At the end, everything you say is standing between her and the door."
+        }
+      ],
+      "summary": "Kristine distinguishes physical lobby tiredness from the roster-waiting kind that follows her home, and catching Wei Ling at shift start finally produces a finished conversation.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c025",
+          "subtype": "MS_SESSION",
+          "ms_function": "pressure_distinction",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s014_t01"
+          ],
+          "literal_source_span": "a full lobby leaves me tired in the arms and legs, waiting for the roster to be posted leaves me tired behind the eyes",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved"
+        },
+        {
+          "candidate_id": "u002_c026",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s014_t03"
+          ],
+          "literal_source_span": "I asked Wei Ling for fifteen minutes at the start of her shift instead of catching her at the end, and for once she stayed until the conversation was actually finished",
+          "action_span": "asked Wei Ling for fifteen minutes at the start of her shift instead of catching her at the end",
+          "result_span": "she stayed until the conversation was actually finished",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_04"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I asked Wei Ling for fifteen minutes at the start of her shift instead of catching her at the end, and for once she stayed until the conversation was actually finished",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_14"
+      ]
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 10 months ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "I switched to the later choir practice because it finishes near my bus stop, and I have not missed a Sunday since."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "Answer first: keep the later one. You didn't need more discipline, you needed a practice that ends where your bus starts."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "Now Teresa keeps asking me to take the morning service as well, and that is exactly when the roster puts me on. I have not told her yet."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "The one place that isn't work is now asking for hours work already owns. And the not-telling is doing its own damage."
+        }
+      ],
+      "summary": "The later choir practice ending near her bus stop keeps Kristine attending every Sunday, but Teresa's requests to cover the morning service clash with her roster.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c027",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s015_t01"
+          ],
+          "literal_source_span": "I switched to the later choir practice because it finishes near my bus stop, and I have not missed a Sunday since",
+          "action_span": "switched to the later choir practice because it finishes near my bus stop",
+          "result_span": "I have not missed a Sunday since",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self",
+            "entity_06"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I switched to the later choir practice because it finishes near my bus stop, and I have not missed a Sunday since",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_15"
+      ]
+    },
+    {
+      "session_index": 16,
+      "relative_time": "about 9 months ago",
+      "topic_thread_ids": [
+        "thread_03",
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02",
+        "entity_03",
+        "entity_09"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s016_t01",
+          "role": "user",
+          "text": "The roof money question is still open — nobody has given me a single figure I can check, and the receipts stopped coming in June."
+        },
+        {
+          "turn_id": "s016_t02",
+          "role": "assistant",
+          "text": "The one arrangement that was working quietly lapsed, and nobody announced it. That's how these things usually end."
+        },
+        {
+          "turn_id": "s016_t03",
+          "role": "user",
+          "text": "And Auntie Belen now says Jomar has already accepted a place at the trade school, which is the first I have heard of it."
+        },
+        {
+          "turn_id": "s016_t04",
+          "role": "assistant",
+          "text": "Answer first: get that from him directly before you believe it. News about him keeps reaching you through other people's mouths."
+        },
+        {
+          "turn_id": "s016_t05",
+          "role": "user",
+          "text": "I paid his application fee myself in August and he has still not submitted the form."
+        },
+        {
+          "turn_id": "s016_t06",
+          "role": "assistant",
+          "text": "So the fee is spent, the form is not filed, and the trade school story arrives from a third party. No wonder none of it adds up."
+        }
+      ],
+      "summary": "Receipts stop arriving and the roof figures stay unverifiable, while second-hand news claims Jomar accepted a trade school place despite his unsubmitted application.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c028",
+          "subtype": "MS_SESSION",
+          "ms_function": "unfinished_thread",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s016_t01"
+          ],
+          "literal_source_span": "The roof money question is still open — nobody has given me a single figure I can check",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u002_c029",
+          "subtype": "MS_SESSION",
+          "ms_function": "wrong_person_distractor",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s016_t03"
+          ],
+          "literal_source_span": "Auntie Belen now says Jomar has already accepted a place at the trade school",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "entity_03",
+            "entity_09"
+          ],
+          "resolution_status": "conflicting"
+        },
+        {
+          "candidate_id": "u002_c030",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s016_t05"
+          ],
+          "literal_source_span": "I paid his application fee myself in August and he has still not submitted the form",
+          "action_span": "paid his application fee myself in August",
+          "topic_thread": "thread_06",
+          "entity_ids": [
+            "self",
+            "entity_03"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I paid his application fee myself in August and he has still not submitted the form"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_16",
+        "u002_evt_17"
+      ]
+    },
+    {
+      "session_index": 17,
+      "relative_time": "about 8 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s017_t01",
+          "role": "user",
+          "text": "The capstone proposal went through with no revisions. I read the acceptance line four times on the shuttle to make sure it said what I thought."
+        },
+        {
+          "turn_id": "s017_t02",
+          "role": "assistant",
+          "text": "Answer first: it said what you thought. Clean approvals are rare enough that disbelief is a reasonable first response."
+        },
+        {
+          "turn_id": "s017_t03",
+          "role": "user",
+          "text": "I still changed the topic in the end. Guest complaint handling on night shifts, which at least I know from the inside."
+        },
+        {
+          "turn_id": "s017_t04",
+          "role": "assistant",
+          "text": "You swapped a topic that sounded serious for one you have lived at four in the morning. That will read differently on the page."
+        }
+      ],
+      "summary": "The capstone proposal is accepted without revisions after Kristine changes her topic to night-shift guest complaint handling, which she knows from the inside.",
+      "typed_candidates": [],
+      "event_ids": [
+        "u002_evt_18"
+      ]
+    },
+    {
+      "session_index": 18,
+      "relative_time": "about 7 months ago",
+      "topic_thread_ids": [
+        "thread_02"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s018_t01",
+          "role": "user",
+          "text": "They have announced that no internal promotions move between November and January. Which is exactly the cycle I was told to wait for."
+        },
+        {
+          "turn_id": "s018_t02",
+          "role": "assistant",
+          "text": "So the drawer you were put in has now been formally locked until February. That is a very tidy way to lose four months."
+        },
+        {
+          "turn_id": "s018_t03",
+          "role": "user",
+          "text": "Two years of running the night desk and I am still explaining that I already do the job. I am tired of the sentence."
+        },
+        {
+          "turn_id": "s018_t04",
+          "role": "assistant",
+          "text": "Repeating your own evidence to people who have watched it happen is exhausting in a way the shifts themselves are not."
+        }
+      ],
+      "summary": "A promotion freeze from November to January covers exactly the cycle Kristine was told to wait for, leaving her repeating her case after two years on nights.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c031",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s018_t01"
+          ],
+          "literal_source_span": "no internal promotions move between November and January",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "candidate_text": "no internal promotions move between November and January"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_19"
+      ]
+    },
+    {
+      "session_index": 19,
+      "relative_time": "about 6 months ago",
+      "topic_thread_ids": [
+        "thread_04"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_05"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s019_t01",
+          "role": "user",
+          "text": "Priya moved out and the room is mine and one other girl's now. It is the first time in three years I can leave a book open on a table."
+        },
+        {
+          "turn_id": "s019_t02",
+          "role": "assistant",
+          "text": "Answer first: that counts as a move, even though you didn't move. Half the room is a different life from a quarter of it."
+        },
+        {
+          "turn_id": "s019_t03",
+          "role": "user",
+          "text": "One thing for these chats — when you do suggest something, give me a couple of ways to go, not one instruction. I get told what to do all shift."
+        },
+        {
+          "turn_id": "s019_t04",
+          "role": "assistant",
+          "text": "Ways to go, not instructions. That fits the rest of your day much better."
+        }
+      ],
+      "summary": "Priya's departure halves the occupancy of Kristine's shared room, and she asks for a couple of options rather than single instructions in these conversations.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c032",
+          "subtype": "MP_PREFERENCE",
+          "preference_type": "choices_rather_than_commands",
+          "preference_item_id": "u002_pr_choices_v1",
+          "supersedes_item_id": null,
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s019_t03"
+          ],
+          "literal_source_span": "give me a couple of ways to go, not one instruction",
+          "topic_thread": null,
+          "entity_ids": [
+            "self"
+          ]
+        }
+      ],
+      "event_ids": [
+        "u002_evt_20"
+      ]
+    },
+    {
+      "session_index": 20,
+      "relative_time": "about 5 months ago",
+      "topic_thread_ids": [
+        "thread_03"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_02"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s020_t01",
+          "role": "user",
+          "text": "I started taking the family video calls standing at the stove while I cook instead of sitting down for them, and they stopped feeling like a report I have to deliver."
+        },
+        {
+          "turn_id": "s020_t02",
+          "role": "assistant",
+          "text": "Two options for why, and you can pick: either the cooking gave your hands something to do, or facing the pan meant nobody could read your face for an hour."
+        },
+        {
+          "turn_id": "s020_t03",
+          "role": "user",
+          "text": "Both, probably. My mother talks more when I am not looking at her either."
+        },
+        {
+          "turn_id": "s020_t04",
+          "role": "assistant",
+          "text": "Side by side instead of face to face, across two countries and a stove. Families say more in that arrangement."
+        }
+      ],
+      "summary": "Taking family video calls while cooking at the stove instead of sitting down stops them feeling like a report, and Kristine's mother talks more.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c033",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "executable_core",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s020_t01"
+          ],
+          "literal_source_span": "I started taking the family video calls standing at the stove while I cook instead of sitting down for them, and they stopped feeling like a report I have to deliver",
+          "action_span": "taking the family video calls standing at the stove while I cook instead of sitting down for them",
+          "result_span": "they stopped feeling like a report I have to deliver",
+          "topic_thread": "thread_03",
+          "entity_ids": [
+            "self",
+            "entity_02"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "I started taking the family video calls standing at the stove while I cook instead of sitting down for them, and they stopped feeling like a report I have to deliver",
+          "me_tier": "executable_core"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_21"
+      ]
+    },
+    {
+      "session_index": 21,
+      "relative_time": "about 4 months ago",
+      "topic_thread_ids": [
+        "thread_01"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_08"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s021_t01",
+          "role": "user",
+          "text": "We went over the capstone at the tutorial again and I came away with nothing I can actually do this week."
+        },
+        {
+          "turn_id": "s021_t02",
+          "role": "assistant",
+          "text": "An hour spent, no first line to write. Tutorials can be strangely good at that."
+        },
+        {
+          "turn_id": "s021_t03",
+          "role": "user",
+          "text": "I have emailed Ms Ong twice about narrowing the question and there has been no reply either time."
+        },
+        {
+          "turn_id": "s021_t04",
+          "role": "assistant",
+          "text": "Two options while that sits: work from the last written thing she did approve, or take the question to the module forum instead. Your call which."
+        }
+      ],
+      "summary": "Another capstone tutorial produces nothing actionable and two emails to Ms Ong about narrowing the question go unanswered.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c034",
+          "subtype": "MS_SESSION",
+          "ms_function": "topic_only_no_content",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s021_t01"
+          ],
+          "literal_source_span": "We went over the capstone at the tutorial again and I came away with nothing I can actually do this week",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved"
+        },
+        {
+          "candidate_id": "u002_c035",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s021_t03"
+          ],
+          "literal_source_span": "I have emailed Ms Ong twice about narrowing the question and there has been no reply either time",
+          "action_span": "emailed Ms Ong twice about narrowing the question",
+          "topic_thread": "thread_01",
+          "entity_ids": [
+            "self",
+            "entity_08"
+          ],
+          "resolution_status": "unresolved",
+          "candidate_text": "I have emailed Ms Ong twice about narrowing the question and there has been no reply either time"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_22"
+      ]
+    },
+    {
+      "session_index": 22,
+      "relative_time": "about 3 months ago",
+      "topic_thread_ids": [
+        "thread_02",
+        "thread_06"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_03",
+        "entity_07"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s022_t01",
+          "role": "user",
+          "text": "Daniel got the acting duty manager slot in June. What I did with that, instead of sulking in the back office, was sit him down over coffee until he had walked me through every line of his application. Mine for the November round is three times stronger for it."
+        },
+        {
+          "turn_id": "s022_t02",
+          "role": "assistant",
+          "text": "Two ways that could have gone, and you took the one that costs pride and buys information. His paper is now working for you as well."
+        },
+        {
+          "turn_id": "s022_t03",
+          "role": "user",
+          "text": "Jomar submitted, by the way. Two days before the deadline, from Auntie Belen's phone, without telling anyone he was doing it."
+        },
+        {
+          "turn_id": "s022_t04",
+          "role": "assistant",
+          "text": "Late, quiet and done. After a year of other people's versions of him, he filed it himself."
+        }
+      ],
+      "summary": "Passed over for the acting slot, Kristine has Daniel walk her through his whole application over coffee; her November submission is far stronger, and Jomar finally files.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c036",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "tier": "natural_coverage_challenge",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s022_t01"
+          ],
+          "literal_source_span": "What I did with that, instead of sulking in the back office, was sit him down over coffee until he had walked me through every line of his application. Mine for the November round is three times stronger for it.",
+          "action_span": "sit him down over coffee until he had walked me through every line of his application",
+          "result_span": "Mine for the November round is three times stronger for it.",
+          "topic_thread": "thread_02",
+          "entity_ids": [
+            "self",
+            "entity_07"
+          ],
+          "resolution_status": "resolved",
+          "candidate_text": "What I did with that, instead of sulking in the back office, was sit him down over coffee until he had walked me through every line of his application. Mine for the November round is three times stronger for it.",
+          "me_tier": "natural_coverage_challenge"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_23"
+      ]
+    },
+    {
+      "session_index": 23,
+      "relative_time": "about 3 weeks ago",
+      "topic_thread_ids": [
+        "thread_05"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_06"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s023_t01",
+          "role": "user",
+          "text": "The Sunday thing has settled itself. I sing at the later service, I leave straight after the second language, and Teresa has stopped asking about the mornings."
+        },
+        {
+          "turn_id": "s023_t02",
+          "role": "assistant",
+          "text": "Two years ago you had one free morning and nobody in it. Now you have a bench, a part to sing and a leaving time nobody argues with."
+        },
+        {
+          "turn_id": "s023_t03",
+          "role": "user",
+          "text": "She found someone else for the mornings and did not make it a thing. I had been dreading that conversation since spring."
+        },
+        {
+          "turn_id": "s023_t04",
+          "role": "assistant",
+          "text": "Months of dread, resolved by someone else quietly filling the gap. The conversation you rehearsed never had to happen."
+        }
+      ],
+      "summary": "The Sunday arrangement settles: Kristine sings at the later service and leaves after the second language, with Teresa quietly finding morning cover elsewhere.",
+      "typed_candidates": [
+        {
+          "candidate_id": "u002_c037",
+          "subtype": "MS_SESSION",
+          "ms_function": "resolved_thread",
+          "owner_id": "p2r_formal_claude_u002",
+          "source_turn_ids": [
+            "s023_t01"
+          ],
+          "literal_source_span": "The Sunday thing has settled itself",
+          "topic_thread": "thread_05",
+          "entity_ids": [
+            "self",
+            "entity_06"
+          ],
+          "resolution_status": "resolved"
+        }
+      ],
+      "event_ids": [
+        "u002_evt_24"
+      ]
+    }
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01",
+      "label": "online degree modules and capstone"
+    },
+    {
+      "thread_id": "thread_02",
+      "label": "roster, night shifts and the duty manager post"
+    },
+    {
+      "thread_id": "thread_03",
+      "label": "money home and the kitchen roof"
+    },
+    {
+      "thread_id": "thread_04",
+      "label": "shared room and finding her own space"
+    },
+    {
+      "thread_id": "thread_05",
+      "label": "Sunday choir and belonging outside work"
+    },
+    {
+      "thread_id": "thread_06",
+      "label": "Jomar's university application"
+    }
+  ]
+}

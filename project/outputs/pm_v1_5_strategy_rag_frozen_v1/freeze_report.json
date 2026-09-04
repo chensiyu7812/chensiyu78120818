@@ -1,0 +1,15 @@
+{
+  "protocol": "pm-v1.5-qualified-strategy-rag-freeze-v1",
+  "status": "FROZEN_AND_QUALIFIED_FOR_G3_CLEAN_TREATMENT",
+  "manifest_relative_path": "data/strategy/strategy_rag_v1_5_minimal_freeze.json",
+  "manifest_sha256": "2bae017a000ab2b6425f63cd3337d727a9c6f12f133ef01ba5eb5af4a026206a",
+  "config_relative_path": "configs/pm_v1_5_minimal_rag_v1.json",
+  "config_sha256": "b1dae8ccd239772957894cee94529750095c7d4038e9da7c5c0d23f918f151af",
+  "bank_relative_path": "data/strategy/strategy_cards_v1_5_minimal.jsonl",
+  "bank_sha256": "04c3af44d54ae9875cd817364ff46e90aa954e0bee81b295af279b1b38964d24",
+  "card_count": 6,
+  "top_k": 1,
+  "strategy_min_score": 0.05,
+  "bge_enabled": false,
+  "formal_response_quality_benefit_proven": false
+}

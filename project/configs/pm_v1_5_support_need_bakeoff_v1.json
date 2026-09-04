@@ -1,0 +1,74 @@
+{
+  "protocol": "pm-v1.5-support-need-factorized-representation-bakeoff-config-v1",
+  "embedding_candidates": [
+    {
+      "protocol": "pm-v1.5-support-need-frozen-embedding-candidate-v1",
+      "candidate_id": "bge_small_en_v1_5",
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "snapshot_tree_sha256": "c94b5329116dedfb43349b42d8138ef0b7c3348373eb7339b35bbeef530de15b",
+      "pooling": "cls",
+      "padding_side": "right",
+      "instruction": null,
+      "max_length": 512,
+      "hidden_dimension": 384,
+      "output_dimension": 384,
+      "output_round_decimals": 8,
+      "local_files_only": true,
+      "trust_remote_code": false
+    },
+    {
+      "protocol": "pm-v1.5-support-need-frozen-embedding-candidate-v1",
+      "candidate_id": "bge_m3",
+      "model_id": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "snapshot_tree_sha256": "f0384ec76e05ff5439dd455f7d65ea523bd90c6273c106cfe9c3629a867b80ba",
+      "pooling": "cls",
+      "padding_side": "right",
+      "instruction": null,
+      "max_length": 512,
+      "hidden_dimension": 1024,
+      "output_dimension": 1024,
+      "output_round_decimals": 8,
+      "local_files_only": true,
+      "trust_remote_code": false
+    },
+    {
+      "protocol": "pm-v1.5-support-need-frozen-embedding-candidate-v1",
+      "candidate_id": "qwen3_embedding_0_6b_support_need",
+      "model_id": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "snapshot_tree_sha256": "3d0adeb555028451e16ff6b65c9d1d63d3973a47f25076891b613e19b41c2ba2",
+      "pooling": "last_token",
+      "padding_side": "left",
+      "instruction": "Represent visible dialogue text for classifying the user's current support need, interaction burden, and readiness for guidance.",
+      "max_length": 512,
+      "hidden_dimension": 1024,
+      "output_dimension": 1024,
+      "output_round_decimals": 8,
+      "local_files_only": true,
+      "trust_remote_code": false
+    }
+  ],
+  "nli_candidate": {
+    "protocol": "pm-v1.5-support-need-frozen-nli-candidate-v1",
+    "candidate_id": "nli_deberta_v3_base",
+    "model_id": "cross-encoder/nli-deberta-v3-base",
+    "revision": "6c749ce3425cd33b46d187e45b92bbf96ee12ec7",
+    "snapshot_tree_sha256": "731feaa9d5ac050259901848250bbea33ac9adb3016427f37101bab0dc3ce37d",
+    "max_length": 512,
+    "label_ids": [
+      "contradiction",
+      "entailment",
+      "neutral"
+    ],
+    "output_round_decimals": 10,
+    "local_files_only": true,
+    "trust_remote_code": false
+  },
+  "hybrid_embedding_candidate_id": "qwen3_embedding_0_6b_support_need",
+  "formal_fit_authorized": false,
+  "automatic_gold_labels_created": false,
+  "internal_test_outcomes_opened": false,
+  "external_outcomes_opened": false
+}

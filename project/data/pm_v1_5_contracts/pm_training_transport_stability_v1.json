@@ -1,0 +1,71 @@
+{
+  "protocol": "pm-v1.5-training-transport-stability-contract-v1",
+  "status": "FROZEN_BEFORE_FOUR_HEAD_EXTERNAL_POLICY_EVALUATION",
+  "research_target": "Train one fixed four-head opportunity router whose inputs and resource mechanisms are shared across internal data, ESConv, and EvoEmo, then test quality, interaction-and-grounding risk, and cost without external retuning.",
+  "evidence_roles": {
+    "controlled_logic": "Shows that a routing definition is representable; never counts as user-level transfer evidence by itself.",
+    "text_derived_development": "Uses content-disjoint text, production retrieval, and production feature compilation; permits model fitting and grouped validation.",
+    "untouched_internal_confirmation": "Checks new users and held-out condition families after all features, thresholds, and heads are frozen.",
+    "external_policy_evaluation": "Tests the complete frozen stack and cannot create training labels, features, thresholds, or prompt revisions."
+  },
+  "training_row_requirements": [
+    "Every row begins with a real visible dialogue plus a real same-user candidate or an explicit no-candidate condition.",
+    "All model features are emitted by the same production compiler used at evaluation time; manually assigned model-feature vectors are forbidden as final training evidence.",
+    "Construction metadata may define the intended opportunity label but is private, never model-visible, and is audited against the rendered text and compiled candidate.",
+    "User, topic, template, condition, item, dataset, target action, response outcome, quality judgment, and risk judgment identifiers are forbidden model inputs.",
+    "Train, confirmation, ESConv, and EvoEmo are user/dialogue disjoint in content; external schema and outcome-free covariate envelopes may inform pre-freeze coverage design.",
+    "The same resource ontology, compiler, query, retrieval, Top-k, hard filters, candidate descriptor, prompt compiler, and generator are used across domains, subject only to environment legality masks."
+  ],
+  "minimum_data": {
+    "RS": "Freeze the existing 160-dialogue same-Bank development fit and 48 human H2 development-transfer decisions; do not add labels merely to improve its score.",
+    "MS": "Reuse the 32 outcome-blind D3 real-text production-candidate rows; add 16 new fitting states and 16 untouched content-disjoint confirmation states spanning held-out failure/benefit condition families, yielding the same 48 fitting plus 16 confirmation design as MP and ME.",
+    "MP": "Reuse the 32 outcome-blind D3 real-text typed preference/profile states; add 16 new fitting states and 16 untouched confirmation states, yielding 48 fitting and 16 confirmation rows with at least 8 positive and 8 negative per role where feasible.",
+    "ME": "Reuse the 32 outcome-blind D3 real-text prior-event/outcome states; add 16 new fitting states and 16 untouched confirmation states, yielding 48 fitting and 16 confirmation rows with at least 8 positive and 8 negative per role where feasible.",
+    "joint": "Each memory head must cover all eight combinations of the other three component background bits. A zero-API runtime audit must mechanically map four post-gate bits to all 16 legal action IDs before external generation."
+  },
+  "head_promotion_gates": {
+    "worst_of_five_seed_user_grouped_balanced_accuracy_min": 0.70,
+    "positive_recall_min": 0.65,
+    "specificity_min": 0.65,
+    "brier_beats_train_fold_prevalence_prior": true,
+    "five_seed_prediction_agreement_min": 0.90,
+    "leave_condition_family_out_balanced_accuracy_min": 0.65,
+    "controlled_confirmation_minority_decision_fraction_min": 0.20,
+    "transparent_rule_reported_on_same_rows": true,
+    "no_seed_C_threshold_or_representation_search_on_confirmation_or_external": true
+  },
+  "transport_gates": {
+    "exact_feature_builder_and_field_identity": true,
+    "outcome_free_external_in_support_candidate_fraction_target": 0.80,
+    "OOD_behavior": "deterministic abstain/off; keep every OOD row in all-state reporting",
+    "ESConv_environment_mask": "M0+R0 or M0+RS only; memory-off is a contract result, not a memory failure",
+    "EvoEmo_environment": "same four heads and resource mechanism, same-user memory catalog, no external retraining or threshold adjustment"
+  },
+  "system_promotion_gates": {
+    "generator_resource_use_human_gate": "at least 8/10 supported-and-functional and at most 1/10 material misuse",
+    "quality_netwin_noninferiority_margin": -0.05,
+    "interaction_and_grounding_material_risk_difference_max": 0.05,
+    "input_token_reduction_vs_high_resource_fixed_min": 0.10,
+    "cluster_grain": {
+      "ESConv": "dialogue",
+      "EvoEmo": "user"
+    },
+    "comparators": [
+      "always off / M0+R0",
+      "transparent rule",
+      "high-resource fixed",
+      "cost-matched fixed for longitudinal evaluation"
+    ]
+  },
+  "human_work_boundary": "Do not open another broad annotation wave. Complete the current ten-item generator execution check. Later human work, if any, is one frozen final sanity sample and never model selection or training-label production.",
+  "claim_boundary": {
+    "allowed_after_head_gates": "The PM learned the prespecified opportunity-routing definitions on user/content-disjoint controlled data.",
+    "allowed_after_external_system_gates": "The frozen stack demonstrated bounded transfer and the stated quality-risk-cost tradeoff on ESConv and/or EvoEmo, reported separately.",
+    "forbidden": [
+      "External stability is guaranteed.",
+      "Controlled OOF performance alone proves reply benefit.",
+      "EvoEmo validates preference-memory capabilities absent from EvoEmo.",
+      "The PM learned item retrieval or response generation."
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "protocol": "pm-v1.5-d2-measurement-blueprint-v1",
+  "status": "FROZEN_READY_FOR_144_D2_RESPONSE_CALLS",
+  "api_calls_made": 0,
+  "new_human_decisions_made": 0,
+  "external_outcomes_read": false,
+  "new_quality_or_risk_outcomes_read": false,
+  "selection_role": "measurement reliability audit, not confirmation-set selection and not direct final model promotion",
+  "states": 32,
+  "component_counts": {
+    "ME": 8,
+    "MP": 8,
+    "MS": 8,
+    "RS": 8
+  },
+  "new_pairs": 72,
+  "new_response_calls": 144,
+  "primary_reviewer_pair_decisions": 72,
+  "second_reviewer_fixed_overlap_decisions": 32,
+  "total_human_decisions": 104,
+  "distinct_users": 22,
+  "existing_direction_counts": {
+    "ME|component_on": 4,
+    "ME|nonpositive": 4,
+    "MP|component_on": 4,
+    "MP|nonpositive": 4,
+    "MS|fresh_no_historical_direction": 8,
+    "RS|component_on": 4,
+    "RS|nonpositive": 4
+  },
+  "checks": {
+    "32_states": true,
+    "8_states_per_component": true,
+    "24_existing_RS_MP_ME": true,
+    "existing_four_on_four_nonpositive_per_component": true,
+    "existing_current_session_summary_empty": true,
+    "8_fresh_MS": true,
+    "fresh_MS_all_first_fit_state_disjoint": true,
+    "fresh_MS_all_supplied_summary_no_fallback": true,
+    "fresh_MS_all_eight_backgrounds": true,
+    "72_new_pairs": true,
+    "144_new_response_calls": true,
+    "all_new_effect_labels_unknown": true
+  },
+  "inputs": {
+    "outputs/pm_v1_5_transport_repaired_final_effect_labels_v1/component_effect_labels.jsonl": "1a52463ca8856c6d269716a3ad926c09291b329e1307c6535dc8f3b59cb5b93b",
+    "outputs/pm_v1_5_transport_repaired_memory_contrast_blueprint_v1/memory_contrast_blueprint.jsonl": "d620ed03004b042b355d357f00c9d82739ea2e3a65711d08d9b758edf702ab75",
+    "outputs/pm_v1_5_transport_repaired_rs_contrast_blueprint_v1/rs_contrast_blueprint.jsonl": "5899966bfea121b72d64004111278ec1bbff318af422fb07b89408a7105ed71a",
+    "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/pm_v2_states.jsonl": "af4bc8b7022a503c70cc6f2cbe1c41e4126bea2ad81370516d409f62250aae26",
+    "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/retrieval_audit.jsonl": "00ede06ced3d1f9aac5b24ca3179ee7b4647fcec6708afdc38140540a7e87224",
+    "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_bundles.jsonl": "63708d5ad2ff71582d096aafd2f59a6e2a69a7ec9858d55122424a332738af04",
+    "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676",
+    "data/pm_v1_5_contracts/first_fit_root_cause_recovery_v1.json": "26307357d96d742e2ca60476bd4778804244119016817aca15f9e339a8b4ad94",
+    "data/pm_v1_5_contracts/internal_superdomain_external_subdomain_v1.json": "b96ad5059de65a9edfcd668c942d195289aaf1964dcd291c7b3ad9530a1cdfee",
+    "outputs/pm_v1_5_ms_external_subdomain_audit_v1/ms_external_subdomain_audit.json": "61e7d7e2cee67c8f7bbae019b95e9f752cf205720af69a140ec172b67e08b42c"
+  }
+}

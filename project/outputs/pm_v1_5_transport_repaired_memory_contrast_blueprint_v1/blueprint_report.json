@@ -1,0 +1,94 @@
+{
+  "protocol": "pm-v1.5-transport-repaired-memory-contrast-blueprint-v1",
+  "status": "READY_192_MEMORY_PAIRS_ZERO_API_RETAIN_64_RS",
+  "api_calls_made": 0,
+  "human_labels_read": false,
+  "effect_labels_created": false,
+  "memory_contrasts": 192,
+  "retained_formal_rs_contrasts": 64,
+  "replacement_total_contrasts": 256,
+  "new_response_calls_required": 384,
+  "distinct_memory_states": 192,
+  "distinct_memory_users": 52,
+  "component_counts": {
+    "ME": 64,
+    "MP": 64,
+    "MS": 64
+  },
+  "split_counts": {
+    "calibration": 48,
+    "internal_test": 48,
+    "train": 96
+  },
+  "background_counts": {
+    "ME|M0+R0": 8,
+    "ME|M0+RS": 8,
+    "ME|MP+R0": 8,
+    "ME|MP+RS": 8,
+    "ME|MPMS+R0": 8,
+    "ME|MPMS+RS": 8,
+    "ME|MS+R0": 8,
+    "ME|MS+RS": 8,
+    "MP|M0+R0": 8,
+    "MP|M0+RS": 8,
+    "MP|ME+R0": 8,
+    "MP|ME+RS": 8,
+    "MP|MS+R0": 8,
+    "MP|MS+RS": 8,
+    "MP|MSE+R0": 8,
+    "MP|MSE+RS": 8,
+    "MS|M0+R0": 8,
+    "MS|M0+RS": 8,
+    "MS|ME+R0": 8,
+    "MS|ME+RS": 8,
+    "MS|MP+R0": 8,
+    "MS|MP+RS": 8,
+    "MS|MPE+R0": 8,
+    "MS|MPE+RS": 8
+  },
+  "selection": {
+    "outcome_blind": true,
+    "observable_axis": "component_top1_lexical_score",
+    "quantiles_by_split": {
+      "train": [
+        0.1,
+        0.35,
+        0.65,
+        0.9
+      ],
+      "calibration": [
+        0.25,
+        0.75
+      ],
+      "internal_test": [
+        0.25,
+        0.75
+      ]
+    },
+    "purpose": "cover low-to-high candidate relevance without selecting on quality, risk, generated response, or old needed-source labels"
+  },
+  "checks": {
+    "64_per_memory_component": true,
+    "8_per_component_background": true,
+    "split_quotas_96_48_48": true,
+    "one_state_per_memory_contrast": true,
+    "all_labels_unknown": true,
+    "all_rs_backgrounds_have_current_candidate": true,
+    "retains_exactly_64_existing_rs": true
+  },
+  "claim_boundary": {
+    "formal": "64 retained RS contrasts plus 192 newly generated memory contrasts under the repaired construction/retrieval stack",
+    "legacy_memory_pairs": "diagnostic only; not concatenated with these formal pairs"
+  },
+  "inputs": {
+    "backend_report": "data/pm_v1_5_evo_style_synthetic_memory_v1_candidate/report.json",
+    "backend_report_sha256": "76f72f2a2ffbc09c3ff8e8c0fb18bad503c2f4365a263393eecd163a4e3bdbe0",
+    "strategy_cards": "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl",
+    "strategy_cards_sha256": "f1e11aa79ab8a9ce4bc6cc8ce05a58d5bc9361ceef62a3d571e42da1396ea676",
+    "retained_rs_blueprint": "outputs/pm_v1_5_four_component_contrast_blueprint_v1/contrast_blueprint.jsonl",
+    "retained_rs_blueprint_sha256": "d3351e557f7d047ec2fac98da52a4e890d6a0a5fb543dd0ca863b0b5024e2d2f"
+  },
+  "outputs": {
+    "memory_contrast_blueprint.jsonl": "d620ed03004b042b355d357f00c9d82739ea2e3a65711d08d9b758edf702ab75"
+  }
+}

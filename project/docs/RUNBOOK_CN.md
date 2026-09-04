@@ -14,6 +14,47 @@ PYTHONPATH=src python scripts/99_release_preflight.py --root . --out release_pre
 
 初始包的 `status` 应为 `API_PILOT_READY`。由于尚未接入你的本地官方 ESConv，`confirmatory_ready` 初始为 `false`，这是预期行为。
 
+### 0.1 PM-v1.5_1 冻结语义运行环境
+
+PM-v1.5_1 的 reportable development/external 路径不能使用历史 `sim_eval`
+环境。它虽可运行 mock tests，但其 Python/Transformers/Hugging Face Hub 组合不符合
+当前合同，且无法真实加载冻结 BGE。也不要直接使用可变的 Conda `base`；`base` 中的
+Python 3.13.2 只可作为创建器，所有正式命令都在仓库专用 venv 中执行：
+
+```bash
+cd <仓库根目录>
+python3.13 -m venv .venv-pm-v1-5
+source .venv-pm-v1-5/bin/activate
+export PYTHONNOUSERSITE=1
+python -m pip install -c project/constraints/pm_v1_5_runtime.txt -e 'project[dev]'
+python -m pip check
+cd project
+python scripts/v1_5/19_preflight_semantic_runtime_v1_5.py
+```
+
+正式 shell 保持 `PYTHONNOUSERSITE=1`，不要在中途 `conda activate sim_eval` 或
+`conda activate base`。只有顶层 `semantic_runtime_status=PASS` 才能继续。该门同时绑定
+Python、关键 package、CPU/float32、user-site 关闭状态、固定公开文本和 3×384 数值矩阵；
+development data generation 与训练入口都会现场重算，candidate manifest、study freeze
+和 external artifact 再逐段绑定。readiness challenge 独立显示为
+`REPORT_ONLY_x_OF_20`；它是能力边界诊断，不是 runtime PASS，也不得用其结果在
+internal/external 后反向改模型。
+
+52-user states 生成后、任何 7,488-response action sweep 前，必须先执行不读 outcome 的
+rule-grid 预检；该产物同时被 sweep 和训练内容寻址验证：
+
+```bash
+python scripts/v1_5/20b_preflight_rule_grid_v1_5.py
+```
+
+正式 52-user `--run` 还必须显式传入本次新 pilot 的
+`--generation-pilot-attestation`。脚本没有默认值，并会拒绝 V8–V8.5
+这些已消费或已失效的历史目录。V8.4 虽在 transport/schema 层真实 PASS，也因
+readiness surface 和 review-lineage 缺口被归档；V8.5 因 provider role list 末尾为 user
+真实 fail-closed。二者均不得复用；V8.6 role-safe exchange 合同已真实 PASS，identity
+在消费后关闭，只允许其 exact attestation 进入后续自动语义审核。该审核必须同时覆盖 27 个确定性案例、exact paid 9-case
+artifact 和 24 个 hard controls（双开发家族共 120 logical calls）。
+
 ## 1. 接入本地官方 ESConv，并重建 Strategy Bank
 
 已有本地官方文件时：

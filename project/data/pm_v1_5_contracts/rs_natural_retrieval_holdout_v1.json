@@ -1,0 +1,64 @@
+{
+  "protocol": "pm-v1.5-rs-natural-retrieval-fit-holdout-v3-final",
+  "status": "FROZEN_BEFORE_HUMAN_HOLDOUT_REVIEW",
+  "scope": "ESConv official train visible-only natural Strategy-RAG retrieval",
+  "ranker": "family_and_card_applicability_then_term_frequency_cosine",
+  "candidate_card_count": 100,
+  "active_variant_count": 62,
+  "active_core_submove_count": 31,
+  "minimum_score": 0.05,
+  "injection_top_k": 1,
+  "review_items": 16,
+  "independent_dialogues": 16,
+  "strata": {
+    "focused_clarification": 6,
+    "grounded_reflection": 5,
+    "welcomed_microstep": 4,
+    "redundancy_negative_control": 1
+  },
+  "profile_minimum": {
+    "minimal": 3,
+    "observed_minimal": 3,
+    "observed_dialogic": 13
+  },
+  "qualification_gate": {
+    "minimum_clean_top1": 12,
+    "maximum_hard_exclusion": 0,
+    "minimum_clean_rate_per_represented_family": 0.5,
+    "clean_definition": "top1_fit=yes AND hard_exclusion_triggered=no AND better_candidate=none",
+    "retuning_on_holdout_forbidden": true
+  },
+  "data_firewall": {
+    "development_32_dialogues_excluded": true,
+    "pre_freeze_dry_run_16_dialogues_excluded": true,
+    "direct_effect_v1_v2_v3_v4_dialogues_excluded": true,
+    "formal_esconv_test_excluded": true,
+    "hidden_next_supporter_response_used": false,
+    "native_next_strategy_used": false,
+    "generation_or_judge_outcomes_used": false,
+    "evoemo_used": false
+  },
+  "frozen_files": {
+    "applicability_implementation": {
+      "path": "src/metacom_pm/v1_5_strategy_rag_v4.py",
+      "sha256": "3c948d9cdc313239953440915c7d91446da26af796d6ca1c12c489dc62d295e3"
+    },
+    "selection_script": {
+      "path": "scripts/v1_5/24l_prepare_rs_natural_retrieval_review_v1_5.py",
+      "sha256": "5f7dd26d8423f0a11e8d53c70adb320b7c47665da91f63450f11eff325153e22"
+    },
+    "candidate_catalog": {
+      "path": "outputs/pm_v1_5_strategy_rag_v4_candidate_v1/strategy_cards_v4_candidate.jsonl",
+      "sha256": "3fb288d33146c605bcee89e00fe519c6c58ac240a66b2ac1c109c5b33adc2b7c"
+    },
+    "review_packet": {
+      "path": "outputs/pm_v1_5_rs_natural_retrieval_fit_holdout_v3_final_candidate/retrieval_review_packet.jsonl",
+      "sha256": "9ec2c2debf98fb79d90b195b65ee7b9ce40d923c7927522af08dd0552d9ef2fa"
+    },
+    "private_selection_audit": {
+      "path": "outputs/pm_v1_5_rs_natural_retrieval_fit_holdout_v3_final_candidate/private_selection_audit.jsonl",
+      "sha256": "66128edb5a7617753b253336b87a10707b1290bcf78869a579fe729397599816"
+    }
+  },
+  "next": "Complete the 16-item blind fit review, then run scripts/v1_5/24o_analyze_rs_natural_retrieval_holdout_v1_5.py without changing any frozen file."
+}

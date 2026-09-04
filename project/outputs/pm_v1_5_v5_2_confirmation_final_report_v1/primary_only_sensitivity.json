@@ -1,0 +1,236 @@
+{
+  "protocol": "pm-v1.5-v5.2-content-disjoint-confirmation-analysis-v1",
+  "status": "FAIL_SINGLE_USE_V5_2_SYSTEM_GATE",
+  "overall_pass": false,
+  "method_or_policy_changed_after_confirmation": false,
+  "review_data_quality": {
+    "manual_quality_rows": 255,
+    "manual_risk_rows": 423,
+    "expanded_quality_rows": 256,
+    "expanded_risk_rows": 512,
+    "quality_annotators": {
+      "Primary_ChatGPT": 255
+    },
+    "risk_annotators": {
+      "Primary_ChatGPT": 423
+    }
+  },
+  "policy_summary": {
+    "always_off": {
+      "selected_on_seed_rows": 0,
+      "selected_on_fraction": 0.0,
+      "quality_mean_vs_always_off": 0.0,
+      "material_risk_count": 8,
+      "material_risk_rate": 0.03125,
+      "mean_prompt_tokens": 205.9375,
+      "mean_total_tokens": 243.1796875,
+      "critical_grounding_event_count": 0
+    },
+    "component_fixed_high": {
+      "selected_on_seed_rows": 256,
+      "selected_on_fraction": 1.0,
+      "quality_mean_vs_always_off": 0.171875,
+      "material_risk_count": 61,
+      "material_risk_rate": 0.23828125,
+      "mean_prompt_tokens": 236.171875,
+      "mean_total_tokens": 262.16796875,
+      "critical_grounding_event_count": 4
+    },
+    "transparent_rule": {
+      "selected_on_seed_rows": 212,
+      "selected_on_fraction": 0.828125,
+      "quality_mean_vs_always_off": 0.03125,
+      "material_risk_count": 56,
+      "material_risk_rate": 0.21875,
+      "mean_prompt_tokens": 231.703125,
+      "mean_total_tokens": 259.1328125,
+      "critical_grounding_event_count": 4
+    },
+    "learned_pm": {
+      "selected_on_seed_rows": 130,
+      "selected_on_fraction": 0.5078125,
+      "quality_mean_vs_always_off": 0.2265625,
+      "material_risk_count": 45,
+      "material_risk_rate": 0.17578125,
+      "mean_prompt_tokens": 219.21875,
+      "mean_total_tokens": 251.44140625,
+      "critical_grounding_event_count": 4
+    }
+  },
+  "learned_comparisons": {
+    "component_fixed_high": {
+      "quality_better": 70,
+      "quality_worse": 56,
+      "quality_tie_or_same_arm": 130,
+      "quality_mean_difference": 0.0546875,
+      "quality_cluster_bootstrap_95_ci": [
+        -0.0859375,
+        0.1953125
+      ],
+      "material_risk_rate_difference": -0.0625,
+      "risk_cluster_bootstrap_95_ci": [
+        -0.1171875,
+        -0.015625
+      ],
+      "mean_prompt_token_difference": -16.953125,
+      "mean_total_token_difference": -10.7265625
+    },
+    "always_off": {
+      "quality_better": 91,
+      "quality_worse": 33,
+      "quality_tie_or_same_arm": 132,
+      "quality_mean_difference": 0.2265625,
+      "quality_cluster_bootstrap_95_ci": [
+        0.1015625,
+        0.3515625
+      ],
+      "material_risk_rate_difference": 0.14453125,
+      "risk_cluster_bootstrap_95_ci": [
+        0.0625,
+        0.23046875
+      ],
+      "mean_prompt_token_difference": 13.28125,
+      "mean_total_token_difference": 8.26171875
+    },
+    "transparent_rule": {
+      "quality_better": 98,
+      "quality_worse": 48,
+      "quality_tie_or_same_arm": 110,
+      "quality_mean_difference": 0.1953125,
+      "quality_cluster_bootstrap_95_ci": [
+        0.0703125,
+        0.3203125
+      ],
+      "material_risk_rate_difference": -0.04296875,
+      "risk_cluster_bootstrap_95_ci": [
+        -0.09765625,
+        0.0078125
+      ],
+      "mean_prompt_token_difference": -12.484375,
+      "mean_total_token_difference": -7.69140625
+    }
+  },
+  "component_diagnostic_not_a_gate": {
+    "MP": {
+      "n_seed_rows": 64,
+      "learned_on_fraction": 0.5,
+      "learned_quality_mean_vs_always_off": -0.03125,
+      "learned_material_risk_rate": 0.359375,
+      "fixed_high_material_risk_rate": 0.359375
+    },
+    "MS": {
+      "n_seed_rows": 64,
+      "learned_on_fraction": 0.53125,
+      "learned_quality_mean_vs_always_off": 0.53125,
+      "learned_material_risk_rate": 0.078125,
+      "fixed_high_material_risk_rate": 0.109375
+    },
+    "ME": {
+      "n_seed_rows": 64,
+      "learned_on_fraction": 0.75,
+      "learned_quality_mean_vs_always_off": 0.40625,
+      "learned_material_risk_rate": 0.046875,
+      "fixed_high_material_risk_rate": 0.03125
+    },
+    "RS": {
+      "n_seed_rows": 64,
+      "learned_on_fraction": 0.25,
+      "learned_quality_mean_vs_always_off": 0.0,
+      "learned_material_risk_rate": 0.21875,
+      "fixed_high_material_risk_rate": 0.453125
+    }
+  },
+  "bootstrap": {
+    "method": "percentile cluster bootstrap over counterfactual_group_id",
+    "groups": 64,
+    "replicates": 50000,
+    "seed": 18029956204560562307
+  },
+  "gate_results": {
+    "quality_vs_fixed_high_lower_ci": {
+      "value": -0.0859375,
+      "threshold": -0.05,
+      "pass": false
+    },
+    "quality_vs_always_off_point": {
+      "value": 0.2265625,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "quality_vs_always_off_lower_ci": {
+      "value": 0.1015625,
+      "threshold": -0.05,
+      "pass": true
+    },
+    "risk_vs_fixed_high_point": {
+      "value": -0.0625,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "risk_vs_fixed_high_upper_ci": {
+      "value": -0.015625,
+      "threshold": 0.05,
+      "pass": true
+    },
+    "prompt_cost_reduction_vs_fixed_high": {
+      "value": 0.07178299702282498,
+      "threshold": 0.05,
+      "pass": true
+    },
+    "quality_vs_transparent_rule_lower_ci": {
+      "value": 0.0703125,
+      "threshold": -0.05,
+      "pass": true
+    },
+    "risk_vs_transparent_rule_point": {
+      "value": -0.04296875,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "prompt_tokens_vs_transparent_rule_point": {
+      "value": -12.484375,
+      "threshold": 0.0,
+      "pass": true
+    },
+    "strict_point_improvement_vs_transparent_rule": {
+      "value": true,
+      "threshold": true,
+      "pass": true
+    },
+    "nondegenerate_policy_activity": {
+      "value": 0.5078125,
+      "threshold": [
+        0.1,
+        0.9
+      ],
+      "pass": true
+    },
+    "critical_grounding_count": {
+      "value": 4,
+      "threshold": 2,
+      "pass": false
+    },
+    "critical_grounding_not_above_fixed_high": {
+      "value": [
+        4,
+        4
+      ],
+      "threshold": "learned<=fixed_high",
+      "pass": true
+    }
+  },
+  "all_checks_required": true,
+  "input_sha256": {
+    "quality_final_export": "2d89a5e773598269864ddfbb11368f465c563ae55a67dba5930e1f9f46ed752e",
+    "risk_final_export": "2a11fee44c37e398373782e2c6a8e91b8a60ff0229203674eaeece429e380a1f",
+    "private_quality_key": "7e49a6704c71f40297532eda9ce5f062ac9fe26ec0399c9bf0d32842fd332798",
+    "private_risk_key": "f61414136d9e7d4bf4281109f321ffd427faba78a58748bc45fdb59a588d874c",
+    "policy_bindings": "868fa6a19459422fd36330469fd28d67f3a23ae40b8bf8e9d99b09b023c24b32",
+    "execution_outcomes": "566302871a60b5f3873cff6806d47a0bf9b9a9b990dfa38226355dcc2c1b0d18",
+    "frozen_contract": "34af5102ab4c60ae8156938a8d7e0b7355375dedebfdf86555eaf3f60df8bf05"
+  },
+  "stopping_rule_applied": {
+    "pass": "freeze the result and run corrected ESConv/EvoEmo only as external replication",
+    "fail": "report bounded/negative V1.5 confirmation; do not create a second confirmation set and do not modify the method on this evidence"
+  }
+}

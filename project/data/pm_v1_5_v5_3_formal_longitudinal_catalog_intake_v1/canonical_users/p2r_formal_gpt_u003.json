@@ -1,0 +1,2197 @@
+{
+  "protocol": "pm-v1.5-v5.3-formal-longitudinal-user-v1",
+  "user_id": "p2r_formal_gpt_u003",
+  "content_author": "chatgpt_pro",
+  "primary_superdomain": "work_education",
+  "secondary_superdomains": [
+    "family_caregiving",
+    "finance_housing",
+    "social_identity_creativity"
+  ],
+  "topic_threads": [
+    {
+      "thread_id": "thread_01_landscape_portfolio",
+      "label": "night landscape-design program application, portfolio, and admission preparation"
+    },
+    {
+      "thread_id": "thread_02_flower_market_work",
+      "label": "wholesale flower-market workload, seasonal peaks, and supervisor communication"
+    },
+    {
+      "thread_id": "thread_03_family_shop_expectations",
+      "label": "family expectations around helping at the parents’ neighborhood plant shop"
+    },
+    {
+      "thread_id": "thread_04_commute_housing",
+      "label": "commute, rent, and whether to move closer to evening classes"
+    },
+    {
+      "thread_id": "thread_05_creative_confidence",
+      "label": "creative confidence, critique, and sharing design work with peers"
+    },
+    {
+      "thread_id": "thread_06_energy_routine",
+      "label": "non-diagnostic energy limits and transitions between physical work and evening study"
+    }
+  ],
+  "profile_history": [
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_profile_name_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "name",
+      "field_value": "Hana Sato",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "Hana Sato",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "addressing_or_disambiguating_user_identity"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_profile_age_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "age",
+      "field_value": "29",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "29",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "age_relevant_feasibility_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_profile_job_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "job",
+      "field_value": "purchasing assistant at a wholesale flower market",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s001_t01"
+      ],
+      "literal_source_span": "I work as a purchasing assistant at a wholesale flower market",
+      "valid_from_session": 1,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "work_schedule",
+        "career_feasibility",
+        "workplace_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_profile_nationality_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "nationality",
+      "field_value": "Japanese",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I'm Japanese",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "country_specific_process_or_language_context"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_profile_location_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "location",
+      "field_value": "Nagoya, Japan",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "I live in Nagoya, Japan",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "local_logistics",
+        "commute",
+        "housing",
+        "location_specific_feasibility"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_profile_gender_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "gender",
+      "field_value": "woman",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I'm a woman",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "gender_relevant_context_only"
+      ]
+    },
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_profile_education_v1",
+      "subtype": "MP_PROFILE",
+      "item_role": "base",
+      "field_type": "education",
+      "field_value": "two-year diploma in horticulture",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s003_t01"
+      ],
+      "literal_source_span": "I have a two-year diploma in horticulture",
+      "valid_from_session": 3,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null,
+      "applicability_scope": [
+        "education_or_training_context"
+      ]
+    }
+  ],
+  "response_preference_history": [
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_preference_concise_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "concise_factual_answer",
+      "preference_text": "When I ask for practical help, I prefer a concise factual answer before the background because too much framing makes me lose the question.",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s002_t01"
+      ],
+      "literal_source_span": "When I ask for practical help, I prefer a concise factual answer before the background because too much framing makes me lose the question.",
+      "valid_from_session": 2,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_preference_optional_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "one_optional_suggestion",
+      "preference_text": "If you have a suggestion, please make it one optional thing rather than a plan with several steps.",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s009_t01"
+      ],
+      "literal_source_span": "If you have a suggestion, please make it one optional thing rather than a plan with several steps.",
+      "valid_from_session": 9,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    },
+    {
+      "item_id": "p2r_formal_gpt_u003_mp_preference_choices_v1",
+      "subtype": "MP_PREFERENCE",
+      "preference_type": "choices_rather_than_commands",
+      "preference_text": "I respond better when you offer choices instead of commands, especially when the options have different costs or time tradeoffs.",
+      "owner_id": "p2r_formal_gpt_u003",
+      "source_turn_ids": [
+        "s016_t01"
+      ],
+      "literal_source_span": "I respond better when you offer choices instead of commands, especially when the options have different costs or time tradeoffs.",
+      "valid_from_session": 16,
+      "valid_until_session": null,
+      "version": 1,
+      "active": true,
+      "supersedes_item_id": null
+    }
+  ],
+  "relationships": [
+    {
+      "entity_id": "entity_mori",
+      "name": "Takumi Mori",
+      "relationship": "supervisor at the wholesale flower market",
+      "valid_from_session": 3,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_aya",
+      "name": "Aya Fujimoto",
+      "relationship": "coworker on the purchasing team",
+      "valid_from_session": 4,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_ren",
+      "name": "Ren Kagawa",
+      "relationship": "partner who lives separately in the same city",
+      "valid_from_session": 8,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_keiko",
+      "name": "Mum",
+      "relationship": "mother and co-owner of the family plant shop",
+      "valid_from_session": 8,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_masaru",
+      "name": "Dad",
+      "relationship": "father and co-owner of the family plant shop",
+      "valid_from_session": 5,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_ishida",
+      "name": "Professor Naomi Ishida",
+      "relationship": "landscape architect who leads Hana’s portfolio workshop",
+      "valid_from_session": 6,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_lian",
+      "name": "Lian Zhou",
+      "relationship": "peer in the landscape-design portfolio workshop",
+      "valid_from_session": 7,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_sora",
+      "name": "Sora Nishimura",
+      "relationship": "longtime friend who runs a small ceramics studio",
+      "valid_from_session": 13,
+      "valid_until_session": null
+    },
+    {
+      "entity_id": "entity_okabe",
+      "name": "Yuki Okabe",
+      "relationship": "leasing agent for an apartment Hana considers near the evening program",
+      "valid_from_session": 14,
+      "valid_until_session": 19
+    }
+  ],
+  "events": [
+    {
+      "event_id": "event_01",
+      "session_index": 1,
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_02_flower_market_work"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Hana begins preparing for a night landscape-design program during the wholesale market’s spring ordering peak."
+    },
+    {
+      "event_id": "event_02",
+      "session_index": 2,
+      "topic_thread_ids": [
+        "thread_06_energy_routine",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "description": "Hana tests a short transition ritual between physical market work and drawing at home."
+    },
+    {
+      "event_id": "event_03",
+      "session_index": 3,
+      "topic_thread_ids": [
+        "thread_02_flower_market_work",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mori"
+      ],
+      "resolution_status": "mixed",
+      "description": "A schedule conflict reveals that Hana fears lost portfolio time more than the busy market itself."
+    },
+    {
+      "event_id": "event_04",
+      "session_index": 4,
+      "topic_thread_ids": [
+        "thread_02_flower_market_work",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mori",
+        "entity_aya"
+      ],
+      "resolution_status": "resolved",
+      "description": "Hana asks for one predictable early finish each week during portfolio season and the team adopts it."
+    },
+    {
+      "event_id": "event_05",
+      "session_index": 5,
+      "topic_thread_ids": [
+        "thread_03_family_shop_expectations",
+        "thread_04_commute_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_masaru"
+      ],
+      "resolution_status": "mixed",
+      "description": "Her parents ask for weekend help at their plant shop while Hana is calculating class commute time."
+    },
+    {
+      "event_id": "event_06",
+      "session_index": 6,
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ishida"
+      ],
+      "resolution_status": "resolved",
+      "description": "Hana narrows a portfolio site study to one small public courtyard and receives clearer mentor feedback."
+    },
+    {
+      "event_id": "event_07",
+      "session_index": 7,
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lian"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Hana has enough draft drawings but keeps postponing a peer critique session."
+    },
+    {
+      "event_id": "event_08",
+      "session_index": 8,
+      "topic_thread_ids": [
+        "thread_06_energy_routine",
+        "thread_04_commute_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ren"
+      ],
+      "resolution_status": "resolved",
+      "description": "A pre-packed study pouch makes it easier for Hana to draw at a library near Ren’s neighborhood after work."
+    },
+    {
+      "event_id": "event_09",
+      "session_index": 8,
+      "topic_thread_ids": [
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_keiko"
+      ],
+      "resolution_status": "mixed",
+      "description": "Keiko separately asks Hana to cover a holiday delivery weekend at the family shop."
+    },
+    {
+      "event_id": "event_10",
+      "session_index": 9,
+      "topic_thread_ids": [
+        "thread_03_family_shop_expectations",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_keiko"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Hana agrees to one family-shop weekend but has not decided how to protect the following portfolio workshop."
+    },
+    {
+      "event_id": "event_11",
+      "session_index": 10,
+      "topic_thread_ids": [
+        "thread_05_creative_confidence",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lian"
+      ],
+      "resolution_status": "resolved",
+      "description": "A peer critique resolves Hana’s fear that an unfinished sketch is too rough to discuss."
+    },
+    {
+      "event_id": "event_12",
+      "session_index": 11,
+      "topic_thread_ids": [
+        "thread_04_commute_housing",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ren"
+      ],
+      "resolution_status": "resolved",
+      "description": "Hana times a class-night route from Ren’s district and finds a transfer she had assumed was worse than it is."
+    },
+    {
+      "event_id": "event_13",
+      "session_index": 12,
+      "topic_thread_ids": [
+        "thread_02_flower_market_work",
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mori",
+        "entity_masaru"
+      ],
+      "resolution_status": "conflicting",
+      "description": "Hana corrects a mix-up between her father’s delivery request and Mori’s separate request for weekend stocktaking."
+    },
+    {
+      "event_id": "event_14",
+      "session_index": 13,
+      "topic_thread_ids": [
+        "thread_05_creative_confidence",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sora"
+      ],
+      "resolution_status": "resolved",
+      "description": "Hana shows a draft board in Sora’s ceramics studio and learns that casual explanation exposes missing design logic."
+    },
+    {
+      "event_id": "event_15",
+      "session_index": 14,
+      "topic_thread_ids": [
+        "thread_04_commute_housing",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_okabe"
+      ],
+      "resolution_status": "mixed",
+      "description": "Hana views a smaller apartment near the design school and begins comparing cost against commuting time."
+    },
+    {
+      "event_id": "event_16",
+      "session_index": 15,
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_keiko",
+        "entity_masaru"
+      ],
+      "resolution_status": "unresolved",
+      "description": "The program application asks for a statement of intent while Hana has not told her parents how serious the plan has become."
+    },
+    {
+      "event_id": "event_17",
+      "session_index": 16,
+      "topic_thread_ids": [
+        "thread_04_commute_housing",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ren"
+      ],
+      "resolution_status": "mixed",
+      "description": "Hana keeps her current apartment for now and revises how she uses the commute on class nights."
+    },
+    {
+      "event_id": "event_18",
+      "session_index": 17,
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ishida"
+      ],
+      "resolution_status": "resolved",
+      "description": "Hana converts broad mentor feedback into a three-question review and finishes one portfolio board."
+    },
+    {
+      "event_id": "event_19",
+      "session_index": 18,
+      "topic_thread_ids": [
+        "thread_02_flower_market_work",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_aya"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Summer auction mornings begin and Hana has not decided how many evening workshops to skip during the busiest fortnight."
+    },
+    {
+      "event_id": "event_20",
+      "session_index": 18,
+      "topic_thread_ids": [
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_keiko"
+      ],
+      "resolution_status": "mixed",
+      "description": "Keiko offers to reduce Hana’s shop shifts if Hana explains the application timeline."
+    },
+    {
+      "event_id": "event_21",
+      "session_index": 19,
+      "topic_thread_ids": [
+        "thread_05_creative_confidence",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sora"
+      ],
+      "resolution_status": "mixed",
+      "description": "Sora’s confidence in selling ceramics becomes an unhelpful comparison with Hana’s portfolio presentation anxiety."
+    },
+    {
+      "event_id": "event_22",
+      "session_index": 20,
+      "topic_thread_ids": [
+        "thread_03_family_shop_expectations",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_keiko",
+        "entity_masaru"
+      ],
+      "resolution_status": "resolved",
+      "description": "Hana tells her parents the exact application timeline and agrees on fewer shop weekends until the deadline."
+    },
+    {
+      "event_id": "event_23",
+      "session_index": 21,
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lian"
+      ],
+      "resolution_status": "resolved",
+      "description": "Hana rehearses a three-minute portfolio explanation with Lian and cuts two unnecessary design claims."
+    },
+    {
+      "event_id": "event_24",
+      "session_index": 22,
+      "topic_thread_ids": [
+        "thread_06_energy_routine",
+        "thread_02_flower_market_work"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_aya"
+      ],
+      "resolution_status": "resolved",
+      "description": "During auction season Hana uses an intentionally rough after-work sketch routine to preserve continuity."
+    },
+    {
+      "event_id": "event_25",
+      "session_index": 23,
+      "topic_thread_ids": [
+        "thread_04_commute_housing",
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ren",
+        "entity_keiko"
+      ],
+      "resolution_status": "mixed",
+      "description": "Hana reconsiders moving only if she is admitted, avoiding a housing decision before the program outcome."
+    },
+    {
+      "event_id": "event_26",
+      "session_index": 24,
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ishida"
+      ],
+      "resolution_status": "unresolved",
+      "description": "Hana finishes most portfolio content but has not selected which work sample should open the submission."
+    },
+    {
+      "event_id": "event_27",
+      "session_index": 25,
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_02_flower_market_work",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mori"
+      ],
+      "resolution_status": "unresolved",
+      "description": "With the deadline close, Hana separates a concrete opening-board decision from generic comments about application stress."
+    }
+  ],
+  "sessions": [
+    {
+      "session_index": 1,
+      "relative_time": "about 18 months ago",
+      "event_ids": [
+        "event_01"
+      ],
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_02_flower_market_work"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s001_t01",
+          "role": "user",
+          "text": "I'm Hana Sato, 29, and I work as a purchasing assistant at a wholesale flower market. I want to apply to a part-time landscape-design program because I miss doing design work, but spring ordering is the most physical and unpredictable part of my job."
+        },
+        {
+          "turn_id": "s001_t02",
+          "role": "assistant",
+          "text": "You are trying to build a route back toward design while your current work is demanding more of your body and schedule. What would make the application feel concrete?"
+        },
+        {
+          "turn_id": "s001_t03",
+          "role": "user",
+          "text": "My goal is to submit a portfolio that shows how I think about real spaces, not just pretty plant combinations. I downloaded the application guide, but I haven't chosen the first site I will study."
+        },
+        {
+          "turn_id": "s001_t04",
+          "role": "assistant",
+          "text": "That gives the first open task a clear shape: one site study, not an entire new identity as a designer."
+        }
+      ],
+      "summary": "Hana begins planning a landscape-design application during the market’s busiest season and defines a portfolio goal centered on reasoning about real spaces rather than decoration.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_ms_001",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "My goal is to submit a portfolio that shows how I think about real spaces, not just pretty plant combinations.",
+          "candidate_text": "My goal is to submit a portfolio that shows how I think about real spaces, not just pretty plant combinations.",
+          "topic_thread": "thread_01_landscape_portfolio",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "prior_goal"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_unresolved_001",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s001_t03"
+          ],
+          "literal_source_span": "I downloaded the application guide, but I haven't chosen the first site I will study.",
+          "candidate_text": "I downloaded the application guide, but I haven't chosen the first site I will study.",
+          "topic_thread": "thread_01_landscape_portfolio",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I downloaded the application guide",
+          "result_span": null
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_context_001",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s001_t01"
+          ],
+          "literal_source_span": "spring ordering is the most physical and unpredictable part of my job.",
+          "candidate_text": "spring ordering is the most physical and unpredictable part of my job.",
+          "topic_thread": "thread_02_flower_market_work",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 2,
+      "relative_time": "about 17 months ago",
+      "event_ids": [
+        "event_02"
+      ],
+      "topic_thread_ids": [
+        "thread_06_energy_routine",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s002_t01",
+          "role": "user",
+          "text": "I'm Japanese and I live in Nagoya, Japan. When I ask for practical help, I prefer a concise factual answer before the background because too much framing makes me lose the question."
+        },
+        {
+          "turn_id": "s002_t02",
+          "role": "assistant",
+          "text": "Concise answer: give yourself a short transition between market work and drawing instead of expecting an immediate switch."
+        },
+        {
+          "turn_id": "s002_t03",
+          "role": "user",
+          "text": "I changed clothes as soon as I got home, washed my hands, and sat by the window with only one sheet of tracing paper for fifteen minutes. I sketched the alley outside without opening my course research folder, and starting with something visible made it much easier to continue for another twenty minutes."
+        },
+        {
+          "turn_id": "s002_t04",
+          "role": "assistant",
+          "text": "That worked as a transition rather than a full study plan. You reduced the jump from physical work into abstract design work."
+        }
+      ],
+      "summary": "Hana uses a fifteen-minute observational sketch after changing out of work clothes and finds that a visible local subject makes continuing design work easier.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_core_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s002_t03"
+          ],
+          "literal_source_span": "I changed clothes as soon as I got home, washed my hands, and sat by the window with only one sheet of tracing paper for fifteen minutes. I sketched the alley outside without opening my course research folder, and starting with something visible made it much easier to continue for another twenty minutes.",
+          "candidate_text": "I changed clothes as soon as I got home, washed my hands, and sat by the window with only one sheet of tracing paper for fifteen minutes. I sketched the alley outside without opening my course research folder, and starting with something visible made it much easier to continue for another twenty minutes.",
+          "topic_thread": "thread_06_energy_routine",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I changed clothes as soon as I got home, washed my hands, and sat by the window with only one sheet of tracing paper for fifteen minutes.",
+          "result_span": "I sketched the alley outside without opening my course research folder, and starting with something visible made it much easier to continue for another twenty minutes."
+        }
+      ]
+    },
+    {
+      "session_index": 3,
+      "relative_time": "about 16 months ago",
+      "event_ids": [
+        "event_03"
+      ],
+      "topic_thread_ids": [
+        "thread_02_flower_market_work",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mori"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s003_t01",
+          "role": "user",
+          "text": "I'm a woman, and I have a two-year diploma in horticulture. Mori asked me to stay late twice for supplier checks. The exhausting part isn't really the extra hour; it's that I lose the only quiet daylight I had planned to photograph the courtyard I'm considering for my portfolio."
+        },
+        {
+          "turn_id": "s003_t02",
+          "role": "assistant",
+          "text": "So the same hour carries a different cost because it removes a nonrepeatable observation window."
+        },
+        {
+          "turn_id": "s003_t03",
+          "role": "user",
+          "text": "Yes. On a normal week I can move drawing around, but I can't photograph how that courtyard is used in daylight after the sun is gone."
+        },
+        {
+          "turn_id": "s003_t04",
+          "role": "assistant",
+          "text": "That distinction may help you decide which overtime requests are actually incompatible with the portfolio task."
+        }
+      ],
+      "summary": "Hana distinguishes ordinary overtime from losing a limited daylight observation window needed for her landscape portfolio site study.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_ms_002",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s003_t01"
+          ],
+          "literal_source_span": "The exhausting part isn't really the extra hour; it's that I lose the only quiet daylight I had planned to photograph the courtyard I'm considering for my portfolio.",
+          "candidate_text": "The exhausting part isn't really the extra hour; it's that I lose the only quiet daylight I had planned to photograph the courtyard I'm considering for my portfolio.",
+          "topic_thread": "thread_02_flower_market_work",
+          "entity_ids": [
+            "self",
+            "entity_mori"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "pressure_distinction"
+        }
+      ]
+    },
+    {
+      "session_index": 4,
+      "relative_time": "about 15 months ago",
+      "event_ids": [
+        "event_04"
+      ],
+      "topic_thread_ids": [
+        "thread_02_flower_market_work",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mori",
+        "entity_aya"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s004_t01",
+          "role": "user",
+          "text": "I asked Mori if one Tuesday a week could be a predictable early finish through the application season, and I offered to take the Thursday supplier reconciliation instead. Aya said the swap was fine, Mori agreed, and for the next five weeks I knew exactly which evening still had daylight for site visits."
+        },
+        {
+          "turn_id": "s004_t02",
+          "role": "assistant",
+          "text": "You made the request a trade rather than a vague plea for less work, and the predictable slot directly served the application."
+        },
+        {
+          "turn_id": "s004_t03",
+          "role": "user",
+          "text": "I was nervous asking, but once it was on the rota I stopped renegotiating the week in my head every Monday."
+        },
+        {
+          "turn_id": "s004_t04",
+          "role": "assistant",
+          "text": "That reduction in weekly uncertainty is part of the result too."
+        }
+      ],
+      "summary": "Hana trades one weekly duty for a predictable early Tuesday, preserving daylight site visits and reducing repeated mental renegotiation of her workweek.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_core_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s004_t01"
+          ],
+          "literal_source_span": "I asked Mori if one Tuesday a week could be a predictable early finish through the application season, and I offered to take the Thursday supplier reconciliation instead. Aya said the swap was fine, Mori agreed, and for the next five weeks I knew exactly which evening still had daylight for site visits.",
+          "candidate_text": "I asked Mori if one Tuesday a week could be a predictable early finish through the application season, and I offered to take the Thursday supplier reconciliation instead. Aya said the swap was fine, Mori agreed, and for the next five weeks I knew exactly which evening still had daylight for site visits.",
+          "topic_thread": "thread_02_flower_market_work",
+          "entity_ids": [
+            "self",
+            "entity_mori",
+            "entity_aya"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I asked Mori if one Tuesday a week could be a predictable early finish through the application season, and I offered to take the Thursday supplier reconciliation instead.",
+          "result_span": "Aya said the swap was fine, Mori agreed, and for the next five weeks I knew exactly which evening still had daylight for site visits."
+        }
+      ]
+    },
+    {
+      "session_index": 5,
+      "relative_time": "about 14 months ago",
+      "event_ids": [
+        "event_05"
+      ],
+      "topic_thread_ids": [
+        "thread_03_family_shop_expectations",
+        "thread_04_commute_housing"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_masaru"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s005_t01",
+          "role": "user",
+          "text": "My parents' plant shop is across town, and they usually ask me to help during delivery weekends. The specific problem is that the trip from my apartment to their shop and then to the evening workshop takes nearly two hours, so a 'few hours helping' changes the whole class day."
+        },
+        {
+          "turn_id": "s005_t02",
+          "role": "assistant",
+          "text": "The family request sounds small when described only by shop hours, but the travel makes its real footprint much larger."
+        },
+        {
+          "turn_id": "s005_t03",
+          "role": "user",
+          "text": "Dad tends to think of the shop as ten minutes from everything because he drives. I don't own a car, and I haven't worked out whether moving closer to class would actually help with the shop route or just change which commute is bad."
+        },
+        {
+          "turn_id": "s005_t04",
+          "role": "assistant",
+          "text": "That is a useful current observation without yet turning it into a moving decision."
+        }
+      ],
+      "summary": "Hana identifies travel, rather than shop hours alone, as the main cost of helping her parents on class days and notes that moving could shift rather than solve the commute.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_ms_003",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s005_t01"
+          ],
+          "literal_source_span": "The specific problem is that the trip from my apartment to their shop and then to the evening workshop takes nearly two hours, so a 'few hours helping' changes the whole class day.",
+          "candidate_text": "The specific problem is that the trip from my apartment to their shop and then to the evening workshop takes nearly two hours, so a 'few hours helping' changes the whole class day.",
+          "topic_thread": "thread_04_commute_housing",
+          "entity_ids": [
+            "self",
+            "entity_masaru"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "specific_old_observation"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_context_002",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s005_t03"
+          ],
+          "literal_source_span": "Dad tends to think of the shop as ten minutes from everything because he drives.",
+          "candidate_text": "Dad tends to think of the shop as ten minutes from everything because he drives.",
+          "topic_thread": "thread_03_family_shop_expectations",
+          "entity_ids": [
+            "entity_masaru"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 6,
+      "relative_time": "about 13 months ago",
+      "event_ids": [
+        "event_06"
+      ],
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ishida"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s006_t01",
+          "role": "user",
+          "text": "Professor Ishida said my first idea was too broad because I was trying to redesign an entire riverside. I chose one small public courtyard instead and spent an hour noting where people crossed, paused, and avoided the sun. Her next feedback was specific enough that I could turn the observations into three design questions."
+        },
+        {
+          "turn_id": "s006_t02",
+          "role": "assistant",
+          "text": "Narrowing the site gave the critique something concrete to attach to, which made the feedback usable rather than global."
+        },
+        {
+          "turn_id": "s006_t03",
+          "role": "user",
+          "text": "It was the first time the portfolio felt like an investigation instead of me trying to prove I have taste."
+        },
+        {
+          "turn_id": "s006_t04",
+          "role": "assistant",
+          "text": "That shift in task definition may be worth remembering when another piece starts to feel too big."
+        }
+      ],
+      "summary": "Hana narrows an oversized riverside concept to one courtyard, producing observable behavior notes and three concrete design questions after more useful mentor feedback.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_core_003",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s006_t01"
+          ],
+          "literal_source_span": "I chose one small public courtyard instead and spent an hour noting where people crossed, paused, and avoided the sun. Her next feedback was specific enough that I could turn the observations into three design questions.",
+          "candidate_text": "I chose one small public courtyard instead and spent an hour noting where people crossed, paused, and avoided the sun. Her next feedback was specific enough that I could turn the observations into three design questions.",
+          "topic_thread": "thread_01_landscape_portfolio",
+          "entity_ids": [
+            "self",
+            "entity_ishida"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I chose one small public courtyard instead and spent an hour noting where people crossed, paused, and avoided the sun.",
+          "result_span": "Her next feedback was specific enough that I could turn the observations into three design questions."
+        }
+      ]
+    },
+    {
+      "session_index": 7,
+      "relative_time": "about 12 months ago",
+      "event_ids": [
+        "event_07"
+      ],
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lian"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s007_t01",
+          "role": "user",
+          "text": "Lian offered to look at my sketches after workshop. I said yes, then spent three evenings cleaning lines so I wouldn't have to show the rough versions."
+        },
+        {
+          "turn_id": "s007_t02",
+          "role": "assistant",
+          "text": "The offer exists, but the critique itself is still being delayed by the condition that the work must look finished first."
+        },
+        {
+          "turn_id": "s007_t03",
+          "role": "user",
+          "text": "I have six draft sheets ready enough to discuss, but I still haven't put a date in the calendar with Lian."
+        },
+        {
+          "turn_id": "s007_t04",
+          "role": "assistant",
+          "text": "Then the unfinished thread is the critique appointment, not another round of drawing cleanup."
+        }
+      ],
+      "summary": "Hana has six discussable draft sheets but keeps postponing peer critique by polishing them, leaving the actual appointment with Lian unmade.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_ms_004",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s007_t03"
+          ],
+          "literal_source_span": "I have six draft sheets ready enough to discuss, but I still haven't put a date in the calendar with Lian.",
+          "candidate_text": "I have six draft sheets ready enough to discuss, but I still haven't put a date in the calendar with Lian.",
+          "topic_thread": "thread_05_creative_confidence",
+          "entity_ids": [
+            "self",
+            "entity_lian"
+          ],
+          "resolution_status": "unresolved",
+          "memory_function": "unfinished_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 8,
+      "relative_time": "about 11 months ago",
+      "event_ids": [
+        "event_08",
+        "event_09"
+      ],
+      "topic_thread_ids": [
+        "thread_06_energy_routine",
+        "thread_04_commute_housing",
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ren",
+        "entity_keiko"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s008_t01",
+          "role": "user",
+          "text": "Ren lives near a library that stays open later than the one by my flat. I put tracing paper, two pens, and my courtyard photos in a zipper pouch and left it in my work bag. Twice that week I stopped at the library instead of going home first, and I finished two study sketches before the tired-at-home feeling had a chance to settle in."
+        },
+        {
+          "turn_id": "s008_t02",
+          "role": "assistant",
+          "text": "You moved the start of study earlier in the route and made the materials portable enough that the decision was small."
+        },
+        {
+          "turn_id": "s008_t03",
+          "role": "user",
+          "text": "Mum also asked me to cover the holiday delivery weekend. I said I'd check the workshop dates before promising anything."
+        },
+        {
+          "turn_id": "s008_t04",
+          "role": "assistant",
+          "text": "Good separation: one routine has evidence behind it, while the family scheduling request is still pending."
+        }
+      ],
+      "summary": "A portable drawing pouch lets Hana use a late library near Ren’s neighborhood before going home, while a separate holiday shop request remains undecided.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_core_004",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s008_t01"
+          ],
+          "literal_source_span": "I put tracing paper, two pens, and my courtyard photos in a zipper pouch and left it in my work bag. Twice that week I stopped at the library instead of going home first, and I finished two study sketches before the tired-at-home feeling had a chance to settle in.",
+          "candidate_text": "I put tracing paper, two pens, and my courtyard photos in a zipper pouch and left it in my work bag. Twice that week I stopped at the library instead of going home first, and I finished two study sketches before the tired-at-home feeling had a chance to settle in.",
+          "topic_thread": "thread_06_energy_routine",
+          "entity_ids": [
+            "self",
+            "entity_ren"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I put tracing paper, two pens, and my courtyard photos in a zipper pouch and left it in my work bag.",
+          "result_span": "Twice that week I stopped at the library instead of going home first, and I finished two study sketches before the tired-at-home feeling had a chance to settle in."
+        }
+      ]
+    },
+    {
+      "session_index": 9,
+      "relative_time": "about 10 months ago",
+      "event_ids": [
+        "event_10"
+      ],
+      "topic_thread_ids": [
+        "thread_03_family_shop_expectations",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_keiko"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s009_t01",
+          "role": "user",
+          "text": "I agreed to help Mum with one delivery weekend. If you have a suggestion, please make it one optional thing rather than a plan with several steps."
+        },
+        {
+          "turn_id": "s009_t02",
+          "role": "assistant",
+          "text": "One optional thing: before the weekend, mark the one portfolio commitment you do not want the shop shift to erase."
+        },
+        {
+          "turn_id": "s009_t03",
+          "role": "user",
+          "text": "I put the Saturday workshop on the family calendar, but I haven't decided whether I should leave the shop early or skip the workshop if deliveries run late."
+        },
+        {
+          "turn_id": "s009_t04",
+          "role": "assistant",
+          "text": "The calendar makes the conflict visible, but the actual contingency is still unresolved."
+        }
+      ],
+      "summary": "Hana agrees to one family delivery weekend and marks the portfolio workshop on the shared calendar, but has not decided what to do if deliveries overrun.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_unresolved_002",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s009_t03"
+          ],
+          "literal_source_span": "I put the Saturday workshop on the family calendar, but I haven't decided whether I should leave the shop early or skip the workshop if deliveries run late.",
+          "candidate_text": "I put the Saturday workshop on the family calendar, but I haven't decided whether I should leave the shop early or skip the workshop if deliveries run late.",
+          "topic_thread": "thread_03_family_shop_expectations",
+          "entity_ids": [
+            "self",
+            "entity_keiko"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I put the Saturday workshop on the family calendar",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 10,
+      "relative_time": "about 9 months ago",
+      "event_ids": [
+        "event_11"
+      ],
+      "topic_thread_ids": [
+        "thread_05_creative_confidence",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lian"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s010_t01",
+          "role": "user",
+          "text": "I finally met Lian with the rough sheets. She didn't care about the wobbly linework; she asked why one path curved behind the benches, and I realized I couldn't explain that choice. The critique gave me one design problem to fix instead of the vague feeling that the whole set looked amateur."
+        },
+        {
+          "turn_id": "s010_t02",
+          "role": "assistant",
+          "text": "The roughness you were protecting turned out not to be the important weakness. The conversation exposed a reasoning gap instead."
+        },
+        {
+          "turn_id": "s010_t03",
+          "role": "user",
+          "text": "That was embarrassing for about five minutes, then useful. I went home knowing what to redraw."
+        },
+        {
+          "turn_id": "s010_t04",
+          "role": "assistant",
+          "text": "That sounds like a completed thread: you got the critique you had been postponing and it produced a specific next target."
+        }
+      ],
+      "summary": "Hana completes the peer critique she had delayed and learns that one unexplained path choice, rather than rough drawing quality, is the specific issue to revise.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_ms_005",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s010_t03"
+          ],
+          "literal_source_span": "I went home knowing what to redraw.",
+          "candidate_text": "I went home knowing what to redraw.",
+          "topic_thread": "thread_05_creative_confidence",
+          "entity_ids": [
+            "self",
+            "entity_lian"
+          ],
+          "resolution_status": "resolved",
+          "memory_function": "resolved_thread"
+        }
+      ]
+    },
+    {
+      "session_index": 11,
+      "relative_time": "about 8 months ago",
+      "event_ids": [
+        "event_12"
+      ],
+      "topic_thread_ids": [
+        "thread_04_commute_housing",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ren"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s011_t01",
+          "role": "user",
+          "text": "Ren and I tested the route from his neighborhood to the design school after work. We took the bus I had always ignored because I assumed the transfer was awkward. It was nine minutes faster than my usual route and had a seat for most of the trip, so that neighborhood stopped looking impractical for class nights."
+        },
+        {
+          "turn_id": "s011_t02",
+          "role": "assistant",
+          "text": "You tested the actual route instead of the route you had mentally pictured, and the difference was meaningful enough to change the option set."
+        },
+        {
+          "turn_id": "s011_t03",
+          "role": "user",
+          "text": "I'm not moving because of one bus ride, but I can at least stop ruling that area out."
+        },
+        {
+          "turn_id": "s011_t04",
+          "role": "assistant",
+          "text": "Exactly; this is evidence about feasibility, not a housing command."
+        }
+      ],
+      "summary": "A real class-night route test from Ren’s neighborhood is faster and easier than Hana expected, making the area a feasible housing option without deciding a move.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_core_005",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s011_t01"
+          ],
+          "literal_source_span": "We took the bus I had always ignored because I assumed the transfer was awkward. It was nine minutes faster than my usual route and had a seat for most of the trip, so that neighborhood stopped looking impractical for class nights.",
+          "candidate_text": "We took the bus I had always ignored because I assumed the transfer was awkward. It was nine minutes faster than my usual route and had a seat for most of the trip, so that neighborhood stopped looking impractical for class nights.",
+          "topic_thread": "thread_04_commute_housing",
+          "entity_ids": [
+            "self",
+            "entity_ren"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "We took the bus I had always ignored because I assumed the transfer was awkward.",
+          "result_span": "It was nine minutes faster than my usual route and had a seat for most of the trip, so that neighborhood stopped looking impractical for class nights."
+        }
+      ]
+    },
+    {
+      "session_index": 12,
+      "relative_time": "about 7 months ago",
+      "event_ids": [
+        "event_13"
+      ],
+      "topic_thread_ids": [
+        "thread_02_flower_market_work",
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mori",
+        "entity_masaru",
+        "entity_aya"
+      ],
+      "resolution_status": "conflicting",
+      "dialogue": [
+        {
+          "turn_id": "s012_t01",
+          "role": "user",
+          "text": "I told Aya I had promised Dad I would help with Saturday deliveries, and she looked confused because Mori had also written my name beside stocktaking. Dad only asked about his shop; Mori's note is a separate work request I hadn't answered."
+        },
+        {
+          "turn_id": "s012_t02",
+          "role": "assistant",
+          "text": "Two weekend obligations were being merged because they share the same day, but they have different owners and different agreement status."
+        },
+        {
+          "turn_id": "s012_t03",
+          "role": "user",
+          "text": "I checked the messages. Dad's request is confirmed. Mori asked if I was available; I never said yes to him."
+        },
+        {
+          "turn_id": "s012_t04",
+          "role": "assistant",
+          "text": "That correction should prevent you from treating an unanswered work request as a commitment."
+        }
+      ],
+      "summary": "Hana corrects a weekend scheduling mix-up by separating a confirmed family-shop promise from Mori’s unanswered stocktaking request.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_ms_006",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s012_t01"
+          ],
+          "literal_source_span": "Dad only asked about his shop; Mori's note is a separate work request I hadn't answered.",
+          "candidate_text": "Dad only asked about his shop; Mori's note is a separate work request I hadn't answered.",
+          "topic_thread": "thread_02_flower_market_work",
+          "entity_ids": [
+            "self",
+            "entity_mori",
+            "entity_masaru"
+          ],
+          "resolution_status": "conflicting",
+          "memory_function": "conflict_record"
+        }
+      ]
+    },
+    {
+      "session_index": 13,
+      "relative_time": "about 6 months ago",
+      "event_ids": [
+        "event_14"
+      ],
+      "topic_thread_ids": [
+        "thread_05_creative_confidence",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sora"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s013_t01",
+          "role": "user",
+          "text": "I spread the board on Sora's clay table while she was cleaning tools. Instead of presenting it, I just talked through where someone would enter the courtyard, where the shade falls, and why I moved the bench. Somewhere between the wet towels and boxes of glaze, I heard myself skip one corner every time; that was the part with no real reason behind it."
+        },
+        {
+          "turn_id": "s013_t02",
+          "role": "assistant",
+          "text": "The casual explanation exposed the missing logic because you were following the imagined person through the space rather than defending the board."
+        },
+        {
+          "turn_id": "s013_t03",
+          "role": "user",
+          "text": "I came home and fixed that corner first. It felt almost silly that the gap became obvious outside a formal critique."
+        },
+        {
+          "turn_id": "s013_t04",
+          "role": "assistant",
+          "text": "That ordinary setting may be part of why the explanation was diagnostic rather than performative."
+        }
+      ],
+      "summary": "Explaining a design informally in Sora’s studio reveals one corner Hana consistently skips, exposing a missing rationale that she can immediately revise.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_challenge_001",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s013_t01"
+          ],
+          "literal_source_span": "I spread the board on Sora's clay table while she was cleaning tools. Instead of presenting it, I just talked through where someone would enter the courtyard, where the shade falls, and why I moved the bench. Somewhere between the wet towels and boxes of glaze, I heard myself skip one corner every time; that was the part with no real reason behind it.",
+          "candidate_text": "I spread the board on Sora's clay table while she was cleaning tools. Instead of presenting it, I just talked through where someone would enter the courtyard, where the shade falls, and why I moved the bench. Somewhere between the wet towels and boxes of glaze, I heard myself skip one corner every time; that was the part with no real reason behind it.",
+          "topic_thread": "thread_05_creative_confidence",
+          "entity_ids": [
+            "self",
+            "entity_sora"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "Instead of presenting it, I just talked through where someone would enter the courtyard, where the shade falls, and why I moved the bench.",
+          "result_span": "Somewhere between the wet towels and boxes of glaze, I heard myself skip one corner every time; that was the part with no real reason behind it."
+        }
+      ]
+    },
+    {
+      "session_index": 14,
+      "relative_time": "about 5 months ago",
+      "event_ids": [
+        "event_15"
+      ],
+      "topic_thread_ids": [
+        "thread_04_commute_housing",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_okabe"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s014_t01",
+          "role": "user",
+          "text": "Okabe showed me a very small apartment ten minutes from the design school. The rent is higher than my current place but lower than I expected for that area."
+        },
+        {
+          "turn_id": "s014_t02",
+          "role": "assistant",
+          "text": "You now have a concrete housing option rather than a general idea of 'moving closer.' What is still missing?"
+        },
+        {
+          "turn_id": "s014_t03",
+          "role": "user",
+          "text": "I wrote down the full monthly cost including the management fee and compared it with my current rent plus train pass. The gap became small enough to consider, but I still need to see what the room feels like after a long market day."
+        },
+        {
+          "turn_id": "s014_t04",
+          "role": "assistant",
+          "text": "So the financial comparison improved, while the lived-space question remains open."
+        }
+      ],
+      "summary": "A real apartment quote makes moving closer to class financially plausible for Hana, but she still lacks evidence about whether the small space suits her after work.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_core_006",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s014_t03"
+          ],
+          "literal_source_span": "I wrote down the full monthly cost including the management fee and compared it with my current rent plus train pass. The gap became small enough to consider, but I still need to see what the room feels like after a long market day.",
+          "candidate_text": "I wrote down the full monthly cost including the management fee and compared it with my current rent plus train pass. The gap became small enough to consider, but I still need to see what the room feels like after a long market day.",
+          "topic_thread": "thread_04_commute_housing",
+          "entity_ids": [
+            "self",
+            "entity_okabe"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I wrote down the full monthly cost including the management fee and compared it with my current rent plus train pass.",
+          "result_span": "The gap became small enough to consider, but I still need to see what the room feels like after a long market day."
+        }
+      ]
+    },
+    {
+      "session_index": 15,
+      "relative_time": "about 4 months ago",
+      "event_ids": [
+        "event_16"
+      ],
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_keiko",
+        "entity_masaru"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s015_t01",
+          "role": "user",
+          "text": "The application asks for a statement about why I want to study landscape design now. I can write about the flower market, but I haven't told Mum and Dad that I'm seriously considering changing fields rather than just taking a hobby course."
+        },
+        {
+          "turn_id": "s015_t02",
+          "role": "assistant",
+          "text": "The written application and the family disclosure are related, but they are not the same task."
+        },
+        {
+          "turn_id": "s015_t03",
+          "role": "user",
+          "text": "I drafted the first paragraph of the statement, but I haven't decided when to tell them the program could eventually change how much I help at the shop."
+        },
+        {
+          "turn_id": "s015_t04",
+          "role": "assistant",
+          "text": "That leaves the conversation timing genuinely unresolved even though the application writing has started."
+        }
+      ],
+      "summary": "Hana starts her statement of intent but has not decided when to tell her parents that landscape study could eventually reduce her availability at their shop.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_unresolved_003",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s015_t03"
+          ],
+          "literal_source_span": "I drafted the first paragraph of the statement, but I haven't decided when to tell them the program could eventually change how much I help at the shop.",
+          "candidate_text": "I drafted the first paragraph of the statement, but I haven't decided when to tell them the program could eventually change how much I help at the shop.",
+          "topic_thread": "thread_03_family_shop_expectations",
+          "entity_ids": [
+            "self",
+            "entity_keiko",
+            "entity_masaru"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I drafted the first paragraph of the statement",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 16,
+      "relative_time": "about 14 weeks ago",
+      "event_ids": [
+        "event_17"
+      ],
+      "topic_thread_ids": [
+        "thread_04_commute_housing",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ren"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s016_t01",
+          "role": "user",
+          "text": "I decided not to move before I even know whether I'm admitted. I still have the long class commute, though. I respond better when you offer choices instead of commands, especially when the options have different costs or time tradeoffs."
+        },
+        {
+          "turn_id": "s016_t02",
+          "role": "assistant",
+          "text": "Two choices, then: use the commute for light review, or treat it as recovery and protect a short study block after arrival. You do not have to force the train into one role every day."
+        },
+        {
+          "turn_id": "s016_t03",
+          "role": "user",
+          "text": "For now I'm using the outbound train for reading and leaving the trip home alone. That split feels less like trying to monetize every minute."
+        },
+        {
+          "turn_id": "s016_t04",
+          "role": "assistant",
+          "text": "You are using the direction of travel differently based on what you have energy for, which is more specific than 'study on the commute.'"
+        }
+      ],
+      "summary": "Hana postpones moving until admission is known and splits her existing commute into outbound light review and an intentionally unproductive trip home.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_context_003",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s016_t01"
+          ],
+          "literal_source_span": "I still have the long class commute, though.",
+          "candidate_text": "I still have the long class commute, though.",
+          "topic_thread": "thread_04_commute_housing",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 17,
+      "relative_time": "about 12 weeks ago",
+      "event_ids": [
+        "event_18"
+      ],
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ishida"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s017_t01",
+          "role": "user",
+          "text": "Professor Ishida gave me a page of comments and I felt that old urge to redraw everything. I turned the comments into three questions—movement, shade, and maintenance—and checked the board only against those. I finished the revision that evening without changing the parts she had not actually criticized."
+        },
+        {
+          "turn_id": "s017_t02",
+          "role": "assistant",
+          "text": "You translated a broad page of feedback into three review lenses and protected the work that was already functioning."
+        },
+        {
+          "turn_id": "s017_t03",
+          "role": "user",
+          "text": "That was much faster than treating every comment as a verdict on the whole board."
+        },
+        {
+          "turn_id": "s017_t04",
+          "role": "assistant",
+          "text": "It also gives you a repeatable way to handle future critique without globalizing it."
+        }
+      ],
+      "summary": "Hana converts a page of mentor comments into three design questions and completes one portfolio revision without unnecessarily redrawing unaffected sections.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_core_007",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s017_t01"
+          ],
+          "literal_source_span": "I turned the comments into three questions—movement, shade, and maintenance—and checked the board only against those. I finished the revision that evening without changing the parts she had not actually criticized.",
+          "candidate_text": "I turned the comments into three questions—movement, shade, and maintenance—and checked the board only against those. I finished the revision that evening without changing the parts she had not actually criticized.",
+          "topic_thread": "thread_01_landscape_portfolio",
+          "entity_ids": [
+            "self",
+            "entity_ishida"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I turned the comments into three questions—movement, shade, and maintenance—and checked the board only against those.",
+          "result_span": "I finished the revision that evening without changing the parts she had not actually criticized."
+        }
+      ]
+    },
+    {
+      "session_index": 18,
+      "relative_time": "about 10 weeks ago",
+      "event_ids": [
+        "event_19",
+        "event_20"
+      ],
+      "topic_thread_ids": [
+        "thread_02_flower_market_work",
+        "thread_06_energy_routine",
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_aya",
+        "entity_keiko"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s018_t01",
+          "role": "user",
+          "text": "Auction mornings start before sunrise for the next two weeks. Aya and I will both be on the early purchasing shift, and I don't know whether I should skip one evening workshop or try to keep all of them."
+        },
+        {
+          "turn_id": "s018_t02",
+          "role": "assistant",
+          "text": "You have a short, unusually intense work period and a finite set of workshops. What has already been decided?"
+        },
+        {
+          "turn_id": "s018_t03",
+          "role": "user",
+          "text": "Mum said she can cover one of my family-shop Sundays if I tell her the application dates. I thanked her, but I haven't chosen which evening workshop, if any, to miss during the auction fortnight."
+        },
+        {
+          "turn_id": "s018_t04",
+          "role": "assistant",
+          "text": "Then the family support option is available, while the course attendance decision remains open."
+        }
+      ],
+      "summary": "Hana enters a two-week early-shift peak at the market and has not yet decided whether to miss one evening workshop despite gaining help with a family-shop Sunday.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_unresolved_004",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s018_t03"
+          ],
+          "literal_source_span": "I haven't chosen which evening workshop, if any, to miss during the auction fortnight.",
+          "candidate_text": "I haven't chosen which evening workshop, if any, to miss during the auction fortnight.",
+          "topic_thread": "thread_06_energy_routine",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 19,
+      "relative_time": "about 8 weeks ago",
+      "event_ids": [
+        "event_21"
+      ],
+      "topic_thread_ids": [
+        "thread_05_creative_confidence",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_sora"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s019_t01",
+          "role": "user",
+          "text": "Sora opened an online shop for her ceramics and immediately started posting process videos. I caught myself thinking that if I were serious about design I would be comfortable showing unfinished work like she is. But Sora has sold ceramics for years; her public process is not the same task as my admissions portfolio."
+        },
+        {
+          "turn_id": "s019_t02",
+          "role": "assistant",
+          "text": "That makes her confidence a poor match for judging your current requirement, even if her openness is inspiring."
+        },
+        {
+          "turn_id": "s019_t03",
+          "role": "user",
+          "text": "I can admire it without using it as evidence that my quieter process is wrong."
+        },
+        {
+          "turn_id": "s019_t04",
+          "role": "assistant",
+          "text": "That separation protects the relevance of your own portfolio evidence."
+        }
+      ],
+      "summary": "Hana identifies Sora’s public ceramics practice as an invalid benchmark for her own admissions portfolio and stops treating different creative contexts as equivalent.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_ms_007",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s019_t01"
+          ],
+          "literal_source_span": "But Sora has sold ceramics for years; her public process is not the same task as my admissions portfolio.",
+          "candidate_text": "But Sora has sold ceramics for years; her public process is not the same task as my admissions portfolio.",
+          "topic_thread": "thread_05_creative_confidence",
+          "entity_ids": [
+            "self",
+            "entity_sora"
+          ],
+          "resolution_status": "stale_or_wrong_entity",
+          "memory_function": "wrong_person_distractor"
+        }
+      ]
+    },
+    {
+      "session_index": 20,
+      "relative_time": "about 6 weeks ago",
+      "event_ids": [
+        "event_22"
+      ],
+      "topic_thread_ids": [
+        "thread_03_family_shop_expectations",
+        "thread_01_landscape_portfolio"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_keiko",
+        "entity_masaru"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s020_t01",
+          "role": "user",
+          "text": "I finally told Mum and Dad the application deadline and that the program would be two evenings a week if I get in. I asked whether we could plan shop help around one Sunday a month instead of assuming I'm free every weekend. They needed time to adjust, but we ended the conversation with the next two months written on the shop calendar."
+        },
+        {
+          "turn_id": "s020_t02",
+          "role": "assistant",
+          "text": "You gave them concrete dates and a proposed pattern, so the conversation could move from surprise into scheduling."
+        },
+        {
+          "turn_id": "s020_t03",
+          "role": "user",
+          "text": "Dad was quieter than I hoped, but having the dates written down stopped us from arguing about an imaginary future."
+        },
+        {
+          "turn_id": "s020_t04",
+          "role": "assistant",
+          "text": "That is a real outcome even though the emotional adjustment is not finished."
+        }
+      ],
+      "summary": "Hana explains the program timeline to her parents and agrees on a one-Sunday-per-month shop pattern, turning an abstract family concern into a dated schedule.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 21,
+      "relative_time": "about 1 month ago",
+      "event_ids": [
+        "event_23"
+      ],
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_lian"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s021_t01",
+          "role": "user",
+          "text": "Lian listened while I explained the courtyard board for three minutes. I asked her to stop me whenever I made a claim the drawing itself didn't support. She stopped me twice, I removed those two claims, and the next run was shorter without feeling emptier."
+        },
+        {
+          "turn_id": "s021_t02",
+          "role": "assistant",
+          "text": "You used the drawing as evidence and cut language that was doing more work than the design could justify."
+        },
+        {
+          "turn_id": "s021_t03",
+          "role": "user",
+          "text": "That is the first time shortening a presentation has made it feel more accurate instead of less impressive."
+        },
+        {
+          "turn_id": "s021_t04",
+          "role": "assistant",
+          "text": "That accuracy criterion may be more useful than trying to sound comprehensive."
+        }
+      ],
+      "summary": "Hana rehearses a three-minute portfolio explanation with Lian and removes two unsupported claims, producing a shorter presentation that feels more accurate rather than diminished.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_core_008",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s021_t01"
+          ],
+          "literal_source_span": "I asked her to stop me whenever I made a claim the drawing itself didn't support. She stopped me twice, I removed those two claims, and the next run was shorter without feeling emptier.",
+          "candidate_text": "I asked her to stop me whenever I made a claim the drawing itself didn't support. She stopped me twice, I removed those two claims, and the next run was shorter without feeling emptier.",
+          "topic_thread": "thread_05_creative_confidence",
+          "entity_ids": [
+            "self",
+            "entity_lian"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "executable_core",
+          "action_span": "I asked her to stop me whenever I made a claim the drawing itself didn't support.",
+          "result_span": "She stopped me twice, I removed those two claims, and the next run was shorter without feeling emptier."
+        }
+      ]
+    },
+    {
+      "session_index": 22,
+      "relative_time": "about 3 weeks ago",
+      "event_ids": [
+        "event_24"
+      ],
+      "topic_thread_ids": [
+        "thread_06_energy_routine",
+        "thread_02_flower_market_work"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_aya"
+      ],
+      "resolution_status": "resolved",
+      "dialogue": [
+        {
+          "turn_id": "s022_t01",
+          "role": "user",
+          "text": "The auction week left my hands tired and my brain noisy. I put a blunt pencil and cheap paper on the floor beside the low table and told myself the sketch could be ugly enough to throw away. For four evenings I drew five-minute shapes from memory before showering; the pages were rough, but I never had to rebuild the habit from zero when the shifts eased."
+        },
+        {
+          "turn_id": "s022_t02",
+          "role": "assistant",
+          "text": "The disposable quality of the sketch seems important: it kept continuity without demanding portfolio-level work from an exhausted evening."
+        },
+        {
+          "turn_id": "s022_t03",
+          "role": "user",
+          "text": "Exactly. Nothing from those pages is going into the application, and that was probably why I could do them."
+        },
+        {
+          "turn_id": "s022_t04",
+          "role": "assistant",
+          "text": "That makes this a continuity tool, not a hidden productivity standard."
+        }
+      ],
+      "summary": "During an exhausting auction week, Hana keeps design continuity with deliberately disposable five-minute sketches, avoiding the need to restart her study habit after peak shifts.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_reusable_challenge_002",
+          "subtype": "ME_REUSABLE_OUTCOME",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s022_t01"
+          ],
+          "literal_source_span": "I put a blunt pencil and cheap paper on the floor beside the low table and told myself the sketch could be ugly enough to throw away. For four evenings I drew five-minute shapes from memory before showering; the pages were rough, but I never had to rebuild the habit from zero when the shifts eased.",
+          "candidate_text": "I put a blunt pencil and cheap paper on the floor beside the low table and told myself the sketch could be ugly enough to throw away. For four evenings I drew five-minute shapes from memory before showering; the pages were rough, but I never had to rebuild the habit from zero when the shifts eased.",
+          "topic_thread": "thread_06_energy_routine",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "resolved",
+          "me_tier": "natural_coverage_challenge",
+          "action_span": "For four evenings I drew five-minute shapes from memory before showering",
+          "result_span": "the pages were rough, but I never had to rebuild the habit from zero when the shifts eased."
+        }
+      ]
+    },
+    {
+      "session_index": 23,
+      "relative_time": "about 2 weeks ago",
+      "event_ids": [
+        "event_25"
+      ],
+      "topic_thread_ids": [
+        "thread_04_commute_housing",
+        "thread_03_family_shop_expectations"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ren",
+        "entity_keiko"
+      ],
+      "resolution_status": "mixed",
+      "dialogue": [
+        {
+          "turn_id": "s023_t01",
+          "role": "user",
+          "text": "Ren asked whether I still want the apartment near school. I don't think moving before admission makes sense, and Mum has finally adjusted the shop schedule around the application."
+        },
+        {
+          "turn_id": "s023_t02",
+          "role": "assistant",
+          "text": "Both facts reduce the pressure to decide housing immediately."
+        },
+        {
+          "turn_id": "s023_t03",
+          "role": "user",
+          "text": "If I get admitted, I'll reopen the question with the actual class timetable. Until then, I want the current place to stay a boring known cost."
+        },
+        {
+          "turn_id": "s023_t04",
+          "role": "assistant",
+          "text": "That is a time-bound housing decision rather than avoidance without a review point."
+        }
+      ],
+      "summary": "Hana postpones moving until an admission result and real class timetable exist, while the newly adjusted family-shop schedule reduces immediate commuting pressure.",
+      "typed_candidates": []
+    },
+    {
+      "session_index": 24,
+      "relative_time": "about 1 week ago",
+      "event_ids": [
+        "event_26"
+      ],
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_05_creative_confidence"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_ishida"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s024_t01",
+          "role": "user",
+          "text": "Most of the portfolio is assembled now. Professor Ishida said any of three boards could open it, which somehow made the choice harder rather than easier."
+        },
+        {
+          "turn_id": "s024_t02",
+          "role": "assistant",
+          "text": "Three acceptable options remove the fear of a disastrous choice, but they do not make the sequencing decision for you."
+        },
+        {
+          "turn_id": "s024_t03",
+          "role": "user",
+          "text": "I printed thumbnails of all three openers, but I haven't chosen which one should be first in the PDF."
+        },
+        {
+          "turn_id": "s024_t04",
+          "role": "assistant",
+          "text": "That is the remaining concrete task: choose the opening logic, not redesign the boards."
+        }
+      ],
+      "summary": "With three acceptable opening boards, Hana has finished most portfolio content but remains undecided about which work sample should lead the final submission.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_unresolved_005",
+          "subtype": "ME_UNRESOLVED_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s024_t03"
+          ],
+          "literal_source_span": "I printed thumbnails of all three openers, but I haven't chosen which one should be first in the PDF.",
+          "candidate_text": "I printed thumbnails of all three openers, but I haven't chosen which one should be first in the PDF.",
+          "topic_thread": "thread_01_landscape_portfolio",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "unresolved",
+          "action_span": "I printed thumbnails of all three openers",
+          "result_span": null
+        }
+      ]
+    },
+    {
+      "session_index": 25,
+      "relative_time": "this week",
+      "event_ids": [
+        "event_27"
+      ],
+      "topic_thread_ids": [
+        "thread_01_landscape_portfolio",
+        "thread_02_flower_market_work",
+        "thread_06_energy_routine"
+      ],
+      "entity_ids": [
+        "self",
+        "entity_mori"
+      ],
+      "resolution_status": "unresolved",
+      "dialogue": [
+        {
+          "turn_id": "s025_t01",
+          "role": "user",
+          "text": "The submission is due on the 27th. People at work keep telling me applications are always stressful, which is true but too generic to be useful. Mori has already approved my early finish this week, so the flower market isn't the missing piece right now."
+        },
+        {
+          "turn_id": "s025_t02",
+          "role": "assistant",
+          "text": "You are stripping away an old source of pressure and a generic story so the current problem can stay specific."
+        },
+        {
+          "turn_id": "s025_t03",
+          "role": "user",
+          "text": "The actual question is which board should open the portfolio and what I want the first thirty seconds of reading it to communicate. Everything else is close enough to done."
+        },
+        {
+          "turn_id": "s025_t04",
+          "role": "assistant",
+          "text": "That is a narrow final decision with a real deadline, not evidence that the entire application is unstable."
+        }
+      ],
+      "summary": "Hana separates generic application stress and an already-solved work schedule from the specific final decision about the portfolio’s opening board and first impression.",
+      "typed_candidates": [
+        {
+          "candidate_id": "p2r_formal_gpt_u003_ms_008",
+          "subtype": "MS_SESSION",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s025_t01"
+          ],
+          "literal_source_span": "People at work keep telling me applications are always stressful, which is true but too generic to be useful.",
+          "candidate_text": "People at work keep telling me applications are always stressful, which is true but too generic to be useful.",
+          "topic_thread": "thread_01_landscape_portfolio",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "not_specific",
+          "memory_function": "same_topic_no_specific_content"
+        },
+        {
+          "candidate_id": "p2r_formal_gpt_u003_me_context_004",
+          "subtype": "ME_CONTEXT_EVENT",
+          "owner_id": "p2r_formal_gpt_u003",
+          "source_turn_ids": [
+            "s025_t01"
+          ],
+          "literal_source_span": "The submission is due on the 27th.",
+          "candidate_text": "The submission is due on the 27th.",
+          "topic_thread": "thread_01_landscape_portfolio",
+          "entity_ids": [
+            "self"
+          ],
+          "resolution_status": "context_only",
+          "action_span": null,
+          "result_span": null
+        }
+      ]
+    }
+  ]
+}

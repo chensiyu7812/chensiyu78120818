@@ -1,0 +1,38 @@
+{
+  "protocol": "pm-v1.5-d3-generation-plan-v1",
+  "status": "FROZEN_READY_FOR_320_D3_RESPONSE_CALLS",
+  "api_calls_made": 0,
+  "pairs": 160,
+  "planned_calls": 320,
+  "component_pair_counts": {
+    "ME": 40,
+    "MP": 40,
+    "MS": 40,
+    "RS": 40
+  },
+  "estimated_input_tokens": 136940,
+  "maximum_output_tokens": 96000,
+  "pricing_usd_per_mtok": {
+    "input": 0.15,
+    "output": 0.6
+  },
+  "cost_upper_bound_usd": 0.078141,
+  "generator_identity": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "family": "llama",
+    "transport": "auto"
+  },
+  "checks": {
+    "160_pairs": true,
+    "320_calls": true,
+    "two_arms_per_pair": true,
+    "component_pairs_40_each": true,
+    "same_seed_within_pair": true,
+    "distinct_prompts_within_pair": true,
+    "no_response_or_outcome": true
+  },
+  "call_plan_sha256": "ccd5ce0d714c847e355f47c1524f2829dcdbd21b030012ed6ba0020382695401",
+  "registry_sha256": "2e576b534299871138a53e8083fdcd25c3a4dca17b74b58223b65ef11345e805",
+  "blueprint_manifest_sha256": "fbfbb54b4f7eebb855808324bcfb98e569575a4702f2ff256aef248ac5caadb8"
+}

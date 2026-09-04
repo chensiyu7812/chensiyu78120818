@@ -1,0 +1,93 @@
+{
+  "protocol": "pm-v1.5-longitudinal-strict-judge-bakeoff-freeze-v1",
+  "status": "LONGITUDINAL_STRICT_JUDGE_BAKEOFF_NOT_SUPPORTED",
+  "created_at_utc": "2026-07-24T16:05:00Z",
+  "scope": "train_only_pairwise_measurement_qualification",
+  "source_execution": {
+    "approval_identity": "a5c4ce21f0c027acc6efb145484eac677efc46ddf60994f1488b033dea5832ad",
+    "qualification_contract_sha256": "059789897061740b5faaa4b5f18b06a5e0d1cd4c3f8d54a7899ca6beb03d06a5",
+    "qualification_results_sha256": "3a0b3d6f04f0528018178bc0bc1e0c2d844a4061fa2f32885b5c90bc9763f45a",
+    "artifact_attestation_file_sha256": "9dd65e1c4e806d83390e805a7ea45bd08a7274ea59bfb58e5afd89cdf3d2b2ed",
+    "logical_calls": 72,
+    "carried_forward_logical_calls": 24,
+    "new_logical_calls": 48,
+    "completed_calls": 72,
+    "failed_calls": 0
+  },
+  "zero_api_aggregation": {
+    "implementation_commit": "0f0b1ec1c11f96738424e8eaa967826f1e147773",
+    "qualification_report_sha256": "7eac85b7fc3cebcc733682e5bec0b1408e578551a7dd211e477e2a5fa53ae6cc",
+    "artifact_attestation_sha256": "7843fe4730eff9a553c4186849f3fbd20fafa9d599a8c708e4da18f8ebc15fdc",
+    "summary_sha256": "2dba2563ce817e9f70af3f9205de2aacbd0c3facca89ae0411a24f8094a017b8",
+    "independent_reproductions": 2,
+    "byte_identical": true,
+    "api_calls_made": 0
+  },
+  "pre_outcome_criteria": {
+    "required_schema_valid_rate": 1.0,
+    "minimum_ab_ba_order_consistency": 0.8,
+    "minimum_pairwise_informative_rate": 0.5,
+    "minimum_gpt_anchor_direction_agreement_secondary": 0.7,
+    "human_anchor_role": "descriptive_only_not_automatic_gold"
+  },
+  "candidate_results": {
+    "anthropic_claude_haiku_4_5": {
+      "schema_valid_rate": 1.0,
+      "overall_order_consistency": 0.8333333333333334,
+      "support_quality_order_consistency": 0.8333333333333334,
+      "evidence_handling_order_consistency": 0.6666666666666666,
+      "safety_order_consistency": 1.0,
+      "overall_informative_rate": 0.8333333333333334,
+      "gpt_anchor_overall_direction_agreement": 1.0,
+      "gpt_anchor_comparable_pairs": 5,
+      "human_overall_direction_agreement_descriptive": 0.7,
+      "human_overall_comparable_pairs": 10,
+      "automatic_checks_pass": false
+    },
+    "google_gemini_2_5_flash": {
+      "schema_valid_rate": 1.0,
+      "overall_order_consistency": 0.9166666666666666,
+      "support_quality_order_consistency": 0.9166666666666666,
+      "evidence_handling_order_consistency": 0.4166666666666667,
+      "safety_order_consistency": 0.6666666666666666,
+      "overall_informative_rate": 0.9166666666666666,
+      "gpt_anchor_overall_direction_agreement": 0.8571428571428571,
+      "gpt_anchor_comparable_pairs": 7,
+      "human_overall_direction_agreement_descriptive": 0.7272727272727273,
+      "human_overall_comparable_pairs": 11,
+      "automatic_checks_pass": false
+    },
+    "openai_gpt_5_mini": {
+      "schema_valid_rate": 1.0,
+      "overall_order_consistency": 0.5833333333333334,
+      "support_quality_order_consistency": 0.5833333333333334,
+      "evidence_handling_order_consistency": 0.75,
+      "safety_order_consistency": 1.0,
+      "overall_informative_rate": 0.5833333333333334,
+      "gpt_anchor_overall_direction_agreement": 0.75,
+      "gpt_anchor_comparable_pairs": 4,
+      "human_overall_direction_agreement_descriptive": 0.5714285714285714,
+      "human_overall_comparable_pairs": 7,
+      "automatic_checks_pass": false
+    }
+  },
+  "frozen_interpretation": {
+    "schema_and_reasoning_budget_problem_resolved": true,
+    "automatic_supported_candidates": [],
+    "root_cause": "All three candidates failed the pre-registered requirement that every preference dimension reach AB/BA order consistency of at least 0.80. Claude and Gemini retained useful overall-direction and descriptive human-anchor signal, but evidence-handling and/or safety judgments were position-sensitive. GPT-5 mini was also unstable on overall and support-quality preference.",
+    "does_not_show": [
+      "that memory or strategy is ineffective",
+      "that a learned PM is conceptually impossible",
+      "that majority vote among these candidates is gold"
+    ]
+  },
+  "stop_rule": {
+    "post_outcome_threshold_or_prompt_tuning_for_this_packet": false,
+    "candidate_auto_promotion": false,
+    "bulk_label_generation_authorized": false,
+    "training_labels_created": false,
+    "calibration_internal_test_or_external_outcomes_read": false,
+    "next_measurement_requires_new_pre_registered_train_only_protocol": true
+  },
+  "binding_sha256": "c660fce8e670015a298719e2e83587a4fb5701dce9f99b63aaeb7a8cad6e61d9"
+}

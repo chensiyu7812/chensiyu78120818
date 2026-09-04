@@ -1,0 +1,33 @@
+{
+  "protocol": "pm-v1.5-paid-entrypoint-registry-v1",
+  "status": "ACTIVE",
+  "policy": "Every paid --run entrypoint must either contain the active paid-run release guard, implement one of the two separately audited resumable MVP protocols, or be explicitly listed here as a hash-preserved historical entrypoint that is outside every unfinished execution chain.",
+  "hash_preserved_historical_unguarded_entrypoints": [
+    "scripts/v1_5/23m_run_esconv_strategy_open_coding_v1_5.py",
+    "scripts/v1_5/23s_run_strategy_g1_weak_label_pilot_v1_5.py",
+    "scripts/v1_5/24aa_run_rs_corrected_supplement_v1_5.py",
+    "scripts/v1_5/24al_rerank_h1_source_relink_candidates_v1_5.py",
+    "scripts/v1_5/24au_run_rs_paired_effect_judge_v1_5.py",
+    "scripts/v1_5/24bd_run_rs_esconv_frozen_validation_v1_5.py",
+    "scripts/v1_5/24bl_run_component_contrast_generation_v1_5.py",
+    "scripts/v1_5/24bs_run_transport_repaired_memory_generation_v1_5.py",
+    "scripts/v1_5/24cl_run_d2_measurement_generation_v1_5.py",
+    "scripts/v1_5/24cr_run_d3_generation_v1_5.py",
+    "scripts/v1_5/24cv_run_d3_ms_replacement_generation_v1_5.py",
+    "scripts/v1_5/24dp_run_generator_alignment_qualification_v1_5.py",
+    "scripts/v1_5/24dq_run_generator_alignment_audit_v1_5.py",
+    "scripts/v1_5/24dr_run_auditable_resource_execution_v1_5.py",
+    "scripts/v1_5/24ef_run_repaired_resource_execution_v1_5.py",
+    "scripts/v1_5/24ej_run_v1_5b_resource_application_v1_5.py",
+    "scripts/v1_5/24es_run_final_system_generation_v1_5.py",
+    "scripts/v1_5/24h_run_strategy_rag_v4_direct_effect_v1_5.py",
+    "scripts/v1_5/24r_run_rs_six_card_clean_pairs_v1_5.py",
+    "scripts/v1_5/25c_run_final_raw_generation_v1_5.py",
+    "scripts/v1_5/25zx_run_v5_itt_fit_generation_v1_5.py",
+    "scripts/v1_5/26h_run_v5_1_confirmation_generation_v1_5.py",
+    "scripts/v1_5/26n_run_v5_1_t5_generation_v1_5.py",
+    "scripts/v1_5/26r_run_v5_1_t5_llm_judge_v1_5.py",
+    "scripts/v1_5/27b_run_v5_2_locked_fit_generation_v1_5.py",
+    "scripts/v1_5/27j_run_v5_2_confirmation_generation_v1_5.py"
+  ]
+}

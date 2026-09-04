@@ -1,0 +1,14 @@
+{
+  "status": "COMPLETE_ZERO_API_AWAITING_HUMAN_ANCHOR",
+  "protocol": "pm-v1.5-train-only-role-decomposed-judge-qualification-v1",
+  "contract_sha256": "e633291d43dda205b7f05163733c5c2337208df4e01e938345518184bf50d5e3",
+  "pairs": 24,
+  "quality_ordered_items": 48,
+  "evidence_risk_items": 48,
+  "human_blind_items": 12,
+  "human_mapping_items": 12,
+  "api_calls_made": 0,
+  "api_clients_created": 0,
+  "training_labels_created": false,
+  "internal_test_or_external_outcomes_consumed": false
+}

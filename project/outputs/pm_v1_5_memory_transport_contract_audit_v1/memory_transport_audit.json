@@ -1,0 +1,526 @@
+{
+  "protocol": "pm-v1.5-memory-transport-contract-audit-v1",
+  "status": "TRANSPORT_MISMATCH_REQUIRES_CLAIM_AND_INPUT_REPAIR",
+  "severity": "HIGH_FOR_STRONG_EXTERNAL_GENERALIZATION_CLAIM",
+  "internal_catalog_records": 468,
+  "external_users": 18,
+  "profiles": {
+    "internal_synthetic": {
+      "MP": {
+        "catalog_count": {
+          "n": 468,
+          "min": 2.0,
+          "p05": 2.0,
+          "p25": 2.0,
+          "median": 2.0,
+          "p75": 2.0,
+          "p95": 2.0,
+          "max": 2.0,
+          "mean": 2.0
+        },
+        "catalog_tokens": {
+          "n": 468,
+          "min": 51.0,
+          "p05": 57.0,
+          "p25": 64.0,
+          "median": 68.0,
+          "p75": 70.0,
+          "p95": 74.0,
+          "max": 75.0,
+          "mean": 66.77777777777777
+        },
+        "mean_item_tokens_per_catalog": {
+          "n": 468,
+          "min": 25.5,
+          "p05": 28.5,
+          "p25": 32.0,
+          "median": 34.0,
+          "p75": 35.0,
+          "p95": 37.0,
+          "max": 37.5,
+          "mean": 33.388888888888886
+        },
+        "estimated_top_k_tokens": {
+          "n": 468,
+          "min": 51.0,
+          "p05": 57.0,
+          "p25": 64.0,
+          "median": 68.0,
+          "p75": 70.0,
+          "p95": 74.0,
+          "max": 75.0,
+          "mean": 66.77777777777777
+        },
+        "item_tokens": {
+          "n": 936,
+          "min": 16.0,
+          "p05": 22.75,
+          "p25": 30.0,
+          "median": 34.0,
+          "p75": 36.0,
+          "p95": 40.0,
+          "max": 41.0,
+          "mean": 33.388888888888886
+        },
+        "item_age_sessions": {
+          "n": 936,
+          "min": 1.0,
+          "p05": 1.0,
+          "p25": 4.0,
+          "median": 7.0,
+          "p75": 10.0,
+          "p95": 12.0,
+          "max": 12.0,
+          "mean": 6.586538461538462
+        }
+      },
+      "MS": {
+        "catalog_count": {
+          "n": 468,
+          "min": 2.0,
+          "p05": 2.0,
+          "p25": 2.0,
+          "median": 2.0,
+          "p75": 2.0,
+          "p95": 2.0,
+          "max": 2.0,
+          "mean": 2.0
+        },
+        "catalog_tokens": {
+          "n": 468,
+          "min": 60.0,
+          "p05": 66.0,
+          "p25": 81.0,
+          "median": 84.0,
+          "p75": 87.0,
+          "p95": 90.0,
+          "max": 93.0,
+          "mean": 82.38247863247864
+        },
+        "mean_item_tokens_per_catalog": {
+          "n": 468,
+          "min": 30.0,
+          "p05": 33.0,
+          "p25": 40.5,
+          "median": 42.0,
+          "p75": 43.5,
+          "p95": 45.0,
+          "max": 46.5,
+          "mean": 41.19123931623932
+        },
+        "estimated_top_k_tokens": {
+          "n": 468,
+          "min": 60.0,
+          "p05": 66.0,
+          "p25": 81.0,
+          "median": 84.0,
+          "p75": 87.0,
+          "p95": 90.0,
+          "max": 93.0,
+          "mean": 82.38247863247864
+        },
+        "item_tokens": {
+          "n": 936,
+          "min": 24.0,
+          "p05": 30.0,
+          "p25": 39.0,
+          "median": 41.0,
+          "p75": 45.0,
+          "p95": 47.0,
+          "max": 47.0,
+          "mean": 41.19123931623932
+        },
+        "item_age_sessions": {
+          "n": 936,
+          "min": 1.0,
+          "p05": 1.0,
+          "p25": 3.0,
+          "median": 6.0,
+          "p75": 9.0,
+          "p95": 12.0,
+          "max": 12.0,
+          "mean": 6.435897435897436
+        }
+      },
+      "ME": {
+        "catalog_count": {
+          "n": 468,
+          "min": 2.0,
+          "p05": 2.0,
+          "p25": 2.0,
+          "median": 2.0,
+          "p75": 2.0,
+          "p95": 2.0,
+          "max": 2.0,
+          "mean": 2.0
+        },
+        "catalog_tokens": {
+          "n": 468,
+          "min": 61.0,
+          "p05": 66.0,
+          "p25": 70.0,
+          "median": 73.0,
+          "p75": 75.0,
+          "p95": 78.0,
+          "max": 79.0,
+          "mean": 72.63675213675214
+        },
+        "mean_item_tokens_per_catalog": {
+          "n": 468,
+          "min": 30.5,
+          "p05": 33.0,
+          "p25": 35.0,
+          "median": 36.5,
+          "p75": 37.5,
+          "p95": 39.0,
+          "max": 39.5,
+          "mean": 36.31837606837607
+        },
+        "estimated_top_k_tokens": {
+          "n": 468,
+          "min": 61.0,
+          "p05": 66.0,
+          "p25": 70.0,
+          "median": 73.0,
+          "p75": 75.0,
+          "p95": 78.0,
+          "max": 79.0,
+          "mean": 72.63675213675214
+        },
+        "item_tokens": {
+          "n": 936,
+          "min": 25.0,
+          "p05": 31.0,
+          "p25": 35.0,
+          "median": 37.0,
+          "p75": 39.0,
+          "p95": 40.0,
+          "max": 41.0,
+          "mean": 36.31837606837607
+        },
+        "item_age_sessions": {
+          "n": 936,
+          "min": 1.0,
+          "p05": 1.0,
+          "p25": 3.0,
+          "median": 6.0,
+          "p75": 9.0,
+          "p95": 12.0,
+          "max": 12.0,
+          "mean": 6.368589743589744
+        }
+      }
+    },
+    "evoemo_external": {
+      "MP": {
+        "catalog_count": {
+          "n": 18,
+          "min": 7.0,
+          "p05": 7.0,
+          "p25": 7.0,
+          "median": 7.0,
+          "p75": 7.0,
+          "p95": 7.0,
+          "max": 7.0,
+          "mean": 7.0
+        },
+        "catalog_tokens": {
+          "n": 18,
+          "min": 30.0,
+          "p05": 30.0,
+          "p25": 33.0,
+          "median": 35.0,
+          "p75": 37.75,
+          "p95": 41.15,
+          "max": 42.0,
+          "mean": 35.27777777777778
+        },
+        "mean_item_tokens_per_catalog": {
+          "n": 18,
+          "min": 4.285714285714286,
+          "p05": 4.285714285714286,
+          "p25": 4.714285714285714,
+          "median": 5.0,
+          "p75": 5.392857142857142,
+          "p95": 5.878571428571428,
+          "max": 6.0,
+          "mean": 5.039682539682541
+        },
+        "estimated_top_k_tokens": {
+          "n": 18,
+          "min": 8.571428571428571,
+          "p05": 8.571428571428571,
+          "p25": 9.428571428571429,
+          "median": 10.0,
+          "p75": 10.785714285714285,
+          "p95": 11.757142857142856,
+          "max": 12.0,
+          "mean": 10.079365079365083
+        },
+        "item_tokens": {
+          "n": 126,
+          "min": 2.0,
+          "p05": 2.0,
+          "p25": 3.0,
+          "median": 5.0,
+          "p75": 6.0,
+          "p95": 9.75,
+          "max": 14.0,
+          "mean": 5.0396825396825395
+        },
+        "item_age_sessions": {
+          "n": 126,
+          "min": 14.0,
+          "p05": 14.25,
+          "p25": 20.0,
+          "median": 23.0,
+          "p75": 26.0,
+          "p95": 33.75,
+          "max": 34.0,
+          "mean": 23.27777777777778
+        }
+      },
+      "MS": {
+        "catalog_count": {
+          "n": 18,
+          "min": 13.0,
+          "p05": 13.850000000000001,
+          "p25": 19.25,
+          "median": 22.0,
+          "p75": 25.0,
+          "p95": 32.15,
+          "max": 33.0,
+          "mean": 22.27777777777778
+        },
+        "catalog_tokens": {
+          "n": 18,
+          "min": 488.0,
+          "p05": 506.70000000000005,
+          "p25": 769.0,
+          "median": 872.0,
+          "p75": 1019.0,
+          "p95": 1356.4499999999998,
+          "max": 1393.0,
+          "mean": 896.8888888888889
+        },
+        "mean_item_tokens_per_catalog": {
+          "n": 18,
+          "min": 36.42857142857143,
+          "p05": 37.37197802197802,
+          "p25": 38.6525974025974,
+          "median": 40.45,
+          "p75": 40.857368421052634,
+          "p95": 42.3822261072261,
+          "max": 43.34615384615385,
+          "mean": 40.00307277476922
+        },
+        "estimated_top_k_tokens": {
+          "n": 18,
+          "min": 72.85714285714286,
+          "p05": 74.74395604395605,
+          "p25": 77.3051948051948,
+          "median": 80.9,
+          "p75": 81.71473684210527,
+          "p95": 84.7644522144522,
+          "max": 86.6923076923077,
+          "mean": 80.00614554953845
+        },
+        "item_tokens": {
+          "n": 401,
+          "min": 21.0,
+          "p05": 26.0,
+          "p25": 34.0,
+          "median": 41.0,
+          "p75": 47.0,
+          "p95": 52.0,
+          "max": 61.0,
+          "mean": 40.25935162094763
+        },
+        "item_age_sessions": {
+          "n": 401,
+          "min": 1.0,
+          "p05": 2.0,
+          "p25": 6.0,
+          "median": 12.0,
+          "p75": 18.0,
+          "p95": 25.0,
+          "max": 33.0,
+          "mean": 12.256857855361597
+        }
+      },
+      "ME": {
+        "catalog_count": {
+          "n": 18,
+          "min": 37.0,
+          "p05": 39.55,
+          "p25": 58.0,
+          "median": 68.0,
+          "p75": 75.25,
+          "p95": 101.35,
+          "max": 109.0,
+          "mean": 67.5
+        },
+        "catalog_tokens": {
+          "n": 18,
+          "min": 3501.0,
+          "p05": 3751.75,
+          "p25": 5277.25,
+          "median": 6153.0,
+          "p75": 6834.0,
+          "p95": 9613.949999999999,
+          "max": 9948.0,
+          "mean": 6217.166666666667
+        },
+        "mean_item_tokens_per_catalog": {
+          "n": 18,
+          "min": 88.16071428571429,
+          "p05": 88.94397015655578,
+          "p25": 90.66529235382308,
+          "median": 91.44658684496967,
+          "p75": 94.25731210662718,
+          "p95": 95.38762820512821,
+          "max": 95.55,
+          "mean": 92.1202825427504
+        },
+        "estimated_top_k_tokens": {
+          "n": 18,
+          "min": 264.4821428571429,
+          "p05": 266.8319104696673,
+          "p25": 271.99587706146923,
+          "median": 274.33976053490903,
+          "p75": 282.77193631988155,
+          "p95": 286.16288461538466,
+          "max": 286.65,
+          "mean": 276.3608476282511
+        },
+        "item_tokens": {
+          "n": 1215,
+          "min": 3.0,
+          "p05": 26.0,
+          "p25": 85.5,
+          "median": 102.0,
+          "p75": 111.0,
+          "p95": 119.0,
+          "max": 120.0,
+          "mean": 92.10617283950617
+        },
+        "item_age_sessions": {
+          "n": 1215,
+          "min": 1.0,
+          "p05": 2.0,
+          "p25": 6.0,
+          "median": 11.0,
+          "p75": 17.0,
+          "p95": 25.299999999999955,
+          "max": 33.0,
+          "mean": 12.03127572016461
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "MP": {
+      "catalog_count": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 3.5
+      },
+      "catalog_tokens": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 0.5147058823529411
+      },
+      "mean_item_tokens": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 0.14705882352941177
+      },
+      "estimated_top_k_tokens": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 0.14705882352941177
+      }
+    },
+    "MS": {
+      "catalog_count": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 11.0
+      },
+      "catalog_tokens": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 10.380952380952381
+      },
+      "mean_item_tokens": {
+        "external_outside_internal_min_max_rate": 0.0,
+        "external_outside_internal_p05_p95_rate": 0.0,
+        "external_to_internal_median_ratio": 0.9630952380952381
+      },
+      "estimated_top_k_tokens": {
+        "external_outside_internal_min_max_rate": 0.0,
+        "external_outside_internal_p05_p95_rate": 0.0,
+        "external_to_internal_median_ratio": 0.9630952380952381
+      }
+    },
+    "ME": {
+      "catalog_count": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 34.0
+      },
+      "catalog_tokens": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 84.28767123287672
+      },
+      "mean_item_tokens": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 2.505385940958073
+      },
+      "estimated_top_k_tokens": {
+        "external_outside_internal_min_max_rate": 1.0,
+        "external_outside_internal_p05_p95_rate": 1.0,
+        "external_to_internal_median_ratio": 3.75807891143711
+      }
+    }
+  },
+  "contract_checks": {
+    "same_memory_item_wire_schema": true,
+    "same_source_ontology_MP_MS_ME": true,
+    "same_retriever_implementation_available": true,
+    "same_default_top_k": {
+      "MP": 2,
+      "MS": 2,
+      "ME": 3
+    },
+    "same_memory_construction_algorithm": false,
+    "internal_builder": "generated case supplies two preconstructed items per source",
+    "external_builder": "pm-v1.5-evo-memory-episode-chunked-v3",
+    "external_builder_contract_sha256": "ec4768cb3b52932a11838196c45e41868b85d321716e18e26e6c6d8961c6c6cb",
+    "external_outcomes_read": false,
+    "external_reference_answers_read": false
+  },
+  "scientific_interpretation": {
+    "not_a_bug": "Personalized memory text must differ across users and domains.",
+    "actual_bug": "The PM is trained under a synthetic memory-construction and candidate-feature distribution that is not guaranteed to match the external memory compiler and catalog shape.",
+    "invalid_strong_claim": "The current design alone cannot prove that PM learned when to use arbitrary external memories.",
+    "salvageable_claim": "It can test transport of a source-routing policy under a declared catalog shift, with OOD abstention and fixed external treatment."
+  },
+  "minimum_repair": [
+    "Freeze one canonical memory-item and candidate-descriptor contract.",
+    "Run the same query builder, retriever, filter, top-k, and descriptor extractor in internal and external data.",
+    "Train component heads on state plus realized candidate descriptors, not source name/count alone.",
+    "Measure external support overlap before outcomes; OOD candidates abstain/off.",
+    "Keep EvoEmo development-informed and use a future untouched corpus for a pristine generalization claim."
+  ],
+  "inputs": {
+    "internal_backend": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/memory_backend.jsonl",
+    "internal_backend_sha256": "bf2173ffc42cac8da3560d8c356ee9304537e746b5e4c28cd046bd6dc5f8cd49",
+    "internal_runtime": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/runtime_states.jsonl",
+    "internal_runtime_sha256": "5ff31de14a5e3a0757f561958153a97f295eb04dd0a23febd19257c370d07ded",
+    "evoemo": "data/external/evo_emo.json",
+    "evoemo_sha256": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420"
+  }
+}

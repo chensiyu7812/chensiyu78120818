@@ -1,0 +1,46 @@
+{
+  "protocol": "pm-v1.5-d3-ms-grounded-quality-aggregation-v1",
+  "status": "PASS_ONE_MS_ON_WIN_PENDING_MINIMAL_RISK",
+  "pair_verdict_counts": {
+    "control": 1,
+    "tie": 38,
+    "treatment": 1
+  },
+  "replacement_counts": {
+    "grounded_fidelity_replacement": 5,
+    "original_non_fidelity_frozen": 35
+  },
+  "independent_states": 32,
+  "state_soft_target_counts": {
+    "0.0": 31,
+    "0.5": 1
+  },
+  "repeat_exact_agreement": {
+    "numerator": 7,
+    "denominator": 8,
+    "rate": 0.875
+  },
+  "quality_on_wins_pending_risk": 1,
+  "formal_training_authorized": false,
+  "blocked_only_on": "one_on_win_minimal_risk_review",
+  "checks": {
+    "40_pair_measurements": true,
+    "pair_ids_unique": true,
+    "five_for_five_replacement": true,
+    "verdicts_on1_off1_tie38": true,
+    "32_state_targets": true,
+    "state_targets_31_zero_1_half": true,
+    "eight_repeat_states": true,
+    "repeat_exact_7_of_8": true,
+    "exactly_one_on_win_pending_risk": true,
+    "repeat_does_not_increase_state_weight": true
+  },
+  "inputs": {
+    "source_annotations_sha256": "9bc9af2a674c3c1857dca9864713ea4dff59609aff7c706eced01045d0e796e1",
+    "grounded_annotations_sha256": "8d151a054369cf8d3ba4750639dfae8439250193961011709ff935af95ff10e2"
+  },
+  "outputs": {
+    "pair_quality_measurements_pre_risk.jsonl": "b8768fbc68f2e7da0610cf4fb7ab0a2ddf5bab2092bda3fa043eb5e28d875350",
+    "state_soft_targets_pre_risk.jsonl": "5fc41622406b4afcd3dbb12f56745ee3a635fd327fa3dfb2a0704b386cdaf54f"
+  }
+}

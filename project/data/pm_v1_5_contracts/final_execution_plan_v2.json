@@ -1,0 +1,292 @@
+{
+  "protocol": "pm-v1.5-final-execution-plan-v2",
+  "status": "SUPERSEDED_BY_FINAL_EXECUTION_PLAN_V3",
+  "superseded_by": "data/pm_v1_5_contracts/final_execution_plan_v3.json",
+  "frozen_date": "2026-08-03",
+  "canonical_document": "docs/PM_V1_5_FINAL_RESEARCH_PLAN_ZH.md",
+  "estimand": "outcome-blind post-candidate-discovery pre-injection four-component resource opportunity routing with end-to-end quality-risk-cost validation",
+  "architecture_contract": "data/pm_v1_5_contracts/staged_policy_architecture_v1.json",
+  "architecture": {
+    "observation": "separately_qualified_transparent_factors",
+    "step1": "learned_four_head_router",
+    "joint_action": "deterministic_16_action_projection",
+    "step2": "deterministic_exact_evidence_bound_execution_planner",
+    "generator": "fixed",
+    "only_learned_pm_stage": "STEP1_ROUTING"
+  },
+  "step1_estimand_contract": {
+    "target": "ex_ante_incremental_resource_opportunity_over_context_only_r0",
+    "not_target": [
+      "surface_applicability_only",
+      "single_stochastic_generation_winner",
+      "post_outcome_quality_prediction"
+    ],
+    "rs_on_requires": [
+      "applicability_and_safety",
+      "nonredundant_increment_over_visible_context_and_r0",
+      "one_point_boundary_and_burden_compatibility"
+    ],
+    "actual_net_benefit_validated_by": [
+      "H2_STEP2_FUNCTION_AND_MISUSE",
+      "H3_PAIRED_QUALITY_RISK_COST"
+    ]
+  },
+  "components": ["MP", "MS", "ME", "RS"],
+  "legal_action_count": 16,
+  "default_action": "M0+R0",
+  "primary_model": {
+    "type": "standardized_l2_logistic_regression",
+    "heads": 4,
+    "c": 0.3,
+    "threshold": 0.5,
+    "feature_count_per_head_min": 5,
+    "feature_count_per_head_max": 7,
+    "fold_seeds": 5,
+    "direct_16_classification": false,
+    "embedding_primary": false
+  },
+  "sample_size_interpretation": {
+    "claim_scope": "minimum controlled learnability qualification, not production-grade 80-90 percent accuracy",
+    "repair_fit_states": 32,
+    "fresh_confirmation_states": 32,
+    "sealed_internal_test_states": 32,
+    "candidate_present_minority_per_head_per_qualification_split_min": 10,
+    "sealed_replication_required": true,
+    "wide_interval_status": "PROMISING_BUT_IMPRECISE"
+  },
+  "internal_dataset": {
+    "unit": "one_target_state_per_synthetic_user",
+    "old_h1_v2": {
+      "states": 256,
+      "role": "DEVELOPMENT_EVIDENCE_ONLY",
+      "maximum_unique_decision_surfaces_after_exact_dedup": 216,
+      "former_confirmation_and_sealed_invalid": true
+    },
+    "final_repair_packet": {
+      "total_states": 96,
+      "repair_fit": {"states": 32, "construction_states_per_intended_action": 2},
+      "fresh_confirmation": {"states": 32, "construction_states_per_intended_action": 2},
+      "sealed_internal_test": {"states": 32, "construction_states_per_intended_action": 2},
+      "construction_intent_is_gold": false,
+      "human_gold_distribution_may_not_be_repaired_after_labeling": true
+    },
+    "candidate_first": true,
+    "exact_rank1_label_binding_required": true
+  },
+  "human_packets": [
+    {"id": "H1", "purpose": "historical_candidate_and_gold_development_evidence", "primary_state_bundles": 256, "independent_overlap": 64, "row_level_overlap_status": "OPTIONAL_MISSING_NOT_BLOCKING_FINAL_REPAIR"},
+    {"id": "H1R", "purpose": "final_repair_candidate_observation_and_step1_gold", "primary_state_bundles": 96, "independent_overlap": 24},
+    {"id": "H2", "purpose": "step2_function_and_misuse", "primary_outputs": 64, "independent_overlap": 16},
+    {"id": "H3", "purpose": "final_blind_quality_and_risk", "states": 96, "pairwise_comparisons": 192, "independent_overlap_rate": 0.2}
+  ],
+  "h1_gates": {
+    "iaa_denominator": "overlap_present_candidates_only_excluding_deterministic_absent_off",
+    "decision_raw_agreement_min": 0.80,
+    "decision_cohen_kappa_min": 0.60,
+    "per_component_decision_raw_agreement_min": 0.70,
+    "subtype_raw_agreement_min": 0.90,
+    "primary_abstain_rate_per_component_max": 0.10,
+    "all_disagreements_abstains_and_flags_require_adjudication": true,
+    "gold_may_freeze_before_adjudication": false,
+    "public_exact_duplicate_count_max": 0,
+    "cross_split_near_template_leakage_count_max": 0,
+    "present_candidate_majority_constant_accuracy_max_exclusive": 0.70,
+    "rs_candidate_presence_may_define_gold": false,
+    "rs_requires_separate_applicability_and_incrementality_fields": true
+  },
+  "step1_gates": {
+    "balanced_accuracy_min": 0.70,
+    "recall_min": 0.60,
+    "specificity_min": 0.60,
+    "brier_gain_over_prevalence_required": true,
+    "prediction_share_each_class_min": 0.20,
+    "seed_balanced_accuracy_sd_max": 0.03,
+    "leave_semantic_family_out_balanced_accuracy_min": 0.65,
+    "minimal_counterfactual_direction_accuracy_min": 0.75
+  },
+  "failure_attribution_order": [
+    "definition_and_human_label_reliability",
+    "exact_candidate_binding_leakage_and_shortcuts",
+    "visible_input_identifiability",
+    "semantic_family_coverage",
+    "feature_and_linear_model_capacity",
+    "external_subtype_transport",
+    "retrieval",
+    "step2_execution",
+    "end_to_end_resource_capacity_and_qrc"
+  ],
+  "prior_research_contingencies": {
+    "LongMemEval": "memory_indexing_retrieval_reading_failure",
+    "ESCA": "strategy_planning_or_step2_expression_failure",
+    "CASE": "cognition_affection_response_generation_failure",
+    "ESC-Eval": "multi_turn_external_evaluation_extension",
+    "may_retroactively_rescue_v1_5_test": false
+  },
+  "p1_static_contract": {
+    "status": "PARTIAL_COMPLETE_OBSERVATION_FACTORS_REOPENED_AS_P1R",
+    "report": "outputs/pm_v1_5_p1_static_contract_v1/report.json",
+    "exact_rank1_binding": true,
+    "memory_subtypes": [
+      "MP_PREFERENCE",
+      "MP_PROFILE",
+      "MS_SESSION",
+      "ME_REUSABLE_OUTCOME",
+      "ME_CONTEXT_EVENT",
+      "ME_UNRESOLVED_EVENT"
+    ],
+    "rs_subtype": "RS_ATOMIC_MOVE",
+    "feature_label_protocols_must_differ": true,
+    "feature_count_per_head_range": [5, 7],
+    "action_trace": [
+      "requested_action",
+      "feasible_action",
+      "realized_action"
+    ],
+    "targeted_regression_tests_passed": 45
+  },
+  "p2_progress": {
+    "status": "OLD_H1_V2_DEVELOPMENT_ONLY_P1R_THEN_96_STATE_H1R_REQUIRED",
+    "construction_method": "outcome_blind_deterministic_controlled_environment_plus_independent_exact_rank1_human_gold",
+    "private_blueprint": "data/pm_v1_5_final_candidate_first_v9_h1_v2/private/construction_blueprint.jsonl",
+    "private_blueprint_sha256": "d1e36d46a06173c2fd98d2364b75790654e75546efe50f82e50f50e4a45df989",
+    "primary_rows": 256,
+    "unique_users": 256,
+    "fit_logic_families": 16,
+    "confirmation_unseen_logic_families": 16,
+    "sealed_unseen_logic_families": 16,
+    "history_scale_balanced_within_each_action": true,
+    "construction_intent_is_gold": false,
+    "construction_intent_is_model_input": false,
+    "formal_candidate_pool_api_calls": 0,
+    "failed_development_smoke_paid_attempts_preserved_not_training": 63,
+    "exact_rank1_candidate_dir": "outputs/pm_v1_5_p2_h1_v2_exact_rank1_v10",
+    "candidate_rows_sha256": "fa92e63e0f9639c1caf5b1d3dd843c08611625374cfd174edd61ab346e9f63be",
+    "model_feature_rows_sha256": "47c4ff546db9e5e72c0ea03b79150f4bc6a283099ed562d6d1aaa54933989844",
+    "exact_rank1_binding_rate": 1.0,
+    "construction_realization_rate": 1.0,
+    "h1_packet_dir": "outputs/pm_v1_5_final_h1_v2_candidate",
+    "h1_primary_states": 256,
+    "h1_human_present_candidate_judgments": 905,
+    "h1_deterministic_absent_off_judgments": 119,
+    "h1_independent_overlap_states": 64,
+    "gold_available": false,
+    "trainable": false,
+    "h1_v1_primary_annotation_received": true,
+    "h1_v1_usable_as_gold": false,
+    "h1_v1_audit": "outputs/pm_v1_5_final_h1_v1_data_quality_audit/audit.json",
+    "h1_v1_invalidation_reasons": [
+      "37_exact_duplicate_groups_36_cross_split",
+      "MP_majority_constant_accuracy_0.9791",
+      "RS_majority_constant_accuracy_0.9453",
+      "RS_surface_fit_was_not_separated_from_increment_over_R0"
+    ],
+    "h1_v2_static_gate": "outputs/pm_v1_5_final_h1_v2_pre_human_static_gate_v1/static_gate_report.json",
+    "h1_v2_static_gate_status": "HISTORICAL_PASS_SUPERSEDED_BY_DECISION_SURFACE_AUDIT_FAIL",
+    "h1_v2_public_visible_state_surfaces_unique": 256,
+    "h1_v2_exact_public_payload_duplicate_groups": 0,
+    "h1_v2_topic_normalized_cross_split_duplicate_groups": 0,
+    "h1_v2_maximum_candidate_present_construction_proxy_majority_share": 0.6213592233009708,
+    "h1_v2_construction_proxy_is_gold": false,
+    "h1_v2_rs_ranker": "pm-v1.5-strategy-rag-pre-pm-content-candidate-rank-v2",
+    "h1_v2_two_gate_fields": [
+      "applicability_safe",
+      "incremental_over_r0"
+    ],
+    "h1_v2_primary_annotation_received": true,
+    "h1_v2_primary_annotation_schema_errors": 0,
+    "h1_v2_primary_annotation_role": "DEVELOPMENT_EVIDENCE",
+    "h1_v2_gold_available": false,
+    "h1_v2_trainable": false,
+    "h1_v2_post_human_audit": "outputs/pm_v1_5_final_h1_v2_annotation_audit_v1/audit_report.json",
+    "h1_v2_decision_surface_cross_split_duplicate_groups": 40,
+    "h1_v2_decision_surface_cross_split_affected_states": 80,
+    "h1_v2_ms_majority_constant_accuracy": 0.7372881355932204,
+    "h1_v2_me_single_cue_balanced_accuracy": 0.8899748472871003,
+    "h1_v2_mp_preference_on_off": [0, 72],
+    "h1_v2_rs_family_only_oracle_balanced_accuracy": 0.8476190476190476,
+    "h1_v2_secondary_overlap_status": "SUMMARY_ONLY_ROW_LEVEL_JSONL_REQUIRED",
+    "root_repair_contract": "data/pm_v1_5_contracts/h1_v2_root_repair_v1.json",
+    "staged_architecture_contract": "data/pm_v1_5_contracts/staged_policy_architecture_v1.json",
+    "old_secondary_overlap_is_blocking": false,
+    "final_repair_states": 96,
+    "final_repair_independent_overlap_states": 24,
+    "h1r_status": "READY_FOR_SINGLE_FINAL_H1R_REVIEW",
+    "h1r_blueprint": "data/pm_v1_5_final_h1r_v1/private/construction_blueprint.jsonl",
+    "h1r_blueprint_sha256": "60e7d2e1e1ea1f0c6d07c9d60f35d6435db3aa2247c99213a8993d9ae565ea91",
+    "h1r_exact_rank1_dir": "outputs/pm_v1_5_final_h1r_exact_rank1_v1",
+    "h1r_candidate_rows_sha256": "7b8b9225a33a86442f472b479e33608b664e70339a6951e05b1c201353eb3a3b",
+    "h1r_static_gate": "outputs/pm_v1_5_final_h1r_pre_human_gate_v1/static_gate_report.json",
+    "h1r_static_gate_sha256": "84fac8cdd69982a29e28c6fa308b3d7cd715a5d516fdac5949bc68f784164fe1",
+    "h1r_review_dir": "outputs/pm_v1_5_final_h1r_review_candidate",
+    "h1r_primary_states": 96,
+    "h1r_present_candidate_judgments": 384,
+    "h1r_independent_overlap_states": 24,
+    "h1r_api_calls": 0,
+    "h1r_gold_available": false,
+    "h1r_trainable": false,
+    "h1r_primary_review_received": true,
+    "h1r_secondary_overlap_received": true,
+    "h1r_primary_on_off_abstain": [143, 241, 0],
+    "h1r_secondary_overlap_on_off_abstain": [17, 78, 1],
+    "h1r_pre_adjudication_raw_agreement": 0.8333333333333334,
+    "h1r_pre_adjudication_cohen_kappa": 0.5755733628074055,
+    "h1r_me_raw_agreement": 0.5833333333333334,
+    "h1r_audit": "outputs/pm_v1_5_final_h1r_dual_review_audit_v1/audit_report.json",
+    "h1r_formal_gate_status": "HOLD_DO_NOT_FREEZE_GOLD_OR_TRAIN",
+    "h1r_pre_human_shortcuts_removed": [
+      "topic_to_MP_MS_ME_intended_bit",
+      "history_scale_to_MS_ME_positive_subtype"
+    ],
+    "next_step": "stop_before_P3_and_choose_between_versioned_fresh_four_head_requalification_or_reporting_full_learned_claim_not_supported"
+  },
+  "retrieval_gates": {
+    "exact_candidate_binding_rate": 1.0,
+    "selected_top1_suitable_min": 0.75,
+    "top3_acceptable_recall_min": 0.90,
+    "hard_exclusion_in_selected_max": 0
+  },
+  "step2_gates": {
+    "requested_component_exact_evidence_identity": 1.0,
+    "adjudicable_min": 0.90,
+    "per_component_functional_use_min": 0.75,
+    "multi_component_all_requested_functional_min": 0.70,
+    "material_misuse_max_count": 1,
+    "fabricated_recall_max_count": 0,
+    "explicit_boundary_violation_max_count": 0,
+    "fallback_adoptable_rate": 1.0
+  },
+  "end_to_end_gates": {
+    "quality_adoption_score_noninferiority_margin": -0.10,
+    "material_risk_rate_noninferiority_margin": 0.05,
+    "generator_input_token_reduction_vs_fixed_high_min": 0.10,
+    "quality_or_risk_failure_cannot_be_offset_by_cost": true
+  },
+  "external_partitions": {
+    "evoemo_development_users": "p1-p6",
+    "evoemo_qualification_users": "p7-p12",
+    "evoemo_lockbox_users": "p13-p18",
+    "minimum_independent_in_support_states_for_component_claim": 20,
+    "external_outcomes_may_update_system": false
+  },
+  "phases": [
+    {"id": "P0", "name": "canonical_plan_and_registry_freeze", "status": "COMPLETE"},
+    {"id": "P1", "name": "ontology_candidate_binding_feature_label_separation_and_joint_feasibility", "status": "SUPERSEDED_BY_P1R_AFTER_OBSERVATION_ROUTING_CONFLATION_AUDIT"},
+    {"id": "P1R", "name": "staged_observation_router_execution_contract_and_factor_qualification", "status": "COMPLETE"},
+    {"id": "P2R", "name": "build_96_state_final_repair_packet_and_H1R", "status": "FAILED_H1R_IAA_AND_HUMAN_LABEL_SHAPE_GATES"},
+    {"id": "P3", "name": "train_and_confirm_four_heads", "status": "BLOCKED_BY_P2R"},
+    {"id": "P4", "name": "retrieval_qualification_and_H2", "status": "BLOCKED_BY_P3"},
+    {"id": "P5", "name": "sealed_internal_test", "status": "BLOCKED_BY_P4"},
+    {"id": "P6", "name": "esconv_and_evoemo_external_evaluation", "status": "BLOCKED_BY_P5"},
+    {"id": "P7", "name": "H3_and_paper", "status": "BLOCKED_BY_P6"}
+  ],
+  "forbidden_next_actions": [
+    "consume_evoemo_p7_p18",
+    "run_external_generation",
+    "train_old_heads",
+    "create_scattered_human_review_packet",
+    "expand_strategy_bank",
+    "replace_bge_or_download_new_embedding",
+    "use_llm_judge_as_gold"
+  ],
+  "next_phase": "STOPPED_BEFORE_P3_PENDING_SCIENTIFIC_SCOPE_DECISION"
+}

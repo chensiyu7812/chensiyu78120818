@@ -1,0 +1,86 @@
+{
+  "protocol": "pm-v1.5-four-component-clean-contrast-blueprint-v1",
+  "status": "READY_256_CONTRAST_BLUEPRINT_ZERO_NEW_API",
+  "api_calls_made": 0,
+  "human_labels_read": false,
+  "effect_labels_created": false,
+  "contrast_groups": 256,
+  "distinct_states": 256,
+  "distinct_users": 52,
+  "component_counts": {
+    "ME": 64,
+    "MP": 64,
+    "MS": 64,
+    "RS": 64
+  },
+  "split_counts": {
+    "calibration": 64,
+    "internal_test": 64,
+    "train": 128
+  },
+  "reuse_counts": {
+    "FULL_PAIR_REUSE_R0_MEMORY_CONTRAST": 96,
+    "GENERATE_BOTH_CURRENT_RS_BACKGROUND_ARMS": 96,
+    "REUSE_R0_CONTROL_GENERATE_CURRENT_RS_TREATMENT": 64
+  },
+  "new_generation_response_calls": 256,
+  "human_quality_decisions_after_generation": 256,
+  "component_background_counts": {
+    "ME|M0+R0": 8,
+    "ME|M0+RS": 8,
+    "ME|MP+R0": 8,
+    "ME|MP+RS": 8,
+    "ME|MPMS+R0": 8,
+    "ME|MPMS+RS": 8,
+    "ME|MS+R0": 8,
+    "ME|MS+RS": 8,
+    "MP|M0+R0": 8,
+    "MP|M0+RS": 8,
+    "MP|ME+R0": 8,
+    "MP|ME+RS": 8,
+    "MP|MS+R0": 8,
+    "MP|MS+RS": 8,
+    "MP|MSE+R0": 8,
+    "MP|MSE+RS": 8,
+    "MS|M0+R0": 8,
+    "MS|M0+RS": 8,
+    "MS|ME+R0": 8,
+    "MS|ME+RS": 8,
+    "MS|MP+R0": 8,
+    "MS|MP+RS": 8,
+    "MS|MPE+R0": 8,
+    "MS|MPE+RS": 8,
+    "RS|M0+R0": 8,
+    "RS|ME+R0": 8,
+    "RS|MP+R0": 8,
+    "RS|MPE+R0": 8,
+    "RS|MPMS+R0": 8,
+    "RS|MPMSME+R0": 8,
+    "RS|MS+R0": 8,
+    "RS|MSE+R0": 8
+  },
+  "checks": {
+    "64_contrasts_per_component": true,
+    "8_contrasts_per_component_background": true,
+    "split_quotas_128_64_64": true,
+    "one_distinct_state_per_contrast": true,
+    "all_RS_backgrounds_have_current_candidate": true,
+    "all_labels_unknown": true
+  },
+  "generation_scope": {
+    "fully_reused_pairs": 96,
+    "half_reused_RS_pairs": 64,
+    "fully_new_RS_background_pairs": 96,
+    "unique_new_response_calls": 256,
+    "API_execution_authorized_by_this_blueprint": false
+  },
+  "inputs": {
+    "states": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+    "historical_outcomes": "outputs/pm_v1_5_longitudinal_action_sweep_v8_19_2_continuation_v2_dry_run/action_outcomes.jsonl",
+    "reusable_contrast_audit": "outputs/pm_v1_5_component_contrast_reuse_audit_v1/reusable_R0_memory_contrasts.jsonl",
+    "current_strategy_bank": "outputs/pm_v1_5_strategy_bank_v4_final_v1/strategy_cards_v4_final.jsonl"
+  },
+  "outputs": {
+    "contrast_blueprint.jsonl": "d3351e557f7d047ec2fac98da52a4e890d6a0a5fb543dd0ca863b0b5024e2d2f"
+  }
+}

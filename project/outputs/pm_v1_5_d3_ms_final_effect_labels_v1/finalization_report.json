@@ -1,0 +1,48 @@
+{
+  "protocol": "pm-v1.5-d3-ms-final-effect-labels-v1",
+  "status": "FINAL_MS_MEASUREMENT_COMPLETE_NOT_DISCRIMINATIVE_TRAIN_QUALIFIED",
+  "risk_result": {
+    "reviewed_quality_on_wins": 1,
+    "material_risk_yes": 0,
+    "material_risk_no": 1,
+    "material_risk_uncertain": 0,
+    "denominator_scope": "quality-winning MS-on responses only",
+    "not_an_overall_MS_risk_rate": true,
+    "not_a_control_vs_treatment_risk_difference": true
+  },
+  "pair_final_label_counts": {
+    "OFF_NO_MATERIAL_QUALITY_BENEFIT": 39,
+    "ON_MATERIAL_BENEFIT_NO_MATERIAL_RISK": 1
+  },
+  "independent_states": 32,
+  "state_soft_target_counts": {
+    "0.0": 31,
+    "0.5": 1
+  },
+  "positive_state_count": 1,
+  "confident_positive_state_count": 0,
+  "discriminative_head_training_qualified": false,
+  "reason_not_train_qualified": "Only one independent state has a nonzero target (0.5), and no state has a confident target of 1.0; there is no support for learning when to turn MS on.",
+  "runtime_fallback": "MS learned gate unavailable; deterministic off",
+  "claim_boundary": "Correct Top-2 MS retrieval was established, but beneficial MS injection and a learnable conditional MS-on gate were not.",
+  "checks": {
+    "one_risk_annotation": true,
+    "risk_verdict_no": true,
+    "40_final_pairs": true,
+    "32_final_states": true,
+    "state_targets_31_zero_1_half": true,
+    "one_positive_state_only": true,
+    "zero_confident_positive_states": true,
+    "state_weights_one": true
+  },
+  "inputs": {
+    "aggregation_report_sha256": "ba0ba5e9407df3993388f24d84e07d9968a595408e51e3022be10245b28bbe35",
+    "risk_annotations_sha256": "f5ee638abde33bc10c54086f35f19f035ef2b800b5b3997b1a5de7c8a0bb5651",
+    "risk_manifest_sha256": "85e10186c783a7324fd2fbd410baffbbb6864eaca9233a0a4d34411992c78c0d"
+  },
+  "outputs": {
+    "final_pair_effect_labels.jsonl": "93bd7b271491a896447d85d1a6482b024c740f07730517f077187a19986ad51c",
+    "final_state_soft_targets.jsonl": "825b2cd409a949890a643767fd0d7ada793256215785ad0423366e2a2a6e1e50",
+    "validated_risk_annotations.jsonl": "33a3a192e90007be619482d1b6059ae000237de8fb9009ec1c630252277a15ec"
+  }
+}

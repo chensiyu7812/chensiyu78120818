@@ -1,0 +1,189 @@
+{
+  "protocol": "pm-v1.5-evo-style-synthetic-memory-backend-v1",
+  "status": "READY_FOR_OUTCOME_BLIND_192_MEMORY_CONTRAST_BLUEPRINT",
+  "api_calls_made": 0,
+  "human_labels_read": false,
+  "external_file_read": false,
+  "external_content_used": false,
+  "external_outcome_used": false,
+  "generated_memory_labels_used": false,
+  "states": 416,
+  "users": 52,
+  "split_counts": {
+    "calibration": 96,
+    "internal_test": 128,
+    "train": 192
+  },
+  "memory_builder": {
+    "protocol": "pm-v1.5-evo-memory-episode-chunked-v3",
+    "contract_sha256": "ec4768cb3b52932a11838196c45e41868b85d321716e18e26e6c6d8961c6c6cb",
+    "transport_adapter_protocol": "pm-v1.5-content-disjoint-evo-style-synthetic-memory-adapter-v1"
+  },
+  "semantic_encoder": {
+    "model_id": "BAAI/bge-small-en-v1.5",
+    "spec_sha256": "febe9bbf8f7207607335284b98d7bc97a0b41231a4c2358cba0a027097911f65",
+    "runtime_contract_sha256": "2b8c2943c72b895c0796daaa4a5971f7d064b2789b6a0d5b896a304a25cbde7a"
+  },
+  "retrieval": {
+    "implementation": "metacom_pm.retrieval.MemoryRetriever",
+    "score": "lexical_score_not_BGE_cosine",
+    "memory_min_score": 0.0,
+    "top_k_by_source": {
+      "MP": 2,
+      "MS": 2,
+      "ME": 3
+    },
+    "states_with_nonempty_selection": {
+      "MP": 416,
+      "MS": 416,
+      "ME": 416
+    },
+    "selected_count_profiles": {
+      "MP": {
+        "n": 416,
+        "min": 1.0,
+        "median": 2.0,
+        "max": 2.0,
+        "mean": 1.9975961538461537
+      },
+      "MS": {
+        "n": 416,
+        "min": 1.0,
+        "median": 2.0,
+        "max": 2.0,
+        "mean": 1.875
+      },
+      "ME": {
+        "n": 416,
+        "min": 1.0,
+        "median": 3.0,
+        "max": 3.0,
+        "mean": 2.6586538461538463
+      }
+    }
+  },
+  "candidate_descriptor_contract": {
+    "protocol": "pm-v1.5-shared-memory-candidate-discovery-v1",
+    "decision_timing": "post-candidate-discovery_pre-injection_pre-generation",
+    "primary_transparent_fields": [
+      "source",
+      "candidate_present",
+      "retrieved_count",
+      "incremental_injected_tokens",
+      "minimum_age_sessions",
+      "median_age_sessions",
+      "maximum_age_sessions",
+      "top1_lexical_relevance",
+      "top1_top2_lexical_margin",
+      "top_k_capacity_fraction",
+      "other-component background bits added at contrast assembly"
+    ],
+    "optional_bge_challenger_fields": [
+      "candidate_state_bge_similarity_optional",
+      "source_catalog_bge_similarity_optional"
+    ],
+    "diagnostic_only_not_primary_pm_feature": [
+      "full catalog count",
+      "full catalog tokens",
+      "dataset or split identity"
+    ],
+    "forbidden": [
+      "raw memory text",
+      "memory IDs",
+      "generated response",
+      "human or judge outcome",
+      "old needed_memory_sources",
+      "external dataset identity"
+    ]
+  },
+  "catalog_profiles": {
+    "MP": {
+      "count": {
+        "n": 416,
+        "min": 3.0,
+        "median": 3.0,
+        "max": 3.0,
+        "mean": 3.0
+      },
+      "estimated_tokens": {
+        "n": 416,
+        "min": 98.0,
+        "median": 104.0,
+        "max": 107.0,
+        "mean": 103.1923076923077
+      }
+    },
+    "MS": {
+      "count": {
+        "n": 416,
+        "min": 1.0,
+        "median": 4.5,
+        "max": 8.0,
+        "mean": 4.5
+      },
+      "estimated_tokens": {
+        "n": 416,
+        "min": 16.0,
+        "median": 150.0,
+        "max": 409.0,
+        "mean": 152.07451923076923
+      }
+    },
+    "ME": {
+      "count": {
+        "n": 416,
+        "min": 1.0,
+        "median": 5.0,
+        "max": 14.0,
+        "mean": 5.0360576923076925
+      },
+      "estimated_tokens": {
+        "n": 416,
+        "min": 31.0,
+        "median": 368.0,
+        "max": 1179.0,
+        "mean": 383.52403846153845
+      }
+    }
+  },
+  "leakage_and_integrity": {
+    "strictly_prior_sessions_only": true,
+    "user_split_overlap": 0,
+    "cross_split_exact_memory_text_count": 0,
+    "cross_split_exact_memory_text_examples_sha256": [],
+    "cross_split_exact_text_is_not_outcome_leakage": true,
+    "note": "Repeated synthetic topic/style templates are a distribution limitation to audit as a shortcut; raw text and hashes are not PM features."
+  },
+  "checks": {
+    "exactly_416_noninitial_states": true,
+    "all_three_sources_available": true,
+    "all_states_have_16_legal_actions": true,
+    "strictly_prior_sessions_only": true,
+    "no_user_overlap_across_splits": true,
+    "all_sources_offer_retrieved_candidates_for_at_least_192_states": true,
+    "no_external_or_outcome_inputs": true,
+    "same_evo_memory_builder": true
+  },
+  "limitations": [
+    "The nine sessions per user are reconstructed from previously independent synthetic cases, not naturally observed longitudinal sessions.",
+    "Some synthetic profile and topic surfaces repeat across users; grouped user splits and shortcut audits remain mandatory.",
+    "MemoryRetriever currently ranks by lexical overlap. BGE supplies pre-retrieval source-level semantic observations but does not rank memory items."
+  ],
+  "inputs": {
+    "bundles": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_bundles.jsonl",
+    "bundles_sha256": "63708d5ad2ff71582d096aafd2f59a6e2a69a7ec9858d55122424a332738af04",
+    "source_states": "data/pm_v1_5_formal_v8_19_2_runtime_projection_repair_candidate/pm_v2_states.jsonl",
+    "source_states_sha256": "0fb269f503eb38ff7734f5a6d09442952aa76420cf1fe961ca09e7036d4e0406",
+    "pm_config": "configs/pm_v1_5.yaml",
+    "pm_config_sha256": "7aaa4ad296936e298d4beb16f9d1a9f5ca096e224d5e518da22b49682842a94b"
+  },
+  "outputs": {
+    "pm_v2_states.jsonl": "af4bc8b7022a503c70cc6f2cbe1c41e4126bea2ad81370516d409f62250aae26",
+    "runtime_states.jsonl": "c013fe0439aff844452e3e58bd91703b781db75f3a90cd33b9518116c1d7efeb",
+    "memory_backend.jsonl": "d32165f0cc72da4ecf23c5fe6a4048195b8b4c6f8785cb3f2d426cb7d8c24875",
+    "state_lineage.jsonl": "b78f9858b31cdb2c1deeedd43691e13c9419151289d5f107e0d8aef253f47485",
+    "retrieval_audit.jsonl": "00ede06ced3d1f9aac5b24ca3179ee7b4647fcec6708afdc38140540a7e87224",
+    "candidate_descriptors.jsonl": "d4427b71a4b7dfb50fc71d96939442f28a635f0b1827a85c5f0a13a6e0249684"
+  },
+  "artifact_sha256": "49f9d41ecc4caad7e06f37e4380ba21d88172b95bd236e5e729647cc85e3da4d"
+}

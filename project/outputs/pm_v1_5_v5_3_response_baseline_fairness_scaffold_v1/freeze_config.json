@@ -1,0 +1,11 @@
+{
+  "cost_matched_fixed_action_by_stratum": {
+    "fixture_external_replication": "M0+RS"
+  },
+  "matched_random_seed": "pm-v1.5-v5.3-response-baseline-fairness-scaffold-v1:matched-random",
+  "protocol": "pm-v1.5-v5.3-response-baseline-fairness-scaffold-v1",
+  "seed_labels": [
+    "seed-a",
+    "seed-b"
+  ]
+}

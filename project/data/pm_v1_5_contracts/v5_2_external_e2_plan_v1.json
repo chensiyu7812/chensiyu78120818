@@ -1,0 +1,58 @@
+{
+  "protocol": "pm-v1.5-v5.2-external-e2-plan-contract-v1",
+  "status": "FROZEN_BEFORE_E2_MATERIALIZATION",
+  "scope": "zero-API logical call planning before retrieval and generation",
+  "response": {
+    "core_policies": [
+      "always_off",
+      "fixed_high_eligible",
+      "transparent_rule",
+      "cost_matched_fixed",
+      "learned_pm"
+    ],
+    "secondary_evoemo_raw_baselines": [
+      "raw_session_top4_plus_frozen_strategy",
+      "all_raw_sessions_plus_frozen_strategy"
+    ],
+    "generation_seeds_per_unique_state_treatment": 2,
+    "seed_derivation": "sha256(protocol,state_id,treatment_id,seed-a-or-b); no seed search",
+    "raw_session_unit": "one complete strictly-prior same-user dialogue session",
+    "raw_context_token_limit": 20000,
+    "raw_context_policy": "deterministic whole-session prefix fit under the same conservative provider-neutral bound used for QA",
+    "raw_top4_retriever": "official-aligned BAAI/bge-m3 dense session retrieval; materialized only in E3",
+    "raw_strategy_policy": "use the same frozen exact Rank-1 V4 strategy candidate only when structurally executable",
+    "raw_baseline_role": "secondary representation baseline, not a legal 16-action PM arm"
+  },
+  "qa": {
+    "main_users": ["p13", "p14", "p15", "p16", "p17", "p18"],
+    "released_question_count": 418,
+    "conditions": [
+      "no_memory",
+      "full_history",
+      "official_session_rag_top4",
+      "typed_memory_fixed_high",
+      "typed_memory_learned_pm"
+    ],
+    "generation_seeds_per_question_condition": 1,
+    "model": "same frozen meta/llama-3.1-8b-instruct generator as response experiment",
+    "temperature": 0.0,
+    "max_output_tokens": 300,
+    "context_token_limit": 20000,
+    "context_policy": "official-style leading context preservation, implemented as deterministic whole-fragment prefix fitting under the project's conservative provider-neutral token bound; finalized in E3",
+    "official_session_rag": "BAAI/bge-m3, one complete session per document, Top-4",
+    "typed_memory_fixed_high": "question-specific exact Rank-1 MP/MS/ME candidates that are structurally executable; RS structurally unavailable for factual QA",
+    "typed_memory_learned_pm": "the same frozen V5.2 MP/MS/ME heads projected on the question-specific candidate surface; RS structurally unavailable for factual QA",
+    "gold_boundary": "question is generator-visible; answer, evidence, capability and group labels are evaluator-only",
+    "interpretation": "memory retrieval and answer diagnostic; not response QRC and not an exact model reproduction of the paper"
+  },
+  "stage_boundary": {
+    "e2": "freeze logical calls, identities, conditions, seeds, user isolation and evaluator-only mapping",
+    "e3": "materialize retrieval, context fitting, exact messages, prompt hashes and conservative token bounds",
+    "e4": "the only paid generation stage; its new runner must require the active paid-run release guard"
+  },
+  "outcome_use": {
+    "response_quality_risk_human_or_judge_read": false,
+    "qa_answer_or_evidence_used_by_retriever_or_generator": false,
+    "external_outcome_used_to_change_method": false
+  }
+}

@@ -24,8 +24,6 @@ class FixedActionPMV2Model(PMV2Model):
             raise RuntimeError(
                 f"fixed action {self.fixed_action} is illegal for state {state.state_id}"
             )
-        ood = self.feature_builder.ood_report(state)
-        predictions = self.predict_actions(state)
         config_hash = sha256_text(
             canonical_json(
                 {
@@ -39,9 +37,12 @@ class FixedActionPMV2Model(PMV2Model):
         return PolicyDecision(
             state_id=state.state_id,
             chosen_action=self.fixed_action,
-            predictions=predictions,
-            semantic_ood_score=float(ood["semantic_ood_score"]),
-            metadata_ood_score=float(ood["metadata_ood_score"]),
+            # A fixed policy neither observes Step-0 nor needs counterfactual model
+            # predictions.  Keeping this empty also prevents diagnostic-only model
+            # calls from silently consuming the directory representation.
+            predictions={},
+            semantic_ood_score=0.0,
+            metadata_ood_score=0.0,
             ood_fallback_used=False,
             decision_reason=(
                 f"frozen fixed-action baseline {self.baseline_name}: "

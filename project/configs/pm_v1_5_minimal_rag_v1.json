@@ -1,0 +1,28 @@
+{
+  "protocol": "pm-v1.5-qualified-strategy-rag-freeze-v1",
+  "status": "ACTIVE_FOR_NEW_PM_V1_5_G3_WORK",
+  "strategy_bank": {
+    "relative_path": "data/strategy/strategy_cards_v1_5_minimal.jsonl",
+    "sha256": "04c3af44d54ae9875cd817364ff46e90aa954e0bee81b295af279b1b38964d24",
+    "card_count": 6
+  },
+  "eligibility_runtime": {
+    "relative_path": "src/metacom_pm/v1_5_strategy_rag_runtime.py",
+    "sha256": "edfcddee3a827dd71f06913905ca23cd1809d7b7050eceb1acd305e800309052"
+  },
+  "retrieval": {
+    "ranker": "term_frequency_cosine",
+    "strategy_min_score": 0.05,
+    "strategy_top_k": 1,
+    "bge_enabled": false
+  },
+  "prompt_compiler": {
+    "relative_path": "src/metacom_pm/prompts.py",
+    "sha256": "6bb05f030fe2a514ce731f543cfc201a6af0411ef8dca55d2a1cfc063a684594",
+    "inject_source_examples": false
+  },
+  "manifest": {
+    "relative_path": "data/strategy/strategy_rag_v1_5_minimal_freeze.json"
+  },
+  "legacy_config_policy": "configs/pm_v1_5.yaml remains historical evidence for the failed 11590-card/top3 path and must not be used for new G3 runs."
+}
