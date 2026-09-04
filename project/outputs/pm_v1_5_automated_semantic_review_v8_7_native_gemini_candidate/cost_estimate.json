@@ -1,0 +1,162 @@
+{
+  "protocol": "pm-v1.5-automated-semantic-review-v4-native-gemini-deterministic27-plus-paid9",
+  "stage": "pm_v1_5_automated_semantic_review",
+  "review_scope": "pilot_27",
+  "n_real_cases": 36,
+  "n_controls": 24,
+  "control_protocol": "pm-v1.5-pilot-controls-v2",
+  "required_control_fields": [
+    "semantic_family_match",
+    "regime_match",
+    "memory_sources_marginal_value_match",
+    "memory_item_utility_match",
+    "source_type_match",
+    "dialogue_temporal_order_match",
+    "context_grounding_match",
+    "memory_age_design_match",
+    "strategy_resource_need_match",
+    "strategy_item_utility_match",
+    "advice_readiness_match",
+    "surface_naturalness_match"
+  ],
+  "controls_per_field": 2,
+  "control_seed": 20260716,
+  "control_matrix_sha256": "e42db4a720cf752f84adb490acbe3895f9597ea9c0bf65c0df0c0f379d29c393",
+  "n_judge_families": 2,
+  "n_logical_calls": 120,
+  "maximum_physical_attempts_per_call": 3,
+  "maximum_physical_api_attempts": 360,
+  "call_plan_sha256": "37bd22b74e94a2f80fa784e0b0586c38ad4506b2229e226b0b09f7c5c682eb15",
+  "maximum_estimated_usd": 0.16509600000000002,
+  "maximum_input_tokens_per_call": 3297,
+  "pricing_usd_per_mtok": {
+    "input": 0.1,
+    "output": 0.4
+  },
+  "api_cost_planning": {
+    "input_token_safety_factor": 1.5,
+    "fail_on_reported_input_overrun": true
+  },
+  "judge_role_isolation": {
+    "protocol": "pm-v1.5-judge-role-isolation-v1",
+    "status": "PASS",
+    "development_endpoints": [
+      {
+        "name": "training_judge_gemini_flash_lite",
+        "family": "google_gemini",
+        "model": "gemini-2.5-flash-lite",
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "transport": "gemini_generate_content"
+      },
+      {
+        "name": "training_judge_deepseek_flash",
+        "family": "deepseek",
+        "model": "deepseek-ai/deepseek-v4-flash",
+        "base_url": "https://integrate.api.nvidia.com",
+        "transport": "openai_chat_completions"
+      }
+    ],
+    "final_endpoints": [
+      {
+        "name": "final_judge",
+        "family": "openai_gpt4o",
+        "model": "gpt-4o",
+        "base_url": "https://api.openai.com",
+        "transport": "openai_chat_completions"
+      },
+      {
+        "name": "final_judge_claude",
+        "family": "anthropic_claude",
+        "model": "claude-sonnet-4-6",
+        "base_url": "https://api.anthropic.com",
+        "transport": "anthropic_messages"
+      }
+    ],
+    "overlap": {
+      "endpoint_names": [],
+      "declared_families": [],
+      "model_identifiers": [],
+      "resolved_routes": []
+    },
+    "errors": []
+  },
+  "judge_endpoint_descriptors": [
+    {
+      "alias": "training_judge_gemini_flash_lite",
+      "family": "google_gemini",
+      "model": "gemini-2.5-flash-lite",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta",
+      "transport": "gemini_generate_content"
+    },
+    {
+      "alias": "training_judge_deepseek_flash",
+      "family": "deepseek",
+      "model": "deepseek-ai/deepseek-v4-flash",
+      "base_url": "https://integrate.api.nvidia.com",
+      "transport": "openai_chat_completions"
+    }
+  ],
+  "call_order_protocol": "frozen-endpoint-order-native-gemini-first-v1",
+  "review_strategy_card_ids": {
+    "gentle_question": "strat_3117fcf093c71e45f41b",
+    "open_restatement": "strat_5e7c70020f3cff635dfb",
+    "stress_reflection": "strat_a0c6982aa523734322d0",
+    "exam_reflection": "strat_c11fdbd724094b26fab8",
+    "one_problem_suggestion": "strat_bfae933e5a8b5bd35388",
+    "social_connection_suggestion": "strat_8ed3e61eeff96909f66e",
+    "low_pressure_connection": "strat_7496a93d31d3325ec3da",
+    "intrusive_long_plan": "strat_f2e1526602e265075feb",
+    "video_call_self_disclosure": "strat_e5381557588a3941ddc1",
+    "support_affirmation": "strat_4b223b52154bcbe29f4c",
+    "job_information": "strat_d54feb99bfd36cfd0702"
+  },
+  "review_strategy_card_ids_sha256": "c55745fc0e64ce8c43b48e3d2fe0a9354218d1a7af9cce46e950134a41583810",
+  "paid_pilot_audit": {
+    "status": "PASS",
+    "pilot_attestation_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_generation_compatibility_pilot_v8_7_frozen_budget_candidate/artifact_attestation.json",
+    "pilot_attestation_sha256": "aef35679a86c9ccb8d3ef3604b6de90752d6ffdf047f0766a916bdffb5a0e7cc",
+    "pilot_bundle_path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/outputs/pm_v1_5_generation_compatibility_pilot_v8_7_frozen_budget_candidate/pilot_bundle.json",
+    "pilot_bundle_sha256": "4637a47b559fccf9c5211c4d7f2f2aec42532a98e9006ea351de00518097bcd8",
+    "pilot_contract_sha256": "e031d35c62a1b65c0f9198864a25ec45611486ae5dff89c78a2a642179f9c183",
+    "generation_config_projection_sha256": "26b45edb9ee5212c378db93de0187384a71484e8242eb40cee1cc7008ae82d7f",
+    "pilot_verification_attestation_sha256": "09f1f90b748e31f4c793182dcd6a50873bd9d4965f29eba76a0fb28c6faa60c5",
+    "item_count": 9
+  },
+  "retry_contract": {
+    "protocol": "pm-v1.5-bounded-retry-v2",
+    "retryable_up_to_full_budget": [
+      "http_5xx",
+      "network_timeout",
+      "rate_limited_429",
+      "request_timeout_408"
+    ],
+    "missing_field_maximum_additional_physical_attempts": 1,
+    "never_retried": [
+      "provider_request_error_4xx",
+      "structured_output_validation_error",
+      "successfully_parsed_but_unfavorable_score",
+      "stage_postcondition_failure"
+    ],
+    "backoff_seconds": [
+      10.0,
+      30.0
+    ],
+    "retry_after_header_is_respected": true,
+    "cross_process_eligibility_source": "physical_attempt_ledger",
+    "legacy_or_unclassified_failure_policy": "fail_closed"
+  },
+  "budget_limits": {
+    "max_api_calls": 360,
+    "max_estimated_usd": 0.17,
+    "max_input_tokens_per_call": 4000
+  },
+  "cost_estimate_sha256": "5f3c57a0ee791e51e10bea78e7c8b3221d8c2f3a29892178bc275bc9cafc8bf7",
+  "budget_gate": {
+    "status": "PASS",
+    "checks": {
+      "physical_api_attempts": true,
+      "estimated_cost_usd": true,
+      "max_input_tokens_per_call": true
+    }
+  }
+}

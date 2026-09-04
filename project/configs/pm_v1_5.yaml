@@ -1,0 +1,1007 @@
+# PM-v1.5_1 release revision of the PM-v1.5 method-family config: genuinely
+# independent from configs/pm_v2.yaml, not a
+# pointer to it. Edit this file for any V1.5-specific change; do not edit
+# pm_v2.yaml expecting it to affect V1.5.
+#
+# 2026-07-18 PM-v1.5_1 protocol-repair notice: the code contract is implemented,
+# and the central config is released for staged execution. This is NOT blanket
+# API authorization: every paid stage must still receive a fresh run identity,
+# complete its clean dry-run/lineage review, and appear in the separate
+# content-bound approval manifest. All old dry-run/cost hashes remain invalid.
+#
+# `version` is the real, honest string "pm-v1.5" -- it is NOT disguised as
+# "pm-v2.2". 22_train_pm_v2.py's hardcoded check
+# (`if pm_config.get("version") != "pm-v2.2": raise ValueError(...)`) would
+# reject this file, so V1.5 uses its own thin training wrapper instead:
+# scripts/v1_5/22_train_pm_v2_v1_5.py, which accepts "pm-v1.5" and is
+# otherwise identical. Any frozen artifact, manifest, or attestation that
+# records this config's version field is telling the truth about what
+# produced it.
+#
+# Differences from pm_v2.yaml, and why:
+# - evidence_filter.enabled is forced to `false` below. PM-v1.5 is a pure
+#   pre-retrieval router; Evidence Filter (post-retrieval item filtering) is
+#   out of scope. This must match what scripts/v1_5/06, 20, 24, 24a already
+#   force in code -- do not flip this back to `true` without also reverting
+#   those code-level overrides, or development and external will train/serve
+#   a different "ME+RS" mechanism again (the exact class of bug this whole
+#   V1.5 effort exists to fix).
+# - semantic_sanity_audit / development_judging.compatibility_pilot.human_spot_check /
+#   human_label_audit describe the PM-v2.2 *human* review gates. PM-v1.5's
+#   scripts/v1_5/*.py forks do not call the functions that enforce these
+#   sections (they check scripts/v1_5_run_automated_semantic_review.py's
+#   PASS report instead), so these fields are present for schema/documentation
+#   parity only and are not code-enforced under this config.
+# - Strategy Bank path is a CLI argument (--strategy-bank), not a value in
+#   this file; V1.5 invocations must pass
+#   data/strategy/strategy_cards_v1_5.jsonl (11,590 cards from 823 ESConv
+#   dialogues). Besides the 84 EvoEmo-overlap exclusions, the exact 52 source
+#   dialogues used by the development seed pool are now excluded at dialogue
+#   instance level; all eight strategy families remain represented.
+#
+# The candidate grids and protocol thresholds below were inherited from the
+# PM-v2 line but are now the preregistered V1.5 values for this run. Training
+# may select only among the declared candidates using the calibration split;
+# margins and gates are not editable after paid development begins. Any config
+# edit invalidates all dry-run hashes and requires a fresh run identity.
+
+version: pm-v1.5
+release_revision: pm-v1.5_1
+
+# Central executable stop switch. No individual ``--run`` flag can bypass
+# this status. Release requires a separately reviewed manifest binding every
+# paid stage to its fresh accepted dry-run/cost identity.
+execution_release:
+  protocol: pm-v1.5-central-paid-run-release-v1
+  # The code/config revision is released for final dry-run identity creation,
+  # but no paid call is authorized unless the separate approval manifest is
+  # APPROVED and binds the exact stage identity.  Its approval map remains empty
+  # while the final post-release dry run is being reviewed.
+  status: PAID_RUN_RELEASED
+  release_revision: pm-v1.5_1
+  approval_manifest: outputs/pm_v1_5_paid_run_release.json
+
+# Content-bound method input.  The first paid development stage rejects any
+# alternate path, hash, card/source count, or selected-seed manifest before it
+# can create an API client.  Downstream attestations and the final freeze then
+# propagate this exact binding; a different Bank is a new reviewed method run.
+strategy_bank_contract:
+  protocol: pm-v1.5-frozen-strategy-bank-binding-v1
+  relative_path: data/strategy/strategy_cards_v1_5.jsonl
+  sha256: 9cd614ad87677442feb6fb65ccbb4cecbba575867871474aede7700b0562a01e
+  card_count: 11590
+  source_dialogue_count: 823
+  audit_relative_path: data/strategy/strategy_bank_audit_v1_5.json
+  audit_sha256: 7381172b1c68e1f0cf79bec228f460384b9359cb0e9434a39806b23e5b687c80
+  selected_seed_sources_relative_path: data/strategy/pm_v1_5_selected_seed_sources.jsonl
+  selected_seed_sources_sha256: c8af66113bb3284cf0b737443800f21a5a53be22589fab72f6624db1d1457065
+  selected_seed_source_count: 52
+
+api_cost_planning:
+  # Provider-neutral char/token estimates are multiplied by this frozen margin.
+  # Any reported prompt usage above the resulting per-call bound stops the run.
+  input_token_safety_factor: 1.50
+  fail_on_reported_input_overrun: true
+
+# These limits are a dedicated generation-stage contract rather than extra
+# keys in the shared token-planning mapping consumed by later stages.
+# Operators must not need hidden CLI flags to reproduce the reviewed identity;
+# conflicting CLI overrides are rejected.
+generation_compatibility_pilot_budget:
+  max_api_calls: 18
+  max_estimated_usd: 0.018
+  max_input_tokens_per_call: 4000
+
+action_space:
+  memory_subsets: [M0, MP, MS, ME, MPMS, MPE, MSE, MPMSME]
+  strategy_modes: [R0, RS]
+
+# One reportable supporter-generation treatment shared by development and
+# external response generation.  Stage runners are migrated to this contract
+# explicitly; no caller may substitute a different prompt or output cap.
+supporter_generation_treatment:
+  version: pm-v2.2-supporter-generation-v1
+  generator_endpoint: generator
+  system_prompt_id: selective_esmem_v1
+  system_prompt_sha256: a0313589ed0da2e45ea5dc411d3edd504f77fabb516fe6c262eb38fbb13c3a59
+  temperature: 0.0
+  max_output_tokens: 300
+  output_normalization: normalize_space_v1
+  finish_reason_protocol: pm-v2-finish-reason-v1
+  accepted_normalized_finish_reasons: [complete]
+  reject_length: true
+  reject_missing_or_unknown: true
+
+# Policy-independent EvoEmo seeker tracks use the same finish-reason protocol,
+# but their 60-token response instruction is deliberately not the provider API
+# cap.  The 300-token cap prevents the old track's instruction from becoming a
+# near-universal forced truncation mechanism.
+fixed_seeker_generation_treatment:
+  version: pm-v2.2-fixed-seeker-generation-v1
+  seeker_endpoint: seeker
+  system_prompt_id: evoemo-fixed-seeker-v1
+  system_prompt_template_sha256: a9138eaf46b46e8f10c89774a9ef51189b5807391a0882dff58c287a4c54eeac
+  response_instruction_token_limit: 60
+  temperature: 0.2
+  max_output_tokens: 300
+  output_normalization: normalize_space_v1
+  finish_reason_protocol: pm-v2-finish-reason-v1
+  accepted_normalized_finish_reasons: [complete]
+  maximum_physical_attempts_per_logical_call: 1
+  seed_protocol: base-seed-plus-turn-index-v1
+  elicitation_scaffold_protocol: deterministic-generic-open-loop-v1
+
+# Fixed-seeker prompts are sequential, so later prompt text is not known at
+# dry-run time.  The cost plan nevertheless has a deterministic upper bound:
+# static request tokens plus 300 tokens for every prior seeker completion, with
+# the safety factor applied to the whole quantity.  These non-zero proxy prices
+# prevent an accepted 1,020-call plan from carrying a zero-dollar budget.
+fixed_seeker_cost_planning:
+  protocol: pm-v2.2-fixed-seeker-cost-planning-v1
+  pricing_usd_per_mtok:
+    input: 0.15
+    output: 0.60
+  input_token_safety_factor: 1.50
+  fail_on_reported_input_overrun: true
+
+data_generation:
+  generator_endpoint: synthetic_generator
+  pricing_usd_per_mtok:
+    input: 0.15
+    output: 0.60
+  base_seed: 1701
+  train_users: 24
+  # User-block conformal calibration at 90% needs at least nine exchangeable
+  # users. Twelve calibration users leave a small finite-sample margin. With
+  # sixteen independent internal users, a 0.60 Wilson lower-bound gate requires
+  # roughly 14/16 user blocks to be fully covered; a 0.80 gate would require an
+  # implausible 16/16 simultaneously for every response/risk head.
+  calibration_users: 12
+  internal_test_users: 16
+  cases_per_user: 9
+  # Every case has one initial surface call and at most one separately seeded,
+  # pre-budgeted repair after schema/topic/structure lint failure. A success
+  # stops the case immediately; no third call or hidden client retry is allowed.
+  max_generation_attempts: 2
+  compatibility_pilot_semantic_review:
+    protocol: pm-v2-generation-pilot-semantic-review-v1-two-independent-all-affirmative
+    required_before_full_generation: true
+    minimum_annotators: 2
+    required_all_affirmative: true
+    cases: 9
+  required_regimes:
+    - context_only
+    - profile_needed
+    - summary_needed
+    - event_needed
+    - multi_source_needed
+    - memory_harmful
+    - strategy_helpful
+    - strategy_harmful
+    - ambiguous
+
+quality_composite:
+  version: pmv2-quality-v2
+  interpretation: preregistered_training_utility_not_llm_overall
+  weights:
+    emotional_support: 0.30
+    personalization: 0.20
+    memory_appropriateness: 0.15
+    factual_grounding: 0.15
+    temporal_consistency: 0.10
+    non_intrusiveness: 0.10
+
+labeling:
+  minimum_independent_judge_families: 2
+  reliable_mad_threshold: 0.75
+  minimum_low_mad_coverage_per_dimension: 0.80
+  minimum_low_mad_coverage_per_action_dimension: 0.80
+  # Conjunction across all 13 heads is diagnostic only; it is not a fatal gate.
+  minimum_reliable_label_rate: 0.80
+  reject_duplicate_dimension_exact_match_rate: 0.98
+  maximum_absolute_dimension_correlation: 0.95
+  # The deterministic composite is audited directly against emotional support.
+  # This prevents the former "Overall == Support" failure from reappearing
+  # through post-processing even when no Overall field is requested from judges.
+  reject_composite_support_exact_match_rate: 0.98
+  maximum_absolute_composite_support_correlation: 0.995
+  reject_constant_response_dimensions: true
+  reject_constant_risk_dimensions: true
+  minimum_action_applicable_risk_signal_rate: 0.005
+  minimum_action_applicable_risk_distinct_values: 2
+  request_llm_overall_field: false
+  forced_swap_audit_fraction: 0.10
+
+human_label_audit:
+  # Explicitly outside V1.5; retained fields document the PM-v2 rubric only.
+  required_before_reportable_freeze: false
+  items: 72
+  sample_seed: 4701
+  minimum_annotators: 2
+  maximum_response_mae: 0.80
+  minimum_response_spearman: 0.20
+  maximum_risk_mae: 0.60
+  minimum_within_one_rate: 0.80
+  minimum_interrater_kappa: 0.10
+
+# One frozen local encoder supplies deployable semantics to both development and
+# external PM states.  Reportable runners resolve this exact cached revision with
+# local_files_only=true; model identity/hash are audit metadata, never PM features.
+semantic_encoder:
+  enabled: true
+  protocol: pm-v1.5-frozen-visible-text-encoder-v1
+  model_id: BAAI/bge-small-en-v1.5
+  revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a
+  snapshot_tree_sha256: c94b5329116dedfb43349b42d8138ef0b7c3348373eb7339b35bbeef530de15b
+  pooling: cls
+  normalize: true
+  max_length: 512
+  output_dimension: 384
+  output_round_decimals: 8
+  local_files_only: true
+  trust_remote_code: false
+  language_scope: english
+  visible_state_input_protocol: pm-v1.5-visible-dialogue-state-v2-section-aware
+  current_user_state_token_budget: 160
+  session_summary_token_budget: 96
+  history_retention_policy: most-recent-token-suffix-preserve-chronology
+  implicit_full_state_truncation: forbidden
+
+# Reportable development and external semantic observations must be produced
+# by this exact numerical runtime. CI may exercise wiring without the snapshot,
+# but paid/reportable stages fail before API use when this canary differs.
+semantic_runtime:
+  protocol: pm-v1.5-semantic-runtime-canary-v1
+  encoder_spec_sha256: febe9bbf8f7207607335284b98d7bc97a0b41231a4c2358cba0a027097911f65
+  encoder_snapshot_tree_sha256: c94b5329116dedfb43349b42d8138ef0b7c3348373eb7339b35bbeef530de15b
+  canary_texts_sha256: 0b5597a2363f6be9bc421df44778f7b45752538e3fc9b012e1e48a004e7c42b6
+  canary_matrix_sha256: de13bd52b0222386ca313f64960bed4f86610fd15fab8ead0688d36abe16bc13
+  canary_shape: [3, 384]
+  python_version: 3.13.2
+  platform_system: Linux
+  platform_machine: x86_64
+  user_site_enabled: false
+  user_site_on_sys_path: false
+  packages:
+    numpy: 2.5.1
+    scikit-learn: 1.9.0
+    scipy: 1.18.0
+    torch: 2.13.0
+    transformers: 4.57.6
+    tokenizers: 0.22.2
+    huggingface-hub: 0.36.2
+    safetensors: 0.8.0
+  device: cpu
+  dtype: float32
+
+features:
+  word_hash_features: 256
+  char_hash_features: 256
+  optional_precomputed_semantic_embedding: true
+  require_precomputed_semantic_embedding: true
+  semantic_projection_dimensions: 48
+  source_similarity: frozen_semantic_catalog_centroid_only
+  expose_current_state_conflict_oracle: false
+  expose_item_level_similarity: false
+  forbid_actual_memory_text: true
+  forbid_retrieved_item_ids: true
+  forbid_generated_response: true
+  forbid_judge_labels: true
+
+step0_observation:
+  protocol: pm-v1.5-step0-semantic-source-observation-v3-unified-state-query
+  stage: pre_item_retrieval
+  full_state_semantic_query: pm-v1.5-unified-step0-state-semantic-query-v1
+  memory_representation: frozen_semantic_source_centroid_only
+  strategy_representation: frozen_semantic_eight_family_centroids
+  advice_readiness_representation: frozen_semantic_five_anchor_centroids
+  strategy_family_count: 8
+  expose_representation_valid: true
+  expose_representation_hash_or_version: false
+  expose_embedding_vector_or_statistics: false
+  primary_router_requires_valid_strategy_family_catalog: true
+
+shortcut_audit:
+  protocol: pm-v1.5-step0-shortcut-audit-v3-user-group-multivariate-train-oracle-only
+  expected_predictive_train_states: 216
+  expected_structural_all_split_states: 468
+  maximum_single_threshold_balanced_accuracy: 0.90
+  maximum_multivariate_probe_balanced_accuracy: 0.90
+  centroid_noise_std: 0.05
+  shuffle_seed: 6113
+  group_cv_folds: 6
+  probe_logistic_c: 1.0
+  probe_logistic_max_iter: 1000
+  probe_tree_max_depth: 3
+  probe_tree_min_samples_leaf: 9
+  fail_on_near_oracle_threshold: true
+  fail_on_near_oracle_multivariate_probe: true
+
+# Low-capacity mechanism baseline. Structural coefficients are frozen here;
+# only this finite numeric grid may be selected on train users (or the fit-user
+# subset inside each train-only CV fold). It sees
+# the exact same Step-0 object as the learned router and never sees item hits.
+transparent_rule_router:
+  protocol: pm-v1.5-transparent-step0-rule-router-v2
+  tuning_data_role: train_only
+  train_minimum_quality: 0.50
+  train_maximum_risk: 0.50
+  grid:
+    source_similarity_weights: [1.0]
+    source_age_penalties: [0.0, 0.10]
+    source_cost_penalties: [0.05]
+    source_minimum_scores: [0.05, 0.15, 0.25]
+    maximum_memory_sources: [1, 2]
+    strategy_family_similarity_weights: [1.0]
+    strategy_readiness_alignment_weights: [0.25, 0.50]
+    question_bonuses: [0.05]
+    strategy_cost_penalties: [0.05]
+    strategy_minimum_scores: [0.10, 0.25]
+
+internal_ablation:
+  learned_without_step0: true
+  learned_without_state_bge: true
+  lexical_without_state_bge_or_step0: true
+  external_primary_matrix: false
+  residual_without_step0_interpretation: component_removal_system_variant
+
+semantic_diagnostics:
+  protocol: pm-v1.5-semantic-diagnostics-v1
+  pre_freeze_design_distribution_splits: [train, calibration]
+  internal_feature_distribution_role: preconsumption_report_only_no_outcomes
+  internal_results_must_not_select_or_retune_candidates: true
+  rule_score_distribution_required: true
+  rule_candidate_action_distribution_required: true
+  readiness_challenge_role: report_only_not_outcome_gate
+  token_truncation_telemetry_required: true
+  unified_step0_state_semantic_query_required: true
+  section_allocation_required_for_every_state: true
+  current_user_text_truncation_must_be_zero: true
+  implicit_visible_state_truncation_must_be_zero: true
+  development_external_centroid_scale_comparison_required: true
+
+pre_training_rule_grid_diagnostic:
+  protocol: pm-v1.5-transparent-rule-grid-diagnostic-v1
+  required_before_response_sweep: true
+  state_splits: [train, calibration]
+  outcome_labels_used: false
+  minimum_unique_policy_mappings: 2
+  minimum_maximum_pairwise_disagreement_rate: 0.01
+
+ood_calibration:
+  protocol: pm-v2-ood-calibration-v1
+  calibration_split_only: true
+  semantic_false_positive_quantile: 0.99
+  metadata_false_positive_quantile: 0.99
+  maximum_joint_in_distribution_fallback_rate: 0.05
+  minimum_semantic_challenge_detection_rate: 0.80
+  minimum_metadata_challenge_detection_rate: 0.95
+  claim_boundary: plumbing_gate_not_real_world_ood_coverage
+
+model:
+  bootstrap_models: 7
+  group_bootstrap_key: user_id
+  primary_regressor: HistGradientBoostingRegressor
+  direct_targets:
+    - emotional_support
+    - personalization
+    - memory_appropriateness
+    - factual_grounding
+    - temporal_consistency
+    - non_intrusiveness
+    - selected_context_misuse
+    - unnecessary_exposure
+    - stale_or_conflicting_use
+    - unsupported_personal_claim
+    - memory_omission
+    - strategy_overuse
+    - strategy_omission
+
+# Model-family and transparent-rule choices are confined to train users and use
+# user-disjoint folds. Calibration is consumed only once for uncertainty,
+# selector margins and fixed-frontier selection; internal_test participates in
+# none of these choices.
+algorithm_selection:
+  protocol: pm-v1.5-train-user-group-cv-one-standard-error-selection-v2
+  group_key: user_id
+  folds: 4
+  cv_bootstrap_models: 3
+  candidates:
+    - state_centered_paired_delta_hgb
+    - absolute_outcome_factorized_hgb
+    - rule_relative_safe_residual_hgb
+    - group_rank_hgb
+  simplicity_order:
+    - absolute_outcome_factorized_hgb
+    - state_centered_paired_delta_hgb
+    - rule_relative_safe_residual_hgb
+    - group_rank_hgb
+  minimum_validation_quality: 0.50
+  maximum_validation_risk: 0.50
+  safe_residual_thresholds:
+    minimum_quality_delta_lcb: -0.02
+    minimum_emotional_support_delta_lcb: -0.025
+    maximum_risk_delta_ucb: 0.02
+    minimum_utility_delta_lcb: 0.00
+
+selection:
+  version: pmv2-selection-v2
+  uncertainty_z: 1.0
+  max_risk_ucb: 0.45
+  risk_weight: 0.25
+  cost_weight: 0.10
+  resource_min_gain: -0.02
+  strategy_min_gain: -0.01
+  m0_omission_trigger: 0.35
+  r0_strategy_omission_trigger: 0.35
+  fallback_action: M0+R0
+  fail_closed_on_ood: true
+  risk_ucb_thresholds:
+    selected_context_misuse: 0.35
+    unnecessary_exposure: 0.35
+    stale_or_conflicting_use: 0.30
+    unsupported_personal_claim: 0.30
+    memory_omission: 0.45
+    strategy_overuse: 0.35
+    strategy_omission: 0.45
+
+retrieval:
+  # A score of 0.0 rejects zero-overlap catalog entries while retaining
+  # positive lexical matches.  These values are frozen before external use.
+  memory_min_score: 0.0
+  strategy_min_score: 0.0
+  strategy_top_k: 3
+
+# Execution-layer Evidence Filter.  The PM remains strictly pre-retrieval and
+# chooses the requested source/strategy action.  This deterministic filter sees
+# the retrieved items and decides which candidates may enter the generator
+# prompt.  requested_action and effective_action are logged separately; filter
+# drops never count as learned PM abstention.
+evidence_filter:
+  protocol: pm-v2-evidence-filter-v1
+  # Forced false for PM-v1.5 (see header comment). scripts/v1_5/06, 20, 24,
+  # 24a already override this in code regardless of what this file says, so
+  # this value is documentation-of-intent, not the sole enforcement point.
+  enabled: false
+  candidate_scope: post_retrieval_pre_generation
+  memory_rules:
+    MP:
+      minimum_current_score: 0.08
+      minimum_context_score: 0.08
+      maximum_items: 2
+      long_item_token_threshold: null
+      long_item_minimum_current_score: null
+    MS:
+      minimum_current_score: 0.18
+      minimum_context_score: 0.22
+      maximum_items: 2
+      long_item_token_threshold: null
+      long_item_minimum_current_score: null
+    ME:
+      minimum_current_score: 0.50
+      minimum_context_score: 1.00
+      maximum_items: 1
+      long_item_token_threshold: 120
+      long_item_minimum_current_score: 0.65
+  strategy_rule:
+    minimum_current_score: 0.08
+    minimum_context_score: 0.12
+    maximum_items: 2
+    long_item_token_threshold: null
+    long_item_minimum_current_score: null
+  maximum_total_memory_items: 3
+  drop_exact_duplicate_text: true
+  allow_empty_memory: true
+  allow_empty_strategy: true
+
+evidence_filter_training:
+  protocol: pm-v2-evidence-filter-training-v1
+  train_split_only: true
+  word_hash_features: 512
+  char_hash_features: 512
+  random_seed: 8841
+  calibration_thresholds: [0.30, 0.40, 0.50, 0.60, 0.70, 0.80]
+  calibration_minimum_recall: 0.75
+  calibration_maximum_false_positive_rate: 0.30
+  internal_minimum_recall: 0.65
+  internal_minimum_precision: 0.55
+  internal_minimum_specificity: 0.65
+  require_before_development_sweep: false
+
+development_sweep:
+  # The hosted NVIDIA research endpoint is currently free for prototyping.
+  # Use a non-zero conservative budget-accounting proxy so the accepted cost
+  # gate cannot be collapsed by passing CLI zeros; this is not an invoice rate.
+  pricing_usd_per_mtok:
+    input: 0.15
+    output: 0.60
+  seed: 4311
+  request_retries: 1
+  fail_fast: true
+
+# Human, no-API audit of the synthetic state's semantic labels.  This gate is
+# completed after state generation and before even the compatibility action
+# sweep is planned, so structurally valid but semantically incoherent synthetic
+# data cannot trigger thousands of paid generation/judging calls.
+semantic_sanity_audit:
+  # Replaced by the attested automated multi-family gate in V1.5.
+  required_before_development_api: false
+  sample_seed: 6841
+  states_per_regime_per_split: 1
+  minimum_states_per_family_per_split: 1
+  minimum_annotators: 2
+  minimum_affirmative_rate_per_field: 0.90
+  minimum_pairwise_agreement_per_field: 0.80
+  minimum_affirmative_rate_per_regime: 0.80
+  minimum_affirmative_rate_per_split: 0.80
+  minimum_affirmative_rate_per_family: 0.80
+
+# Frozen pre-generation 27-case calibration matrix and exact judge aliases.
+# Every one of the 12 rubric dimensions has two deterministic, natural-language
+# corruptions. The runner rejects any CLI seed, panel, or matrix that differs.
+automated_semantic_review:
+  protocol: pm-v1.5-automated-semantic-review-v4-native-gemini-deterministic27-plus-paid9
+  control_protocol: pm-v1.5-pilot-controls-v2
+  judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_flash]
+  control_seed: 20260716
+  controls_per_field: 2
+  required_control_fields:
+    - semantic_family_match
+    - regime_match
+    - memory_sources_marginal_value_match
+    - memory_item_utility_match
+    - source_type_match
+    - dialogue_temporal_order_match
+    - context_grounding_match
+    - memory_age_design_match
+    - strategy_resource_need_match
+    - strategy_item_utility_match
+    - advice_readiness_match
+    - surface_naturalness_match
+
+# Paid response generation is forbidden until every one of the actual 468
+# generated states passes the same dual-family 12-field semantic rubric. The
+# internal split permits no deterministic surface fallback; train/calibration
+# tolerate at most one case only as an explicit fail-closed ceiling.
+actual_corpus_semantic_audit:
+  protocol: pm-v1.5-actual-468-semantic-review-v2
+  control_protocol: pm-v1.5-actual-corpus-controls-v2
+  control_seed: 20260716
+  controls_per_field: 2
+  required_control_fields:
+    - semantic_family_match
+    - regime_match
+    - memory_sources_marginal_value_match
+    - memory_item_utility_match
+    - source_type_match
+    - dialogue_temporal_order_match
+    - context_grounding_match
+    - memory_age_design_match
+    - strategy_resource_need_match
+    - strategy_item_utility_match
+    - advice_readiness_match
+    - surface_naturalness_match
+  required_before_action_response_generation: true
+  expected_states: 468
+  judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_flash]
+  required_all_fields_affirmative: true
+  maximum_provider_surface_fallback_rate_by_split:
+    train: 0.005
+    calibration: 0.01
+    internal_test: 0.0
+
+development_judging:
+  # Development and external judge families are disjoint. V1.5 does not run
+  # PM-v2.2's 180-generation compatibility pilot: its full judging run is
+  # gated by the automated semantic review and fails on the first unsuccessful
+  # physical call. The compatibility_pilot block below is retained only so
+  # shared parsers can read the config; V1.5 CLI branches reject its use.
+  judge_endpoints: [training_judge_gemini_flash_lite, training_judge_deepseek_flash]
+  # Frozen per-family accounting. Gemini rates are the paid-tier list prices;
+  # the NVIDIA-hosted DeepSeek endpoint is credit-backed, so the hard API-call
+  # cap (rather than a fictitious token price) is its primary budget bound.
+  pricing_usd_per_mtok:
+    google_gemini:
+      input: 0.10
+      output: 0.40
+    deepseek:
+      input: 0.0
+      output: 0.0
+  seed: 2701
+  response_max_output_tokens: 600
+  risk_max_output_tokens: 700
+  compatibility_pilot:
+    states_per_regime: 2
+    sample_seed: 6113
+    actions:
+      - M0+R0
+      - M0+RS
+      - MP+R0
+      - MP+RS
+      - MS+R0
+      - MS+RS
+      - ME+R0
+      - ME+RS
+      - MPMSME+R0
+      - MPMSME+RS
+    # Necessary no-API check that evaluator-defined resource needs are visible
+    # in the exact deployable fixed-hash/pre-retrieval feature space.  It uses
+    # train states only and user-group CV; it is not a performance claim.
+    deployable_feature_observability:
+      action_id: M0+R0
+      cv_folds: 5
+      classifier_c: 1.0
+      classifier_max_iter: 1000
+      random_seed: 8171
+      minimum_train_states: 180
+      minimum_regime_macro_f1: 0.20
+      minimum_needed_sources_macro_f1: 0.30
+      minimum_memory_need_macro_f1: 0.60
+      minimum_strategy_direction_macro_f1: 0.60
+      minimum_memory_direction_macro_f1: 0.60
+    minimum_schema_success_rate: 1.0
+    minimum_low_mad_coverage_per_dimension: 0.75
+    minimum_low_mad_coverage_per_action_dimension: 0.75
+    # Joint all-head reliability is retained only as a descriptive reference.
+    minimum_reliable_label_rate: 0.75
+    # Four-call schema smoke runs before the 180-call generator pilot:
+    # two judge families x response/risk.  Its generic fixed candidate tests
+    # structured-output compatibility, not response quality.
+    schema_smoke:
+      required_before_pilot_action_api: true
+      selection_seed: 8053
+      expected_physical_calls: 4
+      candidate_response: >-
+        I am sorry this feels so heavy. It makes sense that you would feel
+        pulled in different directions right now. We can slow this down and
+        focus first on the part that feels most urgent today.
+      selected_context: "[none]"
+    # Before the full 7,488-response sweep, anchor both development judge
+    # families to a small blinded human audit.  The sample is deliberately
+    # restricted to train states so no calibration/internal holdout labels are
+    # exposed to protocol tuning.  Two contrasting actions per regime yield
+    # exactly 9 x 1 x 2 = 18 audited responses.
+    human_spot_check:
+      # No human spot check is performed on the V1.5 fast track.
+      required_before_full_development_api: false
+      selection_seed: 7331
+      train_states_per_regime: 1
+      actions_per_regime: 2
+      diagnostic_actions_by_regime:
+        context_only: [M0+R0, MPMSME+RS]
+        profile_needed: [M0+R0, MP+R0]
+        summary_needed: [M0+R0, MS+R0]
+        event_needed: [M0+R0, ME+R0]
+        multi_source_needed: [M0+R0, MPMSME+R0]
+        memory_harmful: [M0+R0, MPMSME+R0]
+        strategy_helpful: [M0+R0, M0+RS]
+        strategy_harmful: [M0+R0, M0+RS]
+        ambiguous: [M0+R0, ME+R0]
+      minimum_annotators: 2
+      maximum_response_mae_per_dimension: 0.80
+      maximum_risk_mae_per_dimension: 0.60
+      minimum_llm_human_within_one_rate_per_dimension: 0.80
+      minimum_human_human_within_one_rate_per_dimension: 0.80
+    label_value_feasibility:
+      minimum_distinct_oracle_actions: 6
+      maximum_oracle_action_share: 0.35
+      minimum_m0_oracle_share: 0.10
+      minimum_r0_oracle_share: 0.15
+      minimum_rs_oracle_share: 0.15
+      minimum_distinct_oracle_actions_per_regime: 2
+      minimum_mean_within_state_quality_range: 0.05
+      minimum_mean_within_state_quality_variance: 0.0002
+      minimum_strategy_directional_separation: 0.01
+      minimum_memory_directional_separation: 0.01
+      # Optimistic per-state oracle minus best single fixed action on the same
+      # 18 train states.  These are necessary headroom checks, not evidence
+      # that a learned router can attain the oracle.
+      minimum_oracle_utility_headroom: 0.005
+      minimum_oracle_quality_headroom: 0.005
+      minimum_oracle_emotional_support_headroom: 0.005
+
+calibration_grid:
+  # Candidate selector weights may change which action is chosen, but every
+  # candidate is compared with this single frozen evaluation ruler. Otherwise
+  # reducing its own penalties would mechanically inflate its tuning objective.
+  objective_version: pmv2-calibration-utility-v1
+  objective_risk_weight: 0.25
+  objective_cost_weight: 0.10
+  cost_weights: [0.05, 0.10, 0.20, 0.30]
+  risk_weights: [0.15, 0.25, 0.40]
+  resource_gains: [-0.03, -0.01, 0.00, 0.02]
+  strategy_gains: [-0.02, 0.00, 0.02]
+  max_risks: [0.30, 0.40, 0.50]
+  minimum_quality: 0.50
+
+uncertainty_calibration:
+  # The Gaussian multiplier is preregistered. Head-wise split-conformal
+  # residual radii use one max-over-states-and-actions score per calibration
+  # user; z is not tuned against coverage. Wilson lower-bound thresholds are
+  # enforced only on the independent internal users, not on calibration fit.
+  z_candidates: [1.00]
+  target_coverage: 0.90
+  # Finite-sample evidence thresholds, not target coverage itself. At n=16,
+  # a 95% Wilson lower bound >=0.60 requires at least 14 covered user blocks.
+  minimum_quality_coverage_lower_bound: 0.60
+  minimum_response_coverage_lower_bound: 0.60
+  minimum_risk_coverage_lower_bound: 0.60
+  confidence_level: 0.95
+
+reliable_action_matrix_gate:
+  # Every state/action median remains in the estimand. Judge disagreement is
+  # handled per dimension by continuous MAD weights, while these gates reject
+  # incomplete or globally unreliable matrices without complete-case deletion.
+  train:
+    minimum_retained_states: 216
+    minimum_state_retention_rate: 1.0
+    minimum_retained_users: 24
+    minimum_user_retention_rate: 1.0
+    minimum_retained_semantic_families: 14
+    minimum_semantic_family_retention_rate: 1.0
+    minimum_low_mad_coverage_per_dimension: 0.90
+    minimum_low_mad_coverage_per_action_dimension: 0.80
+  calibration:
+    minimum_retained_states: 108
+    minimum_state_retention_rate: 1.0
+    minimum_retained_users: 12
+    minimum_user_retention_rate: 1.0
+    minimum_retained_semantic_families: 5
+    minimum_semantic_family_retention_rate: 1.0
+    minimum_low_mad_coverage_per_dimension: 0.90
+    minimum_low_mad_coverage_per_action_dimension: 0.67
+  internal_test:
+    minimum_retained_states: 144
+    minimum_state_retention_rate: 1.0
+    minimum_retained_users: 16
+    minimum_user_retention_rate: 1.0
+    minimum_retained_semantic_families: 5
+    minimum_semantic_family_retention_rate: 1.0
+    minimum_low_mad_coverage_per_dimension: 0.90
+    minimum_low_mad_coverage_per_action_dimension: 0.67
+
+data_label_gate:
+  maximum_single_action_share: 0.35
+  minimum_m0_share: 0.10
+  minimum_r0_share: 0.15
+  minimum_rs_share: 0.15
+  minimum_distinct_actions: 6
+  minimum_regime_pass_rate: 0.60
+  minimum_reliable_rate: 0.80
+
+internal_reportability_gate:
+  # The relaxed margins below describe a deployable non-inferiority/tradeoff
+  # diagnostic only.  External evaluation is gated by the separate zero-margin
+  # learned-routing advantage checks, so a PM that is detectably worse than the
+  # calibration-selected same-token fixed action cannot be promoted as having
+  # solved adaptive routing.
+  minimum_quality_delta_vs_cost_matched: -0.02
+  minimum_emotional_support_delta_vs_cost_matched: -0.10
+  minimum_utility_delta_vs_cost_matched: 0.00
+  # These three are strict lower bounds: the paired CI lower endpoint must be
+  # greater than (not equal to) zero. An all-tie policy is non-inferior but is
+  # not evidence that state-conditioned routing adds value.
+  minimum_advantage_quality_delta_vs_cost_matched: 0.00
+  minimum_advantage_emotional_support_delta_vs_cost_matched: 0.00
+  minimum_advantage_utility_delta_vs_cost_matched: 0.00
+  require_learned_routing_advantage_before_external: true
+  maximum_risk_delta_vs_cost_matched: 0.02
+  maximum_cost_matched_relative_deviation: 0.10
+  minimum_distinct_actions: 4
+  minimum_m0_rate: 0.05
+  minimum_r0_rate: 0.10
+  maximum_learned_action_share: 0.50
+  minimum_learned_action_entropy_bits: 1.00
+  minimum_nonfallback_m0_r0_rate: 0.05
+  maximum_severe_ood_fallback_rate: 0.10
+  maximum_no_feasible_fallback_rate: 0.10
+  minimum_mean_regime_pass_rate: 0.60
+  regime_wilson_confidence_level: 0.95
+  minimum_each_regime_wilson_lower_bound: 0.50
+  minimum_quality_interval_coverage: 0.60
+  minimum_response_interval_coverage: 0.60
+  minimum_risk_interval_coverage: 0.60
+  minimum_estimated_observed_cost_spearman: 0.70
+  paired_bootstrap_replicates: 4000
+  paired_bootstrap_seed: 4171
+  paired_bootstrap_confidence_level: 0.95
+
+protocol_gates:
+  protocol: pm-v1.5-three-layer-gates-v1
+  delta_direction: PM_minus_comparator
+  primary_bootstrap_block: user_id
+  gate_m_learned_vs_rule:
+    minimum_quality_delta: -0.02
+    minimum_emotional_support_delta: -0.10
+    maximum_risk_delta: 0.02
+    minimum_utility_delta: 0.00
+  gate_f_fixed_guardrail:
+    minimum_quality_delta: -0.02
+    minimum_emotional_support_delta: -0.10
+    maximum_risk_delta: 0.02
+    minimum_utility_delta: 0.00
+  gate_e_learned_vs_structured_high_resource:
+    minimum_quality_delta: -0.02
+    maximum_risk_delta: 0.02
+    maximum_generator_input_token_delta: 0.00
+
+decision_quality:
+  protocol: pm-v1.5-internal-decision-quality-v1
+  split: internal_test
+  utility_oracle_epsilon: 0.02
+  quality_acceptability_epsilon: 0.02
+  bootstrap_replicates: 4000
+  bootstrap_seed: 5197
+  bootstrap_confidence_level: 0.95
+
+splits:
+  require_user_disjoint: true
+  require_semantic_family_disjoint: true
+  require_normalized_current_text_disjoint: true
+  near_duplicate_audit:
+    method: fixed_hash_word_1_2_and_char_3_5_cosine
+    maximum_word_hash_cosine: 0.92
+    maximum_char_hash_cosine: 0.95
+    report_top_pairs: 50
+
+external_evaluation:
+  # EvoEmo is development-informed external evaluation, not a pristine
+  # confirmatory set. Users, not scenario-turn rows, are the primary
+  # independent blocks; scenario clustering remains a sensitivity analysis.
+  primary_bootstrap_cluster: user_id
+  sensitivity_bootstrap_cluster: scenario
+  primary_conditions:
+    - pm_v2
+    - pm_v1_5_transparent_rule_step0
+    - pm_v2_cost_matched_fixed
+    - pm_v2_me_r0_fixed
+    - best_fixed
+  condition_roles:
+    pm_v2: learned_step0
+    pm_v1_5_transparent_rule_step0: transparent_rule_same_step0
+    pm_v2_cost_matched_fixed: calibration_cost_matched_fixed
+    pm_v2_me_r0_fixed: explicit_ME+R0_guardrail
+    best_fixed: structured_high_resource_MPMSME+RS
+  secondary_conditions:
+    - no_memory_r0
+    - session_rag_rs
+    - full_history_rs
+  required_baselines:
+    - M0+R0
+    - ME+R0
+    - cost_matched_fixed
+    - structured_high_resource
+    - raw_session_top_k
+    - full_history
+  # Standard, uncached list prices frozen on 2026-07-14. Cost planning is
+  # endpoint-family specific and includes the structured-output schema payload.
+  judge_pricing_usd_per_mtok:
+    openai_gpt4o:
+      input: 2.50
+      output: 10.00
+    anthropic_claude:
+      input: 3.00
+      output: 15.00
+  primary_resource_metric: observed_input_tokens
+  maximum_cost_matched_relative_deviation: 0.10
+  minimum_low_mad_coverage_per_dimension: 0.80
+  minimum_low_mad_coverage_per_condition_dimension: 0.80
+  latency_role: diagnostic_only
+  # Replaces the old flat require_forced_swap_or_human_check_for_key_claims:
+  # true. That single boolean was misleading: PM-v1.5 does NOT run PM-v2.2's
+  # shared forced-swap *efficacy* key-claim verification (25_eval_pm_v2_
+  # external_v1_5.py passes require_key_claim_verification=False to the
+  # shared evaluator), so a bare "true" here read as if it did. This
+  # structured gate says explicitly which check is real (the V1.5
+  # judge-sensitivity canary, forced_swap block below) and which shared
+  # PM-v2.2 mechanism is deliberately not used, with the efficacy verdict
+  # coming from claim_assessment's frozen paired CIs instead. See
+  # src/metacom_pm/v1_5_forced_swap_canary.py:KEY_CLAIM_GATE (single source
+  # of truth; scripts/v1_5_create_freeze.py and
+  # scripts/v1_5/25_eval_pm_v2_external_v1_5.py both fail closed against it).
+  key_claim_gate:
+    protocol: pm-v1.5-key-claim-gate-v1
+    require_v1_5_forced_swap_canary: true
+    canary_role: judge_sensitivity_not_pm_efficacy
+    efficacy_decision: frozen_paired_quality_and_cost_ci
+    shared_pmv22_key_claim_verification: false
+  claim_assessment:
+    protocol: pm-v1.5-external-claim-assessment-v1
+    quality_judging_mode: anonymous_five_candidate_batched
+    primary_quality_judge_family: openai_gpt4o
+    sensitivity_judge_family: anthropic_claude
+    sensitivity_role: sensitivity_only_not_pooled
+    risk_audit_role: preregistered_stratified_audit_not_population_safety_claim
+    primary_quality_and_cost_comparator: best_fixed
+    quality_metric: quality_composite
+    # quality_composite is a weighted average of per-dimension scores
+    # normalized to [0,1] via (raw_1_to_5 - 1) / 4 (see
+    # src/metacom_pm/pm_v2_contracts.py:CompositeSpec.score). A margin of
+    # 0.02 on this [0,1] scale is therefore ~0.08 points on the original
+    # 1-5 Likert scale (0.02 * 4), not 0.02 of a 1-5 point -- keep this in
+    # mind when describing the non-inferiority margin in the paper.
+    quality_noninferiority_margin: 0.02
+    cost_metric: observed_input_tokens
+    maximum_cost_delta_ci_upper: 0.0
+    primary_cluster: user_id
+    latency_claim_status: descriptive_only_not_confirmatory
+  simulator_id: seeker_main
+  max_turns: 10
+  turn_indices: [3, 8]
+  external_judge_endpoints: [final_judge, final_judge_claude]
+  external_judge_seed: 3701
+  # V1.5 keeps the current freeze/policy-lock/generation lineage and changes
+  # only the final scoring transport. Five claim-relevant anonymous conditions
+  # are judged together; three historical diagnostics remain secondary and do
+  # not dilute the primary mechanism/fixed-policy matrix.
+  batched_judging:
+    protocol: pm-v1.5-external-anonymous-batched-v1
+    primary_quality_endpoint: final_judge
+    primary_scope: all_scoring_units
+    primary_order_variant: 0
+    sensitivity_quality_endpoint: final_judge_claude
+    sensitivity_role: sensitivity_only_not_pooled
+    sensitivity_units_per_user: 3
+    sensitivity_selection_seed: 6841
+    sensitivity_order_variant: 0
+    estimated_quality_output_tokens_per_call: 2200
+    bootstrap_replicates: 10000
+    bootstrap_confidence_level: 0.95
+    bootstrap_seed: 3701
+    schema_order_pilot:
+      pilot_units: 3
+      order_variants: [0, 1]
+      judge_types: [quality, risk]
+      estimated_quality_output_tokens: 2200
+      estimated_risk_output_tokens: 2600
+      expected_calls: 24
+      maximum_mean_absolute_order_delta: 0.15
+      maximum_single_absolute_order_delta: 0.35
+    risk_audit:
+      protocol: pm-v1.5-stratified-evidence-risk-audit-v1
+      role: preregistered_stratified_audit_not_population_safety_claim
+      units_per_user: 2
+      selection_seed: 7919
+      order_variant: 0
+      judge_endpoints: [final_judge, final_judge_claude]
+      estimated_output_tokens_per_call: 2600
+      primary_comparator: best_fixed
+      # risk_composite is normalized to [0,1]. This audit supports only the
+      # bounded "no increase signal in the stratified audit" wording.
+      nonincrease_margin: 0.05
+      reliable_mad_threshold: 1.0
+      minimum_low_mad_coverage: 0.70
+  strategy_action_tokens: 260
+  strategy_top_k: 3
+  memory_min_score: 0.0
+  strategy_min_score: 0.0
+  action_preflight:
+    maximum_severe_ood_fallback_rate: 0.10
+    maximum_no_feasible_fallback_rate: 0.10
+    minimum_m0_rate: 0.05
+    minimum_r0_rate: 0.10
+    minimum_m0_r0_rate: 0.05
+    minimum_nonfallback_rate: 0.80
+    maximum_action_share: 0.50
+    minimum_action_entropy_bits: 1.00
+  forced_swap:
+    # Small judge-sensitivity canary for the V1.5 fast track. It is not the
+    # efficacy test; efficacy comes from the frozen full external paired CIs.
+    sample_units: 12
+    order_variants: [0, 1]
+    judge_endpoints: [final_judge, final_judge_claude]
+    judge_seed: 9173
+    estimated_output_tokens_per_call: 700
+    exclude_sample_from_full_evaluation: true
+    maximum_order_disagreement_rate: 0.25
+    minimum_schema_success_rate: 1.0
+    minimum_cross_family_support_delta_correlation: 0.0
+    require_cross_family_direction_agreement: true
+    # Futility only: continue unless even the pilot CI upper bound is below
+    # this raw 1--5 support margin. Subsequent scoring uses disjoint units.
+    minimum_support_delta_ci_upper_for_continuation: -0.10
+    # These are efficacy gates, separate from the continuation/futility rule.
+    # A merely non-futile negative pilot can never verify PM superiority.
+    minimum_support_delta_ci_lower_for_advantage: 0.00
+    require_positive_support_delta_every_family: true
+    minimum_resolved_preference_margin: 1

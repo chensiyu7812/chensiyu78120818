@@ -8,8 +8,32 @@ import yaml
 from .api import Endpoint
 
 
+class _UniqueKeySafeLoader(yaml.SafeLoader):
+    pass
+
+
+def _construct_unique_mapping(loader, node, deep=False):
+    loader.flatten_mapping(node)
+    mapping = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        if key in mapping:
+            raise ValueError(f"duplicate YAML configuration key: {key!r}")
+        mapping[key] = loader.construct_object(value_node, deep=deep)
+    return mapping
+
+
+_UniqueKeySafeLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+    _construct_unique_mapping,
+)
+
+
 def load_config(path: str | Path) -> dict[str, Any]:
-    value = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+    value = yaml.load(
+        Path(path).read_text(encoding="utf-8"),
+        Loader=_UniqueKeySafeLoader,
+    )
     if not isinstance(value, dict):
         raise ValueError("configuration root must be a mapping")
     return value
@@ -39,6 +63,7 @@ def endpoint_from_config(config: Mapping[str, Any], name: str) -> Endpoint:
         api_key_env=str(raw["api_key_env"]),
         timeout_seconds=float(raw.get("timeout_seconds", 180.0)),
         family=(str(raw["family"]) if raw.get("family") else None),
+        transport=str(raw.get("transport") or "auto"),
     )
 
 

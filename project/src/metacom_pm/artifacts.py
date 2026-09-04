@@ -130,3 +130,103 @@ def require_artifact_attestation(*args, **kwargs) -> dict[str, Any]:
             "Artifact attestation failed:\n- " + "\n- ".join(result["errors"])
         )
     return result
+
+
+def verify_content_addressed_attestation(
+    attestation_path: str | Path,
+    *,
+    required_stage: str,
+    relocated_inputs: Mapping[str, str | Path],
+    relocated_outputs: Mapping[str, str | Path],
+) -> dict[str, Any]:
+    """Verify a relocated artifact bundle by logical name and content hash.
+
+    Older release bundles recorded absolute build-host paths.  Those paths are
+    provenance, not portable identities.  Relocation is safe only when the
+    attestation self-hash is intact and every replay-critical local file matches
+    the recorded digest (and JSONL row count, when present).  Unrequested bulky
+    raw-call outputs may remain provenance-only.
+    """
+
+    path = Path(attestation_path).resolve()
+    if not path.is_file():
+        return {"ok": False, "errors": [f"missing attestation: {path}"]}
+    value = read_json(path)
+    errors: list[str] = []
+    expected_self = value.get("attestation_sha256")
+    without_self = {key: item for key, item in value.items() if key != "attestation_sha256"}
+    if expected_self != sha256_text(canonical_json(without_self)):
+        errors.append("attestation record hash mismatch")
+    if value.get("status") != "ATTESTED":
+        errors.append("attestation status is not ATTESTED")
+    if value.get("stage") != required_stage:
+        errors.append(
+            f"stage mismatch: expected {required_stage}, got {value.get('stage')}"
+        )
+    if not relocated_inputs or not relocated_outputs:
+        errors.append("content-addressed relocation requires inputs and outputs")
+
+    relocated_records: dict[str, dict[str, Any]] = {}
+    for section_name, requested in (
+        ("inputs", relocated_inputs),
+        ("outputs", relocated_outputs),
+    ):
+        records = value.get(section_name) or {}
+        for logical_name, local_path in requested.items():
+            record = records.get(logical_name)
+            local = Path(local_path).resolve()
+            if not isinstance(record, dict):
+                errors.append(
+                    f"attestation lacks replay-critical {section_name} record: "
+                    f"{logical_name}"
+                )
+                continue
+            if not local.is_file():
+                errors.append(f"missing relocated {section_name} file: {local}")
+                continue
+            actual_sha256 = sha256_file(local)
+            if actual_sha256 != record.get("sha256"):
+                errors.append(
+                    f"relocated {section_name} hash mismatch: {logical_name}"
+                )
+            if "bytes" in record and local.stat().st_size != int(record["bytes"]):
+                errors.append(
+                    f"relocated {section_name} byte-count mismatch: {logical_name}"
+                )
+            if "rows" in record:
+                try:
+                    actual_rows = sum(1 for _ in iter_jsonl(local))
+                except Exception as exc:
+                    errors.append(
+                        f"cannot validate relocated JSONL {logical_name}: {exc}"
+                    )
+                else:
+                    if actual_rows != int(record["rows"]):
+                        errors.append(
+                            f"relocated {section_name} row-count mismatch: "
+                            f"{logical_name}"
+                        )
+            relocated_records[f"{section_name}.{logical_name}"] = {
+                "local_path": str(local),
+                "recorded_path": str(record.get("path") or ""),
+                "sha256": actual_sha256,
+            }
+    return {
+        "ok": not errors,
+        "errors": errors,
+        "attestation_sha256": expected_self,
+        "stage": value.get("stage"),
+        "path": str(path),
+        "content_addressed_relocation": True,
+        "relocated_records": relocated_records,
+    }
+
+
+def require_content_addressed_attestation(*args, **kwargs) -> dict[str, Any]:
+    result = verify_content_addressed_attestation(*args, **kwargs)
+    if not result["ok"]:
+        raise RuntimeError(
+            "Content-addressed artifact attestation failed:\n- "
+            + "\n- ".join(result["errors"])
+        )
+    return result

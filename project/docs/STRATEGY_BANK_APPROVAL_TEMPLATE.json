@@ -1,0 +1,22 @@
+{
+  "protocol": "pm-v2.2-strategy-bank-human-approval-v1",
+  "decision": "REPLACE_WITH_APPROVE_FOR_PM_V2_2_FORMAL_STUDY_AFTER_REVIEW",
+  "approver_id": "REPLACE_ME",
+  "approved_at_utc": "REPLACE_WITH_ISO_8601_UTC_TIMESTAMP",
+  "artifact_bindings": {
+    "strategy_bank_sha256": "REPLACE_ME",
+    "strategy_bank_card_count": 0,
+    "split_manifest_sha256": "REPLACE_ME",
+    "bank_audit_sha256": "REPLACE_ME",
+    "strategy_rag_audit_summary_sha256": "REPLACE_ME",
+    "provisional_candidate_manifest_sha256": "REPLACE_ME"
+  },
+  "declarations": {
+    "reviewed_bank_lineage": false,
+    "reviewed_leakage_audit": false,
+    "reviewed_distribution_shift": false,
+    "confirms_legacy_bank_is_not_mixed": false,
+    "approves_formal_pm_v2_2_use": false
+  },
+  "notes": "Complete this file only after human review. Keep the signed copy private and bind it into the study freeze."
+}

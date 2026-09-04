@@ -19,10 +19,8 @@ from .contracts import (
     PairRecord,
     ResponsePairJudgment,
     RuntimeState,
-    StrategyMode,
     StrategyOmissionJudgment,
     StrategyUseJudgment,
-    parse_action_id,
 )
 from .controls import heldout_controls
 from .io import (
@@ -532,13 +530,13 @@ def run_judging(
     expected_m0 = {
         (card_id, action_id)
         for card_id, action_id in expected_outcomes
-        if not parse_action_id(action_id)[0]
+        if not outcomes[(card_id, action_id)].memory_view
     }
     expected_m2 = expected_outcomes - expected_m0
     expected_strategy = {
         (card_id, action_id)
         for card_id, action_id in expected_outcomes
-        if parse_action_id(action_id)[1] is StrategyMode.RS
+        if outcomes[(card_id, action_id)].strategy_view
     }
     expected_strategy_omission = expected_outcomes - expected_strategy
     expected_response = {(pair.pair_id,) for pair in pairs}
@@ -604,8 +602,7 @@ def run_judging(
             state, backend = states[card_id], backends[card_id]
             for action_id in state.allowed_actions:
                 outcome = outcomes[(card_id, action_id)]
-                sources, strategy = parse_action_id(action_id)
-                if not sources and (card_id, action_id) not in done_m0:
+                if not outcome.memory_view and (card_id, action_id) not in done_m0:
                     messages = memory_omission_messages(state, backend.items, outcome.response)
                     try:
                         parsed = _call_with_semantic_retry(
@@ -617,7 +614,7 @@ def run_judging(
                         append_jsonl(paths["m0"], {"card_id": card_id, "action_id": action_id, **parsed.model_dump(mode="json")})
                     except Exception as exc:
                         failures.append({"stage": "m0", "card_id": card_id, "action_id": action_id, "error": str(exc)})
-                elif sources and (card_id, action_id) not in done_m2:
+                elif outcome.memory_view and (card_id, action_id) not in done_m2:
                     messages = memory_use_messages(
                         state, outcome.memory_view, outcome.response, all_items=backend.items
                     )
@@ -633,7 +630,7 @@ def run_judging(
                     except Exception as exc:
                         failures.append({"stage": "m2", "card_id": card_id, "action_id": action_id, "error": str(exc)})
 
-                if strategy is StrategyMode.RS and (card_id, action_id) not in done_s:
+                if outcome.strategy_view and (card_id, action_id) not in done_s:
                     messages = strategy_use_messages(state, outcome.strategy_view, outcome.response)
                     try:
                         parsed = _call_with_semantic_retry(
@@ -646,7 +643,7 @@ def run_judging(
                         append_jsonl(paths["strategy"], {"card_id": card_id, "action_id": action_id, **parsed.model_dump(mode="json")})
                     except Exception as exc:
                         failures.append({"stage": "strategy", "card_id": card_id, "action_id": action_id, "error": str(exc)})
-                elif strategy is StrategyMode.R0 and (card_id, action_id) not in done_s0:
+                elif not outcome.strategy_view and (card_id, action_id) not in done_s0:
                     messages = strategy_omission_messages(state, outcome.response)
                     try:
                         parsed = _call_with_semantic_retry(

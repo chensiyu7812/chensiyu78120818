@@ -1,12 +1,12 @@
 {
-  "status": "CONFIRMATORY_READY",
-  "confirmatory_ready": true,
-  "created_at": "2026-06-28T04:43:41.018842+00:00",
+  "status": "API_PILOT_READY",
+  "confirmatory_ready": false,
+  "created_at": "2026-07-19T04:17:15.715346+00:00",
   "checks": {
     "python_syntax": {
       "passed": true,
       "details": {
-        "n_python_files": 82,
+        "n_python_files": 242,
         "syntax_errors": [],
         "findings": {
           "hardcoded_home": [],
@@ -408,7 +408,7 @@
     "configuration_present": {
       "passed": true,
       "details": {
-        "path": "/home/tokkio/esconv_experiment_bundle/policy_manager_35/configs/experiment.yaml",
+        "path": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/configs/experiment.yaml",
         "schema_errors": [],
         "fill_warnings": [],
         "filled_for_api": true
@@ -433,12 +433,20 @@
     "documentation_present": {
       "passed": true,
       "details": [
-        "/home/tokkio/esconv_experiment_bundle/policy_manager_35/README_CN.md",
-        "/home/tokkio/esconv_experiment_bundle/policy_manager_35/docs/RUNBOOK_CN.md",
-        "/home/tokkio/esconv_experiment_bundle/policy_manager_35/docs/STUDY_PROTOCOL_CN.md",
-        "/home/tokkio/esconv_experiment_bundle/policy_manager_35/docs/MEASUREMENT_PROTOCOL_V2.md",
-        "/home/tokkio/esconv_experiment_bundle/policy_manager_35/docs/MEASUREMENT_PROTOCOL_V3.md"
+        "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/README_CN.md",
+        "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/docs/RUNBOOK_CN.md",
+        "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/docs/STUDY_PROTOCOL_CN.md",
+        "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/docs/MEASUREMENT_PROTOCOL_V2.md",
+        "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project/docs/MEASUREMENT_PROTOCOL_V3.md"
       ]
+    },
+    "pytest": {
+      "passed": true,
+      "details": {
+        "returncode": 0,
+        "stdout_tail": "........................................................................ [ 17%]\n........................................................................ [ 34%]\n........................................................................ [ 51%]\n.................................s.s....s..sssssss.ss................... [ 68%]\n........................................................................ [ 86%]\n.........................................................s               [100%]\n",
+        "stderr_tail": ""
+      }
     }
   },
   "confirmatory_checks": {
@@ -447,15 +455,45 @@
     "esconv_test_runtime_present": true,
     "configuration_filled": true,
     "model_family_independence": true,
-    "study_freeze_valid": true
+    "study_freeze_valid": false
   },
   "freeze_verification": {
-    "ok": true,
-    "errors": [],
-    "freeze_sha256": "a9f270041b54fff3c1f607c0365ef41b673977d62410e3ef2774280ed8b78876",
-    "release_root": "/home/tokkio/esconv_experiment_bundle/policy_manager_35"
+    "ok": false,
+    "errors": [
+      "config hash mismatch",
+      "hash mismatch: src/metacom_pm/prompts.py",
+      "hash mismatch: pyproject.toml",
+      "hash mismatch: scripts/06_run_action_sweep.py",
+      "hash mismatch: scripts/11_tune_validation.py",
+      "hash mismatch: scripts/11b_train_final_pm.py",
+      "hash mismatch: scripts/15a_build_evoemo_fixed_tracks.py",
+      "hash mismatch: scripts/17_eval_evoemo_selective.py",
+      "hash mismatch: src/metacom_pm/api.py",
+      "hash mismatch: src/metacom_pm/artifacts.py",
+      "hash mismatch: src/metacom_pm/config.py",
+      "hash mismatch: src/metacom_pm/contracts.py",
+      "hash mismatch: src/metacom_pm/evo_metrics.py",
+      "hash mismatch: src/metacom_pm/evoemo.py",
+      "hash mismatch: src/metacom_pm/features.py",
+      "hash mismatch: src/metacom_pm/freeze.py",
+      "hash mismatch: src/metacom_pm/io.py",
+      "hash mismatch: src/metacom_pm/judging.py",
+      "hash mismatch: src/metacom_pm/m2b.py",
+      "hash mismatch: src/metacom_pm/policies.py",
+      "hash mismatch: src/metacom_pm/prompts.py",
+      "hash mismatch: src/metacom_pm/release.py",
+      "hash mismatch: src/metacom_pm/retrieval.py",
+      "hash mismatch: src/metacom_pm/strategy_bank.py",
+      "hash mismatch: src/metacom_pm/sweep.py",
+      "hash mismatch: src/metacom_pm/text.py"
+    ],
+    "freeze_sha256": "0e6cb4e2c84da57532d04bb98bf23379acd70c9d00014ee18b96a99666d28798",
+    "release_root": "/home/tokkio/snap/metacom_v33_pm_v1_5_repair/project",
+    "status": "STALE_HISTORICAL_FREEZE",
+    "blocking_scope": "confirmatory_only",
+    "required_action": "do not refresh hashes in place; create a new freeze after the current candidate and all pre-freeze gates are complete"
   },
-  "manifest_sha256": "9457128a4245fbb23b2105e9a7aea7426aa2f60033c8342611ef324e1f9a3c2c",
-  "manifest_files": 838,
+  "manifest_sha256": "3702b03ba72c554bec1635dc83d3e0b3d2116f0898397673614ed768427d4b31",
+  "manifest_files": 610,
   "scope": "API_PILOT_READY permits only generator/judge calibration. CONFIRMATORY_READY additionally requires a locally installed or pinned official ESConv file, an overlap-audited train-only strategy bank, ESConv test runtime, filled model configuration, and a valid study freeze. The real judge pilot gate must still pass before full judging/training."
 }

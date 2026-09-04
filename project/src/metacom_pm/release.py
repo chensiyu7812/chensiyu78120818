@@ -43,7 +43,11 @@ def _is_current_release_python(root: Path, path: Path) -> bool:
         return True
     if parts[0] == "scripts":
         name = path.name
-        return bool(re.match(r"^(?:\d{2}[a-z]?_|99_).+\.py$", name))
+        return bool(
+            (len(parts) >= 2 and parts[1] == "v1_5")
+            or name.startswith("v1_5_")
+            or re.match(r"^(?:\d{2}[a-z]?_|99_).+\.py$", name)
+        )
     return False
 
 
@@ -73,8 +77,10 @@ def run_release_preflight(
     out_path: str | Path,
     *,
     run_tests: bool = True,
+    manifest_out_path: str | Path | None = None,
 ) -> dict[str, Any]:
     root = Path(root).resolve()
+    out_path = Path(out_path).resolve()
     checks: dict[str, dict[str, Any]] = {}
     scan = _scan_python(root)
     checks["python_syntax"] = {"passed": not scan["syntax_errors"], "details": scan}
@@ -209,9 +215,22 @@ def run_release_preflight(
             "stderr_tail": proc.stderr[-2000:],
         }}
 
-    # Build the manifest last and exclude the output itself to make it stable.
-    manifest = build_manifest(root, exclude={Path(out_path).name, "release_manifest.json"})
-    write_json(root / "release_manifest.json", manifest)
+    # Build the manifest last and exclude only generated outputs that are
+    # actually inside this release root. Tests may direct both outputs to
+    # tmp_path so a read-only preflight never mutates the shared checkout.
+    manifest_out = Path(manifest_out_path or (root / "release_manifest.json")).resolve()
+    excluded = {"release_manifest.json"}
+    for generated in (out_path, manifest_out):
+        try:
+            excluded.add(generated.relative_to(root).as_posix())
+        except ValueError:
+            pass
+    manifest = build_manifest(
+        root,
+        exclude=excluded,
+        tracked_only=True,
+    )
+    write_json(manifest_out, manifest)
     passed = all(value["passed"] for value in checks.values())
     esconv_path = root / "data/external/ESConv.json"
     evoemo_path = root / "data/external/evo_emo.json"
@@ -240,12 +259,44 @@ def run_release_preflight(
         confirmatory_data_ok = False
 
     freeze_path = root / "outputs/study_freeze.json"
-    freeze_result = {"ok": False, "errors": ["study freeze not created"]}
+    freeze_result = {
+        "ok": False,
+        "status": "NOT_CREATED",
+        "errors": ["study freeze not created"],
+        "blocking_scope": "confirmatory_only",
+        "required_action": (
+            "create a new study freeze only after the current candidate and "
+            "all pre-freeze gates are complete"
+        ),
+    }
     if freeze_path.is_file():
         try:
             freeze_result = verify_study_freeze(freeze_path, release_root=root)
+            freeze_result["status"] = (
+                "VALID_CURRENT_FREEZE"
+                if freeze_result.get("ok")
+                else "STALE_HISTORICAL_FREEZE"
+            )
+            freeze_result["blocking_scope"] = "confirmatory_only"
+            freeze_result["required_action"] = (
+                None
+                if freeze_result.get("ok")
+                else (
+                    "do not refresh hashes in place; create a new freeze after "
+                    "the current candidate and all pre-freeze gates are complete"
+                )
+            )
         except Exception as exc:
-            freeze_result = {"ok": False, "errors": [str(exc)]}
+            freeze_result = {
+                "ok": False,
+                "status": "INVALID_FREEZE_RECORD",
+                "errors": [str(exc)],
+                "blocking_scope": "confirmatory_only",
+                "required_action": (
+                    "investigate the malformed record and create a new freeze; "
+                    "never repair a confirmatory freeze in place"
+                ),
+            }
 
     confirmatory_checks = {
         "official_esconv_and_evoemo_present": bool(esconv_path.is_file() and evoemo_path.is_file()),

@@ -10,7 +10,6 @@ from .contracts import (
     MemorySelectedSetOmissionJudgment,
     MemorySource,
     RuntimeState,
-    parse_action_id,
 )
 from .io import (
     append_jsonl,
@@ -47,7 +46,7 @@ def _semantic_validate_m2b(
     state: RuntimeState,
     outcome: ActionOutcome,
 ) -> None:
-    selected_sources, _ = parse_action_id(outcome.action_id)
+    selected_sources = {item.source for item in outcome.memory_view}
     available_sources = {
         source for source, catalog in state.inventory.items() if catalog.available
     }
@@ -129,11 +128,11 @@ def run_m2b_audit(
     for card_id in sorted(states):
         state = states[card_id]
         for action_id in sorted(state.allowed_actions):
-            sources, _ = parse_action_id(action_id)
-            if not sources:
-                continue
-            if (card_id, action_id) not in outcomes:
+            outcome = outcomes.get((card_id, action_id))
+            if outcome is None:
                 raise ValueError(f"missing action outcome: {(card_id, action_id)}")
+            if not outcome.memory_view:
+                continue
             jobs.append((card_id, action_id))
     if max_rows is not None:
         jobs = jobs[:max_rows]

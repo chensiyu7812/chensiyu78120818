@@ -37,10 +37,11 @@ endpoints:
   # it passes the frozen V3 pilot gate. Final/confirmatory judging must use a
   # different model family.
   training_judge:
-    base_url: "https://generativelanguage.googleapis.com/v1beta/openai"
+    base_url: "https://generativelanguage.googleapis.com/v1beta"
     model: "gemini-2.5-flash-lite"
     api_key_env: "GEMINI_API_KEY"
     family: "google_gemini"
+    transport: "gemini_generate_content"
     timeout_seconds: 180
 
   # Cheap fallback for quick schema smoke tests only; it is not currently
@@ -79,17 +80,19 @@ endpoints:
   # generator, Mistral seeker, and NVIDIA-hosted judge candidates. Use only
   # after they pass the same V3 pilot gate as any other training judge.
   training_judge_gemini_flash_lite:
-    base_url: "https://generativelanguage.googleapis.com/v1beta/openai"
+    base_url: "https://generativelanguage.googleapis.com/v1beta"
     model: "gemini-2.5-flash-lite"
     api_key_env: "GEMINI_API_KEY"
     family: "google_gemini"
+    transport: "gemini_generate_content"
     timeout_seconds: 180
 
   training_judge_gemini_flash:
-    base_url: "https://generativelanguage.googleapis.com/v1beta/openai"
+    base_url: "https://generativelanguage.googleapis.com/v1beta"
     model: "gemini-2.5-flash"
     api_key_env: "GEMINI_API_KEY"
     family: "google_gemini"
+    transport: "gemini_generate_content"
     timeout_seconds: 180
 
   # Final/confirmatory judge: OpenAI family is independent from the default
