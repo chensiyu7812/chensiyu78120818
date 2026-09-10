@@ -1,0 +1,86 @@
+[
+  {
+    "unit_id": "state_7a0219635c9621d6fd9e",
+    "user_id": "p17",
+    "seed": 101,
+    "turn_index": 3,
+    "ordinal": 108
+  },
+  {
+    "unit_id": "state_21bae6b972f2df1611a6",
+    "user_id": "p16",
+    "seed": 101,
+    "turn_index": 3,
+    "ordinal": 90
+  },
+  {
+    "unit_id": "state_716d2a6c535b740cb855",
+    "user_id": "p12",
+    "seed": 101,
+    "turn_index": 8,
+    "ordinal": 25
+  },
+  {
+    "unit_id": "state_96214f50cc3e2ec6d2e6",
+    "user_id": "p6",
+    "seed": 101,
+    "turn_index": 8,
+    "ordinal": 175
+  },
+  {
+    "unit_id": "state_4955ef7e024bd4351130",
+    "user_id": "p9",
+    "seed": 202,
+    "turn_index": 3,
+    "ordinal": 200
+  },
+  {
+    "unit_id": "state_304d4720ac51c71890e6",
+    "user_id": "p7",
+    "seed": 202,
+    "turn_index": 3,
+    "ordinal": 182
+  },
+  {
+    "unit_id": "state_1bb2fbdd19dca1a22bdc",
+    "user_id": "p10",
+    "seed": 202,
+    "turn_index": 8,
+    "ordinal": 9
+  },
+  {
+    "unit_id": "state_dd0ab43a317c1550d2b4",
+    "user_id": "p5",
+    "seed": 202,
+    "turn_index": 8,
+    "ordinal": 159
+  },
+  {
+    "unit_id": "state_4efd86d565c932379234",
+    "user_id": "p2",
+    "seed": 303,
+    "turn_index": 3,
+    "ordinal": 136
+  },
+  {
+    "unit_id": "state_b34bb1d28ab722e83dc6",
+    "user_id": "p11",
+    "seed": 303,
+    "turn_index": 3,
+    "ordinal": 16
+  },
+  {
+    "unit_id": "state_1c2db2b901295c471336",
+    "user_id": "p3",
+    "seed": 303,
+    "turn_index": 8,
+    "ordinal": 149
+  },
+  {
+    "unit_id": "state_386f27896b4ed9f621e8",
+    "user_id": "p8",
+    "seed": 303,
+    "turn_index": 8,
+    "ordinal": 191
+  }
+]
