@@ -20,3 +20,4 @@ tmp/
 
 # Mutable API execution state; frozen experiment manifests are tracked separately.
 project/outputs/table3_under10/run_v1/
+project/outputs/table3_under10/run_local_v2/

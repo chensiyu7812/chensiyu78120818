@@ -1,0 +1,31 @@
+{
+  "freeze_commit": "fffe054",
+  "freeze_sha256": "668378d317aa06248960e367fe521621a0c32e75b889da603c71c80e573ce290",
+  "service": "pm-table3-under10-v1.service",
+  "status": {
+    "timestamp": "2026-09-10T05:50:00.555762+00:00",
+    "stage": "STOPPED",
+    "freeze_sha256": "668378d317aa06248960e367fe521621a0c32e75b889da603c71c80e573ce290",
+    "budget": {
+      "charged_upper_usd": 0.0,
+      "charged_plus_reserved_usd": 0.0,
+      "limit_usd": 9.0,
+      "attempts_by_status": {
+        "invalid": 1
+      }
+    },
+    "reason": "Provider request failed: HTTP 410; see saved response 595b849affd805f2ba190c9d5a8490b3a9359c54-1"
+  },
+  "first_generation_request_http_status": 410,
+  "provider_end_of_life_utc": "2026-08-26T09:00:00Z",
+  "openai_inference_calls": 0,
+  "recovery_proposal": {
+    "backend": "Local A6000; same Llama 3.1 8B Instruct weights",
+    "generator_api_usd": 0,
+    "user_confirmation": "PENDING",
+    "weights_bytes": 16060556376,
+    "official_mirror_weight_hashes_match": true,
+    "model_source_metadata": "/home/tokkio/audits/pm-v1-table3-20260910/local_recovery_sources.json",
+    "further_verification": "Tokenizer config differs between current official and mirror metadata; verify formatting and freeze selected tokenizer before any local scientific generation."
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "model_id": "meta/llama-3.1-8b-instruct",
+  "model_directory": "/home/tokkio/models/table3-llama31-8b-d10aef7",
+  "source_repository": "NousResearch/Meta-Llama-3.1-8B-Instruct",
+  "source_revision": "d10aef7999a2b5ba950ab3974312feeedbfe0b77",
+  "official_repository": "meta-llama/Llama-3.1-8B-Instruct",
+  "official_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+  "weight_hashes_match_official": true,
+  "model_files_sha256": {
+    "model-00001-of-00004.safetensors": "2b1879f356aed350030bb40eb45ad362c89d9891096f79a3ab323d3ba5607668",
+    "generation_config.json": "189fb0c0d7fd8a527db217c0a60a0e013f0394cd8800f9697a666a9e75e5f7fd",
+    "model-00003-of-00004.safetensors": "fc1cdddd6bfa91128d6e94ee73d0ce62bfcdb7af29e978ddcab30c66ae9ea7fa",
+    "tokenizer_config.json": "24e8a6dc2547164b7002e3125f10b415105644fcf02bf9ad8b674c87b1eaaed6",
+    "model-00002-of-00004.safetensors": "09d433f650646834a83c580877bd60c6d1f88f7755305c12576b5c7058f9af15",
+    "model.safetensors.index.json": "146776fce3f6db1103aa6f249e65ee5544c5923ce6f971b092eee79aa6e5d37b",
+    "config.json": "29e4c210b0d6ac178b16b2a255a568bdb23b581e50ca1ef6a6d071dd85704e6e",
+    "special_tokens_map.json": "6f38c73729248f6c127296386e3cdde96e254636cc58b4169d3fd32328d9a8ec",
+    "model-00004-of-00004.safetensors": "92ecfe1a2414458b4821ac8c13cf8cb70aed66b5eea8dc5ad9eeb4ff309d6d7b",
+    "tokenizer.json": "79e3e522635f3171300913bb421464a87de6222182a0570b9b2ccba2a964b2b4"
+  },
+  "generation_inputs_sha256": "bd4087c1d96129e290f8b48b69770eb56835fd2e4bf8e9e3fd61a71cab7a8255",
+  "server_code_sha256": "ecad4fbd4be69e72518ee5f354b0f96ddf16fd545bf909f883d3e7650e1e7067",
+  "packages": {
+    "torch": "2.10.0",
+    "transformers": "5.3.0",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.7.0",
+    "huggingface-hub": "1.7.1",
+    "accelerate": "1.13.0",
+    "jinja2": "3.1.6"
+  },
+  "dtype": "bfloat16",
+  "quantization": null,
+  "attention": "sdpa",
+  "decoding": "greedy",
+  "max_new_tokens": 100,
+  "eos_token_ids": [
+    128001,
+    128008,
+    128009
+  ],
+  "template_sha256": "b48c47f6443892716176eb200bf4ef108f64e06ca26ed0fa8ebc0a4b3992fcb2",
+  "template_scope": "Pinned mirror plain-text template: trim message edges, one BOS, per-message EOT, trailing assistant header. No date, tools or added system text.",
+  "template_validation": {
+    "all_generation_prompts_checked": 1224,
+    "max_input_tokens": 1937
+  },
+  "provenance_limit": "Official current tokenizer_config differs and is gated. Published mirror tokenizer/template is pinned; framing cross-checked against public Meta llama3 source. Historical NVIDIA renderer and numeric backend cannot be verified.",
+  "source_format_url": "https://github.com/meta-llama/llama-models/blob/0e0b8c519242d5833d8c11bffc1232b77ad7f301/models/llama3/chat_format.py",
+  "asset_sha256": "5daa1157e869435b9fedc80fb5b2479316dcdc8d8b868d1646cd9db0294f6637"
+}

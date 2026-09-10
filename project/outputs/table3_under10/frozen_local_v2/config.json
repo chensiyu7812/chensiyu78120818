@@ -1,0 +1,194 @@
+{
+  "protocol": "pm-v1-table3-memory-filter-diagnostic-mini-batch-v1-local-generator-v2",
+  "baseline_commit": "c16608343fe60e92e57c622fdc24738efe57d08c",
+  "turn_indices": [
+    3,
+    8
+  ],
+  "seeds": [
+    101,
+    202,
+    303
+  ],
+  "simulator_id": "seeker_main",
+  "checkpoint": "outputs/final_model_m2b_stable/pm_final.joblib",
+  "selection": "outputs/selection_stable.json",
+  "generator": {
+    "base_url": "http://127.0.0.1:18081",
+    "model": "meta/llama-3.1-8b-instruct",
+    "api_key_env": "LOCAL_NO_CLOUD_CREDENTIAL",
+    "temperature": 0.0,
+    "max_tokens": 100,
+    "api_usd_assumed": 0,
+    "cost_basis": "User approved same-model local A6000 generation; no external generation API charge.",
+    "local_generation": true
+  },
+  "judge": {
+    "base_url": "https://api.openai.com",
+    "model": "gpt-4.1-mini-2025-04-14",
+    "api_key_env": "OPENAI_API_KEY",
+    "temperature": 0.0,
+    "seed": 20260910,
+    "input_usd_per_million": 0.4,
+    "output_usd_per_million": 1.6,
+    "quality_max_tokens": 1600,
+    "risk_max_tokens": 600,
+    "omission_max_tokens": 300,
+    "quality_expected_tokens": 900,
+    "risk_expected_tokens": 350,
+    "omission_expected_tokens": 180,
+    "main_transport": "batch",
+    "batch_billing_multiplier": 0.5
+  },
+  "filter": {
+    "parameter_provenance": "Memory rules from f8508da:project/configs/pm_v2.yaml; memory-only adaptation; no outcome-based tuning for this run.",
+    "memory_rules": {
+      "MP": {
+        "minimum_current_score": 0.08,
+        "minimum_context_score": 0.08,
+        "maximum_items": 2,
+        "long_item_token_threshold": null,
+        "long_item_minimum_current_score": null
+      },
+      "MS": {
+        "minimum_current_score": 0.18,
+        "minimum_context_score": 0.22,
+        "maximum_items": 2,
+        "long_item_token_threshold": null,
+        "long_item_minimum_current_score": null
+      },
+      "ME": {
+        "minimum_current_score": 0.5,
+        "minimum_context_score": 1.0,
+        "maximum_items": 1,
+        "long_item_token_threshold": 120,
+        "long_item_minimum_current_score": 0.65
+      }
+    },
+    "maximum_total_memory_items": 3,
+    "drop_exact_duplicate_text": true,
+    "allow_empty_memory": true,
+    "strategy_passthrough": true
+  },
+  "analysis": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260910,
+    "primary_cluster": "user",
+    "sensitivity_cluster": "scenario",
+    "estimand": "Mean over all 204 fixed states; equal state weights.",
+    "bootstrap": "Sample clusters with replacement; include all states in each sampled cluster; weighted ratio preserves state-mean estimand.",
+    "confidence": 0.95,
+    "primary_metrics": [
+      "overall",
+      "misuse_clear",
+      "omission_clear"
+    ],
+    "misuse_clear": "selected_evidence_misuse >= 2",
+    "misuse_any": "selected_evidence_misuse >= 1",
+    "omission_clear": "independent omission_severity >= 2",
+    "planned_contrasts": [
+      "ON minus OFF for each policy",
+      "PM minus Rule and PM minus Fixed at each filter setting"
+    ],
+    "missing_observations": "No final table until all 204 x 6 x 3 valid main observations are present.",
+    "inference_scope": "Descriptive paired 95% intervals; no adjusted simultaneous coverage or guaranteed superiority."
+  },
+  "pricing_checked_on": "2026-09-10",
+  "reserve_fraction": 0.25,
+  "pilot_units": 12,
+  "pilot": {
+    "units": 12,
+    "selection_seed": 20260910,
+    "selection_rule": "Seed/turn strata sorted; choose two distinct users per cell in SHA256(seed:unit_id) order, excluding previously chosen users. No outcome or price selection.",
+    "quality_orders_per_judge": 2,
+    "risk_and_omission_per_arm": true,
+    "main_judge_transport": "synchronous",
+    "reference_judge_transport": "synchronous",
+    "reference_judge": {
+      "base_url": "https://api.openai.com",
+      "model": "gpt-4o-2024-08-06",
+      "api_key_env": "OPENAI_API_KEY",
+      "temperature": 0.0,
+      "seed": 20260910,
+      "input_usd_per_million": 2.5,
+      "output_usd_per_million": 10.0,
+      "quality_max_tokens": 1600,
+      "risk_max_tokens": 600,
+      "omission_max_tokens": 300,
+      "quality_expected_tokens": 900,
+      "risk_expected_tokens": 350,
+      "omission_expected_tokens": 180
+    },
+    "reference_scores_in_main_table": false,
+    "purpose": "Technical and rubric cross-check only; twelve units do not establish equivalence to GPT-4o or human raters."
+  },
+  "budget": {
+    "user_total_usd_exclusive_limit": 10.0,
+    "execution_reservation_limit_usd": 9.0,
+    "reserve_fraction": 0.25,
+    "automatic_model_upgrade": false,
+    "enforcement_status": "IMPLEMENTED_SQLITE_RESERVATIONS",
+    "submission_rule": "Before every submission or retry: charged usage + unresolved/queued reservations + new request output-cap reservation must be <=9 USD. Recount actual generated text first. Do not assume usage-unknown failures cost zero. Stop before submitting work that exceeds the limit.",
+    "previous_run_total_usd": 0
+  },
+  "pricing_sources": [
+    "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+    "https://developers.openai.com/api/docs/models/gpt-4o",
+    "https://developers.openai.com/api/docs/guides/batch"
+  ],
+  "source_plan": "outputs/table3_rerun_v1/plan",
+  "execution": {
+    "maximum_attempts_per_job": 2,
+    "input_reservation_multiplier": 1.25,
+    "input_reservation_extra_tokens": 64,
+    "batch_max_input_tokens": 1000000,
+    "batch_poll_seconds": 45,
+    "simultaneous_batches": 1,
+    "generation_order": "frozen unit order, then frozen arm order",
+    "generation_reuse": "Pilot replies reused in main; identical request hash required.",
+    "unknown_usage": "Keep reservation and stop; never implicitly resubmit.",
+    "model_or_schema_fallback": false
+  },
+  "pilot_gate": {
+    "complete_valid_observations_required": true,
+    "max_order_mean_abs_diff": 0.5,
+    "max_position_mean_shift": 0.4,
+    "order_gate_provenance": "v1 evo_response_v4.run_response_v4 defaults; applied to both judges.",
+    "max_reference_overall_mae": 0.75,
+    "minimum_reference_binary_agreement": 0.8,
+    "reference_gate_provenance": "New operational screening thresholds fixed before any outputs; not established equivalence criteria.",
+    "reference_quality_comparison_order": 0,
+    "binary_misuse_and_omission_threshold": 2,
+    "failure_action": "Stop before full scoring; preserve all pilot scores; no outcome-directed parameter changes."
+  },
+  "local_generator": {
+    "model_manifest": "outputs/table3_under10/local_model_v2/model_manifest.json",
+    "asset_sha256": "5daa1157e869435b9fedc80fb5b2479316dcdc8d8b868d1646cd9db0294f6637",
+    "service_unit": "pm-table3-llama-local-v2.service",
+    "dtype": "bfloat16",
+    "quantization": null,
+    "gpu": "NVIDIA RTX A6000",
+    "decoder_cleanup_spaces": false,
+    "generation_max_tokens": 100,
+    "greedy": true
+  },
+  "amendment": {
+    "parent_freeze_sha256": "668378d317aa06248960e367fe521621a0c32e75b889da603c71c80e573ce290",
+    "reason": "NVIDIA first generation request returned HTTP 410, model EOL 2026-08-26. User explicitly approved local A6000 recovery.",
+    "authorization": "User: 可以的，推进吧。 (approval of same 8B local recovery proposal)",
+    "changes": [
+      "Generation endpoint and numerical serving backend",
+      "Pinned mirror tokenizer template and per-request token hashes",
+      "Local service attestation before generation and in every generation response"
+    ],
+    "unchanged": [
+      "Weights identical to official Meta shard hashes",
+      "204 states and six arms",
+      "PM checkpoint and filter",
+      "All generation messages, temperature, max_tokens and seeds",
+      "All judge models/prompts/pilot gates",
+      "OpenAI pricing, 9 USD limit and statistical definitions"
+    ],
+    "limit": "No claim that local numerical execution or tokenizer wrapper is bit-identical to retired NVIDIA service."
+  }
+}
