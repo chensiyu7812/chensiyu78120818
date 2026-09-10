@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-09-10T07:59:47.699362+00:00",
+  "observed_bug": "Batch canonical_json(sort_keys=True) reordered JSON Schema properties; synchronous pilot sent native Pydantic declaration order.",
+  "quality_native_order": [
+    "candidate_id",
+    "emotional_support",
+    "personalization",
+    "memory_appropriateness",
+    "factual_grounding",
+    "temporal_consistency",
+    "non_intrusiveness",
+    "overall",
+    "reason"
+  ],
+  "quality_batch_order": [
+    "candidate_id",
+    "emotional_support",
+    "factual_grounding",
+    "memory_appropriateness",
+    "non_intrusiveness",
+    "overall",
+    "personalization",
+    "reason",
+    "temporal_consistency"
+  ],
+  "observed_failures": "Four quality attempts emitted a reason string followed by roughly 1480-1500 whitespace characters and hit output cap. One risk attempt also failed the stop check.",
+  "causal_limit": "Field-order inconsistency is directly verified; it is a plausible contributor to whitespace looping, not a proved sole cause.",
+  "repair": "Preserve schema declaration order on wire, reconstruct after persistence, hash exact ordered body. Re-evaluate all main jobs uniformly; reuse naturally completed generation and unchanged synchronous pilot.",
+  "official_source": "https://developers.openai.com/api/docs/guides/structured-outputs#key-ordering",
+  "paid_spend_upper_at_snapshot_usd": 3.4175511
+}
