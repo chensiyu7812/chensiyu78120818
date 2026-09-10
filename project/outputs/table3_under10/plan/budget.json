@@ -1,0 +1,141 @@
+{
+  "status": "PLANNED_NO_API",
+  "api_calls_made": 0,
+  "units": 204,
+  "arms_per_unit": 6,
+  "generation_main_calls": 1224,
+  "generation_extra_pilot_calls_budgeted": 72,
+  "generator_usd_assumed": 0,
+  "pilot_units": 12,
+  "pilot_distinct_users": 12,
+  "workloads": {
+    "main_mini_batch": {
+      "model": "gpt-4.1-mini-2025-04-14",
+      "billing_multiplier": 0.5,
+      "stages": {
+        "quality": {
+          "calls": 204,
+          "input_tokens_est": 1527114,
+          "output_tokens_expected": 183600,
+          "output_tokens_cap": 326400,
+          "usd_expected": 0.4523028,
+          "usd_output_caps_input_plus_10pct": 0.59708508
+        },
+        "risk": {
+          "calls": 1224,
+          "input_tokens_est": 3945618,
+          "output_tokens_expected": 428400,
+          "output_tokens_cap": 734400,
+          "usd_expected": 1.1318436,
+          "usd_output_caps_input_plus_10pct": 1.45555596
+        },
+        "omission": {
+          "calls": 1224,
+          "input_tokens_est": 7898868,
+          "output_tokens_expected": 220320,
+          "output_tokens_cap": 367200,
+          "usd_expected": 1.7560296000000002,
+          "usd_output_caps_input_plus_10pct": 2.0315109600000003
+        }
+      },
+      "usd_expected": 3.3401760000000005,
+      "usd_output_caps_input_plus_10pct": 4.0841520000000004
+    },
+    "pilot_mini_sync": {
+      "model": "gpt-4.1-mini-2025-04-14",
+      "billing_multiplier": 1,
+      "stages": {
+        "quality": {
+          "calls": 24,
+          "input_tokens_est": 176186,
+          "output_tokens_expected": 21600,
+          "output_tokens_cap": 38400,
+          "usd_expected": 0.10503440000000001,
+          "usd_output_caps_input_plus_10pct": 0.13896184000000003
+        },
+        "risk": {
+          "calls": 72,
+          "input_tokens_est": 231469,
+          "output_tokens_expected": 25200,
+          "output_tokens_cap": 43200,
+          "usd_expected": 0.13290760000000001,
+          "usd_output_caps_input_plus_10pct": 0.17096636
+        },
+        "omission": {
+          "calls": 72,
+          "input_tokens_est": 454212,
+          "output_tokens_expected": 12960,
+          "output_tokens_cap": 21600,
+          "usd_expected": 0.2024208,
+          "usd_output_caps_input_plus_10pct": 0.23441328000000003
+        }
+      },
+      "usd_expected": 0.44036280000000005,
+      "usd_output_caps_input_plus_10pct": 0.54434148
+    },
+    "pilot_gpt4o_sync": {
+      "model": "gpt-4o-2024-08-06",
+      "billing_multiplier": 1,
+      "stages": {
+        "quality": {
+          "calls": 24,
+          "input_tokens_est": 176186,
+          "output_tokens_expected": 21600,
+          "output_tokens_cap": 38400,
+          "usd_expected": 0.656465,
+          "usd_output_caps_input_plus_10pct": 0.8685115
+        },
+        "risk": {
+          "calls": 72,
+          "input_tokens_est": 231469,
+          "output_tokens_expected": 25200,
+          "output_tokens_cap": 43200,
+          "usd_expected": 0.8306725,
+          "usd_output_caps_input_plus_10pct": 1.06853975
+        },
+        "omission": {
+          "calls": 72,
+          "input_tokens_est": 454212,
+          "output_tokens_expected": 12960,
+          "output_tokens_cap": 21600,
+          "usd_expected": 1.26513,
+          "usd_output_caps_input_plus_10pct": 1.465083
+        }
+      },
+      "usd_expected": 2.7522675000000003,
+      "usd_output_caps_input_plus_10pct": 3.40213425
+    }
+  },
+  "total_usd_expected": 6.532806300000001,
+  "reserve_usd": 1.6332015750000002,
+  "token_reconciliation": {
+    "quality": {
+      "original_in_memory_plan_input_tokens_est": 1541592,
+      "reloaded_frozen_plan_input_tokens_est": 1527114,
+      "delta": -14478
+    },
+    "risk": {
+      "original_in_memory_plan_input_tokens_est": 3945618,
+      "reloaded_frozen_plan_input_tokens_est": 3945618,
+      "delta": 0
+    },
+    "omission": {
+      "original_in_memory_plan_input_tokens_est": 7898868,
+      "reloaded_frozen_plan_input_tokens_est": 7898868,
+      "delta": 0
+    }
+  },
+  "serialization_note": "Quality prompt uses unsorted json.dumps; sorted-key JSONL reload changes nested key ordering and BPE boundaries. Costs here use reloaded frozen inputs. Risk and omission counts match original exactly.",
+  "total_usd_with_25pct_reserve": 8.166007875000002,
+  "total_usd_output_caps_input_plus_10pct": 8.03062773,
+  "execution_reservation_limit_usd": 9.0,
+  "fits_planning_limit": true,
+  "basis": "Actual frozen prompts with BPE/schema overhead estimates and 100 GPT reply-token allowance per not-yet-generated response. Expected output lengths are assumptions. Output-cap/10%-input figure is a planning scenario, not a guaranteed invoice cap. No cache discounts. All pilot calls budgeted as extra to full run.",
+  "limitation": "Budget reservation and paid execution are not implemented by this offline planner. An enforced budget can halt an incomplete run; it cannot promise completion regardless of failures.",
+  "pricing_checked_on": "2026-09-10",
+  "pricing_sources": [
+    "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+    "https://developers.openai.com/api/docs/models/gpt-4o",
+    "https://developers.openai.com/api/docs/guides/batch"
+  ]
+}

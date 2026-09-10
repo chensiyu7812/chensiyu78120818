@@ -1,0 +1,56 @@
+{
+  "stages": {
+    "quality": {
+      "calls": 204,
+      "input_tokens_est": 1541592,
+      "mean_input_tokens_est": 7556.823529411765,
+      "max_input_tokens_est": 11788,
+      "output_tokens_expected": 183600,
+      "output_tokens_cap": 326400,
+      "standard_usd_est": 5.68998,
+      "standard_usd_planning_upper": 7.503378,
+      "batch_usd_est": 2.84499
+    },
+    "generation": {
+      "calls": 1224,
+      "input_tokens_est": 1317901,
+      "mean_input_tokens_est": 1076.7165032679738,
+      "max_input_tokens_est": 1867,
+      "output_tokens_cap": 122400,
+      "api_usd": null,
+      "note": "Original NVIDIA free model endpoint deprecated and absent from public catalog; account route unverified. No generator invoice price assumed."
+    },
+    "risk": {
+      "calls": 1224,
+      "input_tokens_est": 3945618,
+      "mean_input_tokens_est": 3223.544117647059,
+      "max_input_tokens_est": 4575,
+      "output_tokens_expected": 428400,
+      "output_tokens_cap": 734400,
+      "standard_usd_est": 14.148045,
+      "standard_usd_planning_upper": 18.1944495,
+      "batch_usd_est": 7.0740225
+    },
+    "omission": {
+      "calls": 1224,
+      "input_tokens_est": 7898868,
+      "mean_input_tokens_est": 6453.323529411765,
+      "max_input_tokens_est": 10627,
+      "output_tokens_expected": 220320,
+      "output_tokens_cap": 367200,
+      "standard_usd_est": 21.95037,
+      "standard_usd_planning_upper": 25.393887,
+      "batch_usd_est": 10.975185
+    }
+  },
+  "judge_standard_main_usd_est": 41.788395,
+  "judge_standard_pilot_usd_est": 2.792845588235294,
+  "judge_standard_total_with_reserve_usd_est": 55.72655073529412,
+  "judge_standard_main_planning_upper_usd": 51.0917145,
+  "judge_batch_main_plus_standard_pilot_with_reserve_usd_est": 29.60880386029412,
+  "generator_usd": null,
+  "total_invoice_usd": null,
+  "basis": "o200k_base BPE of full visible prompts + estimated schema overhead. Generated replies reserve 100 GPT tokens each; Llama tokenizer differs. Expected judge output lengths are assumptions, not measurements. Upper planning figure uses configured output caps and 10% input buffer; not an invoice ceiling. No cache discount assumed.",
+  "pricing_source": "https://developers.openai.com/api/docs/models/gpt-4o",
+  "pricing_checked_on": "2026-09-10"
+}

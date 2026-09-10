@@ -1,0 +1,25 @@
+{
+  "baseline_commit": "c16608343fe60e92e57c622fdc24738efe57d08c",
+  "verified_baseline_files": {
+    "outputs/final_model_m2b_stable/pm_final.joblib": "1408fa8deb51407ea6e6fa00354754d753ed277800e13bb571ef31b9636fdcad",
+    "outputs/selection_stable.json": "7ccb6825a0a29ad006dd073cbdb4941fc4ed2454c3ec191040232a842f45c89c",
+    "data/external/evo_emo.json": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420",
+    "data/strategy/strategy_cards.jsonl": "f64ded1e23b4a79c0e08c6b47355ad76b3880d5cbc0bfa7530f366149b5c70db",
+    "outputs/evoemo_fixed_tracks/fixed_seeker_tracks.jsonl": "447609e135f0a3813fd5f64c7bea6f1ba386c8bd5e439b4aa487a747ee41f9eb",
+    "src/metacom_pm/evoemo.py": "7f1e74ce58b0d8a468891b4c657236e3f5b14de86fea2e9575e3c7d85c528d49",
+    "src/metacom_pm/policies.py": "5f7bb27c6040f8414d982c389485fb4ada5fea80aacd510b230cebcac6833fde",
+    "src/metacom_pm/training.py": "14bffe883ffca69e157fa3986637ff1c3fc4c27d7aa79763b66cc5960ff5d629",
+    "src/metacom_pm/features.py": "9175d7700b9dd568c9640b64278702eb7f574d0b48fd50998fda0b6faa9877fc",
+    "src/metacom_pm/retrieval.py": "5202ca6e511d06254e0092629cb197f4e4536bb7bc90024cce78a3546c698d92",
+    "src/metacom_pm/prompts.py": "80504562eeb81e9644a4319c23881ade7369b929af78a5d59e1d8087f73bf559",
+    "src/metacom_pm/text.py": "d56cb2dc6c225da045a00e605d9c693abe21968b6a3427a60242fe2d08e6a21a",
+    "src/metacom_pm/contracts.py": "c9c49c97d01618e71d01c12f94bd5264d8b036a24c67256081848c30dd0bcabe"
+  },
+  "legacy_track_attestation_sha256": "66dc3d58dc1a3eb157d1514d655a017c734966c0bfb374ae9f9df65dac1d7902",
+  "legacy_attestation_preserved_unmodified": true,
+  "not_available": [
+    "original supporter responses/logs",
+    "original raw seeker calls"
+  ],
+  "scope": "Content-verified reuse of existing fixed tracks; no claim of reproducing original API transactions"
+}

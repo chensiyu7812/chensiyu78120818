@@ -1,0 +1,14 @@
+{
+  "status": "PLANNED_NO_API",
+  "api_calls_made": 0,
+  "source_plan": "outputs/table3_rerun_v1/plan",
+  "source_manifest_sha256": "ff2ac11390339d6c401c1005ffcc9fae65dd9385913dd24797b1126d34191eb4",
+  "source_manifest_file_sha256": "e14e85efa4541b6e1b4dc342cc04af0cab7773681183590e3fb666c67a72224f",
+  "planner_sha256": "b0901a40cfe295b103940153d4ab8b401a0e9309794dc2a013a73735d3bda438",
+  "artifact_hashes": {
+    "config.json": "4114ca1800cdc299dced7408585ea1d6404e895734519bdfbd6064caf08d0961",
+    "budget.json": "3ce5bdcec645a5df4af4bd64d96a39d1db356515ea0bf3a07383f39e88ddfccb",
+    "pilot_units.json": "89242297c24b626030a05ed9cf927469d798733c27da99134184ba6a378a4251"
+  },
+  "design_change": "Full-run judge changed from GPT-4o to GPT-4.1 mini, using Batch. Frozen generation inputs, six arms, sample, filters and three scoring prompts unchanged."
+}

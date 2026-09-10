@@ -1,0 +1,78 @@
+{
+  "protocol": "pm-v1-table3-memory-filter-diagnostic-v1",
+  "baseline_commit": "c16608343fe60e92e57c622fdc24738efe57d08c",
+  "turn_indices": [
+    3,
+    8
+  ],
+  "seeds": [
+    101,
+    202,
+    303
+  ],
+  "simulator_id": "seeker_main",
+  "checkpoint": "outputs/final_model_m2b_stable/pm_final.joblib",
+  "selection": "outputs/selection_stable.json",
+  "generator": {
+    "base_url": "https://integrate.api.nvidia.com",
+    "model": "meta/llama-3.1-8b-instruct",
+    "api_key_env": "NVIDIA_API_KEY",
+    "temperature": 0.0,
+    "max_tokens": 100
+  },
+  "judge": {
+    "base_url": "https://api.openai.com",
+    "model": "gpt-4o-2024-08-06",
+    "api_key_env": "OPENAI_API_KEY",
+    "temperature": 0.0,
+    "seed": 20260910,
+    "input_usd_per_million": 2.5,
+    "output_usd_per_million": 10.0,
+    "quality_max_tokens": 1600,
+    "risk_max_tokens": 600,
+    "omission_max_tokens": 300,
+    "quality_expected_tokens": 900,
+    "risk_expected_tokens": 350,
+    "omission_expected_tokens": 180
+  },
+  "filter": {
+    "parameter_provenance": "Memory rules from f8508da:project/configs/pm_v2.yaml; memory-only adaptation; no outcome-based tuning for this run.",
+    "memory_rules": {
+      "MP": {
+        "minimum_current_score": 0.08,
+        "minimum_context_score": 0.08,
+        "maximum_items": 2,
+        "long_item_token_threshold": null,
+        "long_item_minimum_current_score": null
+      },
+      "MS": {
+        "minimum_current_score": 0.18,
+        "minimum_context_score": 0.22,
+        "maximum_items": 2,
+        "long_item_token_threshold": null,
+        "long_item_minimum_current_score": null
+      },
+      "ME": {
+        "minimum_current_score": 0.5,
+        "minimum_context_score": 1.0,
+        "maximum_items": 1,
+        "long_item_token_threshold": 120,
+        "long_item_minimum_current_score": 0.65
+      }
+    },
+    "maximum_total_memory_items": 3,
+    "drop_exact_duplicate_text": true,
+    "allow_empty_memory": true,
+    "strategy_passthrough": true
+  },
+  "analysis": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260910,
+    "primary_cluster": "user",
+    "sensitivity_cluster": "scenario"
+  },
+  "pricing_checked_on": "2026-09-10",
+  "pricing_source": "https://developers.openai.com/api/docs/models/gpt-4o",
+  "reserve_fraction": 0.25,
+  "pilot_units": 12
+}
