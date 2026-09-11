@@ -1,0 +1,15 @@
+{
+  "freeze_sha256": "fcf404e9d1d35038d803c58cde50c40dbda474f0e5b6fe7d48cb074b4f3ad765",
+  "source_sha256": {
+    "main.jobs.jsonl": "76a333c0685937d0c7b1888b177bec706b69e5debb6be90902ca482e97c8a183",
+    "ledger.sqlite": "fddedbbda35dde96be17859e1a50893e4895492753e23b22dda96b23c0f2c487",
+    "table3.csv": "65de6a48ad33ce07dc2f05b65006e94dcccb0192aef79a02f26762cc980d1579",
+    "result_manifest.json": "2706d7e47203f4a271b319831107c001200c67931d17794db276e03a473897d3"
+  },
+  "script_sha256": "c08b71846fe0f13fcb79efd279e402625ff64a82394e538274cb47e99532cb7c",
+  "output_sha256": {
+    "TABLE3_ORIGINAL_FORMAT_CN.md": "04075a2c3f605a06dc1f17c5993248aa79fc00cc5c54903f57e6f6cb04702e2b",
+    "table3_original_format.csv": "2a54bd3adf2b1569a0d8276cc43ee2abccb0bd06974c3cb28c8a01a80a4766cb"
+  },
+  "scope": "Reformat existing scores; no new inference, no sample exclusions, no changes to frozen outputs."
+}

@@ -1,0 +1,9 @@
+**表 III 单条 risk 评分记录性例外，2026-09-10**
+
+`run_identity_v6` 把重试上限从 2 提到 5 后，`fixed_off` 臂某个 state 的 risk 评分把全部 5 次真实机会都用完了：5 次都通过正式 Batch API 提交、5 次返回的响应逐字节一致——`verdict`、`selected_evidence_misuse`、`unnecessary_exposure`、`stale_or_conflict`、`unsupported_personal_claim`、`source_set_appropriateness`、`strategy_overuse`、`strategy_omission`、`response_support_sufficiency`、`overall_risk`、`reason` 全部相同，`audit_call_id` 也对得上；唯一每次都不合规的是 `omission_severity`，5 次都是 1，而协议要求这次调用必须固定为 0（遗漏由另一个独立的 `omission` judge 测量）。这比 `identity_v6` 记录的那次域外诊断结果（同一输入曾单独拿到过一次合规响应）更有力：五次正式提交全部落在不合规的一侧，说明继续加大重试次数已经不是一个高性价比的办法。
+
+审计代码确认：`src/metacom_pm/table3_execution.py` 的 `export()`（第 561-583 行）在计算 `omission_clear`/`omission_severity` 这两列时，取的是独立 `omission` 阶段的观测（`obs[(uid, name, 'omission', 0)]`），从未读取 `risk` 阶段自己的 `omission_severity` 字段；`risk` 阶段真正进入 Table III 的字段只有 `misuse_any`/`misuse_clear`/`misuse_severity`/`major_issue_rate`/`overall_risk`。也就是说，这条校验规则守的是一个从不进入任何最终表格数字的辅助字段。
+
+把这个新证据完整呈现给用户后，用户在两个选项间明确选择："标记为永久例外，跳过继续跑完剩余（推荐）"，而不是先自己看一遍这条对话内容再决定。据此，本修订只对这**一个具体 job_id**（`2f558c28656652943f38ed85e88b2410133c6f36`）生效：取五次真实尝试中最早的一次（成本 $0.0008058，来自 `run_identity_v5` 的第 1 次尝试），原样接受为该 job 的正式记录——不改、不清零、不编造 `omission_severity`（如实保留为 1），只是不再要求它满足"该字段必须为 0"这一条与 Table III 输出无关的结构性检查。这不是放宽了一般规则：`parse_response`/`record_response` 里 selected-only omission 的硬性校验对其余全部 2651 条请求原样保留、不受影响；以后任何其他 job 如果同样把重试次数用完，需要单独拿回来给用户看，不会自动套用这条例外。
+
+已核验的证据（五次尝试的完整 attempt id、时间戳、费用、`omission_severity` 值）保存在 `identity_amendment_v7/incident.json`；父账本、run_identity_v6 的全部运行时证据文件原样保存在 `identity_amendment_v7` 并固定 hash。新运行 `run_identity_v7` 保存新账本、独立的 `risk_omission_exceptions/` 例外记录、原始响应、完整表格和分析；入口 `scripts/31_run_table3_risk_omission_exception_v7.py freeze|verify|run`。最终 Table III 的说明文字会明确标注这一条例外及其影响范围（2652 条正式评分请求中的 1 条；204 个 state 里那一个 state 在 `fixed_off` 臂的 risk 审计维度），不会悄悄合并进去。`run_identity_v5`、`run_identity_v6` 及更早的运行/冻结全部原样保留，不做任何修改。

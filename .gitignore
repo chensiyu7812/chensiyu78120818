@@ -24,3 +24,12 @@ project/outputs/table3_under10/run_local_v2/
 project/outputs/table3_under10/run_eos_v3/
 project/outputs/table3_under10/run_wire_v4/
 project/outputs/table3_under10/run_identity_v5/
+project/outputs/table3_under10/run_identity_v6/
+project/outputs/table3_under10/run_identity_v7/
+
+# Large execution evidence is preserved in the published, hash-verified archive.
+project/outputs/table3_under10/identity_amendment_v6/parent_ledger.sqlite
+project/outputs/table3_under10/identity_amendment_v6/parent_runtime/
+project/outputs/table3_under10/identity_amendment_v7/parent_ledger.sqlite
+project/outputs/table3_under10/identity_amendment_v7/parent_runtime/
+project/outputs/table3_under10/published_archive/table3_execution_evidence.tar.gz

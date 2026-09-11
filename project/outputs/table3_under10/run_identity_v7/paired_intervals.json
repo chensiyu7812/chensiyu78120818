@@ -1,0 +1,2382 @@
+[
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "emotional_support",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.19607843137254902,
+    "lower": -0.2761904761904762,
+    "upper": -0.1130952380952381,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "personalization",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.1715686274509804,
+    "lower": -0.25,
+    "upper": -0.0913978494623656,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "memory_appropriateness",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.11764705882352941,
+    "lower": -0.17204301075268819,
+    "upper": -0.06666666666666667,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "factual_grounding",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "temporal_consistency",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "non_intrusiveness",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.00980392156862745,
+    "lower": -0.05,
+    "upper": 0.028735632183908046,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "overall",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.18137254901960784,
+    "lower": -0.2631578947368421,
+    "upper": -0.09722222222222222,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "misuse_any",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.014705882352941176,
+    "lower": -0.010101010101010102,
+    "upper": 0.0392156862745098,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "misuse_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "misuse_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.014705882352941176,
+    "lower": -0.010101010101010102,
+    "upper": 0.0392156862745098,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "major_issue_rate",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "overall_risk",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.07352941176470588,
+    "lower": 0.029166666666666667,
+    "upper": 0.12626262626262627,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "omission_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.00980392156862745,
+    "upper": 0.029411764705882353,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "omission_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.03431372549019608,
+    "lower": -0.04285714285714286,
+    "upper": 0.12777777777777777,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "source_invocations",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -611.8039215686274,
+    "lower": -662.3495493358633,
+    "upper": -559.3609717868338,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "emotional_support",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.1715686274509804,
+    "lower": -0.25980392156862747,
+    "upper": -0.08333333333333333,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "personalization",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.17647058823529413,
+    "lower": -0.23809523809523808,
+    "upper": -0.11711711711711711,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "memory_appropriateness",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.11274509803921569,
+    "lower": -0.17222222222222222,
+    "upper": -0.053763440860215055,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "factual_grounding",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "temporal_consistency",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "non_intrusiveness",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.041666666666666664,
+    "upper": 0.036458333333333336,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "overall",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.16666666666666666,
+    "lower": -0.25225225225225223,
+    "upper": -0.08080808080808081,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "misuse_any",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.023809523809523808,
+    "upper": 0.023148148148148147,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "misuse_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "misuse_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.023809523809523808,
+    "upper": 0.023148148148148147,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "major_issue_rate",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "overall_risk",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.14705882352941177,
+    "lower": 0.07471264367816093,
+    "upper": 0.21052631578947367,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "omission_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.029411764705882353,
+    "lower": -0.05128205128205128,
+    "upper": -0.009523809523809525,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "omission_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.09803921568627451,
+    "lower": -0.16666666666666666,
+    "upper": -0.01904761904761905,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "source_invocations",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -933.0343137254902,
+    "lower": -961.868591017488,
+    "upper": -908.0936681547619,
+    "clusters": 18
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "emotional_support",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.18627450980392157,
+    "lower": -0.2878787878787879,
+    "upper": -0.09375,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "personalization",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.18137254901960784,
+    "lower": -0.2702702702702703,
+    "upper": -0.10101010101010101,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "memory_appropriateness",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.12745098039215685,
+    "lower": -0.19696969696969696,
+    "upper": -0.05952380952380952,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "factual_grounding",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "temporal_consistency",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "non_intrusiveness",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.043010752688172046,
+    "upper": 0.03535353535353535,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "overall",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.19607843137254902,
+    "lower": -0.3,
+    "upper": -0.10100677830940993,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "misuse_any",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.024509803921568627,
+    "lower": 0.009009009009009009,
+    "upper": 0.043010752688172046,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "misuse_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "misuse_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.024509803921568627,
+    "lower": 0.009009009009009009,
+    "upper": 0.043010752688172046,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "major_issue_rate",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "overall_risk",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.12254901960784313,
+    "lower": 0.00520438762626263,
+    "upper": 0.23737373737373738,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "omission_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.004901960784313725,
+    "lower": -0.011111111111111112,
+    "upper": 0.020833333333333332,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "omission_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.029411764705882353,
+    "lower": -0.12857142857142856,
+    "upper": 0.06140350877192982,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "source_invocations",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -944.8284313725491,
+    "lower": -974.5231712962964,
+    "upper": -918.9602941176471,
+    "clusters": 18
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "emotional_support",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.05405686936936937,
+    "upper": 0.07353226174190602,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "personalization",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.0196078431372549,
+    "lower": -0.08333333333333333,
+    "upper": 0.043859649122807015,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "memory_appropriateness",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.004901960784313725,
+    "lower": -0.044444444444444446,
+    "upper": 0.053763440860215055,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "factual_grounding",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "temporal_consistency",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "non_intrusiveness",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.010101010101010102,
+    "upper": 0.03572232947232935,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "overall",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.05405686936936937,
+    "upper": 0.07353226174190602,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "misuse_any",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.026041666666666668,
+    "upper": 0.016666666666666666,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "misuse_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "misuse_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.026041666666666668,
+    "upper": 0.016666666666666666,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "major_issue_rate",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "overall_risk",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.09803921568627451,
+    "lower": 0.04954954954954955,
+    "upper": 0.1452991452991453,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "omission_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.029411764705882353,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "omission_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.06372549019607843,
+    "lower": -0.13425925925925927,
+    "upper": 0.020202020202020204,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "source_invocations",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.28431372549019607,
+    "lower": -0.3620797413793103,
+    "upper": -0.20202020202020202,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -341.29901960784315,
+    "lower": -396.9324103942652,
+    "upper": -287.6885651629073,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -341.29901960784315,
+    "lower": -396.9324103942652,
+    "upper": -287.6885651629073,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "emotional_support",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.0196078431372549,
+    "lower": -0.08771929824561403,
+    "upper": 0.049019607843137254,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "personalization",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.0392156862745098,
+    "lower": -0.10952380952380952,
+    "upper": 0.029411764705882353,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "memory_appropriateness",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.024509803921568627,
+    "lower": -0.07657657657657657,
+    "upper": 0.03333333333333333,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "factual_grounding",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "temporal_consistency",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "non_intrusiveness",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.013157894736842105,
+    "upper": 0.03431372549019608,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "overall",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.03431372549019608,
+    "lower": -0.10784313725490197,
+    "upper": 0.041666666666666664,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "misuse_any",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.004901960784313725,
+    "lower": -0.011111111111111112,
+    "upper": 0.021505376344086023,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "misuse_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "misuse_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.004901960784313725,
+    "lower": -0.011111111111111112,
+    "upper": 0.021505376344086023,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "major_issue_rate",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "overall_risk",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.06862745098039216,
+    "lower": -0.010752688172043012,
+    "upper": 0.1523809523809524,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "omission_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.009523809523809525,
+    "upper": 0.02857142857142857,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "omission_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.07526881720430108,
+    "upper": 0.044444444444444446,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "source_invocations",
+    "cluster": "user_id",
+    "delta_left_minus_right": -1.2843137254901962,
+    "lower": -1.3620797413793102,
+    "upper": -1.202020202020202,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -354.5637254901961,
+    "lower": -410.4466452205882,
+    "upper": -300.7499465811966,
+    "clusters": 18
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -354.5637254901961,
+    "lower": -410.4466452205882,
+    "upper": -300.7499465811966,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "emotional_support",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.05172413793103448,
+    "upper": 0.021505376344086023,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "personalization",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.05555555555555555,
+    "upper": 0.023148148148148147,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "memory_appropriateness",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.04054054054054054,
+    "upper": 0.041666666666666664,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "factual_grounding",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "temporal_consistency",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "non_intrusiveness",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.014705882352941176,
+    "upper": 0.014705882352941176,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "overall",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.04285714285714286,
+    "upper": 0.03125,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "misuse_any",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.01282051282051282,
+    "upper": 0.03333333333333333,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "misuse_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "misuse_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.01282051282051282,
+    "upper": 0.03333333333333333,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "major_issue_rate",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "overall_risk",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.024509803921568627,
+    "lower": -0.031007751937984496,
+    "upper": 0.08333333333333333,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "omission_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.024509803921568627,
+    "lower": 0.004901960784313725,
+    "upper": 0.049019607843137254,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "omission_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.06862745098039216,
+    "lower": 0.0,
+    "upper": 0.1571494708994708,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "source_invocations",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.28431372549019607,
+    "lower": -0.3620797413793103,
+    "upper": -0.20202020202020202,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -20.068627450980394,
+    "lower": -26.859824561403506,
+    "upper": -14.032407407407407,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -341.29901960784315,
+    "lower": -396.9324103942652,
+    "upper": -287.6885651629073,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "emotional_support",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.029411764705882353,
+    "lower": -0.06060606060606061,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "personalization",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.029411764705882353,
+    "lower": -0.06372549019607843,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "memory_appropriateness",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.050505050505050504,
+    "upper": 0.022222222222222223,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "factual_grounding",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "temporal_consistency",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "non_intrusiveness",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.019240196078431367,
+    "upper": 0.020833333333333332,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "overall",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.0196078431372549,
+    "lower": -0.05238095238095238,
+    "upper": 0.011111111111111112,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "misuse_any",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.022222222222222223,
+    "upper": 0.010752688172043012,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "misuse_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "misuse_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.022222222222222223,
+    "upper": 0.010752688172043012,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "major_issue_rate",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "overall_risk",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.0196078431372549,
+    "lower": -0.046875,
+    "upper": 0.08585858585858586,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "omission_clear",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.014705882352941176,
+    "lower": -0.011111111111111112,
+    "upper": 0.04411764705882353,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "omission_severity",
+    "cluster": "user_id",
+    "delta_left_minus_right": 0.049019607843137254,
+    "lower": -0.05392156862745098,
+    "upper": 0.17619747899159655,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "source_invocations",
+    "cluster": "user_id",
+    "delta_left_minus_right": -1.2843137254901962,
+    "lower": -1.3620797413793102,
+    "upper": -1.202020202020202,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -21.53921568627451,
+    "lower": -28.096805819101835,
+    "upper": -15.41922811059908,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "user_id",
+    "delta_left_minus_right": -354.5637254901961,
+    "lower": -410.4466452205882,
+    "upper": -300.7499465811966,
+    "clusters": 18
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "emotional_support",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.19607843137254902,
+    "lower": -0.2696078431372549,
+    "upper": -0.11764705882352941,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "personalization",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.1715686274509804,
+    "lower": -0.24019607843137256,
+    "upper": -0.10784313725490197,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "memory_appropriateness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.11764705882352941,
+    "lower": -0.16666666666666666,
+    "upper": -0.06862745098039216,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "factual_grounding",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "temporal_consistency",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "non_intrusiveness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.00980392156862745,
+    "lower": -0.04411764705882353,
+    "upper": 0.029411764705882353,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "overall",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.18137254901960784,
+    "lower": -0.2549019607843137,
+    "upper": -0.10784313725490197,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "misuse_any",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.014705882352941176,
+    "lower": -0.00980392156862745,
+    "upper": 0.0392156862745098,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "misuse_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "misuse_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.014705882352941176,
+    "lower": -0.00980392156862745,
+    "upper": 0.0392156862745098,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "major_issue_rate",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "overall_risk",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.07352941176470588,
+    "lower": 0.0,
+    "upper": 0.14705882352941177,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "omission_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.014705882352941176,
+    "upper": 0.03431372549019608,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "omission_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.03431372549019608,
+    "lower": -0.0392156862745098,
+    "upper": 0.10784313725490197,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "source_invocations",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -611.8039215686274,
+    "lower": -666.7214460784314,
+    "upper": -560.2430147058824,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "pm_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "emotional_support",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.1715686274509804,
+    "lower": -0.25980392156862747,
+    "upper": -0.08823529411764706,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "personalization",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.17647058823529413,
+    "lower": -0.24509803921568626,
+    "upper": -0.10784313725490197,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "memory_appropriateness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.11274509803921569,
+    "lower": -0.1715686274509804,
+    "upper": -0.05392156862745098,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "factual_grounding",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "temporal_consistency",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "non_intrusiveness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.0392156862745098,
+    "upper": 0.0392156862745098,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "overall",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.16666666666666666,
+    "lower": -0.25,
+    "upper": -0.08333333333333333,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "misuse_any",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.024509803921568627,
+    "upper": 0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "misuse_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "misuse_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.024509803921568627,
+    "upper": 0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "major_issue_rate",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "overall_risk",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.14705882352941177,
+    "lower": 0.08333333333333333,
+    "upper": 0.20588235294117646,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "omission_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.029411764705882353,
+    "lower": -0.058823529411764705,
+    "upper": -0.004901960784313725,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "omission_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.09803921568627451,
+    "lower": -0.1715686274509804,
+    "upper": -0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "source_invocations",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -933.0343137254902,
+    "lower": -957.3438725490196,
+    "upper": -909.593137254902,
+    "clusters": 34
+  },
+  {
+    "left": "rule_on",
+    "right": "rule_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "emotional_support",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.18627450980392157,
+    "lower": -0.27941176470588236,
+    "upper": -0.09803921568627451,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "personalization",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.18137254901960784,
+    "lower": -0.27941176470588236,
+    "upper": -0.08823529411764706,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "memory_appropriateness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.12745098039215685,
+    "lower": -0.20098039215686275,
+    "upper": -0.058823529411764705,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "factual_grounding",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "temporal_consistency",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "non_intrusiveness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.04411764705882353,
+    "upper": 0.0392156862745098,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "overall",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.19607843137254902,
+    "lower": -0.29411764705882354,
+    "upper": -0.10294117647058823,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "misuse_any",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.024509803921568627,
+    "lower": 0.0,
+    "upper": 0.049019607843137254,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "misuse_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "misuse_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.024509803921568627,
+    "lower": 0.0,
+    "upper": 0.049019607843137254,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "major_issue_rate",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "overall_risk",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.12254901960784313,
+    "lower": 0.00980392156862745,
+    "upper": 0.23039215686274508,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "omission_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.004901960784313725,
+    "lower": -0.00980392156862745,
+    "upper": 0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "omission_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.029411764705882353,
+    "lower": -0.11764705882352941,
+    "upper": 0.058823529411764705,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "source_invocations",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -944.8284313725491,
+    "lower": -969.3886029411765,
+    "upper": -920.8868872549019,
+    "clusters": 34
+  },
+  {
+    "left": "fixed_on",
+    "right": "fixed_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "emotional_support",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.049019607843137254,
+    "upper": 0.06372549019607843,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "personalization",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.0196078431372549,
+    "lower": -0.0784313725490196,
+    "upper": 0.03431372549019608,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "memory_appropriateness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.004901960784313725,
+    "lower": -0.04411764705882353,
+    "upper": 0.05392156862745098,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "factual_grounding",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "temporal_consistency",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "non_intrusiveness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.00980392156862745,
+    "upper": 0.029411764705882353,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "overall",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.049019607843137254,
+    "upper": 0.06372549019607843,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "misuse_any",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.024509803921568627,
+    "upper": 0.014705882352941176,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "misuse_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "misuse_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.024509803921568627,
+    "upper": 0.014705882352941176,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "major_issue_rate",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "overall_risk",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.09803921568627451,
+    "lower": 0.0392156862745098,
+    "upper": 0.1568627450980392,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "omission_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.03431372549019608,
+    "upper": 0.004901960784313725,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "omission_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.06372549019607843,
+    "lower": -0.15196078431372548,
+    "upper": 0.0196078431372549,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "source_invocations",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.28431372549019607,
+    "lower": -0.37254901960784315,
+    "upper": -0.20098039215686275,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -341.29901960784315,
+    "lower": -394.6863970588235,
+    "upper": -285.6453431372549,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "rule_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -341.29901960784315,
+    "lower": -394.6863970588235,
+    "upper": -285.6453431372549,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "emotional_support",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.0196078431372549,
+    "lower": -0.08823529411764706,
+    "upper": 0.04411764705882353,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "personalization",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.0392156862745098,
+    "lower": -0.10784313725490197,
+    "upper": 0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "memory_appropriateness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.024509803921568627,
+    "lower": -0.08333333333333333,
+    "upper": 0.03431372549019608,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "factual_grounding",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "temporal_consistency",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "non_intrusiveness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.00980392156862745,
+    "upper": 0.03431372549019608,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "overall",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.03431372549019608,
+    "lower": -0.10784313725490197,
+    "upper": 0.03431372549019608,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "misuse_any",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.004901960784313725,
+    "lower": -0.00980392156862745,
+    "upper": 0.0196078431372549,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "misuse_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "misuse_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.004901960784313725,
+    "lower": -0.00980392156862745,
+    "upper": 0.0196078431372549,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "major_issue_rate",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "overall_risk",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.06862745098039216,
+    "lower": -0.024509803921568627,
+    "upper": 0.1568627450980392,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "omission_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.00980392156862745,
+    "upper": 0.029411764705882353,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "omission_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.08823529411764706,
+    "upper": 0.058823529411764705,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "source_invocations",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -1.2843137254901962,
+    "lower": -1.3725490196078431,
+    "upper": -1.2009803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -354.5637254901961,
+    "lower": -407.9925245098039,
+    "upper": -298.84754901960787,
+    "clusters": 34
+  },
+  {
+    "left": "pm_off",
+    "right": "fixed_off",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -354.5637254901961,
+    "lower": -407.9925245098039,
+    "upper": -298.84754901960787,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "emotional_support",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.058823529411764705,
+    "upper": 0.029411764705882353,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "personalization",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.058823529411764705,
+    "upper": 0.029411764705882353,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "memory_appropriateness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.04411764705882353,
+    "upper": 0.04411764705882353,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "factual_grounding",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "temporal_consistency",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "non_intrusiveness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.014705882352941176,
+    "upper": 0.014705882352941176,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "overall",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.05392156862745098,
+    "upper": 0.0392156862745098,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "misuse_any",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.0196078431372549,
+    "upper": 0.03443627450980214,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "misuse_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "misuse_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.00980392156862745,
+    "lower": -0.0196078431372549,
+    "upper": 0.03443627450980214,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "major_issue_rate",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "overall_risk",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.024509803921568627,
+    "lower": -0.04411764705882353,
+    "upper": 0.09313725490196079,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "omission_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.024509803921568627,
+    "lower": 0.004901960784313725,
+    "upper": 0.04411764705882353,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "omission_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.06862745098039216,
+    "lower": 0.00980392156862745,
+    "upper": 0.1323529411764706,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "source_invocations",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.28431372549019607,
+    "lower": -0.37254901960784315,
+    "upper": -0.20098039215686275,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -20.068627450980394,
+    "lower": -27.299264705882354,
+    "upper": -13.48026960784314,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "rule_on",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -341.29901960784315,
+    "lower": -394.6863970588235,
+    "upper": -285.6453431372549,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "emotional_support",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.029411764705882353,
+    "lower": -0.07352941176470588,
+    "upper": 0.00980392156862745,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "personalization",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.029411764705882353,
+    "lower": -0.07352941176470588,
+    "upper": 0.00980392156862745,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "memory_appropriateness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.014705882352941176,
+    "lower": -0.058823529411764705,
+    "upper": 0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "factual_grounding",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "temporal_consistency",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "non_intrusiveness",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": -0.0196078431372549,
+    "upper": 0.0196078431372549,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "overall",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.0196078431372549,
+    "lower": -0.06372549019607843,
+    "upper": 0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "misuse_any",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.03431372549019608,
+    "upper": 0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "misuse_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "misuse_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -0.004901960784313725,
+    "lower": -0.03431372549019608,
+    "upper": 0.024509803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "major_issue_rate",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "overall_risk",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.0196078431372549,
+    "lower": -0.058823529411764705,
+    "upper": 0.09803921568627451,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "omission_clear",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.014705882352941176,
+    "lower": -0.00980392156862745,
+    "upper": 0.0392156862745098,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "omission_severity",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": 0.049019607843137254,
+    "lower": -0.0392156862745098,
+    "upper": 0.14705882352941177,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "source_invocations",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -1.2843137254901962,
+    "lower": -1.3725490196078431,
+    "upper": -1.2009803921568627,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -21.53921568627451,
+    "lower": -28.705882352941178,
+    "upper": -14.94105392156863,
+    "clusters": 34
+  },
+  {
+    "left": "pm_on",
+    "right": "fixed_on",
+    "metric": "candidate_memory_tokens_est",
+    "cluster": "scenario_id",
+    "delta_left_minus_right": -354.5637254901961,
+    "lower": -407.9925245098039,
+    "upper": -298.84754901960787,
+    "clusters": 34
+  }
+]

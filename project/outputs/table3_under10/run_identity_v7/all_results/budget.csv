@@ -1,0 +1,9 @@
+﻿phase,status,attempts,ledger_usd_upper,note
+generation,done,1224,0.0,包含历史评分与重试；不是各方法的部署成本。
+main,done,3108,3.4143972,包含历史评分与重试；不是各方法的部署成本。
+main,invalid,10,0.013945,包含历史评分与重试；不是各方法的部署成本。
+pilot_mini,done,176,0.4105604,包含历史评分与重试；不是各方法的部署成本。
+pilot_reference,done,176,2.5472325,包含历史评分与重试；不是各方法的部署成本。
+TOTAL_LEDGER,settled,4694,6.3861351,账本未缓存单价口径。
+OFF_LEDGER_DIAGNOSTIC,estimate,1,0.0013,事件记录估计；尚未按原始 usage 对账，不计入任何评分。
+TOTAL_WITH_DIAGNOSTIC,estimate,4695,6.387435099999999,含诊断估计，非精确官方账单。

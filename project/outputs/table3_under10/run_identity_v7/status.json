@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-09-10T12:40:54.023783+00:00",
+  "stage": "COMPLETE",
+  "freeze_sha256": "fcf404e9d1d35038d803c58cde50c40dbda474f0e5b6fe7d48cb074b4f3ad765",
+  "budget": {
+    "charged_upper_usd": 6.3861351,
+    "charged_plus_reserved_usd": 6.3861351,
+    "limit_usd": 9.0,
+    "attempts_by_status": {
+      "done": 4684,
+      "invalid": 10
+    }
+  },
+  "output": "TABLE3_CN.md"
+}

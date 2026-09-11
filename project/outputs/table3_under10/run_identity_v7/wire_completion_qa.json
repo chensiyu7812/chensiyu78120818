@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "active_main_wire_bodies": 2652,
+  "all_native_schema_order": true,
+  "prior_main_scores_excluded": true,
+  "cumulative_budget": {
+    "charged_upper_usd": 6.3861351,
+    "charged_plus_reserved_usd": 6.3861351,
+    "limit_usd": 9.0,
+    "attempts_by_status": {
+      "done": 4684,
+      "invalid": 10
+    }
+  }
+}

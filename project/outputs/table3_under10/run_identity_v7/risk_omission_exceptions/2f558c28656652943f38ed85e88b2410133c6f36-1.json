@@ -1,0 +1,11 @@
+{
+  "batch_key": "wire-main-004-a1",
+  "batch_id": "batch_6aa28ad4fda48190a5748a45b215f4d7",
+  "custom_id": "2f558c28656652943f38ed85e88b2410133c6f36-1",
+  "input_file_sha256": "d92966049140baa7d555feea531c588b5872aeeb9f8442c9a7a408370a3ede79",
+  "provider_request_id": "9e407862-c237-4b35-98bd-7ab8370dc5f3",
+  "response_sha256": "1a9987240a1e6582f7cac7089e2ae3dc0906e751941a65918e37f9f9ee0d87b5",
+  "timestamp": "2026-09-10T12:15:51.777555+00:00",
+  "omission_severity_returned": 1,
+  "rule": "Documented single-job exception (scripts/31): all 5 independent Batch attempts agreed on every field that feeds any Table III metric; only the never-read risk-stage omission_severity guard field stayed nonzero. Raw model output preserved verbatim; no score changed, invented or zeroed. See docs/TABLE3_RISK_OMISSION_EXCEPTION_V7_CN.md."
+}

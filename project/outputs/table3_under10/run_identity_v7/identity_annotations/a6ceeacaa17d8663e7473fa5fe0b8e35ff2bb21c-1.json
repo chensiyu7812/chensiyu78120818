@@ -1,0 +1,12 @@
+{
+  "batch_key": "wire-main-002-a1",
+  "batch_id": "batch_6aa26626729881909f0bfa9bf400e1d5",
+  "custom_id": "a6ceeacaa17d8663e7473fa5fe0b8e35ff2bb21c-1",
+  "input_file_sha256": "1c195587f6194f2c7b3f24862a85861912ca47f6cc32269240b2a3687aaa4b5b",
+  "provider_request_id": "a1142ce7-e4f2-4fc3-b11f-c8ef673b8800",
+  "response_sha256": "faf0a72a802b88d5828873331e9385cfebe615248e9f88b0dcdc0310b180763e",
+  "expected_audit_call_id": "da086b3a3e400053fae4e4be",
+  "model_echo_audit_call_id": "da086b3a3e400053fae4be",
+  "timestamp": "2026-09-10T10:09:07.832606+00:00",
+  "rule": "Transport identity authoritative; model echo preserved; all scores unchanged."
+}

@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-09-10T10:52:51.406204+00:00",
+  "affected_job_id": "2f558c28656652943f38ed85e88b2410133c6f36",
+  "affected_job": {"phase": "main", "stage": "risk", "arm": "fixed_off", "batch": true},
+  "finding": "Both permitted attempts (maximum_attempts_per_job=2) for one risk-stage audit call returned a byte-identical, schema-valid, natural-stop response with omission_severity=1 (strategy_omission=1), violating the fixed rule that this call type must always report omission_severity=0 (a separate authorized-context judge measures omission). The Batch job stopped the whole run with 'Frozen ordered-request attempt limit exhausted', as designed: no automatic retry, no silent acceptance.",
+  "audit_call_id_check": "Matched on both attempts (parsed_json.audit_call_id == expected); this is not an ID-echo case and is unrelated to the identity_v5 amendment.",
+  "attempt_1": {"attempt_id": "2f558c28656652943f38ed85e88b2410133c6f36-1", "created_at": "2026-09-10T10:47:46.443913+00:00", "status": "invalid", "actual_usd": 0.0008058, "error": "ValueError: Audit ID mismatch or selected-only omission score"},
+  "attempt_2": {"attempt_id": "2f558c28656652943f38ed85e88b2410133c6f36-2", "created_at": "2026-09-10T10:51:09.175678+00:00", "status": "invalid", "actual_usd": 0.0008058, "error": "ValueError: Audit ID mismatch or selected-only omission score"},
+  "diagnostic_probe": {
+    "purpose": "Determine whether the two identical failures reflect true determinism (in which case more attempts under the unchanged protocol could never help) or genuine provider-side response variance (in which case the existing attempt-limit design is simply too low for this rare case).",
+    "method": "Sent the exact same frozen request body (model gpt-4.1-mini-2025-04-14, temperature=0, seed=20260910, identical messages) directly to the OpenAI synchronous /v1/chat/completions endpoint, outside the Batch API path.",
+    "scope": "Diagnostic only: not entered in ledger.sqlite, not counted as a scoring attempt, not used as a source of any score or observation anywhere in Table III.",
+    "result": "finish_reason=stop; omission_severity=0; strategy_omission=0; audit_call_id matched. A fully compliant, schema-valid response for the identical input.",
+    "cost_usd_approx": 0.0013,
+    "conclusion": "The two official failures are not deterministic; genuine attempt-to-attempt response variance exists for this input even at temperature=0 with a fixed seed. Additional real attempts under the unchanged validity rule are a legitimate remedy."
+  },
+  "repair_rule": "Raise execution.maximum_attempts_per_job only, from 2 to 5, uniformly for the whole run (not targeted at this job's content). Every other execution parameter, every validity/parse rule in parse_response/record_response, the model, temperature, seed, prompts, schema, pilot gates, bootstrap and budget ceiling are byte-for-byte unchanged from identity_v5. No response is accepted unless it independently passes every existing check, including the unmodified selected-only omission_severity==0 rule.",
+  "no_selection": "The increase is a general retry-budget parameter change, applied identically to any job that might exhaust the old cap, not a rule crafted around this job's observed content. No response is ever chosen because of its score; only a fully valid, freshly obtained, schema- and transport-consistent response is ever recorded.",
+  "authorization": "User approved via an explicit A/B decision after being shown this root cause and the diagnostic result: 'expand the retry budget (recommended)', 2026-09-10 (JST evening). The alternative offered and declined was to halt and hold this job open for manual review.",
+  "parent_cost_usd": 4.5456087,
+  "parent_status_at_freeze": "STOPPED: Frozen ordered-request attempt limit exhausted"
+}

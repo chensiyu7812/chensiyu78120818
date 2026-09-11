@@ -1,0 +1,4 @@
+# Preserve exact bytes of hashed experiment evidence, including CSV CRLF.
+project/outputs/table3_under10/** -text
+project/analysis/table3/provenance/** -text
+*.csv whitespace=cr-at-eol
