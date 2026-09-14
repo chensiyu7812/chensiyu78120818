@@ -1,0 +1,343 @@
+{
+  "status": "EXTRACTED_EXISTING_STATISTICS_NOT_RECOMPUTED_FROM_RAW_SCORES",
+  "scope": "204 original V4 scored states; six candidates; original GPT-4o protocol",
+  "caveat": "User cluster estimate in the original file averages users equally; scenario estimate equals state mean because scenarios each contain six states. No simultaneous CI correction.",
+  "results": [
+    {
+      "metric": "emotional_support",
+      "n": 204,
+      "mean_delta_pm_minus_baseline": -0.08823529411764706,
+      "paired_counts": {
+        "pm_higher": 26,
+        "tie": 137,
+        "pm_lower": 41
+      },
+      "unit_bootstrap_ci": {
+        "estimate": -0.08823529411764706,
+        "lower": -0.1715686274509804,
+        "upper": -0.00980392156862745,
+        "n_units": 204,
+        "n_resamples": 10000
+      },
+      "scenario_cluster_bootstrap_ci": {
+        "estimate": -0.08823529411764706,
+        "lower": -0.16666666666666666,
+        "upper": -0.014705882352941173,
+        "n_clusters": 34,
+        "n_resamples": 10000
+      },
+      "user_cluster_bootstrap_ci": {
+        "estimate": -0.08179012345679011,
+        "lower": -0.1574074074074074,
+        "upper": -0.012345679012345678,
+        "n_clusters": 18,
+        "n_resamples": 10000
+      },
+      "bootstrap_probabilities": {
+        "unit_p_delta_lt_0": 0.9808,
+        "scenario_p_delta_lt_0": 0.9907,
+        "user_p_delta_lt_0": 0.9894
+      },
+      "noninferiority": {
+        "0.05": {
+          "margin": 0.05,
+          "unit_ci_noninferior": false,
+          "scenario_ci_noninferior": false,
+          "user_ci_noninferior": false,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.8308
+        },
+        "0.1": {
+          "margin": 0.1,
+          "unit_ci_noninferior": false,
+          "scenario_ci_noninferior": false,
+          "user_ci_noninferior": false,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.3692
+        }
+      },
+      "turn_mean_deltas": {
+        "3": -0.11764705882352941,
+        "8": -0.058823529411764705
+      }
+    },
+    {
+      "metric": "personalization",
+      "n": 204,
+      "mean_delta_pm_minus_baseline": -0.09803921568627451,
+      "paired_counts": {
+        "pm_higher": 16,
+        "tie": 155,
+        "pm_lower": 33
+      },
+      "unit_bootstrap_ci": {
+        "estimate": -0.09803921568627451,
+        "lower": -0.1715686274509804,
+        "upper": -0.029411764705882353,
+        "n_units": 204,
+        "n_resamples": 10000
+      },
+      "scenario_cluster_bootstrap_ci": {
+        "estimate": -0.09803921568627451,
+        "lower": -0.15686274509803924,
+        "upper": -0.0392156862745098,
+        "n_clusters": 34,
+        "n_resamples": 10000
+      },
+      "user_cluster_bootstrap_ci": {
+        "estimate": -0.09259259259259259,
+        "lower": -0.15123456790123455,
+        "upper": -0.035493827160493825,
+        "n_clusters": 18,
+        "n_resamples": 10000
+      },
+      "bootstrap_probabilities": {
+        "unit_p_delta_lt_0": 0.9959,
+        "scenario_p_delta_lt_0": 0.9996,
+        "user_p_delta_lt_0": 0.9991
+      },
+      "noninferiority": {
+        "0.05": {
+          "margin": 0.05,
+          "unit_ci_noninferior": false,
+          "scenario_ci_noninferior": false,
+          "user_ci_noninferior": false,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.9381
+        },
+        "0.1": {
+          "margin": 0.1,
+          "unit_ci_noninferior": false,
+          "scenario_ci_noninferior": false,
+          "user_ci_noninferior": false,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.469
+        }
+      },
+      "turn_mean_deltas": {
+        "3": -0.09803921568627451,
+        "8": -0.09803921568627451
+      }
+    },
+    {
+      "metric": "memory_appropriateness",
+      "n": 204,
+      "mean_delta_pm_minus_baseline": -0.05392156862745098,
+      "paired_counts": {
+        "pm_higher": 6,
+        "tie": 181,
+        "pm_lower": 17
+      },
+      "unit_bootstrap_ci": {
+        "estimate": -0.05392156862745098,
+        "lower": -0.09803921568627451,
+        "upper": -0.00980392156862745,
+        "n_units": 204,
+        "n_resamples": 10000
+      },
+      "scenario_cluster_bootstrap_ci": {
+        "estimate": -0.053921568627450976,
+        "lower": -0.09313725490196079,
+        "upper": -0.014705882352941176,
+        "n_clusters": 34,
+        "n_resamples": 10000
+      },
+      "user_cluster_bootstrap_ci": {
+        "estimate": -0.054012345679012336,
+        "lower": -0.09722222222222222,
+        "upper": -0.013888888888888892,
+        "n_clusters": 18,
+        "n_resamples": 10000
+      },
+      "bootstrap_probabilities": {
+        "unit_p_delta_lt_0": 0.9874,
+        "scenario_p_delta_lt_0": 0.9957,
+        "user_p_delta_lt_0": 0.9962
+      },
+      "noninferiority": {
+        "0.05": {
+          "margin": 0.05,
+          "unit_ci_noninferior": false,
+          "scenario_ci_noninferior": false,
+          "user_ci_noninferior": false,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.561
+        },
+        "0.1": {
+          "margin": 0.1,
+          "unit_ci_noninferior": true,
+          "scenario_ci_noninferior": true,
+          "user_ci_noninferior": true,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.0107
+        }
+      },
+      "turn_mean_deltas": {
+        "3": -0.058823529411764705,
+        "8": -0.049019607843137254
+      }
+    },
+    {
+      "metric": "factual_grounding",
+      "n": 204,
+      "mean_delta_pm_minus_baseline": -0.00980392156862745,
+      "paired_counts": {
+        "pm_higher": 3,
+        "tie": 196,
+        "pm_lower": 5
+      },
+      "unit_bootstrap_ci": {
+        "estimate": -0.00980392156862745,
+        "lower": -0.03431372549019608,
+        "upper": 0.014705882352941176,
+        "n_units": 204,
+        "n_resamples": 10000
+      },
+      "scenario_cluster_bootstrap_ci": {
+        "estimate": -0.00980392156862745,
+        "lower": -0.034313725490196074,
+        "upper": 0.014705882352941176,
+        "n_clusters": 34,
+        "n_resamples": 10000
+      },
+      "user_cluster_bootstrap_ci": {
+        "estimate": -0.004629629629629629,
+        "lower": -0.032407407407407406,
+        "upper": 0.023148148148148147,
+        "n_clusters": 18,
+        "n_resamples": 10000
+      },
+      "bootstrap_probabilities": {
+        "unit_p_delta_lt_0": 0.6888,
+        "scenario_p_delta_lt_0": 0.7308,
+        "user_p_delta_lt_0": 0.5622
+      },
+      "noninferiority": {
+        "0.05": {
+          "margin": 0.05,
+          "unit_ci_noninferior": true,
+          "scenario_ci_noninferior": true,
+          "user_ci_noninferior": true,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.0007
+        },
+        "0.1": {
+          "margin": 0.1,
+          "unit_ci_noninferior": true,
+          "scenario_ci_noninferior": true,
+          "user_ci_noninferior": true,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.0
+        }
+      },
+      "turn_mean_deltas": {
+        "3": -0.00980392156862745,
+        "8": -0.00980392156862745
+      }
+    },
+    {
+      "metric": "temporal_consistency",
+      "n": 204,
+      "mean_delta_pm_minus_baseline": -0.00980392156862745,
+      "paired_counts": {
+        "pm_higher": 2,
+        "tie": 198,
+        "pm_lower": 4
+      },
+      "unit_bootstrap_ci": {
+        "estimate": -0.00980392156862745,
+        "lower": -0.03431372549019608,
+        "upper": 0.014705882352941176,
+        "n_units": 204,
+        "n_resamples": 10000
+      },
+      "scenario_cluster_bootstrap_ci": {
+        "estimate": -0.00980392156862745,
+        "lower": -0.029411764705882353,
+        "upper": 0.00980392156862745,
+        "n_clusters": 34,
+        "n_resamples": 10000
+      },
+      "user_cluster_bootstrap_ci": {
+        "estimate": -0.009259259259259259,
+        "lower": -0.027777777777777776,
+        "upper": 0.0,
+        "n_clusters": 18,
+        "n_resamples": 10000
+      },
+      "bootstrap_probabilities": {
+        "unit_p_delta_lt_0": 0.7273,
+        "scenario_p_delta_lt_0": 0.7799,
+        "user_p_delta_lt_0": 0.6394
+      },
+      "noninferiority": {
+        "0.05": {
+          "margin": 0.05,
+          "unit_ci_noninferior": true,
+          "scenario_ci_noninferior": true,
+          "user_ci_noninferior": true,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.0
+        },
+        "0.1": {
+          "margin": 0.1,
+          "unit_ci_noninferior": true,
+          "scenario_ci_noninferior": true,
+          "user_ci_noninferior": true,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.0
+        }
+      },
+      "turn_mean_deltas": {
+        "3": -0.00980392156862745,
+        "8": -0.00980392156862745
+      }
+    },
+    {
+      "metric": "non_intrusiveness",
+      "n": 204,
+      "mean_delta_pm_minus_baseline": -0.024509803921568627,
+      "paired_counts": {
+        "pm_higher": 7,
+        "tie": 186,
+        "pm_lower": 11
+      },
+      "unit_bootstrap_ci": {
+        "estimate": -0.024509803921568627,
+        "lower": -0.06862745098039216,
+        "upper": 0.014705882352941176,
+        "n_units": 204,
+        "n_resamples": 10000
+      },
+      "scenario_cluster_bootstrap_ci": {
+        "estimate": -0.024509803921568624,
+        "lower": -0.05392156862745098,
+        "upper": 0.004901960784313725,
+        "n_clusters": 34,
+        "n_resamples": 10000
+      },
+      "user_cluster_bootstrap_ci": {
+        "estimate": -0.018518518518518517,
+        "lower": -0.05246913580246913,
+        "upper": 0.016975308641975304,
+        "n_clusters": 18,
+        "n_resamples": 10000
+      },
+      "bootstrap_probabilities": {
+        "unit_p_delta_lt_0": 0.8434,
+        "scenario_p_delta_lt_0": 0.9267,
+        "user_p_delta_lt_0": 0.8467
+      },
+      "noninferiority": {
+        "0.05": {
+          "margin": 0.05,
+          "unit_ci_noninferior": false,
+          "scenario_ci_noninferior": false,
+          "user_ci_noninferior": false,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.0448
+        },
+        "0.1": {
+          "margin": 0.1,
+          "unit_ci_noninferior": true,
+          "scenario_ci_noninferior": true,
+          "user_ci_noninferior": true,
+          "scenario_bootstrap_p_delta_below_minus_margin": 0.0
+        }
+      },
+      "turn_mean_deltas": {
+        "3": -0.00980392156862745,
+        "8": -0.0392156862745098
+      }
+    }
+  ]
+}

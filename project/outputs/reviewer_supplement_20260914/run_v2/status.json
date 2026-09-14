@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-09-14T02:10:26.269460+00:00",
+  "stage": "STOPPED",
+  "freeze_sha256": "9b18325b0194661fd12de02900b16d718152383d8f1f264d6f2512314c374912",
+  "budget": {
+    "charged_upper_usd": 0.549417,
+    "charged_plus_reserved_usd": 0.549417,
+    "limit_usd": 0.8859466,
+    "attempts_by_status": {
+      "done": 287,
+      "invalid": 88
+    }
+  },
+  "reason": "Batch has incomplete or invalid results; reservations retained; no silent sample removal"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "freeze_sha256": "391eb62b5e02e9d7fc1641bfc3dc5e5a596f8ea76135eaa3fe1f3da77edf1b62",
+  "shuffle": {
+    "cards": 1728,
+    "strata": 40,
+    "maximum_independent_cost_error": 2.2737367544323206e-13,
+    "independently_reconstructed_score_cards": 40,
+    "maximum_score_error": 4.440892098500626e-16,
+    "held_out_card_and_action_join": "PASS"
+  },
+  "latency_requests": 720,
+  "reference_responses": {
+    "matched": 432
+  },
+  "nonidentical_repeat_responses": [],
+  "api_usd": 0
+}

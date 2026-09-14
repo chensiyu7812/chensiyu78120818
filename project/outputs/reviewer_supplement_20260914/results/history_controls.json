@@ -1,0 +1,110 @@
+[
+  {
+    "unit_id": "control_3_recall",
+    "history_need": "necessary",
+    "already_available_in_current_context": false,
+    "historical_evidence_quote": "I wanted to try painting as my relaxing hobby.",
+    "reason": "The user explicitly asked which relaxing hobby they said they wanted to try, but the current conversation does not mention the hobby. The historical context contains the specific hobby 'painting' that the user mentioned, which is necessary to answer the question accurately.",
+    "expected": "necessary",
+    "passed": true
+  },
+  {
+    "unit_id": "control_4_recall",
+    "history_need": "necessary",
+    "already_available_in_current_context": false,
+    "historical_evidence_quote": "My supportive colleague is named Noor.",
+    "reason": "The user explicitly asks for the name of the supportive colleague they mentioned, which is not provided in the current conversation but is stated in the historical context.",
+    "expected": "necessary",
+    "passed": true
+  },
+  {
+    "unit_id": "control_4_repeated",
+    "history_need": "not_needed",
+    "already_available_in_current_context": true,
+    "historical_evidence_quote": "My supportive colleague is named Noor.",
+    "reason": "The current conversation already includes the information that the supportive colleague is named Noor, which was also stated in the historical context. Therefore, no additional historical information is needed to reflect on this detail.",
+    "expected": "not_needed",
+    "passed": true
+  },
+  {
+    "unit_id": "control_1_repeated",
+    "history_need": "not_needed",
+    "already_available_in_current_context": true,
+    "historical_evidence_quote": "",
+    "reason": "The current conversation already includes the information that the user's old dog was named Juniper, so no additional historical context is needed to reflect on that.",
+    "expected": "not_needed",
+    "passed": true
+  },
+  {
+    "unit_id": "control_5_recall",
+    "history_need": "necessary",
+    "already_available_in_current_context": false,
+    "historical_evidence_quote": "I said I feel calmer after a walk beside the river.",
+    "reason": "The user is asking for a specific location where they said they walk to feel calmer, which is not mentioned in the current conversation but is present in the historical context.",
+    "expected": "necessary",
+    "passed": true
+  },
+  {
+    "unit_id": "control_2_repeated",
+    "history_need": "not_needed",
+    "already_available_in_current_context": true,
+    "historical_evidence_quote": "",
+    "reason": "The current conversation already includes the relevant detail that Tuesday evenings are when the user calls their sister, so no additional historical information is needed to reflect on that.",
+    "expected": "not_needed",
+    "passed": true
+  },
+  {
+    "unit_id": "control_0_repeated",
+    "history_need": "not_needed",
+    "already_available_in_current_context": true,
+    "historical_evidence_quote": "",
+    "reason": "The current conversation already includes the user's preference for listening without advice when overwhelmed, repeated explicitly. No additional historical facts are needed to reflect on this preference.",
+    "expected": "not_needed",
+    "passed": true
+  },
+  {
+    "unit_id": "control_3_repeated",
+    "history_need": "not_needed",
+    "already_available_in_current_context": true,
+    "historical_evidence_quote": "",
+    "reason": "The current conversation already includes the user's statement about wanting to try painting as a relaxing hobby, which is the relevant detail needed to reflect on that.",
+    "expected": "not_needed",
+    "passed": true
+  },
+  {
+    "unit_id": "control_5_repeated",
+    "history_need": "not_needed",
+    "already_available_in_current_context": true,
+    "historical_evidence_quote": "",
+    "reason": "The current conversation already includes the user's statement 'I said I feel calmer after a walk beside the river,' which is the relevant detail needed to reflect on their feeling. Therefore, no additional historical information is necessary.",
+    "expected": "not_needed",
+    "passed": true
+  },
+  {
+    "unit_id": "control_0_recall",
+    "history_need": "necessary",
+    "already_available_in_current_context": false,
+    "historical_evidence_quote": "I prefer listening without advice when I am overwhelmed.",
+    "reason": "The user explicitly asked what they said they prefer when overwhelmed, which is not stated in the current conversation but is present in the historical context.",
+    "expected": "necessary",
+    "passed": true
+  },
+  {
+    "unit_id": "control_2_recall",
+    "history_need": "necessary",
+    "already_available_in_current_context": false,
+    "historical_evidence_quote": "I said that Tuesday evenings are when I call my sister.",
+    "reason": "The user explicitly asks which evening they said they call their sister, and the historical context contains the specific information that Tuesday evenings are when they call their sister, which is not present in the current conversation.",
+    "expected": "necessary",
+    "passed": true
+  },
+  {
+    "unit_id": "control_1_recall",
+    "history_need": "necessary",
+    "already_available_in_current_context": false,
+    "historical_evidence_quote": "My old dog was named Juniper.",
+    "reason": "The user is explicitly asking for the name of the dog they mentioned previously, which is not provided in the current conversation. The historical context contains the specific name 'Juniper' that directly answers the question.",
+    "expected": "necessary",
+    "passed": true
+  }
+]

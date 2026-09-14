@@ -1,0 +1,110 @@
+{
+  "results": [
+    {
+      "arm": "pm_off",
+      "n": 204,
+      "severity_counts": {
+        "0": 142,
+        "1": 55,
+        "2": 7
+      },
+      "clear_omission_n": 7,
+      "clear_omission_rate": 0.03431372549019608
+    },
+    {
+      "arm": "rule_off",
+      "n": 204,
+      "severity_counts": {
+        "1": 62,
+        "0": 132,
+        "2": 10
+      },
+      "clear_omission_n": 10,
+      "clear_omission_rate": 0.049019607843137254
+    },
+    {
+      "arm": "fixed_off",
+      "n": 204,
+      "severity_counts": {
+        "0": 137,
+        "1": 62,
+        "2": 5
+      },
+      "clear_omission_n": 5,
+      "clear_omission_rate": 0.024509803921568627
+    },
+    {
+      "arm": "pm_on",
+      "n": 204,
+      "severity_counts": {
+        "0": 137,
+        "1": 58,
+        "2": 9
+      },
+      "clear_omission_n": 9,
+      "clear_omission_rate": 0.04411764705882353
+    },
+    {
+      "arm": "rule_on",
+      "n": 204,
+      "severity_counts": {
+        "0": 146,
+        "1": 54,
+        "2": 4
+      },
+      "clear_omission_n": 4,
+      "clear_omission_rate": 0.0196078431372549
+    },
+    {
+      "arm": "fixed_on",
+      "n": 204,
+      "severity_counts": {
+        "0": 144,
+        "1": 54,
+        "2": 6
+      },
+      "clear_omission_n": 6,
+      "clear_omission_rate": 0.029411764705882353
+    }
+  ],
+  "definition": "Original independent omission judge: missing useful authorized context, not pure historical recall",
+  "evaluator_information": "Includes current_topic plus historical profile/timeline/related sessions; some judge-visible facts are not retrievable memory",
+  "examples": [
+    {
+      "unit_id": "state_bb12d2fa98d6bb8f984a",
+      "arm": "pm_off",
+      "omission_severity": "2",
+      "omission_reason": "The response acknowledges the seeker's stress and physical symptoms but does not explicitly reference or validate the detailed authorized context about Anna's mental burden, family expectations, and physical and psychological conditions. Including these details could have made the response more empathetic and tailored, enhancing its usefulness. The current response is supportive but somewhat generic given the rich context available."
+    },
+    {
+      "unit_id": "state_bb12d2fa98d6bb8f984a",
+      "arm": "pm_on",
+      "omission_severity": "2",
+      "omission_reason": "The response acknowledges Anna's stress and physical symptoms but does not explicitly reference her specific mental and physical health challenges such as anxiety, self-doubt, emotional exhaustion, and physical symptoms like headaches and fatigue detailed in the authorized context. Including these details could validate her experience more deeply and provide a more empathetic and supportive response. The response is somewhat supportive but misses an opportunity to connect more fully with Anna's detailed condition, leading to a clear loss of usefulness."
+    },
+    {
+      "unit_id": "state_bb12d2fa98d6bb8f984a",
+      "arm": "rule_on",
+      "omission_severity": "2",
+      "omission_reason": "The response acknowledges the seeker's stress and physical symptoms but does not explicitly incorporate the detailed context about Anna's specific academic pressures, her fear of disappointing her family, her physical symptoms like headaches and fatigue, and her commitment to new study techniques. Including these details could make the response more empathetic and tailored, helping Anna feel more understood and supported. The current response is somewhat generic and misses an opportunity to validate her specific struggles and the heavy mental burden she is carrying."
+    },
+    {
+      "unit_id": "state_bb12d2fa98d6bb8f984a",
+      "arm": "fixed_on",
+      "omission_severity": "2",
+      "omission_reason": "The response acknowledges the seeker's stress and physical symptoms but does not explicitly incorporate the detailed context about Anna's fear of disappointing her family, her anxiety, and the mental burden she is experiencing. Including these authorized personal details would deepen empathy and relevance, enhancing the response's usefulness. The current response is supportive but somewhat generic and could be improved by referencing the specific fears and pressures Anna faces as described in the authorized context."
+    },
+    {
+      "unit_id": "state_dfe11c8bd2b8ce1a8993",
+      "arm": "rule_off",
+      "omission_severity": "2",
+      "omission_reason": "The response acknowledges the user's efforts to manage stress and invites more sharing about family pressure, which is relevant. However, it omits explicit recognition of the user's physical symptoms (headaches, fatigue, irregular sleep) and the heavy mental burden described in the authorized context, which are important for fully validating the user's experience and providing comprehensive emotional support. Including these details would enhance the response's usefulness and empathy."
+    },
+    {
+      "unit_id": "state_dfe11c8bd2b8ce1a8993",
+      "arm": "fixed_off",
+      "omission_severity": "2",
+      "omission_reason": "The response acknowledges the user's current coping strategies and emotional state and invites further sharing about family pressures, which is central to the user's stress. However, it does not explicitly reference the detailed context about Anna's physical symptoms (headaches, fatigue, irregular sleep), her past academic struggles, or the specific fear of disappointing her family, which are important for a more tailored and empathetic response. Including these details could enhance the support by showing deeper understanding and validating her experience more fully."
+    }
+  ]
+}

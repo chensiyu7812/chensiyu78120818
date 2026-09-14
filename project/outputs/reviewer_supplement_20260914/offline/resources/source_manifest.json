@@ -1,0 +1,16 @@
+{
+  "analysis": "Post-hoc no-API descriptive/sensitivity checks, not a new confirmatory experiment",
+  "bootstrap_seed": 20260911,
+  "resamples": 10000,
+  "estimand": "State-weighted mean; resample users as primary clusters, scenarios as sensitivity",
+  "scope": "Legacy resources are reconstructed from saved candidate mappings on 204 scored states; not the 1020-state population. Legacy per-seed quality is unavailable here.",
+  "files": {
+    "/home/tokkio/chensiyu78120818-table3/project/outputs/evoemo_response_v4/sample_plan.json": "29683497cdc7b11e4a2a109ee7c98de1487c49a7ab3149b36b1d4699ffc8232b",
+    "/home/tokkio/chensiyu78120818-table3/project/outputs/evoemo_response_v4/cost_estimate_full_calls.jsonl": "c2cf30da56c0f8f75e7aa81714a0a0e56d8d567abcbd79ac0d111fa984bda1bf",
+    "/home/tokkio/chensiyu78120818-table3/project/outputs/evoemo_response_v4/response_resource_summary.json": "0b03259c350ac4cee56dd1767ae59efd18cbc97c316156fa7312ffb3552d7c61",
+    "/home/tokkio/chensiyu78120818-table3/project/outputs/table3_under10/run_identity_v7/all_results/per_response.csv": "db1e6de85d6ea61bb8a7427acb9f41b62efd2a9be18b34940718d4320a4bca61",
+    "/home/tokkio/chensiyu78120818-table3/project/outputs/table3_under10/run_identity_v7/ledger.sqlite": "fddedbbda35dde96be17859e1a50893e4895492753e23b22dda96b23c0f2c487",
+    "/home/tokkio/chensiyu78120818-table3/project/outputs/table3_under10/run_identity_v7/pilot_mini.jobs.jsonl": "7fa83ebaf3368adb7c39e1d1ceca6ea6e01f3a16599fdbe53e43798a126cd33b",
+    "/home/tokkio/chensiyu78120818-table3/project/outputs/table3_under10/run_identity_v7/pilot_reference.jobs.jsonl": "ba54dbdebf01eba8e2b38579ee49fc84eb0bb69f3f6464016fb92752a2b2bd4a"
+  }
+}

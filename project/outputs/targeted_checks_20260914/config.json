@@ -1,0 +1,24 @@
+{
+  "n_states": 48,
+  "users": 18,
+  "scenarios": 34,
+  "arms": [
+    "pm_off",
+    "rule_off",
+    "fixed_off",
+    "context_only",
+    "me_r0"
+  ],
+  "repeats": 3,
+  "n_measured_requests": 720,
+  "api_usd": 0,
+  "gpu": "NVIDIA RTX A6000",
+  "warmup_unit": "state_095e7d5a576866ef0fd9",
+  "attention": "sdpa",
+  "dtype": "bfloat16",
+  "decoding": "greedy_natural_eos",
+  "torch_threads": 4,
+  "query_cache": "cleared between requests; reusable inside request",
+  "timing_scope": "Resident local in-process serving; prebuilt inventory/indices; from runtime state hydration to output. Excludes load, external network/database/UI.",
+  "quality_scope": "Reference quality remains tied to exact original responses; newly generated Context Only/ME+R0 responses have no new judge scores."
+}

@@ -1,0 +1,290 @@
+[
+  {
+    "seed": 101,
+    "turn_index": 3,
+    "arm": "fixed_off",
+    "position_counts": {
+      "5": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 3,
+    "arm": "fixed_on",
+    "position_counts": {
+      "6": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 3,
+    "arm": "pm_off",
+    "position_counts": {
+      "1": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 3,
+    "arm": "pm_on",
+    "position_counts": {
+      "2": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 3,
+    "arm": "rule_off",
+    "position_counts": {
+      "3": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 3,
+    "arm": "rule_on",
+    "position_counts": {
+      "4": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 8,
+    "arm": "fixed_off",
+    "position_counts": {
+      "4": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 8,
+    "arm": "fixed_on",
+    "position_counts": {
+      "5": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 8,
+    "arm": "pm_off",
+    "position_counts": {
+      "6": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 8,
+    "arm": "pm_on",
+    "position_counts": {
+      "1": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 8,
+    "arm": "rule_off",
+    "position_counts": {
+      "2": 34
+    }
+  },
+  {
+    "seed": 101,
+    "turn_index": 8,
+    "arm": "rule_on",
+    "position_counts": {
+      "3": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 3,
+    "arm": "fixed_off",
+    "position_counts": {
+      "3": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 3,
+    "arm": "fixed_on",
+    "position_counts": {
+      "4": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 3,
+    "arm": "pm_off",
+    "position_counts": {
+      "5": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 3,
+    "arm": "pm_on",
+    "position_counts": {
+      "6": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 3,
+    "arm": "rule_off",
+    "position_counts": {
+      "1": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 3,
+    "arm": "rule_on",
+    "position_counts": {
+      "2": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 8,
+    "arm": "fixed_off",
+    "position_counts": {
+      "2": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 8,
+    "arm": "fixed_on",
+    "position_counts": {
+      "3": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 8,
+    "arm": "pm_off",
+    "position_counts": {
+      "4": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 8,
+    "arm": "pm_on",
+    "position_counts": {
+      "5": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 8,
+    "arm": "rule_off",
+    "position_counts": {
+      "6": 34
+    }
+  },
+  {
+    "seed": 202,
+    "turn_index": 8,
+    "arm": "rule_on",
+    "position_counts": {
+      "1": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 3,
+    "arm": "fixed_off",
+    "position_counts": {
+      "1": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 3,
+    "arm": "fixed_on",
+    "position_counts": {
+      "2": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 3,
+    "arm": "pm_off",
+    "position_counts": {
+      "3": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 3,
+    "arm": "pm_on",
+    "position_counts": {
+      "4": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 3,
+    "arm": "rule_off",
+    "position_counts": {
+      "5": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 3,
+    "arm": "rule_on",
+    "position_counts": {
+      "6": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 8,
+    "arm": "fixed_off",
+    "position_counts": {
+      "6": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 8,
+    "arm": "fixed_on",
+    "position_counts": {
+      "1": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 8,
+    "arm": "pm_off",
+    "position_counts": {
+      "2": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 8,
+    "arm": "pm_on",
+    "position_counts": {
+      "3": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 8,
+    "arm": "rule_off",
+    "position_counts": {
+      "4": 34
+    }
+  },
+  {
+    "seed": 303,
+    "turn_index": 8,
+    "arm": "rule_on",
+    "position_counts": {
+      "5": 34
+    }
+  }
+]

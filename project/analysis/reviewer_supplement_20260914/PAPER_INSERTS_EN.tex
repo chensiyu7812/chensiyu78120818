@@ -1,0 +1,212 @@
+% Source-grounded additions for the available v1 manuscript.
+% These fragments do not update Overleaf automatically.
+% Include individual paragraphs/tables in the indicated locations.
+% Packages for the tables: booktabs. No new results are implied by archived values.
+
+% Abstract: add near the final sentence.
+Development uses controlled synthetic states, and external evaluation uses
+EvoEmo virtual users. The resource advantage is relative to the two specified
+structured-resource baselines; the current evidence does not establish a
+benefit over Context Only or a cost-matched fixed action.
+
+% Methods: Rule Source Selector.
+\paragraph{Rule Source Selector.}
+The query concatenates the current-session summary, visible recent messages,
+and current user message. The rule hashes word unigrams and bigrams into
+64 nonnegative, L2-normalized dimensions and compares the query with each
+available source's catalog fingerprint by cosine similarity. It selects up
+to two sources above the frozen thresholds
+$\theta_{MP}=\theta_{MS}=\theta_{ME}=0$.
+Strategy RAG is enabled when the maximum lexical cosine similarity to a
+Strategy Bank card is at least $0.08$. The rule uses catalog fingerprints;
+the final stable PM uses dialogue and inventory metadata without these
+fingerprints. On the 204 scored external states, the rule selects MS+ME+RS
+in every case; this is a property of this sample, not a constant-policy
+definition of the rule.
+
+% Methods: inventory construction and validation.
+\paragraph{Inventory variants and development units.}
+Each of the 192 synthetic source states is expanded into nine inventory
+variants: no memory, MP, MS, high-relevance ME, low-relevance ME, MP+MS,
+MP+high-ME, MS+low-ME, and MP+MS+high-ME. High and low ME are selected by
+lexical similarity to the same current context, with memory identifiers
+breaking ties; both ME variants expose one item. Variant labels are
+construction-only and are not model inputs. The resulting 1,728 cards
+contain 192, 768, 576, and 192 cards with 2, 4, 8, and 16 legal actions,
+respectively, yielding 11,136 state--action responses. The 16 users are
+grouped into five folds, keeping all variants of a source state together.
+User identities are held out; the 36 current-user utterances and 12 semantic
+families are reused across folds. Thus, this is a controlled learnability
+diagnostic rather than a test of unseen language families.
+
+\paragraph{Development score and prediction scales.}
+The development response-preference score is distinct from the external
+1--5 Emotional Support rating. Within each card, pair labels are coded as
+$y\in\{-1,0,1\}$ and projected onto action score differences using
+$\hat z=(B^\top B+0.10I)^{-1}B^\top y$, where each row of $B$ contrasts two
+actions. After centering $\hat z$, the diagnostic score of an action is its
+mean $\sigma(\hat z_a-\hat z_b)$ against the other legal actions.
+The deployed logistic ranker is trained on non-tie feature differences with
+mirrored orientations and equal total weight per card. Its sigmoid-transformed
+action score is an ordering score, not an independently calibrated probability
+of successful support. The five ridge heads predict normalized annotation
+targets and are clipped to $[0,1]$; they are not clinical risk estimates.
+
+% Replace "calibrated risk constraints" with "thresholds on predicted
+% annotation-based risk scores" unless separate calibration evidence exists.
+\paragraph{Legality, feasibility, and fallback.}
+Legal actions respect source availability. Feasible actions additionally
+satisfy predicted-risk thresholds. The frozen setting is
+$\epsilon=0$, $\tau_{mis}=0.35$, and $\tau_{omit}=\tau_{str}=1$.
+Since predictions are bounded by one, the latter two thresholds do not
+exclude actions. The highest predicted response score is selected within
+the feasible set; exact ties are resolved by estimated cost, memory decision
+quality, strategy decision quality, response score, and action identifier.
+The cost proxy sums estimated top-$k$ memory tokens, 260 tokens if RS is
+enabled, and a penalty of 24 per source invocation. It is not measured
+end-to-end latency or total generator input. Confirmatory inference stops
+with an error if no action is feasible. A least-violation fallback is
+available only in explicitly enabled development searches, and settings
+that use it are excluded from final validation selection.
+
+% External setting: concrete adapter and unit definition.
+\paragraph{External memory and fixed inputs.}
+MP contains separate profile fields; MS contains historical session
+summaries. Each external ME item concatenates the seeker messages from one
+past session in temporal order; ME is not constructed from gold event
+timelines. The generator receives the most recent eight prior messages and
+the current seeker message, with an empty current-session summary in this
+adapter. The 204 scored states comprise 34 scenarios, three fixed seeker
+seeds, and turns 3 and 8, shared across policies. These seeker seeds are
+not independent PM training seeds.
+
+% Results: make the scope of the main comparison explicit.
+\paragraph{Comparison with Context Only.}
+The original six-candidate GPT-4o evaluation does not show an external
+response benefit for structured resource injection over Context Only.
+PM minus Context Only is $-0.088$ for Emotional Support and $-0.098$ for
+Personalization. The corresponding previously saved scenario-cluster
+95\% intervals are $[-0.167,-0.015]$ and $[-0.157,-0.039]$.
+These are unadjusted per-comparison intervals. Thus, lower input relative
+to Rule and Fixed Structured should not be interpreted as establishing
+that learned routing is preferable to omitting long-term resources.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Existing original V4 comparisons with Context Only. Differences
+are PM minus Context Only over 204 states; intervals use scenario clusters.
+Values are extracted from the saved statistical summary. The original
+per-state score file was unavailable in this checkout for independent
+recomputation. No simultaneous coverage is claimed.}
+\label{tab:context_only_supplement}
+\begin{tabular}{lrr}
+\toprule
+Metric & Difference & 95\% CI \\
+\midrule
+Emotional Support & $-0.088$ & $[-0.167,-0.015]$ \\
+Personalization & $-0.098$ & $[-0.157,-0.039]$ \\
+Memory Appropriateness & $-0.054$ & $[-0.093,-0.015]$ \\
+Factual Grounding & $-0.010$ & $[-0.034,+0.015]$ \\
+Temporal Consistency & $-0.010$ & $[-0.029,+0.010]$ \\
+Non-Intrusiveness & $-0.025$ & $[-0.054,+0.005]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Results: mechanism analysis, not a claim of causal quality improvement.
+\paragraph{Which decision stages affect the selected action?}
+An offline replay exactly reproduces PM and Rule actions on all 204 external
+states. All states have 16 legal actions. No highest-score tie occurs, so
+cost tie-breaking changes no decision. Misuse filtering removes candidates
+in 200 states but never changes the final choice relative to unconstrained
+response-score maximization. Omission and strategy thresholds exclude no
+actions, and no fallback is used. On this external sample, the chosen action
+is therefore identical to the response ranker's unconstrained argmax;
+resource savings cannot be credited to an empirically active cost tie-break.
+In a separate replay of 1,728 out-of-fold development predictions using the
+final consensus thresholds, misuse filtering changes 97 choices, while
+cost tie-breaking again changes none. This replay characterizes decisions
+and does not measure causal changes in response quality.
+
+\paragraph{Strategy preference and transfer.}
+Among 5,568 development response comparisons that hold the memory
+configuration fixed and swap RS/R0, the saved dual-order labels favor RS
+in 2,673 cases and R0 in 1,313, with 1,582 ties. Out-of-fold predictions
+rank RS higher in 4,147 of these action pairs. On external states, RS is
+ranked higher in 1,536/1,632 matched-memory action pairs, and the selected
+RS rate is 192/204. This directly describes the response-ranking behavior;
+the later strategy-quality tie-break is not needed to explain these
+external choices. The separately scored ESConv diagnostic uses GPT-4o
+and favors R0 more often. These differences motivate a transfer/calibration
+limitation, but do not identify judge family as the cause.
+
+% Results: archived cost-matched evidence, separate from the original main table.
+\paragraph{Cost-matched fixed routing.}
+ME+R0 was chosen using development validation under a mean cost proxy no
+greater than PM's, not by searching external response scores. Matching is
+an average-budget criterion rather than exact per-turn equality. The
+archived external diagnostic reports mean inputs of 1,294.6 for PM and
+1,283.8 for ME+R0, and PM-minus-ME+R0 Emotional Support of $-0.172$ under a
+separate two-candidate GPT-4o protocol. An archived 40-state, 80-call
+forced-swap probe reports a two-order-average difference of $-0.150$
+with a unit-bootstrap interval of $[-0.250,-0.050]$.
+These absolute scores are not merged into the six-candidate table.
+The archived report and available code were recovered; their referenced
+raw score files were not available for independent recomputation here.
+The evidence supports reporting a competitive simple fixed policy,
+not a demonstrated external advantage for learned routing.
+
+% New rerun supplement: different generator execution and judge from old V4.
+\paragraph{Resource savings and fixed-input seeds in the rerun.}
+On the 204 rerun states with Filter OFF, PM uses 20.70\% fewer generator
+input tokens than Rule and 22.03\% fewer than Fixed Structured.
+The paired token differences are $-332.76$ (user-cluster 95\% CI
+$[-385.09,-283.35]$) and $-360.14$ ($[-412.50,-310.45]$), respectively.
+The input-saving direction is consistent across all three fixed seeker
+seeds. These intervals describe the 204 scored states and should not be
+attached to the original 1,020-turn population means. Seed-specific quality
+differences vary, and candidate position is confounded with seed and turn
+in the original rerun ordering; the seed check therefore does not establish
+quality robustness.
+
+\paragraph{Candidate-order sensitivity in the rerun.}
+We selected 48 states without consulting response outcomes: eight per
+seeker-seed/turn stratum, covering all 18 users and 34 scenarios. We rescored
+the same six completed replies in their original and exactly reversed
+orders with GPT-4.1-mini-2025-04-14, retaining all other prompt fields and
+serialization order. All 96 quality requests completed and were checked
+against their uploaded requests and returned response identifiers.
+For Filter OFF, PM-minus-Rule Overall changes from $+0.104$ to $-0.042$;
+PM-minus-Fixed changes from $+0.146$ to $0.000$.
+Their two-order averages are $+0.031$ (user-cluster 95\% CI
+$[-0.061,+0.170]$) and $+0.073$ ($[-0.051,+0.225]$), respectively.
+The point estimates are sensitive to candidate order. The averaged
+differences remain small and uncertain; this is not a passed equivalence
+test or validation of the original GPT-4o table's candidate order.
+
+\paragraph{Exploratory demand for historical information.}
+A response-blind judge inspection of all 204 rerun states used only
+authorized history and the actual generator-visible context window,
+excluding current-topic evaluator annotations. Its first outputs labeled
+169 states as potentially helped by additional history and 35 as not
+needing additional history; none was labeled as requiring an unavailable
+historical fact to answer an explicit recall request. Twelve separate
+synthetic annotation controls passed. However, 35 first outputs failed
+verbatim historical-citation checks, and 25 remained unresolved after
+the frozen retry limit. All original labels and failures are retained.
+These are exploratory LLM annotations, not a validated recall benchmark
+or evidence that historical information is unnecessary.
+The existing separate omission scorer assesses missing useful authorized
+context, including evaluator-only current-topic information; it should
+not be relabeled as a pure cross-session memory-recall measure.
+
+% Discussion: concise contribution boundary.
+The evidence establishes a deployable pre-retrieval source allocator,
+learnable allocation signal in controlled synthetic development, and
+reduced input relative to specified high-resource structured policies.
+It does not yet establish that this learned PM is preferable to simple
+low-cost configurations, or that the resource reduction preserves
+performance on a validated history-required task. Such a claim would
+require an independently specified probe with verified needed facts,
+retrievable evidence, and a scorer shown to distinguish omission.

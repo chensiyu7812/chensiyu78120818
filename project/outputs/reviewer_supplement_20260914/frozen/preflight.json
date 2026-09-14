@@ -1,0 +1,17 @@
+{
+  "n_quality": 96,
+  "n_history_need": 204,
+  "n_synthetic_controls": 12,
+  "selected_users": 18,
+  "selected_scenarios": 34,
+  "original_plus_supplement_cap_usd": 7.887435099999999,
+  "previous_estimated_usd": 6.387435099999999,
+  "initial_reservation_usd": 0.7269032,
+  "supplemental_cap_usd": 1.5,
+  "pricing_checked_on": "2026-09-14",
+  "pricing_url": "https://developers.openai.com/api/docs/pricing",
+  "sample_selection": "Eight per seed/turn; minimize prior selected user count, then scenario count, then SHA256(20260914:unit_id)",
+  "controls": "Six authored explicit recall and six repeated-information cases; excluded from experiment n",
+  "unchanged_generation": true,
+  "reverse_is_exact": true
+}

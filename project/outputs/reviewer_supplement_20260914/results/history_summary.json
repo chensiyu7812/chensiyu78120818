@@ -1,0 +1,55 @@
+{
+  "n": 204,
+  "counts": {
+    "helpful": 169,
+    "not_needed": 35
+  },
+  "controls_pass": true,
+  "status": "EXPLORATORY_LABELS_WITH_UNVERIFIED_EVIDENCE",
+  "label_selection": "First response for all 204 states, including flagged citation failures; no outcome selection among retries",
+  "first_attempt_citation_failures": 35,
+  "unresolved_after_frozen_retries": 25,
+  "verified_result_label_counts": {
+    "unverified": 25,
+    "helpful": 143,
+    "not_needed": 36
+  },
+  "n_controls_passed": 12,
+  "n_controls": 12,
+  "interpretation": "Response-blind exploratory LLM labels, not human truth. Even passing synthetic controls does not establish annotation accuracy on real states.",
+  "evidence_quote_scope": "Literal quote coverage only; not semantic recall or sufficiency",
+  "n_necessary_or_helpful": 169,
+  "n_necessary_or_helpful_with_verbatim_quote": 134,
+  "verified_quote_in_any_deployable_memory": 102,
+  "verified_quote_in_pm_off": 14,
+  "verified_quote_in_rule_off": 18,
+  "verified_quote_in_fixed_off": 18,
+  "quoted_evidence_in_any_deployable_memory": 102,
+  "quoted_evidence_in_pm_off": 14,
+  "quoted_evidence_in_rule_off": 18,
+  "quoted_evidence_in_fixed_off": 18,
+  "by_seed": {
+    "101": {
+      "helpful": 54,
+      "not_needed": 14
+    },
+    "202": {
+      "helpful": 61,
+      "not_needed": 7
+    },
+    "303": {
+      "not_needed": 14,
+      "helpful": 54
+    }
+  },
+  "by_turn": {
+    "3": {
+      "helpful": 82,
+      "not_needed": 20
+    },
+    "8": {
+      "helpful": 87,
+      "not_needed": 15
+    }
+  }
+}

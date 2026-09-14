@@ -1,0 +1,75 @@
+{
+  "n_states": 1728,
+  "n_legal_actions": 11136,
+  "chosen_action_counts": {
+    "MPMS+RS": 92,
+    "ME+RS": 368,
+    "MS+RS": 141,
+    "MPE+RS": 58,
+    "M0+RS": 327,
+    "MP+R0": 59,
+    "ME+R0": 117,
+    "MP+RS": 173,
+    "MPMS+R0": 38,
+    "MSE+RS": 128,
+    "M0+R0": 91,
+    "MPE+R0": 32,
+    "MS+R0": 65,
+    "MSE+R0": 32,
+    "MPMSME+R0": 7
+  },
+  "rs_rate": 0.7447916666666666,
+  "definition": "Replay of frozen decision rule; no response generation and no causal quality attribution",
+  "any_risk_pruned_states": 170,
+  "risk_changes_choice_states": 97,
+  "response_tie_states": 0,
+  "cost_distinguishes_tie_states": 0,
+  "cost_changes_choice_states": 0,
+  "fallback_used_states": 0,
+  "chosen_rs_below_matched_r0_states": 0,
+  "omission_pruned_states": 0,
+  "strategy_pruned_states": 0,
+  "n_safe_mean": 6.2123842592592595,
+  "n_candidates_mean": 1,
+  "n_legal_mean": 6.444444444444445,
+  "pruned_actions_mean": 0.23206018518518517,
+  "chosen_cost_mean": 271.9257385361552,
+  "cost_removed_choice_cost_mean": 271.9257385361552,
+  "risk_removed_choice_cost_mean": 275.64004905202825,
+  "misuse_risk": {
+    "all_action_min": 0.0,
+    "all_action_max": 0.558504848067389,
+    "chosen_min": 0.0,
+    "chosen_max": 0.34970419464390046,
+    "chosen_mean": 0.07412193699839592
+  },
+  "memory_omission_risk": {
+    "all_action_min": 0.0,
+    "all_action_max": 1.0,
+    "chosen_min": 0.0,
+    "chosen_max": 0.9353973214852858,
+    "chosen_mean": 0.29612912886114434
+  },
+  "strategy_decision_risk": {
+    "all_action_min": 0.0,
+    "all_action_max": 1.0,
+    "chosen_min": 0.0,
+    "chosen_max": 0.9870159687564773,
+    "chosen_mean": 0.2517318651759079
+  },
+  "response_score": {
+    "all_action_min": 0.13853891019670939,
+    "all_action_max": 0.9840874065986344,
+    "chosen_min": 0.49999999994342703,
+    "chosen_max": 0.9783802004117057,
+    "chosen_mean": 0.787116622371235
+  },
+  "matched_strategy_predictions": {
+    "n_pairs": 5568,
+    "rs_higher": 4147,
+    "ties": 0,
+    "r0_higher": 1421,
+    "mean_delta_rs_minus_r0": 0.14066155229194402
+  },
+  "threshold_scope": "Final frozen consensus thresholds applied to out-of-fold models. Development diagnostics, not an independent test or a newly nested performance estimate."
+}

@@ -1,0 +1,36 @@
+{
+  "status": "QUALITY_COMPLETE_HISTORY_REPORTED_WITH_CITATION_FAILURES",
+  "freeze_sha256": "9b18325b0194661fd12de02900b16d718152383d8f1f264d6f2512314c374912",
+  "valid_jobs": 287,
+  "quality_states": 48,
+  "quality_orders": 2,
+  "quality_observations": 576,
+  "history_states": 204,
+  "synthetic_controls": 12,
+  "source_transport_identity_verified": 312,
+  "first_history_labels_reported": 204,
+  "unresolved_history_citations": 25,
+  "old_superseded_run": {
+    "charged_upper_usd": 0.6140534,
+    "charged_plus_reserved_usd": 0.6140534,
+    "limit_usd": 1.5,
+    "attempts_by_status": {
+      "done": 212,
+      "invalid": 213
+    }
+  },
+  "final_run": {
+    "charged_upper_usd": 0.549417,
+    "charged_plus_reserved_usd": 0.549417,
+    "limit_usd": 0.8859466,
+    "attempts_by_status": {
+      "done": 287,
+      "invalid": 88
+    }
+  },
+  "supplemental_spend_upper_usd": 1.1634704,
+  "total_including_prior_estimated_usd": 7.550905499999999,
+  "combined_supplement_cap_usd": 1.5,
+  "old_runs_excluded_from_estimates": true,
+  "inference": "Descriptive paired cluster intervals; no familywise adjustment; not proof of quality equivalence"
+}

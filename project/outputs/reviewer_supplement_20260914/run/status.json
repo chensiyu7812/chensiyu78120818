@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-09-14T02:02:16.876576+00:00",
+  "stage": "SUPERSEDED_PROTOCOL",
+  "freeze_sha256": "4fe421069e5a02248a87da79d050ac8ab9b41ad54ca28fa5e06861a56b1f9c35",
+  "budget": {
+    "charged_upper_usd": 0.6140534,
+    "charged_plus_reserved_usd": 0.6140534,
+    "limit_usd": 1.5,
+    "attempts_by_status": {
+      "done": 212,
+      "invalid": 213
+    }
+  },
+  "reason": "Candidate serialization and actual visible history corrected in v2; no further v1 submissions"
+}

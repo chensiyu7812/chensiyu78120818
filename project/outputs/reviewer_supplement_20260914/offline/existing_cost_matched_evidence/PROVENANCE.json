@@ -1,0 +1,14 @@
+{
+  "commit": "fbe7781ef5ceda2b1bc8e3f892b24f20e7e09cea",
+  "files": {
+    "project/docs/METACOM_V33_COST_MATCHED_BASELINE_DIAGNOSTIC_ZH.md": "a4a706e281c57742476cad958591dfe79ddce6797cdd41b1a1ce1a1ca065ef2e",
+    "project/scripts/17s_eval_cost_matched_forced_swap_probe.py": "47e83329a5711f72daa86866c6239a88bc4428f2a249b5c90306dd279382b300"
+  },
+  "missing_referenced_scripts": [
+    "project/scripts/17p_analyze_cost_matched_fixed_baseline.py",
+    "project/scripts/17q_run_cost_matched_fixed_baseline.py",
+    "project/scripts/17r_eval_cost_matched_fixed_response.py"
+  ],
+  "raw_results_available": false,
+  "scope": "Archived implementation and result report; referenced per-state raw outputs absent from both inspected checkouts. Reported old values are not newly recomputed."
+}

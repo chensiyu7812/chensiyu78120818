@@ -1,0 +1,60 @@
+{
+  "pilot_mini.jobs.jsonl": {
+    "n_units": 12,
+    "contrasts": [
+      {
+        "comparison": "pm_off - rule_off",
+        "original_order_delta": -0.08333333333333333,
+        "complementary_order_delta": 0,
+        "difference_between_order_deltas": 0.08333333333333333
+      },
+      {
+        "comparison": "pm_off - fixed_off",
+        "original_order_delta": -0.08333333333333333,
+        "complementary_order_delta": 0,
+        "difference_between_order_deltas": 0.08333333333333333
+      },
+      {
+        "comparison": "pm_on - rule_on",
+        "original_order_delta": 0.08333333333333333,
+        "complementary_order_delta": 0,
+        "difference_between_order_deltas": -0.08333333333333333
+      },
+      {
+        "comparison": "pm_on - fixed_on",
+        "original_order_delta": 0,
+        "complementary_order_delta": -0.08333333333333333,
+        "difference_between_order_deltas": -0.08333333333333333
+      }
+    ]
+  },
+  "pilot_reference.jobs.jsonl": {
+    "n_units": 12,
+    "contrasts": [
+      {
+        "comparison": "pm_off - rule_off",
+        "original_order_delta": 0,
+        "complementary_order_delta": -0.16666666666666666,
+        "difference_between_order_deltas": -0.16666666666666666
+      },
+      {
+        "comparison": "pm_off - fixed_off",
+        "original_order_delta": -0.08333333333333333,
+        "complementary_order_delta": -0.16666666666666666,
+        "difference_between_order_deltas": -0.08333333333333333
+      },
+      {
+        "comparison": "pm_on - rule_on",
+        "original_order_delta": 0.08333333333333333,
+        "complementary_order_delta": 0.08333333333333333,
+        "difference_between_order_deltas": 0.0
+      },
+      {
+        "comparison": "pm_on - fixed_on",
+        "original_order_delta": 0.08333333333333333,
+        "complementary_order_delta": 0.08333333333333333,
+        "difference_between_order_deltas": 0.0
+      }
+    ]
+  }
+}

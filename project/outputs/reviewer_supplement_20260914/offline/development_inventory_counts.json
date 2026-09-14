@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "none": 192,
+    "mp": 192,
+    "ms": 192,
+    "me_high": 192,
+    "me_low": 192,
+    "mp_ms": 192,
+    "mp_me": 192,
+    "ms_me": 192,
+    "mp_ms_me": 192
+  },
+  "legal_action_counts": {
+    "2": 192,
+    "4": 768,
+    "8": 576,
+    "16": 192
+  },
+  "users": 16,
+  "states": 192,
+  "current_texts": 36
+}

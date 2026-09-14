@@ -1,0 +1,40 @@
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   1%|          | 2/291 [00:00<00:35,  8.14it/s]Loading weights:   5%|▍         | 14/291 [00:00<00:05, 48.37it/s]Loading weights:   8%|▊         | 23/291 [00:00<00:04, 61.22it/s]Loading weights:  11%|█         | 32/291 [00:00<00:04, 62.85it/s]Loading weights:  14%|█▎        | 40/291 [00:00<00:03, 66.31it/s]Loading weights:  16%|█▋        | 48/291 [00:00<00:03, 68.10it/s]Loading weights:  19%|█▉        | 56/291 [00:00<00:03, 63.67it/s]Loading weights:  22%|██▏       | 63/291 [00:01<00:03, 60.74it/s]Loading weights:  24%|██▍       | 70/291 [00:01<00:03, 59.26it/s]Loading weights:  27%|██▋       | 78/291 [00:01<00:03, 62.99it/s]Loading weights:  30%|██▉       | 87/291 [00:01<00:03, 64.48it/s]Loading weights:  33%|███▎      | 95/291 [00:01<00:02, 66.65it/s]Loading weights:  35%|███▌      | 103/291 [00:01<00:02, 68.26it/s]Loading weights:  38%|███▊      | 110/291 [00:01<00:02, 66.99it/s]Loading weights:  40%|████      | 117/291 [00:01<00:02, 61.97it/s]Loading weights:  43%|████▎     | 124/291 [00:02<00:02, 58.37it/s]Loading weights:  45%|████▌     | 131/291 [00:02<00:02, 59.47it/s]Loading weights:  48%|████▊     | 139/291 [00:02<00:02, 63.07it/s]Loading weights:  50%|█████     | 146/291 [00:02<00:02, 63.33it/s]Loading weights:  53%|█████▎    | 153/291 [00:02<00:02, 60.42it/s]Loading weights:  55%|█████▍    | 160/291 [00:02<00:02, 57.44it/s]Loading weights:  57%|█████▋    | 167/291 [00:02<00:02, 59.68it/s]Loading weights:  60%|██████    | 175/291 [00:02<00:01, 62.91it/s]Loading weights:  63%|██████▎   | 182/291 [00:02<00:01, 62.61it/s]Loading weights:  65%|██████▍   | 189/291 [00:03<00:01, 60.14it/s]Loading weights:  68%|██████▊   | 199/291 [00:03<00:01, 70.31it/s]Loading weights:  71%|███████   | 207/291 [00:03<00:01, 70.67it/s]Loading weights:  74%|███████▍  | 215/291 [00:03<00:01, 66.72it/s]Loading weights:  76%|███████▋  | 222/291 [00:03<00:01, 60.72it/s]Loading weights:  79%|███████▉  | 230/291 [00:03<00:00, 64.53it/s]Loading weights:  82%|████████▏ | 238/291 [00:03<00:00, 67.82it/s]Loading weights:  84%|████████▍ | 245/291 [00:03<00:00, 67.14it/s]Loading weights:  87%|████████▋ | 252/291 [00:04<00:00, 60.47it/s]Loading weights:  89%|████████▉ | 259/291 [00:04<00:00, 62.46it/s]Loading weights:  92%|█████████▏| 267/291 [00:04<00:00, 62.54it/s]Loading weights:  95%|█████████▍| 276/291 [00:04<00:00, 63.81it/s]Loading weights:  98%|█████████▊| 284/291 [00:04<00:00, 67.01it/s]Loading weights: 100%|██████████| 291/291 [00:04<00:00, 63.13it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{"pid":3352797,"requests":5,"stage":"WARMUP_COMPLETE"}
+{"completed":20,"expected":720,"last_seconds":2.751429822994396,"stage":"RUNNING"}
+{"completed":40,"expected":720,"last_seconds":1.707778523908928,"stage":"RUNNING"}
+{"completed":60,"expected":720,"last_seconds":2.6845153209287673,"stage":"RUNNING"}
+{"completed":80,"expected":720,"last_seconds":1.983402804005891,"stage":"RUNNING"}
+{"completed":100,"expected":720,"last_seconds":2.3565782548394054,"stage":"RUNNING"}
+{"completed":120,"expected":720,"last_seconds":2.142354914918542,"stage":"RUNNING"}
+{"completed":140,"expected":720,"last_seconds":3.1700216899625957,"stage":"RUNNING"}
+{"completed":160,"expected":720,"last_seconds":2.116359162144363,"stage":"RUNNING"}
+{"completed":180,"expected":720,"last_seconds":1.782271732809022,"stage":"RUNNING"}
+{"completed":200,"expected":720,"last_seconds":2.7115591999609023,"stage":"RUNNING"}
+{"completed":220,"expected":720,"last_seconds":2.2273423839360476,"stage":"RUNNING"}
+{"completed":240,"expected":720,"last_seconds":1.843915990088135,"stage":"RUNNING"}
+{"completed":260,"expected":720,"last_seconds":2.441194085171446,"stage":"RUNNING"}
+{"completed":280,"expected":720,"last_seconds":2.1555279719177634,"stage":"RUNNING"}
+{"completed":300,"expected":720,"last_seconds":2.016017646063119,"stage":"RUNNING"}
+{"completed":320,"expected":720,"last_seconds":2.7171491130720824,"stage":"RUNNING"}
+{"completed":340,"expected":720,"last_seconds":2.8071613640058786,"stage":"RUNNING"}
+{"completed":360,"expected":720,"last_seconds":2.1629405301064253,"stage":"RUNNING"}
+{"completed":380,"expected":720,"last_seconds":1.76787671004422,"stage":"RUNNING"}
+{"completed":400,"expected":720,"last_seconds":2.9570878089871258,"stage":"RUNNING"}
+{"completed":420,"expected":720,"last_seconds":2.6725406339392066,"stage":"RUNNING"}
+{"completed":440,"expected":720,"last_seconds":2.673200041987002,"stage":"RUNNING"}
+{"completed":460,"expected":720,"last_seconds":1.984629045939073,"stage":"RUNNING"}
+{"completed":480,"expected":720,"last_seconds":2.2554912329651415,"stage":"RUNNING"}
+{"completed":500,"expected":720,"last_seconds":2.3118558661080897,"stage":"RUNNING"}
+{"completed":520,"expected":720,"last_seconds":2.1206498669926077,"stage":"RUNNING"}
+{"completed":540,"expected":720,"last_seconds":2.643417467130348,"stage":"RUNNING"}
+{"completed":560,"expected":720,"last_seconds":1.694302906980738,"stage":"RUNNING"}
+{"completed":580,"expected":720,"last_seconds":2.476217749994248,"stage":"RUNNING"}
+{"completed":600,"expected":720,"last_seconds":2.092246161075309,"stage":"RUNNING"}
+{"completed":620,"expected":720,"last_seconds":1.6985365480650216,"stage":"RUNNING"}
+{"completed":640,"expected":720,"last_seconds":1.682812230894342,"stage":"RUNNING"}
+{"completed":660,"expected":720,"last_seconds":3.676117355003953,"stage":"RUNNING"}
+{"completed":680,"expected":720,"last_seconds":2.2573149271775037,"stage":"RUNNING"}
+{"completed":700,"expected":720,"last_seconds":1.3917761088814586,"stage":"RUNNING"}
+{"completed":720,"expected":720,"last_seconds":1.9591347759123892,"stage":"RUNNING"}
+{"api_usd":0,"completed":720,"stage":"COMPLETE"}

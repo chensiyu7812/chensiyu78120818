@@ -1,0 +1,30 @@
+{
+  "script_sha256": "519bbb5105baa08c8afe8238fdd1d2094e5667159a800766f8a84a1b2ec07b0c",
+  "sources": {
+    "outputs/selection_stable.json": "7ccb6825a0a29ad006dd073cbdb4941fc4ed2454c3ec191040232a842f45c89c",
+    "outputs/evoemo_response_v4/response_statistical_summary.json": "2886896cf46d5895e536a5d3358eafa9ab88cde8fb8d76cec382d069f4325e22",
+    "outputs/table3_under10/frozen_identity_v7/config.json": "d720f15f381019f3d4ef0a66afe7a10aeab5cae50deeb8a76342d1112f433342",
+    "outputs/table3_rerun_v1/plan/units.jsonl": "83baf2b66d25e41e74c31265031b714a2d45517055e68e6f49e536c3f9d53855",
+    "data/external/evo_emo.json": "f30698e87fddaeff51270a666c654da604f487a3456ec60d2b6ae08a6fecd420",
+    "outputs/table3_under10/run_identity_v7/all_results/per_response.csv": "db1e6de85d6ea61bb8a7427acb9f41b62efd2a9be18b34940718d4320a4bca61",
+    "outputs/final_model_m2b_stable/pm_final.joblib": "1408fa8deb51407ea6e6fa00354754d753ed277800e13bb571ef31b9636fdcad",
+    "data/strategy/strategy_cards.jsonl": "f64ded1e23b4a79c0e08c6b47355ad76b3880d5cbc0bfa7530f366149b5c70db",
+    "data/synthetic/runtime_states.jsonl": "eeb516ababd4ee2198ac28d13f1e028be1c01ed03c00194761bdc8ae61e9778e",
+    "data/synthetic/folds.jsonl": "45cec656b84e224f516886a89c778a1863e51be114ebb2edcdae45385a2a7736",
+    "outputs/models_cv_m2b_stable/text_metadata_stable_user_fold0_seed17.joblib": "25c9461549ffaeef560a08a0b4196376c5b33cd7bb42487c5e5bdc853f27e1e1",
+    "outputs/models_cv_m2b_stable/text_metadata_stable_user_fold1_seed17.joblib": "02c4a2b979e6a9908e0ee740680ec69ffc13c346148000cf6d95e81e16f8b544",
+    "outputs/models_cv_m2b_stable/text_metadata_stable_user_fold2_seed17.joblib": "91201eca988ec79b44fffd5b46669f9fd579a0ecd1f71d2b85452110eecdf049",
+    "outputs/models_cv_m2b_stable/text_metadata_stable_user_fold3_seed17.joblib": "aab5bbc16e4f0bd7bda04111d56cc339c9fcc2d926f12d0df3657464ef77a0e6",
+    "outputs/models_cv_m2b_stable/text_metadata_stable_user_fold4_seed17.joblib": "2e398a6697a5aadd8eef975318f3f4691d0b1b2924cc7dbc107b004c7964fc1b",
+    "outputs/full_judging_gemini_flash_lite_v3/response_pair_judgments.jsonl": "de0b648b6d30b60a9e4b19f0d70ddbf9c8c3032b37b4f2555030ccd1fd40731a",
+    "data/synthetic/audit_only.jsonl": "327dcacea6e8e377a84c69d3ebb98cb89850180156a42fb6dbd0e412a5b2fefe",
+    "src/metacom_pm/policies.py": "5f7bb27c6040f8414d982c389485fb4ada5fea80aacd510b230cebcac6833fde",
+    "src/metacom_pm/training.py": "14bffe883ffca69e157fa3986637ff1c3fc4c27d7aa79763b66cc5960ff5d629",
+    "src/metacom_pm/labels.py": "934bba4b555770006f935ce36ce5997fd2aa88dbb077bca7c0ea8a2523cb018f",
+    "src/metacom_pm/evoemo.py": "7f1e74ce58b0d8a468891b4c657236e3f5b14de86fea2e9575e3c7d85c528d49",
+    "src/metacom_pm/preparation.py": "68d166021108c600a41843c4d9a276466f6d65c312e7a38b9ecdab9d0d22ff0b",
+    "src/metacom_pm/selection.py": "31ffafc1bc89eda55ad8d611cd2f92fcf2419e41feaecefbdab4a713458498bc"
+  },
+  "inference": "Post-hoc no-API diagnostic and archived-statistic extraction; no tuning, no new quality labels",
+  "cost_ablation": "Remove cost from the existing lexicographic key; other components retained. A choice difference is mechanical, not a causal quality effect."
+}

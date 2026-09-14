@@ -1,0 +1,16 @@
+{
+  "script_sha256": "70eabcdcbe8b3ee16b91f0c2b00d39edea16a2e7c84e0c011b8e5e14740f03f8",
+  "freeze_sha256": "9b18325b0194661fd12de02900b16d718152383d8f1f264d6f2512314c374912",
+  "files": {
+    "outputs/reviewer_supplement_20260914/results/order_intervals.csv": "23ca42b01da3fed0a24de0b498c1e3bbc445c2991ac6ed56044ab76e121ee3b7",
+    "outputs/reviewer_supplement_20260914/results/history_summary.json": "2349a2187cf8fd9e031a6346042c9cfa1d5b82fe532232967e41c516b392d7f9",
+    "outputs/reviewer_supplement_20260914/results/order_intervals.json": "05d8b723a1f61fa3bc31bc4bcc4af90f3a1a96c44fe6fc0d50f4bf85cabff989",
+    "outputs/reviewer_supplement_20260914/results/existing_omission_measure_audit.json": "fb37224ad0a470ff707f590211fb9f251f2ab7c7c6e72928e7acb76f91a32909",
+    "outputs/reviewer_supplement_20260914/results/history_need_labels.csv": "b32980eef54a872e9d134789c102ce08eaf9c20e0c01bfbee46e00147bbff12d",
+    "outputs/reviewer_supplement_20260914/results/history_controls.json": "033d4c29aadc200701c22c49fc6a332fc96085e6a3ef5d28432e69648e9e38d5",
+    "outputs/reviewer_supplement_20260914/results/quality_scores.csv": "a740debed43d49bc90112c14e9f8af7484c44a9c2d58d5e956b3e716d43536f1",
+    "outputs/reviewer_supplement_20260914/results/exploratory_history_subgroups.csv": "7773c2a967ad357710ee8835312696843d6e72bcbe7069ebce36dcd96730a1ad",
+    "outputs/reviewer_supplement_20260914/results/order_score_means.csv": "54db901fa40ae2151737ca6a1de0440fe0df10ded3e6476a1cba2c9b1d838e77",
+    "outputs/reviewer_supplement_20260914/results/receipt.json": "3609a93d2b29d7ec16d56a2a77b0e594aea064188ab3b30b01d1aec7546d1f41"
+  }
+}

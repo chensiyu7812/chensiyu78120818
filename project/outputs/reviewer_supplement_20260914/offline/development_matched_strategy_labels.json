@@ -1,0 +1,52 @@
+{
+  "n_pairs": 5568,
+  "winner_counts": {
+    "R0": 1313,
+    "tie": 1582,
+    "RS": 2673
+  },
+  "dual_order_disagreements": 1452,
+  "by_memory": {
+    "M0": {
+      "R0": 420,
+      "tie": 397,
+      "RS": 911
+    },
+    "ME": {
+      "R0": 263,
+      "tie": 294,
+      "RS": 403
+    },
+    "MP": {
+      "RS": 353,
+      "tie": 241,
+      "R0": 174
+    },
+    "MPE": {
+      "RS": 165,
+      "R0": 86,
+      "tie": 133
+    },
+    "MPMS": {
+      "R0": 86,
+      "RS": 191,
+      "tie": 107
+    },
+    "MPMSME": {
+      "RS": 93,
+      "tie": 65,
+      "R0": 34
+    },
+    "MS": {
+      "tie": 241,
+      "RS": 364,
+      "R0": 163
+    },
+    "MSE": {
+      "R0": 87,
+      "tie": 104,
+      "RS": 193
+    }
+  },
+  "scope": "Existing dual-order training-eligible response comparisons with identical memory-source actions and RS/R0 swapped; developmental label evidence, not external causal evidence."
+}
